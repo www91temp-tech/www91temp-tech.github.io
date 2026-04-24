@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>個人首頁 | Your Name</title>
+    <title>個人首頁 | Joy915</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -26,6 +26,7 @@
 
         .container {
             max-width: 600px;
+            width: 90%;
             padding: 2rem;
             text-align: center;
         }
@@ -36,27 +37,36 @@
             font-weight: 700;
         }
 
-        p.tagline {
-            font-size: 1.2rem;
+        p.description {
+            font-size: 1.1rem;
             color: var(--secondary-text);
             margin-bottom: 2rem;
         }
 
-        .links {
-            margin-top: 2rem;
+        /* 筆記清單樣式優化 */
+        #file-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
         }
 
-        .links a {
+        #file-list li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #eaecef;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        #file-list li:hover {
+            background-color: #f6f8fa;
+        }
+
+        #file-list a {
             color: var(--link-color);
             text-decoration: none;
-            margin: 0 10px;
             font-weight: 500;
-            transition: opacity 0.2s;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-            opacity: 0.8;
+            display: block;
         }
 
         footer {
@@ -70,14 +80,57 @@
 
     <div class="container">
         <h1>👋 Hi 學習者</h1>
-        
-        <p>這是我的 GitHub Pages 空間。</p>
+        <p class="description">這是我的 GitHub Pages 空間，以下是我的學習筆記：</p>
 
+        <div id="file-list">讀取筆記清單中...</div>
 
         <footer>
             &copy; 2026 Joy915. Built with ❤️ and Minimal CSS.
         </footer>
     </div>
+
+    <script>
+        const username = 'www91temp-tech';
+        const repo = 'www91temp-tech.github.io';
+
+        async function loadFiles() {
+            try {
+                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/`);
+                if (!response.ok) throw new Error('無法取得檔案列表');
+                
+                const files = await response.json();
+                const listElement = document.getElementById('file-list');
+                
+                // 過濾檔案：必須是 .html 且不是 index.html
+                const htmlFiles = files.filter(file => 
+                    file.name.endsWith('.html') && 
+                    file.name.toLowerCase() !== 'index.html'
+                );
+
+                if (htmlFiles.length === 0) {
+                    listElement.innerHTML = '<p>目前尚無筆記檔案。</p>';
+                    return;
+                }
+
+                const ul = document.createElement('ul');
+                htmlFiles.forEach(file => {
+                    const li = document.createElement('li');
+                    // 這裡將檔名的 .html 去除，並處理 URL 編碼問題
+                    const displayName = decodeURIComponent(file.name.replace('.html', ''));
+                    li.innerHTML = `<a href="${file.path}">${displayName}</a>`;
+                    ul.appendChild(li);
+                });
+
+                listElement.innerHTML = '';
+                listElement.appendChild(ul);
+            } catch (error) {
+                console.error(error);
+                document.getElementById('file-list').innerHTML = '<p>載入失敗，請稍後再試。</p>';
+            }
+        }
+
+        loadFiles();
+    </script>
 
 </body>
 </html>
