@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第50章｜感覺與運動機制 Figure 筆記</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --surface: #ffffff;
+    --border: #e8e2d9;
+    --accent: #2d6a4f;
+    --accent2: #b5451b;
+    --accent3: #1a4a7a;
+    --text: #1e1e1e;
+    --muted: #6b6460;
+    --tag-bg: #e8f4ee;
+    --tag2-bg: #fdeee8;
+    --tag3-bg: #e8eef8;
+    --section1: #2d6a4f;
+    --section2: #b5451b;
+    --section3: #7b3f9e;
+    --section4: #1a4a7a;
+    --section5: #8b4513;
+    --section6: #2c5f7a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+    scroll-behavior: auto; /* 由 JS 控制平滑度 */
+  }
+
+  /* Header */
+  .hero {
+    background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 50%, #1a4a7a 100%);
+    padding: 56px 48px 48px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    position: relative; z-index: 1;
+  }
+  .hero-count {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    margin-top: 16px;
+    position: relative; z-index: 1;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toc-label {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+  .toc a {
+    text-decoration: none;
+    font-size: 12.5px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: all 0.2s;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .toc a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* Main layout */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 36px;
+  }
+
+  /* Section headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 52px 0 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+    scroll-margin-top: 100px; /* 避免被 sticky TOC 遮住 */
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* Figure cards */
+  .figure-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .figure-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .figure-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    background: #fafaf8;
+  }
+  .figure-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: white;
+    padding: 3px 9px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .figure-title {
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .figure-body {
+    padding: 18px 20px;
+  }
+  .figure-desc {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .figure-desc:last-child { margin-bottom: 0; }
+
+  /* Key concept callouts */
+  .key-box {
+    background: #f0f7f4;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 13.5px;
+    color: #2a2a2a;
+  }
+  .key-box.orange { background: #fef3ee; border-left-color: var(--accent2); }
+  .key-box.blue { background: #eef3fb; border-left-color: var(--accent3); }
+
+  /* Step lists */
+  .steps {
+    list-style: none;
+    counter-reset: steps;
+    margin: 8px 0;
+  }
+  .steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    color: #333;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(steps);
+    min-width: 22px; height: 22px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+    flex-shrink: 0; margin-top: 1px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .steps.orange li::before { background: var(--accent2); }
+  .steps.blue li::before { background: var(--accent3); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    margin: 2px 2px 6px 0;
+  }
+  .tag.green { background: var(--tag-bg); color: #1a5c3a; border: 1px solid #b8dcc8; }
+  .tag.orange { background: var(--tag2-bg); color: #8a2f10; border: 1px solid #f0c4b0; }
+  .tag.blue { background: var(--tag3-bg); color: #1a3a7a; border: 1px solid #b0c4e8; }
+
+  /* Parts */
+  .part-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 14px 0 6px;
+  }
+
+  /* Divider */
+  hr.light {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 14px 0;
+  }
+
+  /* Color coding per concept */
+  .c1 { background: #2d6a4f; }
+  .c2 { background: #1a6b5a; }
+  .c3 { background: #7b3f9e; }
+  .c4 { background: #1a4a7a; }
+  .c5 { background: #8b4513; }
+  .c6 { background: #2c5f7a; }
+
+  /* Back to top */
+  .back-top {
+    text-align: center;
+    padding: 32px 0 16px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .back-top a { color: var(--accent); text-decoration: none; cursor: pointer; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 32px 24px; }
+    .hero h1 { font-size: 1.6rem; }
+    .toc { padding: 16px 24px; }
+    .container { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="hero">
+  <div class="hero-label">Chapter 50 · Biology</div>
+  <h1>感覺與運動機制<br>Sensory and Motor Mechanisms</h1>
+  <div class="hero-sub">Figure 圖說整理筆記</div>
+  <div class="hero-count">📊 共 39 張圖 · 6 大概念</div>
+</div>
+
+<div class="toc">
+  <span class="toc-label">跳至</span>
+  <a href="#c1">50.1 感覺受器</a>
+  <a href="#c2">50.2 聽覺與平衡</a>
+  <a href="#c3">50.3 視覺受器</a>
+  <a href="#c4">50.4 味覺與嗅覺</a>
+  <a href="#c5">50.5 肌肉功能</a>
+  <a href="#c6">50.6 骨骼與運動</a>
+</div>
+
+<div class="container">
+
+  <div id="c1" class="section-header">
+    <span class="section-num c1">CONCEPT 50.1</span>
+    <span class="section-title">感覺受器將刺激能量轉換並傳遞至中樞神經系統</span>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c1">Figure 50.1</span>
+      <span class="figure-title">星鼻鼴鼠（Condylura cristata）</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">星鼻鼴鼠在北美濕地的隧道中幾乎全黑暗環境下覓食。牠依靠鼻端星形觸手——每個觸手上有 25,000 個觸覺受器——將感覺訊號傳送至腦部，在幾分之一秒內完成獵物捕捉與吞嚥。</p>
+      <div class="key-box">⭐ 本章開場案例：說明感覺訊號→腦部整合→運動輸出的完整路徑。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c1">Figure 50.2</span>
+      <span class="figure-title">簡單反應路徑：星鼻鼴鼠的覓食行為</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">展示感覺輸入 → 整合 → 運動輸出的三段式路徑：</p>
+      <ol class="steps">
+        <li><strong>感覺輸入</strong>：鼴鼠鼻部觸碰物體，觸覺受器啟動，沿感覺神經傳送訊號至腦部。</li>
+        <li><strong>整合</strong>：腦部神經迴路整合輸入，在運動神經元中產生動作電位。</li>
+        <li><strong>運動輸出</strong>：肌肉收縮——若偵測到食物則咬下；若無食物則繼續前行。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c1">Figure 50.3</span>
+      <span class="figure-title">神經性與非神經性感覺受器</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">類型 A：神經性受器</div>
+      <p class="figure-desc">受器本身即為傳入神經元（afferent neuron）。刺激直接在受器產生動作電位，沿軸突傳入中樞神經系統（CNS）。</p>
+      <hr class="light">
+      <div class="part-label">類型 B：非神經性受器</div>
+      <p class="figure-desc">受器為非神經細胞，透過化學突觸調節傳入神經元。刺激導致神經傳導物質釋放，改變傳入神經元產生動作電位的頻率。</p>
+      <div class="key-box">兩種類型的最終結果都是以動作電位的形式進入 CNS。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c1">Figure 50.4</span>
+      <span class="figure-title">單一感覺受器對刺激強度的編碼</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">以壓覺為例，說明刺激強度如何轉化為動作電位頻率：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li><strong>輕壓</strong> → 受器電位小 → 動作電位頻率<em>低</em></li>
+        <li><strong>重壓</strong> → 受器電位大 → 動作電位頻率<em>高</em></li>
+      </ul>
+      <div class="key-box orange">核心概念：刺激強度以動作電位的<strong>頻率</strong>（而非幅度）來編碼。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c1">Figure 50.5</span>
+      <span class="figure-title">人類皮膚中的感覺受器</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">皮膚不同層次分佈著不同類型的受器：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li><strong>表皮（Epidermis）</strong>：裸露樹突 → 偵測溫度或有害刺激</li>
+        <li><strong>真皮淺層</strong>：偵測輕觸與振動（對微弱機械能敏感）</li>
+        <li><strong>毛囊基部</strong>：裸露樹突環繞毛幹 → 偵測毛髮移動</li>
+        <li><strong>真皮深層</strong>：偵測強壓力（由結締組織包裹）</li>
+      </ul>
+      <div class="key-box">真皮中的受器多有結締組織包囊；表皮受器為裸露樹突。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c1">Figure 50.6</span>
+      <span class="figure-title">昆蟲的化學受器——雄性蠶蛾觸角</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">雄性蠶蛾（<em>Bombyx mori</em>）的觸角覆蓋大量感覺毛，毛上具有對雌性費洛蒙極度敏感的化學受器，可偵測數公里外雌蛾釋放的費洛蒙成分。</p>
+      <div class="key-box">費洛蒙與受器結合 → 改變離子通透性 → 產生受器電位 → 觸發動作電位</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c1">Figure 50.7</span>
+      <span class="figure-title">電磁受器與熱受器的例子</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">(a) 白鯨的磁場導航</div>
+      <p class="figure-desc">遷徙動物（如白鯨）能感知地球磁場，配合其他線索進行定向導航。2015 年研究發現，一對蛋白質可作為磁場感測器，其中一個能結合鐵，另一個對電磁輻射敏感。</p>
+      <hr class="light">
+      <div class="part-label">(b) 響尾蛇的頰窩熱受器</div>
+      <p class="figure-desc">蝮蛇類（如響尾蛇）頭部兩側各有一個頰窩器官，能偵測距離一公尺內溫熱獵物發出的紅外線輻射。蛇左右移動頭部直到兩個頰窩接收到等量輻射，即可確認獵物在正前方。</p>
+    </div>
+  </div>
+
+  <div id="c2" class="section-header">
+    <span class="section-num c2">CONCEPT 50.2</span>
+    <span class="section-title">聽覺與平衡：機械受器偵測流動液體或沉降顆粒</span>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c2">Figure 50.8</span>
+      <span class="figure-title">無脊椎動物的平衡囊（Statocyst）</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">大多數無脊椎動物利用平衡囊感知重力方向：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li>腔體內壁由纖毛細胞排列</li>
+        <li><strong>平衡石（Statoliths）</strong>：沙粒或其他緻密物質形成的顆粒，自由懸浮在腔體中</li>
+        <li>動物改變體位時，平衡石沉降至腔體最低點，彎曲該處纖毛，活化機械受器</li>
+      </ul>
+      <div class="key-box orange">實驗驗證：以金屬屑替換平衡石後用磁鐵操控，可讓螯蝦倒游——直接證明平衡石提供重力方向資訊。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c2">Figure 50.9</span>
+      <span class="figure-title">昆蟲的「耳」——位於腿部的鼓膜</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">蟋蟀前腿上可見鼓膜（tympanic membrane），受聲波震動後，附著在鼓膜內側的機械受器即被活化，產生動作電位。</p>
+      <div class="key-box">蟑螂無鼓膜，但具有對空氣流動（如人類腳步下踩時）敏感的振動器官。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c2">Figure 50.10</span>
+      <span class="figure-title">人類耳朵結構探索</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">① 耳的整體結構</div>
+      <p class="figure-desc"><strong>外耳</strong>：耳廓（Pinna）＋外耳道 → 收集聲波，導入鼓膜（Tympanic membrane）。<br>
+      <strong>中耳</strong>：鎚骨（Malleus）→ 砧骨（Incus）→ 鐙骨（Stapes），傳遞振動至卵圓窗。歐氏管連接咽部，平衡氣壓。<br>
+      <strong>內耳</strong>：半規管（平衡）＋耳蝸（Cochlea，聽覺）。</p>
+      <hr class="light">
+      <div class="part-label">② 耳蝸（Cochlea）</div>
+      <p class="figure-desc">橫切面可見：上方前庭管（Vestibular canal）、下方鼓管（Tympanic canal），兩者之間是較小的耳蝸管（Cochlear duct）。三管均充滿液體。</p>
+      <hr class="light">
+      <div class="part-label">③ 柯蒂器（Organ of Corti）</div>
+      <p class="figure-desc">耳蝸管底部的基底膜（Basilar membrane）上即為柯蒂器，包含耳部機械受器——毛細胞（Hair cells）。毛細胞的毛束伸入耳蝸管，許多毛尖附著於上方覆膜（Tectorial membrane）。</p>
+      <hr class="light">
+      <div class="part-label">④ 毛細胞</div>
+      <p class="figure-desc">每個毛細胞毛束核心由肌動蛋白（actin）絲組成。基底膜振動時，毛細胞上下移動，毛束彎曲（因受覆膜阻擋）→ 膜電位改變 → 神經訊號產生。</p>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c2">Figure 50.11</span>
+      <span class="figure-title">毛細胞的感覺接收機制</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">展示三種狀態下毛細胞膜電位與動作電位的關係：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li><strong>(a) 毛束無彎曲</strong>：靜止膜電位（約 −70 mV），低頻動作電位</li>
+        <li><strong>(b) 毛束向一方向彎曲</strong>：細胞去極化（depolarization）→ 更多神經傳導物質釋放 → 傳入神經元動作電位頻率<em>增加</em></li>
+        <li><strong>(c) 毛束向另一方向彎曲</strong>：細胞過極化（hyperpolarization）→ 較少神經傳導物質 → 動作電位頻率<em>減少</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c2">Figure 50.12</span>
+      <span class="figure-title">耳蝸中的感覺轉換</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">(a) 聲波傳遞路徑</div>
+      <p class="figure-desc">鐙骨振動卵圓窗 → 前庭管中壓力波 → 繞過耳蝸頂端 → 鼓管 → 圓窗消散（重置）；能量沿途使基底膜振動，刺激毛細胞。</p>
+      <hr class="light">
+      <div class="part-label">(b) 音調（Pitch）辨別</div>
+      <p class="figure-desc">基底膜沿長度並不均勻：靠近卵圓窗端較<strong>窄而硬</strong>（對高頻共振）；靠近頂端較<strong>寬而柔</strong>（對低頻共振）。每個區域與大腦皮質特定位置相連，因此不同頻率刺激不同區域 → 大腦感知不同音調。</p>
+      <div class="key-box">高頻（6,000 Hz）→ 靠近卵圓窗；低頻（100 Hz）→ 靠近頂端。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c2">Figure 50.13</span>
+      <span class="figure-title">內耳的平衡器官</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">橢圓囊與球囊（Utricle & Saccule）</div>
+      <p class="figure-desc">告訴腦部哪個方向是「上」，感知身體位置或線性加速。毛細胞毛束伸入膠狀物，內嵌小鈣碳酸鈣顆粒（<strong>耳石 Otoliths</strong>）。頭部傾斜時耳石移位，觸碰不同毛束，產生神經訊號。</p>
+      <hr class="light">
+      <div class="part-label">半規管（Semicircular Canals）</div>
+      <p class="figure-desc">三個充液半規管排列於三個空間平面，偵測頭部在任意方向的角加速度。毛細胞毛束伸入膠狀頂帽（<strong>Cupula</strong>）。頭部旋轉時，管內液體（內淋巴）壓迫頂帽，彎曲毛束，動作電位頻率與旋轉加速度成正比。</p>
+      <div class="key-box orange">眩暈的原因：停止旋轉後，移動中的液體撞擊靜止頂帽，產生「仍在旋轉」的錯覺。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c2">Figure 50.14</span>
+      <span class="figure-title">魚類的側線系統</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">大多數魚類與水棲兩生類沿體側具有側線系統，可偵測低頻水波。水流通過側線孔進入側線管 → 推壓頂帽 → 毛細胞去極化 → 動作電位傳至腦部。</p>
+      <p class="figure-desc">功能：感知水流方向與速度、偵測獵物/掠食者/移動物體產生的水波及低頻聲音。</p>
+    </div>
+  </div>
+
+  <div id="c3" class="section-header">
+    <span class="section-num c3">CONCEPT 50.3</span>
+    <span class="section-title">動物多樣化的視覺受器依賴光吸收色素</span>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.15</span>
+      <span class="figure-title">渦蟲（Planarian）的眼點與定向行為</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">渦蟲頭部有一對眼點（Ocelli）：光感受器面向無色素細胞的開口接收光；背面被屏蔽色素遮擋。腦部比較兩個眼點的動作電位頻率，引導身體轉向，直至兩側訊號相等且最小——即背向光源，躲避掠食者。</p>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.16</span>
+      <span class="figure-title">複眼（Compound Eyes）</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">昆蟲、甲殼類等節肢動物的複眼由數千個<strong>小眼（Ommatidia）</strong>組成。每個小眼有：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li><strong>角膜（Cornea）＋晶錐（Crystalline cone）</strong> → 構成透鏡，聚焦光線至</li>
+        <li><strong>Rhabdom</strong>：由一圈光感受器向內延伸的胞器，是感光部位</li>
+      </ul>
+      <div class="key-box">複眼擅長偵測動態，視野極廣；昆蟲可見紫外線（UV），感知範圍超出人類。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.17</span>
+      <span class="figure-title">人類眼球結構探索</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">① 眼球整體結構</div>
+      <p class="figure-desc">由外到內：結膜 → <strong>鞏膜</strong>（connective tissue）→ <strong>脈絡膜</strong>（色素層）→ <strong>視網膜</strong>（神經元與光感受器）。前方鞏膜形成透明<strong>角膜</strong>，脈絡膜形成有色<strong>虹膜</strong>，虹膜中央為瞳孔。<strong>晶狀體</strong>（透明蛋白質盤）將眼分成前後兩腔（水狀液 / 玻璃體液）。</p>
+      <hr class="light">
+      <div class="part-label">② 視網膜（Retina）</div>
+      <p class="figure-desc">光從左側射入，穿越透明神經元層後到達感光細胞。訊號路徑：光感受器 → 雙極細胞（Bipolar cell）← 多個視桿或視錐 → 神經節細胞（Ganglion cell）→ 視神經。水平細胞與無長突細胞整合橫向資訊。視神經盤（Optic disk）無光感受器，形成盲點。</p>
+      <hr class="light">
+      <div class="part-label">③ 光感受器細胞：視桿與視錐</div>
+      <p class="figure-desc">
+        <strong>視桿（Rods）</strong>：對光更敏感，不能辨色，提供夜視能力（黑白）。<br>
+        <strong>視錐（Cones）</strong>：提供彩色視覺，三種類型分別對紅、綠、藍光最敏感；中央窩（Fovea）密度最高。
+      </p>
+      <hr class="light">
+      <div class="part-label">④ 視覺色素</div>
+      <p class="figure-desc">脊椎動物視覺色素由<strong>視黃醛（Retinal，維生素 A 衍生物）</strong>與膜蛋白<strong>視蛋白（Opsin）</strong>結合組成。視桿細胞的視覺色素稱為<strong>視紫質（Rhodopsin）</strong>。光照射 → 視黃醛從<em>cis</em>型轉為<em>trans</em>型（彎曲→直線）→ 活化視蛋白。</p>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.18</span>
+      <span class="figure-title">光感受器細胞對光的反應</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">(a) 黑暗狀態</div>
+      <p class="figure-desc">胞質中 cGMP 濃度高 → Na⁺ 通道開啟 → Na⁺ 持續流入 → 膜電位維持去極化 → 突觸末梢持續釋放麩胺酸（Glutamate）。</p>
+      <hr class="light">
+      <div class="part-label">(b) 光照狀態</div>
+      <ol class="steps blue">
+        <li>光活化視紫質 → 活化傳導蛋白（Transducin，G 蛋白）</li>
+        <li>活化磷酸二酯酶（Phosphodiesterase）</li>
+        <li>cGMP 被水解為 GMP → cGMP 濃度下降</li>
+        <li>Na⁺ 通道關閉 → 細胞過極化（Hyperpolarization）</li>
+        <li>麩胺酸釋放減少 → 雙極細胞膜電位改變 → 最終增加傳至腦的動作電位</li>
+      </ol>
+      <div class="key-box blue">注意：光感受器的「受器電位」是過極化，與多數感覺受器的去極化相反！</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.19</span>
+      <span class="figure-title">視桿細胞在明暗中的突觸活動</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">對比圖：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li><strong>暗反應</strong>：視紫質不活躍 → Na⁺ 通道開啟 → 視桿去極化 → 釋放麩胺酸 → 雙極細胞依其受器類型去極化或過極化</li>
+        <li><strong>光反應</strong>：視紫質活躍 → Na⁺ 通道關閉 → 視桿過極化 → 無麩胺酸釋放 → 雙極細胞狀態相反</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.20</span>
+      <span class="figure-title">視覺的神經路徑</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">神經節細胞軸突形成視神經，在腦部底部<strong>視交叉（Optic chiasm）</strong>匯合：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li>左視野的訊號 → 右側大腦（兩眼各有貢獻）</li>
+        <li>右視野的訊號 → 左側大腦</li>
+      </ul>
+      <p class="figure-desc">大部分軸突連接至<strong>外側膝狀核（Lateral geniculate nuclei）</strong>，再投射至<strong>初級視覺皮質（Primary visual cortex）</strong>，最終整合至其他視覺處理中心（佔大腦皮質至少 30%）。</p>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.21</span>
+      <span class="figure-title">視覺的基因治療</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">松鼠猴僅有兩種視蛋白基因（藍色與紅/綠其中一種），所有雄性天生患紅綠色盲。研究人員將缺失的視蛋白基因以病毒載體注射入成年雄性視網膜，20 週後出現完整色覺的證據。</p>
+      <div class="key-box">意義：即使在成年個體中，神經迴路仍可被生成或活化，開啟了治療多種視覺疾病的可能性（如 Leber's 先天性黑蒙症）。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c3">Figure 50.22</span>
+      <span class="figure-title">哺乳動物眼睛的對焦機制</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">(a) 近視對焦（Accommodation）</div>
+      <p class="figure-desc">睫狀肌收縮 → 懸韌帶鬆弛 → 晶狀體變厚且圓 → 聚焦近物</p>
+      <hr class="light">
+      <div class="part-label">(b) 遠距對焦</div>
+      <p class="figure-desc">睫狀肌放鬆 → 懸韌帶拉緊 → 晶狀體變薄且扁 → 聚焦遠物</p>
+    </div>
+  </div>
+
+  <div id="c4" class="section-header">
+    <span class="section-num c4">CONCEPT 50.4</span>
+    <span class="section-title">味覺與嗅覺依賴相似的感覺受器組合</span>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c4">Figure 50.23</span>
+      <span class="figure-title">哺乳動物如何偵測不同味道？（探究實驗）</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc"><strong>實驗設計</strong>：PBDG（人類覺得極苦，小鼠無此受器）。研究人員以分子選殖技術，讓小鼠在正常製造甜味受器或苦味受器的細胞中表現人類 PBDG 受器，觀察小鼠對 PBDG 水溶液的偏好或厭惡。</p>
+      <p class="figure-desc"><strong>結果</strong>：在甜味細胞中表現 PBDG 受器的小鼠→ 被 PBDG 吸引；在苦味細胞中表現者→ 迴避 PBDG；無 PBDG 受器者→ 無明顯偏好。</p>
+      <div class="key-box blue"><strong>結論</strong>：哺乳動物腦部感知甜或苦，完全取決於哪條傳入神經元被活化，而非受器本身的化學性質。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c4">Figure 50.24</span>
+      <span class="figure-title">人類味覺受器</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">(a) 舌頭結構</div>
+      <p class="figure-desc">舌面覆蓋乳突（Papillae），乳突側壁排列著味蕾（Taste buds）。舌上任何區域均可感知五種味覺（傳統「味覺地圖」並不準確）。</p>
+      <hr class="light">
+      <div class="part-label">(b) 味蕾</div>
+      <p class="figure-desc">各區域的味蕾均包含對五種味覺各自專一的感覺受器細胞。五種味覺：<br>
+      <span class="tag green">甜 Sweet</span><span class="tag blue">鹹 Salty</span><span class="tag orange">酸 Sour</span><span class="tag green">苦 Bitter</span><span class="tag blue">鮮 Umami</span></p>
+      <div class="key-box">甜、鮮、苦 → GPCR 受器；酸 → TRP 家族離子通道；鹹 → 鈉通道</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c4">Figure 50.25</span>
+      <span class="figure-title">人類的嗅覺</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">嗅覺受器細胞（神經元）排列於鼻腔上部，纖毛伸入黏液層。氣味分子溶解後與纖毛膜上特定 GPCR（嗅覺受器蛋白，OR）結合：</p>
+      <ol class="steps blue">
+        <li>OR 活化 → 訊號轉導 → cAMP 合成增加</li>
+        <li>cAMP 開啟 Na⁺/Ca²⁺ 通透的離子通道</li>
+        <li>離子流入 → 膜電位去極化 → 動作電位</li>
+        <li>動作電位沿軸突傳至腦部<strong>嗅球（Olfactory bulb）</strong></li>
+      </ol>
+      <div class="key-box">人類有 380 種 OR 基因（約佔基因組 2%）；每個嗅覺細胞只表現一種 OR 基因。表現相同 OR 的細胞傳送訊號至嗅球同一小區域。</div>
+    </div>
+  </div>
+
+  <div id="c5" class="section-header">
+    <span class="section-num c5">CONCEPT 50.5</span>
+    <span class="section-title">蛋白質絲的物理交互作用是肌肉功能所必需</span>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.26</span>
+      <span class="figure-title">骨骼肌的結構層次</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">從大到小的層次結構：</p>
+      <ol class="steps orange">
+        <li><strong>肌肉（Muscle）</strong>：由肌纖維束組成</li>
+        <li><strong>肌纖維束</strong>→ 多條肌纖維</li>
+        <li><strong>肌纖維（Muscle fiber）</strong>：單一細胞，多核（由胚胎細胞融合而來），內有肌原纖維</li>
+        <li><strong>肌原纖維（Myofibril）</strong>：由細絲（actin）與粗絲（myosin）組成</li>
+        <li><strong>肌節（Sarcomere）</strong>：骨骼肌基本收縮單位，細絲附著於 Z 線（sarcomere 兩端），粗絲固定於 M 線（中央）</li>
+      </ol>
+      <div class="key-box orange">肌節的明暗橫紋（光學顯微鏡可見）使骨骼肌又稱<strong>橫紋肌（Striated muscle）</strong>。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.27</span>
+      <span class="figure-title">肌肉收縮的滑動絲模型</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">展示三種肌肉狀態：放鬆 → 收縮中 → 完全收縮。</p>
+      <div class="key-box orange">關鍵概念：收縮時，粗絲與細絲本身長度不變，但彼此相對滑動，使肌節縮短，進而整條肌肉縮短（如望遠鏡伸縮桿）。</div>
+      <p class="figure-desc">TEM 電子顯微鏡照片直接呈現放鬆與收縮狀態下肌節寬度的差異。</p>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.28</span>
+      <span class="figure-title">肌纖維收縮中肌凝蛋白與肌動蛋白的交互作用</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">ATP 驅動的「橫橋循環」（Cross-bridge cycle）五步驟：</p>
+      <ol class="steps orange">
+        <li><strong>起始</strong>：肌凝蛋白頭部結合 ATP，呈低能量構型，不與肌動蛋白結合</li>
+        <li><strong>水解 ATP</strong>：ATP → ADP + Pᵢ，頭部轉為<strong>高能量構型</strong></li>
+        <li><strong>形成橫橋</strong>：頭部與肌動蛋白結合，形成橫橋（Cross-bridge）</li>
+        <li><strong>力衝程（Power stroke）</strong>：釋放 ADP + Pᵢ，頭部回到低能量構型，拉動細絲向肌節中央移動</li>
+        <li><strong>解離</strong>：新的 ATP 結合頭部 → 橫橋斷開 → 新循環開始</li>
+      </ol>
+      <div class="key-box orange">每條粗絲末端約有 300 個頭部，每個頭部每秒形成約 5 個橫橋，共同驅動絲滑動。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.29</span>
+      <span class="figure-title">調控蛋白質與鈣離子在肌纖維收縮中的角色</span>
+    </div>
+    <div class="figure-body">
+      <div class="part-label">(a) 靜止狀態 — 肌凝蛋白結合位遮蔽</div>
+      <p class="figure-desc"><strong>原肌凝蛋白（Tropomyosin）</strong>覆蓋細絲上的肌凝蛋白結合位；<strong>肌鈣蛋白複合體（Troponin complex）</strong>固定 Tropomyosin 在此位置，阻止橫橋形成。</p>
+      <hr class="light">
+      <div class="part-label">(b) 活化狀態 — Ca²⁺ 暴露結合位</div>
+      <p class="figure-desc">Ca²⁺ 進入胞質 → 結合 Troponin complex → 使其構型改變 → 推開 Tropomyosin → 暴露肌凝蛋白結合位 → 橫橋循環啟動 → 肌肉收縮。</p>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.30</span>
+      <span class="figure-title">肌漿網與 T 管在肌纖維收縮中的角色</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">運動神經元如何引發肌肉收縮的全局示意圖：</p>
+      <ol class="steps">
+        <li>運動神經元突觸末梢釋放乙醯膽鹼（ACh）</li>
+        <li>ACh 與肌纖維膜受器結合 → 去極化 → 動作電位</li>
+        <li>動作電位沿橫管（T tubules，質膜內摺）向細胞內傳播</li>
+        <li>T 管緊鄰<strong>肌漿網（Sarcoplasmic Reticulum, SR）</strong> → 觸發 Ca²⁺ 通道開啟</li>
+        <li>Ca²⁺ 從 SR 流入胞質 → 與 Troponin 結合 → 收縮開始</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.31</span>
+      <span class="figure-title">骨骼肌纖維收縮全過程摘要</span>
+    </div>
+    <div class="figure-body">
+      <ol class="steps orange">
+        <li>ACh 釋放至突觸間隙，結合肌纖維膜受器，引發動作電位</li>
+        <li>動作電位沿質膜與 T 管傳播</li>
+        <li>動作電位觸發 SR 釋放 Ca²⁺</li>
+        <li>Ca²⁺ 結合 Troponin，暴露肌凝蛋白結合位</li>
+        <li>橫橋循環啟動，ATP 水解，細絲向肌節中央滑動，肌肉收縮</li>
+        <li>動作電位結束後，SR 主動幫浦將 Ca²⁺ 回收至 SR</li>
+        <li>Tropomyosin 重新遮蔽結合位，收縮停止，肌肉放鬆</li>
+      </ol>
+      <div class="key-box orange">疾病連結：ALS（運動神經元退化）；重症肌無力（Myasthenia gravis，自體抗體攻擊 ACh 受器）→ 均導致肌肉無力。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.32</span>
+      <span class="figure-title">脊椎動物骨骼肌的運動單位</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">每條肌纖維只受一個運動神經元控制；但每個運動神經元可與多條肌纖維形成突觸。</p>
+      <p class="figure-desc"><strong>運動單位（Motor unit）</strong> = 一個運動神經元 + 它所控制的所有肌纖維。運動神經元發出動作電位時，其運動單位內所有肌纖維同時收縮。</p>
+      <div class="key-box">整條肌肉的收縮強度由<strong>徵召（Recruitment）</strong>控制——啟動越多運動單位，收縮力越大。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.33</span>
+      <span class="figure-title">抽動疊加（Summation of Twitches）</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">說明刺激頻率如何影響肌纖維張力：</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li><strong>單一動作電位</strong> → 一次短暫抽動（~100 ms）</li>
+        <li><strong>第二個電位（肌纖維尚未完全放鬆前）</strong> → 兩次抽動疊加，張力增大</li>
+        <li><strong>高頻刺激</strong> → 完全強直收縮（<strong>Tetanus</strong>），張力最大且持續</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c5">Figure 50.34</span>
+      <span class="figure-title">骨骼肌的特化：雄性牡蠣蟾鱸（Oyster Toadfish）</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">雄性牡蠣蟾鱸（<em>Opsanus tau</em>）鰾周圍的超快速肌肉，可在產生「船笛」求偶聲時，每秒收縮與放鬆超過 200 次——速度遠超任何人類肌肉。</p>
+      <div class="key-box orange">骨骼肌纖維類型對比見 Table 50.1：<br>
+      慢縮氧化型（有氧、抗疲勞）/ 快縮氧化型（有氧、中等）/ 快縮糖解型（糖解、易疲勞）</div>
+    </div>
+  </div>
+
+  <div id="c6" class="section-header">
+    <span class="section-num c6">CONCEPT 50.6</span>
+    <span class="section-title">骨骼系統將肌肉收縮轉化為運動</span>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c6">Figure 50.35</span>
+      <span class="figure-title">肌肉與骨骼在運動中的交互作用</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">肢體的往復運動需要<strong>拮抗肌對（Antagonistic pair）</strong>協作：一條肌肉收縮，另一條放鬆。</p>
+      <ul style="margin-left:18px; font-size:14px; color:#333; line-height:2;">
+        <li><strong>人類前臂（內骨骼）</strong>：屈曲時二頭肌收縮、三頭肌放鬆；伸展時相反</li>
+        <li><strong>蚱蜢後腿（外骨骼）</strong>：屈肌與伸肌同樣呈拮抗關係</li>
+      </ul>
+      <div class="key-box">肌肉只能在收縮時施力，無法主動伸長，因此需要拮抗肌配合。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c6">Figure 50.36</span>
+      <span class="figure-title">蚯蚓的蠕動爬行（Peristalsis）</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">蚯蚓環肌與縱肌交替收縮產生蠕動：</p>
+      <ol class="steps">
+        <li>頭端環肌收縮（縱肌放鬆）→ 體節細長 → 頭部前伸；剛毛錨定後段</li>
+        <li>頭端縱肌收縮（環肌放鬆）→ 體節短粗 → 剛毛錨定頭端</li>
+        <li>後段放鬆刺毛，縱肌收縮 → 後段向前拉</li>
+      </ol>
+      <div class="key-box blue">水壓骨骼（Hydrostatic skeleton）原理：肌肉改變充液腔室形狀，實現移動。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c6">Figure 50.37</span>
+      <span class="figure-title">人類骨骼的骨骼與關節</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">哺乳動物骨骼含超過 200 塊骨頭，部分相互融合，其餘由韌帶（Ligaments）連接於關節處，允許自由移動。標示主要骨骼：頭骨、鎖骨、肩胛骨、肱骨、橈骨、尺骨、掌骨、指骨、股骨、髕骨、脛骨、腓骨、蹠骨等。</p>
+      <div class="key-box">成骨細胞（Osteoblasts）合成骨基質；破骨細胞（Osteoclasts）吸收骨基質用於重塑。</div>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c6">Figure 50.38</span>
+      <span class="figure-title">關節類型</span>
+    </div>
+    <div class="figure-body">
+      <ul style="margin-left:0; list-style:none; font-size:14px; color:#333; line-height:2.2;">
+        <li>🔵 <strong>球窩關節（Ball-and-socket joint）</strong>：位於肱骨/肩帶、股骨/骨盆處，可旋轉及多方向運動（手臂與腿的大範圍活動）</li>
+        <li>🟢 <strong>鉸鏈關節（Hinge joint）</strong>：如肱骨-尺骨，限制在單一平面活動（如膝蓋屈伸）</li>
+        <li>🟠 <strong>樞軸關節（Pivot joint）</strong>：如橈-尺骨，允許前臂旋轉或左右轉頭</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="figure-card">
+    <div class="figure-header">
+      <span class="figure-num c6">Figure 50.39</span>
+      <span class="figure-title">高效率的陸地運動：袋鼠</span>
+    </div>
+    <div class="figure-body">
+      <p class="figure-desc">袋鼠以巨大後腿跳躍移動。每次著地時，後腿的肌腱暫時儲存動能（如壓縮彈簧），於下一跳躍時釋放，大幅降低能量消耗。</p>
+      <p class="figure-desc">事實：一隻大袋鼠以 30 km/h 跳躍時，每分鐘消耗的能量不多於以 6 km/h 移動時——源於肌腱的能量回收機制。大尾巴在跳躍中亦提供額外推力並維持平衡。</p>
+      <div class="key-box">不同運動方式的能量消耗比較（Schmidt-Nielsen 1972）：游泳 < 飛行 < 奔跑（同體重下，奔跑最耗能）。</div>
+    </div>
+  </div>
+
+  <div class="back-top">
+    <a href="#top">↑ 回到頂部</a> &nbsp;·&nbsp; Chapter 50 · Sensory and Motor Mechanisms
+  </div>
+
+</div>
+
+<script>
+  // 抓取所有以 # 開頭的連結（內跳轉）
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      // 阻止瀏覽器預設跳轉（href="#id" 的預設行為）
+      e.preventDefault();
+
+      const targetId = this.getAttribute('href');
+      
+      // 如果是回到頂部且目標為 #top
+      if (targetId === '#top') {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        return;
+      }
+
+      // 取得目標元素
+      const targetElement = document.querySelector(targetId);
+
+      // 如果目標存在，執行 scrollIntoView
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth', // 平滑捲動
+          block: 'start'      // 對齊頂部
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
