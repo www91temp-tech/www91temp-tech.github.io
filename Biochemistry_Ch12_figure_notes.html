@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:         #cdd8f7; /* 主軸底色 */
+    --bg:         #e8f2fc; /* 主軸底色 */
     --surface:    #ffffff;
     --surface2:   #f0f4ff;
     --border:     #b8c5e6;
@@ -18,7 +18,7 @@
     --text:       #1a1c22;
     --text-dim:   #5c6370;
     --text-body:  #2d3436;
-    --header-bg:  #0f5ea8;
+    --header-bg:  #0b4f99;
     --fig-badge:  #e8eaf6;
   }
 
@@ -321,7 +321,7 @@
     <div class="figure-card-body">
       <p class="caption">說明了生物訊號傳遞系統共有的八個統一特性，包括高受體親和力、放大作用、脫敏作用和整合作用。</p>
       <div class="key-points">
-        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Specificity：</strong>受體對配體具有高度專一性，K<sub>d</sub> 通常 ≤ 10<sup>−7</sup> M。</span></div>
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>親和力 (Specificity)：</strong>受體對配體具有高度專一性，K<sub>d</sub> 通常 ≤ 10<sup>−7</sup> M，確保信號準確識別。</span></div>
         <div class="key-point"><span class="kp-dot"></span><span><strong>放大 (Amplification)：</strong>一個信號分子可激活多層下游酵素，形成指數級放大。</span></div>
         <div class="key-point"><span class="kp-dot orange"></span><span><strong>脫敏 (Desensitization)：</strong>持續刺激下，受體活性下調，防止細胞過度反應。</span></div>
         <div class="key-point"><span class="kp-dot"></span><span><strong>整合 (Integration)：</strong>多條信號路徑可匯聚或相互拮抗，達到精細調控。</span></div>
@@ -337,10 +337,10 @@
     <div class="figure-card-body">
       <p class="caption">將跨膜訊號傳遞分類為四種通用的受體架構：離子通道偶聯受體、酵素偶聯受體、G 蛋白偶聯受體 (GPCRs) 以及核激素受體。</p>
       <div class="key-points">
-        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Gated ion channels：</strong>配體或電壓直接開關離子通道（如 nAChR）。</span></div>
-        <div class="key-point"><span class="kp-dot"></span><span><strong>Enzyme-linked receptors：</strong>胞外域感知信號，胞內域具酵素活性（如 Tyr kinase）。</span></div>
-        <div class="key-point"><span class="kp-dot orange"></span><span><strong>GPCRs：</strong>七次跨膜受體，透過異三聚體 G 蛋白傳遞信號。</span></div>
-        <div class="key-point"><span class="kp-dot red"></span><span><strong>Nuclear receptors：</strong>配體進入細胞核，直接調控基因轉錄。</span></div>
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Gated ion channels：</strong>配體或電壓直接開關離子通道（如 nAChR），反應最快（毫秒級）。</span></div>
+        <div class="key-point"><span class="kp-dot"></span><span><strong>Enzyme-linked receptors：</strong>胞外域感知信號，胞內域具酵素活性（如 Tyr kinase），代表為胰島素受體。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>GPCRs：</strong>七次跨膜受體，透過異三聚體 G 蛋白傳遞信號，是最龐大的受體家族。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>Nuclear receptors：</strong>配體（類固醇/甲狀腺素）進入細胞核，直接調控基因轉錄。</span></div>
       </div>
     </div>
   </div>
@@ -359,8 +359,9 @@
     <div class="figure-card-body">
       <p class="caption">展示了腎上腺素（adrenaline）以及合成促效劑異丙腎上腺素（isoproterenol）和拮抗劑普萘洛爾（propranolol）的結構與受體親和力。解離常數說明了促效劑與拮抗劑的關係。</p>
       <div class="key-points">
-        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Epinephrine：</strong>天然配體，調節能量代謝。</span></div>
-        <div class="key-point"><span class="kp-dot red"></span><span><strong>Propranolol：</strong>β 受體阻斷劑，臨床用於降血壓。</span></div>
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Epinephrine：</strong>天然配體，調節肌肉、肝臟、脂肪組織的能量代謝（「戰鬥或逃跑」反應）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>Isoproterenol（促效劑）：</strong>人工合成，親和力高於 epinephrine，用於研究或臨床。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>Propranolol（拮抗劑）：</strong>β 受體阻斷劑，親和力極高但不引發訊號，臨床用於降血壓。</span></div>
       </div>
     </div>
   </div>
@@ -373,7 +374,11 @@
     <div class="figure-card-body">
       <p class="caption">描述了將腎上腺素與其受體結合，並透過刺激性 G 蛋白 Gₛ 活化腺苷酸環化酶的七步機制。同時也指出抑制性 G 蛋白 Gᵢ 可以對腺苷酸環化酶進行相反的調節。</p>
       <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span>Step 1–2：Epinephrine 結合 β-adrenergic receptor（7 次跨膜），促使受體構型改變。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>Step 3–4：受體活化 Gₛ，GDP → GTP 交換，Gₛα 從 Gβγ 解離。</span></div>
         <div class="key-point"><span class="kp-dot orange"></span><span>Step 5–6：Gₛα-GTP 活化 adenylyl cyclase，大量合成 cAMP（第二信使）。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span>Step 7：Gₛα 的 GTPase 將 GTP 水解為 GDP，信號自動終止。</span></div>
+        <div class="key-point"><span class="kp-dot brown"></span><span>Gᵢ 路徑相反：抑制 adenylyl cyclase，降低 cAMP；不同荷爾蒙分別控制 Gₛ 與 Gᵢ。</span></div>
       </div>
     </div>
   </div>
@@ -386,7 +391,9 @@
     <div class="figure-card-body">
       <p class="caption">顯示了 G 蛋白如何在不活化的 GDP 結合狀態（關閉）和活化的 GTP 結合狀態（開啟）之間循環。通常受 RGS 蛋白刺激的內源性 GTPase 活性控制著活化的持續時間。</p>
       <div class="key-points">
-        <div class="key-point"><span class="kp-dot blue"></span><span><strong>分子開關原理：</strong>GTP 結合 → 開；GTP 水解 → 關。</span></div>
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>分子開關原理：</strong>GTP 結合 → 開（on）；GTP 水解 → GDP 結合 → 關（off）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>RGS 蛋白（GTPase 加速因子）：</strong>：調節 G 蛋白訊號，加速 GTP 水解，縮短訊號持續時間，是負調控關鍵。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>G 蛋白的固有 GTPase 活性較弱；若 GAP 缺失或突變（如 Ras oncogene），G 蛋白將持續活化。</span></div>
       </div>
     </div>
   </div>
@@ -398,6 +405,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">插圖說明了 PKA 的結構與活化機制。不活化的全酶是 R₂C₂ 四聚體；cAMP 與調節亞單元 (R) 結合後，會釋放並活化催化亞單元 (C)。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>靜止態（低 cAMP）：</strong>R₂C₂ 四聚體中，R 亞單元的抑制序列占據 C 亞單元的受質結合槽，酵素無活性。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>活化態（高 cAMP）：</strong>每個 R 亞單元結合 2 個 cAMP → R₂(cAMP)₄ 與 2 個游離 C 亞單元解離；C 亞單元磷酸化下游蛋白。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>AKAP 定位：</strong>R 亞單元的 N 端二聚體區域結合 A kinase anchoring proteins（AKAPs），將 PKA 錨定在特定細胞區域（見 Fig. 12-11）。</span></div>
+      </div>
     </div>
   </div>
 
@@ -408,6 +420,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">描述了肝細胞中由單個腎上腺素分子觸發的催化放大級聯反應。每一步都會增加活化分子的數量，最終動員大量的葡萄糖。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span>1 個 epinephrine → 數百個 Gₛ → 多個 adenylyl cyclase → 大量 cAMP。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>cAMP 活化 PKA → PKA 磷酸化並活化 phosphorylase kinase → phosphorylase b → phosphorylase a → 分解肝醣釋放葡萄糖。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>每一級催化放大，最終可釋出 10⁸ 個葡萄糖分子，說明為何微量激素即可產生全身效應。</span></div>
+      </div>
     </div>
   </div>
 
@@ -418,6 +435,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">總結了調節 G 蛋白訊號傳遞的調節蛋白：GEF（上游活化劑，如 GPCR）、GAP（GTPase 加速蛋白）和 GDI（解離抑制劑）。適用於小 G 蛋白 (Ras) 和異三聚體 Gₛ。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>GEFs（GDP-GTP 交換因子）：</strong>促進 GDP 釋放、GTP 結合，活化 G 蛋白；活化的受體（如 β-AR、rhodopsin）即為一種 GEF。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>GAPs（GTPase 加速蛋白）：</strong>加速 GTP → GDP 水解，使 G 蛋白快速失活，終止訊號。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>下游效應酵素：</strong>包括 PDE（降解 cGMP/cAMP）、adenylyl cyclase（合成 cAMP）、Raf（啟動 MAPK 路徑）。</span></div>
+      </div>
     </div>
   </div>
 
@@ -428,6 +450,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">展示了腎上腺素的持續存在如何導致受體脫敏。β-腎上腺素受體激酶 (βARK) 磷酸化被佔據的受體；隨後 β-抑制蛋白 (β-arrestin) 結合並阻止進一步的 G 蛋白偶聯。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>βARK（β-adrenergic receptor kinase）：</strong>磷酸化活化中的受體（Ser/Thr 殘基），此磷酸化也由 PKA 間接促進。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>β-arrestin：</strong>與磷酸化受體結合，立體阻擋 G 蛋白結合，中斷信號傳遞。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>此機制說明為何長期使用 β-腎上腺素類藥物後療效會下降（receptor down-regulation）。</span></div>
+      </div>
     </div>
   </div>
 
@@ -438,6 +465,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">結合了 Gₛ 三聚體 G 蛋白的 GPCR 與結合了抑制蛋白 (arrestin) 的同類受體（視紫質）之結構比較。這兩個結合夥伴是互斥的。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>(a) β-AR + Gₛ 複合體：</strong>受體胞內環與 Gₛ 的 α 亞單元緊密結合，傳遞活化訊號（PDB: 3SN6）。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>(b) Rhodopsin + Arrestin 複合體：</strong>受體 C 端磷酸化後，arrestin 結合並封鎖 G 蛋白結合面（PDB: 4ZWJ）。</span></div>
+        <div class="key-point"><span class="kp-dot"></span><span>兩種結合模式互斥，形成「訊號開」與「訊號關」的結構基礎，體現了分子層面的精確調控。</span></div>
+      </div>
     </div>
   </div>
 
@@ -448,6 +480,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">AKAP5 作為質膜細胞質側的多價支架蛋白，透過棕櫚醯基和 PIP₃ 結合，將 PKA 催化亞單元固定在 β-腎上腺素受體、腺苷酸環化酶及其他訊號分子附近。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>AKAP（A kinase anchoring protein）：</strong>透過結合 PKA 的 R 亞單元二聚體，將 PKA 定位於細胞特定區域。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>AKAP5 的膜錨定：</strong>兩個共價連接的棕櫚醯基（palmitoyl groups）插入膜脂筏，加上 PIP₃ 結合，牢固定位於膜上。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>AKAP5 同時結合 β-AR、adenylyl cyclase、PKA，使這些分子形成「訊號模組」，反應速度遠快於自由擴散。</span></div>
+      </div>
     </div>
   </div>
 
@@ -458,6 +495,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">Ras 與非水解性 GTP 類似物結合的晶體結構。關鍵結構元件——P 環、開關 I (Thr³⁵) 和開關 II (Gly⁶⁰)——協同 Mg²⁺-GTP 複合體。Ala¹⁴⁶ 提供對 GTP 優於 ATP 的特異性。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>P loop（磷酸結合環）：</strong>與 GTP 的 α、β、γ 磷酸基直接接觸，對 Mg²⁺-GTP 的結合至關重要。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>Switch I（Thr³⁵）& Switch II（Gly⁶⁰）：</strong>GTP 結合時這兩個環與 γ 磷酸形成氫鍵，構型改變使 Ras 能與下游效應蛋白（如 Raf）結合。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>Ras 是「小 G 蛋白」原型，單體（~21 kDa），與異三聚體 G 蛋白功能相似但結構更簡單。</span></div>
+      </div>
     </div>
   </div>
 
@@ -468,6 +510,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">當 Ras 水解 GTP（在 GAP 協助下）時，與 Thr³⁵ 和 Gly⁶⁰ 的氫鍵喪失，使得開關 I 和開關 II 區域鬆弛成無法再與下游效應蛋白相互作用的構型。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span>GTP → GDP + Pᵢ：γ 磷酸消失，Switch I 與 Switch II 失去氫鍵，兩個「開關」彈回閉合構型。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>Ras 突變（如 Gly¹² → Val）：</strong>破壞 GTP 水解能力，Ras 持續活化 → 不受調控的細胞增殖 → 致癌。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>GAP 提供 Arg finger（Arg 殘基）插入活性位點，穩定過渡態，將 GTPase 速率加速 10⁵ 倍。</span></div>
+      </div>
     </div>
   </div>
 
@@ -478,6 +525,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">霍亂毒素催化將 NAD⁺ 的 ADP-核糖部分轉移至 Gₛα 的精胺酸 (Arg) 殘基。這種修飾阻止了正常的 GTPase 誘導失活，使 Gₛα 鎖定在與 GTP 結合的活化狀態，導致 cAMP 持續過量產生。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>Cholera toxin 機制：</strong>ADP-ribosylation 修飾 Gₛα 的 Arg201，阻止正常的 GTP 水解，Gₛα 永久活化。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>病理後果：</strong>腸道上皮細胞 adenylyl cyclase 持續活化 → cAMP 過量 → Cl⁻ 通道開放 → 大量水分外流 → 霍亂腹瀉。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>類似機制：百日咳毒素（pertussis toxin）修飾 Gᵢα，阻止 Gᵢ 對 adenylyl cyclase 的抑制。</span></div>
+      </div>
     </div>
   </div>
 
@@ -488,6 +540,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">說明磷脂酶 C (PLC) 途徑：荷爾蒙活化與 Gq 偶聯的 GPCR，進而活化 PLC-β。PLC 將 PIP₂ 裂解為兩個第二信使——IP₃ 和 DAG，各自活化不同的下游效應器。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>PIP₂ 裂解：</strong>荷爾蒙 → GPCR → Gq → PLC-β → PIP₂ 裂解為 IP₃（水溶性）+ DAG（膜結合性）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>IP₃ 路徑：</strong>進入細胞質，結合 ER 上的 IP₃ 受體（Ca²⁺ 通道），釋放 Ca²⁺ → 活化 PKC 與鈣調蛋白路徑。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>DAG 路徑：</strong>留在質膜，與 Ca²⁺ 共同活化 protein kinase C（PKC），磷酸化多種蛋白質。</span></div>
+      </div>
     </div>
   </div>
 
@@ -498,6 +555,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">處於關閉構型的 IP₃ 受體冷凍電子顯微鏡 (Cryo-EM) 結構。這個 1.3 MDa 的四聚體通道具有 24 個跨膜螺旋。IP₃ 結合位點位於巨大的胞質域中；IP₃ 結合驅動構型變化，從內質網釋放 Ca²⁺。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>結構：</strong>四聚體，每條多肽含 6 個跨膜螺旋，總共 24 個跨膜螺旋環繞中央孔道（Ca²⁺ 通道）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>IP₃ 結合位點：</strong>位於巨大的胞質結構域（佔蛋白質大部分體積），結合 IP₃ 後發生構型變化，開放孔道。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>Ca²⁺ 從 ER 釋放後進一步激活細胞內的鈣依賴性酵素，形成正回饋（CICR: Ca²⁺-induced Ca²⁺ release）。</span></div>
+      </div>
     </div>
   </div>
 
@@ -508,6 +570,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">四個 EF-hand 結合位點均被佔據的鈣調蛋白 (calmodulin) 晶體結構。這個啞鈴狀蛋白包裹在螺旋狀目標肽周圍，活化數十種鈣離子依賴性酵素。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>EF-hand 結構：</strong>每個 EF-hand 由兩個 α 螺旋夾一個 Ca²⁺-結合環組成；Calmodulin 含 4 個 EF-hand，可結合 4 個 Ca²⁺。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>構型變化：</strong>Ca²⁺ 結合後，疏水性殘基暴露，可包覆目標蛋白的 amphipathic helix，活化超過 30 種酵素（含 CaM kinases、NOS、PDE 等）。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>Calmodulin 是 Ca²⁺ 訊號的「通用解碼器」，廣泛參與肌肉收縮、神經傳遞、細胞增殖等生理過程。</span></div>
+      </div>
     </div>
   </div>
 
@@ -518,6 +585,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">使用鈣敏感螢光染料 fura 進行的成像顯示，胸腺細胞的胞外刺激不會導致單次 [Ca²⁺] 上升，而是產生重複的震盪。震盪頻率編碼了訊號強度。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Fura 螢光探針：</strong>結合 Ca²⁺ 後激發波長改變，可即時定量細胞內 [Ca²⁺] 的空間分佈與時間動態。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>鈣振盪（Ca²⁺ oscillations）：</strong>訊號不以濃度高低傳遞，而以振盪頻率編碼強度，防止持續高濃度 Ca²⁺ 帶來的毒性。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>振盪由 CICR（Ca²⁺-induced Ca²⁺ release）正回饋與 SERCA 泵（將 Ca²⁺ 回輸 ER）的負回饋共同產生。</span></div>
+      </div>
     </div>
   </div>
 
@@ -534,6 +606,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">展示了桿狀細胞光感受的完整循環：激發（視紫質吸收光子活化轉導蛋白 → PDE 活化 → cGMP 下降 → 通道關閉 → 超極化）以及恢復與適應。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>激發（步驟 1–5）：</strong>光子使 11-cis-retinal → all-trans-retinal；rhodopsin 構型改變（Rh*）→ 活化 transducin（Gt）→ PDE 活化 → cGMP 降低 → cGMP-gated Na⁺/Ca²⁺ 通道關閉 → 超極化（hyperpolarization）。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>恢復（步驟 6–7）：</strong>cGMP 由 guanylyl cyclase 重新合成（受 recoverin 調控）；all-trans-retinal 回異構化為 11-cis-retinal（需光反應循環）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>適應（步驟 8–9）：</strong>光照越強，Ca²⁺ 濃度下降越多 → guanylyl cyclase 更活躍 → cGMP 回升 → 維持部分通道開放，使眼睛在亮環境中仍有感光能力。</span></div>
+      </div>
     </div>
   </div>
 
@@ -544,6 +621,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">一個統一的圖表顯示，GPCR 提供特異性，而 G 蛋白在多種感測模式中提供放大作用。下游效應器匯聚於 cAMP、cGMP 或離子通道通透性的改變。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span>荷爾蒙、光、氣味、味覺雖然信號本質不同，卻共用 GPCR → G 蛋白 → 效應酵素的通用架構。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>效應酵素包括：AC（合成 cAMP）、PDE（降解 cAMP/cGMP）及直接調控 Ca²⁺、Na⁺、K⁺ 通道通透性。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>GPCR 基因家族超過 800 個成員（人類基因體），是目前最大的藥物標靶群（>30% 藥物以 GPCR 為靶點）。</span></div>
+      </div>
     </div>
   </div>
 
@@ -560,6 +642,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">胰島素受體的結構模型，由胞外域和激酶域的晶體結構組裝而成。單個胰島素分子的結合導致兩個 β 亞單元激酶域在三個 Tyr 殘基上相互磷酸化，從而活化激酶。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>結構：</strong>胰島素受體為 α₂β₂ 異四聚體，兩個 α 亞單元（胞外，結合胰島素）透過雙硫鍵連接兩個 β 亞單元（單次跨膜，胞內含 Tyr kinase）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>活化機制：</strong>1 個胰島素分子結合 → 透過跨膜螺旋傳遞構型變化 → β 亞單元激酶域相互靠近 → 相互磷酸化三個 Tyr 殘基（自磷酸化）→ kinase 全面活化。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>此「配體誘導二聚化」策略是 RTK 活化的共同機制，見於 EGFR、PDGFR 等多種受體。</span></div>
+      </div>
     </div>
   </div>
 
@@ -570,6 +657,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">胰島素 → Ras → Raf → MEK → ERK 之 MAP 激酶級聯反應。ERK 進入細胞核並磷酸化轉錄因子以調節基因表達。MEK 是一種雙重特異性激酶，能同時磷酸化 ERK 上的 Thr 和 Tyr。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span>胰島素受體 → IRS-1（Tyr 磷酸化）→ Grb2/Sos（GEF）→ Ras 活化 → Raf（MAP3K）→ MEK（MAP2K）→ ERK（MAPK）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>MEK 雙重特異性：</strong>同時磷酸化 ERK 的 Thr 與 Tyr 殘基，是少數能磷酸化兩種殘基的激酶。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>活化的 ERK 進入細胞核，磷酸化轉錄因子（如 SRF、Elk-1），調控細胞增殖相關基因的表達。</span></div>
+      </div>
     </div>
   </div>
 
@@ -580,6 +672,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">胰島素訊號的 IRS-1 → PI3K → PKB (Akt) 分支驅動含有 GLUT4 的囊泡轉運至質膜並活化肝醣合成酶。PI3K 產生 PIP₃ 作為 PKB 活化的第二信使。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>PI3K 路徑：</strong>磷酸化的 IRS-1 招募 PI3K → 磷酸化 PIP₂ 為 PIP₃ → 招募 PDK1 與 PKB（Akt）到膜上。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>GLUT4 移位：</strong>PKB 磷酸化並抑制 AS160（RabGAP）→ Rab-GTP 活化 → 含 GLUT4 的囊泡與質膜融合 → 葡萄糖攝入增加。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>肝醣合成：</strong>PKB 磷酸化並抑制 GSK3 → GSK3 無法磷酸化/抑制 glycogen synthase → 肝醣合成增加。</span></div>
+      </div>
     </div>
   </div>
 
@@ -590,6 +687,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">PI3K 催化 PIP₂ 肌醇環 C-3 位點的磷酸化以形成 PIP₃，這是關鍵的膜招募訊號。PTEN 則透過移除 3-磷酸來逆轉此過程，從而終止訊號。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>PI3K（on signal）：</strong>在 C-3 磷酸化 PIP₂ → PIP₃，作為膜上的核化點，招募含 PH domain 的蛋白質（PKB、PDK1）。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>PTEN（off signal）：</strong>腫瘤抑制基因，去磷酸化 PIP₃ → PIP₂，終止 PI3K 信號。PTEN 突變 → 持續 PKB 活化 → 多種癌症。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>PI3K / PTEN 是腫瘤學中的核心對立軸，許多癌症同時帶有 PI3K 過度活化與 PTEN 功能喪失。</span></div>
+      </div>
     </div>
   </div>
 
@@ -600,6 +702,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">來自小鼠肝細胞的質譜數據，顯示了注射胰島素後關鍵訊號蛋白中特定殘基磷酸化的動力學。每個蛋白質都顯示出獨特的時間模式。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span>INSR 自磷酸化最快（數秒內），IRS2、Sos 次之，ERK 磷酸化出現延遲，反映訊號的逐步傳遞。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>質譜技術（phosphoproteomics）可同時定量追蹤數千個磷酸化位點，揭示訊號網絡的時序邏輯。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>不同蛋白質磷酸化的起伏模式（pulse vs. sustained）對應不同的生理功能（短暫 vs. 持久效應）。</span></div>
+      </div>
     </div>
   </div>
 
@@ -610,6 +717,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">比較主要 RTK 的結構域架構，包括 INSR（胰島素）、VEGFR、PDGFR、EGFR、TrkA (NGF) 和 FGFR。所有受體都共有胞質 Tyr 激酶域，但具有多樣的胞外配體結合域。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>共同特徵：</strong>胞外配體結合域 + 單次跨膜螺旋 + 胞內 Tyr kinase 域（藍色）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>多樣的胞外域：</strong>Cys-rich 區（EGFR）、Leu-rich 區（TrkA）、免疫球蛋白樣域（PDGFR/FGFR）等，反映不同生長因子的結合特異性。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>許多 RTK 在未結合配體時以單體存在，配體結合誘導二聚化；INSR 例外，以預組裝的異四聚體存在。</span></div>
+      </div>
     </div>
   </div>
 
@@ -620,6 +732,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">當胰島素受體活化時，其 Tyr 激酶直接磷酸化 β-腎上腺素受體上的兩個 Tyr 殘基，並透過 PKB 間接磷酸化兩個 Ser 殘基。這些修飾導致受體內化，減弱了「戰或逃」反應。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>直接磷酸化：</strong>INSR Tyr kinase 直接磷酸化 β-AR 的 Tyr³⁵⁰ 與 Tyr³⁶⁴（近 C 端）。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>間接磷酸化：</strong>INSR → PKB 活化 → PKB 磷酸化 β-AR 附近的 Ser 殘基，促使受體內化（internalization）。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>生理意義：</strong>進食後胰島素升高，抑制腎上腺素反應，使身體轉向「休息與消化」模式；說明訊號路徑間的相互對話（cross talk）是調節代謝的重要機制。</span></div>
+      </div>
     </div>
   </div>
 
@@ -637,6 +754,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">PTB（磷酸酪胺酸結合）結構域結合夥伴蛋白磷酸酪胺酸 (pTyr) 殘基的表面表示圖。多個非共價接觸賦予了特異性並將 pTyr 定位於結合口袋中。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>PTB domain：</strong>識別 pTyr 旁邊的胺基酸序列背景（通常為 NPXpY motif），與 SH2 domain 互補，共同解讀磷酸化信號。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>PTB domain 與 SH2 domain 均結合 pTyr，但識別 pTyr 旁邊的序列方向相反（C 端 vs. N 端）。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>IRS-1 上的多個 pTyr 分別招募含不同 SH2/PTB 的蛋白質（PI3K、Grb2、SHP2），實現訊號分叉。</span></div>
+      </div>
     </div>
   </div>
 
@@ -647,6 +769,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">在 Src 激酶的活化形式中，SH2 和 SH3 結構域結合受質。特定 Tyr 的磷酸化導致 SH2 結構域改為結合內部的 pTyr，進而誘導自抑制。GSK3 使用類似的偽受質機制。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Src 活性態：</strong>SH2 結合受質 pTyr，SH3 結合受質 Pro-rich 區，活性位點對準受質 Tyr 殘基，進行磷酸化。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>Src 自抑態：</strong>自身特定 Tyr 被磷酸化 → SH2 改為結合內部 pTyr → SH3 結合內部 Pro-rich 環 → 活性位點被封鎖。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>GSK3：</strong>自身 N 端的偽受質（pseudo-substrate）序列占據活性位點；PKB 磷酸化 GSK3 → 偽受質被移走 → GSK3 進一步被抑制。</span></div>
+      </div>
     </div>
   </div>
 
@@ -657,6 +784,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">展示各種訊號蛋白結構域圖譜，呈現保守結合模組（SH2、SH3、PH、PTB、PDZ 等）與催化域的組合排列。這些模組定義了訊號特異性。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>主要結合模組：</strong>SH2（結合 pTyr 序列）、SH3（結合 Pro-rich 序列）、PH（結合 PIP₃/PIP₂）、PTB（結合 NPXpY）、PDZ（結合 C 端特定序列）。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>每個訊號蛋白含多個不同模組的組合（如 PI3K、Grb2、Sos、PLC-γ），決定其在訊號網絡中的位置與功能。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>「模組化」設計使訊號網絡可藉由模組的不同組合而快速演化，產生極大的功能多樣性。</span></div>
+      </div>
     </div>
   </div>
 
@@ -667,6 +799,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">KSR 支架蛋白同時結合 Raf-MEK-ERK 級聯的三個激酶，實現高效訊號中繼。一旦 ERK 活化，它會磷酸化 KSR 上的 Raf 結合位點，移出 Raf 並提供負回饋。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Scaffold 功能：</strong>KSR 同時結合 Raf、MEK、ERK，使三者空間上靠近，磷酸化反應速率大幅提升。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>負回饋機制：</strong>活化的 ERK 磷酸化 KSR 上的 Raf 結合位點，誘發構型改變，使 Raf 被排除 → MEK 磷酸化暫時終止。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>KSR 突變體（缺乏 ERK 磷酸化位點）的細胞中，MEK 磷酸化持續時間延長（實驗曲線示意），證明 scaffold 也是信號終止的重要元件。</span></div>
+      </div>
     </div>
   </div>
 
@@ -683,6 +820,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">(a) 生電性 Na⁺K⁺-ATPase 產生約 −60 mV 的跨膜電位。(b) 產生的電化學梯度驅動 Na⁺ 和 Ca²⁺ 內流（去極化）以及 K⁺ 外流。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Na⁺K⁺-ATPase：</strong>每循環泵出 3 Na⁺、泵入 2 K⁺，造成膜內負電，靜止膜電位約 −60 mV。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>Na⁺ & Ca²⁺：</strong>化學梯度與電位梯度皆朝向細胞內，強烈驅動內流（去極化力量）。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>K⁺：</strong>化學梯度朝外，電位梯度朝內；兩者接近平衡，但凈驅動力向外，是維持靜止電位的主要離子。</span></div>
+      </div>
     </div>
   </div>
 
@@ -693,6 +835,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">插圖說明了突觸處的完整事件序列：動作電位傳導、電壓門控 Ca²⁺ 通道開放、乙醯膽鹼 (ACh) 囊泡融合、nAChR 通道開放以及啟動新的動作電位。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>突觸前（presynaptic）：</strong>動作電位到達 → 膜去極化 → 電壓依賴性 Ca²⁺ 通道開放 → Ca²⁺ 內流 → 乙醯膽鹼（ACh）囊泡與突觸前膜融合 → ACh 釋放。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>突觸後（postsynaptic）：</strong>ACh 擴散穿過突觸間隙 → 結合 nAChR（菸鹼型受體，配體依賴性離子通道）→ Na⁺ 內流 → 膜去極化 → 新動作電位。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>ACh 由 acetylcholinesterase 迅速水解（不到 1 ms），確保訊號短暫精確，防止持續去極化。</span></div>
+      </div>
     </div>
   </div>
 
@@ -709,6 +856,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">展示了脂溶性荷爾蒙穿過質膜，結合胞內受體，並且荷爾蒙-受體複合體進入細胞核，在荷爾蒙反應元件 (HRE) 上作為轉錄因子發揮作用的一般機制。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>路徑：</strong>脂溶性荷爾蒙（類固醇、甲狀腺素、維 A 酸、維生素 D）→ 穿過質膜 → 結合胞質或核內受體 → 荷爾蒙-受體複合物進入核 → 結合 DNA 的 HRE（hormone response element）→ 活化/抑制轉錄。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>藥物應用：</strong>Tamoxifen（乳癌治療）為雌激素拮抗劑，占據受體但不活化轉錄，阻止癌細胞增殖。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>核受體反應慢（數小時），但效果持久（改變基因表達程式）；有別於 GPCR/RTK 的快速胞質信號。</span></div>
+      </div>
     </div>
   </div>
 
@@ -725,6 +877,13 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">真核細胞週期四個階段的圓形圖：G1（生長）、S（DNA 合成）、G2（準備）和 M（有絲分裂）。細胞也可以進入靜止的 G0 狀態。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>G1（~11 h）：</strong>細胞生長，合成蛋白質；通過 restriction point（R 點）後，承諾進入 S 期。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>S（~8 h）：</strong>DNA 複製，每條染色體複製一次。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>G2（~4 h）：</strong>細胞繼續生長，檢查 DNA 複製完整性。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>M（~1 h）：</strong>有絲分裂，染色體分離，細胞質分裂。</span></div>
+        <div class="key-point"><span class="kp-dot brown"></span><span><strong>G0：</strong>分化細胞（如肝細胞、脂肪細胞）長期停留；幹細胞可重新進入 G1。</span></div>
+      </div>
     </div>
   </div>
 
@@ -735,6 +894,12 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">折線圖顯示了細胞週期中四種 CDK-cyclin 活性的升降：Cyclin D–CDK4/6 在 G1 達到峰值，Cyclin E–CDK2 在 G1/S 交界達到峰值。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>Cyclin D–CDK4/6：</strong>G1 期緩慢上升，觸發 pRb 磷酸化，G1 結束時急降。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>Cyclin E–CDK2：</strong>G1/S 交界峰值，觸發 DNA 合成所需酵素的表達。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>Cyclin A–CDK2：</strong>S 與 G2 期維持，支持 DNA 複製的進行。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>Cyclin B–CDK1（MPF）：</strong>M 期高峰，觸發核膜崩解、染色體凝縮、紡錘體形成等有絲分裂事件。</span></div>
+      </div>
     </div>
   </div>
 
@@ -745,6 +910,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">CDK2 與 Cyclin A 結合前後的晶體結構。沒有 Cyclin 時，T 環阻擋受質結合位點。Cyclin 結合移動了 T 環並重新定位催化關鍵螺旋，從而活化激酶。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>無 cyclin 時：</strong>T loop 占據受質結合位點，CDK 無活性；Tyr¹⁵ 磷酸化也阻塞 ATP 結合位點。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>Cyclin 結合後：</strong>T loop 移離活性位點，N 端 α 螺旋重新定位，催化關鍵殘基（Glu⁵¹）就位，CDK 部分活化。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span><strong>CAK 磷酸化（T loop Thr¹⁶⁰）：</strong>穩定活性構型，CDK 活性達最大值。</span></div>
+      </div>
     </div>
   </div>
 
@@ -755,6 +925,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">(a) 活化 CDK 的事件序列：Cyclin 結合、CAK 磷酸化、Cdc25 移除抑制性磷酸基。(b) 當泛素介導的蛋白水解破壞其 Cyclin 夥伴時，CDK 會失活。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>活化流程：</strong>Cyclin 合成 → CDK-Cyclin 形成 → CAK 磷酸化 T loop → Cdc25 磷酸酶移除 Tyr¹⁵/Thr¹⁴ 抑制性磷酸基 → CDK 全面活化。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>週期性降解：</strong>APC/C（泛素 E3 連接酶）在特定時間點多泛素化 cyclin → 蛋白酶體降解 → CDK 失活，確保細胞週期的單向性與不可逆性。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span>DNA 損傷訊號（ATM/ATR）抑制 Cdc25，阻止 CDK 活化，細胞週期在 G2 停滯，待修復完成再繼續。</span></div>
+      </div>
     </div>
   </div>
 
@@ -765,6 +940,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">從生長因子受體活化經過 Ras、MAP 激酶級聯到轉錄因子磷酸化的路徑，導致 Cyclin D 表達增加。這是生長因子與細胞週期進入之間的關鍵聯繫。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span>生長因子（如 EGF、PDGF）→ RTK → Ras → MAPK cascade → 轉錄因子（Myc、AP-1）→ Cyclin D 基因上調。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>Cyclin D 合成增加 → 與 CDK4/6 結合 → 部分磷酸化 pRb → 細胞越過 G1 restriction point。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span>這條路徑解釋了為何 Ras 突變（持續活化）會驅動細胞不受控增殖，是癌症形成的核心機制之一。</span></div>
+      </div>
     </div>
   </div>
 
@@ -775,6 +955,11 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">視網膜母細胞瘤蛋白 (pRb) 在低磷酸化時結合並抑制轉錄因子 E2F。由 CDK 進行的連續磷酸化會釋放 E2F，觸發 DNA 合成所需基因的轉錄。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>低磷酸化 pRb（G1 早期）：</strong>結合並抑制 E2F 轉錄因子，阻止 S 期基因表達。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>pRb 磷酸化（G1 末期）：</strong>先由 Cyclin D-CDK4/6 磷酸化，再由 Cyclin E-CDK2 完全磷酸化 → E2F 釋放 → 合成 DNA 聚合酶等 S 期所需蛋白。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>DNA 損傷回路（上方）：</strong>MRN 蛋白偵測雙股斷裂 → ATM → p53 → p21（CDK 抑制劑）→ CDK2 被抑制 → pRb 不被磷酸化 → E2F 被抑制 → 細胞週期停滯，等待修復。</span></div>
+      </div>
     </div>
   </div>
 
@@ -791,6 +976,12 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">癌基因和腫瘤抑制基因突變的連續累積，驅動正常結腸上皮細胞經過一系列日益失調的狀態——早期腺瘤、中期腺瘤、晚期腺瘤——發展為癌，最後發展為轉移性癌症。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>初始事件：</strong>MMR（錯配修復）基因突變 → DNA 修復缺陷 → 突變率大幅上升；APC 腫瘤抑制基因兩個拷貝均突變 → 早期腺瘤。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>進展：</strong>CDC4 癌基因突變（泛素化缺陷）→ Ras 突變 → 中期/晚期腺瘤，細胞增殖失控程度遞增。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>惡化：</strong>SMAD4、p53 等腫瘤抑制基因喪失 → 癌症，最終可能轉移（metastasis）至其他組織。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>此模型（Vogelstein model）是理解癌症多步驟發生的經典範例，說明單一突變通常不足以致癌。</span></div>
+      </div>
     </div>
   </div>
 
@@ -801,6 +992,12 @@
     </div>
     <div class="figure-card-body">
       <p class="caption">外源性凋亡途徑：TNFα 結合其受體，觸發由死亡結構域介導的 TRADD 活化。TRADD 活化 caspase-8，進而從線粒體釋放細胞色素 c；細胞色素 c 隨後與 Apaf-1 組裝成凋亡小體以活化 caspase-9 並執行細胞凋亡。</p>
+      <div class="key-points">
+        <div class="key-point"><span class="kp-dot blue"></span><span><strong>外在路徑（胞外訊號）：</strong>TNFα 結合 TNF 受體 → Death domain 媒介 TRADD 招募 → Caspase-8 活化（啟動子半胱天冬蛋白酶）。</span></div>
+        <div class="key-point"><span class="kp-dot orange"></span><span><strong>線粒體放大：</strong>Caspase-8 裂解 Bid → tBid 移至粒線體外膜 → Cytochrome c 釋放至胞質。</span></div>
+        <div class="key-point"><span class="kp-dot red"></span><span><strong>Apoptosome 組裝：</strong>Cytochrome c + Apaf-1 + dATP → 輪狀 apoptosome（七聚體）→ Caspase-9 活化 → 執行子 Caspase-3/7 → 細胞有序死亡。</span></div>
+        <div class="key-point"><span class="kp-dot green"></span><span>凋亡細胞呈現膜泡形成（blebbing）、DNA 片段化、磷脂醯絲胺酸（PS）外翻，被吞噬細胞識別清除，不引起發炎。</span></div>
+      </div>
     </div>
   </div>
 
