@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 12 章 — 生化訊號傳遞 · 圖說筆記</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #0f1117;
+    --surface:    #161922;
+    --surface2:   #1e2330;
+    --border:     #2d3345;
+    --accent:     #5d9cf5;
+    --accent2:    #e8b86d;
+    --accent3:    #7ecb9e;
+    --danger:     #e07a75;
+    --text:       #e2e8f0;
+    --text-dim:   #94a3b8;
+    --text-body:  #cbd5e1;
+    --fig-badge:  rgba(93, 156, 245, 0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-body);
+    font-family: 'Source Serif 4', 'Noto Serif TC', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── 側邊欄 ─────────────────────────────────── */
+  #sidebar {
+    width: 300px;
+    min-width: 300px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .sidebar-header {
+    padding: 2rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .sidebar-header .chap-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+  }
+
+  .sidebar-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .sidebar-section { padding: 1.2rem 1.5rem .5rem; }
+
+  .sidebar-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: .8rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+    padding: .5rem .4rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all .2s;
+    text-decoration: none;
+    margin-bottom: 2px;
+  }
+
+  .sidebar-link:hover { background: var(--surface2); }
+
+  .sidebar-link .fig-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    min-width: 45px;
+    font-weight: 600;
+  }
+
+  .sidebar-link .fig-title {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ── 主要內容區 ─────────────────────────────── */
+  #main {
+    flex: 1;
+    overflow-x: hidden;
+  }
+
+  /* 仿照片的 Hero Banner */
+  .hero-banner {
+    background: linear-gradient(135deg, #1a2c28 0%, #0f1117 100%);
+    padding: 4rem 4rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: .3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+
+  /* 跳轉按鈕區域 */
+  .quick-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 4rem;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .nav-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    margin-right: .5rem;
+  }
+
+  .pill-btn {
+    padding: .5rem 1.2rem;
+    background: #fff;
+    color: #1a1a1a;
+    border-radius: 50px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    border: none;
+  }
+
+  .pill-btn:hover { opacity: 0.9; }
+
+  /* 內文樣式 */
+  .content-body {
+    padding: 2rem 4rem 6rem;
+    max-width: 1000px;
+  }
+
+  .section-header {
+    margin: 4rem 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .sec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    background: rgba(232,184,109,0.1);
+    border: 1px solid rgba(232,184,109,0.3);
+    border-radius: 6px;
+    padding: .3rem .8rem;
+  }
+
+  .section-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--text);
+  }
+
+  /* 圖表卡片 */
+  .figure-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .figure-card:hover { border-color: var(--accent); }
+
+  .figure-card-header {
+    padding: 1.2rem 1.5rem;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .figure-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--fig-badge);
+    padding: .2rem .8rem;
+    border-radius: 4px;
+    border: 1px solid rgba(93,156,245,0.2);
+  }
+
+  .figure-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .figure-card-body { padding: 1.5rem; }
+
+  .caption {
+    font-size: 14.5px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    font-style: italic;
+  }
+
+  .key-point {
+    display: flex;
+    gap: .8rem;
+    margin-bottom: .6rem;
+    font-size: 14px;
+  }
+
+  .kp-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent3);
+    border-radius: 50%;
+    margin-top: 9px;
+    flex-shrink: 0;
+  }
+
+  .tags {
+    display: flex;
+    gap: .5rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: .2rem .7rem;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 1024px) {
+    #sidebar { display: none; }
+    .hero-banner, .quick-nav, .content-body { padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="chap-label">CHAPTER 12</div>
+    <h1>生化訊號傳遞<br>圖說整理筆記</h1>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">12.1 一般特性</div>
+    <div class="sidebar-link" onclick="jumpTo('fig-1')"><span class="fig-tag">12-1</span><span class="fig-title">訊號傳遞系統的八大特性</span></div>
+    <div class="sidebar-link" onclick="jumpTo('fig-2')"><span class="fig-tag">12-2</span><span class="fig-title">四種通用的訊號轉導模式</span></div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">12.2 GPCR 與第二信使</div>
+    <div class="sidebar-link" onclick="jumpTo('fig-4')"><span class="fig-tag">12-4</span><span class="fig-title">β-腎上腺素受體路徑</span></div>
+    <div class="sidebar-link" onclick="jumpTo('fig-7')"><span class="fig-tag">12-7</span><span class="fig-title">腎上腺素級聯放大效應</span></div>
+    <div class="sidebar-link" onclick="jumpTo('fig-15')"><span class="fig-tag">12-15</span><span class="fig-title">磷脂酶 C 與 IP3/DAG</span></div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">12.4 受體酪氨酸激酶 (RTK)</div>
+    <div class="sidebar-link" onclick="jumpTo('fig-21')"><span class="fig-tag">12-21</span><span class="fig-title">胰島素受體自磷酸化</span></div>
+    <div class="sidebar-link" onclick="jumpTo('fig-22')"><span class="fig-tag">12-22</span><span class="fig-title">MAP 激酶級聯反應</span></div>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="hero-banner">
+    <div class="hero-label">CHAPTER 12 · BIOLOGY / BIOCHEM</div>
+    <h2 class="hero-title">生化訊號傳遞<br>Biochemical Signaling</h2>
+    <p class="hero-subtitle">Figure 圖說整理筆記</p>
+  </header>
+
+  <nav class="quick-nav">
+    <span class="nav-label">跳至</span>
+    <button class="pill-btn" onclick="jumpTo('sec-12-1')">12.1 一般特性</button>
+    <button class="pill-btn" onclick="jumpTo('sec-12-2')">12.2 GPCRs</button>
+    <button class="pill-btn" onclick="jumpTo('sec-12-4')">12.4 RTK 路徑</button>
+    <button class="pill-btn" onclick="jumpTo('sec-12-8')">12.8 細胞週期</button>
+  </nav>
+
+  <div class="content-body">
+    
+    <section id="sec-12-1">
+      <div class="section-header">
+        <span class="sec-num">12.1</span>
+        <h3>訊號傳遞的一般特性 (General Features)</h3>
+      </div>
+
+      <div class="figure-card" id="fig-1">
+        <div class="figure-card-header">
+          <span class="figure-badge">圖 12-1</span>
+          <span class="figure-card-title">訊號傳遞系統的八大特性</span>
+        </div>
+        <div class="figure-card-body">
+          <p class="caption">本圖展示了生物訊號傳導系統共有的基本屬性，包括受體的高親和力、放大作用、脫敏作用以及訊號整合。</p>
+          <div class="key-points">
+            <div class="key-point"><span class="kp-dot"></span><span><strong>專一性 (Specificity)：</strong>受體僅結合特定的配體。</span></div>
+            <div class="key-point"><span class="kp-dot"></span><span><strong>放大 (Amplification)：</strong>酵素級聯反應使單個分子產生數倍反應。</span></div>
+            <div class="key-point"><span class="kp-dot"></span><span><strong>整合 (Integration)：</strong>當多個訊號具有相反效應時，細胞會整合輸出淨值。</span></div>
+          </div>
+          <div class="tags"><span class="tag">affinity</span><span class="tag">amplification</span><span class="tag">integration</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-12-2">
+      <div class="section-header">
+        <span class="sec-num">12.2</span>
+        <h3>G 蛋白偶聯受體與第二信使</h3>
+      </div>
+
+      <div class="figure-card" id="fig-4">
+        <div class="figure-card-header">
+          <span class="figure-badge">圖 12-4</span>
+          <span class="figure-card-title">β-腎上腺素受體路徑之轉導</span>
+        </div>
+        <div class="figure-card-body">
+          <p class="caption">描述腎上腺素結合受體後，透過刺激型 G 蛋白 (Gs) 活化腺苷酸環化酶 (Adenylyl Cyclase) 的七個步驟。</p>
+          <div class="key-points">
+            <div class="key-point"><span class="kp-dot"></span><span>Gsα 結合 GTP 後與 βγ 亞基分離並活化 AC。</span></div>
+            <div class="key-point"><span class="kp-dot"></span><span>AC 將 ATP 轉化為 cAMP (第二信使)。</span></div>
+          </div>
+          <div class="tags"><span class="tag">GPCR</span><span class="tag">Gs protein</span><span class="tag">cAMP</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-12-4">
+      <div class="section-header">
+        <span class="sec-num">12.4</span>
+        <h3>受體酪氨酸激酶 (RTK)</h3>
+      </div>
+
+      <div class="figure-card" id="fig-21">
+        <div class="figure-card-header">
+          <span class="figure-badge">圖 12-21</span>
+          <span class="figure-card-title">胰島素受體激酶的自磷酸化</span>
+        </div>
+        <div class="figure-card-body">
+          <p class="caption">胰島素結合引發受體構型改變，導致胞內區段的酪氨酸殘基相互磷酸化。</p>
+          <div class="key-points">
+            <div class="key-point"><span class="kp-dot"></span><span>受體結構為 α2β2 異四聚體。</span></div>
+            <div class="key-point"><span class="kp-dot"></span><span>自磷酸化開啟了下游的 IRS-1 結合位點。</span></div>
+          </div>
+          <div class="tags"><span class="tag">Insulin Receptor</span><span class="tag">RTK</span><span class="tag">Autophosphorylation</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  /**
+   * 使用 scrollIntoView 進行平滑跳轉
+   * @param {string} id 目標元素的 ID
+   */
+  function jumpTo(id) {
+    const element = document.getElementById(id);
+    if (element) {
+      // 計算 header 的高度 (若有 sticky header 需補償)
+      const offset = 80; 
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      // 執行平滑滾動
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
