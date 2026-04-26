@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第 12 章 — 生化訊號傳遞 · 圖說筆記</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Chapter 12 — Biochemical Signaling · Figure Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:         #0f1117;
     --surface:    #161922;
     --surface2:   #1e2330;
-    --border:     #2d3345;
+    --border:     #2d334a;
     --accent:     #5d9cf5;
     --accent2:    #e8b86d;
     --accent3:    #7ecb9e;
@@ -18,7 +18,8 @@
     --text:       #e2e8f0;
     --text-dim:   #94a3b8;
     --text-body:  #cbd5e1;
-    --fig-badge:  rgba(93, 156, 245, 0.15);
+    --fig-badge:  #1c2d5e;
+    --banner-grad: linear-gradient(135deg, #1a2e2a 0%, #132120 100%);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,17 +29,17 @@
   body {
     background: var(--bg);
     color: var(--text-body);
-    font-family: 'Source Serif 4', 'Noto Serif TC', Georgia, serif;
+    font-family: 'Noto Sans TC', sans-serif;
     font-size: 15px;
     line-height: 1.75;
     display: flex;
     min-height: 100vh;
   }
 
-  /* ── 側邊欄 ─────────────────────────────────── */
+  /* ── Sidebar (Only Sections) ────────────────── */
   #sidebar {
-    width: 300px;
-    min-width: 300px;
+    width: 260px;
+    min-width: 260px;
     background: var(--surface);
     border-right: 1px solid var(--border);
     height: 100vh;
@@ -48,207 +49,183 @@
     display: flex;
     flex-direction: column;
     padding-bottom: 2rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
   }
 
   .sidebar-header {
-    padding: 2rem 1.5rem 1rem;
+    padding: 2rem 1.5rem;
     border-bottom: 1px solid var(--border);
-    background: var(--surface);
-  }
-
-  .sidebar-header .chap-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .15em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: .4rem;
   }
 
   .sidebar-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.4;
+    font-size: 14px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
-  .sidebar-section { padding: 1.2rem 1.5rem .5rem; }
-
-  .sidebar-section-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: .8rem;
-    padding-bottom: .4rem;
-    border-bottom: 1px solid var(--border);
+  .sidebar-section {
+    padding: 0.5rem 0;
   }
 
   .sidebar-link {
-    display: flex;
-    align-items: flex-start;
-    gap: .7rem;
-    padding: .5rem .4rem;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all .2s;
-    text-decoration: none;
-    margin-bottom: 2px;
-  }
-
-  .sidebar-link:hover { background: var(--surface2); }
-
-  .sidebar-link .fig-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--accent);
-    min-width: 45px;
-    font-weight: 600;
-  }
-
-  .sidebar-link .fig-title {
-    font-size: 12px;
+    display: block;
+    padding: 0.75rem 1.5rem;
     color: var(--text-dim);
-    line-height: 1.5;
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
   }
 
-  /* ── 主要內容區 ─────────────────────────────── */
+  .sidebar-link:hover {
+    background: var(--surface2);
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  /* ── Main Content ─────────────────────────────── */
   #main {
     flex: 1;
     overflow-x: hidden;
   }
 
-  /* 仿照片的 Hero Banner */
+  /* ── Hero Banner (From Image) ────────────────── */
   .hero-banner {
-    background: linear-gradient(135deg, #1a2c28 0%, #0f1117 100%);
+    background: var(--banner-grad);
     padding: 4rem 4rem 3rem;
-    border-bottom: 1px solid var(--border);
+    color: white;
+    position: relative;
   }
 
-  .hero-label {
+  .hero-banner .chap-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    letter-spacing: .3em;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    opacity: 0.8;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.1;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    opacity: 0.7;
     margin-bottom: 1rem;
+    text-transform: uppercase;
   }
 
-  .hero-subtitle {
-    font-size: 18px;
-    color: var(--text-dim);
+  .hero-banner h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-banner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    opacity: 0.9;
     margin-bottom: 2rem;
   }
 
-  /* 跳轉按鈕區域 */
-  .quick-nav {
-    display: flex;
+  .hero-banner .fig-meta {
+    display: inline-flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1.5rem 4rem;
-    background: var(--bg);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
+    gap: 0.8rem;
+    background: rgba(255,255,255,0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 13px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
   }
 
-  .nav-label {
+  /* ── Quick Jump Bar ──────────────────────────── */
+  .jump-bar {
+    padding: 1.5rem 4rem;
+    background: #12151c;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .jump-label {
     font-size: 13px;
     color: var(--text-dim);
     white-space: nowrap;
-    margin-right: .5rem;
   }
 
-  .pill-btn {
-    padding: .5rem 1.2rem;
-    background: #fff;
-    color: #1a1a1a;
-    border-radius: 50px;
-    font-size: 13.5px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: opacity 0.2s;
-    border: none;
+  .jump-chips {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
   }
 
-  .pill-btn:hover { opacity: 0.9; }
+  .jump-chip {
+    padding: 0.3rem 1.2rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-body);
+    text-decoration: none;
+    transition: 0.2s;
+    background: var(--bg);
+  }
 
-  /* 內文樣式 */
-  .content-body {
-    padding: 2rem 4rem 6rem;
+  .jump-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(93,156,245,0.05);
+  }
+
+  .content-wrapper {
+    padding: 3rem 4rem;
     max-width: 1000px;
   }
 
+  /* ── Section Header ───────────────────────────── */
   .section-header {
     margin: 4rem 0 2rem;
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
   }
 
-  .sec-num {
+  .section-header .sec-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     color: var(--accent2);
-    background: rgba(232,184,109,0.1);
     border: 1px solid rgba(232,184,109,0.3);
-    border-radius: 6px;
-    padding: .3rem .8rem;
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
   }
 
-  .section-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
+  .section-header h4 {
+    font-size: 22px;
+    font-weight: 600;
     color: var(--text);
   }
 
-  /* 圖表卡片 */
+  /* ── Figure Card ──────────────────────────────── */
   .figure-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     margin-bottom: 2rem;
     overflow: hidden;
-    transition: border-color 0.3s;
   }
 
-  .figure-card:hover { border-color: var(--accent); }
-
   .figure-card-header {
-    padding: 1.2rem 1.5rem;
-    background: var(--surface2);
     display: flex;
     align-items: center;
     gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: #1c212d;
     border-bottom: 1px solid var(--border);
   }
 
   .figure-badge {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    font-weight: 600;
     color: var(--accent);
     background: var(--fig-badge);
-    padding: .2rem .8rem;
+    border: 1px solid rgba(93,156,245,0.3);
+    padding: 0.2rem 0.6rem;
     border-radius: 4px;
-    border: 1px solid rgba(93,156,245,0.2);
   }
 
   .figure-card-title {
@@ -257,54 +234,51 @@
     color: var(--text);
   }
 
-  .figure-card-body { padding: 1.5rem; }
+  .figure-card-body {
+    padding: 1.5rem;
+  }
 
   .caption {
     font-size: 14.5px;
-    color: var(--text-dim);
-    line-height: 1.8;
+    color: var(--text-body);
+    line-height: 1.7;
     margin-bottom: 1.2rem;
+    border-left: 3px solid var(--border);
     padding-left: 1rem;
-    border-left: 2px solid var(--accent);
     font-style: italic;
+  }
+
+  .key-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
   .key-point {
     display: flex;
-    gap: .8rem;
-    margin-bottom: .6rem;
+    gap: 0.8rem;
     font-size: 14px;
   }
 
   .kp-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent3);
-    border-radius: 50%;
-    margin-top: 9px;
-    flex-shrink: 0;
+    min-width: 6px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--accent3);
+    margin-top: 10px; flex-shrink: 0;
   }
 
   .tags {
-    display: flex;
-    gap: .5rem;
-    margin-top: 1.2rem;
-    flex-wrap: wrap;
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem;
   }
 
   .tag {
-    font-size: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--text-dim);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: .2rem .7rem;
-    border-radius: 4px;
+    font-size: 11px; color: var(--text-dim);
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 0.1rem 0.6rem; border-radius: 4px;
   }
 
   @media (max-width: 1024px) {
     #sidebar { display: none; }
-    .hero-banner, .quick-nav, .content-body { padding: 2rem; }
+    .hero-banner, .jump-bar, .content-wrapper { padding: 2rem; }
   }
 </style>
 </head>
@@ -312,140 +286,531 @@
 
 <nav id="sidebar">
   <div class="sidebar-header">
-    <div class="chap-label">CHAPTER 12</div>
-    <h1>生化訊號傳遞<br>圖說整理筆記</h1>
+    <h1>目錄導覽</h1>
   </div>
-
   <div class="sidebar-section">
-    <div class="sidebar-section-title">12.1 一般特性</div>
-    <div class="sidebar-link" onclick="jumpTo('fig-1')"><span class="fig-tag">12-1</span><span class="fig-title">訊號傳遞系統的八大特性</span></div>
-    <div class="sidebar-link" onclick="jumpTo('fig-2')"><span class="fig-tag">12-2</span><span class="fig-title">四種通用的訊號轉導模式</span></div>
-  </div>
-
-  <div class="sidebar-section">
-    <div class="sidebar-section-title">12.2 GPCR 與第二信使</div>
-    <div class="sidebar-link" onclick="jumpTo('fig-4')"><span class="fig-tag">12-4</span><span class="fig-title">β-腎上腺素受體路徑</span></div>
-    <div class="sidebar-link" onclick="jumpTo('fig-7')"><span class="fig-tag">12-7</span><span class="fig-title">腎上腺素級聯放大效應</span></div>
-    <div class="sidebar-link" onclick="jumpTo('fig-15')"><span class="fig-tag">12-15</span><span class="fig-title">磷脂酶 C 與 IP3/DAG</span></div>
-  </div>
-
-  <div class="sidebar-section">
-    <div class="sidebar-section-title">12.4 受體酪氨酸激酶 (RTK)</div>
-    <div class="sidebar-link" onclick="jumpTo('fig-21')"><span class="fig-tag">12-21</span><span class="fig-title">胰島素受體自磷酸化</span></div>
-    <div class="sidebar-link" onclick="jumpTo('fig-22')"><span class="fig-tag">12-22</span><span class="fig-title">MAP 激酶級聯反應</span></div>
+    <a href="#sec-12-1" class="sidebar-link">12.1 信號轉導一般特性</a>
+    <a href="#sec-12-2" class="sidebar-link">12.2 GPCR 與第二信使</a>
+    <a href="#sec-12-3" class="sidebar-link">12.3 視覺、嗅覺與味覺</a>
+    <a href="#sec-12-4" class="sidebar-link">12.4 受體酪胺酸激酶</a>
+    <a href="#sec-12-5" class="sidebar-link">12.5 多價接頭蛋白與脂筏</a>
+    <a href="#sec-12-6" class="sidebar-link">12.6 閘控離子通道</a>
+    <a href="#sec-12-7" class="sidebar-link">12.7 核激素受體</a>
+    <a href="#sec-12-8" class="sidebar-link">12.8 蛋白激酶調節週期</a>
+    <a href="#sec-12-9" class="sidebar-link">12.9 癌基因與細胞凋亡</a>
   </div>
 </nav>
 
 <main id="main">
   <header class="hero-banner">
-    <div class="hero-label">CHAPTER 12 · BIOLOGY / BIOCHEM</div>
-    <h2 class="hero-title">生化訊號傳遞<br>Biochemical Signaling</h2>
-    <p class="hero-subtitle">Figure 圖說整理筆記</p>
+    <div class="chap-label">CHAPTER 12 · BIOCHEMISTRY</div>
+    <h2>生物訊號傳遞</h2>
+    <h3>Biochemical Signaling</h3>
+    <div class="fig-meta">
+      <span>📊 共 42 張圖表</span>
+      <span>•</span>
+      <span>9 大核心概念</span>
+    </div>
   </header>
 
-  <nav class="quick-nav">
-    <span class="nav-label">跳至</span>
-    <button class="pill-btn" onclick="jumpTo('sec-12-1')">12.1 一般特性</button>
-    <button class="pill-btn" onclick="jumpTo('sec-12-2')">12.2 GPCRs</button>
-    <button class="pill-btn" onclick="jumpTo('sec-12-4')">12.4 RTK 路徑</button>
-    <button class="pill-btn" onclick="jumpTo('sec-12-8')">12.8 細胞週期</button>
-  </nav>
+  <div class="jump-bar">
+    <span class="jump-label">跳至</span>
+    <div class="jump-chips">
+      <a href="#sec-12-1" class="jump-chip">12.1 一般特性</a>
+      <a href="#sec-12-2" class="jump-chip">12.2 GPCRs</a>
+      <a href="#sec-12-3" class="jump-chip">12.3 感官受體</a>
+      <a href="#sec-12-4" class="jump-chip">12.4 RTKs</a>
+      <a href="#sec-12-5" class="jump-chip">12.5 接頭蛋白</a>
+      <a href="#sec-12-6" class="jump-chip">12.6 離子通道</a>
+      <a href="#sec-12-7" class="jump-chip">12.7 核受體</a>
+      <a href="#sec-12-8" class="jump-chip">12.8 細胞週期</a>
+      <a href="#sec-12-9" class="jump-chip">12.9 癌與凋亡</a>
+    </div>
+  </div>
 
-  <div class="content-body">
+  <div class="content-wrapper">
+
+    <div id="sec-12-1" class="section-header">
+      <span class="sec-num">12.1</span>
+      <h4>信號轉導的一般特性 (General Features)</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-1</span>
+        <span class="figure-card-title">信號轉導系統的八項特性</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">圖解了生物信號轉導系統共有的八項統一特性，包括高受體親和力、放大作用、去敏感化和整合作用。</p>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-dot"></span><span><strong>專一性：</strong>受體對配體具有高度專一性，Kd 通常 ≤ 10⁻⁷ M。</span></div>
+          <div class="key-point"><span class="kp-dot"></span><span><strong>放大作用：</strong>一個信號分子可激活多層下游酵素。</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-2</span>
+        <span class="figure-card-title">四種通用的信號轉導器類型</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">將跨膜信號傳遞分為四種通用的受體架構：離子通道偶聯受體、酵素偶聯受體、G 蛋白偶聯受體 (GPCR) 和核激素受體。</p>
+        <div class="key-points">
+          <div class="key-point"><span class="kp-dot"></span><span><strong>分類：</strong>涵蓋了從毫秒級的離子通道到數小時的核受體反應。</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="sec-12-2" class="section-header">
+      <span class="sec-num">12.2</span>
+      <h4>G 蛋白偶聯受體與第二信使</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-3</span>
+        <span class="figure-card-title">腎上腺素及其合成模擬物</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示了腎上腺素的結構及其對受體的親和力，並對比了人工合成的促效劑（Isoproterenol）與拮抗劑（Propranolol）。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-4</span>
+        <span class="figure-card-title">β-腎上腺素路徑的轉導機制</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">描繪了將腎上腺素結合與透過刺激型 G 蛋白 (Gs) 活化腺苷酸環化酶偶聯的七個步驟機制。同時註明抑制型 G 蛋白 (Gi) 具有相反的調節作用。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-5</span>
+        <span class="figure-card-title">GTPase 分子開關</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示了 G 蛋白如何在失活的 GDP 結合態（關閉）與活化的 GTP 結合態（開啟）之間循環。由 RGS 蛋白調節的內源性 GTPase 活性控制了活化時間。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-6</span>
+        <span class="figure-card-title">PKA 的活化機制</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">圖解 cAMP 依賴性蛋白激酶 (PKA) 的結構與活化。失活的酵素是 R2C2 四聚體；cAMP 結合調節亞基 (R) 後釋放並活化催化亞基 (C)。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-7</span>
+        <span class="figure-card-title">腎上腺素級聯：信號放大</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">描繪了肝細胞中由單個腎上腺素分子觸發的催化放大級聯。每一步都倍增了活化分子的數量，最終動員大量的葡萄糖。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-8</span>
+        <span class="figure-card-title">調節 G 蛋白活性的因子</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">總結了調節 G 蛋白信號的調節蛋白：GEF（上游活化劑如 GPCR）、GAP（GTPase 加速蛋白）和 GDI（解離抑制劑）。適用於小 G 蛋白 (Ras) 與異三聚體 Gs。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-9</span>
+        <span class="figure-card-title">β-腎上腺素受體的脫敏作用</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示了持續存在的腎上腺素如何導致受體脫敏。β-ARK 磷酸化受體，隨後 β-arrestin 結合並阻斷與 G 蛋白的偶聯。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-10</span>
+        <span class="figure-card-title">G 蛋白與 Arrestin 的互斥結合</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">比較了 GPCR 與 G 蛋白結合的狀態，以及受體磷酸化後與 arrestin 結合的結構。這兩個結合夥伴在空間上是互斥的。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-11</span>
+        <span class="figure-card-title">AKAPs：超分子信號複合物的核化</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">AKAP5 作為質膜細胞質側的多價支架蛋白，透過棕櫚醯基與 PIP3 結合，將 PKA 錨定在受體與腺苷酸環化酶附近。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-12</span>
+        <span class="figure-card-title">Ras：G 蛋白的原型</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示與非水解 GTP 模擬物結合的 Ras 晶體結構。關鍵結構元件如 P-loop、Switch I 和 Switch II 共同協調 Mg²⁺-GTP 複合物。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-13</span>
+        <span class="figure-card-title">GTP 水解切換 Ras 狀態</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">當 Ras 在 GAP 協助下水解 GTP 時，氫鍵的喪失使 Switch 區域放鬆成一種不再與下游效應蛋白交互作用的構型。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-14</span>
+        <span class="figure-card-title">霍亂毒素：將 Gsα 鎖定在活化態</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">霍亂毒素催化將 NAD⁺ 的 ADP-核糖基轉移至 Gsα 的精胺酸殘基。此修飾阻止了 GTPase 引起的失活，導致 cAMP 持續過量產生。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-15</span>
+        <span class="figure-card-title">磷脂酶 C 與 IP3/DAG 第二信使</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">圖解 PLC 路徑：激素活化 Gq 蛋白，隨後活化 PLC-β 將 PIP2 裂解為 IP3 和 DAG，兩者分別活化不同的下游效應器。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-16</span>
+        <span class="figure-card-title">IP3 閘控鈣離子通道機制</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">IP3 受體在關閉狀態下的冷凍電子顯微鏡結構。這是一個 1.3 MDa 的四聚體通道，其巨大胞質域在結合 IP3 後驅動孔道開放以釋放鈣離子。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-17</span>
+        <span class="figure-card-title">鈣調蛋白：鈣離子驅動反應的介導蛋白</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">鈣調蛋白 (Calmodulin) 與四個鈣離子結合後的晶體結構。這種啞鈴狀蛋白會包裹目標胜肽的螺旋結構，進而活化數十種鈣依賴性酵素。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-18</span>
+        <span class="figure-card-title">細胞內 [Ca²⁺] 振盪的觸發</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">使用螢光染料 fura 顯示，細胞受刺激後並非產生單一的鈣升高的，而是重複的振盪。振盪的頻率編碼了信號的強度。</p>
+      </div>
+    </div>
+
+    <div id="sec-12-3" class="section-header">
+      <span class="sec-num">12.3</span>
+      <h4>感官系統中的 GPCR（視、嗅、味覺）</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-19</span>
+        <span class="figure-card-title">視紫質吸收光子的分子後果</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示了視桿細胞感光的完整週期：激發（光子使 cGMP 降低、通道關閉、細胞超極化）以及隨後的恢復與適應過程。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-20</span>
+        <span class="figure-card-title">激素與感官系統的共通特徵</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">統一圖表顯示 GPCR 提供專一性，而 G 蛋白在不同感知模態中提供放大作用。下游效應器通常匯聚在 cAMP 或 cGMP 的變化上。</p>
+      </div>
+    </div>
+
+    <div id="sec-12-4" class="section-header">
+      <span class="sec-num">12.4</span>
+      <h4>受體酪胺酸激酶 (RTK)</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-21</span>
+        <span class="figure-card-title">胰島素受體透過自磷酸化活化</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">胰島素受體的結構模型。單個胰島素分子的結合導致兩個 β 亞單元相互磷酸化三個酪胺酸殘基，從而活化激酶。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-22</span>
+        <span class="figure-card-title">胰島素透過 MAP 激酶級聯調節基因表達</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示 Ras → Raf → MEK → ERK 的級聯反應。活化的 ERK 進入細胞核並磷酸化轉錄因子，進而調節基因表達。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-23</span>
+        <span class="figure-card-title">胰島素對肝醣合成與 GLUT4 的作用</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">PI3K 路徑驅動含有 GLUT4 的囊泡向質膜轉位，並活化肝醣合酶。PI3K 產生 PIP3 作為 PKB 活化的關鍵信號。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-24</span>
+        <span class="figure-card-title">PIP3 的形成與降解：PI3K vs. PTEN</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">PI3K 催化 PIP2 形成 PIP3；抑癌基因 PTEN 則透過移除磷酸基來反轉此過程，從而終止信號。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-25</span>
+        <span class="figure-card-title">胰島素觸發磷酸化的時間進程</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">來自質譜儀的動力學數據，顯示了小鼠肝細胞在注射胰島素後，關鍵信號蛋白磷酸化的時序邏輯。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-26</span>
+        <span class="figure-card-title">受體酪胺酸激酶的多樣性</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">比較了主要 RTK（如 EGFR、VEGFR）的結構域。它們共享細胞內的酪胺酸激酶結構域，但具有高度多樣的細胞外配體結合域。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-27</span>
+        <span class="figure-card-title">胰島素受體與 β-腎上腺素受體的交聯作用</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">活化的胰島素受體會直接或間接磷酸化 β-腎上腺素受體，導致其內化，從而抑制戰鬥或逃跑反應。</p>
+      </div>
+    </div>
+
+    <div id="sec-12-5" class="section-header">
+      <span class="sec-num">12.5</span>
+      <h4>多價接頭蛋白與膜脂筏</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-28</span>
+        <span class="figure-card-title">PTB 結構域與磷酸酪胺酸的交互作用</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示了 PTB 結構域如何結合蛋白質夥伴上的磷酸酪胺酸 (pTyr) 殘基。多個非共價接觸確保了結合的專一性。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-29</span>
+        <span class="figure-card-title">Src 與 GSK3 的自抑制機制</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">在 Src 激酶的活性狀態下，SH2 和 SH3 結合底物。自身特定位點的磷酸化會導致 SH2 轉向結合內部位點，引發自抑制。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-30</span>
+        <span class="figure-card-title">信號蛋白的結合模組</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示各種信號蛋白中模組化排列的保守結合結構域（SH2、SH3、PH 等）。這些模組定義了信號的專一性。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-31</span>
+        <span class="figure-card-title">支架蛋白 KSR 組織 MAP 激酶級聯</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">KSR 同時結合 Raf-MEK-ERK 三種激酶，實現高效信號傳遞。活化的 ERK 會磷酸化 KSR 以產生負回饋。</p>
+      </div>
+    </div>
+
+    <div id="sec-12-6" class="section-header">
+      <span class="sec-num">12.6</span>
+      <h4>閘控離子通道</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-32</span>
+        <span class="figure-card-title">跨膜電位</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">Na⁺K⁺-ATPase 產生約 -60 mV 的跨膜電位。產生的電化學梯度驅動鈉和鈣離子內流及鉀離子外流。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-33</span>
+        <span class="figure-card-title">電壓與配體閘控通道在神經傳導中的作用</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示突觸事件的完整序列：動作電位傳導、鈣通道開放、乙醯膽鹼釋放以及後續突觸後細胞的新動作電位引發。</p>
+      </div>
+    </div>
+
+    <div id="sec-12-7" class="section-header">
+      <span class="sec-num">12.7</span>
+      <h4>核激素受體對轉錄的調節</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-34</span>
+        <span class="figure-card-title">類固醇與甲狀腺素調節基因表達</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示脂溶性激素穿過質膜與胞內受體結合的通用機制。激素-受體複合物進入核內，作為轉錄因子作用於 HRE 序列。</p>
+      </div>
+    </div>
+
+    <div id="sec-12-8" class="section-header">
+      <span class="sec-num">12.8</span>
+      <h4>蛋白激酶對細胞週期的調節</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-35</span>
+        <span class="figure-card-title">真核細胞週期</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示真核細胞週期的四個階段：G1（生長）、S（DNA 合成）、G2（準備）和 M（有絲分裂）。細胞也可以進入靜止的 G0 態。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-36</span>
+        <span class="figure-card-title">細胞週期中 CDK 活性的變化</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">曲線圖顯示四種 CDK-Cyclin 複合物活性在細胞週期中的起伏，例如 Cyclin B-CDK1 在 M 期達到高峰。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-37</span>
+        <span class="figure-card-title">Cyclin 與磷酸化活化 CDK</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">CDK2 的晶體結構顯示，沒有 Cyclin 時 T-loop 會阻擋結合位點。Cyclin 結合與後續的 CAK 磷酸化會全面活化激酶。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-38</span>
+        <span class="figure-card-title">磷酸化與蛋白水解對 CDK 的調節</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">展示 CDK 的活化序列以及如何透過泛素介導的蛋白水解來破壞 Cyclin 夥伴，進而使 CDK 失活。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-39</span>
+        <span class="figure-card-title">生長因子對細胞分裂的調節</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">從受體活化透過 MAP 激酶級聯導致 Cyclin D 表達增加的路徑。這是生長因子信號與進入細胞週期之間的關鍵連結。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-40</span>
+        <span class="figure-card-title">pRb 磷酸化對 G1→S 轉變的調節</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">視網膜母細胞瘤蛋白 (pRb) 在低磷酸化時結合並抑制 E2F。CDK 的連續磷酸化釋放 E2F，觸發 S 期所需基因的轉錄。</p>
+      </div>
+    </div>
+
+    <div id="sec-12-9" class="section-header">
+      <span class="sec-num">12.9</span>
+      <h4>癌基因、抑癌基因與計畫性細胞死亡</h4>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-41</span>
+        <span class="figure-card-title">正常細胞轉變為大腸癌的多步過程</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">癌基因與抑癌基因突變的連續累積，驅動正常上皮細胞經過腺瘤階段最終發展為癌和轉移性癌症。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-card-header">
+        <span class="figure-badge">FIG 12-42</span>
+        <span class="figure-card-title">細胞凋亡的初始事件</span>
+      </div>
+      <div class="figure-card-body">
+        <p class="caption">外在凋亡路徑：TNFα 結合受體觸發 Caspase-8 活化，導致線粒體釋放細胞色素 c。隨後組裝凋亡小體以執行細胞死亡。</p>
+      </div>
+    </div>
     
-    <section id="sec-12-1">
-      <div class="section-header">
-        <span class="sec-num">12.1</span>
-        <h3>訊號傳遞的一般特性 (General Features)</h3>
-      </div>
-
-      <div class="figure-card" id="fig-1">
-        <div class="figure-card-header">
-          <span class="figure-badge">圖 12-1</span>
-          <span class="figure-card-title">訊號傳遞系統的八大特性</span>
-        </div>
-        <div class="figure-card-body">
-          <p class="caption">本圖展示了生物訊號傳導系統共有的基本屬性，包括受體的高親和力、放大作用、脫敏作用以及訊號整合。</p>
-          <div class="key-points">
-            <div class="key-point"><span class="kp-dot"></span><span><strong>專一性 (Specificity)：</strong>受體僅結合特定的配體。</span></div>
-            <div class="key-point"><span class="kp-dot"></span><span><strong>放大 (Amplification)：</strong>酵素級聯反應使單個分子產生數倍反應。</span></div>
-            <div class="key-point"><span class="kp-dot"></span><span><strong>整合 (Integration)：</strong>當多個訊號具有相反效應時，細胞會整合輸出淨值。</span></div>
-          </div>
-          <div class="tags"><span class="tag">affinity</span><span class="tag">amplification</span><span class="tag">integration</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="sec-12-2">
-      <div class="section-header">
-        <span class="sec-num">12.2</span>
-        <h3>G 蛋白偶聯受體與第二信使</h3>
-      </div>
-
-      <div class="figure-card" id="fig-4">
-        <div class="figure-card-header">
-          <span class="figure-badge">圖 12-4</span>
-          <span class="figure-card-title">β-腎上腺素受體路徑之轉導</span>
-        </div>
-        <div class="figure-card-body">
-          <p class="caption">描述腎上腺素結合受體後，透過刺激型 G 蛋白 (Gs) 活化腺苷酸環化酶 (Adenylyl Cyclase) 的七個步驟。</p>
-          <div class="key-points">
-            <div class="key-point"><span class="kp-dot"></span><span>Gsα 結合 GTP 後與 βγ 亞基分離並活化 AC。</span></div>
-            <div class="key-point"><span class="kp-dot"></span><span>AC 將 ATP 轉化為 cAMP (第二信使)。</span></div>
-          </div>
-          <div class="tags"><span class="tag">GPCR</span><span class="tag">Gs protein</span><span class="tag">cAMP</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="sec-12-4">
-      <div class="section-header">
-        <span class="sec-num">12.4</span>
-        <h3>受體酪氨酸激酶 (RTK)</h3>
-      </div>
-
-      <div class="figure-card" id="fig-21">
-        <div class="figure-card-header">
-          <span class="figure-badge">圖 12-21</span>
-          <span class="figure-card-title">胰島素受體激酶的自磷酸化</span>
-        </div>
-        <div class="figure-card-body">
-          <p class="caption">胰島素結合引發受體構型改變，導致胞內區段的酪氨酸殘基相互磷酸化。</p>
-          <div class="key-points">
-            <div class="key-point"><span class="kp-dot"></span><span>受體結構為 α2β2 異四聚體。</span></div>
-            <div class="key-point"><span class="kp-dot"></span><span>自磷酸化開啟了下游的 IRS-1 結合位點。</span></div>
-          </div>
-          <div class="tags"><span class="tag">Insulin Receptor</span><span class="tag">RTK</span><span class="tag">Autophosphorylation</span></div>
-        </div>
-      </div>
-    </section>
-
+    <div class="back-top">
+      <a href="#top">↑ 回到頂部</a> &nbsp;·&nbsp; Chapter 50 · Sensory and Motor Mechanisms
+    </div>
+    
   </div>
 </main>
 
 <script>
-  /**
-   * 使用 scrollIntoView 進行平滑跳轉
-   * @param {string} id 目標元素的 ID
-   */
-  function jumpTo(id) {
-    const element = document.getElementById(id);
-    if (element) {
-      // 計算 header 的高度 (若有 sticky header 需補償)
-      const offset = 80; 
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      // 執行平滑滾動
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  }
+  // 保持簡單的跳轉功能
 </script>
-
 </body>
 </html>
