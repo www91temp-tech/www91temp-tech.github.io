@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 8 章 | 核苷酸與核酸 Figure 筆記</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #1a1a2e;
+    --deep:      #16213e;
+    --mid:       #0f3460;
+    --accent:    #e94560;
+    --gold:      #c9a84c;
+    --warm:      #f5f0e8;
+    --card-bg:   #ffffff;
+    --muted:     #6b7280;
+    --border:    #e5e2d9;
+    --tag-81:    #2563eb;
+    --tag-82:    #7c3aed;
+    --tag-83:    #059669;
+    --tag-84:    #d97706;
+    --shadow:    0 2px 16px rgba(26,26,46,0.09);
+    --shadow-lg: 0 8px 40px rgba(26,26,46,0.16);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', 'Noto Sans TC', sans-serif;
+    background: var(--warm);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* ─── Top banner ─── */
+  .top-banner {
+    background: var(--deep);
+    color: rgba(255,255,255,0.55);
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    padding: 7px 16px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ─── Hero ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--deep) 0%, var(--mid) 60%, #1a4a6e 100%);
+    padding: 56px 32px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(201,168,76,0.12) 0%, transparent 60%),
+      radial-gradient(circle at 10% 90%, rgba(233,69,96,0.08) 0%, transparent 50%);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .hero h1 .en {
+    display: block;
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.3rem, 3.5vw, 2.1rem);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+  }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.04em;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.75);
+  }
+  .hero-badge .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ─── Sticky nav ─── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 12px rgba(26,26,46,0.06);
+  }
+  .nav-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-right: 8px;
+    border-right: 1px solid var(--border);
+    margin-right: 4px;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    border: none;
+    background: var(--warm);
+    color: var(--ink);
+    font-family: 'DM Sans', 'Noto Sans TC', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 500;
+    padding: 5px 13px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, transform 0.12s;
+    border: 1px solid transparent;
+  }
+  .nav-btn:hover {
+    background: var(--mid);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .nav-btn .num {
+    font-size: 0.65rem;
+    background: rgba(0,0,0,0.08);
+    border-radius: 100px;
+    padding: 1px 6px;
+  }
+  .nav-btn:hover .num { background: rgba(255,255,255,0.2); }
+
+  /* ─── Main layout ─── */
+  .main {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 44px 20px 80px;
+  }
+
+  /* ─── Section headers ─── */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin: 56px 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-header:first-child { margin-top: 0; }
+  .section-num {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--mid);
+    border-radius: 5px;
+    padding: 4px 10px;
+    white-space: nowrap;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .section-header h2 .en-sub {
+    display: block;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ─── Cards ─── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    gap: 18px;
+  }
+  @media (max-width: 680px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px 24px 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, transform 0.18s;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 11px;
+  }
+  .fig-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 3px 9px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .fig-tag.s81 { background: #dbeafe; color: var(--tag-81); }
+  .fig-tag.s82 { background: #ede9fe; color: var(--tag-82); }
+  .fig-tag.s83 { background: #d1fae5; color: var(--tag-83); }
+  .fig-tag.s84 { background: #fef3c7; color: var(--tag-84); }
+
+  .card h3 {
+    font-family: 'Noto Serif TC', 'Libre Baskerville', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+    flex: 1;
+  }
+  .card-body {
+    font-size: 0.83rem;
+    color: #374151;
+    line-height: 1.72;
+  }
+  .card-body p + p { margin-top: 8px; }
+
+  .key-box {
+    background: linear-gradient(135deg, #f0f4ff 0%, #f5f0ff 100%);
+    border-left: 3px solid var(--mid);
+    border-radius: 0 6px 6px 0;
+    padding: 9px 14px;
+    margin-top: 11px;
+    font-size: 0.78rem;
+    color: #2d3a52;
+    line-height: 1.6;
+  }
+  .key-box .key-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+
+  /* ─── Wide card (full row) ─── */
+  .card.wide {
+    grid-column: 1 / -1;
+  }
+
+  /* ─── Accent divider ─── */
+  .accent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold), transparent);
+    border-radius: 2px;
+    margin: 0 0 18px;
+    width: 60px;
+  }
+
+  /* ─── Return to top ─── */
+  #back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--mid);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(15,52,96,0.35);
+    transition: background 0.18s, transform 0.18s, opacity 0.2s;
+    opacity: 0;
+    pointer-events: none;
+    font-size: 1.1rem;
+  }
+  #back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #back-to-top:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-banner">第 8 章 ｜ 核苷酸與核酸 Figure 筆記</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">CHAPTER 8 · BIOCHEMISTRY</span>
+    <h1>
+      核苷酸與核酸
+      <span class="en">Nucleotides and Nucleic Acids</span>
+    </h1>
+    <div class="hero-sub">Figure 圖說整理筆記</div>
+    <div class="hero-badge">
+      <span class="dot"></span>
+      共 42 張圖・4 大概念
+    </div>
+  </div>
+</div>
+
+<!-- Sticky navigation -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <span class="nav-label">跳至</span>
+    <button class="nav-btn" onclick="document.getElementById('sec81').scrollIntoView({behavior:'smooth', block:'start'})">
+      8.1 基本定義與規則 <span class="num">11</span>
+    </button>
+    <button class="nav-btn" onclick="document.getElementById('sec82').scrollIntoView({behavior:'smooth', block:'start'})">
+      8.2 核酸結構 <span class="num">14</span>
+    </button>
+    <button class="nav-btn" onclick="document.getElementById('sec83').scrollIntoView({behavior:'smooth', block:'start'})">
+      8.3 核酸化學 <span class="num">13</span>
+    </button>
+    <button class="nav-btn" onclick="document.getElementById('sec84').scrollIntoView({behavior:'smooth', block:'start'})">
+      8.4 核苷酸的其他功能 <span class="num">4</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Main content -->
+<main class="main">
+
+  <!-- ══════════════════════════════════
+       SECTION 8.1
+  ══════════════════════════════════ -->
+  <div id="sec81" class="section-header">
+    <span class="section-num">8.1</span>
+    <h2>
+      基本定義與規則
+      <span class="en-sub">Some Basic Definitions and Conventions</span>
+    </h2>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-1<br>核苷酸的一般結構</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>核苷酸由三個部分組成：(1) 含氮鹼基、(2) 五碳糖（戊糖）、(3) 一個以上的磷酸基。不含磷酸基時稱為核苷（nucleoside）。</p>
+        <p>戊糖環上的碳原子以帶撇號的數字標示（C-1′ 至 C-5′），以區別鹼基環上的編號。磷酸基酯化在 5′ 碳，鹼基以 N-β-糖苷鍵連接在 1′ 碳。</p>
+        <div class="key-box">
+          <div class="key-label">Key Convention</div>
+          核糖核苷酸（ribonucleotide）的 2′ 碳帶有 —OH；去氧核糖核苷酸（deoxyribonucleotide）的 2′ 碳則為 —H，此差異對 RNA 的水解穩定性具關鍵影響。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-2<br>主要嘌呤與嘧啶鹼基</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>DNA 與 RNA 共同含有的嘌呤：腺嘌呤（A）與鳥嘌呤（G）。嘧啶方面，胞嘧啶（C）同存於兩者，但 DNA 含胸腺嘧啶（T），RNA 含尿嘧啶（U）。</p>
+        <p>所有鹼基均為芳香族雜環化合物，嘧啶接近完全平面，嘌呤略有翹曲。這些鹼基在 pH 7.0 時以特定的酮式（lactam）互變異構體形式存在，直接決定了 Watson-Crick 鹼基配對的幾何關係。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-3<br>核糖的構型（ring puckering）</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>游離核糖在溶液中以直鏈（醛式）與 β-呋喃環（closed ring）形式平衡存在；但在 RNA 中，核糖僅以 β-D-核糖呋喃環形式存在。去氧核糖在 DNA 中同樣僅以 β-2′-去氧-D-核糖呋喃環形式存在。</p>
+        <p>呋喃環的五個原子幾乎共面，但其中一個碳（C-2′ 或 C-3′）偏離平面，形成 endo 或 exo 構型。B-DNA 中呈 C-2′ endo；A-DNA 中呈 C-3′ endo。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-4<br>去氧核糖核苷酸與核糖核苷酸</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>DNA 的四種去氧核糖核苷酸：dAMP、dGMP、dCMP、dTMP（即 deoxyribonucleoside 5′-monophosphates）。</p>
+        <p>RNA 的四種核糖核苷酸：AMP、GMP、CMP、UMP（ribonucleoside 5′-monophosphates）。所有縮寫均預設磷酸基位於 5′ 位置；核苷部分（nucleoside portion）特別以淺紅色底色標示。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-5<br>次要嘌呤與嘧啶鹼基</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p><strong>DNA 的次要鹼基：</strong>5-甲基胞苷（動物與高等植物）、N⁶-甲基腺苷（細菌）、5-羥甲基胞苷（被某些噬菌體感染的細菌）。甲基化多由後天酵素修飾引入，功能與基因調控或 DNA 保護有關。</p>
+        <p><strong>tRNA 的次要鹼基：</strong>次黃苷（inosine，含次黃嘌呤）、假尿苷（pseudouridine，以 C-5 而非 N-1 連接核糖）等。</p>
+        <div class="key-box">
+          <div class="key-label">命名慣例</div>
+          環內原子的取代基直接以位置編號標示，如 5-methylcytosine；環外原子則標示原子種類加上標，如 N⁶-methyladenosine。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-6<br>腺苷酸的多種形式</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>核苷酸除了 5′-磷酸形式外，尚可存在 2′-磷酸、3′-磷酸及 2′,3′-環狀磷酸（cyclic monophosphate）等形式。</p>
+        <p>核糖核苷 2′,3′-環狀單磷酸是鹼性條件水解 RNA 的中間產物，隨後進一步水解生成 2′- 或 3′-核苷單磷酸的混合物。此反應說明 DNA 在鹼性條件下比 RNA 更穩定的原因：DNA 的 2′ 碳缺乏 —OH，無法形成環狀中間體。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-7<br>磷酸二酯鍵（phosphodiester linkage）</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>核酸骨架由交替的磷酸基與五碳糖組成，各核苷酸透過磷酸二酯鍵連接：前一核苷酸的 5′-磷酸與下一核苷酸的 3′-羥基成酯。磷酸基在 pH 7.0 時完全游離帶負電，通常由蛋白質正電荷、金屬離子或多胺中和。</p>
+        <div class="key-box">
+          <div class="key-label">Key Convention</div>
+          鏈的方向：5′ 端（缺乏連結在 5′ 位置的核苷酸）寫在左，3′ 端（缺乏連結在 3′ 位置的核苷酸）寫在右，序列一律以 5′→3′ 方向書寫。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-8<br>RNA 的鹼性水解</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>RNA 在鹼性條件下，2′-羥基作為親核基進行分子內取代反應，先形成 2′,3′-環狀單磷酸中間體，再水解為 2′- 與 3′-核苷單磷酸的混合物。</p>
+        <p>DNA 缺少 2′-羥基，故在相同條件下不發生此反應，遠比 RNA 穩定，適合作為長期遺傳資訊的儲存載體。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-9<br>尿嘧啶的互變異構體</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>尿嘧啶（及其他嘧啶、嘌呤）可在 lactam、lactim 及 double lactim 等互變異構體之間轉換。在 pH 7.0 時，lactam 形式（C=O 形式）占主導，此構型決定鹼基所能形成的氫鍵供體/受體模式，進而決定 Watson-Crick 配對專一性。若以 lactim 形式配對，則可能導致錯誤配對，引起突變。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-10<br>常見核苷酸的吸收光譜</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>所有核苷酸鹼基均吸收紫外光，在 260 nm 附近有強烈吸收峰（此為嘌呤、嘧啶共同特徵）。各核苷酸的莫耳消光係數（ε₂₆₀）列於圖中表格，用於定量核酸濃度。</p>
+        <p>核糖核苷酸與去氧核糖核苷酸的光譜實際上相同，核苷亦然。混合核苷酸樣品以 A₂₆₀ 進行定量。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-11<br>Watson-Crick 鹼基配對的氫鍵模式</h3>
+        <span class="fig-tag s81">8.1</span>
+      </div>
+      <div class="card-body">
+        <p>A 與 T（或 U）之間形成 <strong>2 條氫鍵</strong>（A═T）；G 與 C 之間形成 <strong>3 條氫鍵</strong>（G≡C）。此特定配對模式（1953 年 Watson & Crick 提出）是遺傳資訊複製的分子基礎。</p>
+        <p>兩者配對幾何形狀相似（嘌呤-嘧啶組合），使雙螺旋沿長軸維持均勻寬度，骨架不發生扭曲。</p>
+      </div>
+    </div>
+
+  </div><!-- /cards 8.1 -->
+
+
+  <!-- ══════════════════════════════════
+       SECTION 8.2
+  ══════════════════════════════════ -->
+  <div id="sec82" class="section-header">
+    <span class="section-num">8.2</span>
+    <h2>
+      核酸結構
+      <span class="en-sub">Nucleic Acid Structure</span>
+    </h2>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-12<br>DNA 纖維的 X 射線衍射圖</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>Rosalind Franklin 與 Maurice Wilkins 於 1950 年代初利用 X 射線衍射分析 DNA 纖維。衍射圖中心的交叉斑點指示螺旋結構；左右兩側的強帶（heavy bands）來自週期性堆疊的鹼基。</p>
+        <p>分析結果顯示 DNA 為螺旋結構，沿長軸有兩個週期性：3.4 Å（鹼基間距）與 34 Å（每螺旋圈距離），推算出每圈約 10 個鹼基對。此數據是 Watson-Crick 建構模型的關鍵依據。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-13<br>Watson-Crick DNA 雙螺旋模型</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>1953 年提出的雙螺旋模型：兩條反平行 DNA 鏈纏繞同一軸形成右旋雙螺旋。親水性骨架（磷酸-去氧核糖）位於外側，疏水性鹼基堆疊於內側，與長軸垂直。</p>
+        <p>兩條鏈的偏移配對形成<strong>大溝（major groove）</strong>與<strong>小溝（minor groove）</strong>。水溶液中每圈 10.5 bp；原始模型提出 10 bp，後由精確量測修正。螺旋間距 36 Å（3.6 nm）。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-14<br>DNA 雙螺旋的鏈互補性</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>兩條反平行互補鏈的鹼基組成與序列均不相同，但嚴格遵循配對規則（A=T、G=C），故任一鏈的序列完全決定另一鏈的序列。</p>
+        <p>雙螺旋的主要穩定力來自：(1) <strong>金屬離子屏蔽骨架負電荷</strong>、(2) 連續鹼基對之間的<strong>疏水堆疊交互作用</strong>。氫鍵保障了互補性，但對整體穩定性的直接貢獻相對有限。G≡C 豐富的 DNA 更穩定。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-15<br>Watson-Crick 提出的 DNA 複製模型</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>雙螺旋模型直接啟示了遺傳資訊複製的機制：(1) 解開兩條鏈，(2) 各以原有鏈為模板，依鹼基配對規則合成互補的新鏈（子鏈，以粉紅色標示）。</p>
+        <p>此半保留複製（semiconservative replication）的預測後來由 Meselson-Stahl 實驗（1958 年）確認。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-16<br>DNA 的構型變異</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>DNA 的結構可繞 7 個鍵旋轉，其中包括環的 puckering（鍵 4）和 C-1′-N 糖苷鍵的旋轉。嘌呤核苷酸相對於核糖可採 <strong>syn</strong> 或 <strong>anti</strong> 兩種構型；嘧啶因空間位阻限制，僅呈 anti 構型。</p>
+        <p>這些自由度解釋了 DNA 可以 B、A、Z 等不同形式存在的結構基礎。</p>
+      </div>
+    </div>
+
+    <div class="card wide">
+      <div class="card-top">
+        <h3>Figure 8-17<br>A、B、Z 三種 DNA 形式的比較</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p><strong>B-DNA（Watson-Crick 標準形）：</strong>右旋螺旋，10.5 bp/圈，C-2′ endo 構型，鹼基對平面垂直於螺旋軸，生理條件下最穩定。</p>
+        <p><strong>A-DNA：</strong>右旋螺旋，11 bp/圈，較寬較短；去水環境下偏好此形式。鹼基對平面相對螺旋軸傾斜約 20°，大溝更深，小溝更淺。DNA 結晶體多以 A 形存在（脫水所致）。</p>
+        <p><strong>Z-DNA：</strong>左旋螺旋，12 bp/圈，更細長；骨架呈 zigzag 狀。嘌呤殘基翻轉為 syn 構型，大溝幾乎消失，小溝狹窄而深。在含交替嘌呤-嘧啶序列（尤其 CG 重複）或 5-甲基-C 與 G 的序列中最易形成。體內 Z-DNA 短片段可能與基因表達調控或遺傳重組有關。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-18<br>回文序列與鏡像重複</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p><strong>回文序列（palindrome）：</strong>雙鏈 DNA 中，一條鏈的某段序列旋轉 180° 後與另一條鏈互補，需同時繞水平軸與垂直軸各轉 180° 才能重疊。具有形成髮夾（hairpin）或十字型（cruciform）結構的潛力。</p>
+        <p><strong>鏡像重複（mirror repeat）：</strong>單鏈內兩方向對稱，僅需繞垂直軸旋轉 180° 即可重疊，但無法在同一鏈內形成分子內互補配對。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-19<br>髮夾結構與十字型結構</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>回文序列的 DNA（或 RNA）可形成替代結構：<strong>髮夾（hairpin）</strong>由單條 DNA 或 RNA 鏈的自我互補形成；<strong>十字型（cruciform）</strong>則牽涉雙鏈 DNA 的兩條鏈各自折疊。</p>
+        <p>大量非對稱序列（以藍色底色標示）既可與互補鏈配對，也可與同鏈的互補區段配對，使髮夾結構成為 RNA 最常見的二級結構。特定短序列（如 UUCG）能形成特別緊密穩定的環。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-20<br>三股與四股 DNA 結構</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p><strong>三股 DNA（triplex DNA）：</strong>第三條鏈可透過 Hoogsteen 配對與大溝中的 Watson-Crick 鹼基對形成額外氫鍵（N-7、O⁶、N⁶ 等 Hoogsteen 位置）。最穩定於低 pH（需質子化胞嘧啶），且多形成於富含嘌呤或嘧啶的序列段落。</p>
+        <p><strong>G 四鏈體（G tetraplex/quadruplex）：</strong>富含鳥苷酸序列可形成極穩定的四鏈結構，四個 G 殘基透過 Hoogsteen 氫鍵環狀配對（G-quartet），多種鏈走向變體均已知。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-21<br>細菌 mRNA 的結構</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>mRNA 是遺傳資訊從 DNA 傳遞到核糖體的中間載體（François Jacob 與 Jacques Monod，1961 年）。細菌（與古菌）mRNA 可為：(a) <strong>單順反子（monocistronic）</strong>：編碼一條多肽；(b) <strong>多順反子（polycistronic）</strong>：編碼多條多肽，各基因間有非編碼 RNA 隔開。真核生物 mRNA 幾乎均為單順反子。mRNA 總長度大於編碼序列，另含起始翻譯、終止及調控所需的非編碼區域。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-22<br>單股 RNA 的右旋堆疊</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>單股 RNA 傾向採取以鹼基堆疊交互作用為主的右旋螺旋構型。嘌呤-嘌呤堆疊最強，嘌呤-嘧啶次之，嘧啶-嘧啶最弱；兩個嘌呤之間的嘧啶常被排出堆疊面之外。</p>
+        <p>圖中以黃色表示鹼基，橙色表示磷原子，綠色表示核糖與磷酸氧。後續章節以<strong>綠色</strong>代表 RNA 鏈（DNA 鏈以藍色）。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-23<br>RNA 的二級結構</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>A 形雙螺旋中若出現不配對鹼基，可形成凸出環（bulge）、內部環（internal loop）或髮夾環（hairpin loop）。配對區段以 A 形右旋雙螺旋為主。G–U 非 Watson-Crick 鹼基對（以綠點標示）在 RNA 中是允許的，此為與 DNA 的重要差異之一。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-24<br>RNA 中的鹼基配對螺旋</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>以 RNase P 的 P RNA 組件（來自 Thermotoga maritima）為例，展示：(a) 含大量莖-環的二級結構（藍點標示 G-U 鹼基對），以及 (b) 配合 tRNA 的三維結構。可辨識的催化結構域（C）與專一性結構域（S）以黃色與淡紅色骨架標示。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-25<br>RNA 的三維結構</h3>
+        <span class="fig-tag s82">8.2</span>
+      </div>
+      <div class="card-body">
+        <p>(a) 酵母苯丙氨酸 tRNA 的三維結構，含多種非標準鹼基對（如 2′-羥基與核糖磷酸氫鍵）。</p>
+        <p>(b) 槌頭型核糖酶（hammerhead ribozyme），來自植物病毒，以其活性位點的外形命名。(c) 來自 Tetrahymena thermophila 的內含子 mRNA，此核糖酶可催化自身剪接（self-splicing）。三者均說明 RNA 可像蛋白質酶一樣依賴精確三維結構發揮催化功能。</p>
+      </div>
+    </div>
+
+  </div><!-- /cards 8.2 -->
+
+
+  <!-- ══════════════════════════════════
+       SECTION 8.3
+  ══════════════════════════════════ -->
+  <div id="sec83" class="section-header">
+    <span class="section-num">8.3</span>
+    <h2>
+      核酸化學
+      <span class="en-sub">Nucleic Acid Chemistry</span>
+    </h2>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-26<br>DNA 的可逆去自然化與復性</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>高溫或極端 pH 破壞氫鍵和鹼基堆疊，使雙螺旋展開為兩條單鏈（變性/熔化，denaturation）；無共價鍵斷裂。當溫度或 pH 恢復正常範圍，兩鏈可自發退火（anneal）重新形成雙螺旋。</p>
+        <p>兩鏈完全分離後的復性分兩步：(1) 慢步驟：兩鏈隨機碰撞形成短互補片段；(2) 快步驟：剩餘鹼基對如拉鍊般逐步形成雙螺旋。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-27<br>DNA 的熱變性（melting）曲線</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>以 A₂₆₀ 監測 DNA 在加熱過程中的增色效應（hyperchromic effect）：雙鏈 DNA 鹼基堆疊降低 UV 吸收（減色效應），變性後吸收增加。</p>
+        <p>熔點（<em>t</em>m）定義為半數 DNA 已分離為單鏈的溫度。<strong>G≡C 含量越高，t<sub>m</sub> 越高</strong>（因 G≡C 有 3 條氫鍵，且鹼基堆疊貢獻更大）。固定 pH 和離子強度時，熔點可用於估算 DNA 鹼基組成。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-28<br>部分變性 DNA 的電子顯微鏡圖像</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>精確控制變性條件可使 DNA 富含 A═T 的區域優先解鏈，形成「泡（bubble）」，其餘部分仍保持雙鏈。電子顯微鏡可清楚區分單鏈與雙鏈區域。</p>
+        <p>這些解鏈區域具有高度重現性（每次均在相同位置），且富含 A═T 鹼基對。體內 DNA 複製和轉錄的起始位點通常也富含 A═T，有助於雙鏈的開啟。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-29<br>核苷酸的非酵素性反應</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>(a) <strong>脫氨基作用（deamination）：</strong>胞嘧啶脫氨基變為尿嘧啶（每 10⁷ 個 C 每 24 小時約 1 次，哺乳動物每細胞每天約 100 次）；腺嘌呤和鳥嘌呤的脫氨基速率約為其 1/100。這正是 DNA 使用胸腺嘧啶（而非尿嘧啶）的演化原因——胞嘧啶脫氨後若為 U 則難以識別，若為 T 則修復系統可辨認並切除。</p>
+        <p>(b) <strong>去嘌呤化（depurination）：</strong>N-β-糖苷鍵水解，使嘌呤脫落，形成 AP 位點（abasic/apurinic site）。每個哺乳動物細胞每 24 小時約失去 10,000 個嘌呤。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-30<br>UV 光誘發嘧啶二聚體</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>近紫外光（200–400 nm）可誘發同一 DNA 鏈上相鄰嘧啶（尤其相鄰胸腺嘧啶）發生光化學反應：</p>
+        <p>(a) <strong>環丁烷嘧啶二聚體（cyclobutane pyrimidine dimer）：</strong>C-5 與 C-6 之間形成四元環，使 DNA 彎曲（kink）。(b) <strong>6-4 光產物：</strong>C-6 與相鄰嘧啶的 C-4 之間形成鍵。兩種損傷均阻礙 DNA 複製與轉錄，是致突變與致癌的重要機制。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-31<br>造成 DNA 損傷的化學物質</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>(a) <strong>亞硝酸（HNO₂）前驅物（deaminating agents）：</strong>包括亞硝胺等有機前驅物及亞硝酸鹽/硝酸鹽，加速鹼基脫氨基。亞硫酸鹽（bisulfite）有類似效果，兩者均用作食品防腐劑。</p>
+        <p>(b) <strong>烷化劑（alkylating agents）：</strong>如二甲基硫酸（dimethylsulfate）可將鳥嘌呤 O-6 甲基化，形成 O⁶-methylguanine，無法與 C 正常配對，導致 G≡C→A═T 轉換突變。S-腺苷甲硫胺酸（SAM）是正常酵素甲基化的甲基來源。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-32<br>磷酸醯胺法化學合成 DNA</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>由 H. Gobind Khorana 奠基、Robert Letsinger 與 Marvin Caruthers 改良的固相自動化 DNA 合成法。寡核苷酸固定於矽膠載體，從 3′ 端開始逐個添加核苷酸：</p>
+        <p>① 酸除去 DMT 保護基 → ② 磷酸醯胺活化核苷酸與鏈 5′-OH 形成磷酸三酯鍵，並去除二異丙基氨基 → ③ 碘氧化磷酸三酯為磷酸二酯 → ④ 重複步驟直至合成完畢，去保護並純化。可常規合成 70–80 nt，部分實驗室可合成更長鏈。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-33<br>聚合酶連鎖反應（PCR）</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>1983 年 Kary Mullis 發明的 PCR 可從近乎任何樣品中選擇性擴增已知側翼序列的 DNA 片段。三個循環步驟：① <strong>變性（95°C）</strong>：解開雙鏈；② <strong>退火</strong>：引子與模板互補配對（引子濃度過量，優先與目標序列結合）；③ <strong>延伸（72°C）</strong>：耐熱 Taq 聚合酶（來自 Thermus aquaticus）合成新鏈。</p>
+        <p>每 20 個循環擴增超過百萬倍（2²⁰）；30 個循環超過十億倍。可偵測單一 DNA 分子，應用於分子考古學、法醫醫學、產前診斷、病毒感染偵測等。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-34<br>Sanger 雙去氧鏈終止法</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>1977 年 Sanger 發明的 DNA 定序法，利用去氧核苷三磷酸（dNTP）與少量雙去氧核苷三磷酸（ddNTP）的競爭，在特定核苷酸位置終止合成。ddNTP 因缺少 3′-OH 而無法繼續延伸。</p>
+        <p>以 ddCTP 為例：在每個 G 模板位置，有機率插入 ddC 終止鏈，產生一系列長度不同、均以 ddC 結尾的片段。經凝膠電泳分離，由短到長讀取序列（5′→3′ 方向，由下往上）。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-35<br>自動化螢光 Sanger 定序</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>四種 ddNTP 各標記不同顏色的螢光染料，混合於同一反應中。電泳後以毛細管膠進行高解析分離，雷射偵測每個片段末端核苷酸的螢光顏色，電腦直接讀取序列。目前仍用於短片段的常規定序。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-36<br>次世代定序：可逆終止子法（Illumina）</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>基因組 DNA 打碎為數百 bp 片段 → 兩端接合已知序列接頭 → 固定於流動槽表面並原位 PCR 擴增成「cluster」→ 各 cluster 同時定序。</p>
+        <p>每個循環加入四種帶螢光標記且 3′ 端有封阻基（blocking group）的 dNTP（每次只能加一個核苷酸）→ 雷射成像記錄顏色 → 化學/光化學去除螢光與封阻基 → 重複。讀長 100–300 nt，錯誤率約 0.1%。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-37<br>單分子即時定序（SMRT，PacBio）</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>SMRT 晶片含 150,000 個孔（pore，直徑約 70 nm，小於可見光波長），每孔底部固定單一 DNA 聚合酶。基因組 DNA 打碎後兩端接髮夾寡核苷酸，形成環狀模板；引子退火後由聚合酶不斷循環複製。</p>
+        <p>螢光核苷酸與聚合酶結合時短暫發光，光訊號即時記錄。單分子可重複定序同一片段，共識序列降低約 10–15% 的本底錯誤率。平均讀長 30,000–40,000 bp，適合重複序列組裝與結構變異偵測。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-38<br>基因組序列的組裝（contig assembly）</h3>
+        <span class="fig-tag s83">8.3</span>
+      </div>
+      <div class="card-body">
+        <p>基因組定序時，每個鹼基平均被定序數十至數千次（定序深度/覆蓋率）。電腦程式利用多個短讀（reads）之間的<strong>重疊序列</strong>，逐段拼接成連續長片段（contig），可延伸至數百萬 bp。高覆蓋率確保定序錯誤被偵測並排除。</p>
+      </div>
+    </div>
+
+  </div><!-- /cards 8.3 -->
+
+
+  <!-- ══════════════════════════════════
+       SECTION 8.4
+  ══════════════════════════════════ -->
+  <div id="sec84" class="section-header">
+    <span class="section-num">8.4</span>
+    <h2>
+      核苷酸的其他功能
+      <span class="en-sub">Other Functions of Nucleotides</span>
+    </h2>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-39<br>核苷磷酸（NMP、NDP、NTP）</h3>
+        <span class="fig-tag s84">8.4</span>
+      </div>
+      <div class="card-body">
+        <p>核糖核苷酸 5′ 羥基上可依序接一個（NMP）、兩個（NDP）或三個（NTP）磷酸基，以 α、β、γ 標示。去氧核苷磷酸（dNMP、dNDP、dNTP）同理，但戊糖為 2′-去氧-D-核糖。</p>
+        <p>ATP 是細胞中最廣泛使用的能量載體；UTP、GTP、CTP 也參與特定合成反應。核苷三磷酸也是 DNA 與 RNA 合成的活化前體（precursor）。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-40<br>ATP 的磷酸酯與磷酸酐鍵</h3>
+        <span class="fig-tag s84">8.4</span>
+      </div>
+      <div class="card-body">
+        <p>核糖-磷酸間為<strong>磷酸酯鍵</strong>（ester linkage），水解釋放約 14 kJ/mol；α-β 及 β-γ 磷酸間為<strong>磷酸酐鍵</strong>（phosphoanhydride linkage），水解各釋放約 30 kJ/mol。</p>
+        <p>ATP 水解提供的自由能透過偶聯（coupling）驅動吉布斯自由能不利的生物合成反應，使整體反應達到熱力學有利（等效於平衡常數增大）。圖中羧酸酐與羧酸酯對比，說明酐鍵能量較高的化學原理。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-41<br>含腺苷的輔酶</h3>
+        <span class="fig-tag s84">8.4</span>
+      </div>
+      <div class="card-body">
+        <p>多種功能各異的酵素輔因子均含有腺苷：<strong>CoA</strong>（醯基轉移）、<strong>NAD⁺</strong>（氫化物轉移，氧化還原）、<strong>FAD</strong>（電子轉移，維生素 B₂ 活性形式）、5′-去氧腺苷鈷胺素（維生素 B₁₂ 活性形式，分子內基團轉移）。</p>
+        <p>腺苷部分在這些輔酶中並不直接參與主要化學反應，但移除後活性大幅下降（如去除 CoA 的腺苷部分後，β-酮醯-CoA 轉移酶對受質親和力降低 10⁶ 倍）。腺苷可能作為與酵素活性位點結合的「把手（handle）」，亦反映了 ATP 在演化上的優先積累地位（nucleotide-binding fold 的廣泛利用）。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Figure 8-42<br>三種調控核苷酸</h3>
+        <span class="fig-tag s84">8.4</span>
+      </div>
+      <div class="card-body">
+        <p><strong>cAMP（腺苷 3′,5′-環狀單磷酸）：</strong>由腺苷環化酶（adenylyl cyclase，位於細胞膜內側）以 ATP 為受質合成，是最普遍的第二信使（second messenger），幾乎見於除植物外所有細胞。</p>
+        <p><strong>cGMP（鳥苷 3′,5′-環狀單磷酸）：</strong>亦為重要的第二信使，功能見於多種細胞類型。</p>
+        <p><strong>ppGpp：</strong>細菌在胺基酸飢餓時（蛋白質合成減慢）產生，可抑制 rRNA 和 tRNA 的合成，防止不必要的核酸合成（stringent response，嚴格調控反應）。</p>
+      </div>
+    </div>
+
+  </div><!-- /cards 8.4 -->
+
+</main>
+
+<!-- Return to top button -->
+<button id="back-to-top" title="返回頂端" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  ↑
+</button>
+
+<footer class="footer">
+  Lehninger Principles of Biochemistry · Chapter 8 · Figure Notes · 整理自原文書圖說
+</footer>
+
+<script>
+  // Show/hide back-to-top button
+  const btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 420) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>
