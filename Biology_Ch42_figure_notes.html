@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第42章｜循環與氣體交換 Figure 筆記</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&family=Playfair+Display:wght@700&display=swap');
+
+  :root {
+    --bg: #f9f6f0;
+    --surface: #ffffff;
+    --border: #e2d9cc;
+    --accent: #8b3a3a;
+    --accent2: #c0703a;
+    --accent3: #3a6b8b;
+    --text: #2c2218;
+    --text-muted: #7a6a5a;
+    --concept-bg: #fdf4ec;
+    --tag-o2: #d4edda;
+    --tag-co2: #f8d7da;
+    --tag-heart: #d0e8f5;
+    --shadow: 0 2px 12px rgba(44,34,24,0.08);
+    --shadow-hover: 0 6px 24px rgba(44,34,24,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 48px 32px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.03) 20px,
+      rgba(255,255,255,0.03) 40px
+    );
+  }
+  header .ch-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', 'Noto Serif TC', serif;
+    font-size: clamp(26px, 5vw, 40px);
+    line-height: 1.2;
+    margin-bottom: 6px;
+    position: relative;
+  }
+  header .subtitle {
+    font-size: 13px;
+    opacity: 0.75;
+    letter-spacing: 1px;
+  }
+  header .stats {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  header .stat {
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Nav ── */
+  nav {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 16px;
+    gap: 0;
+  }
+  nav ul li a {
+    display: block;
+    padding: 13px 14px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav ul li a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ── Layout ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* ── Concept Section ── */
+  .concept-section {
+    margin-bottom: 56px;
+  }
+  .concept-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .concept-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .concept-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* ── Figure Card ── */
+  .figure-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .figure-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .figure-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: var(--concept-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .figure-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--accent2);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .figure-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .figure-body {
+    padding: 18px 20px;
+  }
+  .figure-body p {
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .figure-body p:last-child { margin-bottom: 0; }
+
+  /* Sub-sections within a figure */
+  .sub {
+    margin: 12px 0;
+    padding: 12px 16px;
+    border-left: 3px solid var(--accent2);
+    background: #fdf8f4;
+    border-radius: 0 6px 6px 0;
+  }
+  .sub .sub-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent2);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .sub p {
+    font-size: 14px;
+    margin-bottom: 0 !important;
+  }
+
+  /* Key terms */
+  .key {
+    display: inline;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .key-blue {
+    display: inline;
+    font-weight: 600;
+    color: var(--accent3);
+  }
+
+  /* Steps list */
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 10px 0;
+  }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .steps li::before {
+    content: counter(step);
+    background: var(--accent);
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .tag-o2 { background: var(--tag-o2); color: #1a6b3a; }
+  .tag-co2 { background: var(--tag-co2); color: #8b1a2a; }
+  .tag-heart { background: var(--tag-heart); color: #1a4a6b; }
+  .tag-blood { background: #e8d5f5; color: #5a1a7a; }
+  .tag-lung { background: #fde8d0; color: #7a3a1a; }
+  .tag-evolution { background: #d8ecd8; color: #1a5a1a; }
+
+  /* Comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+  .compare-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: #faf6f0; }
+
+  /* Note box */
+  .note {
+    background: #fffbe6;
+    border: 1px solid #e6d47a;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin: 10px 0;
+    color: #5a4a10;
+  }
+  .note::before { content: '💡 '; }
+
+  /* Inquiry box */
+  .inquiry {
+    background: #e8f4f8;
+    border-left: 4px solid var(--accent3);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #1a3a5a;
+  }
+  .inquiry strong { display: block; margin-bottom: 5px; color: var(--accent3); }
+
+  /* Back to top */
+  .back-top {
+    display: block;
+    text-align: center;
+    margin-top: 48px;
+    color: var(--text-muted);
+    font-size: 12px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .back-top:hover { color: var(--accent); }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 32px 16px 24px; }
+    main { padding: 24px 12px 60px; }
+    nav ul li a { padding: 11px 10px; font-size: 11px; }
+    .concept-num { font-size: 26px; }
+  }
+</style>
+</head>
+<body id="top">
+
+<header>
+  <div class="ch-label">Chapter 42 · Biology</div>
+  <h1>循環與氣體交換<br><span style="font-size:0.65em;opacity:0.85">Circulation and Gas Exchange</span></h1>
+  <p class="subtitle">Figure 圖說整理筆記</p>
+  <div class="stats">
+    <span class="stat">📊 共 32 張圖</span>
+    <span class="stat">🫀 7 大概念</span>
+    <span class="stat">🫁 循環 × 氣體交換</span>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#c1">42.1 循環系統</a></li>
+    <li><a href="#c2">42.2 心臟收縮</a></li>
+    <li><a href="#c3">42.3 血壓與血流</a></li>
+    <li><a href="#c4">42.4 血液成分</a></li>
+    <li><a href="#c5">42.5 氣體交換面</a></li>
+    <li><a href="#c6">42.6 呼吸換氣</a></li>
+    <li><a href="#c7">42.7 氣體運輸</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════
+     CONCEPT 42.1
+══════════════════════════════════════ -->
+<section class="concept-section" id="c1">
+  <div class="concept-header">
+    <div class="concept-num">42.1</div>
+    <div class="concept-title">循環系統將交換面與全身細胞連結<br>Circulatory systems link exchange surfaces with cells throughout the body</div>
+  </div>
+
+  <!-- Figure 42.1 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.1</span>
+      <span class="figure-title">墨西哥鈍口螈（Axolotl）——開章物種</span>
+    </div>
+    <div class="figure-body">
+      <p>鈍口螈（axolotl）為墨西哥中部淺池塘的原生兩棲類，外觀獨特，頭部伸出的羽狀紅色附肢即為<span class="key">外鰓（external gills）</span>。</p>
+      <p>雖然外鰓在成體動物中罕見，卻能協助鈍口螈完成所有生物共通的過程：<span class="key">身體細胞與環境之間的物質交換</span>。本章以此為引，探討循環與氣體交換系統的結構與功能關係。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.2 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.2</span>
+      <span class="figure-title">消化血管腔的多樣性 Diversity of gastrovascular cavities</span>
+    </div>
+    <div class="figure-body">
+      <p>具有簡單體制的動物（如刺胞動物、扁形動物），不需獨立循環系統，而以<span class="key">消化血管腔（gastrovascular cavity）</span>同時負責物質分配與消化。</p>
+      <div class="sub">
+        <div class="sub-label">(a) 月水母 Aurelia（刺胞動物）</div>
+        <p>口部通往精密消化血管腔，由放射狀管道連至環狀管道，腔壁纖毛細胞驅動液體循環。流體浸潤內外兩層組織，促進氣體與廢物交換。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(b) 渦蟲 Dugesia（扁形動物）</div>
+        <p>腹側口與咽通往高度分支的消化血管腔（染色後呈深紅色）。扁平體型增大表面積、縮短擴散距離——兩層細胞厚的體壁使外層細胞亦能獲得養分。</p>
+      </div>
+      <div class="note">若消化血管腔兩端皆開口，液體一進一出，則腔內養分濃度梯度將無法維持，消化效率與氣體交換效率均會降低。</div>
+    </div>
+  </div>
+
+  <!-- Figure 42.3 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.3</span>
+      <span class="figure-title">開放式與閉鎖式循環系統 Open and Closed Circulatory Systems</span>
+    </div>
+    <div class="figure-body">
+      <p>循環系統的三個基本要素：<span class="key">循環液體、血管網絡、心臟（肌肉泵）</span>。</p>
+      <div class="sub">
+        <div class="sub-label">(a) 開放式循環系統（節肢動物、部分軟體動物）</div>
+        <p>循環液體稱為<span class="key">血淋巴（hemolymph）</span>，同時也是浸潤細胞的間質液。心臟收縮將血淋巴泵入血管，再流入<span class="key">血竇（sinuses）</span>直接接觸器官；心臟舒張時，血淋巴由孔洞吸回。較大的甲殼類（如龍蝦）具更複雜的血管系統。</p>
+        <p style="font-size:13px;color:var(--text-muted);">優勢：液壓較低，耗能少；蜘蛛還利用此系統的液壓伸展腿部。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(b) 閉鎖式循環系統（環節動物、頭足類、所有脊椎動物）</div>
+        <p>循環液體稱為<span class="key">血液（blood）</span>，封閉於血管中，與間質液分開。交換發生在微血管壁：血液↔間質液↔細胞。<br>優勢：血壓夠高，能有效運送 O₂ 與養分至大型、活躍的動物；易於調控血液分配。</p>
+      </div>
+      <div class="tags">
+        <span class="tag tag-heart">閉鎖式：脊椎動物</span>
+        <span class="tag tag-blood">開放式：昆蟲/蛤蜊</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Figure 42.4 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.4</span>
+      <span class="figure-title">脊椎動物循環系統的組織形式 Vertebrate Circulatory System Organization</span>
+    </div>
+    <div class="figure-body">
+      <div class="sub">
+        <div class="sub-label">(a) 單迴路循環：魚類（鯊魚、鰩、硬骨魚）</div>
+        <p>心臟2腔（心房＋心室）。血液路徑：心室→鰓微血管（氣體交換）→全身微血管（物質交換）→心房→心室，一個迴路。缺點：血液流經鰓部後血壓大幅下降，全身循環速率較慢。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(b) 雙迴路循環：兩棲類</div>
+        <p>心臟3腔（2心房＋1心室）。兩個迴路：<span class="key">肺皮回路（pulmocutaneous circuit）</span>＋<span class="key">體循環（systemic circuit）</span>。心室內隆起引流，約90%含氧血導入體循環。潛水時可調節閉鎖肺部血流，改由皮膚進行氣體交換。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(c) 雙迴路循環：哺乳類與鳥類</div>
+        <p>心臟4腔（2心房＋2心室，完全分隔）。左側：只處理含氧血；右側：只處理缺氧血。<span class="key">肺循環（pulmonary circuit）</span>＋體循環完全獨立，心臟重新加壓後血流強勁，能滿足恆溫動物約為同體積外溫動物10倍的能量需求。</span></p>
+      </div>
+      <div class="note">鳥類與哺乳類的四腔心臟各自獨立演化，是<span class="key">趨同演化（convergent evolution）</span>的典型案例。</div>
+      <div class="tags">
+        <span class="tag tag-evolution">趨同演化</span>
+        <span class="tag tag-heart">肺循環 vs 體循環</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     CONCEPT 42.2
+══════════════════════════════════════ -->
+<section class="concept-section" id="c2">
+  <div class="concept-header">
+    <div class="concept-num">42.2</div>
+    <div class="concept-title">協調的心臟收縮週期驅動哺乳類雙迴路循環<br>Coordinated cycles of heart contraction drive double circulation in mammals</div>
+  </div>
+
+  <!-- Figure 42.5 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.5</span>
+      <span class="figure-title">哺乳類心血管系統總覽 The Mammalian Cardiovascular System: An Overview</span>
+    </div>
+    <div class="figure-body">
+      <p>哺乳類心血管系統血管總長度驚人（人體約等於地球赤道周長的兩倍）。主要血管類型：<span class="key">動脈（arteries）→ 小動脈（arterioles）→ 微血管（capillaries）→ 小靜脈（venules）→ 靜脈（veins）</span>。</p>
+      <p>血液循環路徑（數字對應圖中標示）：</p>
+      <ol class="steps">
+        <li>右心室收縮 → 肺動脈</li>
+        <li>左右肺微血管（裝載O₂、卸除CO₂）</li>
+        <li>肺靜脈 → 左心房</li>
+        <li>左心室（含氧血）</li>
+        <li>主動脈 → 全身動脈</li>
+        <li>頭部與前肢微血管</li>
+        <li>腹部器官與後肢微血管（卸O₂、裝CO₂）</li>
+        <li>上腔靜脈（頭頸部回流）</li>
+        <li>下腔靜脈（軀幹後肢回流）</li>
+        <li>右心房 → 右心室</li>
+      </ol>
+      <div class="note">兩個心室幾乎同步收縮，泵出等量血液；但體循環血液量遠多於肺循環。</div>
+    </div>
+  </div>
+
+  <!-- Figure 42.6 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.6</span>
+      <span class="figure-title">哺乳類心臟：近觀 The Mammalian Heart: A Closer Look</span>
+    </div>
+    <div class="figure-body">
+      <p>人類心臟位於胸骨後方，約一個握拳大小，主要由<span class="key">心肌（cardiac muscle）</span>組成。</p>
+      <table class="compare-table">
+        <tr><th>構造</th><th>位置 / 功能</th></tr>
+        <tr><td><span class="key">心房（Atria）</span></td><td>壁薄，收集靜脈回流血液；大部分血液在全腔舒張時即流入心室</td></tr>
+        <tr><td><span class="key">心室（Ventricles）</span></td><td>壁厚，強力收縮泵血；左心室壁最厚（供全身）</td></tr>
+        <tr><td><span class="key">房室瓣（AV valves）</span></td><td>心房與心室之間，防止逆流；腱索防止翻轉</td></tr>
+        <tr><td><span class="key">半月瓣（Semilunar valves）</span></td><td>心室出口（肺動脈、主動脈），收縮時開放，舒張時關閉</td></tr>
+      </table>
+      <p>心音「lub-dup」：<br>
+        「<span class="key">lub</span>」= 血液衝擊關閉的AV瓣；<br>
+        「<span class="key">dup</span>」= 半月瓣關閉時的振動。</p>
+      <div class="note">瓣膜缺損使血液逆流可聽到雜音（heart murmur）；嚴重者需手術置換機械瓣膜。</div>
+    </div>
+  </div>
+
+  <!-- Figure 42.7 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.7</span>
+      <span class="figure-title">心動週期 The Cardiac Cycle</span>
+    </div>
+    <div class="figure-body">
+      <p>一次完整的泵血與充血週期（成人靜息約0.8秒/72次每分鐘）：</p>
+      <ol class="steps">
+        <li><span class="key">心房與心室舒張（diastole）</span>（0.4秒）：靜脈血流入心房再流入心室（通過AV瓣），心腔被動充血</li>
+        <li><span class="key">心房收縮（systole）</span>（0.1秒）：心房收縮，將殘留血液壓入心室</li>
+        <li><span class="key">心室收縮（systole）</span>（0.3秒）：心室強力收縮，血液通過半月瓣泵出</li>
+      </ol>
+      <p><span class="key">心輸出量（cardiac output）</span> = 心率（次/分）× <span class="key">每搏輸出量（stroke volume）</span>。<br>
+      靜息值：72次/分 × 70 mL ≈ 5 L/分（約等於全身血液總量）；劇烈運動時可增至靜息的5倍。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.8 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.8</span>
+      <span class="figure-title">心律的調控 The Control of Heart Rhythm</span>
+    </div>
+    <div class="figure-body">
+      <p>心跳起源於心臟本身的<span class="key">自律性細胞（autorhythmic cells）</span>，即使離體置於培養基中仍可持續跳動。</p>
+      <ol class="steps">
+        <li><span class="key">竇房結（SA node，起搏點）</span>：位於右心房壁，發出電訊號經縫隙連接迅速擴散→兩側心房同步收縮</li>
+        <li><span class="key">房室結（AV node）</span>：訊號在此延遲約0.1秒，確保心房完全排空後心室才收縮</li>
+        <li><span class="key">束支（bundle branches）</span>：訊號傳至心尖</li>
+        <li><span class="key">浦金野纖維（Purkinje fibers）</span>：訊號擴散至全部心室肌肉→同步收縮</li>
+      </ol>
+      <p><span class="key">心電圖（ECG/EKG）</span>：放置在皮膚的電極記錄電流，波形反映心動週期各階段。</p>
+      <p>影響起搏頻率的因子：<br>
+      • <span class="key-blue">交感神經</span>（加速）／<span class="key-blue">副交感神經</span>（減速）<br>
+      • <span class="key-blue">腎上腺素</span>（fight-or-flight，加速）<br>
+      • <span class="key-blue">體溫</span>：每升高1°C，心率增加約10次/分（發燒心跳快的原因）</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     CONCEPT 42.3
+══════════════════════════════════════ -->
+<section class="concept-section" id="c3">
+  <div class="concept-header">
+    <div class="concept-num">42.3</div>
+    <div class="concept-title">血壓與血流的模式反映血管的結構與排列<br>Patterns of blood pressure and flow reflect the structure and arrangement of blood vessels</div>
+  </div>
+
+  <!-- Figure 42.9 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.9</span>
+      <span class="figure-title">血管的結構 The Structure of Blood Vessels</span>
+    </div>
+    <div class="figure-body">
+      <p>所有血管均有中央管腔，內壁覆蓋<span class="key">內皮細胞（endothelium）</span>（光滑，降低阻力）。</p>
+      <table class="compare-table">
+        <tr><th>血管類型</th><th>結構特點</th><th>功能</th></tr>
+        <tr><td><span class="key">微血管（capillaries）</span></td><td>直徑近似紅血球；僅一層內皮＋基底膜（basal lamina），極薄</td><td>物質交換唯一場所（O₂、CO₂、溶質、液體）</td></tr>
+        <tr><td><span class="key">動脈（arteries）</span></td><td>厚壁，含彈性纖維＋平滑肌＋結締組織</td><td>承受高壓、維持血壓；平滑肌調節管徑</td></tr>
+        <tr><td><span class="key">靜脈（veins）</span></td><td>壁厚約動脈1/3；含單向<span class="key">靜脈瓣（valves）</span></td><td>低壓回流；瓣膜防逆流</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Figure 42.10 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.10</span>
+      <span class="figure-title">截面積、血流速度與血壓的相互關係 Cross-sectional Area, Velocity, and Pressure</span>
+    </div>
+    <div class="figure-body">
+      <p>關鍵圖：三條曲線同時展示主動脈→動脈→小動脈→微血管→小靜脈→靜脈→腔靜脈的變化趨勢。</p>
+      <table class="compare-table">
+        <tr><th>指標</th><th>主動脈端</th><th>微血管床</th><th>原因</th></tr>
+        <tr><td>總截面積</td><td>小</td><td>最大（~5000 cm²）</td><td>人體約70億條微血管</td></tr>
+        <tr><td>血流速度</td><td>快（~48 cm/s）</td><td>最慢（~0.1 cm/s，慢500倍）</td><td>截面積大→速度慢</td></tr>
+        <tr><td>血壓</td><td>最高（收縮壓120 mmHg）</td><td>低</td><td>小動脈阻力消耗壓力</td></tr>
+      </table>
+      <p><span class="key">收縮壓（systolic pressure）</span>：心室收縮時；<span class="key">舒張壓（diastolic pressure）</span>：心室舒張時彈性回縮維持。動脈保持持續加壓，使血液不間斷流入微血管。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.11 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.11</span>
+      <span class="figure-title">血壓的測量 Measurement of Blood Pressure</span>
+    </div>
+    <div class="figure-body">
+      <p>以<span class="key">血壓計（sphygmomanometer）</span>（充氣袖套＋壓力計）測量動脈血壓，步驟：</p>
+      <ol class="steps">
+        <li>充氣至壓力超過收縮壓（動脈關閉，無聲）</li>
+        <li>緩慢洩氣；當壓力剛低於收縮壓，血液脈動進入前臂，聽診器可聽到聲音→此為<span class="key">收縮壓</span>（示例：120 mmHg）</li>
+        <li>繼續洩氣至聲音消失→血流暢通→此為<span class="key">舒張壓</span>（示例：70 mmHg）</li>
+      </ol>
+      <p>血壓與重力相關：站立時頭部血壓比心臟低約27 mmHg；暈厥=腦部血壓不足→跌倒使頭部與心臟同高，快速恢復腦部血流。</p>
+      <div class="note">長頸鹿靠近心臟的收縮壓需超過250 mmHg才能將血液送至頭部！</div>
+    </div>
+  </div>
+
+  <!-- Figure 42.12 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.12</span>
+      <span class="figure-title">靜脈中的血液流動 Blood Flow in Veins</span>
+    </div>
+    <div class="figure-body">
+      <p>靜脈血壓低，需額外機制協助回流：</p>
+      <p>• <span class="key">骨骼肌收縮</span>擠壓靜脈（肌肉幫浦）→靜脈瓣確保血液單向流向心臟<br>
+         • 靜脈壁平滑肌節律性收縮也有助於推動血液<br>
+         • 運動員突然停止劇烈運動時，腿部肌肉不再幫助靜脈回流，若心臟已弱化可能導致心臟衰竭</p>
+      <div class="note">久坐或久站→腳部靜脈積血→足部腫脹，是靜脈瓣功能不足的表現。</div>
+    </div>
+  </div>
+
+  <!-- Figure 42.13 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.13</span>
+      <span class="figure-title">微血管床的血液流動 Blood Flow in Capillary Beds</span>
+    </div>
+    <div class="figure-body">
+      <p>任意時刻僅有5–10%的微血管有血液流通，但每個組織均有充足的微血管供應。調控血流的機制：</p>
+      <div class="sub">
+        <div class="sub-label">(a) 括約肌放鬆（Sphincters relaxed）</div>
+        <p>前微血管括約肌（precapillary sphincters）開放→血流進入微血管床，組織獲充足灌流（如飯後消化道）。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(b) 括約肌收縮（Sphincters contracted）</div>
+        <p>血液改由直通道（thoroughfare channels）流過，微血管床血流減少（如運動時消化道血流被導向骨骼肌）。</p>
+      </div>
+      <p>調控訊號包括：神經衝動、循環激素、局部化學物質（如傷口處釋放的<span class="key">組織胺（histamine）</span>→血管擴張→增加白血球進入受傷部位）。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.14 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.14</span>
+      <span class="figure-title">微血管與間質液之間的液體交換 Fluid Exchange between Capillaries and Interstitial Fluid</span>
+    </div>
+    <div class="figure-body">
+      <p>兩個對立力量決定微血管液體流向：</p>
+      <table class="compare-table">
+        <tr><th>力量</th><th>作用方向</th><th>說明</th></tr>
+        <tr><td><span class="key">血壓（blood pressure）</span></td><td>驅液體出微血管</td><td>心臟泵血產生的靜水壓</td></tr>
+        <tr><td><span class="key">滲透壓（osmotic pressure）</span></td><td>將液體拉回微血管</td><td>血漿蛋白（太大無法穿過微血管壁）造成的滲透梯度</td></tr>
+      </table>
+      <p>整體而言，血壓略大於滲透壓 → 微血管淨液體流出（人體每天 4–8 L）→ 由<span class="key">淋巴系統</span>回收。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.15 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.15</span>
+      <span class="figure-title">淋巴管與血管微血管的緊密關係 Lymphatic Vessels and Blood Capillaries</span>
+    </div>
+    <div class="figure-body">
+      <p><span class="key">淋巴系統（lymphatic system）</span>：一套單獨的管道網絡，回收從微血管滲出的液體（含蛋白質）。</p>
+      <ol class="steps">
+        <li>間質液滲入細小的淋巴管（末端封閉但可通透）</li>
+        <li>淋巴液在淋巴管中流動（靜脈瓣阻止逆流；骨骼肌收縮與管壁節律收縮驅動）</li>
+        <li>流經<span class="key">淋巴結（lymph nodes）</span>（白血球過濾，免疫監控；癌細胞也可在此被截）</li>
+        <li>匯入頸部大靜脈，返回血液循環</li>
+      </ol>
+      <p>淋巴系統阻塞 → 組織水腫（edema）。如絲蟲寄生蟲堵塞淋巴管 → <span class="key">象皮病（elephantiasis）</span>（四肢極度腫脹）。</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     CONCEPT 42.4
+══════════════════════════════════════ -->
+<section class="concept-section" id="c4">
+  <div class="concept-header">
+    <div class="concept-num">42.4</div>
+    <div class="concept-title">血液成分執行交換、運輸與防禦功能<br>Blood components function in exchange, transport, and defense</div>
+  </div>
+
+  <!-- Figure 42.16 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.16</span>
+      <span class="figure-title">哺乳類血液的組成 The Composition of Mammalian Blood</span>
+    </div>
+    <div class="figure-body">
+      <p>離心後血液分為三層：血漿（55%）、白血球與血小板（&lt;1%）、紅血球（45%）。</p>
+      <table class="compare-table">
+        <tr><th>成分</th><th>數量/μL</th><th>主要功能</th></tr>
+        <tr><td><span class="key">血漿（Plasma）</span></td><td>—</td><td>溶劑；含血漿蛋白（白蛋白、免疫球蛋白、纖維蛋白原）、電解質、養分、激素</td></tr>
+        <tr><td><span class="key">紅血球（Erythrocytes）</span></td><td>500–600萬</td><td>運輸O₂（及部分CO₂）；含血紅素</td></tr>
+        <tr><td><span class="key">白血球（Leukocytes）</span></td><td>5,000–10,000</td><td>免疫防禦（5種：嗜鹼、嗜酸、嗜中性、單核、淋巴球）</td></tr>
+        <tr><td><span class="key">血小板（Platelets）</span></td><td>25–40萬</td><td>凝血（骨髓細胞的細胞質碎片，無核）</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Figure 42.17 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.17</span>
+      <span class="figure-title">血球的分化 Differentiation of Blood Cells</span>
+    </div>
+    <div class="figure-body">
+      <p>所有血球元素均由骨髓（肋骨、椎骨、胸骨、骨盆）的<span class="key">幹細胞（stem cells）</span>產生，分兩條譜系：</p>
+      <div class="sub">
+        <div class="sub-label">淋巴樣前驅細胞（Lymphoid progenitors）</div>
+        <p>→ B細胞 + T細胞（淋巴球）→ 適應性免疫</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">骨髓樣前驅細胞（Myeloid progenitors）</div>
+        <p>→ 紅血球、嗜中性球、嗜鹼球、嗜酸球、單核球、血小板</p>
+      </div>
+      <p>紅血球壽命最短（約120天）→ <span class="key">紅血球生成素（EPO，erythropoietin）</span>由腎臟分泌（感知O₂下降），刺激生成更多紅血球。運動員濫用EPO違禁。</p>
+      <div class="note"><span class="key">鐮刀型紅血球疾病（sickle-cell disease）</span>：血紅素（HbS）聚合→紅血球變形呈鐮刀狀→堵塞小動脈與微血管→嚴重疼痛＆貧血；紅血球壽命僅20天（正常1/6）。</div>
+    </div>
+  </div>
+
+  <!-- Figure 42.18 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.18</span>
+      <span class="figure-title">血液凝固 Blood Clotting</span>
+    </div>
+    <div class="figure-body">
+      <ol class="steps">
+        <li>血管受損 → 內皮細胞暴露膠原蛋白 → 血小板附著並釋放黏附物質 → <span class="key">血小板栓（platelet plug）</span>形成</li>
+        <li>血小板及受損細胞釋出凝血因子 → 與血漿凝血因子（含鈣、維生素K）啟動酵素級聯反應</li>
+        <li><span class="key">凝血酶原（prothrombin）</span>→ 活化的<span class="key">凝血酶（thrombin）</span></li>
+        <li>凝血酶將<span class="key">纖維蛋白原（fibrinogen）</span>轉為<span class="key">纖維蛋白（fibrin）</span>絲 → 網狀結構形成血凝塊</li>
+      </ol>
+      <p><span class="key">正回饋</span>：凝血酶又回過頭催化更多凝血酶原轉化，驅動凝血完全。</p>
+      <p>凝血途徑任一步驟突變 → <span class="key">血友病（hemophilia）</span>（微小傷口即大量出血）。</p>
+      <p>血管內自發性血凝塊 → <span class="key">血栓（thrombus）</span>，可能引發心肌梗塞或腦卒中。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.19 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.19</span>
+      <span class="figure-title">動脈粥樣硬化 Atherosclerosis</span>
+    </div>
+    <div class="figure-body">
+      <p>健康動脈內壁光滑；損傷或感染使內壁粗糙 → <span class="key">動脈粥樣硬化（atherosclerosis）</span>發展過程：</p>
+      <ol class="steps">
+        <li>動脈壁受損 → 發炎反應 → 白血球聚集，攝入脂質（含膽固醇）</li>
+        <li>脂肪沉積（<span class="key">斑塊，plaque</span>）持續增長 → 動脈壁增厚變硬，管腔縮小</li>
+        <li>斑塊破裂 → <span class="key">血栓（thrombus）</span>形成 → 可能完全堵塞動脈</li>
+      </ol>
+      <p>後果：<br>
+      • 堵塞冠狀動脈 → <span class="key">心肌梗塞（heart attack/myocardial infarction）</span>（心肌缺氧壞死）<br>
+      • 堵塞腦部或頸部動脈 → <span class="key">腦卒中（stroke）</span>（神經組織死亡）<br>
+      • 部分堵塞冠狀動脈 → 心絞痛（angina pectoris）</p>
+      <div class="tags">
+        <span class="tag tag-heart">心血管疾病</span>
+        <span class="tag tag-blood">LDL vs HDL</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Figure 42.20 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.20</span>
+      <span class="figure-title">置入支架以擴張阻塞動脈 Inserting a Stent</span>
+    </div>
+    <div class="figure-body">
+      <ol class="steps">
+        <li>將支架（stent，網狀管）套在氣球上，插入阻塞動脈</li>
+        <li>充氣氣球膨脹 → 支架撐開，擴寬動脈</li>
+        <li>取出氣球，支架永久留置 → 血流恢復通暢</li>
+      </ol>
+      <p>另一選擇：<span class="key">繞道手術（bypass surgery）</span>，移植健康血管（來自胸部或四肢）繞過阻塞段。</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     CONCEPT 42.5
+══════════════════════════════════════ -->
+<section class="concept-section" id="c5">
+  <div class="concept-header">
+    <div class="concept-num">42.5</div>
+    <div class="concept-title">氣體交換發生在特化的呼吸面上<br>Gas exchange occurs across specialized respiratory surfaces</div>
+  </div>
+
+  <!-- Figure 42.21 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.21</span>
+      <span class="figure-title">鰓的結構多樣性 Diversity in the Structure of Gills</span>
+    </div>
+    <div class="figure-body">
+      <p><span class="key">鰓（gills）</span>是體表向外的褶疊，懸浮在水中進行氣體交換；總表面積常遠大於體表其餘部分。</p>
+      <div class="sub">
+        <div class="sub-label">(a) 多毛類海蟲（Polychaete marine worm）</div>
+        <p>每個體節一對扁平附肢（疣足 parapodia）同時作為鰓和運動器官。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(b) 螯蝦（Crayfish）</div>
+        <p>羽毛狀鰓覆蓋於外骨骼下；特化附肢撥動水流通過鰓面。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(c) 海星（Sea star）</div>
+        <p>皮膚的管狀突起中空，延伸為體腔（coelom）腔室；管足（tube feet）表面也參與氣體交換；液體在腔室內循環輔助氣體運輸。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Figure 42.22 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.22</span>
+      <span class="figure-title">魚鰓的結構與功能 The Structure and Function of Fish Gills</span>
+    </div>
+    <div class="figure-body">
+      <p>魚不斷以口/鰓蓋（operculum）的協調運動，驅動水流從口進入，流過鰓弓（gill arch）上的鰓絲（gill filaments），再由鰓蓋排出。</p>
+      <p>每個鰓弓有兩排鰓絲，由扁平薄板（<span class="key">鰓板 lamellae</span>）組成；微血管在鰓板中流動，攝取水中的O₂。</p>
+      <div class="sub">
+        <div class="sub-label">逆流交換（Countercurrent Exchange）——效率關鍵</div>
+        <p>血液流向與水流方向<span class="key">相反</span>。在任何位置，血液的PO₂始終低於接觸到的水，維持整段微血管O₂從水到血的梯度，使超過<span class="key">80%</span>的溶解O₂被提取。若同向（concurrent），最多只能平衡到50%。</p>
+      </div>
+      <div class="tags">
+        <span class="tag tag-o2">逆流交換 &gt;80% O₂提取</span>
+        <span class="tag tag-evolution">高效適應</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Figure 42.23 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.23</span>
+      <span class="figure-title">昆蟲的氣管系統 A Tracheal System</span>
+    </div>
+    <div class="figure-body">
+      <p>昆蟲不靠循環系統運輸O₂，而使用<span class="key">氣管系統（tracheal system）</span>：遍布全身的空氣管道分支，直接將空氣送達每個細胞附近。</p>
+      <div class="sub">
+        <div class="sub-label">(a) 整體結構</div>
+        <p>最大的管道（tracheae）在體表開口，分支形成較小管道（tracheoles）。氣囊（air sacs）位於高O₂需求的器官旁。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(b) 氣管小管（Tracheoles）</div>
+        <p>末端細管充滿液體，活躍時液體收縮，增加與細胞接觸的氣相面積。幾丁質（chitin）環維持管道暢通。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(c) 飛行肌的電子顯微鏡照片（TEM）</div>
+        <p>每個粒線體距最近的氣管小管不超過5 μm；飛行時飛行肌的O₂消耗是靜止時的10–200倍，肌肉收縮/舒張節律幫助泵氣。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Figure 42.24 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.24</span>
+      <span class="figure-title">哺乳類呼吸系統 The Mammalian Respiratory System</span>
+    </div>
+    <div class="figure-body">
+      <p>氣流路徑：鼻腔（加溫、加濕、過濾）→ 咽（pharynx）→ 喉（larynx，含聲帶）→ 氣管（trachea）→ 支氣管（bronchi）→ 細支氣管（bronchioles）→ <span class="key">肺泡（alveoli）</span>（氣體交換終點）。</p>
+      <p>人體肺泡總數百萬個，總表面積約<span class="key">100 m²</span>（皮膚面積的50倍）！每個肺泡被微血管網包圍，O₂溶入潮濕薄膜後擴散穿過上皮進入血液；CO₂反方向擴散。</p>
+      <p>黏液纖毛「電扶梯」（mucus escalator）：主要支氣管上皮的纖毛不斷向上清送黏液（含塵埃、花粉），防止微粒到達肺泡。吸菸/電子煙的微粒繞過此防線，可造成永久性肺容量下降。</p>
+      <div class="sub">
+        <div class="sub-label">肺泡表面活性劑（Surfactant）</div>
+        <p>肺泡分泌磷脂與蛋白質混合物，降低表面張力，防止極微小肺泡（直徑~0.25 mm）塌陷。Mary Ellen Avery（1950年代）實驗證實缺乏surfactant是新生兒<span class="key">呼吸窘迫症（RDS）</span>的原因，現用人工surfactant治療早產兒。</p>
+      </div>
+      <div class="tags">
+        <span class="tag tag-lung">肺泡表面積 100 m²</span>
+        <span class="tag tag-o2">氣體擴散</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Figure 42.25 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.25</span>
+      <span class="figure-title">探究：呼吸窘迫症的成因 Inquiry: What Causes Respiratory Distress Syndrome?</span>
+    </div>
+    <div class="figure-body">
+      <div class="inquiry">
+        <strong>🔬 Avery 實驗設計（1950s，哈佛）</strong>
+        假設：早產兒RDS由肺泡缺乏表面張力降低物質所致。從死於RDS或其他原因的嬰兒肺部提取物，測量水面張力（dynes/cm）。
+      </div>
+      <p><strong>結果</strong>：體重≥1,200 g（≈孕29–30週）的嬰兒中，死於RDS者的樣本表面張力顯著高於死於其他原因者。體重&lt;1,200 g的嬰兒樣本張力均偏高，提示表面活性劑尚未生產。</p>
+      <p><strong>結論</strong>：嬰兒肺部正常含有降低表面張力的物質（=surfactant），RDS在此物質缺乏時發生；surfactant通常在孕33週後才出現。治療方式：人工surfactant給藥，體重＞900 g的早產兒存活率大幅提升。</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     CONCEPT 42.6
+══════════════════════════════════════ -->
+<section class="concept-section" id="c6">
+  <div class="concept-header">
+    <div class="concept-num">42.6</div>
+    <div class="concept-title">呼吸作用使肺部換氣<br>Breathing ventilates the lungs</div>
+  </div>
+
+  <!-- Figure 42.26 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.26</span>
+      <span class="figure-title">鳥類呼吸系統 The Avian Respiratory System</span>
+    </div>
+    <div class="figure-body">
+      <p>鳥類利用前後氣囊（air sacs）當風箱，使空氣<span class="key">單向流過肺部</span>，效率遠高於哺乳類（雙向往返）。一口氣通過整個系統需要兩次吸吐氣循環：</p>
+      <ol class="steps">
+        <li>第一次吸氣：空氣進入後氣囊</li>
+        <li>第一次呼氣：後氣囊收縮，空氣推入肺部（氣體交換發生在細支氣管 parabronchi）</li>
+        <li>第二次吸氣：空氣通過肺部進入前氣囊</li>
+        <li>第二次呼氣：前氣囊收縮，空氣排出體外</li>
+      </ol>
+      <p>優勢：進氣與廢氣不混合（不同於哺乳類），肺泡PO₂差最大化。這也解釋為何哺乳類（如人類）在高海拔缺氧時遠比鳥類（如過喜馬拉雅山的斑頭雁）更難適應。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.27 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.27</span>
+      <span class="figure-title">哺乳類的負壓呼吸 Negative Pressure Breathing</span>
+    </div>
+    <div class="figure-body">
+      <p>哺乳類以<span class="key">負壓呼吸（negative pressure breathing）</span>「吸入」空氣，而非強迫推入（不同於兩棲類的正壓呼吸）。</p>
+      <div class="sub">
+        <div class="sub-label">① 吸氣（Inhalation）</div>
+        <p><span class="key">肋間肌收縮</span>→ 肋骨上提、胸骨外擴；<span class="key">橫膈膜（diaphragm）收縮下降</span>→ 胸腔容積增大→ 肺內氣壓低於大氣壓→ 空氣湧入。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">② 呼氣（Exhalation）</div>
+        <p>肌肉放鬆（通常為被動）→ 胸腔容積縮小→ 肺泡氣壓升高→ 空氣被推出。劇烈運動時頸、背、胸肌肉主動協助擴張。</p>
+      </div>
+      <p>肺部容量名詞：<br>
+      • <span class="key">潮氣量（tidal volume）</span>：靜息每次約500 mL<br>
+      • <span class="key">肺活量（vital capacity）</span>：最大吸呼量（大學生約3.4 L女/4.8 L男）<br>
+      • <span class="key">殘留量（residual volume）</span>：強力呼氣後仍留在肺內的氣體；老化時增加</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.28 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.28</span>
+      <span class="figure-title">呼吸的恆定調控 Homeostatic Control of Breathing</span>
+    </div>
+    <div class="figure-body">
+      <p>大部分呼吸由非自主機制調控，以配合循環與代謝需求。</p>
+      <p>主要回饋路徑（負回饋）：</p>
+      <ol class="steps">
+        <li>組織代謝加快（如運動）→ 血液CO₂濃度升高</li>
+        <li>CO₂擴散至腦脊髓液（CSF）→ 與水反應：CO₂＋H₂O⇌H₂CO₃⇌HCO₃⁻＋H⁺ → CSF pH下降</li>
+        <li><span class="key">延腦（medulla oblongata）</span>感知pH下降；主動脈與頸動脈感應器亦偵測血液pH下降</li>
+        <li>延腦呼吸中樞向肋間肌與橫膈膜發訊 → 呼吸深度與頻率增加</li>
+        <li>CO₂由呼氣排出 → 血液pH回升 → 呼吸減緩（負回饋完成）</li>
+      </ol>
+      <p>O₂水平通常對呼吸中樞影響小；只有在O₂<span class="key">極低</span>時（如高海拔），頸動脈與主動脈的O₂感應器才啟動加快呼吸。</p>
+      <div class="tags">
+        <span class="tag tag-co2">CO₂ → pH變化 → 呼吸調節</span>
+        <span class="tag tag-lung">延腦控制中心</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     CONCEPT 42.7
+══════════════════════════════════════ -->
+<section class="concept-section" id="c7">
+  <div class="concept-header">
+    <div class="concept-num">42.7</div>
+    <div class="concept-title">氣體交換的適應包括能結合與運輸氣體的色素<br>Adaptations for gas exchange include pigments that bind and transport gases</div>
+  </div>
+
+  <!-- Figure 42.29 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.29</span>
+      <span class="figure-title">呼吸氣體的裝載與卸載 Loading and Unloading of Respiratory Gases</span>
+    </div>
+    <div class="figure-body">
+      <p>以人體循環系統追蹤O₂與CO₂的分壓（PO₂/PCO₂，mmHg）：</p>
+      <table class="compare-table">
+        <tr><th>位置</th><th>PO₂</th><th>PCO₂</th><th>說明</th></tr>
+        <tr><td>吸入空氣</td><td>160</td><td>0.3</td><td>新鮮空氣</td></tr>
+        <tr><td>肺泡空間</td><td>104</td><td>40</td><td>與殘留空氣混合後</td></tr>
+        <tr><td>肺泡微血管血液（離開）</td><td>104</td><td>40</td><td>血液與肺泡平衡</td></tr>
+        <tr><td>全身動脈/肺靜脈</td><td>104</td><td>40</td><td>同上</td></tr>
+        <tr><td>體循環微血管（進入）</td><td>40</td><td>45</td><td>組織消耗O₂、產生CO₂</td></tr>
+        <tr><td>體循環微血管（組織端）</td><td>&lt;40</td><td>&gt;45</td><td>活躍組織PO₂更低</td></tr>
+        <tr><td>呼出空氣</td><td>120</td><td>27</td><td>CO₂排出後</td></tr>
+      </table>
+      <p>梯度決定擴散方向：肺部O₂由高壓（肺泡）→低壓（血液）；體循環O₂由血液→組織。CO₂方向相反。</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.30 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.30</span>
+      <span class="figure-title">血紅素的帶狀結構模型 Ribbon Model of Hemoglobin</span>
+    </div>
+    <div class="figure-body">
+      <p><span class="key">血紅素（hemoglobin, Hb）</span>：脊椎動物紅血球內的呼吸色素（分子量約64,500道爾頓）。</p>
+      <p>結構：4個次單元，每個由一條多肽鏈＋<span class="key">血基質（heme group）</span>組成；每個血基質中心有一個<span class="key">鐵原子</span>，結合一個O₂分子 → 一個Hb可攜帶4個O₂。</p>
+      <p>血紅素大幅提升O₂攜帶量：<br>
+      • 無血紅素：1L血液溶解4.5 mL O₂<br>
+      • 有血紅素：1L血液可攜帶約<span class="key">200 mL O₂</span>（增加~45倍）</p>
+      <p>類似色素：<span class="key-blue">血藍素（hemocyanin）</span>（銅為結合中心，節肢動物與軟體動物，血液呈藍色）</p>
+    </div>
+  </div>
+
+  <!-- Figure 42.31 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.31</span>
+      <span class="figure-title">血紅素在37°C的解離曲線 Dissociation Curves for Hemoglobin at 37°C</span>
+    </div>
+    <div class="figure-body">
+      <div class="sub">
+        <div class="sub-label">(a) PO₂與血紅素飽和度（pH 7.4）</div>
+        <p>S形解離曲線（因4個次單元的<span class="key">協同效應</span>）：曲線最陡段對應組織PO₂範圍（20–60 mmHg），PO₂稍降即可使血紅素大量釋放O₂。<br>
+        • 肺部（PO₂≈100 mmHg）→ 飽和度~98%（充分裝載）<br>
+        • 靜息組織（PO₂≈40 mmHg）→ 飽和度~70%（卸除約1/3）<br>
+        • 運動肌肉（PO₂更低）→ 飽和度更低（卸除更多O₂）</p>
+      </div>
+      <div class="sub">
+        <div class="sub-label">(b) pH 對血紅素的影響（Bohr shift 波爾效應）</div>
+        <p>活躍組織產生CO₂→與水反應→碳酸→H⁺濃度升高→<span class="key">pH下降</span>→ 血紅素對O₂親和力下降（曲線右移）→ 在相同PO₂下釋放更多O₂ → 支持更高的細胞呼吸速率。<span class="key">CO₂生產越多的地方，越能得到更多O₂。</span></p>
+      </div>
+      <div class="tags">
+        <span class="tag tag-o2">協同效應 → S形曲線</span>
+        <span class="tag tag-co2">Bohr shift</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Figure 42.32 -->
+  <div class="figure-card">
+    <div class="figure-head">
+      <span class="figure-num">Fig 42.32</span>
+      <span class="figure-title">韋德爾海豹——深潛的呼吸適應 A Weddell Seal, Adapted to Deep, Long Dives</span>
+    </div>
+    <div class="figure-body">
+      <p>韋德爾海豹（南極洲）可潛至200–500 m深，在水下停留20分鐘至超過1小時；枯氏喙鯨（Cuvier's beaked whale）更可達2,900 m深，潛水超過2小時！</p>
+      <table class="compare-table">
+        <tr><th>適應</th><th>細節</th></tr>
+        <tr><td>大血液容量</td><td>每千克體重血量約為人類的2倍</td></tr>
+        <tr><td>高肌紅蛋白（myoglobin）濃度</td><td>肌肉儲氧蛋白，O₂儲量約為人類的2倍/千克體重</td></tr>
+        <tr><td>潛水反射（diving reflex）</td><td>心率大幅下降、血流優先供應腦（脊髓、眼睛、腎上腺、胎盤）；肌肉血流被切斷</td></tr>
+        <tr><td>無氧代謝</td><td>長潛時肌肉耗盡myoglobin儲O₂後，改由發酵作用（糖解）供ATP</td></tr>
+      </table>
+      <p>演化觀點：所有哺乳類（含人類）均有面部接觸冷水時的潛水反射雛形；對能在水中覓食的祖先有選擇優勢。強化此反射的遺傳突變在選擇壓力下累積，逐漸演化出現代深潛哺乳類。</p>
+      <div class="tags">
+        <span class="tag tag-evolution">趨同演化 / 自然選擇</span>
+        <span class="tag tag-o2">O₂儲存 × 保守機制</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<a href="#top" class="back-top">↑ 回到頂部 · Back to Top</a>
+
+</main>
+
+<footer>
+  Chapter 42 · Circulation and Gas Exchange · Biology (Campbell) · Figure 筆記整理
+</footer>
+
+</body>
+</html>
