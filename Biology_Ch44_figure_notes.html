@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第44章｜滲透調節與排泄 Figure 筆記</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+  :root {
+    --teal:   #1a7a6e;
+    --teal2:  #22a08a;
+    --teal3:  #d4f0ea;
+    --gold:   #c9972a;
+    --gold2:  #fdf3dc;
+    --ink:    #1c2633;
+    --muted:  #5a6a76;
+    --rule:   #c8dbd8;
+    --bg:     #f7faf9;
+    --white:  #ffffff;
+    --c1:     #1a7a6e;
+    --c2:     #2e6da4;
+    --c3:     #7b5ea7;
+    --c4:     #c9972a;
+    --c5:     #c04a3b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink);
+    background: var(--bg);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d4f46 0%, #1a7a6e 45%, #1e6fa8 100%);
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: .7;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(14px, 3vw, 20px);
+    font-weight: 400;
+    opacity: .85;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    opacity: .8;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* ── NAV ── */
+  .nav-bar {
+    background: var(--white);
+    border-bottom: 2px solid var(--teal3);
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-bar a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--rule);
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .nav-bar a:hover {
+    background: var(--teal);
+    color: #fff;
+    border-color: var(--teal);
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ── CONCEPT BLOCK ── */
+  .concept {
+    margin-top: 52px;
+    padding-top: 12px;
+    border-top: 3px solid;
+  }
+  .concept-1 { border-color: var(--c1); }
+  .concept-2 { border-color: var(--c2); }
+  .concept-3 { border-color: var(--c3); }
+  .concept-4 { border-color: var(--c4); }
+  .concept-5 { border-color: var(--c5); }
+
+  .concept-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .concept-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: .18;
+  }
+  .concept-1 .concept-num { color: var(--c1); }
+  .concept-2 .concept-num { color: var(--c2); }
+  .concept-3 .concept-num { color: var(--c3); }
+  .concept-4 .concept-num { color: var(--c4); }
+  .concept-5 .concept-num { color: var(--c5); }
+
+  .concept-title {
+    flex: 1;
+  }
+  .concept-title .label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .concept-title h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  /* ── FIGURE CARD ── */
+  .fig {
+    background: var(--white);
+    border-radius: 10px;
+    border: 1px solid var(--rule);
+    margin-bottom: 22px;
+    overflow: hidden;
+    transition: box-shadow .2s;
+  }
+  .fig:hover { box-shadow: 0 4px 20px rgba(26,122,110,.12); }
+
+  .fig-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px 10px;
+    border-bottom: 1px solid var(--teal3);
+    background: linear-gradient(to right, #f0faf8, var(--white));
+  }
+  .fig-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: var(--white);
+    background: var(--teal);
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .concept-2 .fig-badge { background: var(--c2); }
+  .concept-3 .fig-badge { background: var(--c3); }
+  .concept-4 .fig-badge { background: var(--c4); }
+  .concept-5 .fig-badge { background: var(--c5); }
+
+  .fig-head h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .fig-body { padding: 16px 18px; }
+  .fig-body p { color: var(--ink); line-height: 1.85; margin-bottom: 10px; }
+  .fig-body p:last-child { margin-bottom: 0; }
+
+  /* sub-sections within a fig */
+  .sub {
+    margin: 10px 0;
+    padding: 12px 14px;
+    border-left: 3px solid var(--teal3);
+    background: #f7fdfc;
+    border-radius: 0 6px 6px 0;
+  }
+  .sub-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+  .concept-2 .sub { border-left-color: #c8dff5; background: #f5f9fe; }
+  .concept-2 .sub-title { color: var(--c2); }
+  .concept-3 .sub { border-left-color: #dfd4f5; background: #f9f7fe; }
+  .concept-3 .sub-title { color: var(--c3); }
+  .concept-4 .sub { border-left-color: #f5e8c0; background: #fdfaf1; }
+  .concept-4 .sub-title { color: var(--c4); }
+  .concept-5 .sub { border-left-color: #f5c8c4; background: #fef8f8; }
+  .concept-5 .sub-title { color: var(--c5); }
+
+  /* highlight box */
+  .hl {
+    background: var(--gold2);
+    border: 1px solid #e8d094;
+    border-radius: 7px;
+    padding: 11px 14px;
+    margin: 10px 0;
+    font-size: 13.5px;
+  }
+  .hl::before { content: '⭐ '; }
+
+  /* numbered steps */
+  ol.steps {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+  ol.steps li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  /* comparison table */
+  table.comp {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  table.comp th {
+    background: var(--teal);
+    color: #fff;
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 500;
+  }
+  .concept-2 table.comp th { background: var(--c2); }
+  .concept-3 table.comp th { background: var(--c3); }
+  .concept-4 table.comp th { background: var(--c4); }
+  .concept-5 table.comp th { background: var(--c5); }
+
+  table.comp td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  table.comp tr:nth-child(even) td { background: #f5faf9; }
+
+  /* tag pill */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin: 2px 3px 2px 0;
+  }
+  .tag-green { background: #d4f0ea; color: #0f5f53; }
+  .tag-blue  { background: #d3e8f8; color: #1a4d7a; }
+  .tag-purple{ background: #e8d4f5; color: #4a2a7a; }
+  .tag-gold  { background: #fde8b8; color: #7a5010; }
+  .tag-red   { background: #fdd4d0; color: #7a1a14; }
+
+  /* make-connections banner */
+  .make-connections {
+    background: linear-gradient(135deg, #1c2633, #2d4a5a);
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin-bottom: 22px;
+  }
+  .make-connections .mc-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal2);
+    margin-bottom: 6px;
+  }
+  .make-connections h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .mc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .mc-item {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 7px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .mc-item .mc-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--teal2);
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  /* inquiry box */
+  .inquiry {
+    border: 2px solid var(--c2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .inquiry-head {
+    background: var(--c2);
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .inquiry-body { padding: 16px 18px; background: #f5f9fe; }
+
+  /* footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    margin-top: 60px;
+  }
+  .back-top {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 20px;
+    border-radius: 24px;
+    background: var(--teal);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 36px 16px 32px; }
+    .container { padding: 0 14px 60px; }
+    .mc-grid { grid-template-columns: 1fr 1fr; }
+    table.comp { font-size: 12px; }
+  }
+</style>
+</head>
+<body id="top">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Biology · Unit 7 · Chapter 44</div>
+  <h1>滲透調節與排泄</h1>
+  <h2>Osmoregulation and Excretion</h2>
+  <div class="hero-meta">
+    <span>📊 共 21 張圖</span>
+    <span>📖 5 大概念</span>
+    <span>🔬 Figure 說明整理筆記</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#c1">44.1 滲透調節</a>
+  <a href="#c2">44.2 含氮廢物</a>
+  <a href="#c3">44.3 排泄系統</a>
+  <a href="#c4">44.4 腎元處理</a>
+  <a href="#c5">44.5 荷爾蒙調控</a>
+</nav>
+
+<div class="container">
+
+<!-- ═══ CONCEPT 44.1 ═══ -->
+<section class="concept concept-1" id="c1">
+  <div class="concept-header">
+    <div class="concept-num">44.1</div>
+    <div class="concept-title">
+      <div class="label">CONCEPT 44.1</div>
+      <h3>滲透調節平衡水分與溶質的攝取與散失<br>
+        <small style="font-size:13px;font-weight:400;color:var(--muted)">Osmoregulation balances the uptake and loss of water and solutes</small>
+      </h3>
+    </div>
+  </div>
+
+  <!-- Fig 44.1 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.1</span>
+      <h4>漂泊信天翁（<em>Diomedea exulans</em>）——只喝海水也能維持體液平衡</h4>
+    </div>
+    <div class="fig-body">
+      <p>翼展達 3.5 m 的漂泊信天翁是現存翼展最長的鳥類，全年在海上生活，僅返陸繁殖。牠只喝海水，卻能維持體鹽與水分的平衡，是本章的開場案例。</p>
+      <div class="hl">本章核心問題：動物如何調節組織中的水分與鹽分濃度？排泄系統不僅維持鹽水平衡，也負責排除含氮廢物。</div>
+      <p>動物無法主動泵水穿過細胞膜，只能透過控制溶質的運輸，間接驅動水分以<strong>滲透</strong>方式移動（水從低溶質→高溶質處擴散）。</p>
+    </div>
+  </div>
+
+  <!-- Fig 44.2 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.2</span>
+      <h4>銀鮭（<em>Oncorhynchus nerka</em>）——在河川與海洋間洄游的滲透調節者</h4>
+    </div>
+    <div class="fig-body">
+      <p>銀鮭是<strong>廣鹽性滲透調節者（euryhaline osmoregulator）</strong>，能忍受外部滲透壓的劇烈變化。</p>
+      <table class="comp">
+        <tr><th>策略</th><th>定義</th><th>代表生物</th></tr>
+        <tr><td><strong>滲透調節者</strong><br>(Osmoregulator)</td><td>主動控制內部滲透壓，使其獨立於外部環境</td><td>大多數脊椎動物、淡水無脊椎動物</td></tr>
+        <tr><td><strong>滲透順從者</strong><br>(Osmoconformer)</td><td>與環境等滲透，不需主動調節</td><td>大多數海洋無脊椎動物</td></tr>
+      </table>
+      <p><span class="tag tag-green">廣鹽性</span> 能耐受大幅鹽度變化（如鮭魚、條紋鱸）　<span class="tag tag-blue">狹鹽性</span> 只能耐受小幅度鹽度變化（大多數動物）</p>
+      <div class="sub">
+        <div class="sub-title">鮭魚如何適應海水？</div>
+        <p>遷徙至海洋後，鮭魚分泌更多<strong>皮質醇（cortisol）</strong>，增加鰓中特化分泌鹽細胞的數量與大小，切換成「減少排尿 + 鰓主動排鹽」模式。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fig 44.3 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.3</span>
+      <h4>海水與淡水硬骨魚的滲透調節比較</h4>
+    </div>
+    <div class="fig-body">
+      <table class="comp">
+        <tr>
+          <th>比較項目</th>
+          <th>🌊 海水魚（如鱈魚）</th>
+          <th>🏞️ 淡水魚（如鱸魚）</th>
+        </tr>
+        <tr>
+          <td>體液 vs. 環境</td>
+          <td>體液低滲於海水，<strong>持續失水</strong></td>
+          <td>體液高滲於環境，<strong>持續吸水</strong></td>
+        </tr>
+        <tr>
+          <td>水分補充</td>
+          <td>大量飲入海水</td>
+          <td>幾乎不喝水</td>
+        </tr>
+        <tr>
+          <td>尿液</td>
+          <td>量少、較濃縮</td>
+          <td>量多、極稀</td>
+        </tr>
+        <tr>
+          <td>鹽的處理</td>
+          <td>隨飲水攝入多餘鹽分，由<strong>鰓主動排出</strong></td>
+          <td>透過鰓主動<strong>攝取鹽分</strong>（補充因稀釋尿流失的鹽）</td>
+        </tr>
+      </table>
+      <div class="hl">關鍵對比：海水魚用喝水補水，淡水魚靠大量排尿。兩者都依賴鰓上皮的主動運輸來管理鹽分。</div>
+    </div>
+  </div>
+
+  <!-- Fig 44.4 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.4</span>
+      <h4>脫水隱生（Anhydrobiosis）——水熊蟲（緩步動物）</h4>
+    </div>
+    <div class="fig-body">
+      <p>水熊蟲（tardigrades）體長不足 1 mm，活動狀態含水量約 85%，乾燥後降至 2% 以下，可在休眠狀態存活<strong>十年以上</strong>，加水即可復甦。</p>
+      <div class="sub">
+        <div class="sub-title">存活機制：海藻糖（Trehalose）</div>
+        <p>脫水個體含大量<strong>海藻糖</strong>（一種雙醣），可取代蛋白質與膜脂質周圍的結合水，維持細胞膜完整性。部分越冬昆蟲及耐旱植物也使用相同策略。</p>
+      </div>
+      <p>科學應用：模仿脫水隱生保護劑，已開發出<strong>室溫儲存蛋白質、DNA、細胞</strong>的材料，取代傳統 −80°C 超低溫冷凍。</p>
+    </div>
+  </div>
+
+  <!-- Fig 44.5 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.5</span>
+      <h4>海鳥鼻腺的鹽分分泌——運輸上皮的經典案例</h4>
+    </div>
+    <div class="fig-body">
+      <p>信天翁等海鳥僅喝海水卻不會脫水，關鍵在於<strong>鼻腺（nasal salt gland）</strong>的<strong>運輸上皮（transport epithelium）</strong>。</p>
+      <div class="sub">
+        <div class="sub-title">分泌路徑</div>
+        <ol class="steps">
+          <li>血液中的 Na⁺ 和 Cl⁻ 被運輸上皮細胞的主動運輸吸入</li>
+          <li>鹽分進入分泌小管（secretory tubule）管腔</li>
+          <li>分泌小管匯入中央管道（central duct）</li>
+          <li>鹽溶液由鼻孔滴出（比海水鹽分濃度更高）</li>
+        </ol>
+      </div>
+      <p>相同結構也存在於<strong>海龜</strong>與<strong>海鬣蜥</strong>中。與人類不同：人喝等量海水需消耗<em>更多</em>水來排鹽，因此越喝越脫水；而海鳥因鹽腺效率高，喝海水可以<strong>淨得水分</strong>。</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ CONCEPT 44.2 ═══ -->
+<section class="concept concept-2" id="c2">
+  <div class="concept-header">
+    <div class="concept-num">44.2</div>
+    <div class="concept-title">
+      <div class="label">CONCEPT 44.2</div>
+      <h3>動物的含氮廢物反映其演化史與棲息地<br>
+        <small style="font-size:13px;font-weight:400;color:var(--muted)">An animal's nitrogenous wastes reflect its phylogeny and habitat</small>
+      </h3>
+    </div>
+  </div>
+
+  <!-- Fig 44.6 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.6</span>
+      <h4>動物含氮廢物的三種形式——氨、尿素、尿酸</h4>
+    </div>
+    <div class="fig-body">
+      <p>蛋白質與核酸代謝產生<strong>氨基（−NH₂）</strong>，需轉化為可排出的含氮廢物。</p>
+      <table class="comp">
+        <tr>
+          <th></th>
+          <th>🐟 氨（Ammonia）</th>
+          <th>🐀 尿素（Urea）</th>
+          <th>🦎 尿酸（Uric acid）</th>
+        </tr>
+        <tr>
+          <td><strong>毒性</strong></td>
+          <td>極高</td>
+          <td>低</td>
+          <td>微</td>
+        </tr>
+        <tr>
+          <td><strong>溶解度</strong></td>
+          <td>高</td>
+          <td>高</td>
+          <td>低（近不溶）</td>
+        </tr>
+        <tr>
+          <td><strong>合成能耗</strong></td>
+          <td>無（直接排出）</td>
+          <td>中（需 ATP）</td>
+          <td>高（需更多 ATP）</td>
+        </tr>
+        <tr>
+          <td><strong>排出時失水</strong></td>
+          <td>多（需大量水稀釋）</td>
+          <td>少</td>
+          <td>極少（半固體糊狀）</td>
+        </tr>
+        <tr>
+          <td><strong>代表生物</strong></td>
+          <td>大多數水生動物、<br>大多數硬骨魚</td>
+          <td>哺乳類、大多數兩棲類、<br>鯊魚、部分硬骨魚</td>
+          <td>鳥類、大多數爬行類、<br>昆蟲、陸棲蝸牛</td>
+        </tr>
+      </table>
+      <div class="hl">演化決定廢物型態：棲息地可用水量是關鍵選汰壓力。水多→排氨；水少→排尿酸；兩棲類幼體→氨，成體→尿素（棲地轉換）。</div>
+    </div>
+  </div>
+
+  <!-- Fig 44.7 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.7</span>
+      <h4>鳥糞（Guano）富含尿酸</h4>
+    </div>
+    <div class="fig-body">
+      <p>鸕鶿等鳥類聚集地形成的鳥糞，因富含尿酸（白色物質）而成為重要的天然氮肥來源，歷史上大量開採用於農業。</p>
+      <div class="sub">
+        <div class="sub-title">尿酸與蛋中胚胎的關係</div>
+        <p>鳥類與其他爬行類的蛋有不透液體的外殼，若胚胎產生可溶性廢物（氨或尿素），這些物質會被困在蛋內積累至中毒。<strong>尿酸為固體沉澱，無毒，孵化後留在殼內</strong>，是卵殼動物的選汰優勢。</p>
+      </div>
+      <p>人類雖主要排尿素，也會產生少量尿酸。<strong>痛風（Gout）</strong>：尿酸結晶沉積關節，引發劇烈發炎，成年男性尤其易患。化石證據也顯示暴龍曾患痛風。</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ CONCEPT 44.3 ═══ -->
+<section class="concept concept-3" id="c3">
+  <div class="concept-header">
+    <div class="concept-num">44.3</div>
+    <div class="concept-title">
+      <div class="label">CONCEPT 44.3</div>
+      <h3>多樣的排泄系統是管狀主題的變奏<br>
+        <small style="font-size:13px;font-weight:400;color:var(--muted)">Diverse excretory systems are variations on a tubular theme</small>
+      </h3>
+    </div>
+  </div>
+
+  <!-- Fig 44.8 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.8</span>
+      <h4>排泄系統功能的四大關鍵步驟（概覽）</h4>
+    </div>
+    <div class="fig-body">
+      <p>大多數排泄系統透過以下步驟將體液轉化為尿液：</p>
+      <ol class="steps">
+        <li><strong>過濾（Filtration）</strong>：血壓迫使水和小分子（鹽、葡萄糖、胺基酸、含氮廢物）穿越微血管壁，進入排泄管，形成<strong>濾液（filtrate）</strong>；細胞與大分子蛋白質留在血中。</li>
+        <li><strong>再吸收（Reabsorption）</strong>：運輸上皮從濾液中回收有用物質（葡萄糖、鹽、胺基酸等）送回體液。</li>
+        <li><strong>分泌（Secretion）</strong>：毒素、過量離子等由體液主動分泌至管腔，加入濾液。</li>
+        <li><strong>排泄（Excretion）</strong>：處理後的濾液（尿液）離開身體。</li>
+      </ol>
+      <div class="hl">核心原則：先大量過濾，再精確回收有用物質。廢物因未被回收而濃縮於尿液中。</div>
+    </div>
+  </div>
+
+  <!-- Fig 44.9 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.9</span>
+      <h4>渦蟲的原腎（Protonephridia）</h4>
+    </div>
+    <div class="fig-body">
+      <p>扁蟲（渦蟲）是無體腔動物，其排泄系統為一套<strong>原腎管（protonephridia）</strong>——向體內延伸的死端管網。</p>
+      <div class="sub">
+        <div class="sub-title">結構特色：焰細胞（Flame bulb）</div>
+        <p>每個分支末端有焰細胞，由一個管細胞（tubule cell）與一個帽細胞（cap cell）組成，具纖毛束（外形如燃燒的火焰）。</p>
+      </div>
+      <ol class="steps">
+        <li>纖毛擺動，將間質液吸入管腔</li>
+        <li>濾液沿管網向外流動</li>
+        <li>從體表開口排出（稀釋尿液）</li>
+      </ol>
+      <p>淡水渦蟲的原腎主要功能是<strong>滲透調節</strong>（排除多餘水分）；寄生性扁蟲（與宿主等滲）的原腎則主要負責<strong>排除含氮廢物</strong>。</p>
+    </div>
+  </div>
+
+  <!-- Fig 44.10 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.10</span>
+      <h4>蚯蚓的後腎（Metanephridia）</h4>
+    </div>
+    <div class="fig-body">
+      <p>大多數環節動物（如蚯蚓）每節有一對後腎，直接收集<strong>體腔液（coelomic fluid）</strong>。</p>
+      <div class="sub">
+        <div class="sub-title">結構</div>
+        <p>纖毛漏斗狀開口（內開口）→ 收集管（capillary network 包裹）→ 儲尿膀胱 → 體表外開口。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-title">功能</div>
+        <p>蚯蚓生活於潮濕土壤，皮膚吸水使體內水分增多；後腎負責產生<strong>低滲透壓（稀）尿</strong>以排除多餘水分，同時將多數溶質再吸收回血液。含氮廢物殘留於管腔並被排出。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fig 44.11 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.11</span>
+      <h4>昆蟲的馬氏管（Malpighian Tubules）</h4>
+    </div>
+    <div class="fig-body">
+      <p>昆蟲等陸生節肢動物以<strong>馬氏管</strong>進行排泄與滲透調節，無過濾步驟。</p>
+      <ol class="steps">
+        <li>馬氏管末端浸泡在<strong>血淋巴（hemolymph）</strong>中，運輸上皮主動<strong>分泌</strong>鹽、水及含氮廢物（主要為尿酸）進入管腔</li>
+        <li>水靠滲透跟隨鹽分進入管腔</li>
+        <li>液體流入直腸，多數溶質被泵回血淋巴，水隨之再吸收</li>
+        <li>含氮廢物（幾乎乾燥的尿酸）連同糞便排出</li>
+      </ol>
+      <div class="hl">昆蟲保水能力極強，此系統是昆蟲成功登陸的關鍵適應。</div>
+    </div>
+  </div>
+
+  <!-- Fig 44.12 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.12</span>
+      <h4>哺乳動物排泄系統的全覽（探索圖）</h4>
+    </div>
+    <div class="fig-body">
+      <div class="sub">
+        <div class="sub-title">排泄器官</div>
+        <p>人類排泄系統包含一對<strong>腎臟</strong>（各約 10 cm）、輸尿管、膀胱與尿道。括約肌控制排尿。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-title">腎臟結構</div>
+        <p><strong>腎皮質（renal cortex）</strong>（外層）+ <strong>腎髓質（renal medulla）</strong>（內層），由腎動脈供血，腎靜脈回流。濾液最終匯入<strong>腎盂（renal pelvis）</strong>，由輸尿管排出。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-title">腎元類型</div>
+        <p>人類每個腎臟約 100 萬個腎元（nephron），分為兩種：</p>
+        <table class="comp">
+          <tr><th>類型</th><th>位置</th><th>比例</th><th>功能特色</th></tr>
+          <tr><td><strong>皮質腎元</strong><br>(Cortical nephron)</td><td>亨利氏環短，僅達外髓質</td><td>85%</td><td>主要負責再吸收養分</td></tr>
+          <tr><td><strong>近髓腎元</strong><br>(Juxtamedullary nephron)</td><td>亨利氏環深入腎髓質</td><td>15%</td><td>產生高滲透壓尿液，<strong>保水必要</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ CONCEPT 44.4 ═══ -->
+<section class="concept concept-4" id="c4">
+  <div class="concept-header">
+    <div class="concept-num">44.4</div>
+    <div class="concept-title">
+      <div class="label">CONCEPT 44.4</div>
+      <h3>腎元分區段逐步處理血液濾液<br>
+        <small style="font-size:13px;font-weight:400;color:var(--muted)">The nephron is organized for stepwise processing of blood filtrate</small>
+      </h3>
+    </div>
+  </div>
+
+  <!-- Fig 44.13 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.13</span>
+      <h4>腎元與收集管：各區段運輸上皮的功能</h4>
+    </div>
+    <div class="fig-body">
+      <p>每日約 1,600 L 血液流過兩顆腎臟，產生約 180 L 初始濾液；最終僅 1.5 L 以尿液排出（99% 的水分被再吸收）。</p>
+      <table class="comp">
+        <tr><th>區段</th><th>主要功能</th><th>通透性</th></tr>
+        <tr>
+          <td><strong>① 近曲小管</strong><br>(Proximal tubule)</td>
+          <td>大量再吸收 NaCl、水、葡萄糖、胺基酸、K⁺、HCO₃⁻；<br>分泌 H⁺、NH₃（pH 調節）；<br>分泌藥物與毒素</td>
+          <td>水與溶質均通透</td>
+        </tr>
+        <tr>
+          <td><strong>② 亨利氏環降支</strong><br>(Descending limb)</td>
+          <td>水由滲透流出（水通道蛋白多）；濾液濃縮</td>
+          <td>對水高通透；對鹽低通透</td>
+        </tr>
+        <tr>
+          <td><strong>③ 亨利氏環升支</strong><br>(Ascending limb)</td>
+          <td>NaCl 離開（薄段：被動擴散；厚段：主動運輸）；維持髓質高滲透壓</td>
+          <td>對水不通透；對鹽通透</td>
+        </tr>
+        <tr>
+          <td><strong>④ 遠曲小管</strong><br>(Distal tubule)</td>
+          <td>調節 K⁺ 及 NaCl 濃度；控制 H⁺ 分泌與 HCO₃⁻ 再吸收（pH）</td>
+          <td>荷爾蒙調控</td>
+        </tr>
+        <tr>
+          <td><strong>⑤ 收集管</strong><br>(Collecting duct)</td>
+          <td>最終決定尿液濃度；受 ADH 調控（水通道蛋白插入/移除）；內髓質段允許尿素滲出</td>
+          <td>ADH 決定水通透性</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Fig 44.14 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.14</span>
+      <h4>人類腎臟如何濃縮尿液——逆流倍增系統</h4>
+    </div>
+    <div class="fig-body">
+      <p>兩種溶質共同維持腎髓質的高滲透壓梯度（從皮質 300 → 內髓質 1,200 mOsm/L）：</p>
+      <div class="sub">
+        <div class="sub-title">NaCl 梯度（由亨利氏環維持）</div>
+        <p>降支：水外流，NaCl 濃縮；升支薄段：NaCl 被動擴散出；升支厚段：NaCl 主動運輸出（消耗 ATP）。整個亨利氏環形成<strong>逆流倍增系統（countercurrent multiplier system）</strong>，在腎髓質建立 NaCl 高濃度梯度。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-title">尿素梯度</div>
+        <p>收集管內髓質段對尿素具通透性，尿素擴散出形成高滲透壓，再循環進入亨利氏環，持續維持髓質高溶質環境。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-title">直行血管（Vasa recta）的角色</div>
+        <p>直行血管中血液以相反方向流動，具逆流交換特性：帶走腎臟代謝所需養分，卻不破壞髓質的高滲透壓梯度。</p>
+      </div>
+      <div class="hl">最終尿液可達 1,200 mOsm/L（人類）；澳洲跳鼠可達 9,300 mOsm/L（血液的 25 倍！）</div>
+    </div>
+  </div>
+
+  <!-- Fig 44.15 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.15</span>
+      <h4>案例研究：吸血蝙蝠（<em>Desmodus rotundus</em>）的腎臟功能</h4>
+    </div>
+    <div class="fig-body">
+      <p>南美吸血蝙蝠以血為食，每次可喝超過自身體重一半的血液，面臨兩種截然不同的生理挑戰：</p>
+      <div class="sub">
+        <div class="sub-title">進食中：體重過重無法飛行</div>
+        <p>腎臟迅速排出大量稀薄尿液（每小時可達體重的 24%），快速減輕體重後便能飛回巢穴。</p>
+      </div>
+      <div class="sub">
+        <div class="sub-title">返巢後：蛋白質代謝產生大量尿素</div>
+        <p>無水可喝，腎臟轉為產出少量極高滲透壓尿液（高達 4,600 mOsm/L），在最小失水量下排出大量尿素。</p>
+      </div>
+      <div class="hl">說明：哺乳動物腎臟可快速在「大量稀尿↔少量濃尿」間切換，展現腎臟的高度彈性。</div>
+    </div>
+  </div>
+
+  <!-- Fig 44.16 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.16</span>
+      <h4>鴕鳥（<em>Struthio camelus</em>）——適應乾燥環境的鳥類</h4>
+    </div>
+    <div class="fig-body">
+      <p>大多數鳥類（包含信天翁與鴕鳥）生活在脫水環境中，與哺乳類同樣具有<strong>近髓腎元</strong>，但亨利氏環伸入髓質不如哺乳類深，因此尿液最高濃度不如哺乳類。</p>
+      <table class="comp">
+        <tr><th>脊椎動物群</th><th>腎元特色</th><th>保水策略</th></tr>
+        <tr><td>沙漠哺乳類</td><td>近髓腎元多、亨利氏環極長</td><td>高滲尿液</td></tr>
+        <tr><td>鳥類</td><td>近髓腎元有但環較短</td><td>主靠<strong>尿酸</strong>（固態排出）</td></tr>
+        <tr><td>其他爬行類</td><td>只有皮質腎元</td><td>泄殖腔再吸收水、排尿酸</td></tr>
+        <tr><td>淡水魚／兩棲類</td><td>皮質腎元密集</td><td>排大量稀尿</td></tr>
+        <tr><td>海水硬骨魚</td><td>腎元少且小，常無遠曲小管</td><td>排少量尿；主靠鰓排鹽</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Fig 44.17 MAKE CONNECTIONS -->
+  <div class="make-connections">
+    <div class="mc-label">Make Connections · Figure 44.17</div>
+    <h4>離子運動與梯度的廣泛應用</h4>
+    <p style="font-size:13px;opacity:.85;margin-bottom:14px;">離子跨膜運輸是所有生物的基本活動，提供驅動各種生理過程的勢能。</p>
+    <div class="mc-grid">
+      <div class="mc-item">
+        <span class="mc-tag">滲透調節</span>
+        海水硬骨魚鰓中的<strong>氯細胞</strong>利用泵、共輸體與通道，將 NaCl 從血液主動分泌至海水中，防止脫水。
+      </div>
+      <div class="mc-item">
+        <span class="mc-tag">氣體交換</span>
+        植物保衛細胞利用 H⁺ 外泵建立膜電位，驅動 K⁺ 內流，造成滲透吸水，使氣孔開啟。
+      </div>
+      <div class="mc-item">
+        <span class="mc-tag">資訊傳遞</span>
+        神經元中，Na⁺/K⁺ 通道的開關構成動作電位，傳遞感覺與運動訊號。
+      </div>
+      <div class="mc-item">
+        <span class="mc-tag">運動</span>
+        細菌鞭毛馬達由 H⁺ 梯度驅動，質子回流推動馬達旋轉，帶動鞭毛運動。
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ CONCEPT 44.5 ═══ -->
+<section class="concept concept-5" id="c5">
+  <div class="concept-header">
+    <div class="concept-num">44.5</div>
+    <div class="concept-title">
+      <div class="label">CONCEPT 44.5</div>
+      <h3>荷爾蒙迴路連結腎臟功能、水平衡與血壓<br>
+        <small style="font-size:13px;font-weight:400;color:var(--muted)">Hormonal circuits link kidney function, water balance, and blood pressure</small>
+      </h3>
+    </div>
+  </div>
+
+  <!-- Fig 44.18 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.18</span>
+      <h4>抗利尿激素（ADH）控制收集管通透性的機制</h4>
+    </div>
+    <div class="fig-body">
+      <p>ADH（又稱 vasopressin）由腦下垂體後葉分泌，作用於收集管細胞：</p>
+      <ol class="steps">
+        <li>ADH 與收集管細胞膜上的受體結合</li>
+        <li>受體啟動訊號傳遞（cAMP → 蛋白激酶 A）</li>
+        <li>含<strong>水通道蛋白（aquaporin）</strong>的囊泡插入管腔側膜</li>
+        <li>更多水通道 → 水大量再吸收 → 尿量減少、尿液濃縮</li>
+      </ol>
+      <div class="sub">
+        <div class="sub-title">ADH 缺乏：尿崩症（Diabetes Insipidus）</div>
+        <p>ADH 基因突變、ADH 受體基因失活，或水通道蛋白基因突變（見 Fig. 44.20），均可導致收集管無法再吸收水，引起<strong>大量稀薄尿液、嚴重脫水</strong>。</p>
+      </div>
+      <p><span class="tag tag-red">酒精效應</span> 酒精抑制 ADH 分泌 → 排尿增加 → 脫水（宿醉症狀的成因之一）。</p>
+      <p><span class="tag tag-green">咖啡因</span> 多項研究顯示，咖啡因飲料的利尿效果不超過等量清水，並不促進脫水。</p>
+    </div>
+  </div>
+
+  <!-- Fig 44.19 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.19</span>
+      <h4>腎臟液體保留的調節——ADH 負回饋迴路</h4>
+    </div>
+    <div class="fig-body">
+      <ol class="steps">
+        <li>血液滲透壓升高（大量出汗或攝取高鹽食物）</li>
+        <li>下視丘滲透壓感受器偵測到變化，觸發 ADH 從腦下垂體後葉釋放，並產生<strong>渴感</strong></li>
+        <li>ADH 促使收集管再吸收更多水 → 尿量減少、血液滲透壓下降</li>
+        <li>喝水進一步降低血液滲透壓</li>
+        <li><strong>負回饋</strong>：滲透壓恢復正常後，ADH 分泌降低</li>
+      </ol>
+      <div class="hl">反向：大量喝水後，血液滲透壓下降 → ADH 分泌極低 → 收集管通透性下降 → 排出大量稀薄尿液</div>
+    </div>
+  </div>
+
+  <!-- Fig 44.20 -->
+  <div class="inquiry">
+    <div class="inquiry-head">📐 Inquiry · Figure 44.20</div>
+    <div class="inquiry-body">
+      <p style="font-weight:600;margin-bottom:8px;">水通道蛋白突變會導致尿崩症嗎？</p>
+      <div class="sub" style="border-color: #c8dff5; background:#f5f9fe;">
+        <div class="sub-title" style="color:var(--c2)">實驗設計</div>
+        <p>研究一名 ADH 受體基因正常、但水通道蛋白-2 基因有兩個突變等位基因（A 和 B）的尿崩症患者。突變均發生於高度保守的胺基酸位置。</p>
+        <p>將野生型、突變 A、突變 B 的水通道蛋白 mRNA 注射入非洲爪蟾卵母細胞，觀察細胞在低滲溶液中的膨脹速率（作為水通透性的指標）。</p>
+      </div>
+      <table class="comp" style="font-size:12.5px">
+        <tr>
+          <th>注射的 mRNA 來源</th>
+          <th>膨脹速率（μm/sec）</th>
+          <th>解讀</th>
+        </tr>
+        <tr><td>人類野生型</td><td>196</td><td>水通道蛋白正常功能</td></tr>
+        <tr><td>患者等位基因 A</td><td>17</td><td>幾乎失去水通道功能</td></tr>
+        <tr><td>患者等位基因 B</td><td>18</td><td>幾乎失去水通道功能</td></tr>
+        <tr><td>對照（只注水）</td><td>20</td><td>背景值</td></tr>
+      </table>
+      <p style="margin-top:10px;font-size:13.5px;"><strong>結論：</strong>水通道蛋白-2 基因的突變使蛋白質失去水通道功能，是該患者尿崩症的直接病因——即使 ADH 受體完好，沒有功能性水通道蛋白，ADH 訊號也無法發揮保水效果。</p>
+    </div>
+  </div>
+
+  <!-- Fig 44.21 -->
+  <div class="fig">
+    <div class="fig-head">
+      <span class="fig-badge">Figure 44.21</span>
+      <h4>腎素-血管張力素-醛固酮系統（RAAS）——調節血量與血壓</h4>
+    </div>
+    <div class="fig-body">
+      <p>RAAS 處理 ADH 無法應對的情況：<strong>同時失去鹽與水（如大出血或嚴重腹瀉）</strong>，血量下降但滲透壓不變，ADH 不會啟動。</p>
+      <ol class="steps">
+        <li>入球小動脈血壓↓ → <strong>腎絲球旁器（JGA）</strong>分泌腎素（Renin）</li>
+        <li>腎素切割肝臟分泌的血管張力素原（Angiotensinogen）→ 中間體</li>
+        <li>血管張力素轉化酶（ACE）最終生成<strong>血管張力素 II（Angiotensin II）</strong></li>
+        <li>Angiotensin II 引起小動脈收縮（升血壓）+ 刺激腎上腺分泌<strong>醛固酮（Aldosterone）</strong></li>
+        <li>醛固酮促使遠曲小管與收集管再吸收更多 Na⁺ 和水 → 血量血壓回升</li>
+      </ol>
+      <div class="sub">
+        <div class="sub-title">對抗力：心房利尿胜肽（ANP）</div>
+        <p>血量與血壓升高時，心房釋放 ANP，<strong>抑制</strong>腎素分泌、抑制 NaCl 再吸收、降低醛固酮釋放 → 降低血量與血壓，形成與 RAAS 拮抗的制衡機制。</p>
+      </div>
+      <div class="hl">臨床應用：ACE 抑制劑（ACE inhibitors）是治療<strong>高血壓（hypertension）</strong>的常用藥，透過阻斷 Angiotensin II 的生成降低血壓。</div>
+      <table class="comp">
+        <tr>
+          <th>荷爾蒙</th>
+          <th>觸發條件</th>
+          <th>主要效果</th>
+        </tr>
+        <tr>
+          <td><strong>ADH</strong>（抗利尿激素）</td>
+          <td>血液滲透壓↑</td>
+          <td>收集管再吸收水↑ → 尿量↓</td>
+        </tr>
+        <tr>
+          <td><strong>醛固酮</strong>（RAAS）</td>
+          <td>血壓/血量↓</td>
+          <td>Na⁺ 再吸收↑ → 水跟進 → 血量↑</td>
+        </tr>
+        <tr>
+          <td><strong>ANP</strong>（拮抗 RAAS）</td>
+          <td>血壓/血量↑</td>
+          <td>腎素↓、NaCl 再吸收↓ → 血量↓</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <p>Chapter 44 · Osmoregulation and Excretion · Figure 說明整理筆記</p>
+  <p style="margin-top:6px;opacity:.7;">共 21 張圖 · 5 大概念 (44.1–44.5)</p>
+  <a href="#top" class="back-top">↑ 回到頂部</a>
+</div>
+
+</body>
+</html>
