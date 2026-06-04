@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第12章：生化訊號傳遞 | 學習指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --paper: #faf8f3;
+  --accent: #c0392b;
+  --accent2: #2980b9;
+  --accent3: #27ae60;
+  --gold: #d4a017;
+  --warm-gray: #e8e4dc;
+  --highlight: #fff3cd;
+  --highlight2: #d1ecf1;
+  --highlight3: #d4edda;
+  --shadow: rgba(26,26,46,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.85;
+  font-size: 16px;
+}
+
+/* === HEADER === */
+.site-header {
+  background: var(--ink);
+  color: white;
+  padding: 60px 40px 50px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 3px solid rgba(212,160,23,0.25);
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 60px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 2px solid rgba(192,57,43,0.3);
+}
+.chapter-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.site-header h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+.site-header .subtitle {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  max-width: 560px;
+  font-weight: 300;
+}
+.tag-row {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 1px;
+}
+
+/* === NAVIGATION === */
+.toc {
+  background: white;
+  border-bottom: 2px solid var(--warm-gray);
+  padding: 16px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.toc a {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--warm-gray);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.toc a:hover {
+  background: var(--ink);
+  color: white;
+}
+
+/* === MAIN LAYOUT === */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+/* === SECTIONS === */
+.section {
+  margin-top: 70px;
+  animation: fadeUp 0.5s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--ink);
+}
+.section-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--warm-gray);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: -4px;
+}
+.section-title-block h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.section-title-block .en-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 2px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* === CONTENT CARDS === */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  border: 1px solid var(--warm-gray);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.card h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+/* === HIGHLIGHT BOXES === */
+.key-concept {
+  background: #fff8e1;
+  border-left: 5px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.key-concept .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.danger-box {
+  background: #fdf2f2;
+  border-left: 5px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.danger-box .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.info-box {
+  background: var(--highlight2);
+  border-left: 5px solid var(--accent2);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.info-box .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent2);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.success-box {
+  background: var(--highlight3);
+  border-left: 5px solid var(--accent3);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.success-box .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent3);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* === EMPHASIS === */
+.big-keyword {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--accent);
+  background: #fdf2f2;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 0.98em;
+}
+.big-keyword2 {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--accent2);
+  background: #eaf4fd;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 0.98em;
+}
+.big-keyword3 {
+  display: inline-block;
+  font-weight: 700;
+  color: #1a7a4a;
+  background: #eafaf1;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 0.98em;
+}
+
+/* === FLOW DIAGRAM === */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+.flow-step {
+  background: var(--ink);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+.flow-step.alt {
+  background: var(--accent2);
+}
+.flow-step.green {
+  background: var(--accent3);
+}
+.flow-step.gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+.flow-step.red {
+  background: var(--accent);
+}
+.flow-arrow {
+  font-size: 22px;
+  color: #999;
+  flex-shrink: 0;
+}
+
+/* === TABLE === */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 16px 0;
+}
+.styled-table th {
+  background: var(--ink);
+  color: white;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.styled-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--warm-gray);
+  vertical-align: top;
+}
+.styled-table tr:hover td {
+  background: #f7f4ef;
+}
+.styled-table tr:nth-child(even) td {
+  background: #faf9f6;
+}
+
+/* === PILL BADGE === */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+.pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1.5px solid currentColor;
+}
+.pill.red { color: var(--accent); border-color: var(--accent); background: #fdf2f2; }
+.pill.blue { color: var(--accent2); border-color: var(--accent2); background: #eaf4fd; }
+.pill.green { color: #1a7a4a; border-color: #27ae60; background: #eafaf1; }
+.pill.gold { color: #8a6000; border-color: var(--gold); background: #fff8e1; }
+.pill.dark { color: white; background: var(--ink); border-color: var(--ink); }
+
+/* === TWO COLUMNS === */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+}
+@media (max-width: 640px) {
+  .two-col { grid-template-columns: 1fr; }
+  .toc { padding: 12px 16px; }
+  .container { padding: 0 16px 60px; }
+  .site-header { padding: 40px 20px 36px; }
+}
+
+/* === NUMBERED LIST === */
+.num-list {
+  list-style: none;
+  margin: 12px 0;
+}
+.num-list li {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+.num-list .n {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  background: var(--ink);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 1px;
+}
+.num-list .n.red { background: var(--accent); }
+.num-list .n.blue { background: var(--accent2); }
+.num-list .n.green { background: var(--accent3); }
+.num-list .n.gold { background: var(--gold); color: var(--ink); }
+
+/* === CYCLE DIAGRAM === */
+.cycle-box {
+  background: white;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  padding: 28px;
+  margin: 20px 0;
+  text-align: center;
+}
+.cycle-phases {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+@media (max-width: 640px) {
+  .cycle-phases { grid-template-columns: 1fr 1fr; }
+}
+.phase-box {
+  border-radius: 10px;
+  padding: 14px 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.phase-g1 { background: #fff8e1; border: 2px solid var(--gold); }
+.phase-s  { background: #eaf4fd; border: 2px solid var(--accent2); }
+.phase-g2 { background: #eafaf1; border: 2px solid var(--accent3); }
+.phase-m  { background: #fdf2f2; border: 2px solid var(--accent); }
+.phase-box .phase-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* === QUIZ SECTION === */
+.quiz-section {
+  background: var(--ink);
+  color: white;
+  border-radius: 16px;
+  padding: 36px;
+  margin: 60px 0 0;
+}
+.quiz-section h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 22px;
+  margin-bottom: 24px;
+  color: var(--gold);
+}
+.quiz-item {
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quiz-item:hover { background: rgba(255,255,255,0.1); }
+.quiz-q {
+  font-weight: 500;
+  margin-bottom: 0;
+  font-size: 15px;
+}
+.quiz-a {
+  display: none;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.quiz-a.shown { display: block; }
+.quiz-toggle {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-top: 8px;
+  display: inline-block;
+}
+
+/* === COMPARISON TABLE === */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+@media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card {
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid;
+}
+.compare-card h4 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.compare-card.gpcr { border-color: var(--accent2); background: #eaf4fd; }
+.compare-card.rtk  { border-color: var(--accent3); background: #eafaf1; }
+.compare-card.ion  { border-color: var(--gold); background: #fff8e1; }
+.compare-card.nuc  { border-color: var(--accent); background: #fdf2f2; }
+
+/* === SUMMARY BOX === */
+.summary-strip {
+  background: var(--ink);
+  color: white;
+  border-radius: 12px;
+  padding: 22px 28px;
+  margin-top: 28px;
+}
+.summary-strip h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* === SEPARATOR === */
+.divider {
+  border: none;
+  border-top: 1px dashed var(--warm-gray);
+  margin: 36px 0;
+}
+
+/* === FOOTER === */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 32px;
+  font-size: 13px;
+  margin-top: 80px;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="chapter-label">CHAPTER 12 · BIOCHEMISTRY · LEHNINGER</div>
+  <h1>生化訊號傳遞<br>Biochemical Signaling</h1>
+  <p class="subtitle">帶你從零讀懂細胞如何接收訊號、放大訊號、做出反應——從荷爾蒙到癌症，一次搞清楚</p>
+  <div class="tag-row">
+    <span class="tag">GPCR</span>
+    <span class="tag">第二訊息</span>
+    <span class="tag">受體酪胺酸激酶</span>
+    <span class="tag">離子通道</span>
+    <span class="tag">細胞週期</span>
+    <span class="tag">癌症機制</span>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="toc">
+  <a href="#intro">訊號傳遞概論</a>
+  <a href="#gpcr">GPCR 系統</a>
+  <a href="#senses">視覺·嗅覺·味覺</a>
+  <a href="#rtk">受體酪胺酸激酶</a>
+  <a href="#ionchannel">離子通道</a>
+  <a href="#nuclear">核受體</a>
+  <a href="#cellcycle">細胞週期</a>
+  <a href="#oncogene">癌症機制</a>
+  <a href="#quiz">自我測驗</a>
+</nav>
+
+<div class="container">
+
+<!-- ===== SECTION 1 ===== -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div class="section-title-block">
+      <h2>訊號傳遞的基本原理</h2>
+      <div class="en-label">General Features of Signal Transduction</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔑 什麼是訊號傳遞？</h3>
+    <p>細胞就像一個<strong>隨時在接收訊息的智慧系統</strong>。外界的荷爾蒙、神經傳遞物質、生長因子……這些「訊號」一旦被細胞表面的<span class="big-keyword">受體（Receptor）</span>辨認到，就會啟動一連串的化學反應，讓細胞做出適當的反應。</p>
+    <p style="margin-top:10px;">這個「<strong>把外界訊號轉換成細胞內部化學變化</strong>」的過程，就叫做 <span class="big-keyword">訊號傳遞（Signal Transduction）</span>，是所有生命共有的特性。</p>
+  </div>
+
+  <div class="key-concept">
+    <div class="label">⭐ 核心比喻</div>
+    把細胞想成一間辦公室。<strong>訊號＝電話</strong>，<strong>受體＝接待員</strong>，<strong>訊號傳遞＝把訊息轉達給正確的部門並執行</strong>。整個過程要快速、精準、而且電話掛掉後辦公室要恢復安靜。
+  </div>
+
+  <div class="card">
+    <h3>📋 訊號傳遞系統的 8 大特性</h3>
+    <ul class="num-list">
+      <li><div class="n">1</div><div><span class="big-keyword">特異性（Specificity）</span>：訊號分子與受體的形狀完美吻合，就像鑰匙與鎖，一個訊號只激活對的受體。</div></li>
+      <li><div class="n blue">2</div><div><span class="big-keyword2">靈敏性（Sensitivity）</span>：受體對訊號的親和力極高（Kd 常在 10⁻⁷ M 以下），極微量（奈莫耳 nM 級）的訊號就能被偵測。</div></li>
+      <li><div class="n green">3</div><div><span class="big-keyword3">放大性（Amplification）</span>：一個訊號激活一個酵素，那個酵素再激活更多酵素……形成「酵素級聯（enzyme cascade）」，訊號可放大數千倍。</div></li>
+      <li><div class="n gold">4</div><div><span class="big-keyword" style="background:#fff8e1; color:#8a6000;">模組性（Modularity）</span>：訊號蛋白質有多個結合域，可以像積木一樣組合，形成不同功能的複合體。</div></li>
+      <li><div class="n red">5</div><div><span class="big-keyword">去敏感化（Desensitization）</span>：訊號持續存在時，系統會自動降低反應——防止細胞過度刺激。</div></li>
+      <li><div class="n blue">6</div><div><span class="big-keyword2">整合性（Integration）</span>：細胞同時接到多個訊號時，能將所有輸入加總，給出一個統一的合理反應。</div></li>
+      <li><div class="n green">7</div><div><span class="big-keyword3">分歧性（Divergence）</span>：一個訊號可以分叉，同時影響多條下游路徑，產生多種效應。</div></li>
+      <li><div class="n">8</div><div><span class="big-keyword">局部化（Response Localization）</span>：訊號傳遞元件被集中在細胞的特定區域，讓反應精確局限、不四處擴散。</div></li>
+    </ul>
+  </div>
+
+  <div class="danger-box">
+    <div class="label">🔥 超重要觀念</div>
+    <strong>放大性</strong>是訊號傳遞最驚人的地方！一個腎上腺素分子，最終可以釋放出 10 萬個葡萄糖分子。<br>
+    路徑：腎上腺素(1) → G蛋白(10) → 腺苷酸環化酶 → cAMP(200) → PKA(100) → 磷酸化酶b激酶(1,000) → 糖原磷酸化酶(10,000) → 葡萄糖-1-磷酸(100,000)
+  </div>
+
+  <div class="info-box">
+    <div class="label">四種訊號受體類型</div>
+    <div class="pill-group">
+      <span class="pill blue">① G蛋白偶聯受體（GPCR）</span>
+      <span class="pill green">② 受體酵素（酪胺酸激酶）</span>
+      <span class="pill gold">③ 離子通道</span>
+      <span class="pill red">④ 核受體</span>
+    </div>
+    這四種受體是本章的核心，後面將逐一介紹。
+  </div>
+</section>
+
+<!-- ===== SECTION 2 ===== -->
+<section class="section" id="gpcr">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div class="section-title-block">
+      <h2>G蛋白偶聯受體與第二訊息</h2>
+      <div class="en-label">G Protein–Coupled Receptors &amp; Second Messengers</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🏗️ GPCR 的結構——七跨膜受體</h3>
+    <p>GPCR 是動物細胞中<strong>數量最多的受體</strong>。人類基因組中約有 <strong>800 個 GPCR 基因</strong>（其中數百個負責嗅覺）。</p>
+    <p style="margin-top:10px;">GPCR 的特徵是擁有 <span class="big-keyword">7 個跨膜螺旋（7-TM helices）</span>——它像一條蛇一樣在細胞膜上穿來穿去 7 次。配體結合部位埋在膜內，胞內端則與 G 蛋白互動。</p>
+  </div>
+
+  <div class="key-concept">
+    <div class="label">⭐ GPCR 傳遞訊號的步驟</div>
+    <div class="flow">
+      <div class="flow-step">荷爾蒙<br>結合受體</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt">G蛋白活化<br>（GDP→GTP）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green">腺苷酸環化酶<br>產生 cAMP</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step gold">PKA 活化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step red">磷酸化目標<br>蛋白質</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>🟢 G<sub>s</sub>（刺激型 G 蛋白）</h3>
+      <p>例如：腎上腺素結合 <strong>β-腎上腺素受體</strong>。<br>
+      → Gα <strong>活化</strong>腺苷酸環化酶<br>
+      → cAMP ↑ → PKA 活化<br>
+      → 肝糖分解、脂肪動員</p>
+    </div>
+    <div class="card">
+      <h3>🔴 G<sub>i</sub>（抑制型 G 蛋白）</h3>
+      <p>例如：體制素（somatostatin）。<br>
+      → Gα <strong>抑制</strong>腺苷酸環化酶<br>
+      → cAMP ↓ → PKA 活性降低<br>
+      → 抑制荷爾蒙分泌</p>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <div class="label">🔥 G蛋白是「自限開關」</div>
+    G 蛋白內建 <span class="big-keyword">GTPase 活性</span>——它在活化後會自動水解 GTP→GDP，讓自己回到非活化狀態。這個「自毀機制」確保訊號不會永遠開著。
+    <br><br>
+    <strong>GEF（鳥苷核苷酸交換因子）</strong>：催化 GDP→GTP，<strong>開啟</strong> G 蛋白<br>
+    <strong>GAP（GTPase 活化蛋白）</strong>：加速 GTP 水解，<strong>關閉</strong> G 蛋白
+  </div>
+
+  <div class="card">
+    <h3>📬 第二訊息（Second Messengers）</h3>
+    <p>「第一訊息」是細胞外的荷爾蒙；「<span class="big-keyword2">第二訊息</span>」是在細胞<em>內</em>負責傳遞訊號的小分子。</p>
+    <table class="styled-table" style="margin-top:14px;">
+      <thead><tr><th>第二訊息</th><th>產生方式</th><th>主要效應</th></tr></thead>
+      <tbody>
+        <tr><td><strong>cAMP</strong></td><td>腺苷酸環化酶催化 ATP</td><td>活化 PKA，磷酸化眾多蛋白</td></tr>
+        <tr><td><strong>cGMP</strong></td><td>鳥苷酸環化酶催化 GTP</td><td>活化 PKG；心肌舒張；視覺</td></tr>
+        <tr><td><strong>IP₃</strong></td><td>磷脂酶C（PLC）分解 PIP₂</td><td>觸發內質網釋放 Ca²⁺</td></tr>
+        <tr><td><strong>DAG</strong></td><td>同上，與 IP₃ 一起產生</td><td>活化蛋白激酶C（PKC）</td></tr>
+        <tr><td><strong>Ca²⁺</strong></td><td>離子通道或 IP₃ 釋放</td><td>活化鈣調蛋白及多種激酶</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🛑 訊號如何終止？——三種關閉機制</h3>
+    <ul class="num-list">
+      <li><div class="n">1</div><div>荷爾蒙濃度下降 → 與受體解離 → 受體恢復不活化構形</div></li>
+      <li><div class="n red">2</div><div>G 蛋白的 GTPase 活性水解 GTP → GDP，G 蛋白自我關閉（GAP 可加速此過程）</div></li>
+      <li><div class="n blue">3</div><div>磷酸二酯酶（PDE）將 cAMP/cGMP 水解成非活性的 5′-AMP / 5′-GMP</div></li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <div class="label">💊 臨床應用</div>
+    <strong>威而鋼（Sildenafil）</strong>抑制陰莖血管中的 cGMP 磷酸二酯酶 → cGMP 濃度維持升高 → 平滑肌持續舒張 → 血流增加。<br><br>
+    <strong>硝化甘油（Nitroglycerin）</strong>在體內緩慢釋放 NO → 活化鳥苷酸環化酶 → cGMP ↑ → 心肌舒張，治療心絞痛。
+  </div>
+
+  <div class="card">
+    <h3>📍 去敏感化與 β-Arrestin</h3>
+    <p>當腎上腺素持續存在，細胞會主動降低對它的反應：</p>
+    <div class="flow" style="margin-top:14px; font-size:14px;">
+      <div class="flow-step" style="font-size:12px;">受體持續<br>被佔用</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt" style="font-size:12px;">βARK 磷酸化<br>受體 C 端</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step red" style="font-size:12px;">β-arrestin<br>結合受體</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">受體內吞<br>（暫時失活）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green" style="font-size:12px;">去磷酸化後<br>重回細胞膜</div>
+    </div>
+  </div>
+
+  <div class="success-box">
+    <div class="label">📌 AKAP：讓訊號精準定位</div>
+    <strong>AKAPs（A激酶錨定蛋白）</strong>像「支架」一樣，把 PKA 固定在細胞特定位置（粒線體、細胞核、離子通道旁邊），確保 cAMP 訊號只在對的地方作用，不亂跑。
+  </div>
+</section>
+
+<!-- ===== SECTION 3 ===== -->
+<section class="section" id="senses">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div class="section-title-block">
+      <h2>GPCR 在視覺、嗅覺、味覺中的角色</h2>
+      <div class="en-label">GPCRs in Vision, Olfaction, and Gustation</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>👁️ 視覺——光如何轉成電訊號</h3>
+    <p>視網膜上的視桿細胞含有 <span class="big-keyword">視紫質（Rhodopsin）</span>，是一種特殊的 GPCR，其配體是光子（不是分子）。</p>
+    <div class="flow" style="margin-top:14px; flex-wrap:wrap; font-size:13px;">
+      <div class="flow-step gold" style="font-size:12px;">光照射視紫質</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">視黃醛<br>11-cis→全反式</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt" style="font-size:12px;">轉導素（G蛋白）<br>活化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step red" style="font-size:12px;">cGMP 磷酸二酯酶<br>活化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">cGMP ↓<br>離子通道關閉</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green" style="font-size:12px;">超極化<br>電訊號→腦</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>👃 嗅覺</h3>
+      <p>氣味分子 → 嗅覺 GPCR → Golf（G蛋白）<br>→ 腺苷酸環化酶 → cAMP ↑<br>→ 離子通道打開 → Na⁺/Ca²⁺ 內流<br>→ 去極化 → 大腦感知氣味</p>
+      <p style="margin-top:8px; font-size:13px; color:#666;">人類有約 400 種功能性嗅覺受體</p>
+    </div>
+    <div class="card">
+      <h3>👅 味覺</h3>
+      <p>甜味分子 → 味覺 GPCR → 味覺素（Gustducin）<br>→ cAMP ↑ → PKA 磷酸化 K⁺ 通道<br>→ K⁺ 通道關閉 → 去極化<br>→ 大腦感知甜味</p>
+      <p style="margin-top:8px; font-size:13px; color:#666;">苦、甜、鮮（umami）都用 GPCR</p>
+    </div>
+  </div>
+
+  <div class="summary-strip">
+    <h4>✅ 視覺·嗅覺·味覺的共同主題</h4>
+    <p>都用 GPCR + G蛋白 → 改變第二訊息（cAMP 或 cGMP）→ 影響離子通道 → 改變膜電位 → 電訊號送往大腦。不同的是：視覺讓 cGMP 下降（通道關閉），嗅覺讓 cAMP 上升（通道打開）。</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 4 ===== -->
+<section class="section" id="rtk">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div class="section-title-block">
+      <h2>受體酪胺酸激酶（RTK）</h2>
+      <div class="en-label">Receptor Tyrosine Kinases</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔧 RTK 是什麼？</h3>
+    <p><span class="big-keyword2">受體酪胺酸激酶（RTK）</span>是一種特殊受體：它的胞外端負責結合訊號分子（如胰島素、生長因子），胞內端本身就是一個<strong>蛋白激酶</strong>，能磷酸化目標蛋白的<strong>酪胺酸（Tyr）</strong>殘基。</p>
+    <p style="margin-top:10px;">人類有 <strong>58 種 RTK</strong>。胰島素受體（INSR）和表皮生長因子受體（EGFR）是經典例子。</p>
+  </div>
+
+  <div class="key-concept">
+    <div class="label">⭐ RTK 活化機制——自磷酸化（Autophosphorylation）</div>
+    <div class="flow" style="font-size:13px; flex-wrap:wrap;">
+      <div class="flow-step" style="font-size:12px;">胰島素<br>結合受體</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt" style="font-size:12px;">兩個 β 亞基<br>靠近</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step red" style="font-size:12px;">互相磷酸化<br>3個 Tyr 殘基</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green" style="font-size:12px;">活化環移開<br>激酶完全活化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">磷酸化下游<br>訊號蛋白</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📡 胰島素訊號路徑——從受體到代謝效應</h3>
+    <div class="flow" style="font-size:13px; flex-wrap:wrap;">
+      <div class="flow-step" style="font-size:12px;">胰島素受體<br>（RTK）活化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt" style="font-size:12px;">IRS-1 磷酸化<br>（接頭蛋白）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">PI3K 活化<br>產生 PIP₃</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step gold" style="font-size:12px;">Akt/PKB<br>活化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green" style="font-size:12px;">葡萄糖轉運<br>↑醣解 ↑合成</div>
+    </div>
+    <br>
+    <p>另一分支：</p>
+    <div class="flow" style="font-size:13px; flex-wrap:wrap;">
+      <div class="flow-step alt" style="font-size:12px;">IRS-1 磷酸化</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step red" style="font-size:12px;">Ras 活化<br>（GEF 作用）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">MAPK 級聯<br>（Raf→MEK→ERK）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green" style="font-size:12px;">基因表達<br>改變</div>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <div class="label">🔥 Ras 突變與癌症</div>
+    <strong>Ras 蛋白</strong>正常情況下受 GAP 控制，水解 GTP 後回到非活化狀態。<br><br>
+    但在 <strong>約 25% 的人類癌症</strong>中，Ras 發生突變（通常在 P-loop 附近），導致 GTPase 活性幾近消失——Ras 永遠處於活化狀態，持續發出「細胞快分裂！」的訊號，形成腫瘤。
+  </div>
+
+  <div class="info-box">
+    <div class="label">RTK vs GPCR——快速比較</div>
+    <table class="styled-table">
+      <thead><tr><th>特徵</th><th>GPCR</th><th>RTK（如胰島素受體）</th></tr></thead>
+      <tbody>
+        <tr><td>跨膜方式</td><td>7 次跨膜螺旋</td><td>1 次跨膜（單段）</td></tr>
+        <tr><td>傳訊中間人</td><td>G 蛋白</td><td>自磷酸化直接活化</td></tr>
+        <tr><td>主要下游</td><td>cAMP / IP₃ / Ca²⁺</td><td>Ras-MAPK、PI3K-Akt</td></tr>
+        <tr><td>典型配體</td><td>腎上腺素、glucagon</td><td>胰島素、EGF、NGF</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECTION 5 ===== -->
+<section class="section" id="ionchannel">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <div class="section-title-block">
+      <h2>離子通道門控（Gated Ion Channels）</h2>
+      <div class="en-label">Gated Ion Channels</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚡ 最快速的訊號傳遞方式</h3>
+    <p>離子通道是最<strong>直接、最快速</strong>的訊號傳遞方式——訊號分子（或電壓變化）直接打開通道，讓離子瞬間流動，改變膜電位，產生電訊號。</p>
+    <p style="margin-top:10px;">細菌、植物、動物都有門控離子通道——是進化上非常古老的機制。</p>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>配體門控通道<br><small>Ligand-Gated</small></h3>
+      <p>配體（如乙醯膽鹼）結合後，通道直接打開。<br>
+      例：<strong>菸鹼型乙醯膽鹼受體</strong>→ Na⁺ 內流 → 去極化 → 動作電位</p>
+    </div>
+    <div class="card">
+      <h3>電壓門控通道<br><small>Voltage-Gated</small></h3>
+      <p>膜電位改變時，通道打開或關閉。<br>
+      例：去極化 → 電壓門控 Na⁺ 通道開啟 → 動作電位沿神經傳播</p>
+    </div>
+  </div>
+
+  <div class="key-concept">
+    <div class="label">⭐ 突觸傳遞（神經訊號）的流程</div>
+    <ul class="num-list">
+      <li><div class="n">1</div><div>神經衝動到達突觸末端 → 去極化 → <strong>電壓門控 Ca²⁺ 通道</strong>開啟</div></li>
+      <li><div class="n blue">2</div><div>Ca²⁺ 流入 → 含神經傳遞物質的囊泡與突觸前膜融合 → 釋放乙醯膽鹼</div></li>
+      <li><div class="n green">3</div><div>乙醯膽鹼擴散到突觸後膜 → 結合<strong>配體門控 Na⁺ 通道</strong>→ 開啟</div></li>
+      <li><div class="n gold">4</div><div>局部去極化 → 觸發突觸後膜的<strong>電壓門控 Na⁺ 通道</strong>→ 動作電位</div></li>
+      <li><div class="n red">5</div><div>K⁺ 外流（電壓門控 K⁺ 通道）→ 復極化，訊號終止</div></li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <div class="label">溫度門控通道（感測冷熱）</div>
+    <strong>TRPV1</strong>（≥43°C 開啟）→ 感測熱與辣椒素（capsaicin）<br>
+    <strong>TRPV3</strong>（≥33°C 開啟）→ 感測溫熱<br>
+    <strong>TRPM8</strong>（&lt;25°C 開啟）→ 感測涼意與薄荷醇（menthol）
+  </div>
+</section>
+
+<!-- ===== SECTION 6 ===== -->
+<section class="section" id="nuclear">
+  <div class="section-header">
+    <div class="section-number">06</div>
+    <div class="section-title-block">
+      <h2>核受體與基因調控</h2>
+      <div class="en-label">Regulation of Transcription by Nuclear Hormone Receptors</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🧬 類固醇荷爾蒙的特殊之道</h3>
+    <p>類固醇荷爾蒙（如雌激素、cortisol、維生素 D）是<strong>脂溶性</strong>的，可以直接穿過細胞膜，進入細胞核，直接控制<strong>基因的開關</strong>。</p>
+    <p style="margin-top:10px;">這與 GPCR、RTK 完全不同——不需要受體在細胞表面，也不需要第二訊息。</p>
+  </div>
+
+  <div class="key-concept">
+    <div class="label">⭐ 核受體作用流程</div>
+    <div class="flow" style="font-size:13px; flex-wrap:wrap;">
+      <div class="flow-step gold" style="font-size:12px;">類固醇荷爾蒙<br>自由穿膜</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">與核受體<br>結合</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt" style="font-size:12px;">受體構形改變<br>暴露 DNA 結合域</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step red" style="font-size:12px;">結合 HRE<br>（荷爾蒙反應元件）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green" style="font-size:12px;">特定基因<br>轉錄改變</div>
+    </div>
+    <p style="margin-top:12px; font-size:13px; color:#555;">整個過程需要<strong>數小時至數天</strong>才能看到效果（需要等待蛋白質合成）。這與 GPCR（數秒內反應）截然不同。</p>
+  </div>
+
+  <div class="danger-box">
+    <div class="label">💊 臨床應用：乳癌治療</div>
+    <strong>泰莫西芬（Tamoxifen）</strong>是雌激素的<strong>拮抗劑</strong>——競爭性佔據雌激素受體，但不活化它，讓癌細胞無法獲得雌激素的「分裂指令」，減緩腫瘤生長。<br><br>
+    <strong>米非司酮（RU486，Mifepristone）</strong>結合黃體素受體並阻斷其作用，用於避孕（阻止受精卵著床）。
+  </div>
+</section>
+
+<!-- ===== SECTION 7 ===== -->
+<section class="section" id="cellcycle">
+  <div class="section-header">
+    <div class="section-number">07</div>
+    <div class="section-title-block">
+      <h2>細胞週期的蛋白激酶調控</h2>
+      <div class="en-label">Regulation of the Cell Cycle by Protein Kinases</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔄 細胞週期四個階段</h3>
+    <div class="cycle-box">
+      <div style="font-size:14px; color:#666; margin-bottom:12px;">細胞分裂是按照嚴格程序進行的——每個階段都要完成才能進入下一步</div>
+      <div class="cycle-phases">
+        <div class="phase-box phase-g1">
+          <span class="phase-name">G₁</span>
+          準備期<br><small>6–12小時</small><br>
+          <small>RNA / 蛋白質合成<br>無 DNA 合成</small>
+        </div>
+        <div class="phase-box phase-s">
+          <span class="phase-name">S</span>
+          DNA 複製<br><small>6–8小時</small><br>
+          <small>DNA 量加倍</small>
+        </div>
+        <div class="phase-box phase-g2">
+          <span class="phase-name">G₂</span>
+          再準備<br><small>3–4小時</small><br>
+          <small>蛋白質合成<br>無 DNA 合成</small>
+        </div>
+        <div class="phase-box phase-m">
+          <span class="phase-name">M</span>
+          有絲分裂<br><small>~1小時</small><br>
+          <small>染色體分離<br>細胞一分為二</small>
+        </div>
+      </div>
+      <p style="font-size:13px; color:#666;">靜止期 <strong>G₀</strong>：終末分化細胞（如神經元、心肌細胞）永久離開細胞週期</p>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <div class="label">🔥 CDK——細胞週期的主控開關</div>
+    <p><span class="big-keyword">週期素依賴性激酶（CDK, Cyclin-Dependent Kinase）</span>是驅動細胞週期進行的關鍵激酶。</p>
+    <p style="margin-top:10px;"><strong>關鍵原則：</strong>CDK 單獨存在時幾乎沒有活性；只有與<span class="big-keyword">週期素（Cyclin）</span>結合後，活性才提升 <strong>10,000 倍</strong>。</p>
+    <p style="margin-top:10px;">不同時期，不同的 Cyclin-CDK 組合控制不同的轉換：</p>
+    <table class="styled-table" style="margin-top:12px;">
+      <thead><tr><th>複合體</th><th>活躍時期</th><th>主要功能</th></tr></thead>
+      <tbody>
+        <tr><td>Cyclin D – CDK4/6</td><td>G₁ 早期</td><td>磷酸化 pRb，推動 G₁ 進行</td></tr>
+        <tr><td>Cyclin E – CDK2</td><td>G₁ 晚期</td><td>觸發 G₁→S 轉換</td></tr>
+        <tr><td>Cyclin A – CDK2</td><td>S / G₂ 期</td><td>DNA 複製過程控制</td></tr>
+        <tr><td>Cyclin B – CDK1</td><td>M 期</td><td>促進有絲分裂</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🧱 CDK 的四種調控機制</h3>
+    <ul class="num-list">
+      <li><div class="n">1</div><div><strong>磷酸化 / 去磷酸化</strong>：Thr¹⁶⁰ 磷酸化（活化）；Tyr¹⁵ 去磷酸化（開放 ATP 結合位），雙重機制徹底活化 CDK</div></li>
+      <li><div class="n red">2</div><div><strong>週期素的蛋白酶解</strong>：CDK 自己磷酸化 DBRP，DBRP 再把週期素打上泛素標籤 → 蛋白酶體降解 → CDK 失活</div></li>
+      <li><div class="n blue">3</div><div><strong>週期素合成速率</strong>：生長因子等細胞外訊號透過 MAPK 級聯，活化 Jun/Fos，促進週期素和 CDK 的基因轉錄</div></li>
+      <li><div class="n green">4</div><div><strong>CDK 抑制蛋白（CKI）</strong>：如 p21 可直接抑制 CDK2，在 DNA 損傷後被 p53 誘導大量產生</div></li>
+    </ul>
+  </div>
+
+  <div class="key-concept">
+    <div class="label">⭐ DNA 損傷的緊急煞車：p53 路徑</div>
+    <div class="flow" style="font-size:13px; flex-wrap:wrap;">
+      <div class="flow-step red" style="font-size:12px;">DNA 雙鏈斷裂<br>（MRN 偵測）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">ATM / ATR<br>磷酸化 p53</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt" style="font-size:12px;">p53 活化<br>轉錄 p21</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step gold" style="font-size:12px;">p21 抑制<br>CDK2</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:12px;">pRb 不被磷酸化<br>→ E2F 被抑制</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step green" style="font-size:12px;">細胞週期<br>阻滯在 G₁</div>
+    </div>
+    <p style="margin-top:12px; font-size:14px;">這給細胞時間修復 DNA。若損傷太嚴重→觸發<strong>細胞凋亡（apoptosis）</strong>，直接消滅問題細胞。</p>
+  </div>
+
+  <div class="info-box">
+    <div class="label">pRb 的「門鎖」功能</div>
+    <strong>視網膜母細胞瘤蛋白（pRb）</strong>是 G₁→S 的守門員：<br>
+    • <strong>未磷酸化狀態</strong>：抓住轉錄因子 E2F → DNA 合成酶基因不表現 → 細胞無法進入 S 期<br>
+    • <strong>磷酸化後（Cyclin E-CDK2 作用）</strong>：釋放 E2F → DNA 合成酶開始表現 → 細胞進入 S 期
+  </div>
+</section>
+
+<!-- ===== SECTION 8 ===== -->
+<section class="section" id="oncogene">
+  <div class="section-header">
+    <div class="section-number">08</div>
+    <div class="section-title-block">
+      <h2>癌基因、腫瘤抑制基因與細胞凋亡</h2>
+      <div class="en-label">Oncogenes, Tumor Suppressor Genes, and Apoptosis</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💣 癌症的根本原因：訊號調控失控</h3>
+    <p>癌症=<strong>細胞分裂失控</strong>。幾乎所有癌症的直接原因都是<strong>控制細胞分裂的蛋白質發生基因突變</strong>。突變來源：遺傳、環境誘變劑（carcinogen）、高能輻射，或三者混合。</p>
+    <p style="margin-top:10px;">大多數情況下，需要<strong>多個基因突變累積</strong>才能導致完全惡性的腫瘤。</p>
+  </div>
+
+  <div class="two-col">
+    <div class="compare-card compare-card rtk">
+      <h4>🟢 致癌基因（Oncogene）</h4>
+      <p><strong>顯性突變</strong>（一個等位基因突變就夠）<br>
+      原本正常的「原癌基因（proto-oncogene）」發生增益功能（gain-of-function）突變，讓訊號蛋白持續活化——持續發出「分裂！」的指令。</p>
+      <p style="margin-top:10px;"><strong>例子：</strong><br>
+      • Ras 突變（GTPase 活性喪失）<br>
+      • 生長因子受體過量表現<br>
+      • 組成性活化的酪胺酸激酶</p>
+    </div>
+    <div class="compare-card compare-card gpcr">
+      <h4>🔴 腫瘤抑制基因（Tumor Suppressor Gene）</h4>
+      <p><strong>隱性突變</strong>（兩個等位基因都要突變）<br>
+      負責「煞車」的蛋白質失去功能（loss-of-function），解除了對細胞分裂的抑制。</p>
+      <p style="margin-top:10px;"><strong>例子：</strong><br>
+      • p53（「基因組守衛」）<br>
+      • pRb（G₁ 检查點守門員）<br>
+      • APC（大腸癌相關）</p>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <div class="label">🔥 大腸直腸癌的多步驟進展——7個遺傳打擊</div>
+    <div class="flow" style="flex-wrap:wrap; font-size:12px;">
+      <div class="flow-step green" style="font-size:11px;">正常上皮細胞</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:11px;">APC 突變<br>（小腺瘤）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step gold" style="font-size:11px;">ras 突變<br>（中期腺瘤）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step alt" style="font-size:11px;">DCC 突變<br>（晚期腺瘤）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step red" style="font-size:11px;">p53 突變<br>（惡性癌）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="font-size:11px;">轉移</div>
+    </div>
+    <p style="margin-top:10px; font-size:13px;">完整惡性化需至少 7 個遺傳「打擊」（APC×2, DCC×2, p53×2, ras×1）。突變隨年齡累積，因此癌症風險隨年齡上升。<br><strong>早期偵測（如大腸鏡）非常重要！</strong></p>
+  </div>
+
+  <div class="card">
+    <h3>☠️ 細胞凋亡（Apoptosis）——受控的細胞自殺</h3>
+    <p><span class="big-keyword">細胞凋亡</span>是細胞按照「程序」有計劃地消滅自己，不同於細胞壞死（necrosis，混亂的細胞死亡）。凋亡後的產物（胺基酸、核苷酸）可被鄰近細胞回收再用。</p>
+
+    <div style="margin-top:16px;">
+      <strong>觸發凋亡的情形：</strong>
+      <div class="pill-group">
+        <span class="pill red">DNA 損傷無法修復</span>
+        <span class="pill blue">胚胎發育的組織塑形</span>
+        <span class="pill green">消滅自身免疫細胞</span>
+        <span class="pill gold">病毒感染的細胞</span>
+        <span class="pill dark">月經週期</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <strong>外源性凋亡路徑（TNFα 觸發）：</strong>
+      <div class="flow" style="font-size:13px; margin-top:10px; flex-wrap:wrap;">
+        <div class="flow-step red" style="font-size:12px;">TNFα 結合<br>死亡受體</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="font-size:12px;">TRADD<br>活化</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step alt" style="font-size:12px;">Caspase-8<br>活化</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step gold" style="font-size:12px;">Cytochrome c<br>從粒線體釋出</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step red" style="font-size:12px;">Caspase-9→<br>3,6,7 活化</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="font-size:12px;">蛋白質&DNA<br>系統性降解</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="success-box">
+    <div class="label">📝 穩定性基因（Stability Genes）</div>
+    第三類與癌症相關的基因——負責 <strong>DNA 修復</strong>。當穩定性基因突變時，其他突變（包括癌基因和腫瘤抑制基因突變）的速率大幅上升，加速癌症進展。
+  </div>
+</section>
+
+<!-- ===== 四種受體類型總比較 ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-number">總結</div>
+    <div class="section-title-block">
+      <h2>四種受體類型一覽表</h2>
+      <div class="en-label">Summary: Four Types of Signaling Receptors</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+    <div class="compare-card gpcr">
+      <h4>① GPCR</h4>
+      <p><strong>G蛋白偶聯受體</strong><br>
+      7 跨膜螺旋 · 人類最多（800種）<br>
+      透過 G 蛋白 → 第二訊息（cAMP/IP₃/Ca²⁺）<br>
+      反應速度：<strong>秒級</strong><br>
+      例：腎上腺素、嗅覺、視覺</p>
+    </div>
+    <div class="compare-card rtk">
+      <h4>② RTK</h4>
+      <p><strong>受體酪胺酸激酶</strong><br>
+      1 跨膜段 · 自磷酸化活化<br>
+      透過 Ras-MAPK、PI3K-Akt 路徑<br>
+      反應速度：<strong>分鐘至小時</strong><br>
+      例：胰島素、EGF、生長因子</p>
+    </div>
+    <div class="compare-card ion">
+      <h4>③ 離子通道</h4>
+      <p><strong>Gate Ion Channel</strong><br>
+      配體門控 / 電壓門控<br>
+      直接改變膜電位<br>
+      反應速度：<strong>毫秒級</strong>（最快！）<br>
+      例：乙醯膽鹼受體、視覺、觸覺</p>
+    </div>
+    <div class="compare-card nuc">
+      <h4>④ 核受體</h4>
+      <p><strong>Nuclear Receptor</strong><br>
+      脂溶性荷爾蒙穿膜直達細胞核<br>
+      結合 HRE → 調控基因轉錄<br>
+      反應速度：<strong>小時至天</strong>（最慢）<br>
+      例：雌激素、cortisol、維生素D</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="section" id="quiz">
+  <div class="quiz-section">
+    <h2>🧠 自我測驗——點選查看答案</h2>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">Q1. 訊號傳遞系統的「放大性」是什麼意思？舉例說明。</div>
+      <div class="quiz-a">訊號傳遞中，一個初始訊號可以被大量放大。這是因為訊號路徑中每一步都是酵素催化反應——一個被活化的酵素可以作用於許多分子，形成「酵素級聯（enzyme cascade）」。<br><br>例子：1 個腎上腺素分子 → 活化 10 個 Gα → 腺苷酸環化酶產生 200 個 cAMP → 活化 100 個 PKA → 最終釋放出 100,000 個葡萄糖，放大了 10 萬倍。</div>
+      <div class="quiz-toggle">▼ 點我看答案</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">Q2. G蛋白為什麼被稱為「自限開關（self-limiting switch）」？</div>
+      <div class="quiz-a">G 蛋白在被 GEF（如活化的受體）催化換上 GTP 而活化後，會持續活化下游效應酵素。但 G 蛋白本身具有 GTPase 活性，能緩慢地把 GTP 水解成 GDP，讓自己回到非活化狀態——所以它是「自動計時的開關」，不需要外來訊號就能關閉。GAP 蛋白可以大幅加速這個關閉過程（最多 10⁵ 倍）。</div>
+      <div class="quiz-toggle">▼ 點我看答案</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">Q3. 為什麼視覺用 cGMP「下降」來傳遞光的訊號，而不是 cGMP「上升」？</div>
+      <div class="quiz-a">這是因為視桿細胞在<strong>暗處</strong>時，cGMP 濃度高，cGMP 依賴的離子通道持續開啟，Na⁺/Ca²⁺ 持續流入（「暗電流」），細胞維持去極化狀態，持續釋放神經傳遞物質。<br><br>當光照射時，Rhodopsin 活化 → 轉導素（Tα）→ cGMP 磷酸二酯酶 → cGMP 迅速降低 → 離子通道關閉 → 細胞超極化 → 停止釋放神經傳遞物質 → 這個「停止」的訊號就是「看到光」的訊號傳向大腦。</div>
+      <div class="quiz-toggle">▼ 點我看答案</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">Q4. Ras 突變為什麼會導致癌症？</div>
+      <div class="quiz-a">正常 Ras 在接收到訊號後結合 GTP 而活化，促進細胞分裂；之後它的 GTPase 活性水解 GTP→GDP，使自己關閉。GAP（GTPase 活化蛋白）可以幫助加速此關閉。<br><br>但在許多癌症中，Ras 的 GTPase 活性因突變（通常在 GTP 結合位點附近）而幾乎消失，且 GAP 也無法使突變 Ras 失活。結果：Ras 永遠「卡」在活化狀態，持續傳送「細胞快分裂！」的訊號，導致不受控的細胞增殖與腫瘤形成。約 25% 的人類癌症都有 Ras 突變。</div>
+      <div class="quiz-toggle">▼ 點我看答案</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">Q5. 解釋 pRb 如何作為 G₁→S 的「分子門鎖」，以及 p53 如何在 DNA 損傷時啟動緊急剎車。</div>
+      <div class="quiz-a"><strong>pRb（視網膜母細胞瘤蛋白）的門鎖機制：</strong><br>
+      • 未磷酸化的 pRb 與轉錄因子 E2F 結合，阻止 E2F 啟動 DNA 合成所需酵素的基因 → 細胞無法進入 S 期<br>
+      • Cyclin E–CDK2 磷酸化 pRb → pRb 構形改變，釋放 E2F → E2F 啟動 DNA 合成基因 → 細胞進入 S 期<br><br>
+      <strong>p53 的緊急剎車：</strong><br>
+      DNA 損傷 → MRN 複合體偵測 → ATM/ATR 磷酸化 p53 → 活化的 p53 誘導 p21 合成 → p21 抑制 CDK2 → pRb 不被磷酸化 → E2F 繼續被抑制 → 細胞週期阻滯在 G₁ → 給細胞時間修復 DNA。若損傷無法修復，p53 路徑觸發細胞凋亡。</div>
+      <div class="quiz-toggle">▼ 點我看答案</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">Q6. 致癌基因（oncogene）的突變是「顯性」，腫瘤抑制基因突變是「隱性」——為什麼？</div>
+      <div class="quiz-a"><strong>致癌基因（顯性）：</strong>原癌基因發生<strong>增益功能突變</strong>，使蛋白質持續活化，即使另一個等位基因還是正常的，只要一個突變就能持續發出「分裂」訊號。就像有人按住了油門，只要一隻腳就夠了。<br><br>
+      <strong>腫瘤抑制基因（隱性）：</strong>這些基因的產物是「煞車」，只要還有一個正常等位基因，就有足夠的煞車蛋白質維持正常抑制。必須<strong>兩個等位基因都突變</strong>（喪失功能），才會失去抑制能力——即「二次打擊假說（two-hit hypothesis）」。</div>
+      <div class="quiz-toggle">▼ 點我看答案</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY TERMS ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-number">📖</div>
+    <div class="section-title-block">
+      <h2>重要名詞速查</h2>
+      <div class="en-label">Key Terms Flash Reference</div>
+    </div>
+  </div>
+  <table class="styled-table">
+    <thead><tr><th>中文</th><th>英文</th><th>簡要說明</th></tr></thead>
+    <tbody>
+      <tr><td>訊號傳遞</td><td>Signal Transduction</td><td>把外部訊號轉換為細胞內化學變化</td></tr>
+      <tr><td>G蛋白偶聯受體</td><td>GPCR</td><td>7跨膜螺旋，透過G蛋白傳訊</td></tr>
+      <tr><td>第二訊息</td><td>Second Messenger</td><td>胞內傳遞訊號的小分子（cAMP, IP₃, Ca²⁺等）</td></tr>
+      <tr><td>腺苷酸環化酶</td><td>Adenylyl Cyclase</td><td>將 ATP 轉為 cAMP 的酵素</td></tr>
+      <tr><td>蛋白激酶A</td><td>PKA (cAMP-dependent protein kinase)</td><td>被 cAMP 活化，磷酸化多種目標蛋白</td></tr>
+      <tr><td>去敏感化</td><td>Desensitization</td><td>訊號持續時，受體反應性降低</td></tr>
+      <tr><td>受體酪胺酸激酶</td><td>RTK</td><td>胞內端具酪胺酸激酶活性的膜受體</td></tr>
+      <tr><td>自磷酸化</td><td>Autophosphorylation</td><td>受體磷酸化自身Tyr殘基以活化</td></tr>
+      <tr><td>Ras 蛋白</td><td>Ras</td><td>小型G蛋白，中繼細胞分裂訊號</td></tr>
+      <tr><td>MAPK 級聯</td><td>MAPK Cascade</td><td>Raf→MEK→ERK 的激酶連鎖反應</td></tr>
+      <tr><td>週期素</td><td>Cyclin</td><td>CDK 的調節亞基，週期性合成/降解</td></tr>
+      <tr><td>週期素依賴性激酶</td><td>CDK</td><td>控制細胞週期進程的關鍵激酶</td></tr>
+      <tr><td>視網膜母細胞瘤蛋白</td><td>pRb</td><td>腫瘤抑制蛋白，控制G₁→S轉換</td></tr>
+      <tr><td>p53</td><td>p53 ("guardian of genome")</td><td>腫瘤抑制蛋白，DNA損傷感應器</td></tr>
+      <tr><td>細胞凋亡</td><td>Apoptosis</td><td>程序性細胞死亡，由caspase執行</td></tr>
+      <tr><td>致癌基因</td><td>Oncogene</td><td>突變的原癌基因，持續促進細胞分裂</td></tr>
+      <tr><td>腫瘤抑制基因</td><td>Tumor Suppressor Gene</td><td>抑制細胞分裂的基因，突變促癌</td></tr>
+      <tr><td>荷爾蒙反應元件</td><td>HRE</td><td>DNA 上核受體的結合位點</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</div><!-- end container -->
+
+<footer>
+  <p>根據 Lehninger Principles of Biochemistry (8th ed.) Chapter 12 製作 · 僅供學習用途</p>
+  <p style="margin-top:6px;">Nelson &amp; Cox · W. H. Freeman and Company · 2021</p>
+</footer>
+
+<script>
+function toggleQuiz(el) {
+  const ans = el.querySelector('.quiz-a');
+  const toggle = el.querySelector('.quiz-toggle');
+  ans.classList.toggle('shown');
+  toggle.textContent = ans.classList.contains('shown') ? '▲ 收起答案' : '▼ 點我看答案';
+}
+
+// Fade-in sections on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.section').forEach(s => {
+  s.style.opacity = '0';
+  s.style.transform = 'translateY(24px)';
+  s.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  observer.observe(s);
+});
+</script>
+</body>
+</html>
