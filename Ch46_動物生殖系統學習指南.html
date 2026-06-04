@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第46章：動物生殖系統 | 學習指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2333;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #f0a500;
+    --accent2: #58a6ff;
+    --accent3: #3fb950;
+    --accent4: #ff7b72;
+    --accent5: #bc8cff;
+    --glow: rgba(240,165,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #1a0a2e 50%, #0d1117 100%);
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(240,165,0,0.12), transparent);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(240,165,0,0.4);
+    border-radius: 20px;
+    padding: 5px 16px;
+    margin-bottom: 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 16px auto 0;
+    font-weight: 300;
+  }
+  .hero-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+  }
+  .hero-dots span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .hero-dots span:nth-child(3) { background: var(--accent); }
+
+  /* ─── NAV ─── */
+  .nav-bar {
+    background: rgba(13,17,23,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-bar a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 14px 18px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .nav-bar a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    margin-top: 56px;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.3;
+    line-height: 1;
+    min-width: 60px;
+  }
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
+  }
+  .section-title small {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    font-family: 'Noto Sans TC', sans-serif;
+    border: none;
+    margin-top: 4px;
+  }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    border-color: rgba(240,165,0,0.4);
+    box-shadow: 0 0 24px rgba(240,165,0,0.07);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    border-radius: 3px 0 0 3px;
+  }
+  .card.blue::before { background: var(--accent2); }
+  .card.green::before { background: var(--accent3); }
+  .card.red::before { background: var(--accent4); }
+  .card.purple::before { background: var(--accent5); }
+
+  .card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card.blue h3 { color: var(--accent2); }
+  .card.green h3 { color: var(--accent3); }
+  .card.red h3 { color: var(--accent4); }
+  .card.purple h3 { color: var(--accent5); }
+
+  .card p { color: var(--text); font-size: 0.95rem; line-height: 1.9; }
+
+  /* ─── KEY TERM ─── */
+  .key-term {
+    display: inline-block;
+    background: rgba(240,165,0,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(240,165,0,0.3);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-weight: 700;
+    font-size: 0.92em;
+  }
+
+  /* ─── ALERT BOX ─── */
+  .alert {
+    background: rgba(240,165,0,0.08);
+    border: 1px solid rgba(240,165,0,0.35);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .alert-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .alert-body { flex: 1; }
+  .alert-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .alert p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .alert.blue { background: rgba(88,166,255,0.08); border-color: rgba(88,166,255,0.35); }
+  .alert.blue .alert-title { color: var(--accent2); }
+  .alert.green { background: rgba(63,185,80,0.08); border-color: rgba(63,185,80,0.35); }
+  .alert.green .alert-title { color: var(--accent3); }
+  .alert.red { background: rgba(255,123,114,0.08); border-color: rgba(255,123,114,0.35); }
+  .alert.red .alert-title { color: var(--accent4); }
+
+  /* ─── GRID ─── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ─── MINI CARD ─── */
+  .mini-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .mini-card .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .mini-card .value {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.5;
+  }
+  .mini-card .desc {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* ─── TABLE ─── */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 20px 0;
+  }
+  .styled-table th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .styled-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    line-height: 1.7;
+    vertical-align: top;
+  }
+  .styled-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ─── FLOW DIAGRAM ─── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: thin;
+  }
+  .flow-item {
+    flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+    min-width: 100px;
+  }
+  .flow-item.highlight {
+    background: rgba(240,165,0,0.15);
+    border-color: rgba(240,165,0,0.5);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .flow-arrow {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    padding: 0 6px;
+  }
+
+  /* ─── HORMONE TABLE ─── */
+  .hormone-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 1px;
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 0.88rem;
+  }
+  .hormone-row.header { background: var(--surface2); }
+  .hormone-cell {
+    background: var(--surface);
+    padding: 12px 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .hormone-row.header .hormone-cell {
+    background: var(--surface2);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  @media (max-width: 640px) {
+    .hormone-row { grid-template-columns: 1fr 1fr; }
+    .hormone-row.header .hormone-cell:nth-child(n+3) { display: none; }
+  }
+
+  /* ─── CYCLE TIMELINE ─── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent3));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -27px;
+    top: 4px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .tl-item:nth-child(2) .tl-dot { background: var(--accent2); box-shadow: 0 0 0 2px var(--accent2); }
+  .tl-item:nth-child(3) .tl-dot { background: var(--accent3); box-shadow: 0 0 0 2px var(--accent3); }
+  .tl-item:nth-child(4) .tl-dot { background: var(--accent5); box-shadow: 0 0 0 2px var(--accent5); }
+  .tl-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .tl-item:nth-child(2) .tl-label { color: var(--accent2); }
+  .tl-item:nth-child(3) .tl-label { color: var(--accent3); }
+  .tl-item:nth-child(4) .tl-label { color: var(--accent5); }
+  .tl-text { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+
+  /* ─── IMPORTANT STAMP ─── */
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,123,114,0.12);
+    color: var(--accent4);
+    border: 1px solid rgba(255,123,114,0.35);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  /* ─── QUIZ ─── */
+  .quiz-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+  }
+  .quiz-q {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+  }
+  .quiz-opt:hover { border-color: var(--accent2); color: var(--text); }
+  .quiz-opt.correct { background: rgba(63,185,80,0.1); border-color: var(--accent3); color: var(--accent3); }
+  .quiz-opt.wrong { background: rgba(255,123,114,0.1); border-color: var(--accent4); color: var(--accent4); }
+  .quiz-opt-key {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .quiz-feedback {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: rgba(63,185,80,0.1); color: var(--accent3); border: 1px solid rgba(63,185,80,0.3); }
+  .quiz-feedback.no { background: rgba(255,123,114,0.1); color: var(--accent4); border: 1px solid rgba(255,123,114,0.3); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0 0;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .container > * { animation: fadeUp 0.5s ease both; }
+
+  /* ─── SUMMARY GRID ─── */
+  .concept-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .concept-pill-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.5;
+    line-height: 1;
+    min-width: 32px;
+  }
+  .concept-pill-body { flex: 1; }
+  .concept-pill-title { font-weight: 700; font-size: 0.88rem; color: #fff; margin-bottom: 4px; }
+  .concept-pill-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+  ul.fancy-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  ul.fancy-list li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.7;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  ul.fancy-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-badge">BIOLOGY · UNIT 7 · CHAPTER 46</div>
+  <h1>動物<span>生殖系統</span></h1>
+  <p class="hero-sub">從最簡單的無性生殖，到複雜的哺乳類賀爾蒙調控——一步步帶你讀懂生命的傳承</p>
+  <div class="hero-dots">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav class="nav-bar">
+  <a href="#overview">總覽</a>
+  <a href="#asexual">無性生殖</a>
+  <a href="#sexual">有性生殖</a>
+  <a href="#fertilization">受精</a>
+  <a href="#anatomy">生殖器官</a>
+  <a href="#gametogenesis">配子形成</a>
+  <a href="#hormones">賀爾蒙</a>
+  <a href="#pregnancy">妊娠</a>
+  <a href="#contraception">避孕</a>
+  <a href="#quiz">自我測驗</a>
+</nav>
+
+<div class="container">
+
+<!-- ─── OVERVIEW ─── -->
+<div id="overview" class="section-header" style="margin-top:0">
+  <div class="section-num">00</div>
+  <div>
+    <div class="section-title">本章核心概念
+      <small>5 BIG IDEAS · KEY CONCEPTS OVERVIEW</small>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="concept-pill"><div class="concept-pill-num">1</div><div class="concept-pill-body"><div class="concept-pill-title">無性 &amp; 有性生殖</div><div class="concept-pill-desc">動物兩種主要繁殖方式，各有優缺點與適用情境</div></div></div>
+  <div class="concept-pill"><div class="concept-pill-num">2</div><div class="concept-pill-body"><div class="concept-pill-title">受精機制</div><div class="concept-pill-desc">體外受精 vs 體內受精；費洛蒙與配偶行為的角色</div></div></div>
+  <div class="concept-pill"><div class="concept-pill-num">3</div><div class="concept-pill-body"><div class="concept-pill-title">生殖器官解剖</div><div class="concept-pill-desc">人類男女生殖構造，以及精子 / 卵子的製造過程</div></div></div>
+  <div class="concept-pill"><div class="concept-pill-num">4</div><div class="concept-pill-body"><div class="concept-pill-title">賀爾蒙調控</div><div class="concept-pill-desc">下視丘→腦垂體→性腺軸，卵巢週期與子宮週期</div></div></div>
+</div>
+<div class="concept-pill" style="margin-top:16px"><div class="concept-pill-num">5</div><div class="concept-pill-body"><div class="concept-pill-title">胎盤哺乳動物的胚胎發育</div><div class="concept-pill-desc">受精→著床→三個孕期的器官發育，分娩機制與避孕技術</div></div></div>
+
+<!-- ─── SECTION 1: ASEXUAL ─── -->
+<hr class="divider">
+<div id="asexual" class="section-header">
+  <div class="section-num">01</div>
+  <div>
+    <div class="section-title">無性生殖
+      <small>ASEXUAL REPRODUCTION</small>
+    </div>
+  </div>
+</div>
+
+<div class="alert">
+  <div class="alert-icon">🔑</div>
+  <div class="alert-body">
+    <div class="alert-title">核心定義</div>
+    <p>無性生殖不需要精卵結合，後代基因與親代完全相同（除了突變）。只依賴<strong>有絲分裂</strong>（mitosis）進行，速度快、效率高，但缺乏遺傳多樣性。</p>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h3>🌱 出芽（Budding）</h3>
+    <p>親體長出小個體，如水螅（Hydra）。珊瑚礁靠此形成超過 1 公尺的群落。</p>
+  </div>
+  <div class="card blue">
+    <h3>✂️ 裂殖（Fission）</h3>
+    <p>親體分裂為兩個約等大的個體，常見於扁蟲等無脊椎動物。</p>
+  </div>
+  <div class="card green">
+    <h3>🧩 碎裂再生（Fragmentation）</h3>
+    <p>身體斷裂後，每一碎片各自再生為完整個體。環節動物、海綿、刺絲胞動物均有此能力。</p>
+  </div>
+  <div class="card purple">
+    <h3>🥚 孤雌生殖（Parthenogenesis）</h3>
+    <p>卵未受精即發育。蜜蜂雄蜂（單倍體）即由此而來。科摩多龍、雙髻鯊在無雄性時亦可發生。</p>
+  </div>
+</div>
+
+<div class="alert red">
+  <div class="alert-icon">⚠️</div>
+  <div class="alert-body">
+    <div class="alert-title">重要比較：有性 vs 無性 ── 演化代價</div>
+    <p>有性生殖有「<strong>2倍代價（twofold cost）</strong>」——因為一半後代是雄性（不直接生育），族群成長速度遠慢於無性生殖。但有性生殖透過<strong>基因重組</strong>產生多樣後代，在環境多變（例如病原體威脅）時更有適應優勢。</p>
+  </div>
+</div>
+
+<!-- ─── SECTION 2: SEXUAL ─── -->
+<hr class="divider">
+<div id="sexual" class="section-header">
+  <div class="section-num">02</div>
+  <div>
+    <div class="section-title">有性生殖的多樣性
+      <small>VARIATIONS IN SEXUAL REPRODUCTION</small>
+    </div>
+  </div>
+</div>
+
+<div class="grid3">
+  <div class="mini-card">
+    <div class="label">雌雄同體</div>
+    <div class="value">雌雄同體（Hermaphroditism）</div>
+    <div class="desc">個體同時具備雌雄生殖器，如藤壺、蚌類、海蛞蝓。行動不便的物種藉此確保任何兩個個體都能交配。</div>
+  </div>
+  <div class="mini-card">
+    <div class="label">性別轉換</div>
+    <div class="value">性反轉（Sex Reversal）</div>
+    <div class="desc">藍頭魚（bluehead wrasse）：族群唯一雄魚死亡後，最大的雌魚在一週內轉為雄魚。牡蠣先雄後雌以最大化卵子數量。</div>
+  </div>
+  <div class="mini-card">
+    <div class="label">生殖週期</div>
+    <div class="value">季節性繁殖</div>
+    <div class="desc">賀爾蒙分泌受環境（光照、溫度）觸發。母羊秋冬排卵，小羊早春出生，存活率最佳。氣候變遷已導致馴鹿族群後代減少 75% 以上。</div>
+  </div>
+</div>
+
+<!-- ─── SECTION 3: FERTILIZATION ─── -->
+<hr class="divider">
+<div id="fertilization" class="section-header">
+  <div class="section-num">03</div>
+  <div>
+    <div class="section-title">受精機制
+      <small>FERTILIZATION</small>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card blue">
+    <h3>🌊 體外受精（External Fertilization）</h3>
+    <p>雌雄將配子釋放至水中，需要<strong>潮濕環境</strong>與<strong>精確的時間同步</strong>。許多魚類、兩棲類採用。集體產卵（spawning）靠化學訊號或環境觸發，如南太平洋磯蟲配合<strong>月相與季節</strong>釋放配子。</p>
+  </div>
+  <div class="card green">
+    <h3>🏠 體內受精（Internal Fertilization）</h3>
+    <p>精子在雌性生殖道中遇卵，適應<strong>陸地乾燥環境</strong>。需複雜配合行為（交配）。後代數較少，但存活率更高（蛋殼保護、胎盤哺育等）。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h3>🧪 費洛蒙（Pheromones）</h3>
+  <p>揮發性小分子化學訊號，個體之間的溝通橋梁。許多雌蟲釋放費洛蒙可被<strong>1公里外的雄蟲偵測到</strong>。人類費洛蒙的存在至今仍有爭議——過去宣稱「室友月經週期同步」的研究，後續統計分析並未支持此結論。</p>
+</div>
+
+<!-- ─── SECTION 4: ANATOMY ─── -->
+<hr class="divider">
+<div id="anatomy" class="section-header">
+  <div class="section-num">04</div>
+  <div>
+    <div class="section-title">人類生殖器官解剖
+      <small>HUMAN REPRODUCTIVE ANATOMY</small>
+    </div>
+  </div>
+</div>
+
+<div class="stamp">⚡ 必考重點</div>
+
+<div class="grid2">
+  <div class="card blue">
+    <h3>♂ 男性生殖系統</h3>
+    <ul class="fancy-list">
+      <li><span class="key-term">睪丸（Testes）</span>：位於陰囊，比體溫低約 2°C，才能正常產精</li>
+      <li><span class="key-term">精細管（Seminiferous Tubules）</span>：精子製造場所</li>
+      <li><span class="key-term">副睪（Epididymis）</span>：精子成熟並獲得運動能力（歷時約3週，管道長6公尺）</li>
+      <li><span class="key-term">輸精管（Vas Deferens）</span>：射精時將精子送往尿道</li>
+      <li><span class="key-term">精囊（Seminal Vesicles）</span>：佔精液60%，含果糖（精子能量來源）</li>
+      <li><span class="key-term">攝護腺（Prostate Gland）</span>：分泌鹼性液體，含抗凝酶和檸檬酸鹽</li>
+      <li><span class="key-term">尿道球腺（Bulbourethral Glands）</span>：射精前分泌黏液，中和尿液酸性</li>
+    </ul>
+  </div>
+  <div class="card purple">
+    <h3>♀ 女性生殖系統</h3>
+    <ul class="fancy-list">
+      <li><span class="key-term">卵巢（Ovaries）</span>：產卵並分泌雌性素與黃體素</li>
+      <li><span class="key-term">輸卵管（Oviduct/Fallopian Tube）</span>：纖毛將卵子送往子宮，受精在此發生</li>
+      <li><span class="key-term">子宮（Uterus）</span>：肌肉厚壁，可擴張容納4公斤胎兒；內膜=子宮內膜</li>
+      <li><span class="key-term">子宮頸（Cervix）</span>：子宮開口，通往陰道</li>
+      <li><span class="key-term">陰道（Vagina）</span>：交配、精子儲存，也是產道</li>
+      <li><span class="key-term">陰蒂（Clitoris）</span>：胚胎與陰莖同源，富含神經末梢</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert blue">
+  <div class="alert-icon">💡</div>
+  <div class="alert-body">
+    <div class="alert-title">記憶口訣：精子的旅途</div>
+    <p>精細管 → 副睪（成熟3週）→ 輸精管 → 射精管 → 尿道 → 體外<br>
+    <strong>「細副輸射尿，一路向前衝！」</strong></p>
+  </div>
+</div>
+
+<!-- ─── SECTION 5: GAMETOGENESIS ─── -->
+<hr class="divider">
+<div id="gametogenesis" class="section-header">
+  <div class="section-num">05</div>
+  <div>
+    <div class="section-title">配子形成
+      <small>GAMETOGENESIS</small>
+    </div>
+  </div>
+</div>
+
+<div class="stamp">⚡ 必考重點</div>
+
+<div class="grid2">
+  <div class="card blue">
+    <h3>🔵 精子形成（Spermatogenesis）</h3>
+    <ul class="fancy-list">
+      <li>終生持續製造，每天數億個</li>
+      <li>1個初級精母細胞 → <strong>4個精子</strong>（減數分裂）</li>
+      <li>精原細胞（2n）→ 初級精母細胞（2n）→ 次級精母細胞（n）→ 精細胞（n）→ 精子（n）</li>
+      <li>精子構造：頭部（細胞核 + 頂體）+ 頸部 + 中段（粒線體）+ 尾（鞭毛）</li>
+      <li><span class="key-term">頂體（Acrosome）</span>：含穿透卵子的酵素</li>
+    </ul>
+  </div>
+  <div class="card purple">
+    <h3>🔴 卵子形成（Oogenesis）</h3>
+    <ul class="fancy-list">
+      <li>出生前已形成約 <strong>100~200萬個</strong>初級卵母細胞，並停在第一次減數分裂前期</li>
+      <li>青春期起每月FSH刺激數個濾泡，通常只<strong>一個</strong>完全成熟</li>
+      <li>1個初級卵母細胞 → <strong>1個卵子 + 3個極體（退化）</strong></li>
+      <li>不等量細胞質分配：幾乎所有細胞質給卵子，確保足夠養分</li>
+      <li>排卵時釋放的是「次級卵母細胞」，精子進入後才完成減數分裂II</li>
+      <li>約50歲停止排卵（<span class="key-term">停經 Menopause</span>）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h3>📊 精子形成 vs 卵子形成比較表</h3>
+  <table class="styled-table">
+    <tr>
+      <th>項目</th>
+      <th>精子形成</th>
+      <th>卵子形成</th>
+    </tr>
+    <tr>
+      <td>開始時間</td>
+      <td>青春期後持續進行</td>
+      <td>胚胎期即開始，停止於出生前</td>
+    </tr>
+    <tr>
+      <td>持續性</td>
+      <td>連續不斷（終生）</td>
+      <td>週期性，約50歲停止</td>
+    </tr>
+    <tr>
+      <td>每次減數分裂產物</td>
+      <td><strong>4個精子</strong></td>
+      <td><strong>1個卵子 + 3個極體</strong></td>
+    </tr>
+    <tr>
+      <td>細胞質分配</td>
+      <td>均等</td>
+      <td>不等（幾乎全給卵子）</td>
+    </tr>
+    <tr>
+      <td>減數分裂是否中斷</td>
+      <td>無</td>
+      <td>有（出生前停在M1前期；排卵停在M2中期）</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ─── SECTION 6: HORMONES ─── -->
+<hr class="divider">
+<div id="hormones" class="section-header">
+  <div class="section-num">06</div>
+  <div>
+    <div class="section-title">賀爾蒙調控
+      <small>HORMONAL REGULATION</small>
+    </div>
+  </div>
+</div>
+
+<div class="stamp">⚡ 必考重點</div>
+
+<div class="alert">
+  <div class="alert-icon">🧠</div>
+  <div class="alert-body">
+    <div class="alert-title">指揮鏈：下視丘 → 腦垂體 → 性腺</div>
+    <p>所有生殖活動由這條軸線控制。記住三個關鍵荷爾蒙的縮寫與全稱！</p>
+  </div>
+</div>
+
+<!-- Flow -->
+<div class="flow">
+  <div class="flow-item highlight">下視丘<br><small>Hypothalamus</small></div>
+  <div class="flow-arrow">→ <small style="font-size:0.7rem;color:var(--accent)">GnRH</small> →</div>
+  <div class="flow-item">腦垂體前葉<br><small>Ant. Pituitary</small></div>
+  <div class="flow-arrow">→ <small style="font-size:0.7rem;color:var(--accent2)">FSH / LH</small> →</div>
+  <div class="flow-item">性腺<br><small>Gonads</small></div>
+  <div class="flow-arrow">→ <small style="font-size:0.7rem;color:var(--accent5)">T / E2 / P4</small> →</div>
+  <div class="flow-item highlight">生理效應<br><small>Effects</small></div>
+</div>
+
+<div class="hormone-row header" style="border-radius:8px 8px 0 0; margin-top:20px;">
+  <div class="hormone-cell">賀爾蒙</div>
+  <div class="hormone-cell">來源</div>
+  <div class="hormone-cell">雄性作用</div>
+  <div class="hormone-cell">雌性作用</div>
+</div>
+<div class="hormone-row">
+  <div class="hormone-cell"><strong style="color:var(--accent)">GnRH</strong><br><small>促性腺素釋放素</small></div>
+  <div class="hormone-cell">下視丘</div>
+  <div class="hormone-cell">刺激腦垂體釋放 FSH &amp; LH</div>
+  <div class="hormone-cell">同左</div>
+</div>
+<div class="hormone-row">
+  <div class="hormone-cell"><strong style="color:var(--accent2)">FSH</strong><br><small>濾泡刺激素</small></div>
+  <div class="hormone-cell">腦垂體前葉</div>
+  <div class="hormone-cell">刺激塞特利細胞（Sertoli cells）→ 精子發育</div>
+  <div class="hormone-cell">刺激濾泡發育，細胞分泌雌二醇</div>
+</div>
+<div class="hormone-row">
+  <div class="hormone-cell"><strong style="color:var(--accent2)">LH</strong><br><small>黃體化激素</small></div>
+  <div class="hormone-cell">腦垂體前葉</div>
+  <div class="hormone-cell">刺激萊迪希細胞（Leydig cells）→ 分泌睪固酮</div>
+  <div class="hormone-cell">LH 急升 → 觸發排卵；刺激黃體形成</div>
+</div>
+<div class="hormone-row">
+  <div class="hormone-cell"><strong style="color:var(--accent5)">睪固酮（T）</strong></div>
+  <div class="hormone-cell">睪丸</div>
+  <div class="hormone-cell">促精子形成、第二性徵（聲音、肌肉、體毛）</div>
+  <div class="hormone-cell">微量，影響性慾</div>
+</div>
+<div class="hormone-row">
+  <div class="hormone-cell"><strong style="color:var(--accent4)">雌二醇（E2）</strong></div>
+  <div class="hormone-cell">卵巢濾泡</div>
+  <div class="hormone-cell">微量</div>
+  <div class="hormone-cell">子宮內膜增厚、第二性徵（乳房、體型）</div>
+</div>
+<div class="hormone-row" style="border-radius:0 0 8px 8px;">
+  <div class="hormone-cell"><strong style="color:var(--accent3)">黃體素（P4）</strong></div>
+  <div class="hormone-cell">黃體（Corpus Luteum）</div>
+  <div class="hormone-cell">微量</div>
+  <div class="hormone-cell">維持子宮內膜供著床；若未懷孕則黃體退化</div>
+</div>
+
+<div class="section-header" style="margin-top:40px;">
+  <div class="section-num" style="font-size:1.5rem;opacity:0.5">6.1</div>
+  <div><div class="section-title" style="font-size:1.1rem;">28天卵巢週期 &amp; 子宮週期</div></div>
+</div>
+
+<div class="grid2">
+  <div class="card blue">
+    <h3>🔵 卵巢週期（Ovarian Cycle）</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Day 1–14：濾泡期（Follicular Phase）</div>
+        <div class="tl-text">FSH → 濾泡發育 → 雌二醇緩升 → 低濃度時抑制FSH/LH（負回饋），高濃度時反而刺激LH急升（正回饋）</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Day 14：排卵（Ovulation）</div>
+        <div class="tl-text">LH急升後約24小時，濾泡破裂，次級卵母細胞被釋放進輸卵管</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Day 15–28：黃體期（Luteal Phase）</div>
+        <div class="tl-text">LH → 殘留濾泡組織形成黃體 → 分泌E2 + P4 → 抑制FSH/LH（負回饋）若未懷孕 → 黃體退化 → E2/P4驟降</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">週期重啟</div>
+        <div class="tl-text">賀爾蒙降低解除負回饋 → FSH再度上升 → 新濾泡開始發育</div>
+      </div>
+    </div>
+  </div>
+  <div class="card purple">
+    <h3>🔴 子宮週期（Uterine / Menstrual Cycle）</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Day 1–5：月經期（Menstrual Flow）</div>
+        <div class="tl-text">E2/P4 驟降 → 子宮動脈收縮 → 子宮內膜崩解脫落 → 月經</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Day 6–14：增生期（Proliferative）</div>
+        <div class="tl-text">濾泡分泌E2 → 子宮內膜增厚，血管增生</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Day 15–28：分泌期（Secretory）</div>
+        <div class="tl-text">黃體分泌P4 → 子宮腺體分泌滋養液，為著床做準備</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">月經週期 vs 動情週期</div>
+        <div class="tl-text">只有人類與部分靈長類有「月經週期」（子宮內膜脫落）。其他哺乳類為「動情週期」（內膜被重新吸收，性接受期限於排卵前後）。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SECTION 7: PREGNANCY ─── -->
+<hr class="divider">
+<div id="pregnancy" class="section-header">
+  <div class="section-num">07</div>
+  <div>
+    <div class="section-title">妊娠與胚胎發育
+      <small>PREGNANCY & EMBRYONIC DEVELOPMENT</small>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>🥚 受精到著床</h3>
+  <div class="flow" style="flex-wrap:wrap; gap:8px; padding:12px 0;">
+    <div class="flow-item highlight" style="font-size:0.8rem;">排卵</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item" style="font-size:0.8rem;">受精（輸卵管）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item" style="font-size:0.8rem;">卵裂（24h）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item" style="font-size:0.8rem;">囊胚（4天）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item highlight" style="font-size:0.8rem;">著床（第7天）</div>
+  </div>
+  <p style="margin-top:8px; font-size:0.88rem; color:var(--text-muted);">囊胚（blastocyst）外層為滋養層（trophoblast），將發育為胎盤。</p>
+</div>
+
+<div class="grid3">
+  <div class="mini-card">
+    <div class="label">第一孕期（0–13週）</div>
+    <div class="value">器官形成期</div>
+    <div class="desc">所有主要器官雛形出現。胚胎分泌 <strong>hCG</strong> 維持黃體，防止月經。第8週起稱「胎兒」，全長約5公分。</div>
+  </div>
+  <div class="mini-card">
+    <div class="label">第二孕期（14–26週）</div>
+    <div class="value">快速成長期</div>
+    <div class="desc">胎兒成長至約30公分。外耳、指甲、外生殖器發育。母親可感受到胎動。胎盤完全接管黃體素分泌。</div>
+  </div>
+  <div class="mini-card">
+    <div class="label">第三孕期（27–38週）</div>
+    <div class="value">增重期</div>
+    <div class="desc">胎兒成長至3–4公斤、50公分。子宮壓迫腹腔器官。分娩前胎動可能減少。</div>
+  </div>
+</div>
+
+<div class="card green">
+  <h3>🤱 分娩機制（Positive Feedback）</h3>
+  <p>分娩是教科書等級的<strong>正回饋</strong>典範：</p>
+  <ul class="fancy-list" style="margin-top:10px;">
+    <li>雌二醇增加子宮對催產素（oxytocin）的感受性</li>
+    <li>催產素刺激子宮收縮 → 壓力刺激更多催產素分泌</li>
+    <li>前列腺素（prostaglandins）進一步加強收縮</li>
+    <li>胎兒娩出後正回饋中止</li>
+  </ul>
+  <div style="margin-top:14px; padding:12px; background:var(--bg); border-radius:8px; font-size:0.85rem; color:var(--text-muted);">
+    <strong style="color:var(--accent3)">分娩三階段：</strong> ①子宮頸擴張 → ②胎兒娩出 → ③胎盤娩出
+  </div>
+</div>
+
+<div class="card red">
+  <h3>🛡️ 胎盤（Placenta）的功能</h3>
+  <p>胎盤是母胎之間的交換介面。兩者血液<strong>不直接混合</strong>，而是透過絨毛（chorionic villi）進行擴散交換：</p>
+  <ul class="fancy-list" style="margin-top:10px;">
+    <li>O₂ 和養分從母血 → 胎兒血</li>
+    <li>CO₂ 和代謝廢物從胎兒血 → 母血</li>
+    <li>免疫球蛋白（抗體）傳給胎兒</li>
+    <li>酒精、藥物、病毒也可能穿越！（胎兒酒精症候群）</li>
+  </ul>
+</div>
+
+<!-- ─── SECTION 8: CONTRACEPTION ─── -->
+<hr class="divider">
+<div id="contraception" class="section-header">
+  <div class="section-num">08</div>
+  <div>
+    <div class="section-title">避孕與輔助生殖技術
+      <small>CONTRACEPTION & REPRODUCTIVE TECHNOLOGIES</small>
+    </div>
+  </div>
+</div>
+
+<table class="styled-table">
+  <tr>
+    <th>方式</th>
+    <th>機制</th>
+    <th>效果</th>
+  </tr>
+  <tr>
+    <td><strong>保險套（Condom）</strong></td>
+    <td>物理阻隔精卵接觸</td>
+    <td>同時預防 STI，唯一有效阻絕 AIDS 的避孕工具</td>
+  </tr>
+  <tr>
+    <td><strong>口服避孕藥（OCP）</strong></td>
+    <td>合成雌素＋黃體素 → 模擬負回饋 → 抑制FSH/LH → 阻止排卵</td>
+    <td>懷孕率 &lt;1%</td>
+  </tr>
+  <tr>
+    <td><strong>子宮內避孕器（IUD）</strong></td>
+    <td>干擾受精與著床</td>
+    <td>懷孕率 &lt;1%，最廣泛的可逆避孕</td>
+  </tr>
+  <tr>
+    <td><strong>輸卵管結紮（Tubal Ligation）</strong></td>
+    <td>封堵輸卵管，卵子無法進入子宮</td>
+    <td>永久性（可嘗試顯微手術逆轉）</td>
+  </tr>
+  <tr>
+    <td><strong>輸精管結紮（Vasectomy）</strong></td>
+    <td>切斷輸精管，精液中不含精子</td>
+    <td>不影響性荷爾蒙分泌與性功能</td>
+  </tr>
+  <tr>
+    <td><strong>試管嬰兒（IVF）</strong></td>
+    <td>體外受精後植入子宮</td>
+    <td>解決不孕問題，全球逾百萬嬰兒藉此出生</td>
+  </tr>
+</table>
+
+<div class="alert red">
+  <div class="alert-icon">⚠️</div>
+  <div class="alert-body">
+    <div class="alert-title">重要提醒：口服避孕藥的副作用</div>
+    <p>口服避孕藥稍微提高心血管疾病風險（吸菸者風險增加3–10倍）。但同時降低卵巢癌與子宮內膜癌風險，整體孕產婦死亡率下降。<br>目前<strong>尚無男性賀爾蒙避孕藥</strong>上市。</p>
+  </div>
+</div>
+
+<!-- ─── QUIZ ─── -->
+<hr class="divider">
+<div id="quiz" class="section-header">
+  <div class="section-num">★</div>
+  <div>
+    <div class="section-title">自我測驗
+      <small>TEST YOUR UNDERSTANDING · 點選作答</small>
+    </div>
+  </div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q">Q1 下列何者正確描述孤雌生殖（Parthenogenesis）？</div>
+  <div class="quiz-options">
+    <div class="quiz-opt" onclick="answer(this,'wrong','孤雌生殖不涉及性別轉換，性反轉是另一種現象。')"><div class="quiz-opt-key">A</div>個體可在一生中改變性別</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','這是描述出芽或碎裂再生的無性生殖方式。')"><div class="quiz-opt-key">B</div>特化細胞群生長為新個體</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','先雄後雌是牡蠣等物種的性反轉現象，不是孤雌生殖。')"><div class="quiz-opt-key">C</div>個體先為雄性再成為雌性</div>
+    <div class="quiz-opt" onclick="answer(this,'correct','正確！孤雌生殖就是未受精卵直接發育成個體。蜜蜂雄蜂、科摩多龍皆為例子。')"><div class="quiz-opt-key">D</div>未受精的卵直接發育</div>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q">Q2 在哺乳類雄性中，排精管（ejaculatory duct）接受來自哪兩個來源的分泌物？</div>
+  <div class="quiz-options">
+    <div class="quiz-opt" onclick="answer(this,'correct','正確！每條輸精管（vas deferens）與精囊（seminal vesicle）匯合形成射精管。')"><div class="quiz-opt-key">A</div>輸精管（Vas Deferens）+ 精囊（Seminal Vesicle）</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','攝護腺直接開口於尿道，不形成射精管。')"><div class="quiz-opt-key">B</div>副睪 + 攝護腺</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','尿道球腺是在尿道下方的獨立腺體。')"><div class="quiz-opt-key">C</div>精細管 + 尿道球腺</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','陰囊只是包覆睪丸的組織，不是腺體。')"><div class="quiz-opt-key">D</div>副睪 + 陰囊</div>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q">Q3 LH 和 FSH 的分泌出現峰值，是在月經週期的哪個時間點？</div>
+  <div class="quiz-options">
+    <div class="quiz-opt" onclick="answer(this,'wrong','月經期間，FSH/LH 濃度較低。')"><div class="quiz-opt-key">A</div>月經出血期</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','濾泡期初始 FSH/LH 仍低，隨後緩慢上升。')"><div class="quiz-opt-key">B</div>濾泡期剛開始時</div>
+    <div class="quiz-opt" onclick="answer(this,'correct','正確！排卵前高濃度雌二醇觸發正回饋，導致 LH（與 FSH）急升，引發排卵。')"><div class="quiz-opt-key">C</div>排卵前（正回饋引發的急升）</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','分泌期（黃體期）黃體分泌的E2+P4 對 FSH/LH 產生負回饋，濃度下降。')"><div class="quiz-opt-key">D</div>分泌期</div>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q">Q4 人類妊娠中，所有主要器官的雛形完成發育是在哪個時期？</div>
+  <div class="quiz-options">
+    <div class="quiz-opt" onclick="answer(this,'correct','正確！第一孕期（前13週）是器官形成期（organogenesis），此時胚胎最易受酒精等有害物質影響。')"><div class="quiz-opt-key">A</div>第一孕期（前13週）</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','第二孕期以發育和成長為主，器官雛形已在第一孕期形成。')"><div class="quiz-opt-key">B</div>第二孕期</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','第三孕期主要是胎兒增重、臟器成熟。')"><div class="quiz-opt-key">C</div>第三孕期</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','囊胚階段還在著床前，尚未開始器官形成。')"><div class="quiz-opt-key">D</div>囊胚（blastocyst）階段</div>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+<div class="quiz-item">
+  <div class="quiz-q">Q5 合體口服避孕藥（含合成雌素＋黃體素）防止懷孕的主要機制是？</div>
+  <div class="quiz-options">
+    <div class="quiz-opt" onclick="answer(this,'wrong','口服避孕藥不殺精子，保險套才有此功能。')"><div class="quiz-opt-key">A</div>殺死進入子宮的精子</div>
+    <div class="quiz-opt" onclick="answer(this,'correct','正確！合成雌素＋黃體素模擬「已懷孕」的負回饋，抑制GnRH，進而抑制FSH/LH，阻止排卵與濾泡發育。')"><div class="quiz-opt-key">B</div>模擬負回饋，抑制 GnRH → 抑制 FSH/LH → 阻止排卵</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','IUD 才是透過干擾著床，口服藥主要靠抑制排卵。')"><div class="quiz-opt-key">C</div>直接破壞子宮內膜防止著床</div>
+    <div class="quiz-opt" onclick="answer(this,'wrong','避孕藥不影響輸卵管纖毛功能。')"><div class="quiz-opt-key">D</div>使輸卵管纖毛停止運動</div>
+  </div>
+  <div class="quiz-feedback"></div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  本學習指南依據 Campbell Biology Chapter 46 改編，僅供學習參考<br>
+  Animal Reproduction · Biology Study Guide · 生物學習手冊
+</footer>
+
+<script>
+function answer(el, result, explanation) {
+  const parent = el.closest('.quiz-item');
+  const opts = parent.querySelectorAll('.quiz-opt');
+  const fb = parent.querySelector('.quiz-feedback');
+
+  // disable all
+  opts.forEach(o => {
+    o.style.pointerEvents = 'none';
+    o.style.opacity = '0.6';
+  });
+  el.style.opacity = '1';
+  el.classList.add(result);
+
+  fb.textContent = (result === 'correct' ? '✅ ' : '❌ ') + explanation;
+  fb.className = 'quiz-feedback show ' + (result === 'correct' ? 'ok' : 'no');
+}
+</script>
+</body>
+</html>
