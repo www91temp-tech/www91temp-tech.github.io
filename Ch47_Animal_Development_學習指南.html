@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第47章｜動物的發育 — 學習指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #141820;
+    --surface2: #1c2330;
+    --border: #2a3448;
+    --text: #e8eaf0;
+    --muted: #8a94aa;
+    --accent-blue: #4a9eff;
+    --accent-green: #3ecf8e;
+    --accent-orange: #ff9a3c;
+    --accent-red: #ff5f6d;
+    --accent-purple: #c084fc;
+    --accent-yellow: #fbbf24;
+    --ecto: #4a9eff;
+    --meso: #3ecf8e;
+    --endo: #ff9a3c;
+    --glow-blue: rgba(74,158,255,0.15);
+    --glow-green: rgba(62,207,142,0.15);
+    --glow-orange: rgba(255,154,60,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: radial-gradient(ellipse at 30% 50%, rgba(74,158,255,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(62,207,142,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(255,154,60,0.06) 0%, transparent 60%),
+                var(--bg);
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(74,158,255,0.05) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(62,207,142,0.05) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .hero-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    background: linear-gradient(135deg, #fff 0%, var(--accent-blue) 50%, var(--accent-green) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-desc {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto 40px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  /* Stage flow diagram */
+  .stage-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 0 auto;
+    max-width: 900px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .stage-item {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .stage-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+    min-width: 110px;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .stage-box:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 24px rgba(74,158,255,0.2);
+  }
+
+  .stage-box .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .stage-box .name {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent-blue);
+  }
+
+  .stage-arrow {
+    color: var(--muted);
+    font-size: 20px;
+    padding: 0 6px;
+    flex-shrink: 0;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    background: rgba(13,15,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-bar::-webkit-scrollbar { display: none; }
+
+  .nav-link {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 16px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+    border-bottom-color: var(--accent-blue);
+  }
+
+  /* ===== SECTION ===== */
+  .section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--accent-blue);
+    color: #000;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .section-num.green { background: var(--accent-green); }
+  .section-num.orange { background: var(--accent-orange); color: #000; }
+
+  .section h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #fff, var(--muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    border-radius: 16px 0 0 16px;
+  }
+
+  .card.blue::before { background: var(--accent-blue); }
+  .card.green::before { background: var(--accent-green); }
+  .card.orange::before { background: var(--accent-orange); }
+  .card.red::before { background: var(--accent-red); }
+  .card.purple::before { background: var(--accent-purple); }
+
+  .card:hover { border-color: var(--accent-blue); }
+
+  .card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card h3 .icon { font-size: 1.2em; }
+
+  .card p { color: #c5cad8; line-height: 1.9; margin-bottom: 10px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ===== HIGHLIGHT BOXES ===== */
+  .highlight {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border: 1px solid;
+    position: relative;
+  }
+
+  .highlight.critical {
+    background: rgba(255,95,109,0.08);
+    border-color: rgba(255,95,109,0.4);
+  }
+
+  .highlight.important {
+    background: rgba(74,158,255,0.08);
+    border-color: rgba(74,158,255,0.4);
+  }
+
+  .highlight.tip {
+    background: rgba(62,207,142,0.08);
+    border-color: rgba(62,207,142,0.4);
+  }
+
+  .highlight-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .highlight.critical .highlight-label { color: var(--accent-red); }
+  .highlight.important .highlight-label { color: var(--accent-blue); }
+  .highlight.tip .highlight-label { color: var(--accent-green); }
+
+  /* ===== KEYWORD ===== */
+  .kw {
+    color: var(--accent-yellow);
+    font-weight: 700;
+  }
+
+  .kw-blue { color: var(--accent-blue); font-weight: 700; }
+  .kw-green { color: var(--accent-green); font-weight: 700; }
+  .kw-orange { color: var(--accent-orange); font-weight: 700; }
+  .kw-red { color: var(--accent-red); font-weight: 700; }
+  .kw-purple { color: var(--accent-purple); font-weight: 700; }
+
+  /* ===== GERM LAYER VISUAL ===== */
+  .germ-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .germ-card {
+    border-radius: 14px;
+    padding: 24px 20px;
+    border: 1px solid;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .germ-card:hover { transform: translateY(-4px); }
+
+  .germ-card.ecto {
+    background: rgba(74,158,255,0.07);
+    border-color: rgba(74,158,255,0.35);
+  }
+  .germ-card.meso {
+    background: rgba(62,207,142,0.07);
+    border-color: rgba(62,207,142,0.35);
+  }
+  .germ-card.endo {
+    background: rgba(255,154,60,0.07);
+    border-color: rgba(255,154,60,0.35);
+  }
+
+  .germ-card .layer-title {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .germ-card.ecto .layer-title { color: var(--ecto); }
+  .germ-card.meso .layer-title { color: var(--meso); }
+  .germ-card.endo .layer-title { color: var(--endo); }
+
+  .germ-card .layer-cn {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .germ-card ul {
+    list-style: none;
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.9;
+    color: #c5cad8;
+  }
+
+  .germ-card ul li::before {
+    content: '▸ ';
+    opacity: 0.6;
+  }
+
+  /* ===== POLYSPERMY DIAGRAM ===== */
+  .poly-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .poly-box {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .poly-box h4 {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .poly-box.fast h4 { color: var(--accent-blue); }
+  .poly-box.slow h4 { color: var(--accent-orange); }
+
+  .poly-box p { font-size: 13px; color: #aab0c0; line-height: 1.8; }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 20px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-blue), var(--accent-green), var(--accent-orange));
+    border-radius: 2px;
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding-left: 20px;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 8px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-blue);
+    background: var(--bg);
+  }
+
+  .tl-item.green::before { border-color: var(--accent-green); }
+  .tl-item.orange::before { border-color: var(--accent-orange); }
+  .tl-item.purple::before { border-color: var(--accent-purple); }
+
+  .tl-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .tl-item.green .tl-title { color: var(--accent-green); }
+  .tl-item.orange .tl-title { color: var(--accent-orange); }
+  .tl-item.purple .tl-title { color: var(--accent-purple); }
+  .tl-item .tl-title { color: var(--accent-blue); }
+
+  .tl-desc { font-size: 14px; color: #aab0c0; line-height: 1.8; }
+
+  /* ===== QUIZ ===== */
+  .quiz-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 24px;
+  }
+
+  .quiz-section h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.2rem;
+    margin-bottom: 24px;
+    color: var(--accent-yellow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .quiz-item {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .quiz-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .quiz-q {
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #e0e4f0;
+    line-height: 1.7;
+  }
+
+  .quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+
+  .quiz-opt {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+    text-align: left;
+  }
+
+  .quiz-opt:hover { border-color: var(--accent-blue); color: var(--text); }
+  .quiz-opt.correct { background: rgba(62,207,142,0.12); border-color: var(--accent-green); color: var(--accent-green); }
+  .quiz-opt.wrong { background: rgba(255,95,109,0.1); border-color: var(--accent-red); color: var(--accent-red); }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 16px 0;
+  }
+
+  .data-table th {
+    background: var(--surface2);
+    color: var(--accent-blue);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent-blue);
+  }
+
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #c5cad8;
+    vertical-align: top;
+  }
+
+  .data-table tr:hover td { background: var(--surface2); }
+
+  /* ===== MEMORY CARD ===== */
+  .mem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .mem-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mem-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-purple);
+    box-shadow: 0 8px 24px rgba(192,132,252,0.15);
+  }
+
+  .mem-card .term {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent-purple);
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .mem-card .def {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ===== ANIMATION ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section { animation: fadeUp 0.5s ease both; }
+
+  /* ===== IMPORTANT BADGE ===== */
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .badge.hot { background: rgba(255,95,109,0.2); color: var(--accent-red); border: 1px solid rgba(255,95,109,0.4); }
+  .badge.key { background: rgba(74,158,255,0.15); color: var(--accent-blue); border: 1px solid rgba(74,158,255,0.3); }
+  .badge.exam { background: rgba(251,191,36,0.15); color: var(--accent-yellow); border: 1px solid rgba(251,191,36,0.3); }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .germ-grid { grid-template-columns: 1fr; }
+    .poly-grid { grid-template-columns: 1fr; }
+    .stage-flow { gap: 8px; }
+    .stage-arrow { display: none; }
+    .hero { padding: 50px 20px 40px; }
+  }
+
+  /* ===== STEP INDICATOR ===== */
+  .steps {
+    counter-reset: step;
+    margin: 20px 0;
+  }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    border: 2px solid;
+  }
+
+  .step-num.blue { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(74,158,255,0.1); }
+  .step-num.green { border-color: var(--accent-green); color: var(--accent-green); background: rgba(62,207,142,0.1); }
+  .step-num.orange { border-color: var(--accent-orange); color: var(--accent-orange); background: rgba(255,154,60,0.1); }
+
+  .step-body { flex: 1; padding-top: 6px; }
+  .step-title { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+  .step-desc { font-size: 14px; color: #aab0c0; line-height: 1.8; }
+
+  .divider { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 32px 0; }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-subtitle">Chapter 47 · Animal Development</div>
+  <h1>動物的發育</h1>
+  <p class="hero-desc">從一顆受精卵，到擁有眼睛、心臟與大腦的複雜生命——這是生命科學中最令人驚嘆的旅程。</p>
+
+  <div class="stage-flow">
+    <div class="stage-item">
+      <div class="stage-box"><div class="num">STAGE 0</div><div class="name">受精</div></div>
+    </div>
+    <div class="stage-arrow">→</div>
+    <div class="stage-item">
+      <div class="stage-box"><div class="num">STAGE 1</div><div class="name">卵裂</div></div>
+    </div>
+    <div class="stage-arrow">→</div>
+    <div class="stage-item">
+      <div class="stage-box"><div class="num">STAGE 2</div><div class="name">原腸化</div></div>
+    </div>
+    <div class="stage-arrow">→</div>
+    <div class="stage-item">
+      <div class="stage-box"><div class="num">STAGE 3</div><div class="name">器官發生</div></div>
+    </div>
+    <div class="stage-arrow">→</div>
+    <div class="stage-item">
+      <div class="stage-box"><div class="num">STAGE 4</div><div class="name">變態</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#s1" class="nav-link">§1 受精</a>
+  <a href="#s2" class="nav-link">§2 卵裂</a>
+  <a href="#s3" class="nav-link">§3 原腸化</a>
+  <a href="#s4" class="nav-link">§4 器官發生</a>
+  <a href="#s5" class="nav-link">§5 細胞命運</a>
+  <a href="#quiz" class="nav-link">✦ 自我測驗</a>
+  <a href="#vocab" class="nav-link">📚 關鍵字表</a>
+</nav>
+
+<div class="container">
+
+<!-- ===== SECTION 1: 受精 ===== -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <span class="section-num">CONCEPT 47.1</span>
+    <h2>受精 Fertilization</h2>
+  </div>
+
+  <div class="highlight important">
+    <div class="highlight-label">💡 核心概念</div>
+    <p>受精 = 精子 + 卵子 → <span class="kw">合子（Zygote）</span>。受精不只是讓精卵結合，還會「啟動」卵子開始一連串發育程序。</p>
+  </div>
+
+  <div class="card blue">
+    <h3><span class="icon">🦔</span>頂體反應（Acrosomal Reaction）<span class="badge exam">考點</span></h3>
+    <p>以海膽為例：當精子頭部接觸到卵子的<span class="kw-blue">果凍層（jelly coat）</span>時，精子尖端的囊泡——<span class="kw">頂體（acrosome）</span>——釋放水解酵素，消化果凍層，讓精子穿透。</p>
+    <p>精子頂端的蛋白質與卵子膜上的受體結合（「鑰匙對鎖孔」），確保物種特異性，避免異種受精。</p>
+  </div>
+
+  <div class="highlight critical">
+    <div class="highlight-label">🚨 超重要：防止多精入卵（Polyspermy）</div>
+    <p>如果多條精子同時進入卵子，染色體數目異常，胚胎必死！身體有<strong>兩道防線</strong>：</p>
+  </div>
+
+  <div class="poly-grid">
+    <div class="poly-box fast">
+      <h4>⚡ 快速阻擋（Fast Block）</h4>
+      <p>精子一接觸卵膜，卵子立刻去極化（Na⁺ 流入），膜電位改變，<strong>1～3 秒</strong>內阻止其他精子融合。時間短暫，是暫時屏障。</p>
+    </div>
+    <div class="poly-box slow">
+      <h4>🛡️ 慢速阻擋（Slow Block / 皮質反應）</h4>
+      <p>卵子皮質顆粒（cortical granules）與細胞膜融合，釋放酵素，使卵黃膜硬化為<strong>受精膜（fertilization envelope）</strong>，形成永久屏障。</p>
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3><span class="icon">🔬</span>Ca²⁺ 的關鍵角色</h3>
+    <p>科學家用螢光染料追蹤發現：精子進入後，<span class="kw-green">鈣離子（Ca²⁺）</span>從內質網釋放，以「波浪」形式擴散全卵。這個 Ca²⁺ 升高，才是觸發皮質反應、形成受精膜的真正訊號。</p>
+    <div class="highlight tip">
+      <div class="highlight-label">🧪 實驗記憶點</div>
+      <p>只需將 Ca²⁺ 直接注入未受精卵，就能人工啟動發育！→ 說明 Ca²⁺ 就是啟動開關。</p>
+    </div>
+  </div>
+
+  <div class="card orange">
+    <h3><span class="icon">🐭</span>哺乳動物的受精</h3>
+    <p>精子須穿過卵泡細胞層，再穿透<span class="kw-orange">透明帶（zona pellucida）</span>，才能與卵子融合。皮質反應改變透明帶結構，作為慢速阻擋。哺乳動物<strong>沒有快速阻擋</strong>（無去極化）。</p>
+    <p>受精後約 <strong>12～36 小時</strong>才開始第一次分裂（海膽只需約 1.5 小時）。</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: 卵裂 ===== -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <span class="section-num">CONCEPT 47.1</span>
+    <h2>卵裂 Cleavage</h2>
+  </div>
+
+  <div class="highlight important">
+    <div class="highlight-label">💡 核心概念</div>
+    <p>卵裂是一連串<span class="kw">快速有絲分裂</span>，細胞數目急增，但<strong>整體體積不變</strong>（沒有細胞生長，略過 G₁ 和 G₂ 期）。目的是讓每顆細胞核有足夠 DNA 驅動發育。</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-title">受精卵 → 囊胚</div>
+      <div class="tl-desc">5～7 次卵裂後，形成<span class="kw-blue">囊胚（Blastula）</span>——充滿液體的空心球，中央空腔稱<span class="kw-blue">囊胚腔（Blastocoel）</span>。分裂後的小細胞稱為<span class="kw-blue">裂球（Blastomeres）</span>。</div>
+    </div>
+    <div class="tl-item green">
+      <div class="tl-title">卵黃影響卵裂模式</div>
+      <div class="tl-desc">卵黃（yolk，儲存的養分）主要在<span class="kw-green">植物極（vegetal pole）</span>堆積，動物極（animal pole）含量少。卵黃會阻礙分裂，讓植物極細胞較大、動物極細胞較小。</div>
+    </div>
+    <div class="tl-item orange">
+      <div class="tl-title">全裂 vs 偏裂</div>
+      <div class="tl-desc"><span class="kw-orange">全裂（Holoblastic）</span>：分裂溝貫穿整個卵（青蛙、海膽、哺乳動物）。<span class="kw-orange">偏裂（Meroblastic）</span>：卵黃太多，只有無卵黃部分分裂（鳥類、爬蟲、昆蟲）。</div>
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>動物</th>
+        <th>卵黃量</th>
+        <th>卵裂類型</th>
+        <th>囊胚形態</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>海膽</td>
+        <td>少</td>
+        <td>全裂（均等）</td>
+        <td>空心球，裂球大小相近</td>
+      </tr>
+      <tr>
+        <td><strong>青蛙</strong></td>
+        <td>中等，偏植物極</td>
+        <td>全裂（不均等）</td>
+        <td>囊胚腔偏動物極，植物極細胞較大</td>
+      </tr>
+      <tr>
+        <td><strong>鳥類（雞）</strong></td>
+        <td>極多</td>
+        <td>偏裂</td>
+        <td>動物極只有薄薄一層細胞帽</td>
+      </tr>
+      <tr>
+        <td>哺乳動物</td>
+        <td>極少</td>
+        <td>全裂（均等）</td>
+        <td>囊胚（Blastocyst），有內細胞團</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card purple">
+    <h3><span class="icon">🧬</span>哺乳動物囊胚的特別結構</h3>
+    <p>人類等哺乳動物的囊胚有一個特殊結構：<span class="kw-purple">內細胞團（Inner Cell Mass）</span>——堆在一端的細胞，未來會發育成胚胎本身。周圍包裹的外層細胞稱<span class="kw-purple">滋養層（Trophoblast）</span>，負責著床並形成胎盤的胚胎部分。</p>
+    <div class="highlight critical">
+      <div class="highlight-label">⭐ 超考點</div>
+      <p>內細胞團的細胞 = <strong>胚胎幹細胞（Embryonic Stem Cells）</strong>的來源！</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: 原腸化 ===== -->
+<section class="section" id="s3">
+  <div class="section-header">
+    <span class="section-num green">CONCEPT 47.2</span>
+    <h2>原腸化 Gastrulation</h2>
+  </div>
+
+  <div class="highlight important">
+    <div class="highlight-label">💡 核心概念</div>
+    <p>原腸化是胚胎發育史上的大重組！囊胚表面的細胞向內移動，形成具有<span class="kw">2 或 3 個胚層</span>的<span class="kw">原腸胚（Gastrula）</span>。所有動物發育都會經歷原腸化。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Noto Serif TC',serif;font-size:1.1rem;margin-bottom:20px;color:#e8eaf0;">🌿 三個胚層——所有器官的根源</h3>
+
+  <div class="germ-grid">
+    <div class="germ-card ecto">
+      <div class="layer-title">外胚層</div>
+      <div class="layer-cn">Ectoderm</div>
+      <ul>
+        <li>皮膚表皮</li>
+        <li>神經系統</li>
+        <li>感覺器官</li>
+        <li>腦下垂體</li>
+        <li>牙齒、毛髮</li>
+      </ul>
+    </div>
+    <div class="germ-card meso">
+      <div class="layer-title">中胚層</div>
+      <div class="layer-cn">Mesoderm</div>
+      <ul>
+        <li>骨骼與肌肉</li>
+        <li>循環與淋巴系統</li>
+        <li>排泄與生殖系統</li>
+        <li>真皮層</li>
+        <li>腎上腺皮質</li>
+      </ul>
+    </div>
+    <div class="germ-card endo">
+      <div class="layer-title">內胚層</div>
+      <div class="layer-cn">Endoderm</div>
+      <ul>
+        <li>消化道上皮</li>
+        <li>呼吸道上皮</li>
+        <li>肝臟、胰臟</li>
+        <li>甲狀腺</li>
+        <li>膀胱上皮</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight critical">
+    <div class="highlight-label">🚨 二胚層 vs 三胚層</div>
+    <p><span class="kw-red">二胚層動物（Diploblasts）</span>：只有外胚層 + 內胚層（如水螅）。<br>
+    <span class="kw-blue">三胚層動物（Triploblasts）</span>：外 + 中 + 內（包含所有脊椎動物和大多數無脊椎動物）。多出來的中胚層讓器官複雜性大幅提升！</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card blue">
+    <h3><span class="icon">🐸</span>青蛙的原腸化</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num blue">1</div>
+        <div class="step-body">
+          <div class="step-title">囊胚孔（Blastopore）形成</div>
+          <div class="step-desc">在背面，細胞開始內陷，形成一個小凹口，稱為囊胚孔。凹口上方稱為<span class="kw-blue">囊胚孔背唇（Dorsal lip）</span>。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num blue">2</div>
+        <div class="step-body">
+          <div class="step-title">細胞向內捲入</div>
+          <div class="step-desc">細胞沿囊胚孔背唇捲入（involution），移往胚胎內部，形成<span class="kw-blue">原腸（Archenteron）</span>——未來的消化道！囊胚腔逐漸消失。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num blue">3</div>
+        <div class="step-body">
+          <div class="step-title">三胚層建立</div>
+          <div class="step-desc">最終，外表面 = 外胚層，最內層 = 內胚層，兩者之間 = 中胚層。青蛙的肛門由囊胚孔發育而來，嘴巴在另一端打穿。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3><span class="icon">🐣</span>雞（鳥類）的原腸化</h3>
+    <p>鳥類蛋黃太大，細胞只在動物極形成薄片，分為上層的<span class="kw-green">外胚葉（Epiblast）</span>和下層的<span class="kw-green">下胚葉（Hypoblast）</span>。</p>
+    <p>原腸化時，Epiblast 細胞向中線移動，向下塌陷，中線堆積形成可見的<span class="kw-green">原條（Primitive Streak）</span>。這就相當於青蛙的囊胚孔背唇！細胞向下移動形成內胚層和中胚層，留在表面的成為外胚層。</p>
+  </div>
+
+  <div class="card orange">
+    <h3><span class="icon">👶</span>人類的原腸化與著床</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num orange">1</div>
+        <div class="step-body">
+          <div class="step-title">囊胚到達子宮</div>
+          <div class="step-desc">卵裂結束後，超過 100 顆細胞排列成<span class="kw-orange">囊胚（Blastocyst）</span>，抵達子宮。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num orange">2</div>
+        <div class="step-body">
+          <div class="step-title">著床（受精後約 7 天）</div>
+          <div class="step-desc"><span class="kw-orange">滋養層（Trophoblast）</span>分泌酵素，分解子宮內膜，讓囊胚嵌入。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num orange">3</div>
+        <div class="step-body">
+          <div class="step-title">胚外膜形成（10–13 天）</div>
+          <div class="step-desc">形成四個<span class="kw-orange">胚外膜（Extraembryonic Membranes）</span>：羊膜、絨毛膜、卵黃囊、尿囊。原腸化透過原條開始。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num orange">4</div>
+        <div class="step-body">
+          <div class="step-title">胎盤形成</div>
+          <div class="step-desc">滋養層、外胚葉細胞和母方的子宮內膜組織共同形成<span class="kw-orange">胎盤（Placenta）</span>，是胎兒與母體交換養分、氣體、廢物的器官。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <h3><span class="icon">🥚</span>羊膜動物的四個胚外膜</h3>
+    <p><span class="kw-red">羊膜動物（Amniotes）</span> = 爬蟲類（包含鳥類）+ 哺乳動物。它們演化出可在陸地上繁殖的結構：</p>
+    <table class="data-table" style="margin-top:12px;">
+      <thead><tr><th>胚外膜</th><th>功能</th></tr></thead>
+      <tbody>
+        <tr><td><strong>羊膜（Amnion）</strong></td><td>包住胚胎，充滿羊水，物理保護</td></tr>
+        <tr><td><strong>絨毛膜（Chorion）</strong></td><td>氣體交換</td></tr>
+        <tr><td><strong>卵黃囊（Yolk sac）</strong></td><td>鳥：包覆卵黃；哺乳：血球生成早期位點</td></tr>
+        <tr><td><strong>尿囊（Allantois）</strong></td><td>鳥：廢物處理；哺乳：形成臍帶血管</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: 器官發生 ===== -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <span class="section-num orange">CONCEPT 47.2</span>
+    <h2>器官發生 Organogenesis</h2>
+  </div>
+
+  <div class="highlight important">
+    <div class="highlight-label">💡 核心概念</div>
+    <p>原腸化建立三個胚層後，器官發生開始。細胞改變形狀、移位、互相誘導，構築出各種器官的雛形。</p>
+  </div>
+
+  <div class="card blue">
+    <h3><span class="icon">🧠</span>神經管形成（Neurulation）<span class="badge hot">重點</span></h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num blue">1</div>
+        <div class="step-body">
+          <div class="step-title">脊索（Notochord）形成</div>
+          <div class="step-desc">背部中胚層的細胞聚集，形成棒狀的<span class="kw-blue">脊索（Notochord）</span>，沿著胚胎背面延伸。脊索是所有脊索動物（Chordates）的特徵，在發育後期多數退化。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num blue">2</div>
+        <div class="step-body">
+          <div class="step-title">神經板（Neural Plate）形成——誘導作用！</div>
+          <div class="step-desc">脊索分泌訊號分子，<span class="kw-blue">誘導（induce）</span>其上方的外胚層增厚，形成<span class="kw-blue">神經板（Neural Plate）</span>。這是誘導作用的典型例子。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num blue">3</div>
+        <div class="step-body">
+          <div class="step-title">神經管（Neural Tube）閉合</div>
+          <div class="step-desc">神經板兩側邊緣翹起（神經褶），向中央靠攏並癒合，形成中空的<span class="kw-blue">神經管（Neural Tube）</span>——未來的腦和脊髓！</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num blue">4</div>
+        <div class="step-body">
+          <div class="step-title">神經嵴細胞（Neural Crest Cells）遷移</div>
+          <div class="step-desc">神經管閉合時，邊緣脫落的<span class="kw-blue">神經嵴細胞（Neural Crest Cells）</span>會大範圍遷移，形成顱面骨、感覺神經節、腎上腺髓質等多種組織。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3><span class="icon">🦴</span>體節（Somites）</h3>
+    <p>神經管兩側，中胚層形成一對對節塊狀結構——<span class="kw-green">體節（Somites）</span>。體節未來會分化為脊椎骨、肋骨、背側肌肉，以及皮膚的真皮層。</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: 細胞命運 ===== -->
+<section class="section" id="s5">
+  <div class="section-header">
+    <span class="section-num">CONCEPT 47.3</span>
+    <h2>細胞命運的決定 Cell Fate</h2>
+  </div>
+
+  <div class="highlight important">
+    <div class="highlight-label">💡 核心概念</div>
+    <p>細胞如何「知道」自己要成為什麼？有兩種主要機制：（1）<span class="kw">細胞質決定子</span> 與（2）<span class="kw">誘導訊號</span>。</p>
+  </div>
+
+  <div class="card blue">
+    <h3><span class="icon">🧪</span>命運圖（Fate Map）</h3>
+    <p>科學家用染料標記囊胚或囊胚期胚胎的特定區域，追蹤它們長大後成為什麼組織——稱為<span class="kw-blue">命運圖（Fate Map）</span>。</p>
+    <p>線蟲（<em>C. elegans</em>）的細胞譜系已完全解析：成體共 959 顆體細胞（雌雄同體），以及恰好 <span class="kw-blue">131 顆細胞會死亡</span>（程序性細胞死亡）。這個研究讓科學家找到了控制細胞凋亡的基因，2002 年獲諾貝爾獎！</p>
+  </div>
+
+  <div class="card orange">
+    <h3><span class="icon">🔩</span>細胞質決定子（Cytoplasmic Determinants）<span class="badge exam">考點</span></h3>
+    <p>受精卵的細胞質並不均一——某些 mRNA 或蛋白質集中在特定區域（例如植物極或動物極）。當卵裂時，不同細胞分到不同的細胞質，就注定了不同的命運。</p>
+    <p>例子：線蟲的<span class="kw-orange">P 顆粒（P Granules）</span>——含有 RNA 和蛋白質的複合體。受精後移往後端，卵裂時只傳給後端細胞，最終成為生殖細胞（配子的前身）。</p>
+  </div>
+
+  <div class="card green">
+    <h3><span class="icon">📡</span>誘導訊號（Inductive Signals）<span class="badge hot">重點</span></h3>
+    <p>細胞也可透過<span class="kw-green">鄰近細胞的訊號</span>改變命運——稱為<span class="kw-green">誘導（Induction）</span>。</p>
+    <div class="highlight critical" style="margin-top:16px;">
+      <div class="highlight-label">⭐ 史貝曼-曼格德實驗（1924）</div>
+      <p>把青蛙原腸胚的<strong>囊胚孔背唇</strong>移植到另一隻胚胎的腹側，竟然長出了第二個完整胚胎！這個背唇被稱為「<span class="kw-red">組織者（Organizer）</span>」，可以誘導周圍細胞改變命運。現在已知它的機制之一是抑制 BMP-4 蛋白，允許背側結構（脊索、神經管）形成。</p>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <h3><span class="icon">🦷</span>全能性 vs 決定性</h3>
+    <table class="data-table" style="margin-top:12px;">
+      <thead><tr><th>概念</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td><strong class="kw-purple">全能性（Totipotent）</strong></td><td>可發育成該物種所有細胞類型。哺乳動物早期裂球（8 細胞期前）具全能性 → 同卵雙胞胎的成因</td></tr>
+        <tr><td><strong class="kw-blue">多能性（Pluripotent）</strong></td><td>可分化成多種組織，但不能形成完整個體。胚胎幹細胞即屬此類</td></tr>
+        <tr><td><strong class="kw-green">決定（Determination）</strong></td><td>細胞承諾走向特定命運，但尚未表現差異化形態</td></tr>
+        <tr><td><strong class="kw-orange">分化（Differentiation）</strong></td><td>決定後，基因表現的實際改變，細胞展現特有形態和功能</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card red">
+    <h3><span class="icon">💀</span>細胞凋亡（Apoptosis）</h3>
+    <p><span class="kw-red">程序性細胞死亡（Apoptosis）</span>是正常發育的必要過程，不是「死掉」而是「有計劃的自我犧牲」。</p>
+    <p>例子：手指的形成——指縫間的細胞凋亡，才讓手指彼此分開。若阻止凋亡，手指之間會有蹼。線蟲每次發育都有固定的 131 顆細胞死去。</p>
+  </div>
+
+  <div class="card blue">
+    <h3><span class="icon">🦴</span>體軸形成與左右不對稱</h3>
+    <p>青蛙胚胎有三個體軸（前後、背腹、左右），受精時精子進入點決定背腹軸——皮質向精子進入方向旋轉（<span class="kw-blue">皮質旋轉</span>），暴露出<span class="kw-blue">灰色新月（Gray Crescent）</span>，標示未來背側。</p>
+    <p>左右不對稱由<span class="kw-blue">纖毛（Cilia）</span>的擺動在胚胎中產生向左的液流，打破左右對稱，讓心臟、肝臟等器官固定位於正確的一側。若纖毛失能（如 Kartagener's syndrome），左右器官位置可能完全翻轉（<span class="kw-blue">situs inversus</span>）。</p>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="section" id="quiz">
+  <div class="section-header">
+    <span class="section-num" style="background:var(--accent-yellow);color:#000;">SELF TEST</span>
+    <h2>自我測驗 ✦</h2>
+  </div>
+
+  <div class="quiz-section">
+    <h3>✦ 點選答案確認理解</h3>
+
+    <div class="quiz-item">
+      <div class="quiz-q">1. 海膽卵的「皮質反應（cortical reaction）」直接導致什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer(this, false)">（A）快速阻擋多精入卵（去極化）</button>
+        <button class="quiz-opt" onclick="answer(this, true)">（B）受精膜（fertilization envelope）的形成</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（C）精子核進入卵子</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（D）Ca²⁺ 從外部環境進入</button>
+      </div>
+    </div>
+
+    <div class="quiz-item">
+      <div class="quiz-q">2. 鳥類與哺乳動物發育共同具有的結構是？</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer(this, false)">（A）全裂（holoblastic cleavage）</button>
+        <button class="quiz-opt" onclick="answer(this, true)">（B）上胚葉（epiblast）與下胚葉（hypoblast）</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（C）灰色新月（gray crescent）</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（D）囊胚孔（blastopore）發育為肛門</button>
+      </div>
+    </div>
+
+    <div class="quiz-item">
+      <div class="quiz-q">3. 原腸（archenteron）最終發育成？</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer(this, false)">（A）中胚層</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（B）胎盤</button>
+        <button class="quiz-opt" onclick="answer(this, true)">（C）消化道的內腔</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（D）神經管</button>
+      </div>
+    </div>
+
+    <div class="quiz-item">
+      <div class="quiz-q">4. 人類同卵雙胞胎能夠形成的原因是？</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer(this, false)">（A）胚外膜細胞與合子核互作</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（B）收斂伸展（convergent extension）發生</button>
+        <button class="quiz-opt" onclick="answer(this, true)">（C）早期裂球被分離時仍具全能性，可各自發育成完整胚胎</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（D）灰色新月將背腹軸分入不同細胞</button>
+      </div>
+    </div>
+
+    <div class="quiz-item">
+      <div class="quiz-q">5. 史貝曼-曼格德實驗中，移植囊胚孔背唇產生第二個胚胎，這說明了什麼？</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="answer(this, false)">（A）細胞質決定子均勻分布在胚胎</button>
+        <button class="quiz-opt" onclick="answer(this, true)">（B）囊胚孔背唇可誘導周圍細胞改變命運，是「組織者」</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（C）所有細胞到晚期仍保有全能性</button>
+        <button class="quiz-opt" onclick="answer(this, false)">（D）三胚層只在背唇細胞才能形成</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VOCAB ===== -->
+<section class="section" id="vocab">
+  <div class="section-header">
+    <span class="section-num" style="background:var(--accent-purple);color:#fff;">VOCAB</span>
+    <h2>關鍵詞速查 📚</h2>
+  </div>
+
+  <div class="mem-grid">
+    <div class="mem-card">
+      <div class="term">Acrosome</div>
+      <div class="def">頂體：精子尖端的囊泡，含水解酵素，幫助穿透卵子外層。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Polyspermy</div>
+      <div class="def">多精入卵：多條精子進入卵子，導致染色體異常。快速（去極化）與慢速（受精膜）兩道防線阻止之。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Cleavage</div>
+      <div class="def">卵裂：快速有絲分裂，細胞增多但不生長，形成囊胚。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Blastula</div>
+      <div class="def">囊胚：卵裂產生的空心球，中央有囊胚腔（Blastocoel）。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Gastrulation</div>
+      <div class="def">原腸化：囊胚重組為多層胚胎，建立外、中、內三個胚層。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Archenteron</div>
+      <div class="def">原腸：原腸化時形成的原始腔道，是消化道的前身。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Ectoderm</div>
+      <div class="def">外胚層：最外層，形成皮膚表皮、神經系統等。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Mesoderm</div>
+      <div class="def">中胚層：中間層，形成骨骼、肌肉、循環系統等。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Endoderm</div>
+      <div class="def">內胚層：最內層，形成消化道、呼吸道上皮等。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Notochord</div>
+      <div class="def">脊索：中胚層形成的背側棒狀結構，誘導神經板形成，是脊索動物的特徵。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Neural Crest</div>
+      <div class="def">神經嵴：神經管閉合時脫落的細胞，可遷移並形成多種組織（顱面骨、神經節等）。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Induction</div>
+      <div class="def">誘導：某群細胞分泌訊號，影響鄰近細胞的發育命運。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Totipotent</div>
+      <div class="def">全能性：細胞可發育成物種所有細胞類型（含胚外膜）。早期哺乳動物裂球即具此能力。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Apoptosis</div>
+      <div class="def">程序性細胞死亡：正常發育必要的細胞自殺，如手指分離、線蟲固定 131 顆細胞死亡。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Trophoblast</div>
+      <div class="def">滋養層：哺乳類囊胚外層細胞，負責著床、形成胎盤胚胎部分。</div>
+    </div>
+    <div class="mem-card">
+      <div class="term">Gray Crescent</div>
+      <div class="def">灰色新月：青蛙受精後皮質旋轉暴露的淡色區域，標示未來背側，含決定背側發育的因子。</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  Ch.47 Animal Development · 生物學學習指南 · 以淺顯文字輔助初學者理解
+</footer>
+
+<script>
+function answer(btn, isCorrect) {
+  const opts = btn.parentElement.querySelectorAll('.quiz-opt');
+  opts.forEach(opt => {
+    opt.style.pointerEvents = 'none';
+    opt.style.cursor = 'default';
+  });
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    // highlight the correct one
+    opts.forEach(opt => {
+      if (opt !== btn) {
+        opt.addEventListener('mouseenter', () => {});
+      }
+    });
+  }
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Intersection observer for active nav
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.style.color = '';
+        link.style.borderBottomColor = '';
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.style.color = '#e8eaf0';
+          link.style.borderBottomColor = '#4a9eff';
+        }
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
