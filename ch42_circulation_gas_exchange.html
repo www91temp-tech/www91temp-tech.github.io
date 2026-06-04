@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第42章：循環系統與氣體交換</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c0392b;
+    --red-light: #e74c3c;
+    --red-ultra-light: #fdf2f2;
+    --blue: #1a5276;
+    --blue-light: #2980b9;
+    --blue-ultra-light: #eaf4fb;
+    --gold: #b7860b;
+    --gold-light: #f0c040;
+    --gold-ultra: #fffaed;
+    --green: #1a7a4a;
+    --green-light: #27ae60;
+    --ink: #1a1a2e;
+    --gray-dark: #34495e;
+    --gray: #7f8c8d;
+    --gray-light: #ecf0f1;
+    --white: #fefefe;
+    --bg: #f9f6f0;
+    --section-radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* ===== HEADER ===== */
+  .hero {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(192,57,43,0.15);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(41,128,185,0.18);
+    pointer-events: none;
+  }
+  .hero-chapter {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #a0c4d8;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: #e87f7f; }
+  .hero-subtitle {
+    font-size: 16px;
+    color: #b0cfe0;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 13px;
+    color: #d0e8f0;
+  }
+
+  /* ===== NAV ===== */
+  .toc {
+    background: var(--ink);
+    padding: 20px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .toc a {
+    color: #a0c4d8;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .toc a:hover { color: #e87f7f; border-bottom-color: #e87f7f; }
+
+  /* ===== MAIN LAYOUT ===== */
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ===== SECTION ===== */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 72px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 3px solid;
+  }
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: var(--ink);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .sec-red .section-header { border-color: var(--red); }
+  .sec-red .section-num { background: var(--red); }
+  .sec-red .section-header h2 { color: var(--red); }
+
+  .sec-blue .section-header { border-color: var(--blue); }
+  .sec-blue .section-num { background: var(--blue); }
+  .sec-blue .section-header h2 { color: var(--blue); }
+
+  .sec-gold .section-header { border-color: var(--gold); }
+  .sec-gold .section-num { background: var(--gold); }
+  .sec-gold .section-header h2 { color: var(--gold); }
+
+  .sec-green .section-header { border-color: var(--green); }
+  .sec-green .section-num { background: var(--green); }
+  .sec-green .section-header h2 { color: var(--green); }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--white);
+    border-radius: var(--section-radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--gray-dark);
+  }
+  .card p { color: var(--gray-dark); margin-bottom: 10px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ===== CRITICAL BOX ===== */
+  .critical {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+    border-left: 5px solid var(--red-light);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: 16px 0;
+    position: relative;
+  }
+  .critical::before {
+    content: '⚡ 重點';
+    position: absolute;
+    top: -10px; left: 16px;
+    background: var(--red-light);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 10px;
+    border-radius: 10px;
+  }
+  .critical strong { color: var(--red); }
+
+  /* ===== KEY TERM ===== */
+  .key-term {
+    display: inline-block;
+    background: var(--ink);
+    color: #e0f0ff;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 2px 3px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== COMPARE TABLE ===== */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .compare-item {
+    padding: 18px;
+    border-radius: 12px;
+    border: 2px solid;
+  }
+  .compare-item.red { border-color: var(--red-light); background: var(--red-ultra-light); }
+  .compare-item.blue { border-color: var(--blue-light); background: var(--blue-ultra-light); }
+  .compare-item.gold { border-color: var(--gold-light); background: var(--gold-ultra); }
+  .compare-item.green-c { border-color: var(--green-light); background: #f0faf5; }
+  .compare-item h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .compare-item.red h4 { color: var(--red); }
+  .compare-item.blue h4 { color: var(--blue); }
+  .compare-item.gold h4 { color: var(--gold); }
+  .compare-item.green-c h4 { color: var(--green); }
+  .compare-item ul { padding-left: 18px; }
+  .compare-item ul li { margin-bottom: 6px; font-size: 14px; color: var(--gray-dark); }
+
+  /* ===== FLOW DIAGRAM ===== */
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 16px 0;
+    padding: 16px 20px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .flow-node {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+  .flow-node.red { background: #fde8e8; color: var(--red); border: 1.5px solid var(--red-light); }
+  .flow-node.blue { background: var(--blue-ultra-light); color: var(--blue); border: 1.5px solid var(--blue-light); }
+  .flow-node.gray { background: var(--gray-light); color: var(--gray-dark); border: 1.5px solid #bdc3c7; }
+  .flow-arrow {
+    color: var(--gray);
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ===== INFO BOX ===== */
+  .info-box {
+    background: var(--blue-ultra-light);
+    border: 1.5px solid #9ec6e0;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .info-box.gold-box {
+    background: var(--gold-ultra);
+    border-color: #e0c060;
+  }
+  .info-box.green-box {
+    background: #f0faf5;
+    border-color: #80c8a0;
+  }
+  .info-box-title {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--blue);
+  }
+  .gold-box .info-box-title { color: var(--gold); }
+  .green-box .info-box-title { color: var(--green); }
+
+  /* ===== MEMORY AIDS ===== */
+  .memory {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .memory::after {
+    content: '💡';
+    position: absolute;
+    top: 16px; right: 20px;
+    font-size: 28px;
+    opacity: 0.4;
+  }
+  .memory h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #e8c060;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .memory p { font-size: 15px; line-height: 1.7; color: #d0e8f0; }
+  .memory strong { color: #ffdd88; font-size: 17px; }
+
+  /* ===== QUIZ STYLE ===== */
+  .quiz-box {
+    background: linear-gradient(135deg, #0f2027 0%, #1a3045 100%);
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 40px;
+    color: white;
+  }
+  .quiz-box h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.2rem;
+    color: #e0f0ff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 12px;
+  }
+  .quiz-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .quiz-item:hover { background: rgba(255,255,255,0.1); }
+  .quiz-q { font-size: 14px; color: #b0d0e8; margin-bottom: 8px; }
+  .quiz-a {
+    font-size: 14px;
+    color: #6fcf97;
+    display: none;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    line-height: 1.6;
+  }
+  .quiz-a.shown { display: block; }
+  .quiz-hint { font-size: 11px; color: #7090a0; margin-top: 4px; }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  }
+  .data-table th {
+    background: var(--ink);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #eee;
+    color: var(--gray-dark);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #f8f8f8; }
+  .data-table tr:hover td { background: var(--blue-ultra-light); }
+
+  /* ===== HEART DIAGRAM ===== */
+  .heart-diagram {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    margin: 20px 0;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .heart-chambers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .chamber {
+    border-radius: 10px;
+    padding: 14px 18px;
+    text-align: center;
+  }
+  .chamber.right-atrium { background: #dbeafe; border: 2px solid #3b82f6; }
+  .chamber.right-ventricle { background: #bfdbfe; border: 2px solid #2563eb; }
+  .chamber.left-atrium { background: #fee2e2; border: 2px solid #f87171; }
+  .chamber.left-ventricle { background: #fecaca; border: 2px solid #dc2626; }
+  .chamber h5 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .chamber.right-atrium h5, .chamber.right-ventricle h5 { color: #1d4ed8; }
+  .chamber.left-atrium h5, .chamber.left-ventricle h5 { color: #b91c1c; }
+  .chamber p { font-size: 12px; color: var(--gray-dark); line-height: 1.5; }
+  .circuit-label {
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* ===== BLOOD VESSEL VISUAL ===== */
+  .vessel-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .vessel-card {
+    text-align: center;
+    padding: 18px 12px;
+    border-radius: 12px;
+    background: var(--white);
+    border: 2px solid;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .vessel-card.artery { border-color: var(--red-light); }
+  .vessel-card.vein { border-color: var(--blue-light); }
+  .vessel-card.capillary { border-color: var(--green-light); }
+  .vessel-icon { font-size: 32px; margin-bottom: 8px; }
+  .vessel-card h5 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .vessel-card.artery h5 { color: var(--red); }
+  .vessel-card.vein h5 { color: var(--blue); }
+  .vessel-card.capillary h5 { color: var(--green); }
+  .vessel-card ul { text-align: left; padding-left: 16px; font-size: 12px; color: var(--gray-dark); }
+  .vessel-card ul li { margin-bottom: 4px; }
+
+  /* ===== BLOOD COMPONENTS ===== */
+  .blood-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .blood-cell {
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    border: 2px solid;
+  }
+  .bc-red { background: #fff5f5; border-color: #f87171; }
+  .bc-white { background: #f0faf5; border-color: #34d399; }
+  .bc-platelet { background: var(--gold-ultra); border-color: var(--gold-light); }
+  .blood-cell .bc-icon { font-size: 28px; margin-bottom: 8px; }
+  .blood-cell h5 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+  .blood-cell p { font-size: 12px; color: var(--gray-dark); line-height: 1.5; }
+
+  /* ===== HIGHLIGHTED ===== */
+  mark {
+    background: linear-gradient(120deg, #fff176 0%, #ffe082 100%);
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: var(--ink);
+  }
+  .big-highlight {
+    background: linear-gradient(135deg, #fff9c4, #fff176);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border-left: 4px solid var(--gold-light);
+    font-size: 15px;
+  }
+
+  /* ===== NUMBERS ===== */
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1.5px solid var(--gray-light);
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--red);
+    display: block;
+  }
+  .stat-label { font-size: 12px; color: var(--gray); margin-top: 4px; }
+
+  /* ===== GAS EXCHANGE ===== */
+  .partial-pressure {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .pp-card {
+    flex: 1;
+    min-width: 180px;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px;
+    border: 2px solid;
+    font-size: 13px;
+  }
+  .pp-card.lungs { border-color: var(--red-light); background: #fff8f8; }
+  .pp-card.tissue { border-color: var(--blue-light); background: var(--blue-ultra-light); }
+  .pp-card h5 { font-weight: 700; margin-bottom: 10px; font-size: 14px; }
+  .pp-card.lungs h5 { color: var(--red); }
+  .pp-card.tissue h5 { color: var(--blue); }
+  .pp-val { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; }
+  .pp-val:last-child { border-bottom: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .compare-grid, .vessel-compare, .blood-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 20px 36px; }
+    .toc { padding: 14px 16px; }
+    .container { padding: 24px 16px 60px; }
+    .heart-chambers { grid-template-columns: 1fr; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  .section { animation: fadeInUp 0.5s ease both; }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+  .section:nth-child(6) { animation-delay: 0.3s; }
+  .section:nth-child(7) { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-chapter">Chapter 42 · Biology</div>
+  <h1>循環系統與<span>氣體交換</span></h1>
+  <p class="hero-subtitle">從心臟的每一次跳動，到每個細胞的呼吸——帶你讀懂動物體內的「物流系統」</p>
+  <div class="hero-badges">
+    <span class="badge">循環系統</span>
+    <span class="badge">心臟運作</span>
+    <span class="badge">血液成分</span>
+    <span class="badge">氣體交換</span>
+    <span class="badge">血壓調節</span>
+    <span class="badge">血紅素</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+  <a href="#s1">42.1 循環系統概論</a>
+  <a href="#s2">42.2 心臟運作</a>
+  <a href="#s3">42.3 血壓與血流</a>
+  <a href="#s4">42.4 血液成分</a>
+  <a href="#s5">42.5 氣體交換表面</a>
+  <a href="#s6">42.6 呼吸換氣</a>
+  <a href="#s7">42.7 呼吸色素</a>
+</nav>
+
+<div class="container">
+
+<!-- SECTION 1 -->
+<section class="section sec-red" id="s1">
+  <div class="section-header">
+    <span class="section-num">42.1</span>
+    <h2>循環系統：連結全身細胞的高速公路</h2>
+  </div>
+
+  <div class="card">
+    <h3>🤔 為什麼動物需要循環系統？</h3>
+    <p>每個細胞都需要攝取氧氣、養分，並排出廢物（如CO₂）。這些物質靠<strong>擴散</strong>（diffusion）在細胞附近短距離移動，但擴散非常慢——距離增加10倍，所需時間增加<mark>100倍</mark>！</p>
+    <div class="critical">
+      擴散移動1cm需要<strong>近3小時</strong>。多細胞動物體積龐大，不可能只靠擴散來維持每個細胞的生存，因此演化出<strong>循環系統</strong>。
+    </div>
+    <p>解決方案有兩種：①體型扁薄（如水螅、扁蟲），讓所有細胞都靠近表面；②演化出循環系統，主動將物質輸送到全身每個角落。</p>
+  </div>
+
+  <div class="card">
+    <h3>🌊 不需循環系統的動物：胃血管腔</h3>
+    <p>水母、水螅等刺絲胞動物及扁形蟲，靠<span class="key-term">胃血管腔</span>（gastrovascular cavity）分配物質。這個腔與外界相通，體液可以直接接觸兩層細胞，物質只需擴散極短距離。</p>
+    <p>扁蟲身體扁平，增加表面積、縮短擴散距離，也是同樣的適應策略。</p>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-item red">
+      <h4>🐛 開放式循環系統</h4>
+      <ul>
+        <li>代表：昆蟲（蝗蟲）、貝類</li>
+        <li>循環液：<span class="key-term">血淋巴</span>（hemolymph）</li>
+        <li>血淋巴直接浸泡器官，兼做組織液</li>
+        <li>壓力低、耗能少</li>
+        <li>蜘蛛利用高血壓來伸展腿部</li>
+      </ul>
+    </div>
+    <div class="compare-item blue">
+      <h4>🐙 閉鎖式循環系統</h4>
+      <ul>
+        <li>代表：脊椎動物、頭足類（章魚）</li>
+        <li>循環液：<span class="key-term">血液</span>（blood）</li>
+        <li>血液限定在血管內，不接觸細胞</li>
+        <li>血壓高，適合大型活躍動物</li>
+        <li>可精準調控各器官的血流量</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🐟 單循環 vs. 雙循環</h3>
+
+    <div class="info-box">
+      <div class="info-box-title">🐠 單循環（魚類）</div>
+      <p>血液走<strong>一個循環圈</strong>：心臟→鰓（充氧）→全身→心臟。心臟只有「一心房＋一心室」。缺點：血液通過鰓的微血管後，壓力大幅降低，全身血流偏慢。</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-node gray">心臟</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node blue">鰓（充氧）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node red">全身組織</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gray">心臟</div>
+    </div>
+
+    <div class="info-box" style="margin-top:16px">
+      <div class="info-box-title">🐊 雙循環（兩棲類、爬蟲類、哺乳類）</div>
+      <p>血液走<strong>兩個循環圈</strong>同時運作：<br>
+      ①<strong>肺循環（pulmonary circuit）</strong>：右心→肺→左心（充氧）<br>
+      ②<strong>體循環（systemic circuit）</strong>：左心→全身→右心（卸氧）</p>
+      <p style="margin-top:8px">優點：心臟在血液流過肺部後再度加壓，使體循環維持高血壓，大幅提升氧氣輸送效率。</p>
+    </div>
+  </div>
+
+  <table class="data-table">
+    <tr>
+      <th>動物</th><th>心腔數</th><th>心室分隔</th><th>循環方式</th>
+    </tr>
+    <tr><td>魚類</td><td>2（1心房+1心室）</td><td>無</td><td>單循環</td></tr>
+    <tr><td>兩棲類（蛙）</td><td>3（2心房+1心室）</td><td>不完全（功能性分隔）</td><td>雙循環（皮膚肺循環）</td></tr>
+    <tr><td>爬蟲類（蜥蜴）</td><td>3（2心房+1心室）</td><td>不完全（隔膜）</td><td>雙循環</td></tr>
+    <tr><td>鳥類 &amp; 哺乳類</td><td>4（2心房+2心室）</td><td>完全分隔</td><td>雙循環（高效）</td></tr>
+  </table>
+
+  <div class="memory">
+    <h4>記憶小妙招</h4>
+    <p>右心 → 肺（充氧）→ 左心 → 全身（卸氧）→ 右心<br>
+    記住：<strong>「右肺左全身」</strong>——右邊走肺，左邊走全身！</p>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="section sec-blue" id="s2">
+  <div class="section-header">
+    <span class="section-num">42.2</span>
+    <h2>心臟：人體最強的幫浦</h2>
+  </div>
+
+  <div class="heart-diagram">
+    <h3 style="font-family:'Noto Serif TC',serif; margin-bottom:20px; color:var(--ink);">❤️ 哺乳類四腔心臟結構</h3>
+    <div class="heart-chambers">
+      <div class="chamber right-atrium">
+        <h5>右心房（Right Atrium）</h5>
+        <p>接收全身回流的<strong>缺氧血</strong>（來自上、下腔靜脈）</p>
+      </div>
+      <div class="chamber left-atrium">
+        <h5>左心房（Left Atrium）</h5>
+        <p>接收從肺回流的<strong>含氧血</strong>（來自肺靜脈）</p>
+      </div>
+      <div class="chamber right-ventricle">
+        <h5>右心室（Right Ventricle）</h5>
+        <p>將缺氧血泵出→<strong>肺動脈→肺</strong>（壁較薄）</p>
+      </div>
+      <div class="chamber left-ventricle">
+        <h5>左心室（Left Ventricle）</h5>
+        <p>將含氧血泵出→<strong>主動脈→全身</strong>（壁最厚！）</p>
+      </div>
+    </div>
+    <p class="circuit-label">↑ 左右心室同時收縮，泵出等量血液，但左心室壓力遠高於右心室</p>
+  </div>
+
+  <div class="critical">
+    注意：解剖圖中「右心」在圖的左側，「左心」在圖的右側——因為圖是<strong>面對你的身體</strong>！
+  </div>
+
+  <div class="card">
+    <h3>🔄 心動週期（Cardiac Cycle）</h3>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">0.8s</span>
+        <div class="stat-label">一個完整心動週期</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">0.3s</span>
+        <div class="stat-label">心室收縮期（systole）</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">0.4s</span>
+        <div class="stat-label">心室舒張期（diastole）</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">0.1s</span>
+        <div class="stat-label">心房收縮</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="info-box-title">心輸出量公式</div>
+      <p>心輸出量（Cardiac Output）= 心率（Heart Rate）× 每搏輸出量（Stroke Volume）</p>
+      <p style="margin-top:8px">休息時：72次/分 × 70mL ≈ <mark>5 L/min</mark>（約等於全身血液總量！）</p>
+      <p>激烈運動時，心輸出量可達休息的5倍，約<mark>25 L/min</mark>。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🚪 四個心臟瓣膜：防止血液逆流</h3>
+    <div class="compare-grid">
+      <div class="compare-item blue">
+        <h4>房室瓣（AV Valves）× 2</h4>
+        <ul>
+          <li>位於心房與心室之間</li>
+          <li>心室收縮時關閉，防止血液回流心房</li>
+          <li>以腱索固定，不會翻轉</li>
+          <li>關閉聲 = 心音「lub」</li>
+        </ul>
+      </div>
+      <div class="compare-item red">
+        <h4>半月瓣（Semilunar Valves）× 2</h4>
+        <ul>
+          <li>位於肺動脈和主動脈出口</li>
+          <li>心室舒張時關閉，防止血液倒流回心室</li>
+          <li>關閉聲 = 心音「dup」</li>
+          <li>心臟聽診：「lub-dup, lub-dup」</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box gold-box" style="margin-top:12px">
+      <div class="info-box-title">⚠️ 心雜音（Heart Murmur）</div>
+      <p>瓣膜有缺陷時，血液逆流產生不正常聲音。可能先天性或因感染（如風濕熱）所致。輕微者不需手術，嚴重者需置換人工瓣膜。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚡ 心跳節律的控制：從 SA 節點開始</h3>
+    <div class="flow">
+      <div class="flow-node red">SA節點<br><small>（竇房節）</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gray">心房收縮</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node blue">AV節點<br><small>（延遲0.1秒）</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gray">束支/浦肯野纖維</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node red">心室收縮</div>
+    </div>
+    <div class="critical">
+      <strong>SA節點</strong>（sinoatrial node）位於右心房壁，是心臟的「天然節律器」（pacemaker）。它會自發放電，控制整個心臟的節奏，即使取出體外的心肌細胞也會自行跳動！
+    </div>
+    <p style="margin-top:12px">AV節點的<strong>0.1秒延遲</strong>非常重要——讓心房血液完全流入心室後，心室才收縮，確保泵血效率。</p>
+    <div class="info-box" style="margin-top:12px">
+      <div class="info-box-title">影響心率的因素</div>
+      <p>交感神經（加速）、副交感神經（減速）、腎上腺素（加速）、體溫升高1°C→心率↑約10次/分。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="section sec-gold" id="s3">
+  <div class="section-header">
+    <span class="section-num">42.3</span>
+    <h2>血壓與血流：血管的結構功能</h2>
+  </div>
+
+  <div class="vessel-compare">
+    <div class="vessel-card artery">
+      <div class="vessel-icon">🔴</div>
+      <h5>動脈（Artery）</h5>
+      <ul>
+        <li>攜帶心臟輸出的血液</li>
+        <li>管壁厚，富有彈性</li>
+        <li>承受最高血壓</li>
+        <li>可感受到脈搏</li>
+      </ul>
+    </div>
+    <div class="vessel-card vein">
+      <div class="vessel-icon">🔵</div>
+      <h5>靜脈（Vein）</h5>
+      <ul>
+        <li>攜帶回流心臟的血液</li>
+        <li>管壁薄（約動脈的1/3）</li>
+        <li>有<strong>單向瓣膜</strong>防逆流</li>
+        <li>骨骼肌收縮幫助推血</li>
+      </ul>
+    </div>
+    <div class="vessel-card capillary">
+      <div class="vessel-icon">🟢</div>
+      <h5>微血管（Capillary）</h5>
+      <ul>
+        <li>物質交換的<strong>唯一場所</strong></li>
+        <li>管壁最薄：僅單層內皮細胞</li>
+        <li>直徑微小，近似紅血球大小</li>
+        <li>人體共約70億條！</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="critical">
+    「動脈」和「靜脈」是依<strong>血流方向</strong>命名，不是依血液的氧含量。動脈 = 離開心臟；靜脈 = 返回心臟。<br>
+    唯一的例外：<strong>肺靜脈</strong>攜帶含氧血！
+  </div>
+
+  <div class="card">
+    <h3>📊 血壓與流速的關係</h3>
+    <table class="data-table">
+      <tr>
+        <th>血管</th><th>總截面積</th><th>流速</th><th>血壓</th>
+      </tr>
+      <tr><td>主動脈</td><td>~5 cm²</td><td>~48 cm/s（最快）</td><td>120/80 mmHg</td></tr>
+      <tr><td>小動脈</td><td>~400 cm²</td><td>~10 cm/s</td><td>80~40 mmHg</td></tr>
+      <tr><td><strong>微血管</strong></td><td><strong>~4500 cm²（最大！）</strong></td><td><strong>~0.1 cm/s（最慢！）</strong></td><td>40~25 mmHg</td></tr>
+      <tr><td>靜脈</td><td>~600 cm²</td><td>~15 cm/s</td><td>15~5 mmHg</td></tr>
+      <tr><td>腔靜脈</td><td>~10 cm²</td><td>~25 cm/s</td><td>~2 mmHg</td></tr>
+    </table>
+    <div class="memory">
+      <h4>規律：截面積越大，流速越慢</h4>
+      <p>微血管的<strong>總截面積</strong>遠大於任何其他血管（因為數量極多），所以血液在此<strong>減速最多</strong>。<br>
+      流速慢 → 物質有充分時間與組織液交換！這是微血管功能的關鍵。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🩺 血壓讀數：收縮壓 / 舒張壓</h3>
+    <div class="compare-grid">
+      <div class="compare-item red">
+        <h4>收縮壓（Systolic）</h4>
+        <ul>
+          <li>心室<strong>收縮</strong>時的最高血壓</li>
+          <li>正常值：約 <mark>120 mmHg</mark></li>
+          <li>可感受到脈搏（pulse）</li>
+        </ul>
+      </div>
+      <div class="compare-item blue">
+        <h4>舒張壓（Diastolic）</h4>
+        <ul>
+          <li>心室<strong>舒張</strong>時的最低血壓</li>
+          <li>正常值：約 <mark>80 mmHg</mark></li>
+          <li>動脈彈性回縮維持此壓力</li>
+        </ul>
+      </div>
+    </div>
+    <div class="big-highlight">
+      💊 高血壓定義：收縮壓 &gt; 140 mmHg 或舒張壓 &gt; 90 mmHg。長期高血壓會損傷血管內皮，促進動脈粥樣硬化。
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚖️ 血壓調節：縮小與舒張動脈</h3>
+    <div class="compare-grid">
+      <div class="compare-item red">
+        <h4>血管收縮（Vasoconstriction）</h4>
+        <ul>
+          <li>平滑肌收縮，管徑縮小</li>
+          <li>血壓上升</li>
+          <li>誘導物質：內皮素（endothelin）</li>
+        </ul>
+      </div>
+      <div class="compare-item blue">
+        <h4>血管舒張（Vasodilation）</h4>
+        <ul>
+          <li>平滑肌鬆弛，管徑增大</li>
+          <li>血壓下降</li>
+          <li>誘導物質：<strong>一氧化氮（NO）</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💧 淋巴系統：回收外漏液體</h3>
+    <p>每天約<strong>4-8公升</strong>的液體從微血管滲入組織液（因血壓大於滲透壓）。這些液體及蛋白質由<span class="key-term">淋巴系統</span>回收，最終匯入頸部靜脈。</p>
+    <div class="info-box">
+      <div class="info-box-title">淋巴結的作用</div>
+      <p>淋巴結內富含白血球，是免疫監控站。感染時淋巴結腫大，是身體正在對抗病原的訊號。癌細胞也可能進入淋巴系統擴散——這就是醫師在腋下、鼠蹊部檢查淋巴結的原因。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="section sec-red" id="s4">
+  <div class="section-header">
+    <span class="section-num">42.4</span>
+    <h2>血液成分：交換、運輸、防禦的全能液體</h2>
+  </div>
+
+  <div class="card">
+    <h3>🧪 血液的組成</h3>
+    <p>離心後，血液分為：<strong>血漿（55%）</strong> + <strong>細胞成分（45%）</strong>（包括白血球/血小板的薄層 + 紅血球）。</p>
+    <div class="blood-grid">
+      <div class="blood-cell bc-red">
+        <div class="bc-icon">🔴</div>
+        <h5>紅血球（Erythrocytes）</h5>
+        <p>數量最多；雙面凹圓盤形；無細胞核；含<strong>血紅素</strong>；運輸O₂（兼運輸少量CO₂）；壽命約<strong>120天</strong>。</p>
+      </div>
+      <div class="blood-cell bc-white">
+        <div class="bc-icon">⚪</div>
+        <h5>白血球（Leukocytes）</h5>
+        <p>有5種；負責<strong>免疫防禦</strong>；含淋巴球（lymphocytes）與各種吞噬細胞；感染時數量增加。</p>
+      </div>
+      <div class="blood-cell bc-platelet">
+        <div class="bc-icon">🟡</div>
+        <h5>血小板（Platelets）</h5>
+        <p>無細胞核的細胞碎片；直徑2-3µm；負責<strong>血液凝固</strong>；壽命短。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="critical">
+    一個紅血球含約<strong>2.5億個血紅素分子</strong>，每個血紅素可攜帶4個O₂，故每個紅血球可攜帶約<strong>10億個O₂分子</strong>！成熟紅血球沒有粒線體，靠無氧代謝產ATP——如此才不會消耗自己運送的O₂。
+  </div>
+
+  <div class="card">
+    <h3>⚕️ 鐮刀型紅血球疾病（Sickle-cell Disease）</h3>
+    <p>血紅素基因突變（<span class="key-term">HbS</span>）→血紅素聚合成絲→紅血球變形成鐮刀狀→阻塞微血管→組織缺氧、劇痛，且紅血球壽命縮短至僅<strong>20天</strong>（正常的1/6）。</p>
+  </div>
+
+  <div class="card">
+    <h3>🩹 血液凝固過程</h3>
+    <div class="flow" style="flex-direction: column; align-items:flex-start; gap:10px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="flow-node gray" style="min-width:140px">血管受損</div>
+        <div class="flow-arrow">→</div>
+        <span style="font-size:13px;color:var(--gray-dark)">膠原蛋白暴露，血小板黏附並活化</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="flow-node gray" style="min-width:140px">血小板栓塞形成</div>
+        <div class="flow-arrow">→</div>
+        <span style="font-size:13px;color:var(--gray-dark)">提供初步止血</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="flow-node gray" style="min-width:140px">凝血因子級聯反應</div>
+        <div class="flow-arrow">→</div>
+        <span style="font-size:13px;color:var(--gray-dark)">凝血酶原（Prothrombin）→ 凝血酶（Thrombin）</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="flow-node red" style="min-width:140px">纖維蛋白凝塊</div>
+        <div class="flow-arrow">→</div>
+        <span style="font-size:13px;color:var(--gray-dark)">纖維蛋白原→纖維蛋白（Fibrin）網，捕捉紅血球，形成凝塊</span>
+      </div>
+    </div>
+    <div class="info-box gold-box" style="margin-top:14px">
+      <div class="info-box-title">血友病（Hemophilia）</div>
+      <p>凝血過程中任一步驟的基因突變，都可能導致血友病——輕微割傷也難以止血，甚至關節內出血。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🫀 心血管疾病</h3>
+    <div class="compare-grid">
+      <div class="compare-item red">
+        <h4>動脈粥樣硬化（Atherosclerosis）</h4>
+        <ul>
+          <li>血管內皮受損→發炎→LDL（壞膽固醇）堆積</li>
+          <li>形成斑塊（plaque），管腔變窄</li>
+          <li>斑塊破裂 → 血栓（thrombus）形成</li>
+        </ul>
+      </div>
+      <div class="compare-item gold">
+        <h4>心臟病發作 &amp; 中風</h4>
+        <ul>
+          <li><strong>心肌梗塞</strong>：冠狀動脈阻塞→心肌壞死</li>
+          <li><strong>中風</strong>：腦部動脈阻塞→腦細胞死亡</li>
+          <li>心絞痛（angina pectoris）是預警訊號</li>
+        </ul>
+      </div>
+    </div>
+    <div class="big-highlight">
+      🔑 膽固醇關鍵：<strong>LDL（低密度脂蛋白）</strong>= 「壞」膽固醇（送到細胞，但過多會堆積）；<strong>HDL（高密度脂蛋白）</strong>= 「好」膽固醇（回收多餘膽固醇）。<br>
+      LDL/HDL 比值越高 → 風險越大。運動可降低此比值；吸菸、反式脂肪會升高此比值。
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="section sec-green" id="s5">
+  <div class="section-header">
+    <span class="section-num">42.5</span>
+    <h2>氣體交換：從鰓到肺的演化歷程</h2>
+  </div>
+
+  <div class="card">
+    <h3>🌬️ 氣體交換的驅動力：分壓梯度</h3>
+    <p>氣體總是從<strong>分壓高處</strong>往<strong>分壓低處</strong>擴散。大氣中O₂分壓（PO₂）約<strong>160 mmHg</strong>（21% × 760 mmHg）。</p>
+    <div class="partial-pressure">
+      <div class="pp-card lungs">
+        <h5>🫁 肺泡</h5>
+        <div class="pp-val"><span>PO₂</span><span>104 mmHg</span></div>
+        <div class="pp-val"><span>PCO₂</span><span>40 mmHg</span></div>
+        <div class="pp-val"><span>O₂ → 血液</span><span>✅ 淨擴散入</span></div>
+        <div class="pp-val"><span>CO₂ → 空氣</span><span>✅ 淨擴散出</span></div>
+      </div>
+      <div class="pp-card tissue">
+        <h5>💪 體內組織</h5>
+        <div class="pp-val"><span>PO₂</span><span>&lt;40 mmHg</span></div>
+        <div class="pp-val"><span>PCO₂</span><span>&gt;45 mmHg</span></div>
+        <div class="pp-val"><span>O₂ → 細胞</span><span>✅ 淨擴散出</span></div>
+        <div class="pp-val"><span>CO₂ → 血液</span><span>✅ 淨擴散入</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💧 水 vs. 空氣：氣體交換的難度差異</h3>
+    <table class="data-table">
+      <tr><th>特性</th><th>空氣</th><th>水</th></tr>
+      <tr><td>O₂濃度（每升）</td><td>210 mL（高！）</td><td>7 mL（低，約空氣的1/30）</td></tr>
+      <tr><td>密度</td><td>0.0013 kg/L</td><td>1 kg/L（水是空氣的770倍重）</td></tr>
+      <tr><td>黏度</td><td>低</td><td>高（空氣的50倍）</td></tr>
+      <tr><td>換氣難度</td><td>容易</td><td>費力得多</td></tr>
+    </table>
+    <p style="margin-top:10px;color:var(--gray-dark)">人類只從吸入的空氣中提取約<strong>25%的O₂</strong>，因為空氣中O₂豐富、供給充裕；而魚類必須努力移動大量水，才能維持足夠的氣體交換。</p>
+  </div>
+
+  <div class="card">
+    <h3>🐟 魚鰓：逆流交換的傑作</h3>
+    <div class="info-box green-box">
+      <div class="info-box-title">逆流交換（Countercurrent Exchange）</div>
+      <p>水與血液的流向<strong>相反</strong>。這樣在整段鰓的任何位置，血液的PO₂都低於水的PO₂，O₂得以持續不斷地擴散入血液。</p>
+      <p style="margin-top:8px">效率遠高於「順流交換」，魚鰓可從水中提取高達<strong>80%</strong>的溶氧！</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🐛 昆蟲的氣管系統（Tracheal System）</h3>
+    <p>昆蟲完全不靠循環系統運輸O₂！空氣直接由<strong>氣孔（spiracles）</strong>進入，經分支的氣管（tracheae）→微氣管，把O₂直接送達每個細胞。這讓昆蟲的氣體交換效率高，但也限制了體型——體型越大，O₂管道越難到達深部細胞。</p>
+    <div class="critical">
+      這就是為什麼<strong>恐龍般大小的昆蟲</strong>是不可能的！氣管系統有尺寸限制。
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🫁 哺乳類的肺：結構細節</h3>
+    <div class="flow">
+      <div class="flow-node gray">鼻/口</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gray">咽喉</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gray">氣管（trachea）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gray">支氣管（bronchi）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node gray">細支氣管（bronchioles）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node red">肺泡（alveoli）⭐</div>
+    </div>
+    <div class="info-box" style="margin-top:14px">
+      <div class="info-box-title">肺泡的設計</div>
+      <p>人體約有6億個肺泡，總表面積達<mark>70-80平方公尺</mark>（約一個網球場！），提供巨大的氣體交換面積。肺泡壁含有表面張力素（surfactant），防止肺泡塌陷。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 -->
+<section class="section sec-blue" id="s6">
+  <div class="section-header">
+    <span class="section-num">42.6</span>
+    <h2>呼吸換氣：不同動物的吸氣方式</h2>
+  </div>
+
+  <div class="compare-grid" style="grid-template-columns: 1fr 1fr 1fr">
+    <div class="compare-item red">
+      <h4>🐸 兩棲類：正壓呼吸</h4>
+      <ul>
+        <li>口腔底部下降→從鼻孔吸氣</li>
+        <li>閉口後口腔底部上升→<strong>壓氣</strong>入肺</li>
+        <li>靠擠壓「推」氣體進入肺部</li>
+        <li>類似打氣筒原理</li>
+      </ul>
+    </div>
+    <div class="compare-item gold">
+      <h4>🦅 鳥類：單向氣流</h4>
+      <ul>
+        <li>靠氣囊（air sacs）作為風箱</li>
+        <li>空氣只往<strong>同一方向</strong>流過肺</li>
+        <li>需要<strong>兩次</strong>呼吸循環</li>
+        <li>效率最高，適合高空飛行</li>
+      </ul>
+    </div>
+    <div class="compare-item blue">
+      <h4>🫁 哺乳類：負壓呼吸</h4>
+      <ul>
+        <li>肋骨肌+橫膈膜收縮→胸腔擴大</li>
+        <li>胸腔體積增加→氣壓降低</li>
+        <li>空氣被<strong>吸入</strong>肺部</li>
+        <li>類似注射器拉開活塞</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="critical">
+    哺乳類的<strong>橫膈膜（diaphragm）</strong>是呼吸的關鍵！收縮時向下移動→胸腔增大→吸氣（主動）；放鬆時向上回彈→胸腔縮小→呼氣（被動）。
+  </div>
+
+  <div class="card">
+    <h3>📐 肺容積相關名詞</h3>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">500mL</span>
+        <div class="stat-label">潮氣量（Tidal Volume）<br>靜息呼吸量</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">~4L</span>
+        <div class="stat-label">肺活量（Vital Capacity）<br>最大吸吐量</div>
+      </div>
+      <div class="stat" style="--stat-num-color:var(--blue)">
+        <span class="stat-num" style="color:var(--blue)">餘留</span>
+        <div class="stat-label">殘餘量（Residual Volume）<br>用力呼氣後仍留在肺的空氣</div>
+      </div>
+    </div>
+    <p style="margin-top:8px;font-size:13px;color:var(--gray)">哺乳類因為吸氣/呼氣走同一通道，吸入的新鮮空氣會與殘餘空氣混合，肺泡PO₂始終低於大氣。這是哺乳類在高海拔比鳥類更吃力的原因之一。</p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 呼吸節律的控制中心：延髓</h3>
+    <div class="info-box">
+      <div class="info-box-title">呼吸速率的主要控制因子是 CO₂（不是O₂）</div>
+      <p>延髓（medulla oblongata）偵測<strong>腦脊液的pH值</strong>（反映血液CO₂濃度）：</p>
+      <p style="margin-top:8px">代謝增加 → 血液CO₂↑ → 腦脊液pH↓ → 延髓偵測到 → 呼吸加深加快 → CO₂排出 → pH恢復</p>
+    </div>
+    <p style="margin-top:10px;color:var(--gray-dark)">O₂濃度只在極低時（如高海拔）才啟動呼吸調節，透過主動脈弓和頸動脈的感受器。</p>
+    <div class="big-highlight">
+      🌊 憋氣的衝動：憋氣時，不是O₂不夠而是<strong>CO₂積累導致pH下降</strong>，觸發憋不住的感覺！
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 -->
+<section class="section sec-red" id="s7">
+  <div class="section-header">
+    <span class="section-num">42.7</span>
+    <h2>呼吸色素與氣體運輸</h2>
+  </div>
+
+  <div class="card">
+    <h3>🔴 血紅素（Hemoglobin）：O₂的超級載體</h3>
+    <div class="info-box">
+      <div class="info-box-title">為什麼需要血紅素？</div>
+      <p>O₂在水中溶解度很低——每升血液只能溶解<strong>4.5 mL O₂</strong>。若沒有血紅素，激烈運動時心臟每分鐘需泵出<strong>555升血液</strong>才夠用！</p>
+      <p style="margin-top:8px">有了血紅素，每升血液可攜帶約<strong>200 mL O₂</strong>，心輸出量只需<strong>12.5 L/min</strong>即可滿足需求。</p>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-item red">
+        <h4>血紅素結構</h4>
+        <ul>
+          <li>4個次單元組成</li>
+          <li>每個次單元含1個血基質（heme）</li>
+          <li>血基質中心有<strong>鐵原子（Fe）</strong></li>
+          <li>每個分子攜帶 <mark>4個O₂</mark></li>
+          <li>顏色：含氧→鮮紅；缺氧→暗紅</li>
+        </ul>
+      </div>
+      <div class="compare-item blue">
+        <h4>協同效應（Cooperativity）</h4>
+        <ul>
+          <li>第一個O₂結合後，其餘次單元立即提高親和力</li>
+          <li>「全有或全無」的載卸方式</li>
+          <li>在肺部：迅速裝滿4個O₂</li>
+          <li>在組織：迅速卸下O₂供細胞使用</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="critical">
+    <strong>波爾效應（Bohr Shift）</strong>：活躍組織產生大量CO₂→局部pH下降→血紅素對O₂親和力降低→釋放更多O₂給需要的細胞！這是精準的自動調節機制：越活躍的細胞，獲得越多O₂。
+  </div>
+
+  <div class="card">
+    <h3>💨 CO₂ 的運輸方式</h3>
+    <table class="data-table">
+      <tr><th>運輸形式</th><th>比例</th><th>說明</th></tr>
+      <tr><td>溶解在血漿中</td><td>~7%</td><td>直接溶解在血液裡</td></tr>
+      <tr>
+        <td><strong>碳酸氫根離子（HCO₃⁻）</strong></td>
+        <td><mark>~70%</mark></td>
+        <td>CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻（由碳酸酐酶催化，在紅血球內）</td>
+      </tr>
+      <tr><td>與血紅素結合</td><td>~23%</td><td>以胺基甲酸血紅素形式運輸</td></tr>
+    </table>
+    <p style="margin-top:10px;color:var(--gray-dark)">HCO₃⁻ 游離到血漿中運輸，到達肺部後反應逆轉，CO₂重新釋放到肺泡空氣中排出。</p>
+  </div>
+
+  <div class="card">
+    <h3>🐬 潛水哺乳類的特殊適應</h3>
+    <p>威德爾海豹（Weddell seal）可潛水<strong>200-500公尺，超過1小時</strong>！秘訣在於：</p>
+    <div class="compare-grid">
+      <div class="compare-item blue">
+        <h4>超大O₂儲存量</h4>
+        <ul>
+          <li>體內血量是人類的兩倍/公斤</li>
+          <li>肌肉含高濃度<strong>肌紅素（myoglobin）</strong></li>
+          <li>整體O₂儲存量是人類的兩倍</li>
+        </ul>
+      </div>
+      <div class="compare-item green-c">
+        <h4>節約使用O₂</h4>
+        <ul>
+          <li>潛水時心率大幅下降</li>
+          <li>血液優先供應腦部和重要器官</li>
+          <li>肌肉切換為無氧代謝（發酵）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="memory">
+      <h4>演化的起點</h4>
+      <p>所有哺乳類都有<strong>潛水反射</strong>：臉接觸冷水時，心率立即下降。海豹祖先的這個反射在自然選擇下持續強化，歷經數百萬年演化為今日的深潛能力。</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<div class="quiz-box">
+  <h3>🎯 快速自我測驗（點擊查看答案）</h3>
+
+  <div class="quiz-item" onclick="toggleAnswer(this)">
+    <div class="quiz-q">Q1：為什麼多細胞動物不能只靠擴散來輸送物質？</div>
+    <div class="quiz-a">擴散所需時間與距離的平方成正比——距離增加10倍，時間增加100倍。擴散1cm需近3小時，多細胞動物體型大，必須靠循環系統主動輸送。</div>
+    <div class="quiz-hint">👆 點擊展開答案</div>
+  </div>
+
+  <div class="quiz-item" onclick="toggleAnswer(this)">
+    <div class="quiz-q">Q2：哺乳類四心腔的功能各是什麼？哪個壁最厚？</div>
+    <div class="quiz-a">右心房=接收全身缺氧血；右心室=泵血到肺；左心房=接收肺部含氧血；左心室=泵血到全身。<br>⭐<strong>左心室壁最厚</strong>——因為要對抗體循環的高阻力，需要最大力量。</div>
+    <div class="quiz-hint">👆 點擊展開答案</div>
+  </div>
+
+  <div class="quiz-item" onclick="toggleAnswer(this)">
+    <div class="quiz-q">Q3：為什麼微血管的血流速度最慢？慢有什麼好處？</div>
+    <div class="quiz-a">人體有約70億條微血管，<strong>總截面積</strong>（~4500 cm²）遠大於任何其他血管類型，根據流體力學，截面積越大流速越低。<br>流速慢的好處：讓O₂、養分、廢物有充分時間與組織液交換。</div>
+    <div class="quiz-hint">👆 點擊展開答案</div>
+  </div>
+
+  <div class="quiz-item" onclick="toggleAnswer(this)">
+    <div class="quiz-q">Q4：SA節點的AV節點各有什麼功能？為什麼AV節點需要延遲？</div>
+    <div class="quiz-a">SA節點（竇房節）= 心臟天然節律器，自發放電設定心率；AV節點（房室節）= 中繼站，將訊號傳向心室。<br>延遲0.1秒的原因：讓心房先完全收縮、血液充滿心室後，心室再收縮，確保每次心跳的泵血量最大。</div>
+    <div class="quiz-hint">👆 點擊展開答案</div>
+  </div>
+
+  <div class="quiz-item" onclick="toggleAnswer(this)">
+    <div class="quiz-q">Q5：什麼是波爾效應（Bohr Shift）？它為何對運動肌肉特別重要？</div>
+    <div class="quiz-a">pH下降（CO₂增加）→血紅素對O₂親和力降低→釋放更多O₂。<br>運動中的肌肉，細胞呼吸旺盛，CO₂大量生成，pH局部下降，觸發波爾效應，血紅素在此自動卸下更多O₂，正是這些活躍細胞最需要的——一個精妙的自動化按需供應機制。</div>
+    <div class="quiz-hint">👆 點擊展開答案</div>
+  </div>
+
+  <div class="quiz-item" onclick="toggleAnswer(this)">
+    <div class="quiz-q">Q6：憋氣時，最先讓你感到「憋不住」的是O₂下降還是CO₂上升？</div>
+    <div class="quiz-a"><strong>CO₂上升</strong>才是主要刺激！CO₂→碳酸→H⁺增加→腦脊液pH降低→延髓的呼吸中樞受刺激→強烈呼吸衝動。O₂濃度通常只在非常低時（如高海拔）才成為觸發因素。</div>
+    <div class="quiz-hint">👆 點擊展開答案</div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function toggleAnswer(el) {
+  const a = el.querySelector('.quiz-a');
+  const hint = el.querySelector('.quiz-hint');
+  a.classList.toggle('shown');
+  hint.textContent = a.classList.contains('shown') ? '👆 點擊收起' : '👆 點擊展開答案';
+}
+</script>
+
+</body>
+</html>
