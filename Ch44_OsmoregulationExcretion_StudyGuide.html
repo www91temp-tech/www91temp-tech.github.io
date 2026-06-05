@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第44章：滲透調節與排泄系統</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-ocean: #0a1628;
+    --midnight: #0f2040;
+    --navy: #1a3a5c;
+    --teal: #1a7a8a;
+    --aqua: #2ab8cc;
+    --seafoam: #4dd9e8;
+    --coral: #ff6b6b;
+    --amber: #f4a940;
+    --lime: #7ed957;
+    --lavender: #a78bfa;
+    --text-bright: #e8f4f8;
+    --text-soft: #9dbfcc;
+    --card-bg: rgba(26, 58, 92, 0.5);
+    --highlight: #ffe066;
+    --border-glow: rgba(42, 184, 204, 0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--deep-ocean);
+    color: var(--text-bright);
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated ocean background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(26,120,138,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(42,184,204,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(10,22,40,1) 0%, transparent 100%);
+    z-index: -1;
+  }
+
+  /* Navigation sidebar */
+  .nav-sidebar {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 8px;
+    z-index: 100;
+    background: rgba(10,22,40,0.8);
+    border-right: 1px solid var(--border-glow);
+    border-radius: 0 12px 12px 0;
+  }
+
+  .nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--teal);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid var(--aqua);
+  }
+
+  .nav-dot:hover, .nav-dot.active {
+    background: var(--aqua);
+    box-shadow: 0 0 8px var(--aqua);
+    transform: scale(1.3);
+  }
+
+  /* Hero header */
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '💧';
+    position: absolute;
+    font-size: 300px;
+    opacity: 0.03;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .chapter-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--aqua);
+    border: 1px solid var(--aqua);
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 span {
+    color: var(--aqua);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-soft);
+    max-width: 620px;
+    margin: 0 auto 40px;
+  }
+
+  .key-question {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    border: 1px solid var(--aqua);
+    border-radius: 16px;
+    padding: 16px 28px;
+    font-size: 1rem;
+    color: var(--seafoam);
+    font-weight: 500;
+    box-shadow: 0 0 30px rgba(42,184,204,0.2);
+  }
+
+  /* Section layout */
+  .section {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    scroll-margin-top: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .section-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--aqua);
+    opacity: 0.4;
+    line-height: 1;
+    min-width: 60px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--text-bright);
+    border-bottom: 2px solid var(--teal);
+    padding-bottom: 8px;
+  }
+
+  .section-title .emoji {
+    margin-right: 10px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid rgba(42,184,204,0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s, transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--aqua);
+    transform: translateY(-2px);
+  }
+
+  .card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem;
+    color: var(--aqua);
+    margin-bottom: 10px;
+  }
+
+  /* Key term highlight */
+  .key-term {
+    display: inline;
+    background: rgba(255,224,102,0.15);
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+    padding: 0 3px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* IMPORTANT callout box */
+  .callout {
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .callout::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .callout-critical {
+    background: rgba(255,107,107,0.12);
+    border: 1px solid rgba(255,107,107,0.35);
+  }
+  .callout-critical::before { background: var(--coral); }
+
+  .callout-important {
+    background: rgba(244,169,64,0.12);
+    border: 1px solid rgba(244,169,64,0.35);
+  }
+  .callout-important::before { background: var(--amber); }
+
+  .callout-tip {
+    background: rgba(126,217,87,0.1);
+    border: 1px solid rgba(126,217,87,0.3);
+  }
+  .callout-tip::before { background: var(--lime); }
+
+  .callout-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .callout-critical .callout-label { color: var(--coral); }
+  .callout-important .callout-label { color: var(--amber); }
+  .callout-tip .callout-label { color: var(--lime); }
+
+  /* Comparison grid */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 640px) {
+    .compare-grid { grid-template-columns: 1fr; }
+    .nav-sidebar { display: none; }
+  }
+
+  .compare-card {
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .compare-card:hover { transform: translateY(-4px); }
+
+  .compare-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .compare-card h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .compare-card p {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  .card-ammonia { background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.4); }
+  .card-ammonia h4 { color: #ff8585; }
+
+  .card-urea { background: rgba(244,169,64,0.1); border-color: rgba(244,169,64,0.4); }
+  .card-urea h4 { color: var(--amber); }
+
+  .card-uric { background: rgba(126,217,87,0.1); border-color: rgba(126,217,87,0.4); }
+  .card-uric h4 { color: var(--lime); }
+
+  /* Waste table */
+  .waste-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9rem;
+  }
+
+  .waste-table th {
+    background: var(--navy);
+    color: var(--aqua);
+    padding: 10px 14px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  .waste-table td {
+    padding: 10px 14px;
+    text-align: center;
+    border-bottom: 1px solid rgba(42,184,204,0.1);
+  }
+
+  .waste-table tr:hover td { background: rgba(42,184,204,0.05); }
+
+  .level-high { color: var(--coral); font-weight: 700; }
+  .level-med { color: var(--amber); font-weight: 600; }
+  .level-low { color: var(--lime); font-weight: 600; }
+
+  /* Flow diagram for nephron */
+  .nephron-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 28px 0;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 130px;
+    padding: 16px 12px;
+    text-align: center;
+    position: relative;
+    cursor: default;
+  }
+
+  .flow-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    color: var(--aqua);
+    z-index: 2;
+  }
+
+  .flow-step .step-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .flow-step .step-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-soft);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .flow-step .step-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--aqua);
+    margin-bottom: 6px;
+  }
+
+  .flow-step .step-desc {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+
+  .flow-step-1 { background: rgba(26,122,138,0.2); border-radius: 12px 0 0 12px; border: 1px solid rgba(42,184,204,0.25); }
+  .flow-step-2 { background: rgba(42,184,204,0.12); border: 1px solid rgba(42,184,204,0.25); border-left: none; }
+  .flow-step-3 { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.25); border-left: none; }
+  .flow-step-4 { background: rgba(126,217,87,0.12); border-radius: 0 12px 12px 0; border: 1px solid rgba(126,217,87,0.25); border-left: none; }
+
+  /* Nephron tubule visual */
+  .nephron-tubule {
+    background: linear-gradient(135deg, rgba(15,32,64,0.9), rgba(26,58,92,0.9));
+    border: 1px solid var(--border-glow);
+    border-radius: 20px;
+    padding: 28px;
+    margin: 24px 0;
+  }
+
+  .tubule-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--seafoam);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .tubule-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tubule-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .tubule-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .badge-1 { background: rgba(42,184,204,0.25); color: var(--seafoam); border: 1px solid var(--aqua); }
+  .badge-2 { background: rgba(244,169,64,0.2); color: #f4c06a; border: 1px solid var(--amber); }
+  .badge-3 { background: rgba(167,139,250,0.2); color: #c4b5fd; border: 1px solid var(--lavender); }
+  .badge-4 { background: rgba(255,107,107,0.2); color: #ff9999; border: 1px solid var(--coral); }
+  .badge-5 { background: rgba(126,217,87,0.2); color: #a3e87a; border: 1px solid var(--lime); }
+
+  .tubule-content h4 {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .tubule-content p {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  /* Hormone circuit */
+  .hormone-box {
+    background: rgba(26,58,92,0.6);
+    border-radius: 14px;
+    padding: 20px;
+    margin: 16px 0;
+    border-left: 4px solid;
+  }
+
+  .hormone-box h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .hormone-adh { border-color: var(--aqua); }
+  .hormone-adh h4 { color: var(--aqua); }
+
+  .hormone-raas { border-color: var(--amber); }
+  .hormone-raas h4 { color: var(--amber); }
+
+  .hormone-anp { border-color: var(--lime); }
+  .hormone-anp h4 { color: var(--lime); }
+
+  /* Animal habitat cards */
+  .habitat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  @media (max-width: 640px) { .habitat-grid { grid-template-columns: 1fr; } }
+
+  .habitat-card {
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid rgba(42,184,204,0.2);
+  }
+
+  .habitat-card .emoji-big {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .habitat-card h4 {
+    font-weight: 700;
+    color: var(--aqua);
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+  }
+
+  .habitat-card p {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  .habitat-sea { background: rgba(0,80,120,0.25); }
+  .habitat-fresh { background: rgba(30,120,80,0.2); }
+  .habitat-land { background: rgba(120,80,20,0.2); }
+  .habitat-desert { background: rgba(180,100,20,0.15); }
+
+  /* Memory boxes */
+  .memory-card {
+    background: linear-gradient(135deg, rgba(255,224,102,0.1), rgba(255,174,0,0.08));
+    border: 1px solid rgba(255,224,102,0.35);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+
+  .memory-card .mem-icon {
+    font-size: 1.3rem;
+    margin-right: 8px;
+  }
+
+  .memory-card .mem-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--highlight);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .memory-card p {
+    color: #ffe8a0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .memory-card strong { color: var(--highlight); }
+
+  /* Quick review quiz */
+  .quiz-section {
+    background: rgba(10,22,40,0.8);
+    border: 1px solid var(--border-glow);
+    border-radius: 20px;
+    padding: 32px;
+    margin: 40px 0;
+  }
+
+  .quiz-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.4rem;
+    color: var(--aqua);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .quiz-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(42,184,204,0.15);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .quiz-item:hover { border-color: var(--aqua); }
+
+  .quiz-q {
+    font-weight: 600;
+    color: var(--text-bright);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .quiz-q::before {
+    content: 'Q';
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--teal);
+    color: white;
+    padding: 2px 7px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .quiz-a {
+    display: none;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(42,184,204,0.2);
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .quiz-a.show { display: block; }
+
+  .quiz-a::before {
+    content: '▶ ';
+    color: var(--lime);
+    font-size: 0.75rem;
+  }
+
+  /* Summary table */
+  .sum-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 20px 0;
+  }
+
+  .sum-table th {
+    background: var(--navy);
+    color: var(--aqua);
+    padding: 10px 12px;
+    text-align: left;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .sum-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(42,184,204,0.1);
+    vertical-align: top;
+    color: var(--text-soft);
+  }
+
+  .sum-table td:first-child {
+    color: var(--seafoam);
+    font-weight: 600;
+  }
+
+  .sum-table tr:hover td { background: rgba(42,184,204,0.04); }
+
+  /* Section divider */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    margin: 0 auto;
+  }
+
+  /* Progress breadcrumb */
+  .breadcrumb {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 24px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(42,184,204,0.2);
+    transition: all 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--aqua);
+    border-color: var(--aqua);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--deep-ocean); }
+  ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+
+  /* Fade-in animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  /* Pulse glow for critical terms */
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 6px rgba(255,224,102,0.3); }
+    50% { box-shadow: 0 0 16px rgba(255,224,102,0.6); }
+  }
+
+  .glow-pulse {
+    animation: pulseGlow 2.5s infinite;
+  }
+
+  /* Loop of Henle visual */
+  .henle-visual {
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+    gap: 0;
+  }
+
+  .henle-arm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+  }
+
+  .henle-segment {
+    width: 120px;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: 0.76rem;
+    border: 1px solid;
+    margin: 0;
+  }
+
+  .seg-descending { background: rgba(42,184,204,0.15); border-color: var(--aqua); color: var(--seafoam); }
+  .seg-ascending { background: rgba(244,169,64,0.12); border-color: var(--amber); color: #f4c06a; }
+  .seg-tip { 
+    background: rgba(255,107,107,0.15); 
+    border-color: var(--coral); 
+    color: var(--coral); 
+    border-radius: 0 0 60px 60px; 
+    width: 120px;
+    font-weight: 700;
+  }
+
+  .seg-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .seg-desc { margin-top: 4px; color: var(--text-soft); }
+
+  /* tags */
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-family: 'Space Mono', monospace;
+    margin: 2px;
+  }
+
+  .tag-red { background: rgba(255,107,107,0.2); color: #ff9999; border: 1px solid rgba(255,107,107,0.4); }
+  .tag-green { background: rgba(126,217,87,0.2); color: #a3e87a; border: 1px solid rgba(126,217,87,0.4); }
+  .tag-blue { background: rgba(42,184,204,0.2); color: var(--seafoam); border: 1px solid rgba(42,184,204,0.4); }
+  .tag-yellow { background: rgba(255,224,102,0.15); color: var(--highlight); border: 1px solid rgba(255,224,102,0.4); }
+</style>
+</head>
+<body>
+
+<!-- Navigation dots -->
+<nav class="nav-sidebar" aria-label="章節導航">
+  <div class="nav-dot active" onclick="scrollToSection('intro')" title="前言"></div>
+  <div class="nav-dot" onclick="scrollToSection('concept1')" title="概念1：滲透調節"></div>
+  <div class="nav-dot" onclick="scrollToSection('concept2')" title="概念2：含氮廢物"></div>
+  <div class="nav-dot" onclick="scrollToSection('concept3')" title="概念3：排泄系統"></div>
+  <div class="nav-dot" onclick="scrollToSection('concept4')" title="概念4：腎元"></div>
+  <div class="nav-dot" onclick="scrollToSection('concept5')" title="概念5：荷爾蒙調節"></div>
+  <div class="nav-dot" onclick="scrollToSection('review')" title="複習測驗"></div>
+</nav>
+
+<!-- Hero -->
+<header class="hero fade-in" id="intro">
+  <div class="chapter-tag">Chapter 44 · Biology</div>
+  <h1>滲透調節與<span>排泄系統</span></h1>
+  <h1 style="font-size:clamp(1rem,2vw,1.4rem); color:var(--text-soft); font-weight:400; margin-top:4px;">Osmoregulation and Excretion</h1>
+  <p class="hero-sub">動物如何在體內維持水分與鹽分的平衡？廢物又如何從體內排出？本章帶你深入了解這套精密的調節系統。</p>
+  <div class="key-question">🌊 核心問題：動物如何調節體液中的水分與鹽分濃度？</div>
+</header>
+
+<nav class="breadcrumb">
+  <a href="#intro">📖 前言</a>
+  <a href="#concept1">💧 滲透調節</a>
+  <a href="#concept2">🧬 含氮廢物</a>
+  <a href="#concept3">🔬 排泄系統</a>
+  <a href="#concept4">🫘 腎元運作</a>
+  <a href="#concept5">⚗️ 荷爾蒙調控</a>
+  <a href="#review">📝 複習測驗</a>
+</nav>
+
+<!-- INTRO CONCEPTS -->
+<section class="section" id="intro-concepts">
+  <div class="card fade-in">
+    <h3>🎯 為什麼需要滲透調節和排泄？</h3>
+    <p>動物的細胞必須浸泡在<strong>濃度適當的體液</strong>中才能正常運作。如果體液太稀或太濃，細胞會膨脹破裂或萎縮死亡。同時，細胞代謝蛋白質和核酸時會產生有毒的<span class="key-term">含氮廢物</span>（如氨），必須及時排出體外。</p>
+  </div>
+
+  <div class="compare-grid fade-in delay-1">
+    <div style="background:rgba(42,184,204,0.08);border:1px solid rgba(42,184,204,0.3);border-radius:12px;padding:18px;text-align:center;">
+      <span style="font-size:2rem;">🫧</span>
+      <p style="color:var(--coral);font-weight:700;font-size:1rem;margin:8px 0 4px;">高滲（Hyperosmotic）</p>
+      <p style="font-size:0.82rem;color:var(--text-soft);">細胞外比細胞內<br>溶質濃度<strong style="color:var(--coral)">更高</strong><br>→ 水分進入細胞<br>→ 細胞膨脹破裂 💥</p>
+    </div>
+    <div style="background:rgba(126,217,87,0.08);border:1px solid rgba(126,217,87,0.3);border-radius:12px;padding:18px;text-align:center;">
+      <span style="font-size:2rem;">⚖️</span>
+      <p style="color:var(--lime);font-weight:700;font-size:1rem;margin:8px 0 4px;">等滲（Isoosmotic）</p>
+      <p style="font-size:0.82rem;color:var(--text-soft);">兩側溶質濃度<strong style="color:var(--lime)">相同</strong><br>→ 水分不淨移動<br>→ 細胞保持正常 ✅</p>
+    </div>
+    <div style="background:rgba(244,169,64,0.08);border:1px solid rgba(244,169,64,0.3);border-radius:12px;padding:18px;text-align:center;">
+      <span style="font-size:2rem;">🌵</span>
+      <p style="color:var(--amber);font-weight:700;font-size:1rem;margin:8px 0 4px;">低滲（Hypoosmotic）</p>
+      <p style="font-size:0.82rem;color:var(--text-soft);">細胞外比細胞內<br>溶質濃度<strong style="color:var(--amber)">更低</strong><br>→ 水分流出細胞<br>→ 細胞皺縮死亡 💀</p>
+    </div>
+  </div>
+
+  <div class="callout callout-important fade-in delay-2">
+    <span class="callout-label">⚠️ 關鍵概念</span>
+    動物<strong>無法直接抽水穿過細胞膜</strong>，所以只能藉由移動<span class="key-term">溶質</span>來間接控制水分的流向。水分會從溶質濃度低的地方，透過滲透作用（osmosis）流向溶質濃度高的地方。
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCEPT 44.1 -->
+<section class="section" id="concept1">
+  <div class="section-header">
+    <span class="section-number">44.1</span>
+    <h2 class="section-title"><span class="emoji">💧</span>滲透調節：平衡水分與溶質的進出</h2>
+  </div>
+
+  <div class="card fade-in">
+    <h3>📏 滲透濃度（Osmolarity）是什麼？</h3>
+    <p>衡量溶液濃度的單位是「<span class="key-term">滲透濃度</span>」，單位為 mOsm/L（毫滲透莫耳/公升）。</p>
+    <ul style="margin-top:12px;padding-left:20px;color:var(--text-soft);font-size:0.9rem;">
+      <li>人體血液：約 <strong style="color:var(--aqua)">300 mOsm/L</strong></li>
+      <li>海水：約 <strong style="color:var(--coral)">1,000 mOsm/L</strong>（是血液的3倍多）</li>
+      <li>淡水：約 <strong style="color:var(--lime)">0.5–15 mOsm/L</strong>（遠比血液稀）</li>
+    </ul>
+  </div>
+
+  <h3 style="color:var(--aqua);margin:28px 0 16px;font-family:'Noto Serif TC',serif;">兩種應對策略</h3>
+
+  <div class="compare-grid">
+    <div style="grid-column:1/2; background:rgba(42,184,204,0.1);border:2px solid var(--teal);border-radius:14px;padding:20px;">
+      <span style="font-size:2rem;">🌊</span>
+      <h4 style="color:var(--aqua);margin:8px 0;font-size:1rem;font-weight:700;">順滲調節者<br><small style="font-weight:400;color:var(--text-soft)">Osmoconformer</small></h4>
+      <p style="font-size:0.85rem;color:var(--text-soft);line-height:1.6;">體液滲透濃度與環境<strong style="color:var(--seafoam)">相同</strong>，不主動調節。幾乎只有海洋無脊椎動物（如海蛤、海星）採用此策略。省能量，但無法離開穩定的海洋環境。</p>
+    </div>
+    <div style="grid-column:2/4; background:rgba(126,217,87,0.1);border:2px solid rgba(126,217,87,0.5);border-radius:14px;padding:20px;">
+      <span style="font-size:2rem;">🐟</span>
+      <h4 style="color:var(--lime);margin:8px 0;font-size:1rem;font-weight:700;">滲透調節者<br><small style="font-weight:400;color:var(--text-soft)">Osmoregulator</small></h4>
+      <p style="font-size:0.85rem;color:var(--text-soft);line-height:1.6;">主動調節體液滲透濃度，使其<strong style="color:var(--lime)">不隨外界變化</strong>。所有淡水動物、陸生動物，以及大多數海洋脊椎動物都是此類型。需消耗能量，但適應力強。</p>
+      <p style="font-size:0.82rem;color:var(--text-soft);margin-top:8px;"><span class="tag tag-blue">廣鹽性</span> <strong>euryhaline</strong>：能承受大幅鹽度變化的動物（如鮭魚）<br><span class="tag tag-red">窄鹽性</span> <strong>stenohaline</strong>：對鹽度變化敏感，無法耐受大幅波動</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--aqua);margin:28px 0 16px;font-family:'Noto Serif TC',serif;">不同棲地動物的挑戰與應對</h3>
+
+  <div class="habitat-grid">
+    <div class="habitat-card habitat-sea">
+      <span class="emoji-big">🐠</span>
+      <h4>海洋硬骨魚（如鱈魚）</h4>
+      <p>海水比體液<strong>更濃</strong>，魚體不斷失水。<br>應對：<span class="key-term">大量喝海水</span> + 由鰓和腎臟排出多餘的鹽 + 排少量尿液。</p>
+    </div>
+    <div class="habitat-card habitat-sea">
+      <span class="emoji-big">🦈</span>
+      <h4>軟骨魚（鯊魚）</h4>
+      <p>體內保留高濃度的<span class="key-term">尿素</span>和 TMAO（氧化三甲胺），使體液滲透濃度略高於海水。<br>水分因此<strong>緩慢流入</strong>，不需喝海水。</p>
+    </div>
+    <div class="habitat-card habitat-fresh">
+      <span class="emoji-big">🐟</span>
+      <h4>淡水魚（如鱸魚）</h4>
+      <p>淡水比體液<strong>更稀</strong>，水分不斷滲入。<br>應對：<span class="key-term">排大量稀尿</span>（不喝水）+ 鰓主動攝取鹽分。</p>
+    </div>
+    <div class="habitat-card habitat-land">
+      <span class="emoji-big">🦎</span>
+      <h4>陸生動物</h4>
+      <p>最大威脅是<span class="key-term">脫水（desiccation）</span>。<br>應對：防水皮膚（角質層、蠟質）＋夜行習性＋排出濃縮尿液＋補充飲水與食物中的水分。</p>
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <span class="callout-label">🐦 有趣案例：信天翁喝海水也能活！</span>
+    海鳥（信天翁）有<span class="key-term">鼻腺（鹽腺）</span>，可分泌濃度遠高於海水的鹽溶液，直接從鼻尖滴出！喝進去的海水帶來大量鹽分，但鹽腺能排出更多的鹽，讓身體反而獲得淨水分。人類喝海水只會更脫水，因為我們的腎臟需要用更多水來排出鹽分。
+  </div>
+
+  <div class="memory-card">
+    <span class="mem-label">🧠 記憶口訣</span>
+    <p>「海魚喝海水排少尿，淡魚不喝排大量（稀尿），陸生防水靠皮膚」——三種環境，三種策略，方向完全相反！</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCEPT 44.2 -->
+<section class="section" id="concept2">
+  <div class="section-header">
+    <span class="section-number">44.2</span>
+    <h2 class="section-title"><span class="emoji">🧬</span>含氮廢物的種類與演化</h2>
+  </div>
+
+  <div class="card fade-in">
+    <h3>為什麼動物需要排出含氮廢物？</h3>
+    <p>細胞分解<strong>蛋白質和核酸</strong>時，會切除胺基（–NH₂），形成具有毒性的<span class="key-term">氨（Ammonia, NH₃）</span>。不同動物將氨轉換成不同形式的廢物排出，以平衡<strong>毒性、耗能、耗水</strong>三者之間的取捨。</p>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-card card-ammonia glow-pulse">
+      <span class="icon">🐠</span>
+      <h4>氨（Ammonia）</h4>
+      <p><span class="tag tag-red">毒性：高</span><br><span class="tag tag-green">耗能：低</span><br><span class="tag tag-red">耗水：多</span><br><br>直接排放，溶於大量水中即可稀釋。<br><strong>主要：水生動物（魚、水生無脊椎動物）</strong></p>
+    </div>
+    <div class="compare-card card-urea">
+      <span class="icon">🐭</span>
+      <h4>尿素（Urea）</h4>
+      <p><span class="tag tag-yellow">毒性：中</span><br><span class="tag tag-yellow">耗能：中</span><br><span class="tag tag-yellow">耗水：中</span><br><br>在肝臟由氨合成，溶於尿液排出。<br><strong>主要：哺乳類、大部分兩棲類、鯊魚</strong></p>
+    </div>
+    <div class="compare-card card-uric">
+      <span class="icon">🦅</span>
+      <h4>尿酸（Uric Acid）</h4>
+      <p><span class="tag tag-green">毒性：低</span><br><span class="tag tag-red">耗能：高</span><br><span class="tag tag-green">耗水：少</span><br><br>幾乎不溶於水，以半固體糊狀排出（鳥糞白色部分！）<br><strong>主要：鳥類、爬行類、昆蟲、陸生蝸牛</strong></p>
+    </div>
+  </div>
+
+  <div class="callout callout-critical">
+    <span class="callout-label">⭐ 最重要的比較表格</span>
+    <table class="waste-table">
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>氨 Ammonia</th>
+          <th>尿素 Urea</th>
+          <th>尿酸 Uric Acid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--seafoam);font-weight:600;">毒性</td>
+          <td><span class="level-high">高</span></td>
+          <td><span class="level-med">低</span></td>
+          <td><span class="level-low">極低</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--seafoam);font-weight:600;">排出耗水量</td>
+          <td><span class="level-high">多（需大量稀釋）</span></td>
+          <td><span class="level-med">中</span></td>
+          <td><span class="level-low">少（半固體）</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--seafoam);font-weight:600;">合成耗能</td>
+          <td><span class="level-low">低（不需轉換）</span></td>
+          <td><span class="level-med">中</span></td>
+          <td><span class="level-high">高（最耗 ATP）</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--seafoam);font-weight:600;">溶解性</td>
+          <td>高</td>
+          <td>高</td>
+          <td><span class="level-high">低（幾乎不溶）</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--seafoam);font-weight:600;">代表動物</td>
+          <td>大多數魚類、水生無脊椎</td>
+          <td>哺乳類、鯊魚、成年兩棲類</td>
+          <td>鳥類、爬行類、昆蟲</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-tip">
+    <span class="callout-label">🥚 演化的智慧：有殼的蛋為什麼選尿酸？</span>
+    鳥類和爬行類的蛋有硬殼，不透液體。如果胚胎排出可溶的氨或尿素，廢物會積在蛋內達到中毒濃度。尿酸不溶於水，以固體形式儲在蛋裡無害，孵化後留在殼中——這是自然選擇的精妙設計！
+  </div>
+
+  <div class="memory-card">
+    <span class="mem-label">🧠 記憶口訣</span>
+    <p><strong>「魚氨鳥酸哺乳尿素」</strong>——水生魚類用氨（水多稀釋沒問題）、鳥類爬行類用尿酸（省水省重要）、哺乳類用尿素（折中方案）。兩棲類幼體（蝌蚪）在水中→排氨；成體（青蛙）上陸→改排尿素。</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCEPT 44.3 -->
+<section class="section" id="concept3">
+  <div class="section-header">
+    <span class="section-number">44.3</span>
+    <h2 class="section-title"><span class="emoji">🔬</span>各種排泄系統——管狀構造的變奏</h2>
+  </div>
+
+  <div class="card fade-in">
+    <h3>排泄系統的四個共同步驟</h3>
+  </div>
+
+  <div class="nephron-flow fade-in delay-1">
+    <div class="flow-step flow-step-1">
+      <span class="step-icon">🩸</span>
+      <div class="step-num">步驟 1</div>
+      <div class="step-name">過濾<br>Filtration</div>
+      <div class="step-desc">血壓將水分與小分子溶質<br>壓入管腔，形成「原始濾液」。大分子（蛋白質）和細胞留在血液中。</div>
+    </div>
+    <div class="flow-step flow-step-2">
+      <span class="step-icon">♻️</span>
+      <div class="step-num">步驟 2</div>
+      <div class="step-name">再吸收<br>Reabsorption</div>
+      <div class="step-desc">有用的物質（葡萄糖、胺基酸、水分、鹽）從濾液回收入血液。</div>
+    </div>
+    <div class="flow-step flow-step-3">
+      <span class="step-icon">💉</span>
+      <div class="step-num">步驟 3</div>
+      <div class="step-name">分泌<br>Secretion</div>
+      <div class="step-desc">多餘的離子、藥物、毒素等從血液主動分泌進入濾液。</div>
+    </div>
+    <div class="flow-step flow-step-4">
+      <span class="step-icon">🚽</span>
+      <div class="step-num">步驟 4</div>
+      <div class="step-name">排泄<br>Excretion</div>
+      <div class="step-desc">最終的廢液（尿液）含有含氮廢物，排出體外。</div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--aqua);margin:28px 0 16px;font-family:'Noto Serif TC',serif;">不同動物的排泄系統比較</h3>
+
+  <table class="sum-table fade-in">
+    <thead>
+      <tr>
+        <th>動物</th>
+        <th>排泄器官</th>
+        <th>特點</th>
+        <th>主要功能</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>扁蟲 🪱<br><small>（渦蟲）</small></td>
+        <td>原腎管<br>Protonephridia</td>
+        <td>末端有「焰球」（flame bulb），纖毛擺動帶動液體流動，不直接接觸血液</td>
+        <td>主要是滲透調節（淡水種），排出稀尿以平衡滲透進入的水</td>
+      </tr>
+      <tr>
+        <td>蚯蚓 🪱<br><small>（節肢動物）</small></td>
+        <td>後腎管<br>Metanephridia</td>
+        <td>每個體節一對，直接從體腔液抽取，有微血管網包圍</td>
+        <td>滲透調節 + 排泄；再吸收鹽分、排出稀尿</td>
+      </tr>
+      <tr>
+        <td>昆蟲 🦗<br><small>（陸生節肢）</small></td>
+        <td>馬氏管<br>Malpighian Tubules</td>
+        <td>浸於血淋巴（hemolymph）中，分泌廢物進入腸道；在直腸再吸收水分</td>
+        <td>排泄含氮廢物（以尿酸為主）；極省水，陸生昆蟲的關鍵適應</td>
+      </tr>
+      <tr>
+        <td>脊椎動物 🫀<br><small>（包含人類）</small></td>
+        <td>腎臟<br>Kidney</td>
+        <td>由數百萬條<span class="key-term">腎元（nephron）</span>組成；具完整的過濾→再吸收→分泌→排泄流程</td>
+        <td>精密調控滲透濃度、pH值、血壓，同時排泄含氮廢物</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="memory-card">
+    <span class="mem-label">🧠 記憶口訣</span>
+    <p><strong>「扁蟲原腎、蚯蚓後腎、昆蟲馬氏、脊椎腎臟」</strong><br>複雜度依序增加，功能也越來越精密。昆蟲的馬氏管最特別——廢物先進腸道，水分在直腸最後才被回收，極度省水！</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCEPT 44.4 -->
+<section class="section" id="concept4">
+  <div class="section-header">
+    <span class="section-number">44.4</span>
+    <h2 class="section-title"><span class="emoji">🫘</span>腎元：濾液的逐步加工廠</h2>
+  </div>
+
+  <div class="card fade-in">
+    <h3>腎臟的基本結構</h3>
+    <p>人類每個腎臟約 10 公分，含約 <span class="key-term">100萬條腎元</span>。腎臟分為外層的<strong style="color:var(--aqua)">腎皮質</strong>和內層的<strong style="color:var(--amber)">腎髓質</strong>。腎元類型：</p>
+    <ul style="margin-top:10px;padding-left:20px;color:var(--text-soft);font-size:0.9rem;">
+      <li><span class="tag tag-blue">皮質腎元</span> 85%，位於皮質，作一般過濾</li>
+      <li><span class="tag tag-yellow">近髓質腎元</span> 15%，深入髓質，是<strong style="color:var(--highlight)">濃縮尿液的關鍵</strong>！</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-critical">
+    <span class="callout-label">⭐ 必讀：腎元各部位的功能</span>
+    <div class="nephron-tubule">
+      <div class="tubule-title">— 濾液在腎元中的旅程 —</div>
+      <div class="tubule-steps">
+        <div class="tubule-step">
+          <div class="tubule-badge badge-1">①</div>
+          <div class="tubule-content">
+            <h4>鮑氏囊 + 腎絲球（Bowman's Capsule + Glomerulus）</h4>
+            <p>血壓將血液中的水分和小分子「壓」入鮑氏囊，形成<span class="key-term">原始濾液</span>。每日過濾約 180 公升！（大分子蛋白質和血球留在血液中）</p>
+          </div>
+        </div>
+        <div class="tubule-step">
+          <div class="tubule-badge badge-1">②</div>
+          <div class="tubule-content">
+            <h4>近曲小管（Proximal Tubule）</h4>
+            <p>大量再吸收：NaCl、水（約65%）、葡萄糖、胺基酸全部回收。同時分泌 H⁺ 調節 pH 值。藥物和毒素在此由血液分泌進入濾液排出。</p>
+          </div>
+        </div>
+        <div class="tubule-step">
+          <div class="tubule-badge badge-2">③</div>
+          <div class="tubule-content">
+            <h4>亨氏環下行支（Descending Limb of Loop of Henle）</h4>
+            <p><strong style="color:#f4c06a">只透水，不透鹽</strong>——水分依滲透梯度大量離開（有水通道蛋白 aquaporin），濾液越走越濃縮，在彎底部滲透濃度最高（約 1,200 mOsm/L）。</p>
+          </div>
+        </div>
+        <div class="tubule-step">
+          <div class="tubule-badge badge-3">④</div>
+          <div class="tubule-content">
+            <h4>亨氏環上行支（Ascending Limb of Loop of Henle）</h4>
+            <p><strong style="color:#c4b5fd">只透鹽，不透水</strong>——NaCl 擴散或主動運輸離開（無水通道蛋白），濾液越走越稀，回到皮質時已比血液還稀。上行支主動運輸鹽是維持腎髓質高滲梯度的核心機制！</p>
+          </div>
+        </div>
+        <div class="tubule-step">
+          <div class="tubule-badge badge-4">⑤</div>
+          <div class="tubule-content">
+            <h4>遠曲小管（Distal Tubule）</h4>
+            <p>調節 K⁺ 和 NaCl 的濃度；受荷爾蒙調控，協助維持體液 pH 值（分泌 H⁺，再吸收 HCO₃⁻）。</p>
+          </div>
+        </div>
+        <div class="tubule-step">
+          <div class="tubule-badge badge-5">⑥</div>
+          <div class="tubule-content">
+            <h4>集尿管（Collecting Duct）</h4>
+            <p>決定最終尿液濃度的關鍵！</p>
+            <p>• <strong>有 ADH</strong> → 水通道蛋白插入膜中 → 大量吸水 → 排出<strong style="color:var(--amber)">濃縮尿液</strong></p>
+            <p>• <strong>無 ADH</strong> → 無水通道蛋白 → 主動排鹽 → 排出<strong style="color:var(--aqua)">大量稀尿</strong></p>
+            <p>• 內髓質段透過尿素 → 尿素擴散出去，維持髓質高滲梯度</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--aqua);margin:28px 0 16px;font-family:'Noto Serif TC',serif;">逆流倍增系統——濃縮尿液的秘密</h3>
+
+  <div class="card">
+    <h3>🔄 逆流倍增系統（Countercurrent Multiplier）</h3>
+    <p>亨氏環的下行支和上行支的液體方向<strong>相反</strong>，就像兩條方向相反的河流並排而流，形成一個不斷「放大」滲透梯度的機制：</p>
+    <ul style="margin-top:12px;padding-left:20px;color:var(--text-soft);font-size:0.88rem;line-height:1.8;">
+      <li>上行支<strong>主動運輸</strong>鹽分出去（消耗 ATP），使腎髓質越深越鹹</li>
+      <li>下行支水分被抽走，濃縮的鹽又流進上行支的底端，繼續循環</li>
+      <li>最終在腎髓質深部建立高達 <strong style="color:var(--coral)">1,200 mOsm/L</strong> 的超高滲透環境</li>
+      <li>集尿管流過這個梯度時，水分自然被抽出，尿液因此濃縮</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-important">
+    <span class="callout-label">⚠️ 亨氏環長度決定尿液濃縮能力</span>
+    <p>亨氏環<strong>越長</strong>→ 滲透梯度越大 → 尿液越濃縮（越省水）</p>
+    <ul style="margin-top:10px;padding-left:20px;font-size:0.88rem;color:var(--text-soft);">
+      <li>沙漠哺乳類（如袋鼠鼠）：亨氏環極長，尿液可濃縮至 <strong>9,300 mOsm/L</strong>（是血液的31倍！）</li>
+      <li>水生哺乳類（如海狸）：多為短亨氏環的皮質腎元，尿液較稀</li>
+      <li>沙漠動物不喝水也能生存的關鍵就在這裡！</li>
+    </ul>
+  </div>
+
+  <div class="memory-card">
+    <span class="mem-label">🧠 記憶要點</span>
+    <p>記住亨氏環兩支的「天生對立」：<strong>下行支透水不透鹽；上行支透鹽不透水</strong>。這個不對稱性是逆流倍增的核心！人類每天過濾 180 公升的血液，但最終只排出約 1.5 公升尿液——<strong>99% 的水分被回收</strong>，這就是腎元的驚人效率。</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONCEPT 44.5 -->
+<section class="section" id="concept5">
+  <div class="section-header">
+    <span class="section-number">44.5</span>
+    <h2 class="section-title"><span class="emoji">⚗️</span>荷爾蒙調控——腎臟、水分與血壓的連動</h2>
+  </div>
+
+  <div class="card fade-in">
+    <h3>腎臟受三套荷爾蒙系統的精密調控</h3>
+    <p>腎臟並不是只管自己的事——它的運作與<strong>血壓、血量、體液滲透濃度</strong>全部相互連動，由以下三套系統共同協調：</p>
+  </div>
+
+  <div class="hormone-box hormone-adh fade-in delay-1">
+    <h4>💧 ADH（抗利尿激素）——調控水分保留</h4>
+    <p><strong>完整名稱：</strong>Antidiuretic Hormone，又叫 vasopressin（血管加壓素）</p>
+    <p><strong>觸發條件：</strong>血液滲透濃度升高（例如：流汗後、攝入過多鹽分）</p>
+    <p><strong>釋放位置：</strong>下視丘偵測 → 腦垂體後葉釋放 ADH</p>
+    <p><strong>作用機制：</strong>ADH 與集尿管細胞受體結合 → 啟動訊號傳遞 → <span class="key-term">水通道蛋白（aquaporin）</span>被插入細胞膜 → 管壁對水的通透性大增 → 水分大量被吸回 → 排出<strong>濃縮小量尿液</strong></p>
+    <div style="margin-top:10px;padding:10px 14px;background:rgba(10,22,40,0.5);border-radius:8px;font-size:0.82rem;color:var(--text-soft);">
+      🍺 <strong>補充：</strong>酒精會抑制 ADH 分泌 → 水通道蛋白減少 → 大量排尿 → 脫水，這就是宿醉頭痛的部分原因！<br>
+      💉 <strong>尿崩症（Diabetes Insipidus）：</strong>ADH 缺乏或受體失效 → 集尿管無法插入水通道蛋白 → 24小時大量排出極稀的尿液
+    </div>
+  </div>
+
+  <div class="hormone-box hormone-raas fade-in delay-2">
+    <h4>⚡ RAAS 系統——調控血壓與血量</h4>
+    <p><strong>完整名稱：</strong>Renin-Angiotensin-Aldosterone System（腎素–血管緊張素–醛固酮系統）</p>
+    <p><strong>觸發條件：</strong>血壓或血量下降（如大量失血、嚴重腹瀉）——注意：此時滲透濃度不一定改變，ADH不會啟動，所以需要另一套系統！</p>
+    <p><strong>作用流程：</strong></p>
+    <ol style="padding-left:20px;font-size:0.87rem;color:var(--text-soft);line-height:1.9;margin-top:6px;">
+      <li>腎絲球旁器（JGA）偵測到進入腎絲球的動脈壓力下降</li>
+      <li>JGA 釋放<span class="key-term">腎素（Renin）</span>酵素</li>
+      <li>腎素切割肝臟分泌的血管緊張素原 → 最終生成<span class="key-term">血管緊張素II</span></li>
+      <li>血管緊張素II 做兩件事：<strong>①</strong>使小動脈收縮→血壓上升；<strong>②</strong>刺激腎上腺皮質分泌<span class="key-term">醛固酮（Aldosterone）</span></li>
+      <li>醛固酮促使遠曲小管和集尿管多吸收 Na⁺ 和水 → 血量增加 → 血壓回升</li>
+    </ol>
+    <div style="margin-top:10px;padding:10px 14px;background:rgba(10,22,40,0.5);border-radius:8px;font-size:0.82rem;color:var(--text-soft);">
+      💊 <strong>臨床應用：</strong>許多高血壓藥物（ACE抑制劑）正是藉由阻斷血管緊張素II的生成來降低血壓！
+    </div>
+  </div>
+
+  <div class="hormone-box hormone-anp fade-in delay-3">
+    <h4>🌿 ANP——對抗 RAAS 的制衡機制</h4>
+    <p><strong>完整名稱：</strong>Atrial Natriuretic Peptide（心房鈉尿肽）</p>
+    <p><strong>觸發條件：</strong>血量和血壓<strong>上升</strong>時，心房壁受到牽張，釋放 ANP</p>
+    <p><strong>效果：</strong>抑制腎素釋放 + 抑制集尿管吸收 NaCl + 減少醛固酮分泌 → <strong>降低血量和血壓</strong></p>
+  </div>
+
+  <div class="callout callout-critical">
+    <span class="callout-label">⭐ 三套系統的協調總覽</span>
+    <table class="waste-table">
+      <thead>
+        <tr>
+          <th>系統</th>
+          <th>觸發條件</th>
+          <th>效果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--aqua);font-weight:700;">ADH</td>
+          <td>血液滲透濃度↑（脫水、吃鹹）</td>
+          <td>水通道蛋白↑ → 尿液減少、濃縮</td>
+        </tr>
+        <tr>
+          <td style="color:var(--amber);font-weight:700;">RAAS</td>
+          <td>血壓/血量↓（失血、嘔吐腹瀉）</td>
+          <td>Na⁺ 和水的再吸收↑ → 血壓/血量↑</td>
+        </tr>
+        <tr>
+          <td style="color:var(--lime);font-weight:700;">ANP</td>
+          <td>血壓/血量↑（體液過多）</td>
+          <td>對抗 RAAS → 鈉和水排出↑ → 血壓↓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="memory-card">
+    <span class="mem-label">🧠 記憶口訣</span>
+    <p><strong>「血濃靠ADH保水；血少靠RAAS升壓；血多靠ANP洩洪」</strong><br>
+    三套系統互相制衡，像一個精密的「水壓三角」，共同維持身體的液體平衡！</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- REVIEW QUIZ -->
+<section class="section" id="review">
+  <div class="section-header">
+    <span class="section-number">📝</span>
+    <h2 class="section-title">快速複習測驗——點擊題目查看答案</h2>
+  </div>
+
+  <div class="quiz-section fade-in">
+    <div class="quiz-title">🎯 核心概念自我測驗</div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">海洋硬骨魚（如鱈魚）面臨什麼滲透調節問題？牠們如何解決？</div>
+      <div class="quiz-a">海水滲透濃度（約1,000 mOsm/L）遠高於體液（約300 mOsm/L），魚體不斷<strong>被海水「吸走」水分</strong>（低滲環境）。解決方式：<strong>大量喝海水</strong>補充水分，然後由鰓主動運輸排出多餘的鹽分（NaCl），並排出少量濃縮的尿液。</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">為什麼淡水魚不需要喝水，卻需要排大量的稀尿？</div>
+      <div class="quiz-a">淡水滲透濃度極低（約0.5–15 mOsm/L），而淡水魚體液約300 mOsm/L，水分會<strong>不斷滲入</strong>魚體（魚是高滲境中，水往裡跑）。魚必須排出大量稀尿來排除多餘水分，同時鰓需主動攝取鹽分補充因尿液流失的離子。不需喝水，因為水自動流進來！</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">比較氨、尿素、尿酸三者，各有什麼優缺點？</div>
+      <div class="quiz-a">
+        <strong>氨（Ammonia）：</strong>直接排出，合成能耗最低，但毒性高，需大量水稀釋，只適合水生動物。<br>
+        <strong>尿素（Urea）：</strong>毒性低、溶於水，排出耗水量中等；但需在肝臟合成，耗費一些能量。哺乳類、成年兩棲類採用。<br>
+        <strong>尿酸（Uric Acid）：</strong>幾乎不溶，可以半固體排出，耗水最少（最適合缺水環境）；但合成耗能最高。鳥類、爬行類、昆蟲採用。
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">亨氏環的下行支和上行支各有什麼通透性特點？這對腎臟濃縮尿液有何作用？</div>
+      <div class="quiz-a">
+        <strong>下行支：</strong>透水（有水通道蛋白aquaporin），不透鹽 → 水分滲出，濾液越走越濃縮。<br>
+        <strong>上行支：</strong>透鹽，不透水（無水通道蛋白） → 鹽分離開，濾液越走越稀。<br>
+        <strong>整體效果：</strong>NaCl不斷被抽到腎髓質，形成<strong>從皮質到髓質越來越高</strong>的滲透梯度。集尿管流過此梯度時，水分被抽走，尿液越來越濃縮。這個「逆流倍增系統」是哺乳類能保水的核心機制。
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">喝酒後為什麼會特別頻尿？請用ADH解釋。</div>
+      <div class="quiz-a">酒精會<strong>抑制腦垂體後葉釋放ADH</strong>。ADH減少 → 集尿管的水通道蛋白（aquaporin）插入量減少 → 管壁對水的通透性降低 → 水分無法被再吸收 → 排出大量稀薄尿液（利尿效果）→ 身體脫水。這也是宿醉頭痛（腦部輕微脫水）的原因之一。</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">RAAS系統在什麼情況下啟動？說明其完整作用路徑。</div>
+      <div class="quiz-a">
+        <strong>觸發條件：</strong>血壓或血量下降（如失血、嚴重腹瀉、大量嘔吐）。<br>
+        <strong>路徑：</strong>腎絲球旁器（JGA）偵測血壓下降 → 釋放<strong>腎素（renin）</strong> → 腎素切割血管緊張素原 → 生成<strong>血管緊張素II</strong> → ①動脈收縮，血壓立即升高；②刺激腎上腺皮質分泌<strong>醛固酮（aldosterone）</strong> → 遠曲小管和集尿管增加 Na⁺ 和水的吸收 → 血量增加 → 血壓回升 → 負回饋抑制腎素繼續分泌。
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">為什麼沙漠哺乳類能產生極度濃縮的尿液，而水生哺乳類不行？</div>
+      <div class="quiz-a">關鍵在於<strong>近髓質腎元的比例與亨氏環長度</strong>。沙漠哺乳類（如澳洲跳鼠）具有大量近髓質腎元，且亨氏環極深入腎髓質，能建立更陡的滲透梯度。相比之下，水生哺乳類（如海狸）多為皮質腎元，亨氏環短，滲透梯度淺，排出的尿液較稀。自然選擇依照棲地需求塑造了腎元的結構！</div>
+    </div>
+
+    <div class="quiz-item" onclick="toggleQuiz(this)">
+      <div class="quiz-q">鳥類的蛋為什麼一定要使用尿酸作為含氮廢物排泄？</div>
+      <div class="quiz-a">鳥蛋有防水的硬殼，氣體可透過，但液體不行。如果胚胎排出可溶的氨（毒性高）或尿素（可溶），廢物會在密閉的蛋內積累至有毒濃度，導致胚胎死亡。尿酸幾乎不溶於水，可以固體形式安全儲存在蛋內，等孵化時留在殼中，對胚胎無害。這是鳥類在有殼蛋中演化出的重要適應！</div>
+    </div>
+  </div>
+
+  <!-- Summary concept map -->
+  <div class="card fade-in" style="margin-top:32px;">
+    <h3>📊 本章核心概念圖</h3>
+    <div style="font-size:0.85rem;color:var(--text-soft);line-height:2.2;margin-top:14px;">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:8px;">
+        <strong style="color:var(--text-bright);">問題的根源：</strong>
+        <span class="tag tag-red">細胞代謝產生氨（毒）</span>
+        <span style="color:var(--text-soft)">+</span>
+        <span class="tag tag-red">體液滲透濃度需維持平衡</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:8px;">
+        <strong style="color:var(--text-bright);">溶液策略：</strong>
+        <span class="tag tag-blue">氨（水生）</span>
+        <span class="tag tag-yellow">尿素（哺乳/兩棲）</span>
+        <span class="tag tag-green">尿酸（鳥類/爬行/昆蟲）</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:8px;">
+        <strong style="color:var(--text-bright);">排泄系統：</strong>
+        <span class="tag tag-blue">原腎管（扁蟲）</span>
+        <span class="tag tag-blue">後腎管（蚯蚓）</span>
+        <span class="tag tag-blue">馬氏管（昆蟲）</span>
+        <span class="tag tag-yellow">腎臟（脊椎）</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:8px;">
+        <strong style="color:var(--text-bright);">腎元流程：</strong>
+        <span class="tag tag-blue">過濾</span>→<span class="tag tag-green">再吸收</span>→<span class="tag tag-yellow">分泌</span>→<span class="tag tag-red">排泄</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+        <strong style="color:var(--text-bright);">荷爾蒙調控：</strong>
+        <span class="tag tag-blue">ADH（水量）</span>
+        <span class="tag tag-yellow">RAAS（血壓/血量）</span>
+        <span class="tag tag-green">ANP（拮抗RAAS）</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="text-align:center;padding:40px 24px;color:var(--text-soft);font-size:0.8rem;border-top:1px solid rgba(42,184,204,0.15);">
+  <p>Chapter 44 · Osmoregulation & Excretion · 生物學第44章學習指南</p>
+  <p style="margin-top:6px;font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--teal);">filtration → reabsorption → secretion → excretion</p>
+</footer>
+
+<script>
+  function toggleQuiz(el) {
+    const answer = el.querySelector('.quiz-a');
+    answer.classList.toggle('show');
+  }
+
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Update active nav dot on scroll
+  const sections = ['intro', 'concept1', 'concept2', 'concept3', 'concept4', 'concept5', 'review'];
+  const dots = document.querySelectorAll('.nav-dot');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target.id);
+        if (idx >= 0) {
+          dots.forEach(d => d.classList.remove('active'));
+          if (dots[idx]) dots[idx].classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // Scroll-triggered fade-in
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        fadeObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeEls.forEach(el => {
+    el.style.animationPlayState = 'paused';
+    fadeObs.observe(el);
+  });
+</script>
+</body>
+</html>
