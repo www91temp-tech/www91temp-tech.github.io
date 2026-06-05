@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第24章：基因與染色體 | 生物化學學習指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+TC:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07101e;--surface:rgba(255,255,255,.05);--surface2:rgba(255,255,255,.09);
+  --text:#dde4f0;--muted:#7a8898;--border:rgba(255,255,255,.1);
+  --cyan:#38bdf8;--g:#22c55e;--g-dim:rgba(34,197,94,.13);
+  --p:#a855f7;--p-dim:rgba(168,85,247,.13);
+  --a:#f59e0b;--a-dim:rgba(245,158,11,.13);
+  --r:#ef4444;--r-dim:rgba(239,68,68,.12);
+  --b:#3b82f6;--b-dim:rgba(59,130,246,.12);
+  --y:#eab308;--y-dim:rgba(234,179,8,.13);
+  --teal:#14b8a6;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Noto Serif TC","Georgia",serif;font-size:16px;line-height:1.9;overflow-x:hidden}
+h1,h2,h3{font-family:"Cinzel",serif;letter-spacing:.04em}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900}
+h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700}
+h3{font-size:clamp(1rem,2vw,1.3rem);font-weight:700}
+h4{font-size:.95rem;font-weight:700}
+p{margin-bottom:.85rem;font-size:.93rem}
+p:last-child{margin-bottom:0}
+.wrap{max-width:960px;margin:0 auto;padding:0 1.5rem}
+.mono{font-family:"JetBrains Mono",monospace}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(7,16,30,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.6rem 1.5rem}
+.nav-i{max-width:960px;margin:0 auto;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+.nav-title{font-family:"Cinzel",serif;font-size:.72rem;color:var(--muted);flex:1;white-space:nowrap}
+.nav-links{display:flex;gap:.5rem;flex-wrap:wrap}
+.nl{font-size:.75rem;padding:.25rem .75rem;border-radius:999px;border:1px solid var(--border);color:var(--muted);transition:all .2s;white-space:nowrap;text-decoration:none}
+.nl:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
+.nl.g{color:var(--g);border-color:rgba(34,197,94,.3)}
+.nl.p{color:var(--p);border-color:rgba(168,85,247,.3)}
+.nl.a{color:var(--a);border-color:rgba(245,158,11,.3)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,#0d2040 0%,#07101e 65%)}
+.hero-canvas{position:absolute;top:0;left:0;width:100%;height:100%;opacity:.2;pointer-events:none}
+.ch-label{font-family:"Cinzel",serif;font-size:.75rem;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem}
+.hero h1{background:linear-gradient(130deg,#60efff 0%,#c084fc 45%,#fbbf24 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.25rem;line-height:1.2}
+.hero-sub{color:var(--muted);font-size:.92rem;max-width:560px;margin-bottom:2rem;line-height:1.8}
+.badges{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.badge{padding:.35rem 1rem;border-radius:999px;font-size:.78rem;border:1px solid var(--border);background:var(--surface)}
+
+/* PRINCIPLES */
+.principles{padding:2.5rem 0;border-bottom:1px solid var(--border)}
+.p-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-top:1.5rem}
+.p-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .2s}
+.p-card:hover{transform:translateY(-3px)}
+.p-card.c1{border-left:3px solid var(--g)}
+.p-card.c2{border-left:3px solid var(--p)}
+.p-card.c3{border-left:3px solid var(--a)}
+.p-card.c4{border-left:3px solid var(--cyan)}
+.p-n{font-family:"Cinzel",serif;font-size:2.5rem;font-weight:900;opacity:.1;position:absolute;top:-.3rem;right:.4rem;line-height:1}
+.p-icon{font-size:1.4rem;margin-bottom:.5rem}
+.p-card p{font-size:.82rem;color:var(--muted);line-height:1.65;margin:0}
+
+/* SECTIONS */
+.section{padding:0 0 1rem}
+.sec-header{padding:3rem 0 1.5rem;border-top:2px solid var(--sc,var(--border));margin-top:.5rem}
+.sec-num{font-family:"Cinzel",serif;font-size:.7rem;letter-spacing:.3em;color:var(--sc,var(--muted));text-transform:uppercase;margin-bottom:.4rem}
+.sec-header h2{color:var(--sc,var(--text));margin-bottom:.6rem}
+.sec-lead{color:var(--muted);font-size:.9rem;line-height:1.75}
+.sub{margin:2rem 0}
+.sub h3{color:var(--sc,var(--text));margin-bottom:.9rem;padding-bottom:.4rem;border-bottom:1px solid rgba(255,255,255,.07)}
+
+/* FIGURE */
+.fig{margin:1.75rem 0;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.fig-head{padding:.65rem 1.2rem;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.fig-num{font-family:"Cinzel",serif;font-size:.68rem;color:var(--sc,var(--cyan));letter-spacing:.1em;padding:.18rem .65rem;border:1px solid currentColor;border-radius:999px;white-space:nowrap}
+.fig-ttl{font-size:.82rem;color:var(--muted)}
+.fig-svg{padding:1rem 1.25rem;display:flex;justify-content:center;overflow-x:auto}
+.fig-svg svg{max-width:100%;height:auto;display:block}
+.fig-cap{padding:.85rem 1.2rem;font-size:.78rem;color:var(--muted);border-top:1px solid var(--border);line-height:1.75;background:rgba(0,0,0,.18)}
+
+/* CALLOUTS */
+.call{margin:1.25rem 0;padding:1rem 1.25rem;border-radius:9px;border-left:4px solid;display:flex;gap:.9rem;align-items:flex-start}
+.call-ico{font-size:1.2rem;flex-shrink:0;line-height:1.6;margin-top:.05rem}
+.call-body h4{margin-bottom:.25rem;font-size:.88rem}
+.call-body p,.call-body li{font-size:.84rem;color:var(--muted);margin:0}
+.call-body ul{padding-left:1.1rem;margin-top:.25rem}
+.call-body li{margin-bottom:.2rem}
+.call.key{background:var(--b-dim);border-color:var(--b)}
+.call.imp{background:var(--r-dim);border-color:var(--r)}
+.call.mem{background:var(--y-dim);border-color:var(--y)}
+.call.med{background:rgba(16,185,129,.1);border-color:#10b981}
+.call.tip{background:rgba(20,184,166,.1);border-color:var(--teal)}
+
+/* TERM HIGHLIGHTS */
+.t{display:inline;background:rgba(56,189,248,.13);color:#67e8f9;padding:.05rem .35rem;border-radius:4px;font-style:italic}
+.tg{background:var(--g-dim);color:var(--g)}
+.tp{background:var(--p-dim);color:var(--p)}
+.ta{background:var(--a-dim);color:var(--a)}
+.tr{background:var(--r-dim);color:var(--r)}
+
+/* FORMULA */
+.fml{margin:1rem 0;padding:.85rem 1.25rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;font-family:"JetBrains Mono",monospace;font-size:.95rem;text-align:center;color:var(--cyan);line-height:2}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin:1.25rem 0}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+th{background:var(--surface2);color:var(--text);padding:.6rem .9rem;text-align:left;border-bottom:2px solid var(--border);font-weight:600;white-space:nowrap}
+td{padding:.55rem .9rem;border-bottom:1px solid var(--border);color:var(--muted)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface);color:var(--text)}
+
+/* COMPARE CARDS */
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.75rem;margin:1.25rem 0}
+.cmp-c{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem;text-align:center}
+.cmp-c .ico{font-size:2rem;margin-bottom:.4rem}
+.cmp-c h4{font-size:.85rem;margin-bottom:.35rem}
+.cmp-c p{font-size:.75rem;color:var(--muted);margin:0;line-height:1.6}
+
+/* STEPS */
+.steps{display:flex;flex-wrap:wrap;gap:1px;margin:1.25rem 0;background:var(--border);border-radius:10px;overflow:hidden}
+.step{flex:1;min-width:120px;background:var(--bg);padding:.9rem 1rem;text-align:center}
+.step-n{font-family:"Cinzel",serif;font-size:.7rem;color:var(--sc,var(--cyan));letter-spacing:.2em}
+.step p{font-size:.78rem;color:var(--muted);margin-top:.25rem;margin-bottom:0}
+
+/* SUMMARY */
+.sum{margin:2.5rem 0;padding:1.75rem;background:var(--surface);border:1px solid var(--sc,var(--border));border-radius:12px}
+.sum h3{font-family:"Cinzel",serif;font-size:.85rem;color:var(--sc,var(--text));letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
+.sum-list{list-style:none;padding:0}
+.sum-list li{padding:.45rem 0 .45rem 1.4rem;position:relative;font-size:.84rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.65}
+.sum-list li:last-child{border-bottom:none}
+.sum-list li::before{content:"\25B8";position:absolute;left:0;color:var(--sc,var(--cyan))}
+
+/* KEY TERMS */
+.kt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:.65rem;margin-top:1.25rem}
+.kt-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.65rem .9rem;transition:all .2s}
+.kt-card:hover{background:var(--surface2);border-color:var(--cyan)}
+.kt-en{font-family:"Cinzel",serif;font-size:.72rem;color:var(--cyan);letter-spacing:.04em;margin-bottom:.2rem}
+.kt-zh{font-size:.75rem;color:var(--muted)}
+.kt-def{font-size:.72rem;color:rgba(122,136,152,.7);margin-top:.15rem;line-height:1.5}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;border-top:1px solid var(--border)}
+@media(max-width:600px){h1{font-size:1.8rem}.fig-svg{padding:.75rem}.p-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-i">
+    <div class="nav-title">Lehninger 生物化學 · Ch. 24</div>
+    <div class="nav-links">
+      <a href="#s1" class="nl g">24.1 染色體元素</a>
+      <a href="#s2" class="nl p">24.2 DNA 超螺旋</a>
+      <a href="#s3" class="nl a">24.3 染色體結構</a>
+      <a href="#terms" class="nl">關鍵詞彙</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas class="hero-canvas" id="helixCanvas"></canvas>
+  <div class="ch-label">Chapter 24 · Biochemistry</div>
+  <h1>基因與染色體<br>Genes &amp; Chromosomes</h1>
+  <p class="hero-sub">探索遺傳資訊的儲存、組織與包裝——<br>從 DNA 雙螺旋到密集壓縮的染色體，三大核心主題帶你全面理解。</p>
+  <div class="badges">
+    <span class="badge">🧬 染色體元素</span>
+    <span class="badge">🔄 DNA 超螺旋</span>
+    <span class="badge">📦 染色體結構</span>
+    <span class="badge">🏥 拓撲異構酶與藥物</span>
+  </div>
+</section>
+
+<!-- FOUR PRINCIPLES -->
+<div class="wrap principles fi" style="padding:2.5rem 0;border-bottom:1px solid var(--border)">
+  <h2 style="font-size:1.1rem;color:var(--muted);letter-spacing:.15em;font-weight:400">本章四大核心原則</h2>
+  <div class="p-grid">
+    <div class="p-card c1"><div class="p-n">P1</div><div class="p-icon">📌</div><h4>染色體不只有基因</h4><p>染色體包含確保複製、轉錄、包裝與傳遞的專一序列，不僅是蛋白質編碼基因的集合。</p></div>
+    <div class="p-card c2"><div class="p-n">P2</div><div class="p-icon">📏</div><h4>染色體非常巨大</h4><p>DNA 分子遠比容納它的細胞或病毒顆粒長許多個數量級，需要多層次的三級結構來壓縮。</p></div>
+    <div class="p-card c3"><div class="p-n">P3</div><div class="p-icon">🌀</div><h4>DNA 維持扭轉張力</h4><p>所有細胞的 DNA 都維持在「欠旋」狀態，相對 B 型 DNA 轉數較少，有助於包裝與存取遺傳資訊。</p></div>
+    <div class="p-card c4"><div class="p-n">P4</div><div class="p-icon">🔬</div><h4>專一蛋白質與 RNA 維持結構</h4><p>拓撲異構酶、組蛋白、凝縮素、凝聚素及長鏈非編碼 RNA (lncRNA) 共同維護染色體結構。</p></div>
+  </div>
+</div>
+
+<!-- ============================================================ SECTION 24.1 ============================================================ -->
+<section id="s1" class="section" style="--sc:var(--g)">
+<div class="wrap">
+  <div class="sec-header fi">
+    <div class="sec-num">Section 24.1</div>
+    <h2>染色體元素 Chromosomal Elements</h2>
+    <p class="sec-lead">細胞的 DNA 包含基因與基因間區域，兩者都可能具有重要功能。本節從最基本的問題出發：什麼是基因？DNA 究竟有多長？染色體上有哪些不可或缺的結構？</p>
+  </div>
+
+  <div class="sub fi">
+    <h3>🔬 基因的定義演進</h3>
+    <p>「基因」的概念隨著科學發展不斷深化。最初，基因只是「決定表現型的染色體片段」。</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1940s</div><p><strong>Beadle &amp; Tatum</strong><br>一基因—一酵素<br><em>one gene–one enzyme</em></p></div>
+      <div class="step"><div class="step-n">1950s+</div><p>修正為<br><strong>一基因—一多胜肽</strong><br><em>one gene–one polypeptide</em></p></div>
+      <div class="step"><div class="step-n">現代</div><p>基因 = 編碼<br><strong>功能性 RNA 或多胜肽</strong><br>的所有 DNA 序列</p></div>
+    </div>
+    <div class="call key fi">
+      <div class="call-ico">💡</div>
+      <div class="call-body">
+        <h4>現代基因的定義</h4>
+        <p><span class="tg">基因（gene）</span>是編碼最終基因產物（多胜肽或具結構/催化功能的 RNA）的所有 DNA 片段。除此之外，染色體上還有<span class="t">調控序列（regulatory sequences）</span>，負責標示基因的起止、調控轉錄，或作為複製/重組的起始點。每個胺基酸由 <strong>3 個核苷酸（密碼子）</strong>決定，350 個胺基酸的蛋白質約需 <strong>1,050 bp</strong> 的編碼 DNA。</p>
+      </div>
+    </div>
+
+    <!-- Figure 24-2: DNA→mRNA→Polypeptide -->
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-2</span><span class="fig-ttl">DNA → mRNA → 多胜肽的共線性（Colinearity）</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 780 220" xmlns="http://www.w3.org/2000/svg" width="780" height="220">
+          <defs><marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#7a8898"/></marker></defs>
+          <!-- DNA box -->
+          <rect x="5" y="15" width="185" height="195" rx="8" fill="rgba(59,130,246,.08)" stroke="rgba(59,130,246,.25)" stroke-width="1"/>
+          <text x="97" y="38" text-anchor="middle" fill="#60a5fa" font-family="Cinzel,serif" font-size="14" font-weight="700">DNA</text>
+          <text x="97" y="52" text-anchor="middle" fill="#7a8898" font-size="9">雙股螺旋 · 模板股 3'→5'</text>
+          <!-- left strand -->
+          <line x1="55" y1="65" x2="55" y2="200" stroke="#60a5fa" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- right strand -->
+          <line x1="115" y1="65" x2="115" y2="200" stroke="#f97316" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- base pairs with labels -->
+          <g font-size="11" font-family="JetBrains Mono,monospace">
+            <line x1="55" y1="80" x2="115" y2="80" stroke="#d1fae5" stroke-width="1.5"/>
+            <text x="50" y="84" text-anchor="end" fill="#86efac">C</text><text x="120" y="84" fill="#fdba74">G</text>
+            <line x1="55" y1="97" x2="115" y2="97" stroke="#d1fae5" stroke-width="1.5"/>
+            <text x="50" y="101" text-anchor="end" fill="#86efac">G</text><text x="120" y="101" fill="#fdba74">C</text>
+            <line x1="55" y1="114" x2="115" y2="114" stroke="#fef08a" stroke-width="1.5"/>
+            <text x="50" y="118" text-anchor="end" fill="#86efac">T</text><text x="120" y="118" fill="#fdba74">A</text>
+            <line x1="55" y1="131" x2="115" y2="131" stroke="#fef08a" stroke-width="1.5"/>
+            <text x="50" y="135" text-anchor="end" fill="#86efac">G</text><text x="120" y="135" fill="#fdba74">C</text>
+            <line x1="55" y1="148" x2="115" y2="148" stroke="#fef08a" stroke-width="1.5"/>
+            <text x="50" y="152" text-anchor="end" fill="#86efac">G</text><text x="120" y="152" fill="#fdba74">C</text>
+            <line x1="55" y1="165" x2="115" y2="165" stroke="#d1fae5" stroke-width="1.5"/>
+            <text x="50" y="169" text-anchor="end" fill="#86efac">A</text><text x="120" y="169" fill="#fdba74">T</text>
+            <line x1="55" y1="182" x2="115" y2="182" stroke="#d1fae5" stroke-width="1.5"/>
+            <text x="50" y="186" text-anchor="end" fill="#86efac">C</text><text x="120" y="186" fill="#fdba74">G</text>
+          </g>
+          <!-- codon bracket -->
+          <rect x="22" y="107" width="6" height="33" fill="none" stroke="#22c55e" stroke-width="1.5" rx="1"/>
+          <text x="18" y="125" text-anchor="end" fill="#22c55e" font-size="9">密碼子</text>
+          <text x="55" y="62" text-anchor="middle" fill="#7a8898" font-size="9">模板股</text>
+          <text x="115" y="62" text-anchor="middle" fill="#fdba74" font-size="9">編碼股</text>
+
+          <!-- Arrow: transcription -->
+          <line x1="198" y1="110" x2="232" y2="110" stroke="#7a8898" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="215" y="97" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700">轉錄</text>
+          <text x="215" y="128" text-anchor="middle" fill="#7a8898" font-size="9">T→U</text>
+
+          <!-- mRNA box -->
+          <rect x="238" y="15" width="160" height="195" rx="8" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.25)" stroke-width="1"/>
+          <text x="318" y="38" text-anchor="middle" fill="#22c55e" font-family="Cinzel,serif" font-size="14" font-weight="700">mRNA</text>
+          <text x="318" y="52" text-anchor="middle" fill="#7a8898" font-size="9">單股 RNA · 5'→3'</text>
+          <line x1="318" y1="65" x2="318" y2="200" stroke="#22c55e" stroke-width="3.5" stroke-linecap="round"/>
+          <g font-size="11" font-family="JetBrains Mono,monospace">
+            <text x="325" y="84" fill="#86efac">C</text>
+            <text x="325" y="101" fill="#86efac">G</text>
+            <text x="325" y="118" fill="#86efac">U</text>
+            <text x="325" y="135" fill="#86efac">G</text>
+            <text x="325" y="152" fill="#86efac">G</text>
+            <text x="325" y="169" fill="#86efac">A</text>
+            <text x="325" y="186" fill="#86efac">C</text>
+          </g>
+          <!-- codon bracket on mRNA -->
+          <rect x="340" y="107" width="6" height="33" fill="none" stroke="#f59e0b" stroke-width="1.5" rx="1"/>
+          <text x="350" y="126" fill="#f59e0b" font-size="9">Arg</text>
+
+          <!-- Arrow: translation -->
+          <line x1="405" y1="110" x2="440" y2="110" stroke="#7a8898" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="422" y="97" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="700">轉譯</text>
+          <text x="422" y="128" text-anchor="middle" fill="#7a8898" font-size="9">核糖體</text>
+
+          <!-- Polypeptide box -->
+          <rect x="447" y="15" width="328" height="195" rx="8" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.25)" stroke-width="1"/>
+          <text x="611" y="38" text-anchor="middle" fill="#a855f7" font-family="Cinzel,serif" font-size="13" font-weight="700">多胜肽 Polypeptide</text>
+          <text x="611" y="52" text-anchor="middle" fill="#7a8898" font-size="9">每 3 個核苷酸 = 1 個胺基酸</text>
+          <!-- chain backbone -->
+          <polyline points="468,110 490,110 500,95 520,125 530,95 550,125 560,95 580,125 590,95 610,125 620,95 640,125 650,95 670,125 680,110 760,110" fill="none" stroke="#c4b5fd" stroke-width="1.5"/>
+          <!-- amino acid circles -->
+          <g text-anchor="middle" font-size="9" font-family="JetBrains Mono,monospace">
+            <circle cx="490" cy="110" r="14" fill="rgba(168,85,247,.3)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="490" y="114" fill="#e9d5ff">Arg</text>
+            <circle cx="530" cy="110" r="14" fill="rgba(168,85,247,.3)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="530" y="114" fill="#e9d5ff">Gly</text>
+            <circle cx="570" cy="110" r="14" fill="rgba(168,85,247,.3)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="570" y="114" fill="#e9d5ff">Tyr</text>
+            <circle cx="610" cy="110" r="14" fill="rgba(168,85,247,.3)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="610" y="114" fill="#e9d5ff">Thr</text>
+            <circle cx="650" cy="110" r="14" fill="rgba(168,85,247,.3)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="650" y="114" fill="#e9d5ff">Phe</text>
+            <circle cx="690" cy="110" r="14" fill="rgba(168,85,247,.3)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="690" y="114" fill="#e9d5ff">Ala</text>
+            <circle cx="730" cy="110" r="14" fill="rgba(168,85,247,.3)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="730" y="114" fill="#e9d5ff">Val</text>
+          </g>
+          <text x="469" y="100" fill="#7a8898" font-size="8">N端</text>
+          <text x="750" y="100" fill="#7a8898" font-size="8">C端</text>
+          <text x="611" y="170" text-anchor="middle" fill="#7a8898" font-size="9" font-family="Noto Serif TC,serif">350 個胺基酸的蛋白質 ≈ 需要 1,050 bp 編碼 DNA</text>
+        </svg>
+      </div>
+      <div class="fig-cap"><strong>共線性原理：</strong>DNA 核苷酸序列（模板股 3'→5'）決定 mRNA 密碼子序列（5'→3'），mRNA 再決定胺基酸序列。每 3 個核苷酸 = 1 個密碼子 = 1 個胺基酸。在真核生物中，因有內含子的插入，基因與蛋白質序列的共線性會被中斷。</div>
+    </div>
+  </div>
+
+  <!-- DNA SIZE -->
+  <div class="sub fi">
+    <h3>📐 DNA 遠比容納它的細胞大</h3>
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-1 &amp; 24-3</span><span class="fig-ttl">DNA 長度 vs. 細胞/病毒大小的驚人對比</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 780 180" width="780" height="180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Phage T4 -->
+          <rect x="5" y="5" width="235" height="170" rx="8" fill="rgba(59,130,246,.07)" stroke="rgba(59,130,246,.2)" stroke-width="1"/>
+          <text x="118" y="28" text-anchor="middle" fill="#60a5fa" font-size="12" font-family="Cinzel,serif" font-weight="700">噬菌體 T4</text>
+          <ellipse cx="70" cy="100" rx="20" ry="28" fill="rgba(96,165,250,.25)" stroke="#60a5fa" stroke-width="1.5"/>
+          <text x="70" y="103" text-anchor="middle" fill="#bfdbfe" font-size="7">蛋白外殼</text>
+          <line x1="70" y1="128" x2="70" y2="143" stroke="#60a5fa" stroke-width="2"/>
+          <g stroke="#60a5fa" stroke-width="1"><line x1="60" y1="138" x2="56" y2="148"/><line x1="65" y1="138" x2="63" y2="148"/><line x1="70" y1="138" x2="70" y2="148"/><line x1="75" y1="138" x2="77" y2="148"/><line x1="80" y1="138" x2="84" y2="148"/></g>
+          <text x="97" y="55" fill="#7a8898" font-size="9">病毒長度: <tspan fill="#60a5fa">210 nm</tspan></text>
+          <text x="97" y="72" fill="#7a8898" font-size="9">DNA: 168,889 bp</text>
+          <text x="97" y="89" fill="#ef4444" font-size="9">DNA 展開: 60,800 nm</text>
+          <text x="97" y="110" fill="#f59e0b" font-size="10" font-weight="700">是病毒的 290 倍！</text>
+
+          <!-- E. coli -->
+          <rect x="250" y="5" width="240" height="170" rx="8" fill="rgba(34,197,94,.07)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+          <text x="370" y="28" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Cinzel,serif" font-weight="700">大腸桿菌 E. coli</text>
+          <ellipse cx="310" cy="100" rx="18" ry="35" fill="rgba(34,197,94,.2)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="310" y="103" text-anchor="middle" fill="#86efac" font-size="7">細菌</text>
+          <text x="340" y="55" fill="#7a8898" font-size="9">細胞長度: <tspan fill="#22c55e">2 μm</tspan></text>
+          <text x="340" y="72" fill="#7a8898" font-size="9">DNA: 4,641,652 bp</text>
+          <text x="340" y="89" fill="#ef4444" font-size="9">DNA 展開: 1.7 mm</text>
+          <text x="340" y="110" fill="#f59e0b" font-size="10" font-weight="700">是細胞的 850 倍！</text>
+
+          <!-- Human -->
+          <rect x="503" y="5" width="272" height="170" rx="8" fill="rgba(168,85,247,.07)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+          <text x="639" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">人類（46條染色體）</text>
+          <ellipse cx="555" cy="100" rx="25" ry="22" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="1.5"/>
+          <ellipse cx="555" cy="100" rx="12" ry="10" fill="rgba(168,85,247,.35)" stroke="#c4b5fd" stroke-width="1"/>
+          <text x="555" y="103" text-anchor="middle" fill="#e9d5ff" font-size="7">細胞核</text>
+          <text x="585" y="50" fill="#7a8898" font-size="9">基因組: 3.1 × 10⁹ bp</text>
+          <text x="585" y="67" fill="#7a8898" font-size="9">每細胞 DNA: ≈ 2 m</text>
+          <text x="585" y="84" fill="#ef4444" font-size="9">全身 DNA 總長:</text>
+          <text x="585" y="101" fill="#ef4444" font-size="10" font-weight="700">2 × 10¹¹ km</text>
+          <text x="585" y="120" fill="#f59e0b" font-size="9">≈ 地球到太陽 1,333 倍！</text>
+        </svg>
+      </div>
+      <div class="fig-cap">Fig 24-1 原圖為 T2 噬菌體釋放出遠超自身的 DNA；Fig 24-3 則顯示 E. coli 染色體（1.7 mm）比細胞本身（2 μm）長 850 倍。人類每個細胞含約 2 公尺的 DNA，全身 10¹⁴ 個細胞的 DNA 總長達 2×10¹¹ 公里，超越地球到太陽距離的千倍。</div>
+    </div>
+    <div class="tbl-wrap fi">
+      <table>
+        <thead><tr><th>病毒</th><th>DNA（bp）</th><th>DNA 長度（nm）</th><th>病毒顆粒（nm）</th><th>比值</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">φX174</td><td>5,386</td><td>1,939</td><td>25</td><td style="color:#f59e0b;font-weight:700">~78×</td></tr>
+          <tr><td class="mono">λ (lambda)</td><td>48,502</td><td>17,460</td><td>190</td><td style="color:#f59e0b;font-weight:700">~92×</td></tr>
+          <tr><td class="mono">T4</td><td>168,889</td><td>60,800</td><td>210</td><td style="color:#f59e0b;font-weight:700">~290×</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INTRONS AND EXONS -->
+  <div class="sub fi">
+    <h3>🧩 內含子（Introns）與外顯子（Exons）</h3>
+    <p>細菌的基因幾乎全部與蛋白質序列共線，但真核生物基因有特殊結構：<span class="tg">外顯子（exon）</span>（編碼序列）和<span class="tr">內含子（intron）</span>（非編碼，插入序列）交替出現。轉錄後 mRNA 前驅體（pre-mRNA）需要<strong>剪接</strong>去除內含子，才能得到成熟 mRNA。</p>
+    <div class="call imp fi">
+      <div class="call-ico">⚠️</div>
+      <div class="call-body">
+        <h4>人類基因組中 DNA 的用途分布</h4>
+        <ul>
+          <li>僅約 <strong>1.5%</strong> 為外顯子（蛋白質編碼序列）</li>
+          <li>計入內含子後，蛋白質編碼基因佔約 <strong>30%</strong></li>
+          <li>約 <strong>50%</strong> 由轉位子（transposons，分子寄生蟲）等重複序列組成</li>
+          <li>其餘包含 lncRNA 基因、衛星 DNA、調控序列等</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Figure 24-6 Introns/Exons -->
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-6</span><span class="fig-ttl">兩個真核基因的外顯子—內含子結構</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 180" width="760" height="180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ovalbumin -->
+          <text x="10" y="22" fill="#e8eaf0" font-size="12" font-weight="700">卵白蛋白基因 Ovalbumin（7個內含子 A–G，佔全長 85%）</text>
+          <rect x="10" y="30" width="740" height="30" rx="4" fill="rgba(239,68,68,.12)" stroke="rgba(239,68,68,.25)" stroke-width="1"/>
+          <!-- Exons green, Introns red, rough proportions -->
+          <rect x="10" y="30" width="18" height="30" rx="2" fill="#22c55e"/><text x="19" y="49" text-anchor="middle" fill="#fff" font-size="8">L</text>
+          <rect x="28" y="34" width="130" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="93" y="48" text-anchor="middle" fill="#fca5a5" font-size="9">A</text>
+          <rect x="158" y="30" width="22" height="30" rx="2" fill="#22c55e"/><text x="169" y="49" text-anchor="middle" fill="#fff" font-size="8">1</text>
+          <rect x="180" y="34" width="55" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="207" y="48" text-anchor="middle" fill="#fca5a5" font-size="9">B</text>
+          <rect x="235" y="30" width="22" height="30" rx="2" fill="#22c55e"/><text x="246" y="49" text-anchor="middle" fill="#fff" font-size="8">2</text>
+          <rect x="257" y="34" width="78" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="296" y="48" text-anchor="middle" fill="#fca5a5" font-size="9">C</text>
+          <rect x="335" y="30" width="22" height="30" rx="2" fill="#22c55e"/><text x="346" y="49" text-anchor="middle" fill="#fff" font-size="8">3</text>
+          <rect x="357" y="34" width="60" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="387" y="48" text-anchor="middle" fill="#fca5a5" font-size="9">D</text>
+          <rect x="417" y="30" width="22" height="30" rx="2" fill="#22c55e"/><text x="428" y="49" text-anchor="middle" fill="#fff" font-size="8">4</text>
+          <rect x="439" y="34" width="95" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="486" y="48" text-anchor="middle" fill="#fca5a5" font-size="9">E</text>
+          <rect x="534" y="30" width="22" height="30" rx="2" fill="#22c55e"/><text x="545" y="49" text-anchor="middle" fill="#fff" font-size="8">5</text>
+          <rect x="556" y="34" width="72" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="592" y="48" text-anchor="middle" fill="#fca5a5" font-size="9">F</text>
+          <rect x="628" y="30" width="22" height="30" rx="2" fill="#22c55e"/><text x="639" y="49" text-anchor="middle" fill="#fff" font-size="8">6</text>
+          <rect x="650" y="34" width="28" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="664" y="48" text-anchor="middle" fill="#fca5a5" font-size="8">G</text>
+          <rect x="678" y="30" width="72" height="30" rx="2" fill="#22c55e"/><text x="714" y="49" text-anchor="middle" fill="#fff" font-size="9">7</text>
+
+          <!-- Legend -->
+          <rect x="10" y="70" width="12" height="10" rx="2" fill="#22c55e"/>
+          <text x="26" y="80" fill="#86efac" font-size="10">外顯子（Exon）— 編碼</text>
+          <rect x="185" y="70" width="12" height="10" rx="2" fill="rgba(239,68,68,.5)"/>
+          <text x="201" y="80" fill="#fca5a5" font-size="10">內含子（Intron）— 非編碼（佔 85%！）</text>
+
+          <!-- Hemoglobin beta -->
+          <text x="10" y="108" fill="#e8eaf0" font-size="12" font-weight="700">血紅蛋白 β 基因（2個內含子，最大者佔全長60%）</text>
+          <rect x="10" y="116" width="740" height="30" rx="4" fill="rgba(168,85,247,.1)" stroke="rgba(168,85,247,.25)" stroke-width="1"/>
+          <!-- Exon1: 90bp/1420bp × 740 = 47px; IntronA: 131/1420 × 740 = 68px; Exon2: 222/1420 × 740 = 116px; IntronB: 851/1420 × 740 = 443px; Exon3: 126/1420 × 740 = 66px -->
+          <rect x="10" y="116" width="47" height="30" rx="2" fill="#a855f7"/><text x="33" y="135" text-anchor="middle" fill="#fff" font-size="9">90 bp</text>
+          <rect x="57" y="120" width="68" height="22" rx="1" fill="rgba(239,68,68,.4)"/><text x="91" y="134" text-anchor="middle" fill="#fca5a5" font-size="8">A (131 bp)</text>
+          <rect x="125" y="116" width="116" height="30" rx="2" fill="#a855f7"/><text x="183" y="135" text-anchor="middle" fill="#fff" font-size="9">222 bp</text>
+          <rect x="241" y="120" width="443" height="22" rx="1" fill="rgba(239,68,68,.5)"/><text x="462" y="134" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="700">B  (851 bp ← 超過整個基因的一半！)</text>
+          <rect x="684" y="116" width="66" height="30" rx="2" fill="#a855f7"/><text x="717" y="135" text-anchor="middle" fill="#fff" font-size="9">126 bp</text>
+          <text x="380" y="170" text-anchor="middle" fill="#7a8898" font-size="9">→ 剪接後成熟 mRNA 中，外顯子序列才用於翻譯蛋白質</text>
+        </svg>
+      </div>
+      <div class="fig-cap">卵白蛋白（上）有 8 個外顯子和 7 個內含子，<strong>內含子佔整個基因 85%</strong>。血紅蛋白 β（下）有 3 個外顯子和 2 個內含子，僅一個內含子（B, 851 bp）就超過三個外顯子的總和（90+222+126 = 438 bp）。這說明基因的大多數序列並不直接編碼蛋白質。</div>
+    </div>
+  </div>
+
+  <!-- CENTROMERE AND TELOMERE -->
+  <div class="sub fi">
+    <h3>🔩 著絲點（Centromere）與端粒（Telomere）</h3>
+    <!-- Figure 24-7 -->
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-7</span><span class="fig-ttl">酵母菌染色體的重要結構元素</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 135" width="760" height="135" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="48" width="750" height="32" rx="5" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+          <!-- Left telomere -->
+          <rect x="5" y="43" width="68" height="42" rx="5" fill="rgba(245,158,11,.4)" stroke="#f59e0b" stroke-width="2"/>
+          <text x="39" y="67" text-anchor="middle" fill="#fef3c7" font-size="10" font-weight="700">端粒</text>
+          <text x="39" y="80" text-anchor="middle" fill="#fde68a" font-size="8">(TTAGGG)ₙ</text>
+          <!-- Gene region 1 -->
+          <rect x="78" y="48" width="55" height="32" rx="3" fill="rgba(34,197,94,.3)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="105" y="68" text-anchor="middle" fill="#86efac" font-size="9">基因群</text>
+          <!-- Origin 1 -->
+          <circle cx="162" cy="64" r="14" fill="rgba(56,189,248,.25)" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="162" y="61" text-anchor="middle" fill="#bae6fd" font-size="8">複製</text>
+          <text x="162" y="72" text-anchor="middle" fill="#bae6fd" font-size="8">起點</text>
+          <!-- Gene region 2 -->
+          <rect x="180" y="48" width="60" height="32" rx="3" fill="rgba(34,197,94,.3)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="210" y="68" text-anchor="middle" fill="#86efac" font-size="9">基因群</text>
+          <!-- Centromere -->
+          <rect x="248" y="38" width="90" height="52" rx="5" fill="rgba(239,68,68,.4)" stroke="#ef4444" stroke-width="2.5"/>
+          <text x="293" y="61" text-anchor="middle" fill="#fecaca" font-size="11" font-weight="700">著絲點</text>
+          <text x="293" y="75" text-anchor="middle" fill="#fca5a5" font-size="8">~130 bp（酵母）</text>
+          <text x="293" y="87" text-anchor="middle" fill="#fca5a5" font-size="7">富含 A-T 對</text>
+          <!-- Gene region 3 -->
+          <rect x="343" y="48" width="75" height="32" rx="3" fill="rgba(34,197,94,.3)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="380" y="68" text-anchor="middle" fill="#86efac" font-size="9">多個基因</text>
+          <!-- Origin 2 -->
+          <circle cx="450" cy="64" r="14" fill="rgba(56,189,248,.25)" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="450" y="61" text-anchor="middle" fill="#bae6fd" font-size="8">複製</text>
+          <text x="450" y="72" text-anchor="middle" fill="#bae6fd" font-size="8">起點</text>
+          <!-- Dispersed repeats and genes -->
+          <rect x="468" y="48" width="45" height="32" rx="3" fill="rgba(168,85,247,.25)" stroke="#a855f7" stroke-width="1"/>
+          <text x="490" y="68" text-anchor="middle" fill="#c4b5fd" font-size="8">重複序列</text>
+          <rect x="518" y="48" width="50" height="32" rx="3" fill="rgba(34,197,94,.3)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="543" y="68" text-anchor="middle" fill="#86efac" font-size="9">基因群</text>
+          <rect x="573" y="48" width="42" height="32" rx="3" fill="rgba(168,85,247,.25)" stroke="#a855f7" stroke-width="1"/>
+          <text x="594" y="68" text-anchor="middle" fill="#c4b5fd" font-size="8">重複序列</text>
+          <rect x="620" y="48" width="48" height="32" rx="3" fill="rgba(34,197,94,.3)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="644" y="68" text-anchor="middle" fill="#86efac" font-size="9">基因群</text>
+          <!-- Right telomere -->
+          <rect x="687" y="43" width="68" height="42" rx="5" fill="rgba(245,158,11,.4)" stroke="#f59e0b" stroke-width="2"/>
+          <text x="721" y="67" text-anchor="middle" fill="#fef3c7" font-size="10" font-weight="700">端粒</text>
+          <text x="721" y="80" text-anchor="middle" fill="#fde68a" font-size="8">(TTAGGG)ₙ</text>
+          <!-- Labels -->
+          <text x="39" y="35" text-anchor="middle" fill="#f59e0b" font-size="8">← 染色體末端</text>
+          <text x="721" y="35" text-anchor="middle" fill="#f59e0b" font-size="8">染色體末端 →</text>
+          <text x="293" y="127" text-anchor="middle" fill="#ef4444" font-size="9">▲ 紡錘絲附著點 · 確保有絲分裂時染色體正確分離</text>
+        </svg>
+      </div>
+      <div class="fig-cap">一條真核染色體的三大必要元素：<strong>端粒</strong>（穩定末端，含重複序列）、<strong>著絲點</strong>（紡錘絲附著點）、以及多個<strong>複製起點（ARS）</strong>。人工染色體（YAC）只需這三種元素即可穩定遺傳。</div>
+    </div>
+    <div class="call key fi">
+      <div class="call-ico">🔬</div>
+      <div class="call-body">
+        <h4>端粒酶（Telomerase）</h4>
+        <p>線性 DNA 末端無法被一般複製機器完整複製（<strong>末端複製問題</strong>）。<span class="tg">端粒酶</span>攜帶自身 RNA 模板，不斷在染色體末端添加重複序列，防止縮短。癌細胞中端粒酶高度活躍，使癌細胞「長生不老」。正常體細胞的端粒隨細胞分裂逐漸縮短，與細胞老化有關。</p>
+      </div>
+    </div>
+    <div class="tbl-wrap fi">
+      <table>
+        <thead><tr><th>物種</th><th>端粒重複序列</th></tr></thead>
+        <tbody>
+          <tr><td>人類 Homo sapiens</td><td class="mono tg">(TTAGGG)ₙ — n &gt; 1,500</td></tr>
+          <tr><td>四膜蟲 Tetrahymena</td><td class="mono tg">(TTGGGG)ₙ</td></tr>
+          <tr><td>酵母菌 S. cerevisiae</td><td class="mono tg">(TG₁₋₃)ₙ — n = 20~100</td></tr>
+          <tr><td>阿拉伯芥 Arabidopsis</td><td class="mono tg">(TTTAGGG)ₙ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sum fi">
+    <h3>Section 24.1 摘要</h3>
+    <ul class="sum-list">
+      <li>基因是染色體上編碼功能性多胜肽或 RNA 的片段；染色體還包含複製、轉錄等調控序列。</li>
+      <li>基因組 DNA 的長度比容納它的病毒顆粒或細胞大許多個數量級，需要高度三級結構壓縮。</li>
+      <li>真核生物大多數基因被<strong>內含子（introns）</strong>中斷，內含子間的編碼區稱為<strong>外顯子（exons）</strong>。人類基因組中僅 1.5% 為外顯子，計入內含子後可達 ~30%。</li>
+      <li>真核染色體有兩種重要重複序列：<strong>著絲點（centromere）</strong>——紡錘絲附著點，確保分裂時染色體正確分離；<strong>端粒（telomere）</strong>——保護線性染色體末端，由端粒酶添加。</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ SECTION 24.2 ============================================================ -->
+<section id="s2" class="section" style="--sc:var(--p)">
+<div class="wrap">
+  <div class="sec-header fi">
+    <div class="sec-num">Section 24.2</div>
+    <h2>DNA 超螺旋 DNA Supercoiling</h2>
+    <p class="sec-lead">超螺旋不是 DNA 獨有的現象——想像電話線圈再次捲起的樣子。瞭解超螺旋，就是理解 DNA 如何被細胞精確管控的第一步。</p>
+  </div>
+
+  <!-- WHAT IS SUPERCOILING -->
+  <div class="sub fi">
+    <h3>🌀 超螺旋的概念</h3>
+    <p><span class="tp">超螺旋（supercoiling）</span>是「螺旋上的螺旋」——DNA 本身就是雙螺旋，當這個螺旋的軸心再次捲繞自身，就形成了超螺旋（超螺旋體）。</p>
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-8 &amp; 24-9</span><span class="fig-ttl">超螺旋概念：電話線類比與 DNA</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 200" width="760" height="200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Phone cord analogy -->
+          <rect x="5" y="5" width="340" height="190" rx="8" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+          <text x="175" y="30" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">電話線比喻</text>
+          <g transform="translate(25,50)">
+            <path d="M0,50 Q10,30 22,50 Q34,70 46,50 Q58,30 70,50 Q82,70 94,50 Q106,30 118,50" fill="none" stroke="#c4b5fd" stroke-width="4" stroke-linecap="round"/>
+            <text x="59" y="90" text-anchor="middle" fill="#a855f7" font-size="10">一次螺旋（Coil）</text>
+            <text x="59" y="105" text-anchor="middle" fill="#7a8898" font-size="9">≈ DNA 雙螺旋</text>
+            <line x1="128" y1="50" x2="155" y2="50" stroke="#7a8898" stroke-width="1.5" marker-end="url(#arrs)"/>
+            <text x="141" y="44" text-anchor="middle" fill="#7a8898" font-size="8">施力</text>
+            <path d="M162,80 Q167,30 185,52 Q208,78 198,105 Q185,125 162,80" fill="none" stroke="#c4b5fd" stroke-width="4" stroke-linecap="round"/>
+            <path d="M163,80 Q168,65 175,80 Q182,95 189,80" fill="none" stroke="#e9d5ff" stroke-width="2" opacity=".7"/>
+            <text x="186" y="145" text-anchor="middle" fill="#a855f7" font-size="10">超螺旋（Supercoil）</text>
+            <text x="186" y="160" text-anchor="middle" fill="#7a8898" font-size="9">螺旋的軸心再捲繞</text>
+          </g>
+          <text x="175" y="182" text-anchor="middle" fill="#7a8898" font-size="8" font-style="italic">Vinograd（1965）首次在環形病毒 DNA 中發現超螺旋</text>
+
+          <!-- DNA diagram -->
+          <defs><marker id="arrs" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#7a8898"/></marker></defs>
+          <rect x="355" y="5" width="400" height="190" rx="8" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+          <text x="555" y="30" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">DNA 鬆弛 → 超螺旋</text>
+          <!-- Relaxed circle -->
+          <g transform="translate(375,55)">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#c4b5fd" stroke-width="3"/>
+            <circle cx="60" cy="8" r="3" fill="#c4b5fd"/><circle cx="112" cy="60" r="3" fill="#c4b5fd"/>
+            <circle cx="60" cy="112" r="3" fill="#c4b5fd"/><circle cx="8" cy="60" r="3" fill="#c4b5fd"/>
+            <text x="60" y="58" text-anchor="middle" fill="#c4b5fd" font-size="9">B-DNA</text>
+            <text x="60" y="72" text-anchor="middle" fill="#7a8898" font-size="8">正常鬆弛</text>
+            <text x="60" y="140" text-anchor="middle" fill="#c4b5fd" font-size="10">鬆弛 · Lk = Lk₀</text>
+          </g>
+          <line x1="505" y1="100" x2="545" y2="100" stroke="#7a8898" stroke-width="1.5" marker-end="url(#arrs)"/>
+          <text x="525" y="92" text-anchor="middle" fill="#7a8898" font-size="8">欠旋</text>
+          <!-- Supercoiled figure-8 -->
+          <g transform="translate(545,40)">
+            <path d="M95,25 Q150,20 160,58 Q168,92 135,106 Q105,118 95,100 Q82,82 82,62 Q82,38 95,25" fill="none" stroke="#c4b5fd" stroke-width="2.8"/>
+            <path d="M95,25 Q42,18 36,56 Q28,92 57,106 Q80,118 95,100" fill="none" stroke="#c4b5fd" stroke-width="2.8"/>
+            <circle cx="95" cy="62" r="5" fill="#a855f7"/>
+            <text x="107" y="65" fill="#a855f7" font-size="8">交叉</text>
+            <text x="95" y="145" text-anchor="middle" fill="#c4b5fd" font-size="10">超螺旋 · Lk &lt; Lk₀</text>
+            <text x="95" y="160" text-anchor="middle" fill="#ef4444" font-size="9">負超螺旋 σ ≈ −0.06</text>
+            <text x="95" y="175" text-anchor="middle" fill="#7a8898" font-size="8">更緊密，電泳跑更快</text>
+          </g>
+        </svg>
+      </div>
+      <div class="fig-cap">左：電話線（一次螺旋）本身再捲起（超螺旋）是理解 DNA 超螺旋的直觀比喻。右：鬆弛環形 DNA 發生欠旋後形成負超螺旋。超螺旋 DNA 比鬆弛 DNA 更緊密，在凝膠電泳中移動更快。</div>
+    </div>
+    <div class="call imp fi">
+      <div class="call-ico">🚨</div>
+      <div class="call-body">
+        <h4>核心事實：細胞的 DNA 都是「欠旋」的！</h4>
+        <p>所有細胞都主動維持 DNA 在<span class="tp">欠旋（underwound）</span>狀態——比 B 型 DNA 少轉 <strong>5%~7%</strong> 的螺旋數（σ ≈ −0.05 到 −0.07）。這種<strong>負超螺旋</strong>使 DNA 壓縮成為可能，並讓需要打開雙鏈的酵素（DNA 聚合酶、RNA 聚合酶）工作更輕鬆。超螺旋是 DNA 三級結構的固有屬性。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKING NUMBER AND SIGMA -->
+  <div class="sub fi">
+    <h3>🔢 連接數（Linking Number, Lk）與超螺旋密度（σ）</h3>
+
+    <!-- Figure 24-12 + 24-15 combined -->
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-12 &amp; 24-15</span><span class="fig-ttl">欠旋的效應：四種結果 × 負超螺旋 vs 正超螺旋</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 280" width="760" height="280" xmlns="http://www.w3.org/2000/svg">
+          <text x="380" y="18" text-anchor="middle" fill="#e8eaf0" font-size="13" font-family="Cinzel,serif" font-weight="700">欠旋的四種可能結果（84 bp 環形 DNA）</text>
+
+          <!-- (a) Relaxed 8 turns -->
+          <g transform="translate(10,25)">
+            <text x="80" y="22" text-anchor="middle" fill="#7a8898" font-size="11">(a) 鬆弛 Lk=8</text>
+            <circle cx="80" cy="100" r="62" fill="none" stroke="#60a5fa" stroke-width="2.5"/>
+            <circle cx="80" cy="38" r="3" fill="#60a5fa"/>
+            <circle cx="124" cy="56" r="3" fill="#60a5fa"/>
+            <circle cx="142" cy="100" r="3" fill="#60a5fa"/>
+            <circle cx="124" cy="144" r="3" fill="#60a5fa"/>
+            <circle cx="80" cy="162" r="3" fill="#60a5fa"/>
+            <circle cx="36" cy="144" r="3" fill="#60a5fa"/>
+            <circle cx="18" cy="100" r="3" fill="#60a5fa"/>
+            <circle cx="36" cy="56" r="3" fill="#60a5fa"/>
+            <text x="80" y="97" text-anchor="middle" fill="#60a5fa" font-size="10">8 圈</text>
+            <text x="80" y="112" text-anchor="middle" fill="#7a8898" font-size="9">10.5 bp/圈</text>
+            <text x="80" y="210" text-anchor="middle" fill="#7a8898" font-size="9">無應力</text>
+          </g>
+
+          <!-- Arrow -->
+          <text x="185" y="130" fill="#a855f7" font-size="18" text-anchor="middle">→</text>
+          <text x="185" y="148" fill="#7a8898" font-size="8" text-anchor="middle">移除1圈</text>
+
+          <!-- (b) Strained 7 turns -->
+          <g transform="translate(200,25)">
+            <text x="80" y="22" text-anchor="middle" fill="#7a8898" font-size="11">(b) 應力 Lk=7</text>
+            <circle cx="80" cy="100" r="62" fill="none" stroke="#f97316" stroke-width="2.5" stroke-dasharray="5,3"/>
+            <circle cx="80" cy="38" r="3" fill="#f97316"/>
+            <circle cx="130" cy="62" r="3" fill="#f97316"/>
+            <circle cx="142" cy="118" r="3" fill="#f97316"/>
+            <circle cx="100" cy="162" r="3" fill="#f97316"/>
+            <circle cx="50" cy="162" r="3" fill="#f97316"/>
+            <circle cx="18" cy="118" r="3" fill="#f97316"/>
+            <circle cx="30" cy="62" r="3" fill="#f97316"/>
+            <text x="80" y="97" text-anchor="middle" fill="#f97316" font-size="10">7 圈</text>
+            <text x="80" y="112" text-anchor="middle" fill="#f97316" font-size="9">12 bp/圈</text>
+            <text x="80" y="210" text-anchor="middle" fill="#f97316" font-size="9">△Lk = −1，有應力</text>
+          </g>
+
+          <!-- Arrows to (c) and (d) -->
+          <text x="360" y="115" fill="#7a8898" font-size="13" text-anchor="middle">↗</text>
+          <text x="340" y="100" fill="#22c55e" font-size="8" text-anchor="middle">多數</text>
+          <text x="360" y="150" fill="#7a8898" font-size="13" text-anchor="middle">↘</text>
+          <text x="340" y="165" fill="#7a8898" font-size="8" text-anchor="middle">少數</text>
+
+          <!-- (c) Negative supercoil (common) -->
+          <g transform="translate(380,25)">
+            <text x="80" y="22" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700">(c) ⭐負超螺旋（常見）</text>
+            <path d="M80,40 Q145,35 155,75 Q162,112 128,130 Q100,145 80,128 Q58,112 52,82 Q45,50 80,40" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+            <path d="M80,40 Q18,33 12,72 Q5,110 38,130 Q60,145 80,128" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+            <circle cx="80" cy="87" r="5" fill="#22c55e"/>
+            <text x="80" y="170" text-anchor="middle" fill="#22c55e" font-size="10">Lk=7，軸心捲曲</text>
+            <text x="80" y="185" text-anchor="middle" fill="#22c55e" font-size="9" font-weight="700">σ = -0.05~-0.07（細胞正常）</text>
+          </g>
+
+          <!-- (d) Strand separation (rare) -->
+          <g transform="translate(570,25)">
+            <text x="95" y="22" text-anchor="middle" fill="#7a8898" font-size="11">(d) 雙鏈分離（少見）</text>
+            <circle cx="95" cy="100" r="62" fill="none" stroke="#a855f7" stroke-width="2.5"/>
+            <ellipse cx="95" cy="45" rx="22" ry="12" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="2"/>
+            <text x="95" y="48" text-anchor="middle" fill="#c4b5fd" font-size="8">氫鍵斷裂~10 bp</text>
+            <text x="95" y="104" text-anchor="middle" fill="#a855f7" font-size="9">欠旋促進</text>
+            <text x="95" y="118" text-anchor="middle" fill="#a855f7" font-size="9">雙鏈打開</text>
+            <text x="95" y="210" text-anchor="middle" fill="#7a8898" font-size="9">耗能較多，但有利</text>
+            <text x="95" y="222" text-anchor="middle" fill="#7a8898" font-size="9">轉錄和複製！</text>
+          </g>
+
+          <!-- Bottom: Neg vs Pos supercoil summary -->
+          <rect x="5" y="240" width="750" height="35" rx="6" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+          <text x="380" y="256" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="700">⭐ 核心：欠旋（ΔLk &lt; 0）→ 負超螺旋（右手旋向）｜過旋（ΔLk &gt; 0）→ 正超螺旋（左手旋向，複製酶/RNA聚合酶前方形成）</text>
+          <text x="380" y="270" text-anchor="middle" fill="#7a8898" font-size="9">σ = ΔLk / Lk₀ = (Lk − Lk₀) / Lk₀　　細胞 DNA：σ ≈ −0.05 到 −0.07</text>
+        </svg>
+      </div>
+      <div class="fig-cap">84 bp 環形 DNA 中移除 1 圈螺旋（Lk: 8→7）後，應力可由：(c) <strong>形成負超螺旋</strong>（最常見，能量最低）或 (d) <strong>局部雙鏈分離</strong>（少見，但正是此效應使複製和轉錄更易進行）來釋放。</div>
+    </div>
+
+    <div class="fml">
+      ΔLk = Lk − Lk₀ &nbsp;&nbsp;·&nbsp;&nbsp; σ = ΔLk / Lk₀<br>
+      <span style="color:var(--text);font-size:.8rem">例：4,200 bp 閉合 DNA，Lk = 374 → Lk₀ = 4200÷10.5 = 400 → ΔLk = −26 → σ = −0.065（負超螺旋）</span>
+    </div>
+  </div>
+
+  <!-- TOPOISOMERASES -->
+  <div class="sub fi">
+    <h3>✂️ 拓撲異構酶（Topoisomerases）</h3>
+    <p><span class="tp">拓撲異構酶</span>是改變 DNA 連接數（Lk）的酵素，也是每個細胞不可或缺的分子機器，更是重要的抗菌與抗癌藥物標靶。</p>
+
+    <!-- Figure 24-18 + 24-19 Type I and II -->
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-18 &amp; 24-19</span><span class="fig-ttl">Type I 與 Type II 拓撲異構酶的作用機制</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 230" width="760" height="230" xmlns="http://www.w3.org/2000/svg">
+          <!-- Type I -->
+          <rect x="5" y="5" width="365" height="220" rx="8" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+          <text x="187" y="28" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Cinzel,serif" font-weight="700">Type I 拓撲異構酶</text>
+          <text x="187" y="42" text-anchor="middle" fill="#7a8898" font-size="9">切一股 · Lk 每次改變 ±1 · 不需 ATP</text>
+
+          <!-- Steps 1-4 for Type I -->
+          <g font-size="8" font-family="Noto Serif TC,serif">
+            <!-- Step 1 -->
+            <rect x="15" y="52" width="78" height="155" rx="5" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+            <text x="54" y="68" text-anchor="middle" fill="#22c55e" font-weight="700" font-size="9">①</text>
+            <!-- Two DNA strands -->
+            <line x1="40" y1="80" x2="40" y2="195" stroke="#60a5fa" stroke-width="2.5"/>
+            <line x1="70" y1="80" x2="70" y2="195" stroke="#f97316" stroke-width="2.5"/>
+            <!-- Base pairs -->
+            <line x1="40" y1="100" x2="70" y2="100" stroke="#d1fae5" stroke-width="1"/>
+            <line x1="40" y1="120" x2="70" y2="120" stroke="#d1fae5" stroke-width="1"/>
+            <line x1="40" y1="140" x2="70" y2="140" stroke="#d1fae5" stroke-width="1"/>
+            <line x1="40" y1="160" x2="70" y2="160" stroke="#d1fae5" stroke-width="1"/>
+            <!-- Enzyme binding -->
+            <ellipse cx="55" cy="95" rx="30" ry="12" fill="rgba(34,197,94,.3)" stroke="#22c55e" stroke-width="1.5"/>
+            <text x="55" y="98" text-anchor="middle" fill="#86efac" font-size="7">Topo I</text>
+            <text x="54" y="205" text-anchor="middle" fill="#7a8898" font-size="7">酵素結合，</text>
+            <text x="54" y="215" text-anchor="middle" fill="#7a8898" font-size="7">切斷一股</text>
+
+            <!-- Step 2 -->
+            <rect x="101" y="52" width="78" height="155" rx="5" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+            <text x="140" y="68" text-anchor="middle" fill="#22c55e" font-weight="700" font-size="9">②</text>
+            <line x1="126" y1="80" x2="126" y2="140" stroke="#60a5fa" stroke-width="2.5"/>
+            <line x1="156" y1="80" x2="156" y2="195" stroke="#f97316" stroke-width="2.5"/>
+            <!-- gap in strand -->
+            <line x1="126" y1="158" x2="126" y2="195" stroke="#60a5fa" stroke-width="2.5" stroke-dasharray="3,3"/>
+            <line x1="126" y1="120" x2="156" y2="120" stroke="#d1fae5" stroke-width="1"/>
+            <!-- other strand passes through -->
+            <path d="M156,155 Q140,148 126,152" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="4,2"/>
+            <text x="140" y="205" text-anchor="middle" fill="#7a8898" font-size="7">另一股</text>
+            <text x="140" y="215" text-anchor="middle" fill="#7a8898" font-size="7">穿過缺口</text>
+
+            <!-- Step 3 -->
+            <rect x="187" y="52" width="78" height="155" rx="5" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+            <text x="226" y="68" text-anchor="middle" fill="#22c55e" font-weight="700" font-size="9">③</text>
+            <line x1="212" y1="80" x2="212" y2="195" stroke="#60a5fa" stroke-width="2.5"/>
+            <line x1="242" y1="80" x2="242" y2="195" stroke="#f97316" stroke-width="2.5"/>
+            <line x1="212" y1="100" x2="242" y2="100" stroke="#fef08a" stroke-width="1.5"/>
+            <line x1="212" y1="120" x2="242" y2="120" stroke="#d1fae5" stroke-width="1"/>
+            <line x1="212" y1="140" x2="242" y2="140" stroke="#d1fae5" stroke-width="1"/>
+            <line x1="212" y1="160" x2="242" y2="160" stroke="#d1fae5" stroke-width="1"/>
+            <ellipse cx="226" cy="100" rx="28" ry="10" fill="rgba(34,197,94,.3)" stroke="#22c55e" stroke-width="1.5"/>
+            <text x="226" y="103" text-anchor="middle" fill="#86efac" font-size="7">再接合</text>
+            <text x="226" y="205" text-anchor="middle" fill="#7a8898" font-size="7">斷點再接合</text>
+            <text x="226" y="215" text-anchor="middle" fill="#7a8898" font-size="7">Lk 改變 1</text>
+
+            <!-- Result -->
+            <rect x="273" y="52" width="88" height="155" rx="5" fill="rgba(34,197,94,.12)" stroke="#22c55e" stroke-width="1.5"/>
+            <text x="317" y="68" text-anchor="middle" fill="#22c55e" font-weight="700" font-size="9">結果</text>
+            <circle cx="317" cy="130" r="40" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+            <text x="317" y="127" text-anchor="middle" fill="#22c55e" font-size="9">Lk</text>
+            <text x="317" y="142" text-anchor="middle" fill="#22c55e" font-size="9">±1</text>
+            <text x="317" y="205" text-anchor="middle" fill="#22c55e" font-size="8" font-weight="700">鬆弛(增Lk)</text>
+            <text x="317" y="216" text-anchor="middle" fill="#7a8898" font-size="7">細菌 Type IA</text>
+          </g>
+
+          <!-- Type II -->
+          <rect x="383" y="5" width="372" height="220" rx="8" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+          <text x="569" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">Type II 拓撲異構酶（含 DNA 迴旋酶）</text>
+          <text x="569" y="42" text-anchor="middle" fill="#7a8898" font-size="9">切雙股 · Lk 每次改變 ±2 · 需 ATP · 可解開纏環（catenanes）</text>
+
+          <!-- Type II mechanism: Gate model -->
+          <g transform="translate(393,50)">
+            <!-- Step 1: T-segment binds -->
+            <rect x="0" y="8" width="82" height="148" rx="5" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+            <text x="41" y="22" text-anchor="middle" fill="#a855f7" font-size="9" font-weight="700">① T-DNA 結合</text>
+            <!-- G-segment (gate segment) horizontal -->
+            <line x1="8" y1="90" x2="74" y2="90" stroke="#60a5fa" stroke-width="2.5"/>
+            <line x1="8" y1="100" x2="74" y2="100" stroke="#f97316" stroke-width="2.5"/>
+            <!-- T-segment (transport) vertical -->
+            <line x1="41" y1="35" x2="41" y2="78" stroke="#22c55e" stroke-width="3"/>
+            <line x1="35" y1="35" x2="35" y2="78" stroke="#4ade80" stroke-width="2.5"/>
+            <ellipse cx="41" cy="88" rx="35" ry="14" fill="rgba(168,85,247,.35)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="41" y="92" text-anchor="middle" fill="#e9d5ff" font-size="7">Topo II 酵素</text>
+            <text x="41" y="148" text-anchor="middle" fill="#7a8898" font-size="7">G-DNA 被切斷</text>
+            <text x="41" y="160" text-anchor="middle" fill="#7a8898" font-size="7">T-DNA 穿過</text>
+
+            <!-- Step 2: Translocation -->
+            <rect x="90" y="8" width="82" height="148" rx="5" fill="rgba(168,85,247,.08)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+            <text x="131" y="22" text-anchor="middle" fill="#a855f7" font-size="9" font-weight="700">② T-DNA 通過</text>
+            <line x1="98" y1="90" x2="164" y2="90" stroke="#60a5fa" stroke-width="2.5"/>
+            <line x1="98" y1="100" x2="164" y2="100" stroke="#f97316" stroke-width="2.5"/>
+            <!-- T-DNA below G now -->
+            <line x1="131" y1="112" x2="131" y2="148" stroke="#22c55e" stroke-width="3"/>
+            <line x1="125" y1="112" x2="125" y2="148" stroke="#4ade80" stroke-width="2.5"/>
+            <ellipse cx="131" cy="90" rx="35" ry="14" fill="rgba(168,85,247,.35)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="131" y="94" text-anchor="middle" fill="#e9d5ff" font-size="7">ATP→ADP</text>
+            <text x="131" y="148" text-anchor="middle" fill="#7a8898" font-size="7">消耗 2 ATP</text>
+            <text x="131" y="160" text-anchor="middle" fill="#7a8898" font-size="7">G-DNA 再接合</text>
+
+            <!-- Catenane resolution -->
+            <rect x="181" y="8" width="175" height="148" rx="5" fill="rgba(168,85,247,.1)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="268" y="22" text-anchor="middle" fill="#a855f7" font-size="9" font-weight="700">Type II 解開纏環 Catenane</text>
+            <!-- Two linked circles -->
+            <circle cx="235" cy="90" r="38" fill="none" stroke="#60a5fa" stroke-width="2.5"/>
+            <circle cx="275" cy="90" r="38" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+            <text x="222" y="93" text-anchor="middle" fill="#60a5fa" font-size="8">環 1</text>
+            <text x="288" y="93" text-anchor="middle" fill="#22c55e" font-size="8">環 2</text>
+            <text x="255" y="65" text-anchor="middle" fill="#ef4444" font-size="8">交纏！</text>
+            <line x1="268" y1="148" x2="268" y2="160" stroke="#a855f7" stroke-width="1.5" marker-end="url(#arrs)"/>
+            <circle cx="230" cy="170" r="22" fill="none" stroke="#60a5fa" stroke-width="2"/>
+            <circle cx="303" cy="170" r="22" fill="none" stroke="#22c55e" stroke-width="2"/>
+            <text x="268" y="195" text-anchor="middle" fill="#22c55e" font-size="8" font-weight="700">分離！（DNA 複製後必需）</text>
+          </g>
+        </svg>
+      </div>
+      <div class="fig-cap">Type I（左）：切斷一股 DNA，讓另一股穿過，再接合，Lk 每次改變 ±1，不需 ATP。<strong>細菌 Type IA 通常使超螺旋鬆弛</strong>（增加 Lk）。Type II（右）：切斷雙股，讓另一段雙鏈穿過，再接合，Lk 每次改變 ±2，需消耗 ATP。<strong>DNA 迴旋酶（Gyrase，Type IIA）</strong>是唯一能引入負超螺旋的酵素。Type II 還能解開複製後互相纏繞的染色體環（catenane）。</div>
+    </div>
+
+    <div class="cmp fi">
+      <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4)"><div class="ico">✂️</div><h4 style="color:var(--g)">Type I</h4><p>切一股<br>Lk 改變 ±1<br>不需 ATP<br>大腸桿菌 Topo I/III：鬆弛負超螺旋<br>反向迴旋酶（archaea）：引入正超螺旋</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4)"><div class="ico">✂️✂️</div><h4 style="color:var(--p)">Type II</h4><p>切雙股<br>Lk 改變 ±2<br>需 ATP<br>DNA 迴旋酶：引入負超螺旋<br>真核 Topo IIα/β：鬆弛（+/-）</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4)"><div class="ico">⭕</div><h4 style="color:var(--a)">Catenane 解環</h4><p>Topo IV（細菌）專責<br>解開複製後互纏染色體<br>有絲分裂前必需</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(239,68,68,.4)"><div class="ico">🏥</div><h4 style="color:var(--r)">藥物靶點</h4><p>氟喹諾酮（如 Cipro）：抑制細菌 Gyrase/Topo IV<br>喜樹鹼衍生物：抑制真核 Topo I（抗癌）<br>依託泊苷：抑制 Topo II（抗癌）</p></div>
+    </div>
+
+    <div class="call med fi">
+      <div class="call-ico">🏥</div>
+      <div class="call-body">
+        <h4>Box 24-2：拓撲異構酶抑制劑——抗菌藥與抗癌藥</h4>
+        <ul>
+          <li><strong>環丙沙星（Ciprofloxacin，Cipro）：</strong>氟喹諾酮類，抑制細菌的 DNA 迴旋酶和 Topo IV，阻止 DNA 鏈斷裂後再接合。廣效抗生素，是炭疽熱的關鍵用藥。對人體真核酵素選擇性很高，人體安全。</li>
+          <li><strong>伊立替康（Irinotecan）/ 托泊替康（Topotecan）：</strong>喜樹鹼衍生物，抑制真核 Type I Topo，用於大腸直腸癌、卵巢癌。</li>
+          <li><strong>依託泊苷（Etoposide）、道柔比星（Doxorubicin）：</strong>抑制 Type II Topo，用於多種癌症。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLECTONEMIC vs SOLENOIDAL -->
+  <div class="sub fi">
+    <h3>📐 兩種超螺旋形式：纏繞型 vs 螺線管型</h3>
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-20 &amp; 24-21</span><span class="fig-ttl">纏繞型（Plectonemic）與螺線管型（Solenoidal）超螺旋</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 210" width="760" height="210" xmlns="http://www.w3.org/2000/svg">
+          <!-- Plectonemic -->
+          <rect x="5" y="5" width="360" height="200" rx="8" fill="rgba(168,85,247,.05)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+          <text x="185" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">纏繞型（Plectonemic）</text>
+          <g transform="translate(30,42)">
+            <path d="M80,5 Q155,0 168,42 Q180,82 148,100 Q115,115 80,100 Q50,83 42,58 Q30,30 80,5" fill="none" stroke="#c4b5fd" stroke-width="3"/>
+            <path d="M80,5 Q10,0 2,40 Q-7,80 24,100 Q54,115 80,100" fill="none" stroke="#c4b5fd" stroke-width="3"/>
+            <circle cx="80" cy="58" r="5" fill="#a855f7"/>
+            <!-- branch -->
+            <path d="M80,100 Q65,135 82,150 Q95,163 78,175" fill="none" stroke="#c4b5fd" stroke-width="2.5"/>
+            <path d="M80,100 Q95,135 80,148" fill="none" stroke="#c4b5fd" stroke-width="2" opacity=".7"/>
+            <circle cx="80" cy="120" r="4" fill="#a855f7" opacity=".7"/>
+          </g>
+          <text x="185" y="155" text-anchor="middle" fill="#7a8898" font-size="10">→ 右手旋向，延伸，有分支</text>
+          <text x="185" y="170" text-anchor="middle" fill="#7a8898" font-size="10">→ 自由 DNA 溶液中的常見形式</text>
+          <text x="185" y="188" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="700">壓縮效率較低</text>
+
+          <!-- Solenoidal -->
+          <rect x="380" y="5" width="375" height="200" rx="8" fill="rgba(34,197,94,.05)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+          <text x="567" y="28" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Cinzel,serif" font-weight="700">螺線管型（Solenoidal）</text>
+          <g transform="translate(395,42)">
+            <!-- cylinder -->
+            <rect x="45" y="0" width="105" height="140" rx="8" fill="rgba(34,197,94,.1)" stroke="rgba(34,197,94,.25)" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="97" y="72" text-anchor="middle" fill="#86efac" font-size="8" opacity=".5">假想圓柱核心</text>
+            <!-- tight left-handed turns -->
+            <g fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round">
+              <path d="M45,18 Q22,28 22,43 Q22,58 45,62"/>
+              <line x1="45" y1="18" x2="150" y2="18"/>
+              <path d="M150,18 Q173,28 173,43 Q173,58 150,62"/>
+              <line x1="45" y1="62" x2="150" y2="62"/>
+              <path d="M45,62 Q22,72 22,87 Q22,102 45,106"/>
+              <path d="M150,62 Q173,72 173,87 Q173,102 150,106"/>
+              <line x1="45" y1="106" x2="150" y2="106"/>
+              <path d="M45,106 Q22,116 22,131 Q22,138 45,140"/>
+              <path d="M150,106 Q173,116 173,131 Q173,138 150,140"/>
+              <line x1="45" y1="140" x2="150" y2="140"/>
+            </g>
+            <text x="185" y="35" fill="#7a8898" font-size="9">← 左手旋向（緊繞）</text>
+            <text x="185" y="75" fill="#7a8898" font-size="9">← 如水管整齊纏繞</text>
+            <text x="185" y="115" fill="#7a8898" font-size="9">← 需蛋白質固定</text>
+          </g>
+          <text x="567" y="162" text-anchor="middle" fill="#7a8898" font-size="10">→ 被組蛋白（核小體）固定後的形式</text>
+          <text x="567" y="177" text-anchor="middle" fill="#22c55e" font-size="10" font-weight="700">壓縮效率遠高於纏繞型！← 核小體的結構基礎</text>
+          <text x="567" y="193" text-anchor="middle" fill="#7a8898" font-size="9">兩種形式均為負超螺旋，可互相轉換</text>
+        </svg>
+      </div>
+      <div class="fig-cap">兩種負超螺旋形式可互相轉換。<strong>纏繞型</strong>在溶液中較穩定但壓縮有限；<strong>螺線管型</strong>需要蛋白質（組蛋白）固定，但壓縮效率更高——這正是真核生物核小體（nucleosome）的結構基礎。</div>
+    </div>
+  </div>
+
+  <div class="sum fi">
+    <h3>Section 24.2 摘要</h3>
+    <ul class="sum-list">
+      <li>細胞的 DNA 通常都是<strong>超螺旋</strong>狀態。欠旋（underwinding）使 DNA 閉合環形分子的總螺旋圈數少於 B 型 DNA。</li>
+      <li>欠旋程度由<strong>連接數（Lk）</strong>和<strong>超螺旋密度（σ = ΔLk/Lk₀）</strong>描述；細胞 DNA 的 σ ≈ −0.05 至 −0.07。</li>
+      <li><strong>拓撲異構酶</strong>改變 DNA 連接數：Type I 每次 ±1（不需 ATP）；Type II 每次 ±2（需 ATP）。DNA 迴旋酶是唯一能引入負超螺旋的 Type II 酵素。</li>
+      <li>拓撲異構酶是重要藥物靶點：氟喹諾酮類抗生素（如環丙沙星）靶向細菌迴旋酶；喜樹鹼和依託泊苷等靶向真核 Topo 用於抗癌。</li>
+      <li>溶液中超螺旋 DNA 呈<strong>纏繞型（plectonemic）</strong>；與蛋白質結合後呈壓縮效率更高的<strong>螺線管型（solenoidal）</strong>，核小體即基於此原理。</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ SECTION 24.3 ============================================================ -->
+<section id="s3" class="section" style="--sc:var(--a)">
+<div class="wrap">
+  <div class="sec-header fi">
+    <div class="sec-num">Section 24.3</div>
+    <h2>染色體的結構 The Structure of Chromosomes</h2>
+    <p class="sec-lead">如何將幾公尺長的 DNA 塞進幾微米的細胞核？答案是多層次的精密包裝——從核小體、30 nm 纖維、環狀結構域，到染色體領域，每一層帶來更高倍的壓縮。</p>
+  </div>
+
+  <!-- CELL CYCLE AND CHROMATIN -->
+  <div class="sub fi">
+    <h3>🧬 染色質（Chromatin）組成與細胞週期</h3>
+    <p>真核細胞染色體的主體是<span class="ta">染色質（chromatin）</span>，由 <strong>DNA + 蛋白質（尤其組蛋白）+ RNA</strong> 組成，DNA 與蛋白質的質量大致相等。染色質的壓縮程度隨細胞週期動態變化。</p>
+
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-22</span><span class="fig-ttl">細胞週期中染色體結構的動態變化</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 300" width="760" height="300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Circular cycle diagram -->
+          <g transform="translate(155,155)">
+            <circle cx="0" cy="0" r="118" fill="none" stroke="rgba(245,158,11,.25)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <!-- G1: top-right, ~40% -->
+            <path d="M0,-118 A118,118 0 0 1 112,-42" fill="none" stroke="#38bdf8" stroke-width="14" stroke-linecap="round"/>
+            <!-- S: right, ~20% -->
+            <path d="M112,-42 A118,118 0 0 1 112,42" fill="none" stroke="#22c55e" stroke-width="14" stroke-linecap="round"/>
+            <!-- G2: bottom-right, ~15% -->
+            <path d="M112,42 A118,118 0 0 1 42,112" fill="none" stroke="#a855f7" stroke-width="14" stroke-linecap="round"/>
+            <!-- Mitosis: bottom and left, ~25% -->
+            <path d="M42,112 A118,118 0 0 1 -118,0" fill="none" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/>
+            <!-- G0/back: top-left -->
+            <path d="M-118,0 A118,118 0 0 1 0,-118" fill="none" stroke="#f97316" stroke-width="14" stroke-linecap="round"/>
+            <!-- Center label -->
+            <text x="0" y="-8" text-anchor="middle" fill="#e8eaf0" font-size="12" font-family="Cinzel,serif">細胞週期</text>
+            <text x="0" y="10" text-anchor="middle" fill="#7a8898" font-size="9">Cell Cycle</text>
+            <!-- Phase labels outside -->
+            <text x="75" y="-95" fill="#38bdf8" font-size="13" font-family="Cinzel,serif" font-weight="700">G1</text>
+            <text x="135" y="8" fill="#22c55e" font-size="13" font-family="Cinzel,serif" font-weight="700">S</text>
+            <text x="88" y="105" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">G2</text>
+            <text x="-175" y="25" fill="#ef4444" font-size="12" font-family="Cinzel,serif" font-weight="700">分裂期M</text>
+            <text x="-168" y="-60" fill="#f97316" font-size="10" font-family="Cinzel,serif">前中後末</text>
+          </g>
+
+          <!-- Phase detail table -->
+          <g transform="translate(330,15)">
+            <rect x="0" y="0" width="425" height="270" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+            <text x="212" y="22" text-anchor="middle" fill="#f59e0b" font-size="12" font-family="Cinzel,serif" font-weight="700">各期染色體狀態</text>
+            <line x1="5" y1="32" x2="420" y2="32" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+
+            <g font-size="9" font-family="Noto Serif TC,serif">
+              <text x="12" y="50" fill="#38bdf8" font-weight="700" font-size="10">G1 間期</text>
+              <text x="90" y="50" fill="#7a8898">DNA 鬆散分布核中；細胞合成蛋白質活躍生長</text>
+              <line x1="5" y1="58" x2="420" y2="58" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+              <text x="12" y="76" fill="#22c55e" font-weight="700" font-size="10">S 期</text>
+              <text x="90" y="76" fill="#7a8898">DNA 複製進行；姊妹染色分體形成（凝聚素開始累積）</text>
+              <line x1="5" y1="84" x2="420" y2="84" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+              <text x="12" y="102" fill="#a855f7" font-weight="700" font-size="10">G2 期</text>
+              <text x="90" y="102" fill="#7a8898">複製完成；凝聚素繼續累積；初步壓縮開始</text>
+              <line x1="5" y1="110" x2="420" y2="110" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+              <text x="12" y="128" fill="#ef4444" font-weight="700" font-size="10">前期</text>
+              <text x="90" y="128" fill="#7a8898">染色體開始高度壓縮；核膜開始解體；紡錘絲形成</text>
+              <line x1="5" y1="136" x2="420" y2="136" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+              <text x="12" y="154" fill="#ef4444" font-weight="700" font-size="10">中期 ⭐</text>
+              <text x="90" y="154" fill="#7a8898">染色體最高度壓縮（可見）；排列在分裂板；著絲點接紡錘絲</text>
+              <line x1="5" y1="162" x2="420" y2="162" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+              <text x="12" y="180" fill="#ef4444" font-weight="700" font-size="10">後期</text>
+              <text x="90" y="180" fill="#7a8898">凝聚素（cohesin）釋放；姊妹染色分體分離移向兩極</text>
+              <line x1="5" y1="188" x2="420" y2="188" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+              <text x="12" y="206" fill="#f97316" font-weight="700" font-size="10">末期</text>
+              <text x="90" y="206" fill="#7a8898">染色體抵達兩極；核膜重新形成；凝縮素（condensin）釋放</text>
+              <line x1="5" y1="214" x2="420" y2="214" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+
+              <rect x="8" y="225" width="410" height="36" rx="5" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+              <text x="212" y="240" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="700">壓縮倍數比較</text>
+              <text x="212" y="256" text-anchor="middle" fill="#7a8898" font-size="9">核小體：7× · 30 nm 纖維：~40× · 有絲分裂中期染色體：&gt;10,000×</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="fig-cap">真核細胞週期中染色質的動態變化。在間期（G1、S、G2），染色質鬆散，方便轉錄和複製。進入有絲分裂前期，<strong>凝縮素（condensin）</strong>驅動染色體高度壓縮至光學顯微鏡可見的形態（>10,000 倍壓縮），確保分裂時被紡錘絲精確拉向兩極。</div>
+    </div>
+  </div>
+
+  <!-- HISTONES -->
+  <div class="sub fi">
+    <h3>🧱 組蛋白（Histones）</h3>
+    <p><span class="ta">組蛋白（histones）</span>是真核染色質中含量最豐富的蛋白質，分子量 11,000–21,000，富含帶正電的精胺酸（Arg）和離胺酸（Lys），可與 DNA 的磷酸骨架緊密結合。</p>
+
+    <div class="call imp fi">
+      <div class="call-ico">⭐</div>
+      <div class="call-body">
+        <h4>組蛋白在演化上極度保守！</h4>
+        <p>H3 和 H4 在演化上極度保守：豌豆和牛的 H4 蛋白只有 2 個胺基酸不同（共 102 個）；人類和酵母菌的 H4 僅差 8 個。這說明組蛋白的每一個位置幾乎都至關重要，任何突變都可能造成嚴重後果。</p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap fi">
+      <table>
+        <thead><tr><th>組蛋白</th><th>分子量</th><th>胺基酸數</th><th>Lys（%）</th><th>Arg（%）</th><th>功能</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--a)">H1</td><td>21,130</td><td>223</td><td>29.5</td><td>1.6</td><td>接頭蛋白，連結核小體，促進高階折疊</td></tr>
+          <tr><td style="color:var(--a)">H2A</td><td>13,960</td><td>129</td><td>10.9</td><td>9.3</td><td>核心八聚體（×2）</td></tr>
+          <tr><td style="color:var(--a)">H2B</td><td>13,774</td><td>125</td><td>16.0</td><td>6.4</td><td>核心八聚體（×2）</td></tr>
+          <tr><td style="color:var(--a)"><strong>H3</strong></td><td>15,273</td><td>135</td><td>19.6</td><td>13.3</td><td>核心八聚體（×2）<strong>· 最保守</strong></td></tr>
+          <tr><td style="color:var(--a)"><strong>H4</strong></td><td>11,236</td><td>102</td><td>10.8</td><td>13.7</td><td>核心八聚體（×2）<strong>· 最保守</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="call key fi">
+      <div class="call-ico">🔬</div>
+      <div class="call-body">
+        <h4>組蛋白修飾（Histone Modification）與表觀遺傳</h4>
+        <p>組蛋白的 N 端尾巴（histone tails）突出於核小體外，是眾多酵素修飾的位點：<strong>乙醯化（acetylation）</strong>常與轉錄活化有關；<strong>甲基化（methylation）</strong>依位置可活化或抑制；<strong>磷酸化（phosphorylation）</strong>與細胞分裂有關。這些修飾可<strong>代代相傳</strong>（表觀遺傳，epigenetics），不改變 DNA 序列卻影響基因表現。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NUCLEOSOMES -->
+  <div class="sub fi">
+    <h3>🔮 核小體（Nucleosomes）：第一層壓縮</h3>
+
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-23 &amp; 24-24</span><span class="fig-ttl">核小體：「串珠」模型與核心顆粒結構</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 260" width="760" height="260" xmlns="http://www.w3.org/2000/svg">
+          <text x="380" y="20" text-anchor="middle" fill="#f59e0b" font-size="13" font-family="Cinzel,serif" font-weight="700">「串珠」模型 Beads-on-a-String</text>
+
+          <!-- DNA backbone -->
+          <path d="M15,95 Q55,80 95,95 Q125,107 155,95 Q170,88 188,95 Q228,80 268,95 Q298,107 328,95 Q343,88 362,95 Q402,80 442,95 Q472,107 502,95 Q517,88 536,95 Q576,80 616,95 Q646,107 676,95 Q691,88 715,95 Q735,88 755,95" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- Nucleosome 1 (detailed) -->
+          <g transform="translate(52,90)">
+            <ellipse cx="0" cy="0" rx="40" ry="34" fill="rgba(245,158,11,.28)" stroke="#f59e0b" stroke-width="2.5"/>
+            <!-- H3-H4 core -->
+            <ellipse cx="-4" cy="-4" rx="20" ry="16" fill="rgba(245,158,11,.5)" stroke="#fde68a" stroke-width="1.5"/>
+            <text x="-4" y="-2" text-anchor="middle" fill="#fef3c7" font-size="7">H3-H4</text>
+            <text x="-4" y="8" text-anchor="middle" fill="#fef3c7" font-size="7">×2</text>
+            <!-- H2A-H2B label -->
+            <text x="22" y="18" fill="#fde68a" font-size="7">H2A</text>
+            <text x="22" y="28" fill="#fde68a" font-size="7">H2B×2</text>
+            <!-- DNA wrapping dashed -->
+            <path d="M-40,-5 Q-48,-32 -25,-44 Q0,-52 28,-40 Q48,-26 40,2 Q48,28 26,40 Q0,52 -26,40 Q-48,26 -40,5" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-dasharray="4,2.5"/>
+            <!-- Annotation arrows -->
+            <line x1="55" y1="-42" x2="38" y2="-35" stroke="#38bdf8" stroke-width="1" opacity=".6"/>
+            <text x="60" y="-50" fill="#38bdf8" font-size="8">1.65 圈</text>
+            <text x="60" y="-38" fill="#38bdf8" font-size="8">146 bp</text>
+          </g>
+
+          <!-- H1 on first linker -->
+          <circle cx="185" cy="95" r="12" fill="rgba(56,189,248,.28)" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="185" y="99" text-anchor="middle" fill="#bae6fd" font-size="8">H1</text>
+
+          <!-- Nucleosome 2 -->
+          <g transform="translate(320,90)">
+            <ellipse cx="0" cy="0" rx="36" ry="30" fill="rgba(245,158,11,.28)" stroke="#f59e0b" stroke-width="2"/>
+            <text x="0" y="-2" text-anchor="middle" fill="#fef3c7" font-size="8">核小體</text>
+            <text x="0" y="10" text-anchor="middle" fill="#fde68a" font-size="8">#2</text>
+          </g>
+
+          <!-- H1 on second linker -->
+          <circle cx="455" cy="95" r="12" fill="rgba(56,189,248,.28)" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="455" y="99" text-anchor="middle" fill="#bae6fd" font-size="8">H1</text>
+
+          <!-- Nucleosome 3 -->
+          <g transform="translate(572,90)">
+            <ellipse cx="0" cy="0" rx="36" ry="30" fill="rgba(245,158,11,.28)" stroke="#f59e0b" stroke-width="2"/>
+            <text x="0" y="-2" text-anchor="middle" fill="#fef3c7" font-size="8">核小體</text>
+            <text x="0" y="10" text-anchor="middle" fill="#fde68a" font-size="8">#3</text>
+          </g>
+
+          <!-- Linker DNA label -->
+          <text x="249" y="73" text-anchor="middle" fill="#60a5fa" font-size="8">接頭 DNA</text>
+          <text x="249" y="84" text-anchor="middle" fill="#38bdf8" font-size="8">Linker ~54 bp</text>
+
+          <!-- Bottom summary box -->
+          <rect x="10" y="148" width="740" height="105" rx="8" fill="rgba(245,158,11,.07)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+          <text x="380" y="168" text-anchor="middle" fill="#f59e0b" font-size="12" font-family="Cinzel,serif" font-weight="700">核小體結構要點</text>
+
+          <g font-size="9" font-family="Noto Serif TC,serif">
+            <!-- Left column -->
+            <text x="50" y="188" fill="#fde68a" font-weight="700">核心顆粒（Core Particle）</text>
+            <text x="50" y="202" fill="#7a8898">· H2A、H2B、H3、H4 各 2 個</text>
+            <text x="50" y="216" fill="#7a8898">· 共 8 個組蛋白 = 八聚體（octamer）</text>
+            <text x="50" y="230" fill="#7a8898">· 纏繞 1.65 圈、146 bp DNA</text>
+            <text x="50" y="244" fill="#7a8898">· 直徑 11 nm（串珠）</text>
+            <!-- Middle column -->
+            <text x="290" y="188" fill="#38bdf8" font-weight="700">接頭 DNA + H1</text>
+            <text x="290" y="202" fill="#7a8898">· 接頭 DNA 長度：~54 bp</text>
+            <text x="290" y="216" fill="#7a8898">· 核小體間距：~200 bp</text>
+            <text x="290" y="230" fill="#7a8898">· H1 固定接頭，穩定高階結構</text>
+            <!-- Right column -->
+            <text x="530" y="188" fill="#22c55e" font-weight="700">壓縮效果</text>
+            <text x="530" y="202" fill="#7a8898">· DNA 長度：~7 倍壓縮</text>
+            <text x="530" y="216" fill="#7a8898">· 但染色體總壓縮 &gt;10,000×</text>
+            <text x="530" y="230" fill="#f59e0b" font-weight="700">→ 需要更高階結構！</text>
+          </g>
+        </svg>
+      </div>
+      <div class="fig-cap">核小體是染色質的基本重複單位。<strong>核心顆粒（core particle）</strong>由 H2A、H2B、H3、H4 各兩個（八聚體）和纏繞 1.65 圈的 <strong>146 bp DNA</strong> 構成，直徑約 11 nm。相鄰核小體之間有 ~54 bp 接頭 DNA，H1 在接頭處幫助穩定結構。此「串珠」結構提供約 <strong>7 倍</strong> DNA 壓縮，但染色體的 >10,000 倍壓縮還需要更多層次的結構。</div>
+    </div>
+  </div>
+
+  <!-- HIGHER-ORDER PACKAGING -->
+  <div class="sub fi">
+    <h3>🏗️ 更高階的染色質結構（從 7× 到 10,000×）</h3>
+    <p>核小體串珠結構（11 nm，7×）→ 螺旋壓縮成 <strong>30 nm 纖維</strong>（~40×）→ 固定在支架上形成<strong>環狀結構域</strong>→ 進一步折疊→ 有絲分裂中期染色體（>10,000×）。</p>
+
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-27 &amp; 24-28</span><span class="fig-ttl">染色體支架、環狀結構域與拓撲相關結構域（TADs）</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 290" width="760" height="290" xmlns="http://www.w3.org/2000/svg">
+          <!-- LEFT: Chromosomal scaffold + loops -->
+          <rect x="5" y="5" width="345" height="280" rx="8" fill="rgba(245,158,11,.05)" stroke="rgba(245,158,11,.2)" stroke-width="1"/>
+          <text x="177" y="28" text-anchor="middle" fill="#f59e0b" font-size="12" font-family="Cinzel,serif" font-weight="700">染色體支架與 DNA 環</text>
+          <text x="177" y="42" text-anchor="middle" fill="#7a8898" font-size="9">（有絲分裂中期染色體結構）</text>
+
+          <!-- Scaffold rod -->
+          <rect x="147" y="55" width="60" height="218" rx="12" fill="rgba(245,158,11,.3)" stroke="#f59e0b" stroke-width="2"/>
+          <text x="177" y="145" text-anchor="middle" fill="#fde68a" font-size="9">蛋白質</text>
+          <text x="177" y="158" text-anchor="middle" fill="#fde68a" font-size="9">支架</text>
+          <text x="177" y="172" text-anchor="middle" fill="#7a8898" font-size="7">Topo IIα</text>
+          <text x="177" y="183" text-anchor="middle" fill="#7a8898" font-size="7">凝縮素（Condensin）</text>
+
+          <!-- DNA loops left side -->
+          <path d="M147,75 Q78,65 55,100 Q32,135 55,168 Q78,200 147,190" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M147,110 Q72,98 48,138 Q26,175 48,210 Q72,243 147,230" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Scaffold attachment points -->
+          <circle cx="147" cy="75" r="5" fill="#f59e0b"/>
+          <circle cx="147" cy="190" r="5" fill="#f59e0b"/>
+          <circle cx="147" cy="110" r="5" fill="#f59e0b"/>
+          <circle cx="147" cy="230" r="5" fill="#f59e0b"/>
+
+          <!-- DNA loops right side -->
+          <path d="M207,75 Q275,65 298,100 Q320,135 298,168 Q275,200 207,190" fill="none" stroke="#c4b5fd" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M207,110 Q282,98 305,138 Q328,175 305,210 Q282,243 207,230" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="207" cy="75" r="5" fill="#f59e0b"/>
+          <circle cx="207" cy="190" r="5" fill="#f59e0b"/>
+          <circle cx="207" cy="110" r="5" fill="#f59e0b"/>
+          <circle cx="207" cy="230" r="5" fill="#f59e0b"/>
+
+          <text x="70" y="128" text-anchor="middle" fill="#60a5fa" font-size="8">DNA 環</text>
+          <text x="70" y="140" text-anchor="middle" fill="#7a8898" font-size="7">~50,000 bp/環</text>
+          <text x="177" y="283" text-anchor="middle" fill="#7a8898" font-size="8">DNA 環固定在蛋白質支架上 · 拓撲異構酶 IIα 最豐富</text>
+
+          <!-- RIGHT: TADs diagram -->
+          <rect x="362" y="5" width="393" height="280" rx="8" fill="rgba(168,85,247,.05)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+          <text x="558" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">拓撲相關結構域 TADs</text>
+          <text x="558" y="42" text-anchor="middle" fill="#7a8898" font-size="9">（間期細胞核中的組織）</text>
+
+          <!-- Active compartment -->
+          <rect x="370" y="52" width="185" height="218" rx="6" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>
+          <text x="462" y="70" text-anchor="middle" fill="#22c55e" font-size="10" font-weight="700">活躍區室（A 型）</text>
+          <text x="462" y="83" text-anchor="middle" fill="#7a8898" font-size="8">真染色質 · 轉錄活躍</text>
+
+          <!-- Active loops (looser) -->
+          <path d="M400,100 Q378,130 400,162" fill="none" stroke="#22c55e" stroke-width="2"/>
+          <path d="M430,100 Q404,138 430,172" fill="none" stroke="#22c55e" stroke-width="2"/>
+          <path d="M460,100 Q430,142 460,180" fill="none" stroke="#22c55e" stroke-width="2"/>
+          <path d="M490,100 Q463,135 490,168" fill="none" stroke="#22c55e" stroke-width="2"/>
+          <path d="M520,100 Q500,130 520,160" fill="none" stroke="#22c55e" stroke-width="2"/>
+          <!-- CTCF sites -->
+          <circle cx="400" cy="100" r="5" fill="#22c55e"/><circle cx="400" cy="162" r="5" fill="#22c55e"/>
+          <circle cx="460" cy="100" r="5" fill="#22c55e"/><circle cx="460" cy="180" r="5" fill="#22c55e"/>
+          <text x="462" y="210" text-anchor="middle" fill="#86efac" font-size="8">● CTCF 結合位點</text>
+          <text x="462" y="222" text-anchor="middle" fill="#7a8898" font-size="7">固定 TAD 邊界</text>
+          <text x="462" y="238" text-anchor="middle" fill="#22c55e" font-size="9" font-weight="700">真染色質</text>
+          <text x="462" y="252" text-anchor="middle" fill="#7a8898" font-size="7">Euchromatin</text>
+          <text x="462" y="264" text-anchor="middle" fill="#7a8898" font-size="7">近核膜內部</text>
+
+          <!-- Inactive compartment -->
+          <rect x="560" y="52" width="188" height="218" rx="6" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
+          <text x="654" y="70" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="700">不活躍區室（B 型）</text>
+          <text x="654" y="83" text-anchor="middle" fill="#7a8898" font-size="8">異染色質 · 基因沉默</text>
+
+          <!-- Inactive - more compact wavy -->
+          <path d="M582,95 Q572,115 582,135 Q592,155 582,175 Q572,195 582,215 Q590,232 582,250" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+          <path d="M610,95 Q597,118 610,140 Q623,162 610,182 Q597,202 610,222 Q620,237 610,252" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+          <path d="M640,95 Q624,120 640,145 Q655,170 640,192 Q624,215 640,238" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+          <path d="M668,95 Q655,120 668,145 Q682,170 668,192 Q655,215 668,238" fill="none" stroke="#fbbf24" stroke-width="2"/>
+          <text x="654" y="252" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="700">異染色質</text>
+          <text x="654" y="264" text-anchor="middle" fill="#7a8898" font-size="7">Heterochromatin · 緊密壓縮 · 近核膜</text>
+
+          <!-- TAD size note -->
+          <text x="558" y="282" text-anchor="middle" fill="#7a8898" font-size="8">TAD 平均大小 ~800,000 bp (0.8 Mbp) · 由 CTCF 和 SMC 蛋白（凝聚素）界定邊界</text>
+        </svg>
+      </div>
+      <div class="fig-cap">左：有絲分裂中期染色體中，DNA 形成大量 <strong>~50,000 bp 的環</strong>，錨定在由拓撲異構酶 IIα 和凝縮素（condensin）組成的蛋白質支架上。右：間期細胞核中，大的 DNA 環被組織成<strong>拓撲相關結構域（TAD）</strong>，分為轉錄活躍的<strong>活躍區室（A）</strong>和基因沉默的<strong>不活躍區室（B）</strong>，由 CTCF 蛋白結合位點界定邊界。</div>
+    </div>
+  </div>
+
+  <!-- lncRNAs -->
+  <div class="sub fi">
+    <h3>📡 長鏈非編碼 RNA（lncRNAs）</h3>
+    <p><span class="ta">長鏈非編碼 RNA（lncRNA）</span>超過 200 個核苷酸，不編碼蛋白質，卻有多樣的結構調控功能：橋接遠距 DNA 片段、招募染色質修飾複合物、引導基因活化或沉默。</p>
+
+    <div class="cmp fi">
+      <div class="cmp-c"><div class="ico">🔗</div><h4>DNA 橋接</h4><p>lncRNA 同時與多個 DNA 結合蛋白作用，將遠端 DNA 片段拉近，形成染色質環（見 Fig 24-29）</p></div>
+      <div class="cmp-c"><div class="ico">🔕</div><h4>基因沉默</h4><p>某些 lncRNA 招募組蛋白修飾酶，使特定基因區域凝縮成異染色質，抑制轉錄</p></div>
+      <div class="cmp-c"><div class="ico">❌</div><h4>X 染色體失活</h4><p><strong>Xist</strong> lncRNA（17,000 nt）覆蓋整條 X 染色體，招募蛋白質使其凝縮，形成 Barr 體</p></div>
+      <div class="cmp-c"><div class="ico">⚖️</div><h4>Tsix 反向調控</h4><p><strong>Tsix</strong>（Xist 反向互補，40,000 nt）對抗 Xist，保護另一條 X 不被沉默</p></div>
+    </div>
+
+    <div class="call key fi">
+      <div class="call-ico">🐱</div>
+      <div class="call-body">
+        <h4>Box 24-3：虎斑貓（Calico Cat）與 X 染色體失活</h4>
+        <p>雌性哺乳動物（XX）若不調控，基因劑量是雄性（XY）的兩倍。解決方案：<span class="ta">X 染色體失活（X-inactivation）</span>——在胚胎早期，每個細胞隨機選擇沉默其中一條 X。一旦選定，後代細胞維持相同選擇（表觀遺傳穩定性）。<br><strong>虎斑貓</strong>的橙色/黑色花紋正是此現象的可見結果：毛色基因位在 X 染色體上，不同細胞隨機沉默不同 X，表現出不同毛色，形成鑲嵌圖案。這也解釋了為何虎斑貓幾乎全是雌性。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMC PROTEINS -->
+  <div class="sub fi">
+    <h3>🔧 SMC 蛋白質：染色體維護的結構蛋白</h3>
+    <p><span class="ta">SMC 蛋白（Structural Maintenance of Chromosomes）</span>是染色質中繼組蛋白和拓撲異構酶之後第三大重要蛋白類別，負責複製後維持染色體結構。所有 SMC 蛋白由兩個亞基以鉸鏈域（hinge）形成 <strong>V 形二聚體</strong>，兩端各有 ATP 水解域。</p>
+
+    <div class="cmp fi">
+      <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4)"><div class="ico">🤝</div><h4 style="color:var(--g)">凝聚素（Cohesin）</h4><p>SMC1 + SMC3<br>讓姊妹染色分體在複製後保持連接，直到後期才被切割釋放<br>→ 確保染色體正確分離</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4)"><div class="ico">📦</div><h4 style="color:var(--p)">凝縮素（Condensin）</h4><p>SMC2 + SMC4<br>驅動染色體在前期高度壓縮（凝縮）<br>→ 有絲分裂必需，基因叩環（loop extrusion）的動力來源</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(56,189,248,.4)"><div class="ico">🔩</div><h4 style="color:var(--cyan)">SMC5/6 複合體</h4><p>SMC5 + SMC6<br>參與 DNA 修復（尤其雙股斷裂修復）和複製叉的維護<br>→ 基因組穩定性</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4)"><div class="ico">🌀</div><h4 style="color:var(--a)">基因叩環（Loop Extrusion）</h4><p>凝縮素像「毛毛蟲」一樣沿 DNA 移動，拉出越來越大的環<br>→ 形成 TAD 和染色體環的機制</p></div>
+    </div>
+  </div>
+
+  <!-- BACTERIAL CHROMOSOME -->
+  <div class="sub fi">
+    <h3>🦠 細菌 DNA 的包裝：類核體（Nucleoid）</h3>
+    <p>細菌 DNA 壓縮在稱為<span class="ta">類核體（nucleoid）</span>的結構中，沒有核膜包裹，但仍有多層次的組織，且其 DNA 同樣維持<strong>負超螺旋</strong>（σ ≈ −0.06）。</p>
+
+    <div class="fig fi">
+      <div class="fig-head"><span class="fig-num">Figure 24-34 &amp; 24-35</span><span class="fig-ttl">E. coli 類核體與 ~500 個環狀結構域</span></div>
+      <div class="fig-svg">
+        <svg viewBox="0 0 760 240" width="760" height="240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cell -->
+          <rect x="5" y="5" width="340" height="230" rx="8" fill="rgba(34,197,94,.05)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+          <text x="175" y="28" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Cinzel,serif" font-weight="700">大腸桿菌 E. coli</text>
+          <!-- Cell membrane -->
+          <ellipse cx="175" cy="130" rx="108" ry="85" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="6,3"/>
+          <text x="175" y="225" text-anchor="middle" fill="#7a8898" font-size="8">細胞邊界（長 ~2 μm）</text>
+          <!-- Nucleoid condensed mass -->
+          <ellipse cx="175" cy="130" rx="70" ry="55" fill="rgba(34,197,94,.2)" stroke="#4ade80" stroke-width="1.5"/>
+          <text x="175" y="125" text-anchor="middle" fill="#86efac" font-size="11">類核體</text>
+          <text x="175" y="140" text-anchor="middle" fill="#7a8898" font-size="9">4,641,652 bp</text>
+          <text x="175" y="155" text-anchor="middle" fill="#7a8898" font-size="8">~1.7 mm 展開長度</text>
+          <!-- No membrane warning -->
+          <text x="175" y="60" text-anchor="middle" fill="#f59e0b" font-size="9">⚠ 無核膜！DNA 直接在細胞質中</text>
+          <text x="175" y="76" text-anchor="middle" fill="#7a8898" font-size="8">可能固定於細胞膜上</text>
+
+          <!-- Loop domain model -->
+          <rect x="358" y="5" width="397" height="230" rx="8" fill="rgba(34,197,94,.05)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+          <text x="557" y="28" text-anchor="middle" fill="#22c55e" font-size="12" font-family="Cinzel,serif" font-weight="700">~500 個環狀結構域</text>
+          <text x="557" y="42" text-anchor="middle" fill="#7a8898" font-size="9">每環平均 10,000 bp，拓撲上相互獨立</text>
+
+          <!-- Anchoring complex -->
+          <ellipse cx="557" cy="130" rx="32" ry="26" fill="rgba(245,158,11,.3)" stroke="#f59e0b" stroke-width="2"/>
+          <text x="557" y="127" text-anchor="middle" fill="#fde68a" font-size="8">蛋白質</text>
+          <text x="557" y="140" text-anchor="middle" fill="#fde68a" font-size="8">骨架</text>
+
+          <!-- Loops radiating out -->
+          <g fill="none" stroke-linecap="round">
+            <path d="M557,104 Q530,55 505,75 Q480,95 505,125 Q528,145 557,130" stroke="#22c55e" stroke-width="2"/>
+            <path d="M557,104 Q584,55 609,75 Q634,95 609,125 Q586,145 557,130" stroke="#4ade80" stroke-width="2"/>
+            <path d="M557,130 Q510,165 493,195 Q480,222 520,225 Q547,226 557,158" stroke="#22c55e" stroke-width="2"/>
+            <path d="M557,130 Q604,165 620,195 Q634,222 594,225 Q567,226 557,158" stroke="#4ade80" stroke-width="2"/>
+            <path d="M557,104 Q557,48 540,38 Q524,30 528,65 Q532,90 557,104" stroke="#86efac" stroke-width="1.5"/>
+            <path d="M557,104 Q557,48 574,38 Q590,30 586,65 Q582,90 557,104" stroke="#86efac" stroke-width="1.5"/>
+          </g>
+          <!-- Domain boundaries -->
+          <circle cx="535" cy="108" r="5" fill="#f59e0b"/>
+          <circle cx="579" cy="108" r="5" fill="#f59e0b"/>
+          <circle cx="530" cy="148" r="5" fill="#f59e0b"/>
+          <circle cx="584" cy="148" r="5" fill="#f59e0b"/>
+          <text x="557" y="218" text-anchor="middle" fill="#7a8898" font-size="8">一個域斷裂不影響其他域的超螺旋狀態</text>
+        </svg>
+      </div>
+      <div class="fig-cap">左：大腸桿菌 DNA（4.64 Mbp）壓縮在<strong>類核體</strong>中，無核膜，可能固定在細胞膜上。右：E. coli 圓形染色體被組織成約 <strong>500 個環狀結構域</strong>，每環平均 10,000 bp，各域在拓撲上相互獨立（一個域的超螺旋斷裂不影響其他域）。注意：細菌<strong>沒有穩定的核小體</strong>，其類組蛋白（HU 蛋白、H-NS 等）只是短暫結合，使 DNA 更動態，適應快速的基因表達需求。</div>
+    </div>
+
+    <div class="call tip fi">
+      <div class="call-ico">⚖️</div>
+      <div class="call-body">
+        <h4>細菌 vs. 真核生物染色體包裝比較</h4>
+        <ul>
+          <li><strong>細菌：</strong>環狀 DNA，無核膜，無穩定核小體，約 500 個動態環狀域，σ ≈ −0.06，HU / H-NS 等蛋白暫時結合；細胞分裂週期 ~15 分鐘</li>
+          <li><strong>真核生物：</strong>線性 DNA，有核膜，穩定核小體（每 200 bp 一個），多層次壓縮（核小體→30 nm 纖維→TAD→染色體域），分裂週期數小時至數天</li>
+          <li>細菌 DNA 結構更「動態」，因為更大比例的 DNA 需要同時轉錄/複製</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sum fi">
+    <h3>Section 24.3 摘要</h3>
+    <ul class="sum-list">
+      <li>真核染色體由 DNA、蛋白質（尤其組蛋白）和 RNA 組成，稱為<strong>染色質（chromatin）</strong>。壓縮程度隨細胞週期動態變化。</li>
+      <li><strong>核小體</strong>是染色質基本單位：8 個組蛋白八聚體（H2A、H2B、H3、H4 各 2）+ 146 bp DNA（纏繞 1.65 圈）+ ~54 bp 接頭 DNA，共約 200 bp，提供約 7 倍壓縮。H1 組蛋白穩定接頭。</li>
+      <li>組蛋白可被乙醯化、甲基化、磷酸化等修飾，影響染色質結構和基因表現，可代代相傳（<strong>表觀遺傳，epigenetics</strong>）。</li>
+      <li>染色體更高層次的包裝涉及與<strong>蛋白質支架</strong>結合的 DNA 環（~50,000 bp/環）；拓撲異構酶 IIα 和凝縮素（condensin）在其中扮演關鍵角色。</li>
+      <li>真核細胞核中，大的 DNA 環被組成<strong>拓撲相關結構域（TAD，平均 0.8 Mbp）</strong>，分為活躍（真染色質）和不活躍（異染色質）區室，邊界由 CTCF 蛋白界定。</li>
+      <li><strong>lncRNA</strong>（如 Xist）參與染色質結構的長程調控；<strong>SMC 蛋白</strong>（凝聚素 cohesin、凝縮素 condensin、SMC5/6）維護染色體結構完整性。</li>
+      <li>細菌 DNA 以類核體形式存在，約 500 個動態環狀域，無穩定核小體，同樣維持負超螺旋狀態。</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ KEY TERMS ============================================================ -->
+<section id="terms" style="padding:3rem 0;border-top:1px solid var(--border)">
+<div class="wrap">
+  <h2 style="font-size:1.2rem;color:var(--cyan);letter-spacing:.15em;margin-bottom:.5rem">關鍵詞彙 Key Terms</h2>
+  <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.25rem">滑鼠移至卡片可查看詳情</p>
+  <div class="kt-grid">
+    <div class="kt-card"><div class="kt-en">Gene</div><div class="kt-zh">基因</div><div class="kt-def">編碼功能性多胜肽或 RNA 的所有 DNA 片段</div></div>
+    <div class="kt-card"><div class="kt-en">Colinearity</div><div class="kt-zh">共線性</div><div class="kt-def">DNA → mRNA → 多胜肽序列的對應關係</div></div>
+    <div class="kt-card"><div class="kt-en">Intron</div><div class="kt-zh">內含子</div><div class="kt-def">基因中被剪接去除的非編碼序列</div></div>
+    <div class="kt-card"><div class="kt-en">Exon</div><div class="kt-zh">外顯子</div><div class="kt-def">基因中保留在成熟 mRNA 的編碼序列</div></div>
+    <div class="kt-card"><div class="kt-en">Centromere</div><div class="kt-zh">著絲點</div><div class="kt-def">染色體上紡錘絲的附著位點，確保有絲分裂時染色體正確分離</div></div>
+    <div class="kt-card"><div class="kt-en">Telomere</div><div class="kt-zh">端粒</div><div class="kt-def">線性染色體末端的重複序列，保護染色體不縮短</div></div>
+    <div class="kt-card"><div class="kt-en">Telomerase</div><div class="kt-zh">端粒酶</div><div class="kt-def">帶 RNA 模板的逆轉錄酶，在染色體末端添加端粒重複序列</div></div>
+    <div class="kt-card"><div class="kt-en">Supercoiling</div><div class="kt-zh">超螺旋</div><div class="kt-def">DNA 雙螺旋軸心再次捲繞自身的結構，分正超螺旋和負超螺旋</div></div>
+    <div class="kt-card"><div class="kt-en">Underwinding</div><div class="kt-zh">欠旋</div><div class="kt-def">DNA 螺旋圈數少於鬆弛 B-DNA 的狀態，導致負超螺旋，σ &lt; 0</div></div>
+    <div class="kt-card"><div class="kt-en">Linking Number (Lk)</div><div class="kt-zh">連接數</div><div class="kt-def">閉合雙股 DNA 中，一股穿過另一股所形成圓形平面的次數</div></div>
+    <div class="kt-card"><div class="kt-en">Superhelical Density (σ)</div><div class="kt-zh">超螺旋密度</div><div class="kt-def">σ = ΔLk / Lk₀，細胞 DNA 約 −0.05 至 −0.07</div></div>
+    <div class="kt-card"><div class="kt-en">Topoisomerase</div><div class="kt-zh">拓撲異構酶</div><div class="kt-def">藉由暫時切斷 DNA 鏈改變連接數的酵素，分 Type I 和 Type II</div></div>
+    <div class="kt-card"><div class="kt-en">DNA Gyrase</div><div class="kt-zh">DNA 迴旋酶</div><div class="kt-def">唯一能引入負超螺旋的 Type IIA 拓撲異構酶，存在於細菌中</div></div>
+    <div class="kt-card"><div class="kt-en">Catenane</div><div class="kt-zh">纏環</div><div class="kt-def">兩個環狀 DNA 互相纏繞但不共價連接，需 Type II 拓撲異構酶解開</div></div>
+    <div class="kt-card"><div class="kt-en">Plectonemic Supercoil</div><div class="kt-zh">纏繞型超螺旋</div><div class="kt-def">延伸且分支的超螺旋形式，在自由 DNA 溶液中常見</div></div>
+    <div class="kt-card"><div class="kt-en">Solenoidal Supercoil</div><div class="kt-zh">螺線管型超螺旋</div><div class="kt-def">緊密纏繞在假想圓柱上的超螺旋，核小體的結構基礎</div></div>
+    <div class="kt-card"><div class="kt-en">Chromatin</div><div class="kt-zh">染色質</div><div class="kt-def">真核染色體的主體，由 DNA + 蛋白質（尤其組蛋白）+ RNA 構成</div></div>
+    <div class="kt-card"><div class="kt-en">Histone</div><div class="kt-zh">組蛋白</div><div class="kt-def">染色質的主要蛋白質，富含 Lys 和 Arg，H2A/H2B/H3/H4 形成核小體八聚體，H1 為接頭蛋白</div></div>
+    <div class="kt-card"><div class="kt-en">Nucleosome</div><div class="kt-zh">核小體</div><div class="kt-def">染色質的基本重複單位：組蛋白八聚體 + 146 bp DNA（1.65 圈），外加接頭 DNA 共約 200 bp</div></div>
+    <div class="kt-card"><div class="kt-en">Epigenetics</div><div class="kt-zh">表觀遺傳</div><div class="kt-def">不改變 DNA 序列而影響基因表現的可遺傳變化，如組蛋白修飾、DNA 甲基化</div></div>
+    <div class="kt-card"><div class="kt-en">TAD</div><div class="kt-zh">拓撲相關結構域</div><div class="kt-def">染色體中相互作用頻率高的 DNA 區域（平均 ~0.8 Mbp），由 CTCF 和 SMC 蛋白界定邊界</div></div>
+    <div class="kt-card"><div class="kt-en">Heterochromatin</div><div class="kt-zh">異染色質</div><div class="kt-def">高度壓縮、轉錄不活躍的染色質，多位於細胞核周邊</div></div>
+    <div class="kt-card"><div class="kt-en">Euchromatin</div><div class="kt-zh">真染色質</div><div class="kt-def">鬆散、轉錄活躍的染色質，多位於細胞核內部</div></div>
+    <div class="kt-card"><div class="kt-en">lncRNA</div><div class="kt-zh">長鏈非編碼 RNA</div><div class="kt-def">&gt;200 nt，不編碼蛋白質，參與染色質結構調控（如 Xist 介導 X 染色體失活）</div></div>
+    <div class="kt-card"><div class="kt-en">SMC Proteins</div><div class="kt-zh">SMC 蛋白</div><div class="kt-def">染色體結構維護蛋白，包括凝聚素（cohesin）、凝縮素（condensin）和 SMC5/6</div></div>
+    <div class="kt-card"><div class="kt-en">Cohesin</div><div class="kt-zh">凝聚素</div><div class="kt-def">SMC1+SMC3 構成，使複製後的姊妹染色分體保持連接，直到後期才釋放</div></div>
+    <div class="kt-card"><div class="kt-en">Condensin</div><div class="kt-zh">凝縮素</div><div class="kt-def">SMC2+SMC4 構成，驅動有絲分裂期染色體高度壓縮</div></div>
+    <div class="kt-card"><div class="kt-en">Nucleoid</div><div class="kt-zh">類核體</div><div class="kt-def">細菌 DNA 及其結合蛋白的集合，無核膜包裹，組織成約 500 個環狀結構域</div></div>
+    <div class="kt-card"><div class="kt-en">Loop Extrusion</div><div class="kt-zh">基因叩環</div><div class="kt-def">凝縮素沿 DNA 移動、拉出越來越大的環，是形成 TAD 的關鍵機制</div></div>
+    <div class="kt-card"><div class="kt-en">X-Inactivation</div><div class="kt-zh">X 染色體失活</div><div class="kt-def">雌性哺乳動物胚胎早期，隨機沉默其中一條 X，由 Xist lncRNA 介導</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ CHAPTER SUMMARY ============================================================ -->
+<section style="padding:2.5rem 0;border-top:1px solid var(--border);background:linear-gradient(180deg,rgba(7,16,30,0) 0%,rgba(13,32,64,.4) 100%)">
+<div class="wrap">
+  <h2 style="font-size:1.1rem;color:var(--cyan);letter-spacing:.15em;margin-bottom:1.5rem;font-family:Cinzel,serif">📋 全章總複習</h2>
+  <div class="cmp">
+    <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4);text-align:left;padding:1.25rem">
+      <h4 style="color:var(--g);margin-bottom:.75rem">24.1 染色體元素</h4>
+      <p style="font-size:.8rem;line-height:1.7">• 基因 = 編碼功能性 RNA/多胜肽的 DNA<br>• DNA 比細胞大 850~290 倍<br>• 真核基因含<strong>外顯子＋內含子</strong><br>• 人類基因組僅 1.5% 是外顯子<br>• 著絲點 = 紡錘絲附著點<br>• 端粒 = 保護染色體末端</p>
+    </div>
+    <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4);text-align:left;padding:1.25rem">
+      <h4 style="color:var(--p);margin-bottom:.75rem">24.2 DNA 超螺旋</h4>
+      <p style="font-size:.8rem;line-height:1.7">• 所有細胞 DNA 維持負超螺旋<br>• σ ≈ −0.05 到 −0.07<br>• Lk = 連接數；σ = ΔLk/Lk₀<br>• Type I：切一股，±1，無 ATP<br>• Type II：切雙股，±2，需 ATP<br>• 迴旋酶：唯一引入負超螺旋<br>• 藥物靶點：Cipro / Etoposide</p>
+    </div>
+    <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4);text-align:left;padding:1.25rem">
+      <h4 style="color:var(--a);margin-bottom:.75rem">24.3 染色體結構</h4>
+      <p style="font-size:.8rem;line-height:1.7">• 染色質 = DNA + 組蛋白 + RNA<br>• 核小體：八聚體 + 146 bp<br>• 壓縮：7× → 40× → &gt;10,000×<br>• 組蛋白修飾 = 表觀遺傳<br>• TAD：~0.8 Mbp，CTCF 界定<br>• lncRNA：結構調控（Xist）<br>• SMC：凝聚素/凝縮素/SMC5-6<br>• 細菌：類核體，~500 環狀域</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>本學習指南根據 Lehninger Biochemistry (第8版) 第24章編寫 · 供學習用途</p>
+  <p style="margin-top:.5rem;color:rgba(122,136,152,.5)">圖示為示意圖，非原書圖片的重製</p>
+</footer>
+
+<!-- ============================================================ JAVASCRIPT ============================================================ -->
+<script>
+// ── DNA HELIX CANVAS ANIMATION ──
+(function(){
+  const canvas = document.getElementById("helixCanvas");
+  if(!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let W, H, raf;
+  function resize(){
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  let t = 0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const cx = W/2;
+    const amp = Math.min(W*0.08, 80);
+    const period = 120;
+    const numBP = Math.ceil(H/10);
+
+    for(let i=0; i<numBP; i++){
+      const y = (i * H/numBP + t*0.4) % H;
+      const phase = (y / period) * Math.PI * 2;
+      const x1 = cx + amp * Math.sin(phase);
+      const x2 = cx - amp * Math.sin(phase);
+      const alpha = 0.5 + 0.5 * Math.abs(Math.sin(phase));
+
+      // Strand 1
+      ctx.beginPath();
+      ctx.arc(x1, y, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(96,165,250,${alpha*0.7})`;
+      ctx.fill();
+
+      // Strand 2
+      ctx.beginPath();
+      ctx.arc(x2, y, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(249,115,22,${alpha*0.7})`;
+      ctx.fill();
+
+      // Base pair connection (at intervals)
+      if(i % 4 === 0){
+        ctx.beginPath();
+        ctx.moveTo(x1, y);
+        ctx.lineTo(x2, y);
+        const grad = ctx.createLinearGradient(x1,y,x2,y);
+        grad.addColorStop(0,"rgba(96,165,250,0.4)");
+        grad.addColorStop(1,"rgba(249,115,22,0.4)");
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+
+    // Backbone connections (smooth curves)
+    ctx.beginPath();
+    for(let i=0; i<numBP; i++){
+      const y = (i * H/numBP + t*0.4) % H;
+      const phase = (y / period) * Math.PI * 2;
+      const x1 = cx + amp * Math.sin(phase);
+      if(i===0) ctx.moveTo(x1,y); else ctx.lineTo(x1,y);
+    }
+    ctx.strokeStyle = "rgba(96,165,250,0.25)";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.beginPath();
+    for(let i=0; i<numBP; i++){
+      const y = (i * H/numBP + t*0.4) % H;
+      const phase = (y / period) * Math.PI * 2;
+      const x2 = cx - amp * Math.sin(phase);
+      if(i===0) ctx.moveTo(x2,y); else ctx.lineTo(x2,y);
+    }
+    ctx.strokeStyle = "rgba(249,115,22,0.25)";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    t += 0.5;
+    raf = requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── SCROLL FADE-IN ──
+(function(){
+  const items = document.querySelectorAll(".fi");
+  if(!("IntersectionObserver" in window)){
+    items.forEach(el => el.classList.add("vis"));
+    return;
+  }
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add("vis");
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.1,rootMargin:"0px 0px -40px 0px"});
+  items.forEach(el => obs.observe(el));
+})();
+</script>
+</body>
+</html>
