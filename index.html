@@ -20,14 +20,14 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* 為了讓內容多時能正常滾動，改為 flex-start */
             min-height: 100vh;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px; /* 稍微加寬一點讓長檔名更好看 */
             width: 90%;
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
         }
 
@@ -43,16 +43,31 @@
             margin-bottom: 2rem;
         }
 
+        /* 分類區塊樣式 */
+        .category-section {
+            margin-bottom: 2.5rem;
+            text-align: left; /* 讓分類標題與列表靠左，更易於閱讀 */
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            border-bottom: 2px solid #eaecef;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
         /* 筆記清單樣式優化 */
         #file-list ul {
             list-style: none;
             padding: 0;
-            margin: 2rem 0;
+            margin: 0;
         }
 
         #file-list li {
             margin: 10px 0;
-            padding: 10px;
+            padding: 10px 15px;
             border: 1px solid #eaecef;
             border-radius: 6px;
             transition: background 0.2s;
@@ -70,9 +85,10 @@
         }
 
         footer {
-            margin-top: 3rem;
+            margin-top: 4rem;
             font-size: 0.9rem;
             color: #888;
+            text-align: center;
         }
     </style>
 </head>
@@ -93,6 +109,15 @@
         const username = 'www91temp-tech';
         const repo = 'www91temp-tech.github.io';
 
+        // 建立一個字典，用來將英文前綴對應到您想要的中文分類名稱
+        const categoryMapping = {
+            'Biochemistry': '🧪 生化 (Biochemistry)',
+            'Biology': '🧬 普生 (Biology)'
+            // 若未來有其他科目，可以在這裡繼續新增，例如：
+            // 'Physics': '⚛️ 物理',
+            // 'Chemistry': '⚗️ 化學'
+        };
+
         async function loadFiles() {
             try {
                 const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/`);
@@ -112,17 +137,62 @@
                     return;
                 }
 
-                const ul = document.createElement('ul');
+                // 將檔案依據名稱前綴進行分類 (Grouping)
+                const groupedFiles = {};
+
                 htmlFiles.forEach(file => {
-                    const li = document.createElement('li');
-                    // 這裡將檔名的 .html 去除，並處理 URL 編碼問題
+                    // 去除副檔名並解碼
                     const displayName = decodeURIComponent(file.name.replace('.html', ''));
-                    li.innerHTML = `<a href="${file.path}">${displayName}</a>`;
-                    ul.appendChild(li);
+                    
+                    // 以底線 "_" 分割檔名來取得前綴
+                    const nameParts = displayName.split('_');
+                    let rawCategory = nameParts[0]; 
+
+                    // 檢查有沒有底線，沒有的話歸類為「其他」
+                    if (nameParts.length === 1) {
+                        rawCategory = 'Other';
+                    }
+
+                    // 將前綴轉換為我們設定好的中文名稱（如果沒設定，就保留原本的英文前綴）
+                    const finalCategoryName = categoryMapping[rawCategory] || (rawCategory === 'Other' ? '📁 其他筆記' : `📁 ${rawCategory}`);
+
+                    // 將檔案放入對應的分類陣列中
+                    if (!groupedFiles[finalCategoryName]) {
+                        groupedFiles[finalCategoryName] = [];
+                    }
+                    groupedFiles[finalCategoryName].push({
+                        displayName: displayName,
+                        path: file.path
+                    });
                 });
 
-                listElement.innerHTML = '';
-                listElement.appendChild(ul);
+                // 開始產生 HTML 畫面
+                listElement.innerHTML = ''; // 清除載入文字
+
+                // 遍歷所有分類來建立區塊
+                for (const [categoryName, categoryFiles] of Object.entries(groupedFiles)) {
+                    // 建立分類容器
+                    const section = document.createElement('div');
+                    section.className = 'category-section';
+
+                    // 建立分類標題
+                    const title = document.createElement('h2');
+                    title.className = 'category-title';
+                    title.textContent = categoryName;
+                    section.appendChild(title);
+
+                    // 建立該分類底下的檔案列表
+                    const ul = document.createElement('ul');
+                    categoryFiles.forEach(fileData => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<a href="${fileData.path}">${fileData.displayName}</a>`;
+                        ul.appendChild(li);
+                    });
+
+                    section.appendChild(ul);
+                    listElement.appendChild(section);
+                }
+
             } catch (error) {
                 console.error(error);
                 document.getElementById('file-list').innerHTML = '<p>載入失敗，請稍後再試。</p>';
