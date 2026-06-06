@@ -801,19 +801,19 @@
       <h3>🏗️ 骨骼肌的結構層次（由大到小）</h3>
       <div class="flow" style="flex-direction:column;gap:4px;">
         <div class="flow-step" style="max-width:none;text-align:left;padding:12px 16px;">
-          🦾 <strong>肌肉（Muscle）</strong>——由肌束（bundles）組成
+          🦾 <strong>肌肉（Muscle）</strong>——由肌束組成
         </div>
         <div class="flow-step" style="max-width:none;text-align:left;padding:12px 16px;">
-          📦 <strong>肌纖維（Muscle fiber）</strong>——單一細胞，多核
+          🔴 <strong>肌束（Muscle fascicle）</strong>——多條肌纖維組成
         </div>
         <div class="flow-step" style="max-width:none;text-align:left;padding:12px 16px;">
-          🧵 <strong>肌原纖維（Myofibril）</strong>——細絲束
+          📦 <strong>肌纖維（Muscle fiber）</strong>——單一細胞，多核，內有肌原纖維
+        </div>
+        <div class="flow-step" style="max-width:none;text-align:left;padding:12px 16px;">
+          🧵 <strong>肌原纖維（Myofibril）</strong>——由肌絲（Myofilament）組成，可分成<strong>細肌絲（actin）</strong> 與 <strong>粗肌絲（myosin）</strong>
         </div>
         <div class="flow-step" style="max-width:none;text-align:left;padding:12px 16px;border-color:rgba(255,123,114,.4);">
-          ⭐ <strong>肌節（Sarcomere）</strong>——收縮的基本單位，Z 線到 Z 線之間
-        </div>
-        <div class="flow-step" style="max-width:none;text-align:left;padding:12px 16px;">
-          🔴 <strong>細肌絲（actin）</strong> + <strong>粗肌絲（myosin）</strong>
+          ⭐ <strong>肌節（Sarcomere）</strong>——收縮的基本單位，Z 線到 Z 線之間，粗絲固定於 M 線（中央）
         </div>
       </div>
     </div>
@@ -825,7 +825,7 @@
           <div class="step-num" style="background:rgba(255,123,114,.2);color:var(--accent5);">1</div>
           <div class="step-content">
             <h4>低能量狀態，ATP 結合</h4>
-            <p>肌凝蛋白頭與 ATP 結合，此時頭部能量低。</p>
+            <p>肌凝蛋白（Myosin，粗肌絲）頭部與 ATP 結合，此時頭部能量低。</p>
           </div>
         </div>
         <div class="step">
@@ -839,7 +839,7 @@
           <div class="step-num" style="background:rgba(255,123,114,.2);color:var(--accent5);">3</div>
           <div class="step-content">
             <h4>形成橫橋（Cross-bridge）</h4>
-            <p>高能量頭部與肌動蛋白（actin）結合，形成橫橋。</p>
+            <p>高能量頭部與肌動蛋白（actin，細肌絲）結合，形成橫橋。</p>
           </div>
         </div>
         <div class="step">
@@ -853,7 +853,7 @@
           <div class="step-num" style="background:rgba(255,123,114,.2);color:var(--accent5);">5</div>
           <div class="step-content">
             <h4>新 ATP 結合，解離橫橋</h4>
-            <p>新 ATP 結合後，頭部與肌動蛋白分離，循環重新開始。</p>
+            <p>新 ATP 結合後，肌凝蛋白頭部與肌動蛋白分離，循環重新開始。</p>
           </div>
         </div>
       </div>
@@ -871,36 +871,36 @@
         <div class="step">
           <div class="step-num c5">1</div>
           <div class="step-content">
-            <h4>運動神經元釋放乙醯膽鹼（ACh）</h4>
+            <h4>運動神經元釋放乙醯膽鹼（ACh，Acetylcholine）</h4>
             <p>ACh 與肌纖維受器結合，觸發肌纖維去極化。</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num c5">2</div>
           <div class="step-content">
-            <h4>動作電位沿 T 小管（T-tubule）傳導</h4>
-            <p>T 小管將動作電位帶到細胞深處。</p>
+            <h4>動作電位沿 T 管（T-tubule）傳導</h4>
+            <p>T 管將動作電位帶到細胞深處。</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num c5">3</div>
           <div class="step-content">
-            <h4>肌漿網（Sarcoplasmic Reticulum）釋放 Ca²⁺</h4>
+            <h4>肌漿網（Sarcoplasmic Reticulum，SR）釋放 Ca²⁺</h4>
             <p>Ca²⁺ 大量進入細胞質。</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num c5">4</div>
           <div class="step-content">
-            <h4>Ca²⁺ 結合旋轉蛋白複合體（Troponin）</h4>
-            <p>旋轉蛋白複合體改變形狀，<strong>移開原肌球蛋白（tropomyosin）</strong>，露出肌動蛋白的結合位點。</p>
+            <h4>Ca²⁺ 結合肌鈣蛋白複合體（Troponin）</h4>
+            <p>肌鈣蛋白複合體改變形狀，移開<strong>原肌凝蛋白（tropomyosin）</strong>，露出肌動蛋白（Actin）上的肌凝蛋白結合位點。</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num c5">5</div>
           <div class="step-content">
             <h4>橫橋形成，開始收縮！</h4>
-            <p>訊號停止後，Ca²⁺ 被泵回肌漿網，tropomyosin 重新蓋住結合位，收縮停止。</p>
+            <p>訊號停止後，Ca²⁺ 被泵回肌漿網 SR，原肌凝蛋白（tropomyosin）重新蓋住結合位，收縮停止。</p>
           </div>
         </div>
       </div>
@@ -919,9 +919,9 @@
         </thead>
         <tbody>
           <tr><td>收縮速度</td><td>慢</td><td>快</td><td>快</td></tr>
-          <tr><td>主要 ATP 來源</td><td>有氧呼吸</td><td>有氧呼吸</td><td>糖解作用</td></tr>
+          <tr><td>主要 ATP 來源</td><td>有氧呼吸</td><td>有氧呼吸</td><td>糖解作用（Glycolysis）</td></tr>
           <tr><td>疲勞速度</td><td>慢（耐久）</td><td>中等</td><td>快（易疲勞）</td></tr>
-          <tr><td>肌紅蛋白</td><td>多（紅色）</td><td>多（紅色）</td><td>少（白色）</td></tr>
+          <tr><td>肌紅蛋白（Myoglobin）</td><td>多（紅色）</td><td>多（紅色）</td><td>少（白色）</td></tr>
           <tr><td>粒線體</td><td>多</td><td>多</td><td>少</td></tr>
           <tr><td>典型例子</td><td>姿勢維持肌肉</td><td>中距離跑步</td><td>短衝刺、力量</td></tr>
         </tbody>
@@ -934,7 +934,7 @@
         <h3 style="color:var(--accent5)">❤️ 心肌</h3>
         <ul style="margin-top:8px;">
           <li>有橫紋，構造類似骨骼肌</li>
-          <li>細胞間有<strong>閏盤（intercalated disks）</strong>，電性耦合</li>
+          <li>細胞間有<strong>心間盤（intercalated disks）</strong>，電性耦合</li>
           <li>心跳節律由<strong>節律器（pacemaker）細胞</strong>自發觸發</li>
           <li>不會產生強直（tetanus）——有長不反應期</li>
         </ul>
@@ -942,10 +942,10 @@
       <div class="card">
         <h3 style="color:var(--accent5)">🌀 平滑肌</h3>
         <ul style="margin-top:8px;">
-          <li>無橫紋（細絲排列不規則）</li>
+          <li>無橫紋（肌絲（Myofilament）排列不規則）</li>
           <li>收縮/放鬆較慢</li>
           <li>存在於消化道、血管壁、子宮等中空器官</li>
-          <li>Ca²⁺ 靠鈣調蛋白（calmodulin）調控，非 troponin</li>
+          <li>Ca²⁺ 靠鈣調蛋白（calmodulin）調控，非肌鈣蛋白（troponin）</li>
         </ul>
       </div>
     </div>
@@ -1018,12 +1018,13 @@
         <span class="term">柯蒂氏器</span>
         <span class="term" style="background:rgba(210,168,255,.2);color:#d8b8ff;border-color:rgba(210,168,255,.3)">視紫質</span>
         <span class="term" style="background:rgba(210,168,255,.2);color:#d8b8ff;border-color:rgba(210,168,255,.3)">視桿/視錐</span>
-        <span class="term" style="background:rgba(210,168,255,.2);color:#d8b8ff;border-color:rgba(210,168,255,.3)">中央窩</span>
+        <span class="term" style="background:rgba(210,168,255,.2);color:#d8b8ff;border-color:rgba(210,168,255,.3)">中央窩 Fovea</span>
         <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">滑動細絲模型</span>
         <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">肌節</span>
-        <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">troponin/tropomyosin</span>
-        <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">T 小管</span>
-        <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">肌漿網</span>
+        <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">肌鈣蛋白troponin</span>
+        <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">原肌凝蛋白tropomyosin</span>
+        <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">T 管</span>
+        <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">肌漿網 Sarcoplasmic Reticulum</span>
         <span class="term" style="background:rgba(255,123,114,.2);color:#ffb3ae;border-color:rgba(255,123,114,.3)">運動單位</span>
         <span class="term" style="background:rgba(121,192,255,.2);color:#a8d8ff;border-color:rgba(121,192,255,.3)">液壓/外/內骨骼</span>
         <span class="term" style="background:rgba(121,192,255,.2);color:#a8d8ff;border-color:rgba(121,192,255,.3)">拮抗肌</span>
