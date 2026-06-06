@@ -947,7 +947,7 @@
   <div class="critical">
     <strong>嘧啶合成的材料來自哪裡？</strong>
     <ul style="margin-top:8px">
-      <li><strong>Carbamoyl phosphate（氨甲醯磷酸）</strong> ＋ <strong>Aspartate（天冬胺酸）</strong> → 嘧啶環的主體</li>
+      <li><strong>Carbamoyl phosphate（胺甲醯磷酸）</strong> ＋ <strong>Aspartate（天冬胺酸）</strong> → 嘧啶環的主體</li>
       <li>Carbamoyl phosphate 在動物中有兩種：
         <br>① 粒線體的 <strong>CPSI</strong>：用於尿素循環（合成 Arg）
         <br>② 細胞質的 <strong>CPSII</strong>：用於嘧啶合成 ← <em>這個才是我們的主角</em>
@@ -958,7 +958,7 @@
 
   <div class="fig-box">
     <div class="fig-label">📊 Figure 22-38 — 嘧啶核苷酸的 De Novo 合成</div>
-    從 Carbamoyl phosphate + Aspartate 開始，經由 <em>N-carbamoylaspartate</em>、<em>Dihydroorotate</em>、<em>Orotate（乳清酸）</em>、<em>Orotidylate</em>，最終生成 <strong>UMP（尿苷一磷酸）</strong>。UMP 再磷酸化為 UTP，然後由 cytidylate synthetase（消耗 ATP）將 UTP 轉為 <strong>CTP</strong>。
+    從 Carbamoyl phosphate + Aspartate 開始，經由 N-carbamoylaspartate、Dihydroorotate、Orotate（乳清酸）、Orotidylate，最終生成 <strong>UMP（尿苷單磷酸）</strong>。UMP 再磷酸化為 UTP，然後由 cytidylate synthetase（消耗 ATP）將 UTP 轉為 <strong>CTP</strong>。
   </div>
 
   <div class="pathway">
@@ -967,8 +967,7 @@
       <div class="step-line"></div>
       <div class="step-content">
         <div class="step-name">Carbamoyl phosphate + Aspartate → N-Carbamoylaspartate</div>
-        <div class="step-desc">由 <strong>Aspartate transcarbamoylase（ATCase）</strong> 催化，這是嘧啶合成的 <strong>第一承諾步驟</strong>，也是主要調節點。</div>
-        <div style="margin-top:6px"><span class="enzyme-box">ATCase（aspartate transcarbamoylase）</span></div>
+        <div class="step-desc">由 <span class="enzyme-box">Aspartate transcarbamoylase（ATCase）</span> 催化，這是嘧啶合成的 <strong>第一承諾步驟</strong>，也是主要調節點。</div>
       </div>
     </div>
     <div class="step">
@@ -983,7 +982,7 @@
       <div class="step-num" style="background:var(--pyrimidine);color:white">3</div>
       <div class="step-line"></div>
       <div class="step-content">
-        <div class="step-name">氧化 → Orotate（乳清酸）</div>
+        <div class="step-name">氧化脫氫 → Orotate（乳清酸）</div>
         <div class="step-desc">由 <span class="enzyme-box">Dihydroorotate dehydrogenase</span> 催化，NAD⁺ 是電子受體。</div>
       </div>
     </div>
@@ -999,8 +998,8 @@
       <div class="step-num" style="background:#3aad6f;color:white">5</div>
       <div class="step-line"></div>
       <div class="step-content">
-        <div class="step-name">去羧基 → UMP（尿苷一磷酸）</div>
-        <div class="step-desc">脫去 CO₂，生成 UMP。</div>
+        <div class="step-name">脫去羧基 → UMP（尿苷單磷酸）</div>
+        <div class="step-desc">由 <span class="enzyme-box">Orotidylate decarboxylase</span> 催化，脫去 CO₂，生成 UMP。</div>
       </div>
     </div>
     <div class="step">
@@ -1008,7 +1007,7 @@
       <div class="step-line"></div>
       <div class="step-content">
         <div class="step-name">UMP → UDP → UTP（磷酸化）</div>
-        <div class="step-desc">由激酶（kinases）逐步磷酸化，消耗 2 個 ATP。</div>
+        <div class="step-desc">由 <span class="enzyme-box">激酶（kinases）</span>逐步磷酸化，消耗 2 個 ATP。</div>
       </div>
     </div>
     <div class="step">
@@ -1021,7 +1020,7 @@
   </div>
 
   <div class="fig-box">
-    <div class="fig-label">📊 Figure 22-39 — 細菌氨甲醯磷酸合成酶的中間體通道</div>
+    <div class="fig-label">📊 Figure 22-39 — 細菌胺甲醯磷酸合成酶的中間體通道</div>
     細菌的 Carbamoyl phosphate synthetase 有三個活性位點，由一條長達 <strong>100 Å</strong> 的通道連接。Glutamine 在一端去除胺基產生 NH₄⁺，NH₄⁺ 進入通道與碳酸氫根在第二個活性位點結合（消耗 ATP），生成的 carbamate 再前進到第三個位點磷酸化（再消耗一個 ATP），最終得到 carbamoyl phosphate。這種「流水線」結構是基質通道（channeling）的典型範例。
   </div>
 
@@ -1041,7 +1040,7 @@
     </div>
   </div>
 
-  <p>嘧啶合成的調節核心是 <strong>ATCase（天冬胺酸氨甲醯轉移酶）</strong>，這是生化教科書中研究最透徹的別構酶之一。</p>
+  <p>嘧啶合成的調節核心是 <strong>ATCase（天冬胺酸胺甲醯轉移酶）</strong>，這是生化教科書中研究最透徹的別構酶之一。</p>
 
   <div class="card">
     <div class="card-title">🔬 ATCase 的結構</div>
@@ -1094,7 +1093,7 @@
     </div>
   </div>
 
-  <p>合成出的核苷一磷酸（NMP）需要磷酸化才能使用。這個過程由兩類激酶完成：</p>
+  <p>合成出的核苷單磷酸（NMP）需要磷酸化才能使用。這個過程由兩類激酶完成：</p>
 
   <div class="grid-2">
     <div class="card">
