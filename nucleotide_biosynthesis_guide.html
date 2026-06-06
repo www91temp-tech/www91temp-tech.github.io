@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22.4 核苷酸的合成與降解 — 學習指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --bg2: #ffffff;
+    --text: #1c1a17;
+    --text-muted: #6b635a;
+    --border: #ddd8cf;
+
+    --purine: #1a4a8a;
+    --purine-light: #e8f0fb;
+    --purine-accent: #4a90d9;
+
+    --pyrimidine: #166534;
+    --pyrimidine-light: #e8f5ee;
+    --pyrimidine-accent: #3aad6f;
+
+    --regulation: #92400e;
+    --regulation-light: #fef3e2;
+    --regulation-accent: #f59e0b;
+
+    --deoxy: #5b21b6;
+    --deoxy-light: #f0ebff;
+    --deoxy-accent: #8b5cf6;
+
+    --degradation: #991b1b;
+    --degradation-light: #fef0ee;
+    --degradation-accent: #ef4444;
+
+    --clinical: #065f6b;
+    --clinical-light: #e0f7fa;
+    --clinical-accent: #06b6d4;
+
+    --chemo: #6d1f73;
+    --chemo-light: #f8e8fa;
+    --chemo-accent: #c026d3;
+
+    --key-bg: #fffbe6;
+    --key-border: #f59e0b;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.13);
+    --radius: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0f2744 0%, #1a4a8a 50%, #0d6e4e 100%);
+    color: white;
+    padding: 56px 32px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3Ccircle cx='0' cy='0' r='4'/%3E%3Ccircle cx='60' cy='0' r='4'/%3E%3Ccircle cx='0' cy='60' r='4'/%3E%3Ccircle cx='60' cy='60' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .hero-dna {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 24px 16px;
+    background: #1c2a3e;
+    color: white;
+  }
+  .sidebar-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    padding: 0 8px;
+    margin-bottom: 12px;
+    margin-top: 8px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2px;
+  }
+  .nav-item:hover, .nav-item.active {
+    background: rgba(255,255,255,0.12);
+    color: white;
+  }
+  .nav-item .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+  /* ── MAIN ── */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 32px 40px;
+  }
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 20px 16px; }
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 48px;
+    scroll-margin-top: 24px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .section-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--bg2);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── KEY HIGHLIGHT (記憶卡) ── */
+  .key-box {
+    background: var(--key-bg);
+    border-left: 4px solid var(--key-border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .key-box .key-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--regulation);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  /* ── CRITICAL (最重要的內容) ── */
+  .critical {
+    background: #fff0f0;
+    border: 2px solid #ef4444;
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 16px 0;
+    position: relative;
+  }
+  .critical::before {
+    content: '⚡ 核心重點';
+    position: absolute;
+    top: -11px; left: 16px;
+    background: #ef4444;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FIGURE BOX ── */
+  .fig-box {
+    background: #f4f7fb;
+    border: 1px dashed #9ab0cc;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 13.5px;
+    color: #3a4a5c;
+  }
+  .fig-box .fig-label {
+    font-weight: 700;
+    color: #1a4a8a;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 7px;
+  }
+
+  /* ── PATHWAY STEPS ── */
+  .pathway {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 16px 0;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    z-index: 1;
+    border: 2px solid white;
+  }
+  .step-line {
+    position: absolute;
+    left: 15px; top: 32px;
+    width: 2px;
+    background: var(--border);
+    bottom: 0;
+    z-index: 0;
+  }
+  .step-content {
+    padding: 4px 12px 16px;
+    flex: 1;
+  }
+  .step-name {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .step-desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── DRUG CARD ── */
+  .drug-card {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    border: 1px solid;
+  }
+  .drug-name {
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .drug-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  /* ── DISEASE CARD ── */
+  .disease-card {
+    background: var(--clinical-light);
+    border-left: 4px solid var(--clinical-accent);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .disease-name {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--clinical);
+    margin-bottom: 6px;
+  }
+
+  /* ── REGULATION DIAGRAM ── */
+  .reg-diagram {
+    background: linear-gradient(135deg, var(--regulation-light), var(--bg2));
+    border: 1px solid #fed7aa;
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .reg-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--regulation);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .reg-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13.5px;
+  }
+  .reg-arrow { color: var(--regulation-accent); font-weight: 700; }
+  .inhibit { color: #ef4444; font-weight: 700; }
+  .activate { color: #16a34a; font-weight: 700; }
+
+  /* ── MNEMONIC ── */
+  .mnemonic {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .mnemonic-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f59e0b;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .mnemonic-text {
+    font-size: 15px;
+    font-style: italic;
+    color: #fef3c7;
+  }
+  .mnemonic small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin: 12px 0;
+  }
+  th {
+    background: #f0f0f0;
+    padding: 9px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 13px;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:hover td { background: var(--bg); }
+
+  /* ── ATOM LABEL ── */
+  .atom {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    font-weight: 700;
+    font-family: monospace;
+  }
+
+  /* ── PURINE RING VISUAL ── */
+  .ring-visual {
+    background: var(--purine-light);
+    border: 1px solid #b3cce8;
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .ring-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .ring-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 6px;
+    border: none;
+    font-size: 13.5px;
+  }
+
+  /* ── SUMMARY BOXES ── */
+  .sum-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+  }
+  .sum-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+  /* ── TAG ── */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin: 2px;
+    white-space: nowrap;
+  }
+
+  /* ── TOPIC COLORS (used with .section) ── */
+  .c-purine .section-icon { background: var(--purine-light); color: var(--purine); }
+  .c-pyrimidine .section-icon { background: var(--pyrimidine-light); color: var(--pyrimidine); }
+  .c-regulation .section-icon { background: var(--regulation-light); color: var(--regulation); }
+  .c-deoxy .section-icon { background: var(--deoxy-light); color: var(--deoxy); }
+  .c-degradation .section-icon { background: var(--degradation-light); color: var(--degradation); }
+  .c-clinical .section-icon { background: var(--clinical-light); color: var(--clinical); }
+  .c-chemo .section-icon { background: var(--chemo-light); color: var(--chemo); }
+
+  /* highlight inline terms */
+  .hl { font-weight: 700; }
+  .hl-p { color: var(--purine); }
+  .hl-y { color: var(--pyrimidine); }
+  .hl-r { color: var(--regulation); }
+  .hl-d { color: var(--degradation); }
+  .hl-c { color: var(--clinical); }
+  .hl-v { color: var(--deoxy); }
+
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  p { margin-bottom: 10px; }
+  ul, ol { margin: 8px 0 10px 20px; }
+  li { margin-bottom: 5px; }
+
+  /* ── OVERVIEW CARD ── */
+  .overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .ov-card {
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    font-size: 13.5px;
+    border: 1px solid;
+    transition: transform 0.2s;
+  }
+  .ov-card:hover { transform: translateY(-3px); }
+  .ov-card .ov-icon { font-size: 28px; margin-bottom: 8px; }
+  .ov-card .ov-name { font-weight: 700; margin-bottom: 4px; }
+
+  /* Feedback loop visual */
+  .fb-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    background: var(--regulation-light);
+    border-radius: 10px;
+    border: 1px solid #fed7aa;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  .fb-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .fb-box {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .fb-arrow { font-size: 18px; color: #9ca3af; }
+  .fb-inh { color: #ef4444; font-size: 13px; font-weight: 700; margin: 0 4px; }
+
+  /* Enzyme box */
+  .enzyme-box {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 5px;
+    background: #e0e7ff;
+    color: #3730a3;
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  .scroll-top {
+    position: fixed; bottom: 24px; right: 24px;
+    width: 40px; height: 40px;
+    background: #1c2a3e; color: white;
+    border: none; border-radius: 50%;
+    font-size: 18px; cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+    z-index: 100;
+  }
+  .scroll-top.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-dna">🧬</span>
+  <div class="hero-tag">Biochemistry · Chapter 22.4</div>
+  <h1>核苷酸的合成與降解<br><span style="font-size:0.6em;opacity:0.8">Biosynthesis and Degradation of Nucleotides</span></h1>
+  <p style="margin-top:12px">從氨基酸、核糖到嘌呤嘧啶的完整代謝地圖 — 給初學者的全方位學習指南</p>
+</div>
+
+<div class="layout">
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-title">目錄</div>
+  <a class="nav-item" href="#intro"><span class="dot" style="background:#a8b4c0"></span>引言總覽</a>
+  <a class="nav-item" href="#purine-denovo"><span class="dot" style="background:var(--purine-accent)"></span>嘌呤 De Novo 合成</a>
+  <a class="nav-item" href="#purine-reg"><span class="dot" style="background:var(--regulation-accent)"></span>嘌呤合成調節</a>
+  <a class="nav-item" href="#pyrimidine-denovo"><span class="dot" style="background:var(--pyrimidine-accent)"></span>嘧啶 De Novo 合成</a>
+  <a class="nav-item" href="#pyrimidine-reg"><span class="dot" style="background:var(--regulation-accent)"></span>嘧啶合成調節</a>
+  <a class="nav-item" href="#ntp"><span class="dot" style="background:#60a5fa"></span>NMP → NTP 轉化</a>
+  <a class="nav-item" href="#deoxy"><span class="dot" style="background:var(--deoxy-accent)"></span>脫氧核苷酸合成</a>
+  <a class="nav-item" href="#thymine"><span class="dot" style="background:#a78bfa"></span>胸腺嘧啶 dTMP</a>
+  <a class="nav-item" href="#degradation"><span class="dot" style="background:var(--degradation-accent)"></span>降解路徑</a>
+  <a class="nav-item" href="#salvage"><span class="dot" style="background:#34d399"></span>搶救路徑</a>
+  <a class="nav-item" href="#clinical"><span class="dot" style="background:var(--clinical-accent)"></span>臨床疾病</a>
+  <a class="nav-item" href="#chemo"><span class="dot" style="background:var(--chemo-accent)"></span>化療藥物</a>
+  <a class="nav-item" href="#summary"><span class="dot" style="background:#f9a8d4"></span>重點總結</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 0. INTRO ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <div class="section-icon" style="background:#e8f0fb">🌐</div>
+    <div>
+      <div class="section-title">引言 — 為什麼核苷酸這麼重要？</div>
+      <div class="section-subtitle">Introduction</div>
+    </div>
+  </div>
+
+  <p>核苷酸是細胞生命不可或缺的分子，功能遠超過「只是 DNA/RNA 的原料」。</p>
+
+  <div class="overview-cards">
+    <div class="ov-card" style="background:var(--purine-light);border-color:#b3cce8;color:var(--purine)">
+      <div class="ov-icon">🧱</div>
+      <div class="ov-name">遺傳材料原料</div>
+      DNA & RNA 的前驅物
+    </div>
+    <div class="ov-card" style="background:#fef9e7;border-color:#fad47a;color:#92400e">
+      <div class="ov-icon">⚡</div>
+      <div class="ov-name">能量貨幣</div>
+      ATP、GTP 攜帶化學能
+    </div>
+    <div class="ov-card" style="background:#f0fdf4;border-color:#86efac;color:#166534">
+      <div class="ov-icon">🔧</div>
+      <div class="ov-name">輔酶成分</div>
+      NAD、FAD、CoA 等輔酶的組成
+    </div>
+    <div class="ov-card" style="background:var(--deoxy-light);border-color:#c4b5fd;color:var(--deoxy)">
+      <div class="ov-icon">📡</div>
+      <div class="ov-name">第二信使</div>
+      cAMP、cGMP 傳遞細胞訊號
+    </div>
+    <div class="ov-card" style="background:#fef0ee;border-color:#fca5a5;color:#991b1b">
+      <div class="ov-icon">🏭</div>
+      <div class="ov-name">活化中間體</div>
+      UDP-glucose、CDP-DAG 等
+    </div>
+  </div>
+
+  <div class="critical">
+    <p>核苷酸的合成有兩條路徑：</p>
+    <ul>
+      <li><strong>De Novo 路徑（從頭合成）</strong>：從氨基酸、核糖-5-磷酸、CO₂、NH₃ 從零開始合成</li>
+      <li><strong>Salvage 路徑（搶救路徑）</strong>：回收核酸降解時釋放的遊離鹼基和核苷</li>
+    </ul>
+    <p style="margin-top:8px">兩者在細胞代謝中都很重要！</p>
+  </div>
+
+  <div class="key-box">
+    <div class="key-label">🔑 關鍵觀念</div>
+    <strong>De Novo 路徑的重大發現：</strong>嘌呤和嘧啶的遊離鹼基（G、A、T、C、U）<em>不是</em>先合成好再接到核糖上的！而是直接在核糖上一步一步「組裝」。唯一例外是嘧啶合成：先造好嘧啶環，再接到核糖-5-磷酸。
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔗 兩條路徑共用的重要前驅物</div>
+    <div class="grid-2">
+      <div>
+        <strong><span class="atom" style="background:#dbeafe;color:#1d4ed8">PRPP</span> 磷酸核糖焦磷酸</strong><br>
+        <span style="font-size:13px;color:var(--text-muted)">嘌呤和嘧啶合成都需要，核糖骨架的主要來源</span>
+      </div>
+      <div>
+        <strong><span class="atom" style="background:#dcfce7;color:#15803d">Glutamine 麩醯胺</span></strong><br>
+        <span style="font-size:13px;color:var(--text-muted)">氨基的最主要供應者，在兩條路徑中共參與 <em>5 個</em>步驟</span>
+      </div>
+      <div>
+        <strong><span class="atom" style="background:#dbeafe;color:#1e40af">Glycine 甘胺酸</span></strong><br>
+        <span style="font-size:13px;color:var(--text-muted)">嘌呤的重要氨基酸前驅物</span>
+      </div>
+      <div>
+        <strong><span class="atom" style="background:#dcfce7;color:#166534">Aspartate 天冬氨酸</span></strong><br>
+        <span style="font-size:13px;color:var(--text-muted)">嘧啶的重要氨基酸前驅物；嘌呤合成也用到兩次</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 1. PURINE DE NOVO ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-purine" id="purine-denovo">
+  <div class="section-header">
+    <div class="section-icon">🔵</div>
+    <div>
+      <div class="section-title" style="color:var(--purine)">嘌呤的 De Novo 合成</div>
+      <div class="section-subtitle">De Novo Purine Nucleotide Synthesis</div>
+    </div>
+  </div>
+
+  <p>嘌呤包含 <strong class="hl-p">腺嘌呤（Adenine，A）</strong> 和 <strong class="hl-p">鳥嘌呤（Guanine，G）</strong>。De Novo 合成終點是 <strong>IMP（次黃嘌呤核苷酸，inosinate）</strong>，再由 IMP 分枝生成 AMP 和 GMP。</p>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-34 — 嘌呤環的原子來源</div>
+    John M. Buchanan 以同位素追蹤實驗（在鳥類身上進行）確定了嘌呤環各原子的來源（鳥類以不溶性尿酸排泄多餘氮，方便偵測）。結果如下：
+    <table style="margin-top:10px">
+      <thead><tr><th>環上位置</th><th>原子來源</th></tr></thead>
+      <tbody>
+        <tr><td>C-4, C-5, N-7</td><td>Glycine（甘胺酸）—— 提供三個原子！</td></tr>
+        <tr><td>N-1</td><td>Aspartate（天冬氨酸）</td></tr>
+        <tr><td>C-6</td><td>CO₂</td></tr>
+        <tr><td>N-3, N-9</td><td>Glutamine 的醯胺基（amide-N）</td></tr>
+        <tr><td>C-2, C-8</td><td>Formate（甲酸，由 N¹⁰-formyl-THF 提供）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 記憶口訣</div>
+    <div class="mnemonic-text">「Glycine 最霸道，C4、C5、N7 全包辦；Glutamine 出氨基，N3 和 N9 都給它；CO₂ 貢獻 C6；Formate 做 C2、C8。」</div>
+    <small>想像蓋房子：Glycine 是地基（一次給三塊磚），Glutamine 來釘兩根柱子。</small>
+  </div>
+
+  <h3 style="margin:20px 0 12px;font-size:16px;color:var(--purine)">從 PRPP → IMP 的 11 步反應</h3>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-35 — IMP 的 De Novo 合成（11 步）</div>
+    嘌呤環在 5-磷酸核糖胺（5-phosphoribosylamine）的核糖骨架上逐步搭建。每個加入的原子都對應 Figure 22-34 的顏色標示。其中 <strong>Step 9 的產物 AICAR</strong> 同時也是組胺酸生合成途中 ATP 釋放出的殘片（見 Fig. 22-22）。
+  </div>
+
+  <div class="pathway">
+    <div class="step">
+      <div class="step-num" style="background:var(--purine);color:white">1</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">PRPP → 5-磷酸核糖胺（5-Phosphoribosylamine）</div>
+        <div class="step-desc">Glutamine 捐出氨基接在 PRPP 的 C-1 上。這是整個嘌呤合成的 <strong>第一個承諾步驟（committed step）</strong>。生成的中間體極不穩定，半衰期只有 30 秒！</div>
+        <div style="margin-top:6px"><span class="enzyme-box">Glutamine-PRPP amidotransferase</span></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purine);color:white">2</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">加入 Glycine（三個原子：C4、C5、N7）</div>
+        <div class="step-desc">消耗 ATP 活化甘胺酸的羧基，再與胺進行縮合。這是嘌呤環中原子量最大的單次貢獻。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purine);color:white">3</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">N¹⁰-甲醯四氫葉酸加甲醯基（→ C8）</div>
+        <div class="step-desc">Formate 以 N¹⁰-formyl-THF 的形式轉移 C8 原子。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purine);color:white">4</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">Glutamine 提供 N3</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purine);color:white">5</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">脫水閉環 → 5-氨基咪唑核苷酸（AIR）</div>
+        <div class="step-desc">五元環（咪唑環）形成！這是嘌呤雙環中的第一個環。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#4a90d9;color:white">6-7</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">加入 CO₂ → CAIR（在六員環位置加羧基）</div>
+        <div class="step-desc">這個羧化步驟<strong>不需要 Biotin</strong>，直接利用水溶液中的碳酸氫根。細菌/真菌需兩步，高等真核生物（包括人類）只需一步（AIR carboxylase）。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#4a90d9;color:white">8-9</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">Aspartate 提供 N1（兩步：縮合→消去 fumarate）</div>
+        <div class="step-desc">天冬氨酸先形成醯胺鍵，再消去碳骨架（以 fumarate 形式離開），只留下氨基。<em>這個策略和尿素循環中 Arg 的合成完全一樣！</em></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#4a90d9;color:white">10</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">N¹⁰-甲醯四氫葉酸加 C2（甲醯基）</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#1a4a8a;color:white">11</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">閉環 → 🎉 IMP（inosinate）</div>
+        <div class="step-desc">六員環（嘌呤環的第二個環）閉合完成。IMP 是第一個擁有完整嘌呤環的分子！之後再由 IMP 生成 AMP 和 GMP。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="key-box">
+    <div class="key-label">🏗️ 多酶複合體（Metabolon）</div>
+    IMP 合成的酶在細胞中並非各自分散，而是形成大型<strong>多酶複合體（metabolons）</strong>。例如在酵母菌到雞的真核生物中，步驟 1、3、5 由同一個多功能蛋白催化；步驟 10 和 11 由另一個多功能蛋白負責。這樣的「流水線」設計對不穩定的中間體（如 5-磷酸核糖胺）特別重要。
+  </div>
+
+  <h3 style="margin:20px 0 12px;font-size:16px;color:var(--purine)">從 IMP 到 AMP 和 GMP</h3>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-36 — AMP 和 GMP 的合成</div>
+    IMP 是嘌呤生合成的分叉點，分別走向 AMP 和 GMP：
+    <div class="grid-2" style="margin-top:12px">
+      <div style="background:var(--purine-light);border-radius:8px;padding:14px">
+        <strong>IMP → AMP（腺苷酸）</strong><br>
+        <span style="font-size:13px">① IMP + Aspartate + <strong style="color:red">GTP</strong> → Adenylosuccinate（消耗 GTP！）<br>
+        ② 消去 Fumarate → AMP</span>
+      </div>
+      <div style="background:#e8f9f0;border-radius:8px;padding:14px">
+        <strong>IMP → GMP（鳥苷酸）</strong><br>
+        <span style="font-size:13px">① IMP + NAD⁺ → XMP（氧化 C2）<br>
+        ② XMP + Glutamine + <strong style="color:blue">ATP</strong> → GMP（消耗 ATP！）</span>
+      </div>
+    </div>
+  </div>
+  <div class="critical">
+    注意能量交叉調節：合成 <strong>AMP 消耗 GTP</strong>，合成 <strong>GMP 消耗 ATP</strong>。這是平衡兩種嘌呤濃度的精妙設計！
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 2. PURINE REGULATION ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-regulation" id="purine-reg">
+  <div class="section-header">
+    <div class="section-icon">🔄</div>
+    <div>
+      <div class="section-title" style="color:var(--regulation)">嘌呤合成的調節（4 大機制）</div>
+      <div class="section-subtitle">Purine Nucleotide Biosynthesis Regulation</div>
+    </div>
+  </div>
+
+  <p>嘌呤合成受到精密的四重負回饋調控，確保細胞不浪費資源，且 AMP 與 GMP 的比例維持平衡。</p>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-37 — E. coli 中腺嘌呤與鳥嘌呤核苷酸合成的調節機制</div>
+    此圖用紅色叉號標示反饋抑制的關鍵點：ADP/AMP 抑制 PRPP 合成酶；AMP、GMP、IMP 共同抑制 Glutamine-PRPP amidotransferase；AMP 抑制自身分支，GMP 抑制自身分支。
+  </div>
+
+  <div class="reg-diagram">
+    <div class="reg-title">🔁 四大調節機制一覽</div>
+
+    <div class="fb-wrap">
+      <div class="fb-row">
+        <span class="fb-box" style="background:#dbeafe;color:#1d4ed8">Ribose-5-P</span>
+        <span class="fb-arrow">→</span>
+        <span class="fb-box" style="background:#dbeafe;color:#1d4ed8">PRPP</span>
+        <span class="fb-arrow">→</span>
+        <span class="fb-box" style="background:#dbeafe;color:#1d4ed8">5-PR-amine</span>
+        <span class="fb-arrow">→</span>
+        <span class="fb-box" style="background:#e0e7ff;color:#3730a3">9 steps</span>
+        <span class="fb-arrow">→</span>
+        <span class="fb-box" style="background:#f0fdf4;color:#166534">IMP</span>
+      </div>
+      <div class="fb-row" style="padding-left:120px">
+        <span class="fb-box" style="background:#f0fdf4;color:#166534">IMP</span>
+        <span class="fb-arrow">→</span>
+        <span class="fb-box" style="background:#dbeafe;color:#1d4ed8">AMP</span>
+        <span style="margin:0 12px;font-size:13px;color:var(--text-muted)">及</span>
+        <span class="fb-box" style="background:#dcfce7;color:#15803d">GMP</span>
+      </div>
+    </div>
+
+    <div style="margin-top:16px">
+      <div style="margin-bottom:12px">
+        <span style="font-weight:700;color:var(--regulation)">機制 ①</span>
+        <span class="fb-inh">⊣</span>
+        <strong>PRPP synthetase</strong> 受 <span class="tag" style="background:#fee2e2;color:#991b1b">ADP</span> <span class="tag" style="background:#fee2e2;color:#991b1b">GDP</span> 抑制（第四機制同時也在此）
+      </div>
+      <div style="margin-bottom:12px">
+        <span style="font-weight:700;color:var(--regulation)">機制 ②</span>
+        <span class="fb-inh">⊣</span>
+        <strong>Glutamine-PRPP amidotransferase</strong>（第一承諾步驟）受 <span class="tag" style="background:#fee2e2;color:#991b1b">AMP</span> <span class="tag" style="background:#fee2e2;color:#991b1b">GMP</span> <span class="tag" style="background:#fee2e2;color:#991b1b">IMP</span> <strong>協同抑制</strong>（synergistic）
+      </div>
+      <div style="margin-bottom:12px">
+        <span style="font-weight:700;color:var(--regulation)">機制 ③</span>
+        分枝特異性抑制：<span class="tag" style="background:#fee2e2;color:#991b1b">GMP</span> 抑制 IMP→XMP（減少 GMP 自身的合成）；<span class="tag" style="background:#fee2e2;color:#991b1b">AMP</span> 抑制 IMP→Adenylosuccinate（減少 AMP 自身的合成）。這稱為 <strong>Sequential Feedback Inhibition（順序回饋抑制）</strong>
+      </div>
+      <div>
+        <span style="font-weight:700;color:var(--regulation)">機制 ④</span>
+        能量交叉平衡：GTP 用於合成 AMP，ATP 用於合成 GMP，自動平衡兩者的濃度
+      </div>
+    </div>
+  </div>
+
+  <div class="key-box">
+    <div class="key-label">💡 解讀策略</div>
+    當 AMP 或 GMP 任一過多時，第一步（amidotransferase）就會受到抑制，整條路徑減速。當兩者都過多時，IMP 積累，進一步抑制更上游的步驟——「層層設防」的設計。
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 3. PYRIMIDINE DE NOVO ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-pyrimidine" id="pyrimidine-denovo">
+  <div class="section-header">
+    <div class="section-icon">🟢</div>
+    <div>
+      <div class="section-title" style="color:var(--pyrimidine)">嘧啶的 De Novo 合成</div>
+      <div class="section-subtitle">Pyrimidine Nucleotide Biosynthesis</div>
+    </div>
+  </div>
+
+  <p>嘧啶核苷酸主要是 <strong class="hl-y">UMP（尿苷酸）</strong> 和 <strong class="hl-y">CMP（胞苷酸）</strong>。<strong>和嘌呤的根本區別是：嘧啶環先合成完成，再接到核糖-5-磷酸。</strong></p>
+
+  <div class="critical">
+    <strong>嘧啶合成的材料來自哪裡？</strong>
+    <ul style="margin-top:8px">
+      <li><strong>Carbamoyl phosphate（氨甲醯磷酸）</strong> ＋ <strong>Aspartate（天冬氨酸）</strong> → 嘧啶環的主體</li>
+      <li>Carbamoyl phosphate 在動物中有兩種：
+        <br>① 粒線體的 <strong>CPSI</strong>：用於尿素循環（合成 Arg）
+        <br>② 細胞質的 <strong>CPSII</strong>：用於嘧啶合成 ← <em>這個才是我們的主角</em>
+      </li>
+      <li>細菌只有一種 CPS，同時供應兩條路徑</li>
+    </ul>
+  </div>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-38 — 嘧啶核苷酸的 De Novo 合成</div>
+    從 Carbamoyl phosphate + Aspartate 開始，經由 <em>N-carbamoylaspartate</em>、<em>Dihydroorotate</em>、<em>Orotate（乳清酸）</em>、<em>Orotidylate</em>，最終生成 <strong>UMP（尿苷一磷酸）</strong>。UMP 再磷酸化為 UTP，然後由 cytidylate synthetase（消耗 ATP）將 UTP 轉為 <strong>CTP</strong>。
+  </div>
+
+  <div class="pathway">
+    <div class="step">
+      <div class="step-num" style="background:var(--pyrimidine);color:white">1</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">Carbamoyl phosphate + Aspartate → N-Carbamoylaspartate</div>
+        <div class="step-desc">由 <strong>Aspartate transcarbamoylase（ATCase）</strong> 催化，這是嘧啶合成的 <strong>第一承諾步驟</strong>，也是主要調節點。</div>
+        <div style="margin-top:6px"><span class="enzyme-box">ATCase（aspartate transcarbamoylase）</span></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--pyrimidine);color:white">2</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">脫水閉環 → Dihydroorotate（二氫乳清酸）</div>
+        <div class="step-desc">由 <span class="enzyme-box">Dihydroorotase</span> 催化，嘧啶六元環形成！</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--pyrimidine);color:white">3</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">氧化 → Orotate（乳清酸）</div>
+        <div class="step-desc">由 <span class="enzyme-box">Dihydroorotate dehydrogenase</span> 催化，NAD⁺ 是電子受體。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#3aad6f;color:white">4</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">接上 PRPP → Orotidylate（乳清苷酸）</div>
+        <div class="step-desc">由 <span class="enzyme-box">Orotate phosphoribosyltransferase</span> 催化，核糖磷酸接上嘧啶環。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#3aad6f;color:white">5</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">去羧基 → UMP（尿苷一磷酸）</div>
+        <div class="step-desc">脫去 CO₂，生成 UMP。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#3aad6f;color:white">6</div>
+      <div class="step-line"></div>
+      <div class="step-content">
+        <div class="step-name">UMP → UDP → UTP（磷酸化）</div>
+        <div class="step-desc">由激酶（kinases）逐步磷酸化，消耗 2 個 ATP。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#3aad6f;color:white">7</div>
+      <div class="step-content">
+        <div class="step-name">UTP → CTP（細胞質合成）</div>
+        <div class="step-desc">由 <span class="enzyme-box">Cytidylate synthetase</span> 催化。Glutamine（或 NH₄⁺）提供氨基，消耗 ATP → ADP + Pᵢ。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-39 — 細菌氨甲醯磷酸合成酶的中間體通道</div>
+    細菌的 Carbamoyl phosphate synthetase 有三個活性位點，由一條長達 <strong>100 Å</strong> 的通道連接。Glutamine 在一端去除氨基產生 NH₄⁺，NH₄⁺ 進入通道與碳酸氫根在第二個活性位點結合（消耗 ATP），生成的 carbamate 再前進到第三個位點磷酸化（再消耗一個 ATP），最終得到 carbamoyl phosphate。這種「流水線」結構是基質通道（channeling）的典型範例。
+  </div>
+
+  <div class="key-box">
+    <div class="key-label">🏭 真核生物的 CAD 複合體</div>
+    在真核生物中，嘧啶合成的前三步（CPS II + ATCase + Dihydroorotase）由同一個巨型三功能蛋白質 <strong>CAD</strong> 催化。這個蛋白有三個相同的多肽鏈，每條分子量 230,000 Da，每條都含有三個活性位點。代謝流水線的設計在嘧啶合成中同樣普遍。
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 4. PYRIMIDINE REGULATION ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-regulation" id="pyrimidine-reg">
+  <div class="section-header">
+    <div class="section-icon">🔄</div>
+    <div>
+      <div class="section-title" style="color:var(--regulation)">嘧啶合成的調節</div>
+      <div class="section-subtitle">Pyrimidine Regulation via ATCase</div>
+    </div>
+  </div>
+
+  <p>嘧啶合成的調節核心是 <strong>ATCase（天冬氨酸氨甲醯轉移酶）</strong>，這是生化教科書中研究最透徹的別構酶之一。</p>
+
+  <div class="card">
+    <div class="card-title">🔬 ATCase 的結構</div>
+    <ul>
+      <li><strong>6 個催化次基（catalytic subunits）</strong>：結合受質（aspartate + carbamoyl phosphate）</li>
+      <li><strong>6 個調控次基（regulatory subunits）</strong>：結合別構調節物（CTP 或 ATP）</li>
+      <li>整個酶在<strong>活性態</strong>和<strong>非活性態</strong>之間轉換（R 態 ⇌ T 態）</li>
+    </ul>
+  </div>
+
+  <div class="reg-diagram">
+    <div class="reg-title">⚖️ ATCase 的別構調節</div>
+    <table>
+      <thead><tr><th>調節物</th><th>作用</th><th>生物意義</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag" style="background:#fee2e2;color:#991b1b">CTP 累積</span></td>
+          <td class="inhibit" style="color:#ef4444">抑制 ATCase</td>
+          <td>嘧啶夠了，不要再合成</td>
+        </tr>
+        <tr>
+          <td><span class="tag" style="background:#d1fae5;color:#065f46">ATP 累積</span></td>
+          <td style="color:#16a34a;font-weight:700">逆轉 CTP 的抑制</td>
+          <td>能量充足時，促進嘧啶合成（平衡嘌呤/嘧啶）</td>
+        </tr>
+        <tr>
+          <td><span class="tag" style="background:#ede9fe;color:#5b21b6">CTP+ATP 同時存在</span></td>
+          <td>中等活性</td>
+          <td>細胞需要在兩者之間找平衡</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px;font-size:13px;color:var(--text-muted)">加入 CTP（0.8 mM）使 K₀.₅ 從 12 mM 提高到 23 mM（需要更多 aspartate 才能達到半最大速率）；加入 ATP 可完全逆轉此抑制。</div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 記憶口訣</div>
+    <div class="mnemonic-text">「ATCase 的調節：C 壓制（CTP 抑制），A 解救（ATP 解除），平衡嘌呤和嘧啶。」</div>
+    <small>CTP = 嘧啶產物 → 負回饋抑制合成；ATP = 嘌呤多了 → 促進嘧啶合成以平衡</small>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 5. NMP→NTP ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section" id="ntp">
+  <div class="section-header">
+    <div class="section-icon" style="background:#eff6ff;color:#1d4ed8">⚡</div>
+    <div>
+      <div class="section-title">核苷磷酸的轉化：NMP → NDP → NTP</div>
+      <div class="section-subtitle">Nucleoside Monophosphates → Triphosphates</div>
+    </div>
+  </div>
+
+  <p>合成出的核苷一磷酸（NMP）需要磷酸化才能使用。這個過程由兩類激酶完成：</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">① NMP → NDP</div>
+      <p>由 <strong>Nucleoside monophosphate kinases</strong> 催化：</p>
+      <div style="background:#f0f4ff;border-radius:8px;padding:12px;font-size:14px;margin-top:8px;font-family:monospace">
+        ATP + NMP ⇌ ADP + NDP
+      </div>
+      <p style="margin-top:10px;font-size:13.5px">這些激酶<strong>對核糖或去氧核糖不挑剔</strong>，但對鹼基有特異性（不同鹼基有不同激酶）。</p>
+      <div style="margin-top:8px;font-size:13.5px">特例：AMP → ADP 由 <span class="enzyme-box">Adenylate kinase</span> 催化：<br>ATP + AMP ⇌ 2 ADP</div>
+    </div>
+    <div class="card">
+      <div class="card-title">② NDP → NTP</div>
+      <p>由 <strong>Nucleoside diphosphate kinase</strong> 催化：</p>
+      <div style="background:#f0f4ff;border-radius:8px;padding:12px;font-size:14px;margin-top:8px;font-family:monospace">
+        NTP_donor + NDP_acceptor ⇌ NDP_donor + NTP_acceptor
+      </div>
+      <p style="margin-top:10px;font-size:13.5px">此酶<strong>對鹼基和糖都沒有特異性</strong>（最廣泛的激酶之一）。磷酸供體幾乎都是 ATP，因為有氧條件下 ATP 濃度最高。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 6. DEOXYRIBONUCLEOTIDES ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-deoxy" id="deoxy">
+  <div class="section-header">
+    <div class="section-icon">🔬</div>
+    <div>
+      <div class="section-title" style="color:var(--deoxy)">脫氧核苷酸的合成</div>
+      <div class="section-subtitle">Ribonucleotide Reductase — Making DNA Precursors</div>
+    </div>
+  </div>
+
+  <p>DNA 需要的是<strong>脫氧核苷酸（dNTP）</strong>，而所有 dNTP 都是從對應的核糖核苷二磷酸（NDP）直接還原而來。</p>
+
+  <div class="critical">
+    核心反應：<strong>NDP → dNDP</strong>（在 2'-碳上將 -OH 還原為 -H）<br>
+    催化此反應的酶是 <strong>Ribonucleotide Reductase（RNR，核糖核苷酸還原酶）</strong><br>
+    這個反應在有機化學中幾乎沒有對應的類比——在未活化的碳上進行還原，<em>極不尋常</em>！
+  </div>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-41 — 核苷酸還原的電子傳遞鏈</div>
+    電子從 NADPH 出發，有兩條通道傳遞到 RNR：
+    <div class="grid-2" style="margin-top:10px">
+      <div style="background:#f0fdf4;border-radius:8px;padding:12px;font-size:13px">
+        <strong>通道 (a)：Glutaredoxin 路徑</strong><br>
+        NADPH → Glutathione reductase → GSSG → 2GSH → Glutaredoxin (S-S → SH/SH) → <strong>RNR</strong>
+      </div>
+      <div style="background:#eff6ff;border-radius:8px;padding:12px;font-size:13px">
+        <strong>通道 (b)：Thioredoxin 路徑</strong><br>
+        NADPH → Thioredoxin reductase（含 FAD）→ Thioredoxin (S-S → SH/SH) → <strong>RNR</strong>
+      </div>
+    </div>
+    最後，還原態的 RNR（SH/SH）將 NDP 還原為 dNDP，並釋出一分子 H₂O。
+  </div>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-42 & 22-43 — RNR 的結構與反應機制</div>
+    <strong>E. coli RNR 結構（α₂β₂ 二聚體）：</strong>
+    <ul style="margin-top:8px">
+      <li><strong>α 次基（催化次基 R1）</strong>：含兩個 Cys 硫基（催化活性必需）＋ 兩種調控位點</li>
+      <li><strong>β 次基（自由基產生次基 R2）</strong>：含 Tyr¹²²（穩定的酪胺酸自由基）＋ 雙核鐵（Fe³⁺）中心</li>
+    </ul>
+    <strong style="margin-top:8px;display:block">自由基傳遞路徑：</strong>
+    Tyr¹²² (β) → 多個芳香族氨基酸 → Cys⁴³⁹ (α) → 催化位點（反應底物）
+    <br>
+    <em>Tyr¹²² 距催化位點太遠，需靠「長程自由基傳遞」才能激活反應。</em>
+  </div>
+
+  <div class="key-box">
+    <div class="key-label">🔬 三類 RNR 的比較</div>
+    <table>
+      <thead><tr><th>類型</th><th>自由基來源</th><th>特殊輔因子</th><th>環境需求</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Class I</strong>（E. coli、大多數真核生物）</td><td>Tyr 自由基</td><td>雙核 Fe³⁺</td><td>需要氧氣（有氧）</td></tr>
+        <tr><td><strong>Class II</strong>（某些微生物）</td><td>5'-腺苷鈷胺素</td><td>Cobalamin（B₁₂）</td><td>有氧或無氧均可</td></tr>
+        <tr><td><strong>Class III</strong>（E. coli 無氧時）</td><td>甘胺酸自由基</td><td>鐵硫簇 ＋ S-腺苷甲硫胺酸</td><td>無氧（厭氧）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin:20px 0 12px;font-size:16px;color:var(--deoxy)">RNR 的精密調節：活性＋底物特異性雙重控制</h3>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-44 — 脫氧核苷三磷酸對 RNR 的調節</div>
+    每個 α 次基有<strong>兩種調控位點</strong>：
+    <div class="grid-2" style="margin-top:10px">
+      <div style="background:#fef3e2;border-radius:8px;padding:12px">
+        <strong>主調控位點（Overall activity）</strong><br>
+        <span class="tag" style="background:#d1fae5;color:#065f46">ATP</span> → <strong style="color:#16a34a">激活</strong>整體活性<br>
+        <span class="tag" style="background:#fee2e2;color:#991b1b">dATP</span> → <strong style="color:#ef4444">抑制</strong>整體活性
+      </div>
+      <div style="background:#eff6ff;border-radius:8px;padding:12px">
+        <strong>底物特異性位點（Substrate specificity）</strong><br>
+        ATP/dATP → 偏向還原 UDP、CDP<br>
+        dTTP → 偏向還原 GDP<br>
+        dGTP → 偏向還原 ADP
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:13px">
+      <strong>設計邏輯：</strong>pyrimidine dNTPs 多 → dTTP 升高 → 促 GDP 還原 → dGTP 升高 → 促 ADP 還原 → dATP 升高 → 關閉整個 RNR。形成自動「循環制衡」。
+    </div>
+  </div>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-45 — dATP 誘導的 RNR 寡聚化抑制</div>
+    當 dATP 濃度高（50 μM），活性的 α₂β₂ 會組合成環形的 <strong>α₄β₄</strong>（更大的複合體）。在這個構象中，自由基傳遞路徑被暴露於溶劑中、被阻斷，酶失活。當 dATP 下降，α₄β₄ 解聚回 α₂β₂，活性恢復。酵母的 RNR 在 dATP 作用下甚至形成 <strong>α₆β₆</strong> 六聚體。
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 7. THYMIDYLATE ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section" id="thymine">
+  <div class="section-header">
+    <div class="section-icon" style="background:#ede9fe;color:#5b21b6">🧪</div>
+    <div>
+      <div class="section-title" style="color:#5b21b6">胸腺嘧啶核苷酸的合成（dTMP）</div>
+      <div class="section-subtitle">Thymidylate Synthesis from dUMP</div>
+    </div>
+  </div>
+
+  <p>DNA 中含有胸腺嘧啶（Thymine，T），但 <strong>T 的 De Novo 合成完全是在脫氧核苷酸水平</strong>（沒有 RNA 中的 Uracil 到 Thymine 的轉化，只有 dUMP → dTMP）。</p>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-46 — dTMP 合成的前驅物路徑</div>
+    <strong>兩條走向 dUMP 的路徑（細菌中）：</strong>
+    <ol style="margin-top:8px">
+      <li>CDP → dCDP → dCTP → 脫氨 → dUTP → dUTPase → dUMP</li>
+      <li>UDP → dUDP → dUTP → dUTPase → dUMP</li>
+    </ol>
+    dUTPase 確保 dUTP 池保持低水平，防止 Uracil 被誤插入 DNA！
+  </div>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-47 — dUMP → dTMP 的甲基化反應</div>
+    <strong>Thymidylate synthase</strong> 催化：N⁵,N¹⁰-Methylene-THF 提供一個碳基團（在羥甲基氧化態），轉移給 dUMP 的 C-5，同時四氫葉酸被氧化為 <strong>7,8-Dihydrofolate（DHF）</strong>。
+    <br><br>
+    然後 <strong>Dihydrofolate reductase（DHFR）</strong> 用 NADPH 把 DHF 還原回 THF，再由 Serine hydroxymethyltransferase（需 PLP）把 Serine 的一碳基給 THF，再生 N⁵,N¹⁰-Methylene-THF。
+    <div style="margin-top:10px;background:#fef3e2;border-radius:6px;padding:10px;font-size:13px">
+      ⚠️ <strong>臨床重點：</strong>葉酸缺乏（全球約 10% 人口，貧困地區高達 50%）會導致 THF 不足 → dTMP 合成降低 → Uracil 被插入 DNA → DNA 斷裂 → 心臟病、癌症、神經管缺陷（孕婦最危險）。
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 8. DEGRADATION ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-degradation" id="degradation">
+  <div class="section-header">
+    <div class="section-icon">♻️</div>
+    <div>
+      <div class="section-title" style="color:var(--degradation)">嘌呤與嘧啶的降解</div>
+      <div class="section-subtitle">Catabolism of Purines and Pyrimidines</div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:14px;color:var(--degradation)">A. 嘌呤的降解 → 尿酸（Uric Acid）</h3>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-48 — 嘌呤核苷酸的分解代謝</div>
+    <strong>AMP 的降解路徑：</strong><br>
+    AMP → Adenosine（5'-nucleotidase）→ Inosine（adenosine deaminase 脫氨）→ Hypoxanthine（nucleosidase）→ Xanthine（xanthine oxidase）→ <strong>Uric Acid（尿酸）</strong>
+    <br><br>
+    <strong>GMP 的降解路徑：</strong><br>
+    GMP → Guanosine → Guanine（guanine deaminase 脫氨）→ Xanthine → <strong>Uric Acid</strong>
+    <br><br>
+    <em>兩條路都匯流到 Xanthine，再由 Xanthine oxidase 氧化為尿酸（含 Mo 和 Fe-S 中心的黃素酶）。</em>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🦏 不同動物的嘌呤排泄終產物</div>
+    <table>
+      <thead><tr><th>終產物</th><th>排泄的動物</th></tr></thead>
+      <tbody>
+        <tr><td><strong>尿酸（Uric acid）</strong></td><td>靈長類（含人類）、鳥類、爬行動物、昆蟲</td></tr>
+        <tr><td>尿囊素（Allantoin）</td><td>大多數哺乳動物（非靈長類）</td></tr>
+        <tr><td>尿囊酸（Allantoate）</td><td>硬骨魚類</td></tr>
+        <tr><td>尿素（Urea）</td><td>兩棲類、軟骨魚類</td></tr>
+        <tr><td>NH₄⁺</td><td>海洋無脊椎動物</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;font-size:13px;color:var(--text-muted)">靈長類之所以止步於尿酸，是因為缺少 <em>Urate oxidase</em>（尿酸酶）。這也是人類容易得痛風的原因。</div>
+  </div>
+
+  <h3 style="margin:20px 0 14px;color:var(--degradation)">B. 嘧啶的降解 → NH₄⁺ 和 Urea</h3>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-49 — 嘧啶的分解代謝（簡化路徑）</div>
+    嘧啶降解比嘌呤簡單，最終走向 NH₄⁺（進入尿素循環）：
+    <ul style="margin-top:8px">
+      <li><strong>Uracil 和 Cytosine</strong>：降解終產物為 Acetyl-CoA（可進入 TCA）</li>
+      <li><strong>Thymine</strong>：降解終產物為 Succinyl-CoA（TCA 中間體）</li>
+    </ul>
+    Cytosine 先脫氨變 Uracil，再走 Uracil 路徑。兩者均產生 NH₃ + CO₂ → 轉入尿素循環。
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 記憶口訣</div>
+    <div class="mnemonic-text">「嘌呤降解到尿酸（在人的手上止步），嘧啶降解到 Acetyl/Succinyl-CoA（可回 TCA）」</div>
+    <small>嘌呤代謝出尿酸結晶（痛風）；嘧啶代謝出 CoA 化合物（回到能量代謝）</small>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 9. SALVAGE ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section" id="salvage">
+  <div class="section-header">
+    <div class="section-icon" style="background:#ecfdf5;color:#065f46">♻️</div>
+    <div>
+      <div class="section-title" style="color:#065f46">搶救路徑（Salvage Pathways）</div>
+      <div class="section-subtitle">Recycling Free Bases back to Nucleotides</div>
+    </div>
+  </div>
+
+  <p>細胞核酸降解時會釋放遊離鹼基，搶救路徑可<strong>回收這些鹼基</strong>重新合成核苷酸，比 De Novo 合成節省許多能量。</p>
+
+  <div class="card">
+    <div class="card-title">⚙️ 主要搶救酶</div>
+    <div class="grid-2">
+      <div>
+        <strong>Adenosine phosphoribosyltransferase</strong><br>
+        <code style="font-size:12px">Adenine + PRPP → AMP + PPᵢ</code><br>
+        <span style="font-size:13px;color:var(--text-muted)">專門搶救 Adenine</span>
+      </div>
+      <div>
+        <strong>Hypoxanthine-guanine phosphoribosyltransferase（HGPRT）</strong><br>
+        <code style="font-size:12px">Hypoxanthine/Guanine + PRPP → IMP/GMP + PPᵢ</code><br>
+        <span style="font-size:13px;color:var(--text-muted)">搶救 Hypoxanthine 和 Guanine</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="key-box">
+    <div class="key-label">💡 搶救路徑的重要性</div>
+    大腦特別依賴搶救路徑（因為 De Novo 合成的能量成本很高，且某些細胞的 De Novo 能力有限）。搶救路徑失效 → 細胞 De Novo 合成過度 → 嘌呤過多 → 尿酸累積 → 組織損傷。
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 10. CLINICAL ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-clinical" id="clinical">
+  <div class="section-header">
+    <div class="section-icon">🏥</div>
+    <div>
+      <div class="section-title" style="color:var(--clinical)">臨床相關疾病</div>
+      <div class="section-subtitle">Clinical Disorders of Nucleotide Metabolism</div>
+    </div>
+  </div>
+
+  <div class="disease-card">
+    <div class="disease-name">🔴 Lesch-Nyhan 症候群</div>
+    <strong>病因：</strong>HGPRT（次黃嘌呤-鳥嘌呤磷酸核糖轉移酶）完全缺乏（幾乎只見於男孩）。<br>
+    <strong>後果：</strong>Hypoxanthine 和 Guanine 無法被搶救 → PRPP 水平升高 → De Novo 路徑過度活躍 → 尿酸大量產生，類似痛風症狀 → 腦部（尤其是基底核）功能障礙。<br>
+    <strong>症狀：</strong>動作協調障礙、智識缺損、<strong>強迫性自殘行為</strong>（咬斷自己的手指、腳趾、嘴唇）<br>
+    <strong>治療展望：</strong>基因治療（已有早期成功案例）、CRISPR 基因編輯（未來潛力）
+  </div>
+
+  <div class="disease-card" style="border-color:#f59e0b;background:#fef9ec">
+    <div class="disease-name" style="color:#92400e">🟡 痛風（Gout）</div>
+    <strong>病因：</strong>血液和組織中尿酸濃度過高，通常和<strong>尿酸排泄不足</strong>有關（部分有嘌呤代謝酶的遺傳缺陷）。男性多見。<br>
+    <strong>症狀：</strong>關節發炎、疼痛、關節炎（尿酸鈉結晶在關節中析出）；腎臟也受影響（尿酸沉積在腎小管）。<br>
+    <strong>治療：</strong>
+    <ul style="margin-top:6px">
+      <li>飲食：避免高嘌呤食物（肝臟、腺體類食品）</li>
+      <li>藥物：<strong>Allopurinol</strong>（別嘌呤醇）</li>
+    </ul>
+  </div>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-50 — Allopurinol 的作用機制</div>
+    Allopurinol 是 Hypoxanthine 的結構類似物（五元環中 N 和 C 的位置略有不同）。黃嘌呤氧化酶會把 Allopurinol 轉化成 <strong>Oxypurinol（Alloxanthine）</strong>，而 Oxypurinol 會緊緊結合在酶的還原態活性位點，形成<strong>死端複合體，永久抑制酶</strong>（機制型抑制）。結果：黃嘌呤和次黃嘌呤代替尿酸被排泄（更易溶，不易結晶）。Allopurinol 由 Gertrude Elion 和 George Hitchings 開發。
+  </div>
+
+  <div class="disease-card" style="border-color:#8b5cf6;background:var(--deoxy-light)">
+    <div class="disease-name" style="color:#5b21b6">🟣 ADA 缺乏症（嚴重複合型免疫缺陷）</div>
+    <strong>病因：</strong><strong>Adenosine deaminase（ADA）</strong> 缺乏（無法把 Adenosine 脫氨變 Inosine）。<br>
+    <strong>後果：</strong>細胞內 dATP 濃度升高 100 倍 → dATP 強力抑制 RNR（ribonucleotide reductase）→ 其他 dNTP 嚴重不足 → T 和 B 淋巴細胞無法正常發育 → <strong>免疫系統幾乎完全失功能</strong>。<br>
+    <strong>治療：</strong>骨髓移植、酶替代療法（每週注射 ADA）、<strong>基因治療</strong>（1990 年首次人類基因治療試驗即是此症）、未來 CRISPR 基因編輯。<br>
+    <span style="font-size:13px;color:#5b21b6;font-weight:600">— ADA 缺乏症是歷史上第一個人類基因治療的試驗標的！</span>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ 11. CHEMOTHERAPY ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section c-chemo" id="chemo">
+  <div class="section-header">
+    <div class="section-icon">💊</div>
+    <div>
+      <div class="section-title" style="color:var(--chemo)">化療藥物：鎖定核苷酸合成</div>
+      <div class="section-subtitle">Chemotherapeutic Agents Targeting Nucleotide Biosynthesis</div>
+    </div>
+  </div>
+
+  <p>癌細胞分裂快速，對核苷酸的需求遠高於正常細胞，因此對核苷酸合成抑制劑特別敏感。這是現代腫瘤化療的重要策略之一。</p>
+
+  <div class="fig-box">
+    <div class="fig-label">📊 Figure 22-51 — 胸腺嘧啶合成的「化療靶點」</div>
+    dUMP → dTMP 的路徑（thymidylate synthase 催化）和 DHF → THF 的再生路徑（DHFR 催化）是細胞中 <strong>胸腺嘧啶合成的唯一路徑</strong>，所以是絕佳的化療標靶。阻斷此路徑 → 細胞無法合成 dTMP → DNA 複製停止 → 快速分裂的癌細胞死亡。
+  </div>
+
+  <div class="grid-2">
+    <div class="drug-card" style="background:var(--chemo-light);border-color:#d946ef;color:#4a044e">
+      <div class="drug-name">Fluorouracil（5-FU）</div>
+      <div class="drug-tag" style="background:#fbcfe8;color:#9d174d">Thymidylate Synthase 抑制劑</div>
+      <p style="font-size:13.5px">在細胞中被搶救路徑轉化為 <strong>FdUMP</strong>（有活性的代謝物）。FdUMP 進入 thymidylate synthase 的活性位點，完成前兩步反應後，因 C-5 是 F（非 H），無法繼續反應 → 形成穩定的<strong>共價死端複合體（covalent dead-end complex）</strong> → 酶永久失活。</p>
+      <p style="font-size:12.5px;color:#86198f">這是「機制型抑制（mechanism-based inactivation）」的典型範例。</p>
+    </div>
+    <div class="drug-card" style="background:#eff6ff;border-color:#60a5fa;color:#1e3a8a">
+      <div class="drug-name">Methotrexate（MTX）</div>
+      <div class="drug-tag" style="background:#dbeafe;color:#1d4ed8">Dihydrofolate Reductase 抑制劑</div>
+      <p style="font-size:13.5px">葉酸的結構類似物，對 DHFR 的親和力是二氫葉酸（正常受質）的 <strong>100 倍</strong>。競爭性抑制 DHFR → THF 無法再生 → N⁵,N¹⁰-Methylene-THF 耗竭 → dTMP 合成停止。</p>
+      <p style="font-size:12.5px;color:#1d4ed8">相關藥物：Aminopterin（結構與 MTX 相同，少一個甲基）</p>
+    </div>
+  </div>
+
+  <div class="fig-box" style="margin-top:16px">
+    <div class="fig-label">📊 Figure 22-52 — Thymidylate Synthase 的催化機制與 FdUMP 的抑制</div>
+    <strong>正常機制（dUMP → dTMP）：</strong><br>
+    Step 1: 酶的 Cys 硫基（-SH）攻擊 dUMP 的 C-6（麥克爾加成）<br>
+    Step 2: C-5 的碳負離子攻擊 N⁵-iminium ion（四氫葉酸的活化中間體）<br>
+    Step 3: C-5 上形成亞甲基橋，消去 N⁵ → 生成 THF<br>
+    Step 4: 1,3-氫轉移（hydride shift），H 從 C-6 的 THF 轉移到甲基，THF 氧化為 DHF<br>
+    <br>
+    <strong>FdUMP 的抑制：</strong>Step 1 和 Step 2 正常進行，但 Step 3 <strong>因 C-5 有氟（F 不能像 H 一樣消去）</strong>，反應卡住 → 形成 FdUMP + 酶 + THF 的穩定三元共價複合體 → 酶永久失活。
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">🌍 其他重要應用</div>
+    <ul>
+      <li><strong>Trimethoprim</strong>：抗生素，對細菌 DHFR 的親和力是哺乳類 DHFR 的 10 萬倍 → 選擇性殺菌，不傷人體。用於治療尿道感染和中耳炎。</li>
+      <li><strong>Allopurinol（見上）</strong>及嘌呤類似物：對非洲錐蟲病（睡眠病，African trypanosomiasis）有療效，因錐蟲缺乏 De Novo 合成路徑，完全依賴搶救路徑。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━ SUMMARY ━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="section" id="summary">
+  <div class="section-header">
+    <div class="section-icon" style="background:#fce7f3;color:#9d174d">📝</div>
+    <div>
+      <div class="section-title">重點總結</div>
+      <div class="section-subtitle">Summary 22.4</div>
+    </div>
+  </div>
+
+  <div class="sum-box"><span class="sum-icon">🔵</span><div>嘌呤環從頭合成從 PRPP 出發，以 Glycine、Glutamine、Aspartate、CO₂、Formate 逐步組裝，共 11 步，終點是 IMP；IMP 再分枝為 AMP 和 GMP。</div></div>
+  <div class="sum-box"><span class="sum-icon">🔄</span><div>嘌呤合成受四重負回饋調節：① ADP/GDP 抑制 PRPP synthetase；② AMP+GMP 協同抑制 amidotransferase；③ 分枝特異性抑制（sequential feedback）；④ GTP/ATP 交叉用於合成對方。</div></div>
+  <div class="sum-box"><span class="sum-icon">🟢</span><div>嘧啶先合成環再接核糖，從 Carbamoyl phosphate + Aspartate 出發，經 Orotate、OMP，最終得 UMP → UDP → UTP → CTP。</div></div>
+  <div class="sum-box"><span class="sum-icon">⚖️</span><div>嘧啶合成由 ATCase（首酶）調節：CTP 抑制，ATP 解除抑制。</div></div>
+  <div class="sum-box"><span class="sum-icon">⚡</span><div>NMP → NDP 由鹼基特異性激酶催化；NDP → NTP 由鹼基非特異性的 NDP kinase 催化。</div></div>
+  <div class="sum-box"><span class="sum-icon">🔬</span><div>核糖核苷酸 → 脫氧核苷酸：由 Ribonucleotide Reductase（RNR）催化，以自由基機制在 2'-碳還原。RNR 的活性和底物特異性均受 dNTP 別構調節，精細平衡各 dNTP 的池濃度。</div></div>
+  <div class="sum-box"><span class="sum-icon">🧪</span><div>dTMP 來自 dUMP，由 Thymidylate synthase 甲基化，消耗 N⁵,N¹⁰-Methylene-THF；DHF 再生回 THF 需要 DHFR 和 NADPH。</div></div>
+  <div class="sum-box"><span class="sum-icon">♻️</span><div>嘌呤降解終點是尿酸（人類/靈長類）。搶救路徑（APRT、HGPRT）回收遊離嘌呤鹼基。HGPRT 缺乏 → Lesch-Nyhan 症候群。尿酸過多 → 痛風（Allopurinol 治療）。</div></div>
+  <div class="sum-box"><span class="sum-icon">💊</span><div>核苷酸合成路徑是化療/抗生素的重要靶點：Fluorouracil（機制型抑制 Thymidylate synthase）、Methotrexate（競爭抑制 DHFR）、Trimethoprim（細菌選擇性 DHFR 抑制劑）。</div></div>
+
+  <div style="margin-top:28px;padding:20px 24px;background:linear-gradient(135deg,#0f2744,#0d6e4e);border-radius:var(--radius);color:white;text-align:center">
+    <div style="font-size:28px;margin-bottom:8px">🧬</div>
+    <div style="font-family:'Noto Serif TC',serif;font-size:17px;font-weight:700;margin-bottom:8px">一句話記住本章</div>
+    <div style="font-size:14px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.8">
+      嘌呤在核糖上「搭積木」（11 步，IMP 為核心），嘧啶先「折盒子」再接核糖（ATCase 是開關）；<br>
+      兩者都要 PRPP 打底、Glutamine 提氮——最後 RNR 把核糖脫氧，造出 DNA 原料。
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- Scroll to top button -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Scroll to top button visibility
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  btn.classList.toggle('show', window.scrollY > 300);
+});
+
+// Active nav item based on scroll position
+const sections = document.querySelectorAll('.section');
+const navItems = document.querySelectorAll('.nav-item');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => observer.observe(s));
+
+// Smooth scroll for nav items
+navItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(item.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
