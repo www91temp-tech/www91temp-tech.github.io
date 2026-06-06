@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第26章 RNA代謝 · 學習指南</title>
+<title>第26章：RNA代謝｜學習指南</title>
 <style>
 :root {
   --bg: #0f1117;
@@ -21,7 +21,7 @@
   --teal: #30d5c8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'Noto Sans TC',sans-serif;font-size:16px;line-height:1.75}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'Noto Sans TC',sans-serif;font-size:16px;line-height:1.75;padding-top:52px}
 
 /* ─── HERO ─── */
 .hero{background:linear-gradient(160deg,#0a0d14 0%,#111726 60%,#16202e 100%);border-bottom:1px solid var(--border);padding:64px 24px 52px;text-align:center;position:relative;overflow:hidden}
@@ -45,7 +45,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'No
 .toc-n{font-family:monospace;font-size:11px;color:var(--muted);min-width:22px}
 
 /* ─── SECTION ─── */
-.sec{margin-bottom:60px;scroll-margin-top:20px}
+.sec{margin-bottom:60px;scroll-margin-top:64px}
 .sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:26px;padding-bottom:14px;border-bottom:1px solid var(--border)}
 .sec-badge{font-family:monospace;font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:3px 8px;white-space:nowrap}
 .sec-title{font-size:1.55rem;font-weight:800;color:#fff}
@@ -141,9 +141,37 @@ hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* ─── TOP NAV ─── */
+.topnav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,17,23,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.topnav-inner{max-width:1040px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:16px;height:52px}
+.topnav-brand{font-family:monospace;font-size:11px;color:var(--accent);white-space:nowrap;font-weight:700;letter-spacing:1.5px;flex-shrink:0;padding-right:8px;border-right:1px solid var(--border)}
+.topnav-links{display:flex;align-items:center;gap:3px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.topnav-links::-webkit-scrollbar{display:none}
+.tnav-a{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:13px;white-space:nowrap;transition:color .2s,background .2s,border-color .2s;border:1px solid transparent;flex-shrink:0}
+.tnav-a:hover{color:var(--text);background:var(--surface2);border-color:var(--border)}
+.tnav-a.active{color:var(--accent);background:rgba(78,158,255,.1);border-color:rgba(78,158,255,.3)}
+.tnav-n{font-family:monospace;font-size:10px;color:var(--muted);opacity:.7;flex-shrink:0}
+.tnav-a.active .tnav-n{color:var(--accent);opacity:1}
+#sq{scroll-margin-top:64px}
 </style>
 </head>
 <body>
+
+<!-- TOP NAV -->
+<nav class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <span class="topnav-brand">Ch26 RNA代謝</span>
+    <div class="topnav-links">
+      <a href="#s0" class="tnav-a" data-sec="s0"><span class="tnav-n"></span>RNA 的多重身份</a>
+      <a href="#s1" class="tnav-a" data-sec="s1"><span class="tnav-n">26.1</span>DNA 依賴性 RNA 合成</a>
+      <a href="#s2" class="tnav-a" data-sec="s2"><span class="tnav-n">26.2</span>RNA 加工</a>
+      <a href="#s3" class="tnav-a" data-sec="s3"><span class="tnav-n">26.3</span>反轉錄與 RNA 複製</a>
+      <a href="#s4" class="tnav-a" data-sec="s4"><span class="tnav-n">26.4</span>核酶與 RNA 世界</a>
+      <a href="#sq" class="tnav-a" data-sec="sq"><span class="tnav-n">✏️</span>自我測驗</a>
+    </div>
+  </div>
+</nav>
 
 <!-- HERO -->
 <div class="hero">
@@ -161,19 +189,6 @@ hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--
 </div>
 
 <div class="wrap">
-
-<!-- TOC -->
-<div class="toc">
-  <div class="toc-label">📚 章節目錄</div>
-  <div class="toc-grid">
-    <a href="#s0" class="toc-a"><span class="toc-n">00</span>RNA 的多重身份</a>
-    <a href="#s1" class="toc-a"><span class="toc-n">26.1</span>DNA 依賴性 RNA 合成</a>
-    <a href="#s2" class="toc-a"><span class="toc-n">26.2</span>RNA 加工</a>
-    <a href="#s3" class="toc-a"><span class="toc-n">26.3</span>反轉錄與 RNA 複製</a>
-    <a href="#s4" class="toc-a"><span class="toc-n">26.4</span>核酶與 RNA 世界</a>
-    <a href="#sq" class="toc-a"><span class="toc-n">✏️</span>自我測驗</a>
-  </div>
-</div>
 
 <!-- ══════════════════════════════ -->
 <!-- S0: 引言 -->
@@ -789,20 +804,48 @@ hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--
 <!-- FOOTER -->
 <div style="text-align:center;margin-top:70px;color:var(--muted);font-size:13px;font-family:monospace;line-height:2">
   <p>Chapter 26 · RNA Metabolism</p>
-  <p>Lehninger Principles of Biochemistry, 8e · Nelson & Cox · © 2021 W. H. Freeman</p>
 </div>
 
 </div><!-- /wrap -->
 
 <script>
-document.querySelectorAll('.toc-a').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const id=a.getAttribute('href');
-    if(id&&id.startsWith('#')){
+// ─── Smooth scroll for both old toc-a and new tnav-a links ───
+document.querySelectorAll('.tnav-a, .toc-a').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
       e.preventDefault();
       document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
     }
   });
+});
+
+// ─── Active section highlight via IntersectionObserver ───
+const secIds = ['s0','s1','s2','s3','s4','sq'];
+const navLinks = document.querySelectorAll('.tnav-a');
+
+let lastActive = null;
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      if (id === lastActive) return;
+      lastActive = id;
+      navLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector(`.tnav-a[data-sec="${id}"]`);
+      if (active) {
+        active.classList.add('active');
+        // Keep active link visible in scrollable nav
+        active.scrollIntoView({block:'nearest', inline:'nearest'});
+      }
+    }
+  });
+}, {rootMargin: '-52px 0px -55% 0px', threshold: 0});
+
+secIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
 });
 </script>
 </body>
