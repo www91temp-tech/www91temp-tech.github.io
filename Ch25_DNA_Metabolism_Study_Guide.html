@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第25章 DNA 代謝 — 學習指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2128;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent-blue: #58a6ff;
+    --accent-green: #3fb950;
+    --accent-orange: #d29922;
+    --accent-red: #f85149;
+    --accent-purple: #bc8cff;
+    --accent-teal: #39d353;
+    --highlight-bg: rgba(88, 166, 255, 0.12);
+    --highlight-border: rgba(88, 166, 255, 0.4);
+    --warn-bg: rgba(240, 136, 62, 0.12);
+    --warn-border: rgba(240, 136, 62, 0.5);
+    --key-bg: rgba(63, 185, 80, 0.12);
+    --key-border: rgba(63, 185, 80, 0.4);
+    --critical-bg: rgba(248, 81, 73, 0.12);
+    --critical-border: rgba(248, 81, 73, 0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .site-header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a2232 50%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(88,166,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .chapter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+  .site-header h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .site-header h1 span { color: var(--accent-blue); }
+  .header-subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Nav tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 16px 24px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    background: none;
+  }
+  .nav-tab:hover { color: var(--text); background: var(--bg3); }
+  .nav-tab.active {
+    color: var(--accent-blue);
+    background: rgba(88,166,255,0.1);
+    border-color: rgba(88,166,255,0.3);
+  }
+
+  /* Main layout */
+  .main-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Section */
+  .section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Section title */
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--accent-blue);
+    color: #000;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .section-intro {
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    font-size: 15px;
+    border-left: 3px solid var(--accent-blue);
+    padding-left: 16px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .card-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .icon-blue { background: rgba(88,166,255,0.15); color: var(--accent-blue); }
+  .icon-green { background: rgba(63,185,80,0.15); color: var(--accent-green); }
+  .icon-orange { background: rgba(210,153,34,0.15); color: var(--accent-orange); }
+  .icon-red { background: rgba(248,81,73,0.15); color: var(--accent-red); }
+  .icon-purple { background: rgba(188,140,255,0.15); color: var(--accent-purple); }
+
+  p { color: var(--text); line-height: 1.85; margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* Key term highlight */
+  .term {
+    color: var(--accent-blue);
+    font-weight: 600;
+    cursor: help;
+    border-bottom: 1px dashed rgba(88,166,255,0.4);
+  }
+
+  /* Critical highlight box */
+  .highlight-box {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .highlight-box.blue {
+    background: var(--highlight-bg);
+    border-left: 4px solid var(--accent-blue);
+    color: #a8d8ff;
+  }
+  .highlight-box.green {
+    background: var(--key-bg);
+    border-left: 4px solid var(--accent-green);
+    color: #9be0a8;
+  }
+  .highlight-box.orange {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--accent-orange);
+    color: #f0c060;
+  }
+  .highlight-box.red {
+    background: var(--critical-bg);
+    border-left: 4px solid var(--accent-red);
+    color: #ffa0a0;
+  }
+  .highlight-box strong { font-weight: 700; color: #fff; }
+
+  /* Super highlight — critical content */
+  .super-highlight {
+    background: linear-gradient(135deg, rgba(88,166,255,0.15), rgba(88,166,255,0.05));
+    border: 1px solid rgba(88,166,255,0.35);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .super-highlight::before {
+    content: '★ 重點';
+    position: absolute;
+    top: -11px;
+    left: 16px;
+    background: var(--accent-blue);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+
+  /* Concept comparison grid */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-cell {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .compare-cell h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .compare-cell p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; }
+  .compare-cell.blue { border-top: 3px solid var(--accent-blue); }
+  .compare-cell.blue h4 { color: var(--accent-blue); }
+  .compare-cell.green { border-top: 3px solid var(--accent-green); }
+  .compare-cell.green h4 { color: var(--accent-green); }
+  .compare-cell.orange { border-top: 3px solid var(--accent-orange); }
+  .compare-cell.orange h4 { color: var(--accent-orange); }
+  .compare-cell.red { border-top: 3px solid var(--accent-red); }
+  .compare-cell.red h4 { color: var(--accent-red); }
+
+  /* Step diagram */
+  .step-list { margin: 12px 0; }
+  .step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    color: #000;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .step-content { flex: 1; }
+  .step-content strong { color: #fff; }
+  .step-content p { font-size: 14.5px; margin-bottom: 0; color: var(--text-muted); }
+
+  /* Summary table */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .summary-table th {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--accent-blue);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .summary-table td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    color: var(--text);
+    vertical-align: top;
+  }
+  .summary-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+  /* Memory tip */
+  .memory-tip {
+    background: linear-gradient(135deg, rgba(188,140,255,0.1), rgba(188,140,255,0.04));
+    border: 1px solid rgba(188,140,255,0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .memory-tip::before {
+    content: '💡 記憶技巧 ';
+    font-weight: 700;
+    color: var(--accent-purple);
+  }
+  .memory-tip p { color: var(--text-muted); margin: 4px 0 0; font-size: 14px; }
+
+  /* Sub-heading */
+  h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #e0e6ef;
+    margin: 24px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Mnemonic badge */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    margin-right: 6px;
+  }
+  .badge-blue { background: rgba(88,166,255,0.2); color: var(--accent-blue); }
+  .badge-green { background: rgba(63,185,80,0.2); color: var(--accent-green); }
+  .badge-red { background: rgba(248,81,73,0.2); color: var(--accent-red); }
+
+  /* Quiz section */
+  .quiz-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .quiz-q {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 14px;
+    font-size: 15px;
+  }
+  .quiz-q .qnum {
+    display: inline-block;
+    background: var(--accent-orange);
+    color: #000;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  .quiz-options { list-style: none; }
+  .quiz-options li {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14.5px;
+    color: var(--text-muted);
+  }
+  .quiz-options li:hover { border-color: var(--accent-blue); color: var(--text); background: rgba(88,166,255,0.05); }
+  .quiz-options li.correct { background: rgba(63,185,80,0.15); border-color: var(--accent-green); color: #9be0a8; }
+  .quiz-options li.wrong { background: rgba(248,81,73,0.1); border-color: var(--accent-red); color: #ffa0a0; }
+  .quiz-explanation {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .quiz-explanation.show { display: block; }
+  .quiz-explanation strong { color: #fff; }
+
+  /* Progress overview */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) { .overview-grid { grid-template-columns: 1fr; } }
+  .overview-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .overview-card:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .overview-card .oc-icon { font-size: 2rem; margin-bottom: 10px; }
+  .overview-card .oc-title { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 4px; }
+  .overview-card .oc-desc { font-size: 13px; color: var(--text-muted); }
+
+  /* Principle boxes */
+  .principle-row {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 20px;
+    padding: 18px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color 0.2s;
+  }
+  .principle-row:hover { border-color: rgba(88,166,255,0.3); }
+  .p-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--accent-blue);
+    opacity: 0.6;
+    text-align: center;
+    padding-top: 2px;
+  }
+  .p-content h4 { color: #fff; font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+  .p-content p { color: var(--text-muted); font-size: 14px; margin: 0; }
+
+  /* Arrow flow diagram */
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 16px 0;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .flow-node {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+    min-width: 80px;
+  }
+  .flow-node.highlight { background: rgba(88,166,255,0.15); border-color: rgba(88,166,255,0.4); color: var(--accent-blue); }
+  .flow-arrow {
+    color: var(--text-muted);
+    font-size: 18px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  ul.content-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  ul.content-list li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 14.5px;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  ul.content-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-size: 12px;
+    top: 8px;
+  }
+  ul.content-list li strong { color: var(--text); }
+  ul.content-list li:last-child { border-bottom: none; }
+
+  .repair-timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 16px 0;
+  }
+  .repair-timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .rt-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .rt-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    border: 2px solid var(--bg);
+  }
+  .rt-item h4 { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .rt-item p { font-size: 13.5px; color: var(--text-muted); margin: 0; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .main-container { padding: 24px 16px 60px; }
+    .card { padding: 18px; }
+    .site-header { padding: 40px 16px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="chapter-label">Chapter 25 · Biochemistry</div>
+  <h1>DNA <span>代謝</span></h1>
+  <p class="header-subtitle">複製 · 修復 · 重組 — 理解生命如何忠實傳遞遺傳資訊</p>
+</header>
+
+<nav class="nav-tabs" id="mainNav">
+  <button class="nav-tab active" onclick="showSection('overview', this)">📋 總覽</button>
+  <button class="nav-tab" onclick="showSection('replication', this)">🔬 25.1 DNA 複製</button>
+  <button class="nav-tab" onclick="showSection('repair', this)">🛠 25.2 DNA 修復</button>
+  <button class="nav-tab" onclick="showSection('recombination', this)">🔀 25.3 DNA 重組</button>
+  <button class="nav-tab" onclick="showSection('quiz', this)">✏️ 測驗練習</button>
+</nav>
+
+<main class="main-container">
+
+  <!-- ===================== OVERVIEW ===================== -->
+  <section id="overview" class="section active">
+    <h2 class="section-title">
+      <span class="section-num">總覽</span>
+      本章核心概念
+    </h2>
+    <p class="section-intro">DNA 不只是靜態的資訊儲存器。它必須被精確複製、持續修復、並在必要時重排。這三大過程密不可分，共同維護生命的遺傳完整性。</p>
+
+    <div class="overview-grid">
+      <div class="overview-card" onclick="showSection('replication', document.querySelectorAll('.nav-tab')[1])">
+        <div class="oc-icon">🔬</div>
+        <div class="oc-title">DNA 複製</div>
+        <div class="oc-desc">忠實複製遺傳訊息<br>半保留、雙向、半不連續</div>
+      </div>
+      <div class="overview-card" onclick="showSection('repair', document.querySelectorAll('.nav-tab')[2])">
+        <div class="oc-icon">🛠</div>
+        <div class="oc-title">DNA 修復</div>
+        <div class="oc-desc">糾正損傷、避免突變<br>四大主要修復系統</div>
+      </div>
+      <div class="overview-card" onclick="showSection('recombination', document.querySelectorAll('.nav-tab')[3])">
+        <div class="oc-icon">🔀</div>
+        <div class="oc-title">DNA 重組</div>
+        <div class="oc-desc">重排遺傳資訊<br>同源、位點特異、轉位</div>
+      </div>
+    </div>
+
+    <h3>本章四大指導原則</h3>
+
+    <div class="principle-row">
+      <div class="p-num">P1</div>
+      <div class="p-content">
+        <h4>遺傳資訊是生命的基礎之一</h4>
+        <p>除了催化作用，生物資訊是生命的兩大先決條件之一。忠實維護與傳遞遺傳資訊，才能確保物種的延續性。</p>
+      </div>
+    </div>
+    <div class="principle-row">
+      <div class="p-num">P2</div>
+      <div class="p-content">
+        <h4>資訊代價昂貴</h4>
+        <p>細胞對 DNA 合成的化學投入遠超一般磷酸二酯鍵所需。不僅要形成鍵，更要確保鍵接的是正確的核苷酸。</p>
+      </div>
+    </div>
+    <div class="principle-row">
+      <div class="p-num">P3</div>
+      <div class="p-content">
+        <h4>基因組維護並非完美</h4>
+        <p>DNA 損傷常由自發過程造成。修復系統處理絕大多數損傷，少數漏網的突變則成為演化的動力。</p>
+      </div>
+    </div>
+    <div class="principle-row">
+      <div class="p-num">P4</div>
+      <div class="p-content">
+        <h4>複製、修復、重組高度整合</h4>
+        <p>這三大過程在細胞中並非獨立運作，它們相互協調、高度整合，共同維護基因組的完整性。</p>
+      </div>
+    </div>
+
+    <h3>關鍵詞速覽</h3>
+    <div class="compare-grid">
+      <div class="compare-cell blue">
+        <h4>複製相關</h4>
+        <p>半保留複製、複製叉、起始點、岡崎片段、前導股、落後股、複製體</p>
+      </div>
+      <div class="compare-cell green">
+        <h4>修復相關</h4>
+        <p>錯配修復、鹼基切除修復、核苷酸切除修復、直接修復、SOS 反應</p>
+      </div>
+      <div class="compare-cell orange">
+        <h4>重組相關</h4>
+        <p>同源重組、位點特異性重組、轉位子、Holliday 中間體、NHEJ</p>
+      </div>
+      <div class="compare-cell red">
+        <h4>醫學相關</h4>
+        <p>突變與癌症、著色性乾皮症、HNPCC、BRCA1/2、PARP 抑制劑</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REPLICATION ===================== -->
+  <section id="replication" class="section">
+    <h2 class="section-title">
+      <span class="section-num">25.1</span>
+      DNA 複製
+    </h2>
+    <p class="section-intro">每次細胞分裂前，所有 DNA 都必須被完整且精確地複製一份。這個看似簡單的任務，背後是一台精密的「分子機器」。</p>
+
+    <!-- Fundamental rules -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-blue">📐</span>複製的四大基本規則</div>
+
+      <div class="super-highlight">
+        <strong>1. 半保留複製 (Semiconservative Replication)</strong>
+        <p style="margin-top:8px; color:#a8d8ff;">每個子代 DNA 分子含有<strong style="color:#fff;">一條舊鏈 + 一條新鏈</strong>。1957年 Meselson & Stahl 用 ¹⁵N / ¹⁴N 標記法實驗確認。</p>
+      </div>
+
+      <div class="compare-grid" style="margin-top:0">
+        <div class="compare-cell blue">
+          <h4>2. 有起始點，雙向進行</h4>
+          <p>複製從特定的<strong style="color:#fff;">起始點 (origin)</strong> 開始，向兩個方向形成兩個複製叉。細菌只有一個起始點；人類細胞有 30,000–50,000 個。</p>
+        </div>
+        <div class="compare-cell green">
+          <h4>3. 方向：5'→3'，半不連續</h4>
+          <p>新股只能往 5'→3' 方向延伸。因此，<strong style="color:#fff;">前導股</strong>連續合成，<strong style="color:#fff;">落後股</strong>不連續，形成岡崎片段。</p>
+        </div>
+      </div>
+
+      <div class="highlight-box orange" style="margin-top:16px">
+        <strong>⚡ 高保真複製的三道防線：</strong><br>
+        ① DNA 聚合酶的鹼基選擇性（錯誤率 1/10⁵）<br>
+        ② 3'→5' 校讀外切核酸酶（再降 100–1000 倍）<br>
+        ③ 複製後的錯配修復系統（最終錯誤率 &lt; 1/10⁹）
+      </div>
+    </div>
+
+    <!-- Leading vs Lagging -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-green">🧵</span>前導股 vs 落後股</div>
+
+      <div class="compare-grid">
+        <div class="compare-cell blue">
+          <h4>🡒 前導股 (Leading Strand)</h4>
+          <p>與複製叉移動方向<strong style="color:#fff;">相同</strong>的 5'→3' 合成。<strong style="color:#fff;">連續</strong>合成，一路到底。</p>
+        </div>
+        <div class="compare-cell orange">
+          <h4>🡐 落後股 (Lagging Strand)</h4>
+          <p>與複製叉移動方向<strong style="color:#fff;">相反</strong>的 5'→3' 合成。<strong style="color:#fff;">不連續</strong>，形成一段段的<strong style="color:#fff;">岡崎片段</strong>。</p>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <p>想像「落後的人跑反方向」— 落後股的聚合酶雖然走向正確（5'→3'），但相對於複製叉卻是「走回頭路」，所以要一段一段合成。</p>
+      </div>
+
+      <h3>岡崎片段的處理流程</h3>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>引子酶合成 RNA 引子</strong>
+            <p>每個岡崎片段開始前，引子酶（primase）先合成一小段 RNA 引子，提供 3'-OH 起始點</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>DNA 聚合酶 III 延伸</strong>
+            <p>以 RNA 引子為基礎，往 5'→3' 延伸 DNA</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>DNA 聚合酶 I 移除 RNA 引子</strong>
+            <p>利用 5'→3' 外切核酸酶活性，邊切除 RNA 邊用 DNA 填補</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>DNA 連接酶封閉缺口</strong>
+            <p>將相鄰片段之間的缺口（nick）用磷酸二酯鍵封合，完成落後股</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key proteins -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-purple">⚙️</span>複製體（Replisome）的關鍵蛋白</div>
+      <table class="summary-table">
+        <tr>
+          <th>蛋白質</th>
+          <th>功能</th>
+          <th>類比</th>
+        </tr>
+        <tr>
+          <td><strong style="color:#58a6ff">DNA 解螺旋酶<br>(Helicase / DnaB)</strong></td>
+          <td>消耗 ATP 打開雙股 DNA</td>
+          <td>「拉鍊頭」，將 DNA 解開</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#3fb950">單股結合蛋白 (SSB)</strong></td>
+          <td>穩定已解開的單股 DNA，防止重新配對</td>
+          <td>撐開的「鷹架」</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#d29922">DNA 拓撲異構酶<br>(Topoisomerase)</strong></td>
+          <td>解除複製叉前方的超螺旋張力</td>
+          <td>「捲線器」，避免纏繞打結</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#bc8cff">引子酶 (Primase)</strong></td>
+          <td>合成短 RNA 引子（複製必需的起始點）</td>
+          <td>「啟動按鈕」，DNA 聚合酶無法從頭開始</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#58a6ff">β 滑動夾 (β clamp)</strong></td>
+          <td>固定 DNA 聚合酶 III，提高連貫性</td>
+          <td>「安全帶」，讓聚合酶不脫落</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#3fb950">DNA 連接酶 (Ligase)</strong></td>
+          <td>連接相鄰片段，封閉缺口</td>
+          <td>「膠帶」，黏合岡崎片段</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- E. coli vs Eukaryote -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-red">⚖️</span>原核 vs 真核複製的比較</div>
+      <div class="compare-grid">
+        <div class="compare-cell blue">
+          <h4>🦠 大腸桿菌（原核）</h4>
+          <p>• 1 個起始點 (oriC)<br>
+          • DnaA 蛋白識別起始點<br>
+          • 主要聚合酶：Pol III<br>
+          • 速度：~1,000 nt/秒<br>
+          • Ter 序列 + Tus 蛋白終止<br>
+          • 拓撲異構酶 IV 解開連環體</p>
+        </div>
+        <div class="compare-cell green">
+          <h4>🧬 人類細胞（真核）</h4>
+          <p>• 30,000–50,000 個起始點<br>
+          • ORC 複合物識別起始點<br>
+          • 主要聚合酶：Pol ε（前導股）、Pol δ（落後股）<br>
+          • 速度：~50 nt/秒（慢 20 倍！）<br>
+          • PCNA 作為滑動夾<br>
+          • 細胞週期調控（CDK/Cyclin）</p>
+        </div>
+      </div>
+
+      <div class="highlight-box blue" style="margin-top:16px">
+        <strong>為何真核生物需要這麼多起始點？</strong><br>
+        若人類細胞 23 條染色體每條從單一起始點開始複製，按 50 nt/秒計算，複製完一條平均長度的染色體需要超過 500 小時！多起始點將時間壓縮到幾小時內完成。
+      </div>
+    </div>
+
+    <!-- Antiviral -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-red">💊</span>病毒 DNA 聚合酶作為藥物標靶</div>
+      <p>許多 DNA 病毒編碼自己的 DNA 聚合酶，是抗病毒藥物的重要目標。</p>
+      <div class="highlight-box red">
+        <strong>阿昔洛韋（Acyclovir）對抗疱疹病毒的三重機制：</strong><br>
+        ① 由病毒編碼的胸腺嘧啶激酶優先磷酸化（選擇性 200 倍），確保主要作用在感染細胞<br>
+        ② 競爭性抑制病毒 DNA 聚合酶<br>
+        ③ 作為<strong>鏈終止者</strong>：缺少 3'-OH，插入 DNA 後阻止延伸
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REPAIR ===================== -->
+  <section id="repair" class="section">
+    <h2 class="section-title">
+      <span class="section-num">25.2</span>
+      DNA 修復
+    </h2>
+    <p class="section-intro">哺乳類細胞每 24 小時積累數千個 DNA 損傷，但超過 99.9% 能被修復。近 200 個基因專門編碼修復蛋白——可見 DNA 完整性對生命有多重要。</p>
+
+    <!-- Mutation basics -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-red">⚠️</span>突變與癌症</div>
+      <p><span class="term">突變（Mutation）</span>是 DNA 鹼基序列的永久性改變。在哺乳動物中，突變的累積與癌症高度相關。</p>
+      <div class="compare-grid">
+        <div class="compare-cell blue">
+          <h4>取代突變 (Substitution)</h4>
+          <p>一個鹼基對被另一個取代，例如 G≡C → A═T</p>
+        </div>
+        <div class="compare-cell orange">
+          <h4>插入/缺失突變</h4>
+          <p>一個或多個鹼基對的增加或刪除，可能造成讀碼框移位（frameshift）</p>
+        </div>
+      </div>
+      <div class="highlight-box green">
+        <strong>Ames 致癌性試驗：</strong>使用無法合成組胺酸的沙門氏菌，若化合物能引發回復突變（使菌落生長），則為致突變物。已知致癌化合物中超過 90% 在此試驗中呈陽性——是篩選潛在致癌物的快速廉價方法。
+      </div>
+    </div>
+
+    <!-- 4 repair systems -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-blue">🔧</span>四大主要 DNA 修復系統</div>
+
+      <div class="repair-timeline">
+        <div class="rt-item">
+          <h4>① 錯配修復 (Mismatch Repair, MMR)</h4>
+          <p><strong style="color:#fff;">修復對象：</strong>複製後遺留的錯誤鹼基配對<br>
+          <strong style="color:#fff;">原核機制：</strong>MutS 辨識錯配 → MutL 滑動 → MutH 在半甲基化 GATC 切割未甲基化的新股 → 切除錯誤段落 → Pol III + Ligase 填補<br>
+          <strong style="color:#fff;">關鍵概念：</strong>Dam 甲基酶標記舊股（模板），讓修復系統知道要修新股而非舊股</p>
+        </div>
+
+        <div class="rt-item">
+          <h4>② 鹼基切除修復 (Base-Excision Repair, BER)</h4>
+          <p><strong style="color:#fff;">修復對象：</strong>異常鹼基（如胞嘧啶去胺基形成的尿嘧啶）<br>
+          <strong style="color:#fff;">步驟：</strong>DNA 醣苷酶切除損傷鹼基 → AP 位點 → AP 核酸內切酶切割骨架 → Pol I 移除並補填 → Ligase 封合<br>
+          <strong style="color:#fff;">為何 DNA 用胸腺嘧啶（T）而非尿嘧啶（U）？</strong>正是為了能辨識並修復由 C 去胺基產生的「錯誤 U」</p>
+        </div>
+
+        <div class="rt-item">
+          <h4>③ 核苷酸切除修復 (Nucleotide-Excision Repair, NER)</h4>
+          <p><strong style="color:#fff;">修復對象：</strong>造成 DNA 螺旋大變形的損傷（如紫外線造成的嘧啶二聚體）<br>
+          <strong style="color:#fff;">原核（E. coli）：</strong>ABC 外切核酸酶（UvrA/B/C）切除損傷位點兩側，移除 12–13 個核苷酸<br>
+          <strong style="color:#fff;">真核（人類）：</strong>類似機制，但需要 ≥16 個蛋白，切除 27–29 個核苷酸</p>
+        </div>
+
+        <div class="rt-item">
+          <h4>④ 直接修復 (Direct Repair)</h4>
+          <p><strong style="color:#fff;">光解酶（Photolyase）：</strong>利用藍光能量直接逆轉嘧啶二聚體（人類沒有此酶！）<br>
+          <strong style="color:#fff;">O⁶-甲基鳥嘌呤甲基轉移酶：</strong>將甲基基團從損傷鳥嘌呤轉移到自身的 Cys 殘基，<span style="color:#f85149">但每個蛋白分子只能用一次（自殺酶）</span><br>
+          <strong style="color:#fff;">AlkB 蛋白：</strong>以氧化去甲基方式修復 1-甲基腺嘌呤和 3-甲基胞嘧啶</p>
+        </div>
+      </div>
+
+      <div class="super-highlight">
+        <strong>📊 修復系統總比較</strong>
+        <table class="summary-table" style="margin-top:12px">
+          <tr>
+            <th>修復系統</th>
+            <th>修復標的</th>
+            <th>關鍵酶</th>
+            <th>切幾個 nt？</th>
+          </tr>
+          <tr>
+            <td>錯配修復</td>
+            <td>複製錯誤</td>
+            <td>MutS/L/H</td>
+            <td>大段（~1000 bp）</td>
+          </tr>
+          <tr>
+            <td>鹼基切除修復</td>
+            <td>異常鹼基</td>
+            <td>DNA 醣苷酶</td>
+            <td>1 個鹼基（填補 1–2 nt）</td>
+          </tr>
+          <tr>
+            <td>核苷酸切除修復</td>
+            <td>大型損傷</td>
+            <td>外切核酸酶</td>
+            <td>12–13（原核）/ 27–29（真核）</td>
+          </tr>
+          <tr>
+            <td>直接修復</td>
+            <td>特定化學損傷</td>
+            <td>光解酶、甲基轉移酶</td>
+            <td>不切除</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SOS response -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-orange">🆘</span>SOS 反應（細菌的緊急應變）</div>
+      <p>當 DNA 損傷極為嚴重、所有複製叉都被阻斷時，細菌啟動 <span class="term">SOS 反應</span>，這是一種「孤注一擲」的策略。</p>
+
+      <div class="flow-diagram">
+        <div class="flow-node">大量 DNA 損傷</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight">SOS 反應啟動</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">誘導 DNA Pol IV、V</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">跨損傷合成 (TLS)</div>
+      </div>
+
+      <div class="highlight-box red" style="margin-top:16px">
+        <strong>⚡ TLS（跨損傷合成）的特點：</strong><br>
+        • <strong>DNA 聚合酶 V（UmuD'₂C + RecA）</strong>可越過一般會阻斷複製的損傷<br>
+        • 缺乏校讀外切酶，錯誤率高達 1/1,000（比正常高 100 倍以上）<br>
+        • 這是<span style="color:#ffa0a0">「以突變換存活」</span>的絕境策略——寧可突變，也要讓某些子代活下去<br>
+        • 突變的後代成為演化的材料（P3 原則）
+      </div>
+    </div>
+
+    <!-- Cancer connection -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-red">🔬</span>DNA 修復缺陷與癌症</div>
+      <table class="summary-table">
+        <tr>
+          <th>疾病</th>
+          <th>缺陷的修復系統</th>
+          <th>臨床特徵</th>
+        </tr>
+        <tr>
+          <td><strong style="color:#f85149">著色性乾皮症 (XP)</strong></td>
+          <td>核苷酸切除修復（XPA–XPG 任一）</td>
+          <td>極度光敏感，皮膚癌風險極高，常伴神經異常</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#f85149">遺傳性非息肉大腸癌 (HNPCC)</strong></td>
+          <td>錯配修復（hMLH1, hMSH2 等）</td>
+          <td>年輕發病的大腸癌，最常見遺傳癌症易感症候群之一</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#f85149">乳癌/卵巢癌（遺傳型）</strong></td>
+          <td>BRCA1/BRCA2（雙股斷裂修復）</td>
+          <td>約 10% 乳癌患者，終生罹癌風險 ~70%</td>
+        </tr>
+      </table>
+      <div class="highlight-box green" style="margin-top:16px">
+        <strong>💊 PARP 抑制劑的新興治療：</strong><br>
+        PARP1 蛋白偵測 DNA 單股斷裂並協助修復。對 BRCA1/2 缺陷的腫瘤細胞，再抑制 PARP1 會使<strong>雙重修復缺陷</strong>，導致大量雙股斷裂 → 腫瘤細胞死亡（合成致死，synthetic lethality）。Olaparib（2014 年批准）使 BRCA 缺陷乳癌/卵巢癌患者無惡化存活期提升 4 倍。
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RECOMBINATION ===================== -->
+  <section id="recombination" class="section">
+    <h2 class="section-title">
+      <span class="section-num">25.3</span>
+      DNA 重組
+    </h2>
+    <p class="section-intro">DNA 不只被複製和修復，有時也需要被重新「排列」。重組對 DNA 修復、減數分裂、免疫多樣性，乃至細菌演化都不可或缺。</p>
+
+    <!-- Three types -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-blue">📚</span>三大重組類型</div>
+      <div class="compare-grid">
+        <div class="compare-cell blue">
+          <h4>① 同源基因重組<br>(Homologous Recombination)</h4>
+          <p>兩個具有<strong style="color:#fff;">高度相似序列</strong>的 DNA 分子之間的交換。<br>細菌中主要作為<strong style="color:#fff;">DNA 修復工具</strong>；真核生物中在<strong style="color:#fff;">減數分裂</strong>中發生，確保染色體正確分離。</p>
+        </div>
+        <div class="compare-cell green">
+          <h4>② 位點特異性重組<br>(Site-Specific Recombination)</h4>
+          <p>僅在<strong style="color:#fff;">特定短 DNA 序列</strong>處發生的精確交換。<br>由重組酶（recombinase）催化，用於病毒整合、基因表現調控等。</p>
+        </div>
+        <div class="compare-cell orange">
+          <h4>③ DNA 轉位<br>(DNA Transposition)</h4>
+          <p>轉位子（「跳躍基因」）在染色體上<strong style="color:#fff;">跳來跳去</strong>，不需要序列同源性。<br>Barbara McClintock 1940 年代在玉米中最早發現，獲 1983 年諾貝爾獎。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Homologous recombination -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-green">🔁</span>同源重組——修復崩潰的複製叉</div>
+      <p>細菌中同源重組的主要功能：<strong>重建因 DNA 損傷而崩潰的複製叉</strong>。</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>複製叉崩潰</strong>
+            <p>複製叉遇到未修復的 DNA 損傷或單股斷裂，其中一臂脫落形成雙股斷裂</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>RecBCD 加工末端</strong>
+            <p>RecBCD 核酸酶/螺旋酶分解 5' 端，在 chi 序列（GCTGGTGG）處停止並保留 3' 單股尾端</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>RecA 促進股侵入</strong>
+            <p>RecA 蛋白在單股 DNA 上組裝成螺旋絲狀複合物，催化該 3' 端侵入鄰近完整的雙股 DNA</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>分支遷移形成 Holliday 中間體</strong>
+            <p>DNA 分支移動（branch migration），形成 X 形的 Holliday 中間體</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <strong>RuvC 解析 + DNA 連接酶封合</strong>
+            <p>RuvC 核酸酶切割 Holliday 中間體，Ligase 封合缺口，複製叉重建</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <p>記憶口訣：<strong style="color:#bc8cff">「RecBCD 切末端，RecA 入侵鄰居，Holliday 形成 X，RuvC 剪開解套」</strong></p>
+      </div>
+    </div>
+
+    <!-- NHEJ -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-orange">🩹</span>非同源末端接合 (NHEJ)</div>
+      <p>當沒有同源染色體可用（如非 S 期）時，雙股斷裂的備用修復方式：<span class="term">直接把斷裂末端黏回去</span>。</p>
+
+      <div class="highlight-box orange">
+        <strong>⚠️ NHEJ 的特點：</strong><br>
+        • <strong>不保留原始序列</strong>（可能有幾個鹼基的增減）<br>
+        • 在哺乳動物中負責大多數非減數分裂期的雙股斷裂修復<br>
+        • 關鍵蛋白：<strong>Ku70-Ku80</strong>（先行結合斷裂末端）、DNA-PKcs、Artemis 核酸酶、XRCC4、DNA Ligase IV<br>
+        • 基因組越大越依賴 NHEJ（人類比酵母菌更需要）
+      </div>
+    </div>
+
+    <!-- Site-specific & Transposons -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-purple">🎯</span>位點特異性重組與轉位子</div>
+
+      <h3>位點特異性重組</h3>
+      <p>重組酶識別特定序列（20–200 bp），精確切割並重新接合 DNA。依重組位點的方向不同，可產生：</p>
+      <div class="compare-grid">
+        <div class="compare-cell blue">
+          <h4>反轉（Inversion）</h4>
+          <p>兩位點方向相反，中間片段被翻轉 180°</p>
+        </div>
+        <div class="compare-cell green">
+          <h4>缺失 / 插入（Deletion / Insertion）</h4>
+          <p>兩位點方向相同：可切出並形成小環（缺失）或整合進去（插入）</p>
+        </div>
+      </div>
+
+      <h3>轉位子（Transposons / 跳躍基因）</h3>
+      <ul class="content-list">
+        <li><strong>插入序列（Insertion sequences）：</strong>最簡單，只帶轉位酶基因和末端重複序列</li>
+        <li><strong>複合型轉位子（Complex transposons）：</strong>還帶有其他基因，如<span style="color:#f85149">抗生素抗性基因</span>——這是抗藥性擴散的重要機制！</li>
+        <li><strong>插入機制：</strong>轉位酶在目標位點切錯位口，插入後兩側產生短重複序列</li>
+      </ul>
+
+      <div class="highlight-box red">
+        <strong>🦠 抗藥性危機與轉位子：</strong><br>
+        細菌通過轉位子將抗生素抗性基因從一個質粒（或染色體）傳播到另一個，是病原菌快速獲得多重抗藥性的重要機制之一。
+      </div>
+    </div>
+
+    <!-- Immunoglobulin -->
+    <div class="card">
+      <div class="card-title"><span class="icon icon-blue">🛡</span>免疫球蛋白基因的程序性重組</div>
+      <p>人類免疫系統能識別數百萬種抗原，這種多樣性來自 <span class="term">V(D)J 重組</span>——一種程序性位點特異性重組。</p>
+      <div class="highlight-box blue">
+        <strong>多樣性的來源：</strong><br>
+        • κ 輕鏈：V 節段 × J 節段 ≈ 40 × 5 = <strong style="color:#fff;">~200 種</strong><br>
+        • 重鏈：V × D × J 節段 ≈ <strong style="color:#fff;">&gt;5,000 種</strong><br>
+        • 輕鏈 × 重鏈組合 = <strong style="color:#fff;">≥ 2.5 × 10⁶ 種</strong> IgG<br>
+        • 加上 B 淋巴球分化時的高突變率，多樣性更是天文數字！
+      </div>
+      <p>RAG1 和 RAG2 蛋白催化這些基因片段的重組，其機制與轉位子非常相似，暗示免疫系統可能在演化上起源於古老的轉位子。</p>
+    </div>
+  </section>
+
+  <!-- ===================== QUIZ ===================== -->
+  <section id="quiz" class="section">
+    <h2 class="section-title">
+      <span class="section-num">測驗</span>
+      概念自我檢驗
+    </h2>
+    <p class="section-intro">點選選項查看答案與解析。每道題都對應一個核心概念，做完後若有不熟悉的部分再回去複習。</p>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q1</span> 半保留複製（Semiconservative Replication）的意思是？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. 每個子代 DNA 都是全新合成的兩條新鏈</li>
+        <li onclick="answer(this, true)">B. 每個子代 DNA 含有一條舊鏈和一條新鏈</li>
+        <li onclick="answer(this, false)">C. 只有一個子代 DNA 保有舊鏈</li>
+        <li onclick="answer(this, false)">D. 舊的 DNA 鏈被分解後重新利用核苷酸</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：B ✅</strong><br>
+        「半保留」意指原有的親代雙股 DNA 解開後，每條舊鏈各作為模板合成一條新鏈，結果每個子代 DNA 都保留了「半條」舊的。1957年 Meselson 和 Stahl 以 ¹⁵N/¹⁴N 密度梯度離心實驗確認此機制。
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q2</span> DNA 合成只能往哪個方向進行？為什麼？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. 3'→5'，因為酶只能讀取此方向</li>
+        <li onclick="answer(this, false)">B. 任意方向，視模板而定</li>
+        <li onclick="answer(this, true)">C. 5'→3'，因為新核苷酸只能接在自由的 3'-OH 上</li>
+        <li onclick="answer(this, false)">D. 3'→5'，因為能量來自 PPi 水解</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：C ✅</strong><br>
+        DNA 聚合酶的反應機制是：自由的 3'-OH 基團對新進入的 dNTP α-磷進行親核攻擊，釋放焦磷酸（PPi）並形成磷酸二酯鍵。因此新鏈的延伸永遠從 5' 端往 3' 端方向進行。
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q3</span> 落後股（Lagging Strand）為什麼必須不連續合成？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. 落後股的 DNA 聚合酶速度較慢</li>
+        <li onclick="answer(this, false)">B. 落後股是 RNA 而非 DNA</li>
+        <li onclick="answer(this, true)">C. DNA 合成只能 5'→3'，而落後股的模板方向與複製叉移動相反</li>
+        <li onclick="answer(this, false)">D. 落後股附近核苷酸濃度不足</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：C ✅</strong><br>
+        兩條模板鏈方向相反（反平行）。前導股的模板 3'→5' 方向與複製叉一致，可連續合成。落後股模板 5'→3' 方向與複製叉相反，聚合酶必須「逆向」工作，只能分段合成岡崎片段（每段長度約 150–2000 nt）。
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q4</span> 大腸桿菌的錯配修復如何區分新股（有錯誤）和舊股（正確）？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. 新股的鹼基組成不同</li>
+        <li onclick="answer(this, true)">B. 複製後短時間內，模板股已甲基化，新股尚未甲基化（半甲基化狀態）</li>
+        <li onclick="answer(this, false)">C. 新股含有尿嘧啶，舊股含有胸腺嘧啶</li>
+        <li onclick="answer(this, false)">D. 新股的磷酸骨架暴露在外</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：B ✅</strong><br>
+        Dam 甲基酶甲基化 GATC 序列中腺嘌呤的 N⁶ 位置。複製叉剛通過後，模板股已甲基化，新股尚未，形成「半甲基化」狀態。MutH 蛋白識別此狀態並切割未甲基化（新）股，確保修復方向正確。
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q5</span> 鹼基切除修復（BER）和核苷酸切除修復（NER）最主要的差異是？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. BER 用於 RNA，NER 用於 DNA</li>
+        <li onclick="answer(this, true)">B. BER 只切除一個損傷鹼基；NER 切除包含損傷的大片段（12–29 nt）</li>
+        <li onclick="answer(this, false)">C. BER 需要光能，NER 不需要</li>
+        <li onclick="answer(this, false)">D. BER 只在真核生物中存在</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：B ✅</strong><br>
+        BER 由 DNA 醣苷酶先切除損傷鹼基，再由 AP 核酸酶切割骨架，最後填補 1–2 個核苷酸。適合小型化學損傷。NER 則由外切核酸酶複合物（excinuclease）在損傷兩側各切一刀，切除 12–29 個核苷酸大片段，適合造成螺旋大變形的損傷（如嘧啶二聚體）。
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q6</span> 著色性乾皮症（Xeroderma Pigmentosum, XP）患者為何對陽光極度敏感？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. 皮膚缺乏黑色素</li>
+        <li onclick="answer(this, false)">B. 缺乏錯配修復系統</li>
+        <li onclick="answer(this, true)">C. 缺乏核苷酸切除修復功能，無法修復紫外線造成的嘧啶二聚體</li>
+        <li onclick="answer(this, false)">D. 無法合成正確的 DNA 聚合酶</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：C ✅</strong><br>
+        NER 是人類修復 UV 誘導嘧啶二聚體的唯一主要途徑（不像細菌還有光解酶）。XP 患者因 XPA–XPG 任一蛋白缺陷導致 NER 失效，嘧啶二聚體累積造成皮膚癌風險大幅提高。多數 XP 患者也有神經問題，因神經細胞氧化代謝旺盛，DNA 損傷更多。
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q7</span> O⁶-甲基鳥嘌呤甲基轉移酶修復 DNA 後會發生什麼事？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. 酶恢復活性，可繼續修復其他損傷</li>
+        <li onclick="answer(this, false)">B. 酶被蛋白酶分解後重新合成</li>
+        <li onclick="answer(this, true)">C. 酶因甲基化而永久失活（自殺式修復）</li>
+        <li onclick="answer(this, false)">D. 酶將甲基轉移給 ATP</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：C ✅</strong><br>
+        這是一個「自殺酶」：它將甲基從 O⁶-甲基鳥嘌呤轉移到自身的 Cys 殘基（不可逆甲基化），之後便永久失活。細胞消耗一整個蛋白質分子來修復一個損傷鹼基，充分體現 DNA 完整性的優先地位（P2 原則：資訊代價昂貴）。
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q"><span class="qnum">Q8</span> 非同源末端接合（NHEJ）相較於同源重組修復的主要缺點是？</div>
+      <ul class="quiz-options">
+        <li onclick="answer(this, false)">A. NHEJ 需要消耗更多 ATP</li>
+        <li onclick="answer(this, false)">B. NHEJ 速度太慢，無法趕上細胞週期</li>
+        <li onclick="answer(this, true)">C. NHEJ 不保留原始序列，可能導致小的插入或缺失突變</li>
+        <li onclick="answer(this, false)">D. NHEJ 只在細菌中有效</li>
+      </ul>
+      <div class="quiz-explanation">
+        <strong>答案：C ✅</strong><br>
+        NHEJ 是「先黏再說」的策略，不依賴同源序列，直接處理並接合斷裂末端，但可能在接合處引入小的序列改變。同源重組修復則利用同源染色體作為模板，能精確重建原始序列，但需要 S/G2 期存在姐妹染色分體。哺乳動物大基因組對小突變有較高耐受性，所以 NHEJ 在非分裂細胞中更常用。
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:32px; color: var(--text-muted); font-size:14px;">
+      完成測驗後，可回到各節複習不熟的概念 🎓
+    </div>
+  </section>
+
+</main>
+
+<script>
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn && btn.classList) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function answer(el, correct) {
+  const options = el.parentElement.querySelectorAll('li');
+  if ([...options].some(o => o.classList.contains('correct') || o.classList.contains('wrong'))) return;
+
+  el.classList.add(correct ? 'correct' : 'wrong');
+
+  if (!correct) {
+    options.forEach(o => {
+      if (o.dataset.answer === 'true' || o.textContent.includes('✅')) return;
+    });
+    // find correct and mark it
+    options.forEach(o => {
+      if (o !== el) {
+        const txt = o.getAttribute('onclick');
+        if (txt && txt.includes('true')) o.classList.add('correct');
+      }
+    });
+  }
+
+  const card = el.closest('.quiz-card');
+  const explanation = card.querySelector('.quiz-explanation');
+  explanation.classList.add('show');
+}
+
+// Highlight overview cards on click
+document.querySelectorAll('.overview-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const section = this.querySelector('.oc-title').textContent.trim();
+    const tabs = document.querySelectorAll('.nav-tab');
+    if (section.includes('複製')) showSection('replication', tabs[1]);
+    else if (section.includes('修復')) showSection('repair', tabs[2]);
+    else if (section.includes('重組')) showSection('recombination', tabs[3]);
+  });
+});
+</script>
+</body>
+</html>
