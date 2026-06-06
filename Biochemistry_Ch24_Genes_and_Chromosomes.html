@@ -186,7 +186,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
     <div class="p-card c1"><div class="p-n">P1</div><div class="p-icon">📌</div><h4>染色體不只有基因</h4><p>染色體包含確保複製、轉錄、包裝與傳遞的專一序列，不僅是蛋白質編碼基因的集合。</p></div>
     <div class="p-card c2"><div class="p-n">P2</div><div class="p-icon">📏</div><h4>染色體非常巨大</h4><p>DNA 分子遠比容納它的細胞或病毒顆粒長許多個數量級，需要多層次的三級結構來壓縮。</p></div>
     <div class="p-card c3"><div class="p-n">P3</div><div class="p-icon">🌀</div><h4>DNA 維持扭轉張力</h4><p>所有細胞的 DNA 都維持在「欠旋」狀態，相對 B 型 DNA 轉數較少，有助於包裝與存取遺傳資訊。</p></div>
-    <div class="p-card c4"><div class="p-n">P4</div><div class="p-icon">🔬</div><h4>專一蛋白質與 RNA 維持結構</h4><p>拓撲異構酶、組蛋白、凝縮素、凝聚素及長鏈非編碼 RNA (lncRNA) 共同維護染色體結構。</p></div>
+    <div class="p-card c4"><div class="p-n">P4</div><div class="p-icon">🔬</div><h4>專一蛋白質與 RNA 維持結構</h4><p>拓撲異構酶、組蛋白、凝縮蛋白、黏連蛋白及長鏈非編碼 RNA (lncRNA) 共同維護染色體結構。</p></div>
   </div>
 </div>
 
@@ -249,8 +249,8 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
           <!-- codon bracket -->
           <rect x="22" y="107" width="6" height="33" fill="none" stroke="#22c55e" stroke-width="1.5" rx="1"/>
           <text x="18" y="125" text-anchor="end" fill="#22c55e" font-size="9">密碼子</text>
-          <text x="55" y="62" text-anchor="middle" fill="#7a8898" font-size="9">模板股</text>
-          <text x="115" y="62" text-anchor="middle" fill="#fdba74" font-size="9">編碼股</text>
+          <text x="55" y="62" text-anchor="middle" fill="#7a8898" font-size="9">編碼股</text>
+          <text x="115" y="62" text-anchor="middle" fill="#fdba74" font-size="9">模板股</text>
 
           <!-- Arrow: transcription -->
           <line x1="198" y1="110" x2="232" y2="110" stroke="#7a8898" stroke-width="1.5" marker-end="url(#arr)"/>
@@ -379,7 +379,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
         <ul>
           <li>僅約 <strong>1.5%</strong> 為外顯子（蛋白質編碼序列）</li>
           <li>計入內含子後，蛋白質編碼基因佔約 <strong>30%</strong></li>
-          <li>約 <strong>50%</strong> 由轉位子（transposons，分子寄生蟲）等重複序列組成</li>
+          <li>約 <strong>45%</strong> 由轉位子（transposons，分子寄生蟲）等重複序列組成</li>
           <li>其餘包含 lncRNA 基因、衛星 DNA、調控序列等</li>
         </ul>
       </div>
@@ -425,7 +425,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
           <rect x="125" y="116" width="116" height="30" rx="2" fill="#a855f7"/><text x="183" y="135" text-anchor="middle" fill="#fff" font-size="9">222 bp</text>
           <rect x="241" y="120" width="443" height="22" rx="1" fill="rgba(239,68,68,.5)"/><text x="462" y="134" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="700">B  (851 bp ← 超過整個基因的一半！)</text>
           <rect x="684" y="116" width="66" height="30" rx="2" fill="#a855f7"/><text x="717" y="135" text-anchor="middle" fill="#fff" font-size="9">126 bp</text>
-          <text x="380" y="170" text-anchor="middle" fill="#7a8898" font-size="9">→ 剪接後成熟 mRNA 中，外顯子序列才用於翻譯蛋白質</text>
+          <text x="380" y="170" text-anchor="middle" fill="#7a8898" font-size="9">→ 剪接後成熟 mRNA 中，外顯子序列才用於轉譯蛋白質</text>
         </svg>
       </div>
       <div class="fig-cap">卵白蛋白（上）有 8 個外顯子和 7 個內含子，<strong>內含子佔整個基因 85%</strong>。血紅蛋白 β（下）有 3 個外顯子和 2 個內含子，僅一個內含子（B, 851 bp）就超過三個外顯子的總和（90+222+126 = 438 bp）。這說明基因的大多數序列並不直接編碼蛋白質。</div>
@@ -755,7 +755,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
 
           <!-- Type II -->
           <rect x="383" y="5" width="372" height="220" rx="8" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
-          <text x="569" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">Type II 拓撲異構酶（含 DNA 迴旋酶）</text>
+          <text x="569" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">Type II 拓撲異構酶（含 DNA 旋轉酶）</text>
           <text x="569" y="42" text-anchor="middle" fill="#7a8898" font-size="9">切雙股 · Lk 每次改變 ±2 · 需 ATP · 可解開纏環（catenanes）</text>
 
           <!-- Type II mechanism: Gate model -->
@@ -803,13 +803,13 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
           </g>
         </svg>
       </div>
-      <div class="fig-cap">Type I（左）：切斷一股 DNA，讓另一股穿過，再接合，Lk 每次改變 ±1，不需 ATP。<strong>細菌 Type IA 通常使超螺旋鬆弛</strong>（增加 Lk）。Type II（右）：切斷雙股，讓另一段雙鏈穿過，再接合，Lk 每次改變 ±2，需消耗 ATP。<strong>DNA 迴旋酶（Gyrase，Type IIA）</strong>是唯一能引入負超螺旋的酵素。Type II 還能解開複製後互相纏繞的染色體環（catenane）。</div>
+      <div class="fig-cap">Type I（左）：切斷一股 DNA，讓另一股穿過，再接合，Lk 每次改變 ±1，不需 ATP。<strong>細菌 Type IA 通常使超螺旋鬆弛</strong>（增加 Lk）。Type II（右）：切斷雙股，讓另一段雙鏈穿過，再接合，Lk 每次改變 ±2，需消耗 ATP。<strong>DNA 旋轉酶（Gyrase，Type IIA）</strong>是唯一能引入負超螺旋的酵素。Type II 還能解開複製後互相纏繞的染色體環（catenane）。</div>
     </div>
 
     <div class="cmp fi">
-      <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4)"><div class="ico">✂️</div><h4 style="color:var(--g)">Type I</h4><p>切一股<br>Lk 改變 ±1<br>不需 ATP<br>大腸桿菌 Topo I/III：鬆弛負超螺旋<br>反向迴旋酶（archaea）：引入正超螺旋</p></div>
-      <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4)"><div class="ico">✂️✂️</div><h4 style="color:var(--p)">Type II</h4><p>切雙股<br>Lk 改變 ±2<br>需 ATP<br>DNA 迴旋酶：引入負超螺旋<br>真核 Topo IIα/β：鬆弛（+/-）</p></div>
-      <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4)"><div class="ico">⭕</div><h4 style="color:var(--a)">Catenane 解環</h4><p>Topo IV（細菌）專責<br>解開複製後互纏染色體<br>有絲分裂前必需</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4)"><div class="ico">✂️</div><h4 style="color:var(--g)">Type I</h4><p>切一股<br>Lk 改變 ±1<br>不需 ATP<br>大腸桿菌 Topo I/III：鬆弛負超螺旋<br>反向旋轉酶（archaea）：引入正超螺旋</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4)"><div class="ico">✂️✂️</div><h4 style="color:var(--p)">Type II</h4><p>切雙股<br>Lk 改變 ±2<br>需 ATP<br>DNA 旋轉酶：引入負超螺旋<br>真核 Topo IIα/β：鬆弛（+/-）</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4)"><div class="ico">⭕</div><h4 style="color:var(--a)">Decatenane 解環</h4><p>Topo IV（細菌）專責：<br>解開複製後互纏染色體<br>有絲分裂前必需</p></div>
       <div class="cmp-c" style="border:1px solid rgba(239,68,68,.4)"><div class="ico">🏥</div><h4 style="color:var(--r)">藥物靶點</h4><p>氟喹諾酮（如 Cipro）：抑制細菌 Gyrase/Topo IV<br>喜樹鹼衍生物：抑制真核 Topo I（抗癌）<br>依託泊苷：抑制 Topo II（抗癌）</p></div>
     </div>
 
@@ -818,7 +818,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
       <div class="call-body">
         <h4>Box 24-2：拓撲異構酶抑制劑——抗菌藥與抗癌藥</h4>
         <ul>
-          <li><strong>環丙沙星（Ciprofloxacin，Cipro）：</strong>氟喹諾酮類，抑制細菌的 DNA 迴旋酶和 Topo IV，阻止 DNA 鏈斷裂後再接合。廣效抗生素，是炭疽熱的關鍵用藥。對人體真核酵素選擇性很高，人體安全。</li>
+          <li><strong>環丙沙星（Ciprofloxacin，Cipro）：</strong>氟喹諾酮類，抑制細菌的 DNA 旋轉酶和 Topo IV，阻止 DNA 鏈斷裂後再接合。廣效抗生素，是炭疽熱的關鍵用藥。對人體真核酵素選擇性很高，人體安全。</li>
           <li><strong>伊立替康（Irinotecan）/ 托泊替康（Topotecan）：</strong>喜樹鹼衍生物，抑制真核 Type I Topo，用於大腸直腸癌、卵巢癌。</li>
           <li><strong>依託泊苷（Etoposide）、道柔比星（Doxorubicin）：</strong>抑制 Type II Topo，用於多種癌症。</li>
         </ul>
@@ -828,14 +828,14 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
 
   <!-- PLECTONEMIC vs SOLENOIDAL -->
   <div class="sub fi">
-    <h3>📐 兩種超螺旋形式：纏繞型 vs 螺線管型</h3>
+    <h3>📐 兩種超螺旋形式：鉸鏈型 vs 螺線管型</h3>
     <div class="fig fi">
-      <div class="fig-head"><span class="fig-num">Figure 24-20 &amp; 24-21</span><span class="fig-ttl">纏繞型（Plectonemic）與螺線管型（Solenoidal）超螺旋</span></div>
+      <div class="fig-head"><span class="fig-num">Figure 24-20 &amp; 24-21</span><span class="fig-ttl">鉸鏈型（Plectonemic）與螺線管型（Solenoidal）超螺旋</span></div>
       <div class="fig-svg">
         <svg viewBox="0 0 760 210" width="760" height="210" xmlns="http://www.w3.org/2000/svg">
           <!-- Plectonemic -->
           <rect x="5" y="5" width="360" height="200" rx="8" fill="rgba(168,85,247,.05)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
-          <text x="185" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">纏繞型（Plectonemic）</text>
+          <text x="185" y="28" text-anchor="middle" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">鉸鏈型（Plectonemic）</text>
           <g transform="translate(30,42)">
             <path d="M80,5 Q155,0 168,42 Q180,82 148,100 Q115,115 80,100 Q50,83 42,58 Q30,30 80,5" fill="none" stroke="#c4b5fd" stroke-width="3"/>
             <path d="M80,5 Q10,0 2,40 Q-7,80 24,100 Q54,115 80,100" fill="none" stroke="#c4b5fd" stroke-width="3"/>
@@ -869,16 +869,15 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
               <path d="M150,106 Q173,116 173,131 Q173,138 150,140"/>
               <line x1="45" y1="140" x2="150" y2="140"/>
             </g>
-            <text x="185" y="35" fill="#7a8898" font-size="9">← 左手旋向（緊繞）</text>
-            <text x="185" y="75" fill="#7a8898" font-size="9">← 如水管整齊纏繞</text>
-            <text x="185" y="115" fill="#7a8898" font-size="9">← 需蛋白質固定</text>
+            <text x="185" y="35" fill="#7a8898" font-size="10">← 左手旋向（緊繞）</text>
+            <text x="185" y="75" fill="#7a8898" font-size="10">← 如水管整齊纏繞</text>
+            <text x="185" y="115" fill="#7a8898" font-size="10">← 需蛋白質固定</text>
           </g>
           <text x="567" y="162" text-anchor="middle" fill="#7a8898" font-size="10">→ 被組蛋白（核小體）固定後的形式</text>
-          <text x="567" y="177" text-anchor="middle" fill="#22c55e" font-size="10" font-weight="700">壓縮效率遠高於纏繞型！← 核小體的結構基礎</text>
-          <text x="567" y="193" text-anchor="middle" fill="#7a8898" font-size="9">兩種形式均為負超螺旋，可互相轉換</text>
+          <text x="567" y="177" text-anchor="middle" fill="#22c55e" font-size="10" font-weight="700">壓縮效率遠高於鉸鏈型！← 核小體的結構基礎</text>
         </svg>
       </div>
-      <div class="fig-cap">兩種負超螺旋形式可互相轉換。<strong>纏繞型</strong>在溶液中較穩定但壓縮有限；<strong>螺線管型</strong>需要蛋白質（組蛋白）固定，但壓縮效率更高——這正是真核生物核小體（nucleosome）的結構基礎。</div>
+      <div class="fig-cap">兩種負超螺旋形式可互相轉換。<strong>鉸鏈型</strong>在溶液中較穩定但壓縮有限；<strong>螺線管型</strong>需要蛋白質（組蛋白）固定，但壓縮效率更高——這正是真核生物核小體（nucleosome）的結構基礎。</div>
     </div>
   </div>
 
@@ -887,9 +886,9 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
     <ul class="sum-list">
       <li>細胞的 DNA 通常都是<strong>超螺旋</strong>狀態。欠旋（underwinding）使 DNA 閉合環形分子的總螺旋圈數少於 B 型 DNA。</li>
       <li>欠旋程度由<strong>連接數（Lk）</strong>和<strong>超螺旋密度（σ = ΔLk/Lk₀）</strong>描述；細胞 DNA 的 σ ≈ −0.05 至 −0.07。</li>
-      <li><strong>拓撲異構酶</strong>改變 DNA 連接數：Type I 每次 ±1（不需 ATP）；Type II 每次 ±2（需 ATP）。DNA 迴旋酶是唯一能引入負超螺旋的 Type II 酵素。</li>
-      <li>拓撲異構酶是重要藥物靶點：氟喹諾酮類抗生素（如環丙沙星）靶向細菌迴旋酶；喜樹鹼和依託泊苷等靶向真核 Topo 用於抗癌。</li>
-      <li>溶液中超螺旋 DNA 呈<strong>纏繞型（plectonemic）</strong>；與蛋白質結合後呈壓縮效率更高的<strong>螺線管型（solenoidal）</strong>，核小體即基於此原理。</li>
+      <li><strong>拓撲異構酶</strong>改變 DNA 連接數：Type I 每次 ±1（不需 ATP）；Type II 每次 ±2（需 ATP）。DNA 旋轉酶是唯一能引入負超螺旋的 Type II 酵素。</li>
+      <li>拓撲異構酶是重要藥物靶點：氟喹諾酮類抗生素（如環丙沙星 Cipro）靶向細菌旋轉酶；喜樹鹼和依託泊苷等靶向真核 Topo 用於抗癌。</li>
+      <li>溶液中超螺旋 DNA 呈<strong>鉸鏈型（plectonemic）</strong>；與蛋白質結合後呈壓縮效率更高的<strong>螺線管型（solenoidal）</strong>，核小體即基於此原理。</li>
     </ul>
   </div>
 </div>
@@ -918,13 +917,11 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
             <circle cx="0" cy="0" r="118" fill="none" stroke="rgba(245,158,11,.25)" stroke-width="1.5" stroke-dasharray="5,3"/>
             <!-- G1: top-right, ~40% -->
             <path d="M0,-118 A118,118 0 0 1 112,-42" fill="none" stroke="#38bdf8" stroke-width="14" stroke-linecap="round"/>
-            <!-- S: right, ~20% -->
+            <!-- S: right, ~30% -->
             <path d="M112,-42 A118,118 0 0 1 112,42" fill="none" stroke="#22c55e" stroke-width="14" stroke-linecap="round"/>
-            <!-- G2: bottom-right, ~15% -->
+            <!-- G2: bottom-right, ~20% -->
             <path d="M112,42 A118,118 0 0 1 42,112" fill="none" stroke="#a855f7" stroke-width="14" stroke-linecap="round"/>
-            <!-- Mitosis: bottom and left, ~25% -->
-            <path d="M42,112 A118,118 0 0 1 -118,0" fill="none" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/>
-            <!-- G0/back: top-left -->
+            <!-- Mitosis: bottom and left, ~10% -->
             <path d="M-118,0 A118,118 0 0 1 0,-118" fill="none" stroke="#f97316" stroke-width="14" stroke-linecap="round"/>
             <!-- Center label -->
             <text x="0" y="-8" text-anchor="middle" fill="#e8eaf0" font-size="12" font-family="Cinzel,serif">細胞週期</text>
@@ -933,8 +930,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
             <text x="75" y="-95" fill="#38bdf8" font-size="13" font-family="Cinzel,serif" font-weight="700">G1</text>
             <text x="135" y="8" fill="#22c55e" font-size="13" font-family="Cinzel,serif" font-weight="700">S</text>
             <text x="88" y="105" fill="#a855f7" font-size="12" font-family="Cinzel,serif" font-weight="700">G2</text>
-            <text x="-175" y="25" fill="#ef4444" font-size="12" font-family="Cinzel,serif" font-weight="700">分裂期M</text>
-            <text x="-168" y="-60" fill="#f97316" font-size="10" font-family="Cinzel,serif">前中後末</text>
+            <text x="-175" y="25" fill="#ef4444" font-size="12" font-family="Cinzel,serif" font-weight="700">M</text>
           </g>
 
           <!-- Phase detail table -->
@@ -949,11 +945,11 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
               <line x1="5" y1="58" x2="420" y2="58" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
 
               <text x="12" y="76" fill="#22c55e" font-weight="700" font-size="10">S 期</text>
-              <text x="90" y="76" fill="#7a8898">DNA 複製進行；姊妹染色分體形成（凝聚素開始累積）</text>
+              <text x="90" y="76" fill="#7a8898">DNA 複製進行；姊妹染色分體形成（黏連蛋白開始累積）</text>
               <line x1="5" y1="84" x2="420" y2="84" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
 
               <text x="12" y="102" fill="#a855f7" font-weight="700" font-size="10">G2 期</text>
-              <text x="90" y="102" fill="#7a8898">複製完成；凝聚素繼續累積；初步壓縮開始</text>
+              <text x="90" y="102" fill="#7a8898">複製完成；黏連蛋白繼續累積；初步壓縮開始</text>
               <line x1="5" y1="110" x2="420" y2="110" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
 
               <text x="12" y="128" fill="#ef4444" font-weight="700" font-size="10">前期</text>
@@ -965,11 +961,11 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
               <line x1="5" y1="162" x2="420" y2="162" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
 
               <text x="12" y="180" fill="#ef4444" font-weight="700" font-size="10">後期</text>
-              <text x="90" y="180" fill="#7a8898">凝聚素（cohesin）釋放；姊妹染色分體分離移向兩極</text>
+              <text x="90" y="180" fill="#7a8898">黏連蛋白（cohesin）釋放；姊妹染色分體分離移向兩極</text>
               <line x1="5" y1="188" x2="420" y2="188" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
 
-              <text x="12" y="206" fill="#f97316" font-weight="700" font-size="10">末期</text>
-              <text x="90" y="206" fill="#7a8898">染色體抵達兩極；核膜重新形成；凝縮素（condensin）釋放</text>
+              <text x="12" y="206" fill="#ef4444" font-weight="700" font-size="10">末期</text>
+              <text x="90" y="206" fill="#7a8898">染色體抵達兩極；核膜重新形成；凝縮蛋白（condensin）釋放</text>
               <line x1="5" y1="214" x2="420" y2="214" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
 
               <rect x="8" y="225" width="410" height="36" rx="5" fill="rgba(245,158,11,.12)" stroke="rgba(245,158,11,.3)" stroke-width="1"/>
@@ -979,7 +975,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
           </g>
         </svg>
       </div>
-      <div class="fig-cap">真核細胞週期中染色質的動態變化。在間期（G1、S、G2），染色質鬆散，方便轉錄和複製。進入有絲分裂前期，<strong>凝縮素（condensin）</strong>驅動染色體高度壓縮至光學顯微鏡可見的形態（>10,000 倍壓縮），確保分裂時被紡錘絲精確拉向兩極。</div>
+      <div class="fig-cap">真核細胞週期中染色質的動態變化。在間期（G1、S、G2），染色質鬆散，方便轉錄和複製。進入有絲分裂前期，<strong>凝縮蛋白（condensin）</strong>驅動染色體高度壓縮至光學顯微鏡可見的形態（>10,000 倍壓縮），確保分裂時被紡錘絲精確拉向兩極。</div>
     </div>
   </div>
 
@@ -1122,7 +1118,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
           <text x="177" y="145" text-anchor="middle" fill="#fde68a" font-size="9">蛋白質</text>
           <text x="177" y="158" text-anchor="middle" fill="#fde68a" font-size="9">支架</text>
           <text x="177" y="172" text-anchor="middle" fill="#7a8898" font-size="7">Topo IIα</text>
-          <text x="177" y="183" text-anchor="middle" fill="#7a8898" font-size="7">凝縮素（Condensin）</text>
+          <text x="177" y="183" text-anchor="middle" fill="#7a8898" font-size="7">凝縮蛋白（Condensin）</text>
 
           <!-- DNA loops left side -->
           <path d="M147,75 Q78,65 55,100 Q32,135 55,168 Q78,200 147,190" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
@@ -1184,10 +1180,10 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
           <text x="654" y="264" text-anchor="middle" fill="#7a8898" font-size="7">Heterochromatin · 緊密壓縮 · 近核膜</text>
 
           <!-- TAD size note -->
-          <text x="558" y="282" text-anchor="middle" fill="#7a8898" font-size="8">TAD 平均大小 ~800,000 bp (0.8 Mbp) · 由 CTCF 和 SMC 蛋白（凝聚素）界定邊界</text>
+          <text x="558" y="282" text-anchor="middle" fill="#7a8898" font-size="8">TAD 平均大小 ~800,000 bp (0.8 Mbp) · 由 CTCF 和 SMC 蛋白（黏連蛋白）界定邊界</text>
         </svg>
       </div>
-      <div class="fig-cap">左：有絲分裂中期染色體中，DNA 形成大量 <strong>~50,000 bp 的環</strong>，錨定在由拓撲異構酶 IIα 和凝縮素（condensin）組成的蛋白質支架上。右：間期細胞核中，大的 DNA 環被組織成<strong>拓撲相關結構域（TAD）</strong>，分為轉錄活躍的<strong>活躍區室（A）</strong>和基因沉默的<strong>不活躍區室（B）</strong>，由 CTCF 蛋白結合位點界定邊界。</div>
+      <div class="fig-cap">左：有絲分裂中期染色體中，DNA 形成大量 <strong>~50,000 bp 的環</strong>，錨定在由拓撲異構酶 IIα 和凝縮蛋白（condensin）組成的蛋白質支架上。右：間期細胞核中，大的 DNA 環被組織成<strong>拓撲相關結構域（TAD）</strong>，分為轉錄活躍的<strong>活躍區室（A）</strong>和基因沉默的<strong>不活躍區室（B）</strong>，由 CTCF 蛋白結合位點界定邊界。</div>
     </div>
   </div>
 
@@ -1218,10 +1214,10 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
     <p><span class="ta">SMC 蛋白（Structural Maintenance of Chromosomes）</span>是染色質中繼組蛋白和拓撲異構酶之後第三大重要蛋白類別，負責複製後維持染色體結構。所有 SMC 蛋白由兩個亞基以鉸鏈域（hinge）形成 <strong>V 形二聚體</strong>，兩端各有 ATP 水解域。</p>
 
     <div class="cmp fi">
-      <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4)"><div class="ico">🤝</div><h4 style="color:var(--g)">凝聚素（Cohesin）</h4><p>SMC1 + SMC3<br>讓姊妹染色分體在複製後保持連接，直到後期才被切割釋放<br>→ 確保染色體正確分離</p></div>
-      <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4)"><div class="ico">📦</div><h4 style="color:var(--p)">凝縮素（Condensin）</h4><p>SMC2 + SMC4<br>驅動染色體在前期高度壓縮（凝縮）<br>→ 有絲分裂必需，基因叩環（loop extrusion）的動力來源</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4)"><div class="ico">🤝</div><h4 style="color:var(--g)">黏連蛋白（Cohesin）</h4><p>SMC1 + SMC3<br>讓姊妹染色分體在複製後保持連接，直到後期才被切割釋放<br>→ 確保染色體正確分離</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4)"><div class="ico">📦</div><h4 style="color:var(--p)">凝縮蛋白（Condensin）</h4><p>SMC2 + SMC4<br>驅動染色體在前期高度壓縮（凝縮）<br>→ 有絲分裂必需，基因叩環（loop extrusion）的動力來源</p></div>
       <div class="cmp-c" style="border:1px solid rgba(56,189,248,.4)"><div class="ico">🔩</div><h4 style="color:var(--cyan)">SMC5/6 複合體</h4><p>SMC5 + SMC6<br>參與 DNA 修復（尤其雙股斷裂修復）和複製叉的維護<br>→ 基因組穩定性</p></div>
-      <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4)"><div class="ico">🌀</div><h4 style="color:var(--a)">基因叩環（Loop Extrusion）</h4><p>凝縮素像「毛毛蟲」一樣沿 DNA 移動，拉出越來越大的環<br>→ 形成 TAD 和染色體環的機制</p></div>
+      <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4)"><div class="ico">🌀</div><h4 style="color:var(--a)">基因叩環（Loop Extrusion）</h4><p>凝縮蛋白像「毛毛蟲」一樣沿 DNA 移動，拉出越來越大的環<br>→ 形成 TAD 和染色體環的機制</p></div>
     </div>
   </div>
 
@@ -1298,9 +1294,9 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
       <li>真核染色體由 DNA、蛋白質（尤其組蛋白）和 RNA 組成，稱為<strong>染色質（chromatin）</strong>。壓縮程度隨細胞週期動態變化。</li>
       <li><strong>核小體</strong>是染色質基本單位：8 個組蛋白八聚體（H2A、H2B、H3、H4 各 2）+ 146 bp DNA（纏繞 1.65 圈）+ ~54 bp 接頭 DNA，共約 200 bp，提供約 7 倍壓縮。H1 組蛋白穩定接頭。</li>
       <li>組蛋白可被乙醯化、甲基化、磷酸化等修飾，影響染色質結構和基因表現，可代代相傳（<strong>表觀遺傳，epigenetics</strong>）。</li>
-      <li>染色體更高層次的包裝涉及與<strong>蛋白質支架</strong>結合的 DNA 環（~50,000 bp/環）；拓撲異構酶 IIα 和凝縮素（condensin）在其中扮演關鍵角色。</li>
+      <li>染色體更高層次的包裝涉及與<strong>蛋白質支架</strong>結合的 DNA 環（~50,000 bp/環）；拓撲異構酶 IIα 和凝縮蛋白（condensin）在其中扮演關鍵角色。</li>
       <li>真核細胞核中，大的 DNA 環被組成<strong>拓撲相關結構域（TAD，平均 0.8 Mbp）</strong>，分為活躍（真染色質）和不活躍（異染色質）區室，邊界由 CTCF 蛋白界定。</li>
-      <li><strong>lncRNA</strong>（如 Xist）參與染色質結構的長程調控；<strong>SMC 蛋白</strong>（凝聚素 cohesin、凝縮素 condensin、SMC5/6）維護染色體結構完整性。</li>
+      <li><strong>lncRNA</strong>（如 Xist）參與染色質結構的長程調控；<strong>SMC 蛋白</strong>（黏連蛋白 cohesin、凝縮蛋白 condensin、SMC5/6）維護染色體結構完整性。</li>
       <li>細菌 DNA 以類核體形式存在，約 500 個動態環狀域，無穩定核小體，同樣維持負超螺旋狀態。</li>
     </ul>
   </div>
@@ -1325,9 +1321,9 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
     <div class="kt-card"><div class="kt-en">Linking Number (Lk)</div><div class="kt-zh">連接數</div><div class="kt-def">閉合雙股 DNA 中，一股穿過另一股所形成圓形平面的次數</div></div>
     <div class="kt-card"><div class="kt-en">Superhelical Density (σ)</div><div class="kt-zh">超螺旋密度</div><div class="kt-def">σ = ΔLk / Lk₀，細胞 DNA 約 −0.05 至 −0.07</div></div>
     <div class="kt-card"><div class="kt-en">Topoisomerase</div><div class="kt-zh">拓撲異構酶</div><div class="kt-def">藉由暫時切斷 DNA 鏈改變連接數的酵素，分 Type I 和 Type II</div></div>
-    <div class="kt-card"><div class="kt-en">DNA Gyrase</div><div class="kt-zh">DNA 迴旋酶</div><div class="kt-def">唯一能引入負超螺旋的 Type IIA 拓撲異構酶，存在於細菌中</div></div>
+    <div class="kt-card"><div class="kt-en">DNA Gyrase</div><div class="kt-zh">DNA 旋轉酶</div><div class="kt-def">唯一能引入負超螺旋的 Type IIA 拓撲異構酶，存在於細菌中</div></div>
     <div class="kt-card"><div class="kt-en">Catenane</div><div class="kt-zh">纏環</div><div class="kt-def">兩個環狀 DNA 互相纏繞但不共價連接，需 Type II 拓撲異構酶解開</div></div>
-    <div class="kt-card"><div class="kt-en">Plectonemic Supercoil</div><div class="kt-zh">纏繞型超螺旋</div><div class="kt-def">延伸且分支的超螺旋形式，在自由 DNA 溶液中常見</div></div>
+    <div class="kt-card"><div class="kt-en">Plectonemic Supercoil</div><div class="kt-zh">鉸鏈型超螺旋</div><div class="kt-def">延伸且分支的超螺旋形式，在自由 DNA 溶液中常見</div></div>
     <div class="kt-card"><div class="kt-en">Solenoidal Supercoil</div><div class="kt-zh">螺線管型超螺旋</div><div class="kt-def">緊密纏繞在假想圓柱上的超螺旋，核小體的結構基礎</div></div>
     <div class="kt-card"><div class="kt-en">Chromatin</div><div class="kt-zh">染色質</div><div class="kt-def">真核染色體的主體，由 DNA + 蛋白質（尤其組蛋白）+ RNA 構成</div></div>
     <div class="kt-card"><div class="kt-en">Histone</div><div class="kt-zh">組蛋白</div><div class="kt-def">染色質的主要蛋白質，富含 Lys 和 Arg，H2A/H2B/H3/H4 形成核小體八聚體，H1 為接頭蛋白</div></div>
@@ -1337,11 +1333,11 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
     <div class="kt-card"><div class="kt-en">Heterochromatin</div><div class="kt-zh">異染色質</div><div class="kt-def">高度壓縮、轉錄不活躍的染色質，多位於細胞核周邊</div></div>
     <div class="kt-card"><div class="kt-en">Euchromatin</div><div class="kt-zh">真染色質</div><div class="kt-def">鬆散、轉錄活躍的染色質，多位於細胞核內部</div></div>
     <div class="kt-card"><div class="kt-en">lncRNA</div><div class="kt-zh">長鏈非編碼 RNA</div><div class="kt-def">&gt;200 nt，不編碼蛋白質，參與染色質結構調控（如 Xist 介導 X 染色體失活）</div></div>
-    <div class="kt-card"><div class="kt-en">SMC Proteins</div><div class="kt-zh">SMC 蛋白</div><div class="kt-def">染色體結構維護蛋白，包括凝聚素（cohesin）、凝縮素（condensin）和 SMC5/6</div></div>
-    <div class="kt-card"><div class="kt-en">Cohesin</div><div class="kt-zh">凝聚素</div><div class="kt-def">SMC1+SMC3 構成，使複製後的姊妹染色分體保持連接，直到後期才釋放</div></div>
-    <div class="kt-card"><div class="kt-en">Condensin</div><div class="kt-zh">凝縮素</div><div class="kt-def">SMC2+SMC4 構成，驅動有絲分裂期染色體高度壓縮</div></div>
+    <div class="kt-card"><div class="kt-en">SMC Proteins</div><div class="kt-zh">SMC 蛋白</div><div class="kt-def">染色體結構維護蛋白，包括黏連蛋白（cohesin）、凝縮蛋白（condensin）和 SMC5/6</div></div>
+    <div class="kt-card"><div class="kt-en">Cohesin</div><div class="kt-zh">黏連蛋白</div><div class="kt-def">SMC1+SMC3 構成，使複製後的姊妹染色分體保持連接，直到後期才釋放</div></div>
+    <div class="kt-card"><div class="kt-en">Condensin</div><div class="kt-zh">凝縮蛋白</div><div class="kt-def">SMC2+SMC4 構成，驅動有絲分裂期染色體高度壓縮</div></div>
     <div class="kt-card"><div class="kt-en">Nucleoid</div><div class="kt-zh">類核體</div><div class="kt-def">細菌 DNA 及其結合蛋白的集合，無核膜包裹，組織成約 500 個環狀結構域</div></div>
-    <div class="kt-card"><div class="kt-en">Loop Extrusion</div><div class="kt-zh">基因叩環</div><div class="kt-def">凝縮素沿 DNA 移動、拉出越來越大的環，是形成 TAD 的關鍵機制</div></div>
+    <div class="kt-card"><div class="kt-en">Loop Extrusion</div><div class="kt-zh">基因叩環</div><div class="kt-def">凝縮蛋白沿 DNA 移動、拉出越來越大的環，是形成 TAD 的關鍵機制</div></div>
     <div class="kt-card"><div class="kt-en">X-Inactivation</div><div class="kt-zh">X 染色體失活</div><div class="kt-def">雌性哺乳動物胚胎早期，隨機沉默其中一條 X，由 Xist lncRNA 介導</div></div>
   </div>
 </div>
@@ -1358,11 +1354,11 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
     </div>
     <div class="cmp-c" style="border:1px solid rgba(168,85,247,.4);text-align:left;padding:1.25rem">
       <h4 style="color:var(--p);margin-bottom:.75rem">24.2 DNA 超螺旋</h4>
-      <p style="font-size:.8rem;line-height:1.7">• 所有細胞 DNA 維持負超螺旋<br>• σ ≈ −0.05 到 −0.07<br>• Lk = 連接數；σ = ΔLk/Lk₀<br>• Type I：切一股，±1，無 ATP<br>• Type II：切雙股，±2，需 ATP<br>• 迴旋酶：唯一引入負超螺旋<br>• 藥物靶點：Cipro / Etoposide</p>
+      <p style="font-size:.8rem;line-height:1.7">• 所有細胞 DNA 維持負超螺旋<br>• σ ≈ −0.05 到 −0.07<br>• Lk = 連接數；σ = ΔLk/Lk₀<br>• Type I：切一股，±1，無 ATP<br>• Type II：切雙股，±2，需 ATP<br>• 旋轉酶：唯一引入負超螺旋<br>• 藥物靶點：Cipro / Etoposide</p>
     </div>
     <div class="cmp-c" style="border:1px solid rgba(245,158,11,.4);text-align:left;padding:1.25rem">
       <h4 style="color:var(--a);margin-bottom:.75rem">24.3 染色體結構</h4>
-      <p style="font-size:.8rem;line-height:1.7">• 染色質 = DNA + 組蛋白 + RNA<br>• 核小體：八聚體 + 146 bp<br>• 壓縮：7× → 40× → &gt;10,000×<br>• 組蛋白修飾 = 表觀遺傳<br>• TAD：~0.8 Mbp，CTCF 界定<br>• lncRNA：結構調控（Xist）<br>• SMC：凝聚素/凝縮素/SMC5-6<br>• 細菌：類核體，~500 環狀域</p>
+      <p style="font-size:.8rem;line-height:1.7">• 染色質 = DNA + 組蛋白 + RNA<br>• 核小體：八聚體 + 146 bp<br>• 壓縮：7× → 40× → &gt;10,000×<br>• 組蛋白修飾 = 表觀遺傳<br>• TAD：~0.8 Mbp，CTCF 界定<br>• lncRNA：結構調控（Xist）<br>• SMC：黏連蛋白/凝縮蛋白/SMC5-6<br>• 細菌：類核體，~500 環狀域</p>
     </div>
   </div>
 </div>
