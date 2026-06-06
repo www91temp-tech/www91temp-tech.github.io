@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>核苷酸與核酸 — 生化入門學習指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050c18;
+    --bg2: #0b1525;
+    --bg3: #111e33;
+    --card: #0f1e35;
+    --border: #1e3454;
+    --cyan: #00e5ff;
+    --coral: #ff5f7e;
+    --lime: #b8ff4a;
+    --gold: #ffd166;
+    --violet: #a855f7;
+    --text: #d4e8ff;
+    --text-dim: #6a8aaa;
+    --text-muted: #3a5578;
+    --purine-color: #ff5f7e;
+    --pyrimidine-color: #00e5ff;
+    --dna-color: #b8ff4a;
+    --rna-color: #ffd166;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, #071a3e 0%, var(--bg) 70%);
+  }
+
+  /* Animated DNA helix background */
+  .dna-canvas {
+    position: absolute; inset: 0;
+    opacity: 0.18;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--cyan)22, var(--violet)22);
+    border: 1px solid var(--cyan)44;
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    padding: 0.4em 1.2em;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #ffffff 0%, var(--cyan) 50%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-chips {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .chip {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 0.35em 1em;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    animation: bounce 2s infinite;
+  }
+
+  /* ── NAV ── */
+  .top-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #050c18cc;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 2rem;
+    display: flex; gap: 0.4rem; flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nav-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-right: 0.5rem;
+  }
+
+  .nav-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 0.3em 0.8em;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .nav-link:hover { background: var(--bg3); color: var(--cyan); }
+
+  /* ── MAIN ── */
+  main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+  /* ── SECTION HEADERS ── */
+  .section {
+    margin-top: 5rem;
+    padding-top: 1rem;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title span { color: var(--cyan); }
+
+  .section-intro {
+    color: var(--text-dim);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    border-left: 3px solid var(--border);
+    padding-left: 1rem;
+    max-width: 640px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.2rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    border-color: var(--cyan)44;
+    box-shadow: 0 0 40px var(--cyan)08;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media(max-width:640px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    border-radius: 12px;
+    padding: 1.4rem 1.8rem;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  }
+  .callout-cyan { background: var(--cyan)0d; }
+  .callout-cyan::before { background: var(--cyan); }
+  .callout-coral { background: var(--coral)0d; }
+  .callout-coral::before { background: var(--coral); }
+  .callout-lime { background: var(--lime)0d; }
+  .callout-lime::before { background: var(--lime); }
+  .callout-gold { background: var(--gold)0d; }
+  .callout-gold::before { background: var(--gold); }
+  .callout-violet { background: var(--violet)0d; }
+  .callout-violet::before { background: var(--violet); }
+
+  .callout-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── HIGHLIGHT TERMS ── */
+  .hl { 
+    background: linear-gradient(90deg, var(--cyan)22, var(--cyan)0a);
+    color: var(--cyan);
+    border-radius: 4px;
+    padding: 0.05em 0.4em;
+    font-weight: 700;
+  }
+  .hl-coral { 
+    background: linear-gradient(90deg, var(--coral)22, var(--coral)0a);
+    color: var(--coral); border-radius: 4px; padding: 0.05em 0.4em; font-weight: 700;
+  }
+  .hl-lime { 
+    background: linear-gradient(90deg, var(--lime)22, var(--lime)0a);
+    color: var(--lime); border-radius: 4px; padding: 0.05em 0.4em; font-weight: 700;
+  }
+  .hl-gold { 
+    background: linear-gradient(90deg, var(--gold)22, var(--gold)0a);
+    color: var(--gold); border-radius: 4px; padding: 0.05em 0.4em; font-weight: 700;
+  }
+  .hl-violet { 
+    background: linear-gradient(90deg, var(--violet)22, var(--violet)0a);
+    color: var(--violet); border-radius: 4px; padding: 0.05em 0.4em; font-weight: 700;
+  }
+
+  /* ── BIG RULE ── */
+  .big-rule {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 900;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 16px;
+    margin: 1.5rem 0;
+    line-height: 1.4;
+  }
+
+  /* ── NUCLEOTIDE DIAGRAM ── */
+  .nucleotide-diagram {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    margin: 2rem 0;
+  }
+
+  .nuc-component {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .nuc-component .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+  .nuc-component .name { font-weight: 700; font-size: 1rem; }
+  .nuc-component .desc { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+  .plus-sign {
+    font-size: 2rem;
+    color: var(--border);
+    padding: 0 0.5rem;
+    text-align: center;
+  }
+
+  /* ── BASE PAIR VISUAL ── */
+  .base-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .base-card {
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .base-card.purine {
+    background: linear-gradient(135deg, var(--coral)15, var(--coral)05);
+    border: 1px solid var(--coral)40;
+  }
+  .base-card.pyrimidine {
+    background: linear-gradient(135deg, var(--cyan)15, var(--cyan)05);
+    border: 1px solid var(--cyan)40;
+  }
+
+  .base-card .type-label {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+  }
+  .base-card.purine .type-label { color: var(--coral); }
+  .base-card.pyrimidine .type-label { color: var(--cyan); }
+
+  .base-card h3 {
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+  }
+  .base-card.purine h3 { color: var(--coral); }
+  .base-card.pyrimidine h3 { color: var(--cyan); }
+
+  .base-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+
+  .base-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #ffffff08;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .base-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .base-in { display: flex; gap: 0.4rem; font-size: 0.72rem; color: var(--text-muted); }
+
+  /* ── PAIRING VISUAL ── */
+  .pairing-row {
+    display: flex; align-items: center;
+    gap: 0;
+    margin: 0.6rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .pair-base {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .pair-bonds {
+    padding: 0.9rem 0.8rem;
+    background: #ffffff05;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── TABLE ── */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 1.2rem 0;
+  }
+  .styled-table th {
+    background: var(--bg3);
+    color: var(--text-dim);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+  .styled-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border)80;
+    vertical-align: top;
+  }
+  .styled-table tr:last-child td { border-bottom: none; }
+  .styled-table tr:hover td { background: #ffffff03; }
+
+  /* ── DNA FORMS ── */
+  .form-compare {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media(max-width:600px) { .form-compare { grid-template-columns: 1fr; } }
+
+  .form-card {
+    border-radius: 14px;
+    padding: 1.4rem;
+    text-align: center;
+  }
+  .form-card.b-form {
+    background: linear-gradient(135deg, var(--lime)15, var(--lime)05);
+    border: 2px solid var(--lime)50;
+  }
+  .form-card.a-form {
+    background: linear-gradient(135deg, var(--gold)15, var(--gold)05);
+    border: 1px solid var(--gold)40;
+  }
+  .form-card.z-form {
+    background: linear-gradient(135deg, var(--violet)15, var(--violet)05);
+    border: 1px solid var(--violet)40;
+  }
+
+  .form-name {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.3rem;
+  }
+  .b-form .form-name { color: var(--lime); }
+  .a-form .form-name { color: var(--gold); }
+  .z-form .form-name { color: var(--violet); }
+
+  .form-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.2em 0.7em;
+    border-radius: 100px;
+    margin-bottom: 0.8rem;
+  }
+  .b-form .form-badge { background: var(--lime)20; color: var(--lime); }
+  .a-form .form-badge { background: var(--gold)20; color: var(--gold); }
+  .z-form .form-badge { background: var(--violet)20; color: var(--violet); }
+
+  .form-stats { font-size: 0.82rem; color: var(--text-dim); text-align: left; }
+  .form-stats li { padding: 0.3rem 0; border-bottom: 1px solid var(--border)50; }
+  .form-stats li:last-child { border: none; }
+  .form-stats li span { float: right; color: var(--text); font-weight: 600; }
+
+  /* ── RNA CARDS ── */
+  .rna-card {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+  }
+  .rna-card:hover { border-color: var(--gold)50; }
+
+  .rna-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+    width: 3rem; text-align: center;
+  }
+
+  .rna-abbr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .rna-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; }
+  .rna-desc { font-size: 0.88rem; color: var(--text-dim); }
+
+  /* ── MNEMONIC BOX ── */
+  .mnemonic {
+    background: linear-gradient(135deg, var(--gold)12, var(--coral)08);
+    border: 1px solid var(--gold)40;
+    border-radius: 14px;
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .mnemonic::before {
+    content: '💡 記憶訣竅';
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+  .mnemonic p { font-size: 0.95rem; }
+  .mnemonic strong { color: var(--gold); }
+
+  /* ── CHARGAFF ── */
+  .chargaff-box {
+    background: linear-gradient(135deg, #1a0a3a, #0a1a3a);
+    border: 1px solid var(--violet)50;
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .chargaff-box::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at center, var(--violet)08 0%, transparent 60%);
+  }
+
+  .chargaff-eq {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 700;
+    margin: 1rem 0;
+    color: var(--violet);
+    position: relative;
+  }
+
+  .chargaff-eq .eq-part {
+    display: inline-block;
+    margin: 0 0.3em;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; margin: 1.5rem 0; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--cyan), var(--violet));
+  }
+
+  .tl-item {
+    display: flex; gap: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .tl-dot {
+    width: 2.2rem; height: 2.2rem;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--cyan);
+    position: relative; z-index: 1;
+  }
+
+  .tl-content { padding-top: 0.2rem; }
+  .tl-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+  .tl-text { font-size: 0.92rem; }
+
+  /* ── KEY RULE BOX ── */
+  .key-rule {
+    background: linear-gradient(135deg, #001a2e, #0a1520);
+    border: 2px solid var(--cyan)60;
+    border-radius: 16px;
+    padding: 2rem 2.2rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 0 60px var(--cyan)08, inset 0 0 40px var(--cyan)04;
+  }
+  .key-rule-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+  }
+  .key-rule-text {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.7;
+  }
+
+  /* ── STEP LIST ── */
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex; gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border)60;
+  }
+  .step-list li:last-child { border: none; }
+
+  .step-num {
+    width: 2rem; height: 2rem;
+    background: linear-gradient(135deg, var(--cyan), var(--violet));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem;
+    flex-shrink: 0; color: #000;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  @media(max-width:600px) { .summary-grid { grid-template-columns: 1fr; } }
+
+  .summary-card {
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+
+  .summary-card.dna-card {
+    background: linear-gradient(135deg, var(--lime)10, var(--lime)04);
+    border: 1px solid var(--lime)40;
+  }
+  .summary-card.rna-card-s {
+    background: linear-gradient(135deg, var(--gold)10, var(--gold)04);
+    border: 1px solid var(--gold)40;
+  }
+
+  .summary-card h3 {
+    font-size: 1.3rem; font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .dna-card h3 { color: var(--lime); }
+  .rna-card-s h3 { color: var(--gold); }
+
+  .prop-list { list-style: none; }
+  .prop-list li {
+    display: flex; justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border)50;
+    font-size: 0.88rem;
+  }
+  .prop-list li:last-child { border: none; }
+  .prop-list .prop-key { color: var(--text-dim); }
+  .prop-list .prop-val { font-weight: 600; }
+
+  /* ── PRINCIPLE CARDS ── */
+  .principle-card {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 0.8rem;
+    background: var(--bg3);
+    border-left: 3px solid var(--cyan);
+  }
+  .p-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--cyan);
+    background: var(--cyan)15;
+    padding: 0.2em 0.6em;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+  .p-text { font-size: 0.9rem; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  /* ── ATP SPECIAL ── */
+  .atp-visual {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; flex-wrap: wrap;
+    margin: 1.5rem 0;
+  }
+
+  .atp-block {
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .atp-arrow {
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    padding: 0 0.5rem;
+  }
+
+  /* Energy release flash */
+  .energy-tag {
+    background: linear-gradient(135deg, var(--gold), var(--coral));
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2em 0.7em;
+    border-radius: 100px;
+    vertical-align: middle;
+    margin-left: 0.4rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- SVG DNA helix decoration -->
+  <svg class="dna-canvas" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#00e5ff" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <!-- Helix strand 1 -->
+    <path d="M 200 0 Q 300 100 200 200 Q 100 300 200 400 Q 300 500 200 600 Q 100 700 200 800" 
+          stroke="#00e5ff" stroke-width="2" fill="none" opacity="0.6"/>
+    <!-- Helix strand 2 -->
+    <path d="M 200 0 Q 100 100 200 200 Q 300 300 200 400 Q 100 500 200 600 Q 300 700 200 800" 
+          stroke="#a855f7" stroke-width="2" fill="none" opacity="0.6"/>
+    <!-- Cross-links -->
+    <line x1="200" y1="50" x2="200" y2="50" stroke="#ffffff" stroke-width="1" opacity="0.3"/>
+    <!-- Right side helix -->
+    <path d="M 900 0 Q 1000 100 900 200 Q 800 300 900 400 Q 1000 500 900 600 Q 800 700 900 800" 
+          stroke="#b8ff4a" stroke-width="2" fill="none" opacity="0.4"/>
+    <path d="M 900 0 Q 800 100 900 200 Q 1000 300 900 400 Q 800 500 900 600 Q 1000 700 900 800" 
+          stroke="#ff5f7e" stroke-width="2" fill="none" opacity="0.4"/>
+    <!-- Some base pair lines for right helix -->
+    <line x1="860" y1="50" x2="940" y2="50" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="855" y1="150" x2="945" y2="150" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="860" y1="250" x2="940" y2="250" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="855" y1="350" x2="945" y2="350" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="860" y1="450" x2="940" y2="450" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <!-- Left helix base pairs -->
+    <line x1="155" y1="50" x2="245" y2="50" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="155" y1="150" x2="245" y2="150" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="155" y1="250" x2="245" y2="250" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="155" y1="350" x2="245" y2="350" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="155" y1="450" x2="245" y2="450" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+    <line x1="155" y1="550" x2="245" y2="550" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">CHAPTER 8 · BIOCHEMISTRY</div>
+    <h1>核苷酸與核酸</h1>
+    <p class="hero-sub">Nucleotides &amp; Nucleic Acids — 從零開始，一步步理解生命的分子語言</p>
+    <div class="hero-chips">
+      <span class="chip">🧬 DNA 結構</span>
+      <span class="chip">🔬 核苷酸組成</span>
+      <span class="chip">🔗 鹼基配對</span>
+      <span class="chip">📡 RNA 種類</span>
+      <span class="chip">⚡ ATP 能量</span>
+    </div>
+  </div>
+  <div class="hero-scroll">▼ 向下捲動開始學習</div>
+</section>
+
+<!-- ═══ TOP NAV ═══ -->
+<nav class="top-nav">
+  <span class="nav-label">跳至：</span>
+  <a href="#nucleotide" class="nav-link">核苷酸結構</a>
+  <a href="#bases" class="nav-link">含氮鹼基</a>
+  <a href="#bond" class="nav-link">磷酸二酯鍵</a>
+  <a href="#helix" class="nav-link">雙螺旋</a>
+  <a href="#forms" class="nav-link">DNA構型</a>
+  <a href="#rna" class="nav-link">RNA種類</a>
+  <a href="#atp" class="nav-link">其他功能</a>
+  <a href="#summary" class="nav-link">重點整理</a>
+</nav>
+
+<main>
+
+  <!-- ═══ PRINCIPLES ═══ -->
+  <section class="section" id="principles">
+    <div class="section-tag">CORE PRINCIPLES · 核心原則</div>
+    <h2 class="section-title">本章 <span>5 大核心概念</span></h2>
+    <p class="section-intro">在進入細節之前，先掌握這章的大方向——核酸為什麼重要？</p>
+
+    <div class="principle-card">
+      <span class="p-num">P1</span>
+      <div class="p-text"><strong>核酸是生物資訊的<span class="hl">儲存庫</span>與<span class="hl">表現者</span></strong>：DNA 儲存遺傳藍圖，RNA 則將資訊實際轉譯、執行出來（有些 RNA 本身就有催化功能！）</div>
+    </div>
+    <div class="principle-card">
+      <span class="p-num">P2</span>
+      <div class="p-text"><strong>生物資訊的傳遞依賴<span class="hl">分子互補性</span></strong>：核苷酸序列能形成互補的兩股鏈，這是資訊儲存與複製的關鍵，其他類別的生物分子都做不到這一點。</div>
+    </div>
+    <div class="principle-card">
+      <span class="p-num">P3</span>
+      <div class="p-text"><strong>生物資訊會自然<span class="hl">損傷與突變</span></strong>：DNA 損傷是持續發生的事，偶然造成的突變，正是演化的原始材料。</div>
+    </div>
+    <div class="principle-card">
+      <span class="p-num">P4</span>
+      <div class="p-text"><strong>我們可以在實驗室中<span class="hl">讀取、改寫</span>遺傳資訊</strong>：核酸的定序、合成與修改技術不斷精進，是現代生醫研究的基礎。</div>
+    </div>
+    <div class="principle-card">
+      <span class="p-num">P5</span>
+      <div class="p-text"><strong>核苷三磷酸（NTP）是細胞的<span class="hl">能量貨幣</span>與訊號分子</strong>：ATP 是分解代謝的最終產物，也是合成代謝的燃料。</div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 1 · NUCLEOTIDE STRUCTURE ═══ -->
+  <section class="section" id="nucleotide">
+    <div class="section-tag">SECTION 8.1 · 核苷酸基本結構</div>
+    <h2 class="section-title">什麼是 <span>核苷酸</span>？</h2>
+    <p class="section-intro">核苷酸是核酸（DNA、RNA）的基本「磚塊」，就像蛋白質由胺基酸組成一樣，核酸是由成千上萬個核苷酸連接而成的長鏈聚合物。</p>
+
+    <div class="callout callout-cyan">
+      <div class="callout-title" style="color:var(--cyan)">📌 核心定義</div>
+      <p>一個 <strong class="hl">核苷酸（Nucleotide）</strong> = <strong>含氮鹼基</strong> + <strong>五碳糖</strong> + <strong>一個或多個磷酸根</strong></p>
+      <p style="margin-top:0.5rem;color:var(--text-dim);font-size:0.9rem">若去掉磷酸根，剩下的部分（鹼基＋五碳糖）稱為 <strong class="hl">核苷（Nucleoside）</strong>。</p>
+    </div>
+
+    <!-- Component diagram -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;margin:2rem 0;">
+      <div class="nuc-component" style="border-color:var(--coral)40;background:linear-gradient(135deg,var(--coral)10,var(--card))">
+        <div class="num">組成 ①</div>
+        <div class="name" style="color:var(--coral)">含氮鹼基</div>
+        <div class="desc">Nitrogenous Base<br>嘌呤 / 嘧啶</div>
+      </div>
+      <div class="plus-sign">+</div>
+      <div class="nuc-component" style="border-color:var(--cyan)40;background:linear-gradient(135deg,var(--cyan)10,var(--card))">
+        <div class="num">組成 ②</div>
+        <div class="name" style="color:var(--cyan)">五碳糖</div>
+        <div class="desc">Pentose Sugar<br>核糖 / 去氧核糖</div>
+      </div>
+      <div class="plus-sign">+</div>
+      <div class="nuc-component" style="border-color:var(--lime)40;background:linear-gradient(135deg,var(--lime)10,var(--card))">
+        <div class="num">組成 ③</div>
+        <div class="name" style="color:var(--lime)">磷酸根</div>
+        <div class="desc">Phosphate Group<br>連接骨架用</div>
+      </div>
+    </div>
+
+    <div class="mnemonic">
+      <p>記憶口訣：<strong>「鹼基＋糖＋磷」</strong>，就像三明治：鹼基是內餡，糖是麵包，磷酸是醬料連在外面。去掉「醬料（磷酸）」就是核苷！</p>
+    </div>
+
+    <!-- Sugar comparison -->
+    <h3 style="font-size:1.15rem;font-weight:700;margin:2rem 0 1rem">🍬 五碳糖的關鍵差異</h3>
+    <div class="grid-2">
+      <div class="card" style="border-color:var(--lime)40">
+        <div class="card-title"><span style="color:var(--lime)">⬟</span> DNA 的糖</div>
+        <p><strong class="hl-lime">2′-去氧核糖</strong>（2′-deoxyribose）</p>
+        <p style="font-size:0.88rem;color:var(--text-dim);margin-top:0.5rem">2′ 位置的碳：接的是 <strong>—H</strong>（去掉了一個氧！）</p>
+        <div class="callout callout-lime" style="margin-top:1rem;padding:0.8rem 1rem">
+          <span style="color:var(--lime);font-size:0.8rem">更穩定 → 適合長期儲存遺傳資訊</span>
+        </div>
+      </div>
+      <div class="card" style="border-color:var(--gold)40">
+        <div class="card-title"><span style="color:var(--gold)">⬟</span> RNA 的糖</div>
+        <p><strong class="hl-gold">核糖</strong>（Ribose）</p>
+        <p style="font-size:0.88rem;color:var(--text-dim);margin-top:0.5rem">2′ 位置的碳：接的是 <strong>—OH</strong>（多一個羥基）</p>
+        <div class="callout callout-gold" style="margin-top:1rem;padding:0.8rem 1rem">
+          <span style="color:var(--gold);font-size:0.8rem">較易被鹼水解 → RNA 壽命較短、功能多樣</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-rule" style="margin-top:1.5rem">
+      <div class="key-rule-label">🔑 KEY CONVENTION — 判斷 DNA/RNA 的關鍵</div>
+      <div class="key-rule-text">
+        決定一段核酸是 DNA 還是 RNA，<strong style="color:var(--cyan)">唯一的判斷依據是五碳糖的種類</strong>，而不是含什麼鹼基。
+        <br><br>
+        舉例：含有尿嘧啶（U）的核酸，如果其糖是「去氧核糖」，它依然是 <strong>DNA</strong>。
+        相反地，含有胸腺嘧啶（T）但糖是「核糖」，它是 <strong>RNA</strong>。
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 2 · BASES ═══ -->
+  <section class="section" id="bases">
+    <div class="section-tag">SECTION 8.1 · 含氮鹼基</div>
+    <h2 class="section-title">五種 <span>含氮鹼基</span></h2>
+    <p class="section-intro">鹼基分為兩大家族：雙環的嘌呤（大）、單環的嘧啶（小）。記住它們，就掌握了遺傳語言的「字母」。</p>
+
+    <div class="base-grid">
+      <!-- Purines -->
+      <div class="base-card purine">
+        <div class="type-label">PURINES · 嘌呤</div>
+        <h3>雙環結構（較大）</h3>
+        <ul class="base-list">
+          <li class="base-item">
+            <div style="display:flex;align-items:center;gap:0.7rem">
+              <div class="base-letter" style="background:var(--coral)20;color:var(--coral)">A</div>
+              <div>
+                <div style="font-weight:700">腺嘌呤</div>
+                <div style="font-size:0.75rem;color:var(--text-dim)">Adenine</div>
+              </div>
+            </div>
+            <div class="base-in">
+              <span style="background:var(--lime)20;color:var(--lime);border-radius:4px;padding:0.1em 0.5em">DNA</span>
+              <span style="background:var(--gold)20;color:var(--gold);border-radius:4px;padding:0.1em 0.5em">RNA</span>
+            </div>
+          </li>
+          <li class="base-item">
+            <div style="display:flex;align-items:center;gap:0.7rem">
+              <div class="base-letter" style="background:var(--coral)20;color:var(--coral)">G</div>
+              <div>
+                <div style="font-weight:700">鳥嘌呤</div>
+                <div style="font-size:0.75rem;color:var(--text-dim)">Guanine</div>
+              </div>
+            </div>
+            <div class="base-in">
+              <span style="background:var(--lime)20;color:var(--lime);border-radius:4px;padding:0.1em 0.5em">DNA</span>
+              <span style="background:var(--gold)20;color:var(--gold);border-radius:4px;padding:0.1em 0.5em">RNA</span>
+            </div>
+          </li>
+        </ul>
+        <p style="font-size:0.78rem;color:var(--text-dim);margin-top:1rem">嘌呤由六員環＋五員環融合而成（像「8」字形）</p>
+      </div>
+
+      <!-- Pyrimidines -->
+      <div class="base-card pyrimidine">
+        <div class="type-label">PYRIMIDINES · 嘧啶</div>
+        <h3>單環結構（較小）</h3>
+        <ul class="base-list">
+          <li class="base-item">
+            <div style="display:flex;align-items:center;gap:0.7rem">
+              <div class="base-letter" style="background:var(--cyan)20;color:var(--cyan)">C</div>
+              <div>
+                <div style="font-weight:700">胞嘧啶</div>
+                <div style="font-size:0.75rem;color:var(--text-dim)">Cytosine</div>
+              </div>
+            </div>
+            <div class="base-in">
+              <span style="background:var(--lime)20;color:var(--lime);border-radius:4px;padding:0.1em 0.5em">DNA</span>
+              <span style="background:var(--gold)20;color:var(--gold);border-radius:4px;padding:0.1em 0.5em">RNA</span>
+            </div>
+          </li>
+          <li class="base-item">
+            <div style="display:flex;align-items:center;gap:0.7rem">
+              <div class="base-letter" style="background:var(--cyan)20;color:var(--lime)">T</div>
+              <div>
+                <div style="font-weight:700">胸腺嘧啶</div>
+                <div style="font-size:0.75rem;color:var(--text-dim)">Thymine</div>
+              </div>
+            </div>
+            <div class="base-in">
+              <span style="background:var(--lime)20;color:var(--lime);border-radius:4px;padding:0.1em 0.5em">DNA 專屬</span>
+            </div>
+          </li>
+          <li class="base-item">
+            <div style="display:flex;align-items:center;gap:0.7rem">
+              <div class="base-letter" style="background:var(--cyan)20;color:var(--gold)">U</div>
+              <div>
+                <div style="font-weight:700">尿嘧啶</div>
+                <div style="font-size:0.75rem;color:var(--text-dim)">Uracil</div>
+              </div>
+            </div>
+            <div class="base-in">
+              <span style="background:var(--gold)20;color:var(--gold);border-radius:4px;padding:0.1em 0.5em">RNA 專屬</span>
+            </div>
+          </li>
+        </ul>
+        <p style="font-size:0.78rem;color:var(--text-dim);margin-top:1rem">嘧啶只有一個六員環（比嘌呤小一號）</p>
+      </div>
+    </div>
+
+    <div class="mnemonic">
+      <p>
+        <strong>嘌呤 vs 嘧啶 大小記憶法：</strong><br>
+        「<strong>嘌呤（PURine）</strong>純粹 PURE 大」→ 雙環，比較大<br>
+        「<strong>嘧啶（PYRimidine）</strong>」→ 單環，比較小<br><br>
+        <strong>DNA vs RNA 鹼基差異：</strong><br>
+        DNA 有「<strong>T</strong>hymine（T）」→ 想像 DNA 是「<strong>T</strong>rue（真實）」的遺傳儲存<br>
+        RNA 有「<strong>U</strong>racil（U）」→ RNA 是「<strong>U</strong>sage（使用）」中的工作者
+      </p>
+    </div>
+
+    <!-- DNA vs RNA full table -->
+    <h3 style="font-size:1.15rem;font-weight:700;margin:2rem 0 1rem">📊 DNA 與 RNA 鹼基對照</h3>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>鹼基</th>
+          <th>類型</th>
+          <th style="color:var(--lime)">DNA</th>
+          <th style="color:var(--gold)">RNA</th>
+          <th>核苷名稱（RNA）</th>
+          <th>核苷名稱（DNA）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--coral)">A 腺嘌呤</strong></td>
+          <td>嘌呤</td>
+          <td>✅</td><td>✅</td>
+          <td>腺苷 Adenosine</td>
+          <td>去氧腺苷 Deoxyadenosine</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--coral)">G 鳥嘌呤</strong></td>
+          <td>嘌呤</td>
+          <td>✅</td><td>✅</td>
+          <td>鳥苷 Guanosine</td>
+          <td>去氧鳥苷 Deoxyguanosine</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--cyan)">C 胞嘧啶</strong></td>
+          <td>嘧啶</td>
+          <td>✅</td><td>✅</td>
+          <td>胞苷 Cytidine</td>
+          <td>去氧胞苷 Deoxycytidine</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--lime)">T 胸腺嘧啶</strong></td>
+          <td>嘧啶</td>
+          <td>✅</td><td>❌</td>
+          <td>—</td>
+          <td>胸苷 Thymidine</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold)">U 尿嘧啶</strong></td>
+          <td>嘧啶</td>
+          <td>❌</td><td>✅</td>
+          <td>尿苷 Uridine</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══ SECTION 3 · PHOSPHODIESTER BOND ═══ -->
+  <section class="section" id="bond">
+    <div class="section-tag">SECTION 8.1 · 核酸骨架</div>
+    <h2 class="section-title"><span>磷酸二酯鍵</span>：核酸的骨幹</h2>
+    <p class="section-intro">核苷酸是如何連接成長鏈的？靠的就是磷酸二酯鍵！理解這個連接方式，才能明白 5' 端、3' 端的方向性。</p>
+
+    <div class="callout callout-lime">
+      <div class="callout-title" style="color:var(--lime)">🔗 磷酸二酯鍵如何形成？</div>
+      <p>一個核苷酸的 <strong class="hl-lime">5' 磷酸根</strong>，與下一個核苷酸的 <strong class="hl-lime">3' 羥基（—OH）</strong>脫水縮合，形成共價鍵。<br>
+      骨架交替排列：…磷酸—五碳糖—磷酸—五碳糖…，鹼基像「側鏈」一樣掛在外面。</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📍 5' 端 vs 3' 端</div>
+        <p style="font-size:0.9rem">每條核酸鏈都有方向性：</p>
+        <ul style="list-style:none;margin-top:0.8rem;">
+          <li style="padding:0.5rem 0;border-bottom:1px solid var(--border)60">
+            <strong class="hl">5' 端</strong>：鏈的「頭」——5' 碳上有自由磷酸根（或沒有接其他核苷酸）
+          </li>
+          <li style="padding:0.5rem 0;border-bottom:1px solid var(--border)60">
+            <strong class="hl">3' 端</strong>：鏈的「尾」——3' 碳上有自由羥基（—OH）
+          </li>
+          <li style="padding:0.5rem 0;color:var(--gold)">
+            📖 書寫慣例：永遠從 <strong>5' 端</strong> 寫到 <strong>3' 端</strong>（左 → 右）
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">🧪 DNA vs RNA 的化學穩定性</div>
+        <p style="font-size:0.9rem">RNA 有 2' 羥基（—OH），這讓它在<strong>鹼性環境下容易水解</strong>：</p>
+        <ul style="list-style:none;margin-top:0.8rem;">
+          <li style="padding:0.5rem 0;border-bottom:1px solid var(--border)60;font-size:0.88rem">
+            🔴 <strong style="color:var(--coral)">RNA</strong>：2'-OH 會攻擊相鄰磷原子 → 形成 2',3'-環磷酸中間體 → 水解斷裂
+          </li>
+          <li style="padding:0.5rem 0;font-size:0.88rem">
+            🟢 <strong style="color:var(--lime)">DNA</strong>：2' 位置只有 —H，無法自我水解 → 化學上更穩定，適合長期儲存
+          </li>
+        </ul>
+        <p style="font-size:0.78rem;color:var(--text-dim);margin-top:0.8rem">🔬 實驗室利用：鹼性試劑可快速水解 RNA，但不影響 DNA</p>
+      </div>
+    </div>
+
+    <div class="callout callout-coral" style="margin-top:1.5rem">
+      <div class="callout-title" style="color:var(--coral)">⚠️ 重要術語</div>
+      <p>
+        <strong class="hl-coral">寡核苷酸（Oligonucleotide）</strong>：≤50 個核苷酸的短鏈<br>
+        <strong class="hl-coral">多核苷酸（Polynucleotide）</strong>：超過 50 個核苷酸的長鏈
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 4 · DNA DOUBLE HELIX ═══ -->
+  <section class="section" id="helix">
+    <div class="section-tag">SECTION 8.2 · DNA 結構</div>
+    <h2 class="section-title">DNA <span>雙螺旋</span> 結構</h2>
+    <p class="section-intro">1953 年，Watson 與 Crick 揭示了 DNA 最重要的秘密——雙螺旋。這個發現改變了整個生物學史！</p>
+
+    <!-- Discovery timeline -->
+    <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem">📖 發現歷程</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-content">
+          <div class="tl-year">1869</div>
+          <div class="tl-text">Miescher 首次從細胞中分離出含磷物質，命名為「核素（Nuclein）」——DNA 的前身</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-content">
+          <div class="tl-year">1940s</div>
+          <div class="tl-text">Avery、MacLeod、McCarty 證明：讓細菌產生「毒性轉型」的物質是 <strong class="hl">DNA</strong>，不是蛋白質——DNA 就是遺傳物質</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-content">
+          <div class="tl-year">1940s末</div>
+          <div class="tl-text">Chargaff 發現：DNA 中 <strong class="hl">A = T、G = C</strong>（不同物種的比例不同，但同一物種的 A+G = T+C）</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-content">
+          <div class="tl-year">1952</div>
+          <div class="tl-text">Rosalind Franklin &amp; Maurice Wilkins 用 X 光繞射分析，拍出 DNA 的螺旋結構影像（3.4 Å 與 34 Å 的週期性）</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">5</div>
+        <div class="tl-content">
+          <div class="tl-year">🏆 1953</div>
+          <div class="tl-text"><strong style="color:var(--cyan)">Watson 與 Crick 建立 DNA 雙螺旋模型</strong>——整合所有數據，提出正確的三維結構！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Watson-Crick features -->
+    <h3 style="font-size:1.1rem;font-weight:700;margin:2rem 0 1rem">🌀 雙螺旋的 6 大特徵</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">① 右旋雙螺旋</div>
+        <p style="font-size:0.9rem">兩條 DNA 鏈纏繞在同一軸上，螺旋方向為<strong class="hl">右旋（Right-handed）</strong>。每圈包含約 <strong>10.5 個鹼基對</strong>，螺距 <strong>36 Å</strong>。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">② 反平行雙鏈</div>
+        <p style="font-size:0.9rem">兩條鏈方向<strong class="hl">相反</strong>（Antiparallel）：一條從 5'→3'，另一條從 3'→5'。這是鹼基能完美互補的必要條件。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">③ 骨架在外，鹼基在內</div>
+        <p style="font-size:0.9rem">親水性的<strong>磷酸-去氧核糖骨架</strong>在外側（接觸水），疏水性的<strong>鹼基</strong>堆疊在螺旋內側，彼此平行。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">④ 互補鹼基配對</div>
+        <p style="font-size:0.9rem">兩鏈之間靠<strong class="hl">氫鍵</strong>連接，遵循嚴格的配對規則（見下方）。鹼基配對的<strong>互補性</strong>是遺傳資訊複製的基礎。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">⑤ 大溝與小溝</div>
+        <p style="font-size:0.9rem">兩鏈交錯形成<strong class="hl">主要溝（Major groove）</strong>和<strong class="hl">次要溝（Minor groove）</strong>。許多調控蛋白就是結合在這裡「讀取」基因序列。</p>
+      </div>
+      <div class="card">
+        <div class="card-title">⑥ 穩定力來源</div>
+        <p style="font-size:0.9rem">雙螺旋的穩定主要靠：① <strong>金屬離子</strong>（遮蔽骨架負電荷）② <strong>鹼基堆疊力</strong>（疏水交互作用＋范德瓦力）。氫鍵對穩定性的貢獻反而較小！</p>
+      </div>
+    </div>
+
+    <!-- Chargaff Rules -->
+    <div class="chargaff-box">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--violet);margin-bottom:0.5rem">⭐ CHARGAFF'S RULES · 查哥夫法則</div>
+      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:0.5rem;color:var(--text)">在任何生物的 DNA 中，鹼基比例永遠滿足：</h3>
+      <div class="chargaff-eq">
+        <span class="eq-part" style="color:var(--coral)">A</span>
+        <span class="eq-part" style="color:var(--text-muted)">=</span>
+        <span class="eq-part" style="color:var(--lime)">T</span>
+        <span class="eq-part" style="color:var(--border)">　|　</span>
+        <span class="eq-part" style="color:var(--coral)">G</span>
+        <span class="eq-part" style="color:var(--text-muted)">=</span>
+        <span class="eq-part" style="color:var(--cyan)">C</span>
+        <span class="eq-part" style="color:var(--border)">　|　</span>
+        <span class="eq-part" style="color:var(--coral)">A+G</span>
+        <span class="eq-part" style="color:var(--text-muted)">=</span>
+        <span class="eq-part" style="color:var(--lime)">T+C</span>
+      </div>
+      <p style="color:var(--text-dim);font-size:0.9rem;max-width:500px;margin:0.5rem auto 0">嘌呤總量 = 嘧啶總量<br>這個發現是推導雙螺旋配對結構的重要線索！</p>
+    </div>
+
+    <!-- Base pairing visual -->
+    <h3 style="font-size:1.1rem;font-weight:700;margin:2rem 0 1rem">🔬 Watson-Crick 鹼基配對規則</h3>
+
+    <div class="pairing-row">
+      <div class="pair-base" style="background:var(--coral)20;color:var(--coral)">A</div>
+      <div style="flex:2;background:#ffffff06;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0.9rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div style="letter-spacing:0.2em;color:var(--text-muted);font-size:1rem">· ·</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:0.2rem"><strong>2 條氫鍵</strong> — 較弱</div>
+      </div>
+      <div class="pair-base" style="background:var(--lime)20;color:var(--lime)">T</div>
+    </div>
+    <div style="font-size:0.8rem;color:var(--text-dim);text-align:center;margin-bottom:0.6rem">（A 配 T：2 條氫鍵；用於 DNA）</div>
+
+    <div class="pairing-row">
+      <div class="pair-base" style="background:var(--coral)20;color:var(--coral)">A</div>
+      <div style="flex:2;background:#ffffff06;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0.9rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div style="letter-spacing:0.2em;color:var(--text-muted);font-size:1rem">· ·</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:0.2rem"><strong>2 條氫鍵</strong> — 較弱</div>
+      </div>
+      <div class="pair-base" style="background:var(--gold)20;color:var(--gold)">U</div>
+    </div>
+    <div style="font-size:0.8rem;color:var(--text-dim);text-align:center;margin-bottom:0.6rem">（A 配 U：2 條氫鍵；用於 RNA）</div>
+
+    <div class="pairing-row">
+      <div class="pair-base" style="background:var(--coral)20;color:var(--coral)">G</div>
+      <div style="flex:2;background:#ffffff06;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0.9rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div style="letter-spacing:0.2em;color:var(--text-muted);font-size:1rem">· · ·</div>
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-top:0.2rem"><strong>3 條氫鍵</strong> — 較強</div>
+      </div>
+      <div class="pair-base" style="background:var(--cyan)20;color:var(--cyan)">C</div>
+    </div>
+    <div style="font-size:0.8rem;color:var(--text-dim);text-align:center;margin-bottom:1rem">（G 配 C：3 條氫鍵；G≡C 較穩定）</div>
+
+    <div class="callout callout-violet">
+      <div class="callout-title" style="color:var(--violet)">🌡️ G+C 含量越高，DNA 越穩定！</div>
+      <p>G≡C 有 3 條氫鍵，A═T 只有 2 條。因此，<strong>G+C 含量高</strong>的 DNA 雙鏈結合更緊密，需要<strong>更高溫度</strong>才能解開（熔點更高）。</p>
+    </div>
+
+    <!-- Replication hint -->
+    <div class="card" style="margin-top:1.5rem;border-color:var(--lime)30">
+      <div class="card-title">🔄 為什麼這個結構如此完美？— DNA 複製的邏輯</div>
+      <p style="font-size:0.92rem">Watson 與 Crick 一提出雙螺旋，立刻就看出了複製的機制：</p>
+      <ol class="step-list" style="margin-top:1rem">
+        <li>
+          <div class="step-num">1</div>
+          <div>兩股鏈<strong>解開分離</strong>（就像拉開拉鍊）</div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div>各自作為<strong>模板</strong>，依照互補配對規則</div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div>合成兩條新的<strong>互補鏈</strong></div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div>得到兩個完全相同的雙螺旋（<strong>半保留複製</strong>）</div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 5 · DNA FORMS ═══ -->
+  <section class="section" id="forms">
+    <div class="section-tag">SECTION 8.2 · DNA 的構型多樣性</div>
+    <h2 class="section-title">DNA 的三種 <span>立體構型</span></h2>
+    <p class="section-intro">DNA 並非只有一種形狀——依環境條件不同，它可以呈現三種構型。B型是細胞中最常見的形式。</p>
+
+    <div class="form-compare">
+      <div class="form-card b-form">
+        <div class="form-name">B</div>
+        <div class="form-badge">⭐ 最常見 · 生理狀態</div>
+        <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:1rem">Watson-Crick 模型的標準形式，在含水的生理環境中最穩定。</p>
+        <ul class="form-stats">
+          <li>螺旋方向 <span>右旋</span></li>
+          <li>直徑 <span>~20 Å</span></li>
+          <li>每圈鹼基對 <span>10.5 對</span></li>
+          <li>每對螺距 <span>3.4 Å</span></li>
+          <li>鹼基傾斜 <span>6°</span></li>
+        </ul>
+      </div>
+
+      <div class="form-card a-form">
+        <div class="form-name">A</div>
+        <div class="form-badge">低含水量環境</div>
+        <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:1rem">在脫水條件下出現，比 B 型更寬更短。RNA-DNA 雜合雙鏈通常也是 A 型。</p>
+        <ul class="form-stats">
+          <li>螺旋方向 <span>右旋</span></li>
+          <li>直徑 <span>~26 Å</span></li>
+          <li>每圈鹼基對 <span>11 對</span></li>
+          <li>每對螺距 <span>2.6 Å</span></li>
+          <li>鹼基傾斜 <span>20°</span></li>
+        </ul>
+      </div>
+
+      <div class="form-card z-form">
+        <div class="form-name">Z</div>
+        <div class="form-badge">⬅ 左旋 · 特殊序列</div>
+        <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:1rem">最特別！骨架呈鋸齒狀，且是<strong style="color:var(--violet)">左旋</span></strong>（唯一）。嘌呤-嘧啶交替序列（如 CGCGCG）最容易形成。</p>
+        <ul class="form-stats">
+          <li>螺旋方向 <span style="color:var(--violet)">左旋 ⬅</span></li>
+          <li>直徑 <span>~18 Å</span></li>
+          <li>每圈鹼基對 <span>12 對</span></li>
+          <li>每對螺距 <span>3.7 Å</span></li>
+          <li>骨架外觀 <span>鋸齒狀</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mnemonic">
+      <p>
+        <strong>A、B、Z 構型記憶口訣：</strong><br>
+        「<strong>A</strong> 型去水變矮胖，<strong>B</strong> 型最 Best（最常見），<strong>Z</strong> 型走鋸齒、往左轉！」
+      </p>
+    </div>
+
+    <!-- Special structures -->
+    <div class="card" style="margin-top:1.5rem">
+      <div class="card-title">🔮 特殊 DNA 結構</div>
+      <div class="grid-2" style="margin-top:1rem">
+        <div>
+          <p style="font-weight:700;color:var(--cyan);margin-bottom:0.4rem">迴文序列（Palindrome）</p>
+          <p style="font-size:0.88rem;color:var(--text-dim)">DNA 中兩條鏈都含有反向重複序列，能形成<strong>髮夾結構</strong>或<strong>十字型結構</strong>，與基因調控有關。</p>
+        </div>
+        <div>
+          <p style="font-weight:700;color:var(--violet);margin-bottom:0.4rem">G 四鏈體（G Tetraplex）</p>
+          <p style="font-size:0.88rem;color:var(--text-dim)">富含鳥嘌呤的序列（如染色體末端的端粒 Telomere）可形成四股 DNA 結構，在細胞老化和癌症研究中受到關注。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 6 · RNA TYPES ═══ -->
+  <section class="section" id="rna">
+    <div class="section-tag">SECTION 8.2-8.3 · RNA 的世界</div>
+    <h2 class="section-title">RNA 的 <span>種類與功能</span></h2>
+    <p class="section-intro">RNA 的功能遠比 DNA 多樣！除了傳遞遺傳訊息，有些 RNA 甚至能自己催化反應（核酶 Ribozyme）。</p>
+
+    <div class="rna-card">
+      <div class="rna-icon">📨</div>
+      <div>
+        <div class="rna-abbr">mRNA · MESSENGER RNA</div>
+        <div class="rna-name">傳訊 RNA</div>
+        <div class="rna-desc">
+          以 DNA 為模板轉錄而來，攜帶製造蛋白質所需的「基因密碼」，送往核糖體翻譯。
+          每條 mRNA 通常對應一個基因（真核生物多為<strong>單順反子</strong>）。<br>
+          <span style="color:var(--gold)">重要結構：5' 帽（Cap）、3' 聚腺苷尾（Poly-A tail）、5'UTR、編碼區、3'UTR</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rna-card">
+      <div class="rna-icon">🏭</div>
+      <div>
+        <div class="rna-abbr">rRNA · RIBOSOMAL RNA</div>
+        <div class="rna-name">核糖體 RNA</div>
+        <div class="rna-desc">
+          核糖體的結構成分（佔核糖體 RNA 約 60%，蛋白質約 40%）。rRNA 不只是支架——它本身就是催化肽鍵形成的<strong class="hl-gold">核酶（Ribozyme）</strong>！這是現代「RNA 世界假說」的有力證據。
+        </div>
+      </div>
+    </div>
+
+    <div class="rna-card">
+      <div class="rna-icon">🔤</div>
+      <div>
+        <div class="rna-abbr">tRNA · TRANSFER RNA</div>
+        <div class="rna-name">轉移 RNA</div>
+        <div class="rna-desc">
+          翻譯過程中的「轉接器分子」。一端辨認 mRNA 上的密碼子（Codon），另一端攜帶對應的胺基酸。tRNA 具有特徵性的<strong>三葉草型二級結構</strong>和 L 形三級結構，含有大量稀有修飾鹼基。
+        </div>
+      </div>
+    </div>
+
+    <div class="rna-card">
+      <div class="rna-icon">🔇</div>
+      <div>
+        <div class="rna-abbr">ncRNA · NON-CODING RNA</div>
+        <div class="rna-name">非編碼 RNA（多種類）</div>
+        <div class="rna-desc">
+          不轉譯成蛋白質的 RNA 總稱，種類繁多：<br>
+          <strong>miRNA</strong>（微 RNA）— 調控基因表現<br>
+          <strong>siRNA</strong>（小干擾 RNA）— RNA 干擾（RNAi）機制<br>
+          <strong>lncRNA</strong>（長鏈非編碼 RNA）— 表觀遺傳調控<br>
+          <strong>snRNA</strong>（小核 RNA）— 參與 RNA 剪接
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-gold" style="margin-top:1rem">
+      <div class="callout-title" style="color:var(--gold)">💡 RNA 也能形成複雜的二級結構！</div>
+      <p>RNA 是單股，但它會自我折疊，讓互補的序列形成<strong>莖環（Stem-loop）/髮夾結構</strong>。這些折疊結構對 RNA 的功能至關重要——就像蛋白質的摺疊決定其功能一樣。</p>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 7 · OTHER FUNCTIONS ═══ -->
+  <section class="section" id="atp">
+    <div class="section-tag">SECTION 8.4 · 核苷酸的其他功能</div>
+    <h2 class="section-title">不只是 DNA/RNA：<span>核苷酸的其他角色</span></h2>
+    <p class="section-intro">核苷酸除了構成核酸，還在細胞代謝中扮演多種關鍵角色——能量貨幣、訊號分子、酵素輔因子。</p>
+
+    <!-- ATP -->
+    <div class="card" style="border-color:var(--gold)50;margin-bottom:1.5rem">
+      <div class="card-title" style="font-size:1.2rem">⚡ ATP — 細胞的能量貨幣</div>
+      <p style="font-size:0.92rem;margin-bottom:1.2rem">三磷酸腺苷（Adenosine Triphosphate）是細胞中最重要的能量載體。水解時釋放能量，驅動各種生命活動。</p>
+      
+      <div class="atp-visual">
+        <div class="atp-block" style="background:var(--gold)20;border:1px solid var(--gold)40;color:var(--gold)">
+          ATP<br><span style="font-size:0.7rem;opacity:0.7">三磷酸腺苷</span>
+        </div>
+        <div class="atp-arrow">+ H₂O →</div>
+        <div class="atp-block" style="background:var(--cyan)20;border:1px solid var(--cyan)40;color:var(--cyan)">
+          ADP<br><span style="font-size:0.7rem;opacity:0.7">二磷酸腺苷</span>
+        </div>
+        <div class="atp-arrow">+</div>
+        <div class="atp-block" style="background:var(--lime)20;border:1px solid var(--lime)40;color:var(--lime)">
+          Pᵢ<br><span style="font-size:0.7rem;opacity:0.7">無機磷酸</span>
+        </div>
+        <div class="atp-arrow">+</div>
+        <div class="atp-block" style="background:var(--coral)20;border:1px solid var(--coral)40;color:var(--coral)">
+          能量<br><span style="font-size:0.7rem;opacity:0.7">~30.5 kJ/mol</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text-dim);text-align:center;margin-top:0.5rem">ATP 也可再水解一個磷酸，變成 AMP（一磷酸腺苷），釋放更多能量</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title" style="color:var(--violet)">📡 cAMP</div>
+        <p style="font-size:0.88rem">環磷酸腺苷（3',5'-cyclic AMP），是重要的細胞內<strong>第二訊息分子</strong>，在荷爾蒙訊號傳遞（如腎上腺素）中扮演關鍵角色。</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--lime)">🧬 NAD⁺ / FAD</div>
+        <p style="font-size:0.88rem">含有 AMP 的<strong>酵素輔因子</strong>，在氧化還原反應中傳遞電子（如細胞呼吸的電子傳遞鏈）。</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--coral)">🔩 CoA</div>
+        <p style="font-size:0.88rem">輔酶 A（Coenzyme A）也含有腺苷，是脂肪酸代謝與 TCA 循環的重要輔因子（如乙醯輔酶 A）。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 8 · SUMMARY ═══ -->
+  <section class="section" id="summary">
+    <div class="section-tag">SUMMARY · 重點整理</div>
+    <h2 class="section-title">DNA vs RNA <span>完整比較</span></h2>
+    <p class="section-intro">把所有重要的差異整理在一起，這張比較表是考試必備！</p>
+
+    <div class="summary-grid">
+      <div class="summary-card dna-card">
+        <h3>🧬 DNA</h3>
+        <ul class="prop-list">
+          <li><span class="prop-key">五碳糖</span><span class="prop-val">去氧核糖</span></li>
+          <li><span class="prop-key">嘌呤鹼基</span><span class="prop-val">A、G</span></li>
+          <li><span class="prop-key">嘧啶鹼基</span><span class="prop-val">C、<strong style="color:var(--lime)">T（胸腺嘧啶）</strong></span></li>
+          <li><span class="prop-key">結構</span><span class="prop-val">雙股螺旋</span></li>
+          <li><span class="prop-key">穩定性</span><span class="prop-val">高（無 2'-OH）</span></li>
+          <li><span class="prop-key">功能</span><span class="prop-val">儲存遺傳資訊</span></li>
+          <li><span class="prop-key">位置</span><span class="prop-val">主要在細胞核</span></li>
+          <li><span class="prop-key">鹼基配對</span><span class="prop-val">A＝T（2鍵）　G≡C（3鍵）</span></li>
+        </ul>
+      </div>
+      <div class="summary-card rna-card-s">
+        <h3>📡 RNA</h3>
+        <ul class="prop-list">
+          <li><span class="prop-key">五碳糖</span><span class="prop-val">核糖</span></li>
+          <li><span class="prop-key">嘌呤鹼基</span><span class="prop-val">A、G</span></li>
+          <li><span class="prop-key">嘧啶鹼基</span><span class="prop-val">C、<strong style="color:var(--gold)">U（尿嘧啶）</strong></span></li>
+          <li><span class="prop-key">結構</span><span class="prop-val">單股（可自折疊）</span></li>
+          <li><span class="prop-key">穩定性</span><span class="prop-val">低（有 2'-OH，易水解）</span></li>
+          <li><span class="prop-key">功能</span><span class="prop-val">資訊傳遞、催化、調控</span></li>
+          <li><span class="prop-key">位置</span><span class="prop-val">核與質皆有</span></li>
+          <li><span class="prop-key">鹼基配對</span><span class="prop-val">A＝U（2鍵）　G≡C（3鍵）</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Final big rules -->
+    <h3 style="font-size:1.15rem;font-weight:700;margin:2.5rem 0 1rem">⭐ 絕對不能忘的 5 大重點</h3>
+
+    <div class="big-rule" style="background:linear-gradient(135deg,var(--coral)15,var(--coral)05);border:1px solid var(--coral)40;color:var(--coral)">
+      核苷酸 = 鹼基 + 五碳糖 + 磷酸<br>
+      <span style="font-size:0.6em;color:var(--text-dim)">去掉磷酸 → 核苷；核苷酸是構成 DNA/RNA 的基本單位</span>
+    </div>
+
+    <div class="big-rule" style="background:linear-gradient(135deg,var(--lime)15,var(--lime)05);border:1px solid var(--lime)40;color:var(--lime)">
+      DNA：A-T（2鍵）　G≡C（3鍵）<br>
+      <span style="font-size:0.6em;color:var(--text-dim)">Chargaff 法則：A=T，G=C，嘌呤總量＝嘧啶總量</span>
+    </div>
+
+    <div class="big-rule" style="background:linear-gradient(135deg,var(--cyan)15,var(--cyan)05);border:1px solid var(--cyan)40;color:var(--cyan)">
+      DNA 雙螺旋：反平行 + 互補 + 右旋<br>
+      <span style="font-size:0.6em;color:var(--text-dim)">B 型（生理）、A 型（脫水）、Z 型（左旋，最特殊）</span>
+    </div>
+
+    <div class="big-rule" style="background:linear-gradient(135deg,var(--gold)15,var(--gold)05);border:1px solid var(--gold)40;color:var(--gold)">
+      RNA：單股、核糖、U 取代 T<br>
+      <span style="font-size:0.6em;color:var(--text-dim)">mRNA（傳訊）/ rRNA（核糖體）/ tRNA（轉接器）/ ncRNA（調控）</span>
+    </div>
+
+    <div class="big-rule" style="background:linear-gradient(135deg,var(--violet)15,var(--violet)05);border:1px solid var(--violet)40;color:var(--violet)">
+      ATP = 細胞能量貨幣 | cAMP = 訊號分子<br>
+      <span style="font-size:0.6em;color:var(--text-dim)">核苷酸不只是 DNA/RNA 的材料，還有多種代謝功能</span>
+    </div>
+
+    <!-- Final mnemonic -->
+    <div class="mnemonic" style="margin-top:2rem">
+      <p>
+        <strong>終極記憶口訣：</strong><br><br>
+        「<strong>嘌（A、G）嘧（C、T/U）磷糖成核苷，</strong><br>
+        <strong>雙螺旋反平行互補，</strong><br>
+        <strong>DNA 去氧 T 穩定，RNA 核糖 U 多變，</strong><br>
+        <strong>A=T 雙鍵，G≡C 三鍵，Chargaff 定律記心間！</strong>」
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p style="color:var(--text-dim)">📘 Lehninger Principles of Biochemistry, Chapter 8 · 核苷酸與核酸</p>
+  <p style="margin-top:0.4rem">學習指南 — 初學者入門版 · 以繁體中文撰寫</p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .rna-card, .form-card, .principle-card, .tl-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
