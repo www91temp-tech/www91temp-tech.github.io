@@ -676,9 +676,9 @@
     <div class="flow">
       <div class="flow-node gray">心臟</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node blue">鰓（充氧）</div>
+      <div class="flow-node red">鰓（充氧）</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node red">全身組織</div>
+      <div class="flow-node blue">全身組織</div>
       <div class="flow-arrow">→</div>
       <div class="flow-node gray">心臟</div>
     </div>
@@ -751,16 +751,16 @@
         <div class="stat-label">一個完整心動週期</div>
       </div>
       <div class="stat">
+        <span class="stat-num">0.1s</span>
+        <div class="stat-label">心房收縮</div>
+      </div>
+      <div class="stat">
         <span class="stat-num">0.3s</span>
         <div class="stat-label">心室收縮期（systole）</div>
       </div>
       <div class="stat">
         <span class="stat-num">0.4s</span>
         <div class="stat-label">心室舒張期（diastole）</div>
-      </div>
-      <div class="stat">
-        <span class="stat-num">0.1s</span>
-        <div class="stat-label">心房收縮</div>
       </div>
     </div>
     <div class="info-box">
@@ -1003,7 +1003,7 @@
       <div style="display:flex;align-items:center;gap:8px">
         <div class="flow-node red" style="min-width:140px">纖維蛋白凝塊</div>
         <div class="flow-arrow">→</div>
-        <span style="font-size:13px;color:var(--gray-dark)">纖維蛋白原→纖維蛋白（Fibrin）網，捕捉紅血球，形成凝塊</span>
+        <span style="font-size:13px;color:var(--gray-dark)">纖維蛋白原（Fibrinogen）→ 纖維蛋白（Fibrin）網，捕捉紅血球，形成凝塊</span>
       </div>
     </div>
     <div class="info-box gold-box" style="margin-top:14px">
@@ -1020,7 +1020,7 @@
         <ul>
           <li>血管內皮受損→發炎→LDL（壞膽固醇）堆積</li>
           <li>形成斑塊（plaque），管腔變窄</li>
-          <li>斑塊破裂 → 血栓（thrombus）形成</li>
+          <li>斑塊破裂 → <strong>血栓（thrombus）</strong>形成</li>
         </ul>
       </div>
       <div class="compare-item gold">
@@ -1034,7 +1034,7 @@
     </div>
     <div class="big-highlight">
       🔑 膽固醇關鍵：<strong>LDL（低密度脂蛋白）</strong>= 「壞」膽固醇（送到細胞，但過多會堆積）；<strong>HDL（高密度脂蛋白）</strong>= 「好」膽固醇（回收多餘膽固醇）。<br>
-      LDL/HDL 比值越高 → 風險越大。運動可降低此比值；吸菸、反式脂肪會升高此比值。
+      LDL/HDL 比值越高 → 風險越大。運動可降低比值；吸菸、反式脂肪會升高比值。
     </div>
   </div>
 </section>
@@ -1054,15 +1054,15 @@
         <h5>🫁 肺泡</h5>
         <div class="pp-val"><span>PO₂</span><span>104 mmHg</span></div>
         <div class="pp-val"><span>PCO₂</span><span>40 mmHg</span></div>
-        <div class="pp-val"><span>O₂ → 血液</span><span>✅ 淨擴散入</span></div>
-        <div class="pp-val"><span>CO₂ → 空氣</span><span>✅ 淨擴散出</span></div>
+        <div class="pp-val"><span>O₂</span><span>淨擴散入 → 血液</span></div>
+        <div class="pp-val"><span>CO₂</span><span>淨擴散出 → 空氣</span></div>
       </div>
       <div class="pp-card tissue">
         <h5>💪 體內組織</h5>
         <div class="pp-val"><span>PO₂</span><span>&lt;40 mmHg</span></div>
         <div class="pp-val"><span>PCO₂</span><span>&gt;45 mmHg</span></div>
-        <div class="pp-val"><span>O₂ → 細胞</span><span>✅ 淨擴散出</span></div>
-        <div class="pp-val"><span>CO₂ → 血液</span><span>✅ 淨擴散入</span></div>
+        <div class="pp-val"><span>O₂</span><span>淨擴散出 → 細胞</span></div>
+        <div class="pp-val"><span>CO₂</span><span>淨擴散入 → 血液</span></div>
       </div>
     </div>
   </div>
@@ -1090,7 +1090,7 @@
 
   <div class="card">
     <h3>🐛 昆蟲的氣管系統（Tracheal System）</h3>
-    <p>昆蟲完全不靠循環系統運輸O₂！空氣直接由<strong>氣孔（spiracles）</strong>進入，經分支的氣管（tracheae）→微氣管，把O₂直接送達每個細胞。這讓昆蟲的氣體交換效率高，但也限制了體型——體型越大，O₂管道越難到達深部細胞。</p>
+    <p>昆蟲完全不靠循環系統運輸O₂！空氣直接由<strong>氣孔（spiracles）</strong>進入，經分支的氣管（tracheae）→ 微氣管（Tracheole），把O₂直接送達每個細胞。這讓昆蟲的氣體交換效率高，但也限制了體型——體型越大，O₂管道越難到達深部細胞。</p>
     <div class="critical">
       這就是為什麼<strong>恐龍般大小的昆蟲</strong>是不可能的！氣管系統有尺寸限制。
     </div>
