@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第25章 DNA 代謝 — 學習指南</title>
+<title>第25章：DNA 代謝｜學習指南</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -124,11 +124,17 @@
 
   /* Section */
   .section {
-    display: none;
-    animation: fadeIn 0.3s ease;
+    display: block;
   }
-  .section.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section + .section {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  /* Offset anchor scroll for sticky nav height */
+  .section {
+    scroll-margin-top: 64px;
+  }
 
   /* Section title */
   .section-title {
@@ -594,7 +600,7 @@
 <main class="main-container">
 
   <!-- ===================== OVERVIEW ===================== -->
-  <section id="overview" class="section active">
+  <section id="overview" class="section">
     <h2 class="section-title">
       <span class="section-num">總覽</span>
       本章核心概念
@@ -1257,14 +1263,49 @@
 </main>
 
 <script>
+/* ── Navigation: scroll to section ── */
 function showSection(id, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Active state is managed by IntersectionObserver below;
+  // but set it immediately for instant visual feedback on click.
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
   if (btn && btn.classList) btn.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* ── Highlight nav tab based on scroll position ── */
+(function () {
+  const sections = document.querySelectorAll('.section');
+  const tabs = document.querySelectorAll('.nav-tab');
+
+  // Map section id → tab button
+  const idToTab = {};
+  tabs.forEach(tab => {
+    const match = tab.getAttribute('onclick').match(/showSection\('([^']+)'/);
+    if (match) idToTab[match[1]] = tab;
+  });
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tabs.forEach(t => t.classList.remove('active'));
+          if (idToTab[id]) idToTab[id].classList.add('active');
+        }
+      });
+    },
+    {
+      rootMargin: '-64px 0px -60% 0px', // trigger when section top crosses sticky nav
+      threshold: 0
+    }
+  );
+
+  sections.forEach(sec => observer.observe(sec));
+})();
+
+/* ── Quiz answer handler ── */
 function answer(el, correct) {
   const options = el.parentElement.querySelectorAll('li');
   if ([...options].some(o => o.classList.contains('correct') || o.classList.contains('wrong'))) return;
@@ -1272,10 +1313,6 @@ function answer(el, correct) {
   el.classList.add(correct ? 'correct' : 'wrong');
 
   if (!correct) {
-    options.forEach(o => {
-      if (o.dataset.answer === 'true' || o.textContent.includes('✅')) return;
-    });
-    // find correct and mark it
     options.forEach(o => {
       if (o !== el) {
         const txt = o.getAttribute('onclick');
@@ -1289,14 +1326,18 @@ function answer(el, correct) {
   explanation.classList.add('show');
 }
 
-// Highlight overview cards on click
+/* ── Overview cards: scroll to section ── */
 document.querySelectorAll('.overview-card').forEach(card => {
   card.addEventListener('click', function() {
-    const section = this.querySelector('.oc-title').textContent.trim();
-    const tabs = document.querySelectorAll('.nav-tab');
-    if (section.includes('複製')) showSection('replication', tabs[1]);
-    else if (section.includes('修復')) showSection('repair', tabs[2]);
-    else if (section.includes('重組')) showSection('recombination', tabs[3]);
+    const title = this.querySelector('.oc-title').textContent.trim();
+    let targetId = null;
+    if (title.includes('複製')) targetId = 'replication';
+    else if (title.includes('修復')) targetId = 'repair';
+    else if (title.includes('重組')) targetId = 'recombination';
+    if (targetId) {
+      const target = document.getElementById(targetId);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 });
 </script>
