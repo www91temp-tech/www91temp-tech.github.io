@@ -890,7 +890,7 @@
         <div class="rt-item">
           <h4><span class="term">① 錯配修復 (Mismatch Repair, MMR)</span></h4>
           <p><strong style="color:#fff;">修復對象：</strong>複製後遺留的錯誤鹼基配對<br>
-          <strong style="color:#fff;">原核機制：</strong>MutS 辨識錯配 → MutL 滑動 → MutH 在半甲基化 GATC 切割未甲基化的新股 → 切除錯誤段落 → Pol III + Ligase 填補<br>
+          <strong style="color:#fff;">原核機制：</strong>MutS 辨識錯配 → MutL 滑動 → MutH 在半甲基化 GATC 切割未甲基化的新股 → 核酸外切酶切除錯誤段落 → Pol III + Ligase 填補<br>
           <strong style="color:#fff;">關鍵概念：</strong>Dam 甲基酶標記舊股（模板），讓修復系統知道要修新股而非舊股</p>
         </div>
 
@@ -904,7 +904,7 @@
         <div class="rt-item">
           <h4><span class="term">③ 核苷酸切除修復 (Nucleotide-Excision Repair, NER)</span></h4>
           <p><strong style="color:#fff;">修復對象：</strong>造成 DNA 螺旋大變形的損傷（如紫外線造成的嘧啶二聚體）<br>
-          <strong style="color:#fff;">原核（E. coli）：</strong>ABC 外切核酸酶（UvrA/B/C）切除損傷位點兩側，移除 12–13 個核苷酸<br>
+          <strong style="color:#fff;">原核（E. coli）：</strong>ABC 切除核酸酶（UvrA/B/C）切除損傷位點兩側，移除 12–13 個核苷酸<br>
           <strong style="color:#fff;">真核（人類）：</strong>類似機制，但需要 ≥16 個蛋白，切除 27–29 個核苷酸</p>
         </div>
 
@@ -926,21 +926,21 @@
             <th>切幾個 nt？</th>
           </tr>
           <tr>
-            <td>錯配修復</td>
+            <td>錯配修復 MMR</td>
             <td>複製錯誤</td>
-            <td>MutS/L/H</td>
+            <td>MutS/L/H 蛋白</td>
             <td>大段（~1000 bp）</td>
           </tr>
           <tr>
-            <td>鹼基切除修復</td>
+            <td>鹼基切除修復 BER</td>
             <td>異常鹼基</td>
-            <td>DNA 醣苷酶</td>
+            <td>DNA 醣苷酶、AP 核酸內切酶</td>
             <td>1 個鹼基（填補 1–2 nt）</td>
           </tr>
           <tr>
-            <td>核苷酸切除修復</td>
+            <td>核苷酸切除修復 NER</td>
             <td>大型損傷</td>
-            <td>外切核酸酶</td>
+            <td>ABC 切除核酸酶</td>
             <td>12–13（原核）/ 27–29（真核）</td>
           </tr>
           <tr>
@@ -971,8 +971,8 @@
       <div class="highlight-box red" style="margin-top:16px">
         <strong>⚡ TLS（跨損傷合成）的特點：</strong><br>
         • <strong>DNA 聚合酶 V（UmuD'₂C + RecA）</strong>可越過一般會阻斷複製的損傷<br>
-        • 缺乏校讀外切酶，錯誤率高達 1/1,000（比正常高 100 倍以上）<br>
-        • 這是<span style="color:#ffa0a0">「以突變換存活」</span>的絕境策略——寧可突變，也要讓某些子代活下去<br>
+        • 缺乏校讀外切核酸酶，錯誤率高達 1/1,000（比正常高 100 倍以上）<br>
+        • 這是<strong>「以突變換存活」</strong>的絕境策略——寧可突變，也要讓某些子代活下去<br>
         • 突變的後代成為演化的材料（P3 原則）
       </div>
     </div>
@@ -1217,7 +1217,7 @@
       </ul>
       <div class="quiz-explanation">
         <strong>答案：B ✅</strong><br>
-        BER 由 DNA 醣苷酶先切除損傷鹼基，再由 AP 核酸酶切割骨架，最後填補 1–2 個核苷酸。適合小型化學損傷。NER 則由外切核酸酶複合物（excinuclease）在損傷兩側各切一刀，切除 12–29 個核苷酸大片段，適合造成螺旋大變形的損傷（如嘧啶二聚體）。
+        BER 由 DNA 醣苷酶先切除損傷鹼基，再由 AP 核酸內切酶切割骨架，最後填補 1–2 個核苷酸。適合小型化學損傷。NER 則由ABC 切除核酸酶複合物（excinuclease）在損傷兩側各切一刀，切除 12–29 個核苷酸大片段，適合造成螺旋大變形的損傷（如嘧啶二聚體）。
       </div>
     </div>
 
