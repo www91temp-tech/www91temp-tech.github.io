@@ -774,9 +774,9 @@
         <p>負責把<strong>正確的胺基酸接到正確的 tRNA 上</strong>的酶，共 20 種（每種胺基酸一種）。</p>
         <p>反應：<br>
         <code style="font-size:0.82rem; color:var(--accent)">胺基酸 + tRNA + ATP → 胺基醯-tRNA + AMP + PPi</code></p>
-        <p>20 種合成酶依胺基酸接在 tRNA 3’ 端的位置，分成兩大類別：<br>
-        <p>Class I：腺苷的<strong> 2’-OH</strong>，再通過<strong>轉酯基化</strong>將胺基酸轉至 3’-OH。<br>
-        <p>Class II：腺苷的<strong> 3’-OH</strong>（一步完成）。
+        <p>依胺基酸接在 tRNA 3' 端的位置，分成兩類：<br>
+        <p><span class="tag green">Class I</span>：腺苷的<strong> 2'-OH</strong>，再通過<strong>轉酯基化</strong>將胺基酸轉至 3’-OH。<br>
+        <p><span class="tag blue">Class II</span>：腺苷的<strong> 3'-OH</strong>（一步完成）。
       </div>
     </div>
   </div>
@@ -855,7 +855,7 @@
       <p><span class="hi-green">原核生物（細菌）起始過程：</span></p>
       <ol>
         <li><strong>IF3、IF1</strong> 結合到 30S 次單元，防止兩個次單元過早合併；mRNA 結合</li>
-        <li><span class="hi-yellow">Shine-Dalgarno 序列</span>（mRNA 上 AUG 上游 8-13bp 的一段富含嘌呤序列）與 16S rRNA 3' 端互補配對，把 AUG 定位到 P 位</li>
+        <li><span class="hi-yellow">Shine-Dalgarno 序列</span>（mRNA 上 AUG 上游 8-13bp 的一段富含嘌呤序列）與<strong> 16S rRNA</strong> 3' 端互補配對，把 AUG 定位到 P 位</li>
         <li><strong>IF2-GTP</strong> 攜帶起始 tRNA（<span class="hi-orange">fMet-tRNA<sup>fMet</sup></span>）進入 P 位</li>
         <li>50S 次單元加入，GTP 水解，三個起始因子離開 → 形成 <strong>70S 起始複合體</strong></li>
       </ol>
@@ -870,7 +870,7 @@
         <li>核糖體從 5' cap 開始 <span class="hi-blue">掃描（scanning）</span>，找第一個 AUG</li>
         <li>沒有 Shine-Dalgarno 序列</li>
         <li>起始 tRNA 攜帶的是 Met（不是 fMet）</li>
-        <li>eIF4G 同時結合 5' cap 和 3' poly(A) 尾，讓 mRNA <span class="hi-purple">環形化</span>，提高翻譯效率</li>
+        <li>eIF4G 同時結合 5' cap 和 3' poly(A) 尾，讓 mRNA <span class="hi-purple">環形化</span>，提高轉譯效率</li>
       </ul>
     </div>
   </div>
@@ -889,7 +889,7 @@
         <div class="flow-step" style="background:rgba(63,185,80,0.08); border-color:var(--green);">
           <div class="step-num">步驟 2</div>
           <div class="step-title">肽鍵形成</div>
-          <div class="step-body"><strong>肽醯轉移酶</strong>（rRNA！）催化：P 位的肽鏈轉移到 A 位的胺基醯-tRNA 上，形成新的肽鍵</div>
+          <div class="step-body"><strong>肽醯轉移酶</strong>（<strong> 23S rRNA</strong>！）催化：P 位的肽鏈轉移到 A 位的胺基醯-tRNA 上，形成新的肽鍵</div>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step" style="background:rgba(240,136,62,0.08); border-color:var(--orange);">
@@ -926,8 +926,9 @@
       <ul>
         <li><strong>分子伴侶（Chaperones）</strong>協助蛋白質正確折疊，防止錯誤聚集</li>
         <li>切除起始的 fMet 或信號序列</li>
-        <li>磷酸化、甲基化、糖基化等<strong>共價修飾</strong></li>
-        <li>輔基（cofactor）附加</li>
+        <li>磷酸化（Ser、Thr、Tyr）、甲基化、醣基化等<strong>共價修飾</strong></li>
+        <li>類異戊二烯基（Isoprenyl groups）修飾 Cys 殘基（如Ras 蛋白法尼基化Farnesylation）</li>
+        <li>輔基（cofactor）附加（如血紅素 Heme）</li>
         <li>蛋白質水解切割（如胰島素前體的加工）</li>
       </ul>
     </div>
@@ -1110,7 +1111,7 @@
       <tr>
         <td class="label" style="color:var(--accent);">Puromycin<br>嘌呤黴素</td>
         <td>A 位</td>
-        <td>模擬胺基醯-tRNA，進入 A 位後形成 peptidyl-puromycin，但<strong>不能繼續延伸</strong>，導致提前終止</td>
+        <td>模擬胺基醯-tRNA，進入 A 位後形成 peptidyl-puromycin，但<strong>不能繼續延伸</strong>，導致提前終止（阻斷轉位）</td>
         <td>原核 + 真核</td>
       </tr>
       <tr>
@@ -1134,7 +1135,7 @@
       <tr>
         <td class="label" style="color:var(--accent);">Streptomycin<br>鏈黴素</td>
         <td>30S 次單元</td>
-        <td>低濃度：導致<strong>密碼子誤讀</strong>；高濃度：抑制起始</td>
+        <td>強力結合 16S rRNA<br>低濃度：導致<strong>密碼子誤讀</strong>；高濃度：抑制起始</td>
         <td>原核</td>
       </tr>
       <tr>
