@@ -586,8 +586,8 @@
       <div class="card-body">從細菌到人類，幾乎所有生物用同一套密碼！這是所有生物擁有<strong>共同祖先</strong>的有力證據。<br><br>少數例外（如粒線體）更強化了這個法則。</div>
     </div>
     <div class="card">
-      <div class="card-title">🔄 縮退性（Degeneracy）</div>
-      <div class="card-body">64 個密碼子對應 20 種胺基酸，<strong>多個密碼子可以編碼同一種胺基酸</strong>。<br><br>例：亮胺酸（Leu）有 6 個密碼子！縮退性保護基因免於突變的傷害。</div>
+      <div class="card-title">🔄 縮併性（Degeneracy）</div>
+      <div class="card-body">64 個密碼子對應 20 種胺基酸，<strong>多個密碼子可以編碼同一種胺基酸</strong>。<br><br>例：白胺酸（Leu）有 6 個密碼子！縮併性保護基因免於突變的傷害。</div>
     </div>
   </div>
 
@@ -692,13 +692,13 @@
       </tr>
       <tr>
         <td class="label">大次單元</td>
-        <td>50S（5S + 23S rRNA，36 蛋白）</td>
-        <td>60S（5S + 5.8S + 28S rRNA，46 蛋白）</td>
+        <td>50S（<span class="tag blue">5S + 23S rRNA</span>，36 蛋白）</td>
+        <td>60S（<span class="tag green">5S + 5.8S + 28S rRNA</span>，46 蛋白）</td>
       </tr>
       <tr>
         <td class="label">小次單元</td>
-        <td>30S（16S rRNA，21 蛋白）</td>
-        <td>40S（18S rRNA，33 蛋白）</td>
+        <td>30S（<span class="tag blue">16S rRNA</span>，21 蛋白）</td>
+        <td>40S（<span class="tag green">18S rRNA</span>，33 蛋白）</td>
       </tr>
       <tr>
         <td class="label">直徑</td>
@@ -732,7 +732,7 @@
     <div class="key-label">🎯 核糖體三個 tRNA 結合位點</div>
     <p>
     <span class="tag blue">A 位（Aminoacyl site）</span> — 胺基醯-tRNA 進入的位點<br>
-    <span class="tag green">P 位（Peptidyl site）</span> — 正在延伸的肽鍊所在位點（起始時 fMet-tRNA 在此）<br>
+    <span class="tag green">P 位（Peptidyl site）</span> — 正在延伸的肽鏈所在位點（起始時 fMet-tRNA 在此）<br>
     <span class="tag orange">E 位（Exit site）</span> — 空的 tRNA 離開前暫時停留的位點
     </p>
     <p style="margin-top:10px; font-size:0.88rem; color:var(--text-muted)">mRNA 穿過核糖體的縫隙（cleft），核糖體沿著 mRNA 由 5'→3' 方向移動。</p>
@@ -774,17 +774,16 @@
         <p>負責把<strong>正確的胺基酸接到正確的 tRNA 上</strong>的酶，共 20 種（每種胺基酸一種）。</p>
         <p>反應：<br>
         <code style="font-size:0.82rem; color:var(--accent)">胺基酸 + tRNA + ATP → 胺基醯-tRNA + AMP + PPi</code></p>
-        <div class="key-box" style="margin-top:12px; padding:10px 14px;">
-          <div class="key-label" style="margin-bottom:4px;">⚠️ 準確性決定一切</div>
-          <p style="font-size:0.85rem;">蛋白質合成的準確性很大程度取決於這些酶的識別精確度。部分酶還有<strong>校對（proofreading）</strong>功能，防止錯誤的胺基酸被接上。</p>
-        </div>
+        <p>20 種合成酶依胺基酸接在 tRNA 3’ 端的位置，分成兩大類別：<br>
+        <p>Class I：腺苷的<strong> 2’-OH</strong>，再通過<strong>轉酯基化</strong>將胺基酸轉至 3’-OH。<br>
+        <p>Class II：腺苷的<strong> 3’-OH</strong>（一步完成）。
       </div>
     </div>
   </div>
 
   <div class="key-box orange">
     <div class="key-label">🔄 Wobble（搖擺）假說</div>
-    <p>密碼子第 <span class="hi-orange">三個</span>位置的配對要求最不嚴格（允許「搖擺」），這就是為什麼一個 tRNA 可以識別多個密碼子。<br><br>
+    <p>密碼子 <span class="hi-orange">第三個</span>位置的配對要求最不嚴格（允許「搖擺」），這就是為什麼一個 tRNA 可以識別多個密碼子。<br><br>
     例：tRNA 的反密碼子中，鳥苷（G）可以與密碼子中的 U 或 C 配對；肌苷（I，修飾過的腺嘌呤）可以與 U、C 或 A 配對。<br><br>
     這就是為什麼只需 <strong>≥ 32 種 tRNA</strong> 就能識別全部 61 個有意義密碼子（不含終止密碼子）。</p>
   </div>
@@ -842,6 +841,10 @@
         胺基酸 + tRNA + ATP → 胺基醯-tRNA + AMP + PP<sub>i</sub>
       </div>
       <p>消耗 <span class="hi-yellow">2 個高能磷酸鍵</span>（ATP→AMP）。這步驟決定了把哪個胺基酸接到哪個 tRNA，<strong>是翻譯準確性的第一關</strong>。</p>
+    </div>
+    <div class="key-box" style="margin-top:12px; padding:10px 14px;">
+          <div class="key-label" style="margin-bottom:4px;">⚠️ 準確性決定一切</div>
+          <p style="font-size:0.85rem;">蛋白質合成的準確性很大程度取決於這些酶的識別精確度。部分酶還有<strong>校對（proofreading）</strong>功能，防止錯誤的胺基酸被接上。</p>
     </div>
   </div>
 
@@ -909,7 +912,7 @@
       <p>當 A 位出現 <span class="hi-red">終止密碼子（UAA、UAG、UGA）</span>時：</p>
       <ul>
         <li><strong>釋放因子（RF1、RF2）</strong>辨認終止密碼子（沒有對應的 tRNA！）</li>
-        <li>RF 刺激肽醯轉移酶活性，讓水分子作為受體，<span class="hi-yellow">水解肽鍊</span>，多肽從 P 位釋放</li>
+        <li>RF 刺激肽醯轉移酶活性，讓水分子作為受體，<span class="hi-yellow">水解肽鏈</span>，多肽從 P 位釋放</li>
         <li>RF3·GTP 幫助 RF1/RF2 解離</li>
         <li><strong>核糖體回收因子（RRF）</strong>和 EF-G 讓核糖體解體，可重複利用</li>
       </ul>
@@ -1066,7 +1069,7 @@
   <div class="critical" style="margin-top:20px;">
     <div class="key-label">🔥 泛素（Ubiquitin）的重要性</div>
     <p><span class="hi-red">泛素</span>是由 <strong>76 個胺基酸</strong>組成的小蛋白，從酵母菌到人類幾乎完全相同（高度保守），是演化中最保守的蛋白質之一。<br><br>
-    泛素的功能不只是蛋白質降解的標誌，還參與：<strong>DNA 修復、細胞周期調控、信號轉導</strong>等多種過程。</p>
+    泛素的功能不只是蛋白質降解的標誌，還參與：<strong>DNA 修復、細胞週期調控、信號轉導</strong>等多種過程。</p>
   </div>
 
   <div class="card" style="margin-top: 18px;">
@@ -1253,7 +1256,7 @@
     <div style="padding:16px; background:var(--surface2); border-radius:8px; border:1px solid rgba(88,166,255,0.2);">
       <div style="color:var(--accent); font-size:1.8rem; margin-bottom:8px;">🔤</div>
       <div style="font-weight:700; margin-bottom:6px;">遺傳密碼</div>
-      <div style="font-size:0.82rem; color:var(--text-muted);">三聯體、不重疊、縮退性、近乎普遍。64 個密碼子對應 20 種胺基酸 + 3 個終止密碼子。</div>
+      <div style="font-size:0.82rem; color:var(--text-muted);">三聯體、不重疊、縮併性、近乎普遍。64 個密碼子對應 20 種胺基酸 + 3 個終止密碼子。</div>
     </div>
     <div style="padding:16px; background:var(--surface2); border-radius:8px; border:1px solid rgba(63,185,80,0.2);">
       <div style="color:var(--green); font-size:1.8rem; margin-bottom:8px;">⚙️</div>
