@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第22章：羧酸及其衍生物—親核醯基取代反應</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --deep: #1b2d42;
+    --teal: #0a8ea0;
+    --teal-light: #12b0c7;
+    --gold: #e8a020;
+    --gold-light: #f5c842;
+    --red-accent: #e05252;
+    --green-accent: #3fb06a;
+    --purple-accent: #8b5cf6;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #1a2236;
+    --muted: #5a6b80;
+    --border: #d8e2ef;
+    --acid-chloride: #e8f4f8;
+    --acid-chloride-b: #0a8ea0;
+    --anhydride: #fff3e0;
+    --anhydride-b: #e8890a;
+    --carb-acid: #fce4ec;
+    --carb-acid-b: #e01a70;
+    --ester: #e8f5e9;
+    --ester-b: #2e7d32;
+    --amide: #ede7f6;
+    --amide-b: #6a1ebb;
+    --nitrile: #fafafa;
+    --nitrile-b: #37474f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    min-height: 52px;
+  }
+  nav a {
+    color: #a8c0d6;
+    text-decoration: none;
+    font-size: 13px;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all .2s;
+    font-weight: 500;
+  }
+  nav a:hover { background: rgba(255,255,255,0.12); color: var(--gold-light); }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 50%, #0d2e40 100%);
+    color: white;
+    padding: 64px 32px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(232,160,32,0.2);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 13px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(24px, 5vw, 42px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--gold-light); }
+  .hero p {
+    font-size: 17px;
+    color: #90b4cc;
+    max-width: 620px;
+    margin: 0 auto 32px;
+  }
+  .hero-formula {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 16px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: var(--teal-light);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  /* ─── CONTAINER ─── */
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ─── SECTION ─── */
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 2px;
+    background: var(--teal);
+  }
+
+  h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--deep);
+    margin: 32px 0 12px;
+    padding-left: 14px;
+    border-left: 4px solid var(--teal);
+  }
+  h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 20px 0 8px;
+  }
+  p { margin-bottom: 14px; color: var(--text); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+
+  /* ─── HIGHLIGHT BOXES ─── */
+  .highlight {
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .highlight.key {
+    background: linear-gradient(135deg, #fff8e1, #fffde7);
+    border: 2px solid var(--gold);
+  }
+  .highlight.key::before {
+    content: '⚡ 核心重點';
+    position: absolute; top: -12px; left: 20px;
+    background: var(--gold);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+  .highlight.warning {
+    background: #fef3f2;
+    border: 2px solid #e05252;
+  }
+  .highlight.warning::before {
+    content: '⚠ 注意';
+    position: absolute; top: -12px; left: 20px;
+    background: #e05252;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 20px;
+  }
+  .highlight.info {
+    background: #e8f4f8;
+    border: 2px solid var(--teal);
+  }
+  .highlight.info::before {
+    content: '💡 小技巧';
+    position: absolute; top: -12px; left: 20px;
+    background: var(--teal);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 20px;
+  }
+  .highlight.memory {
+    background: linear-gradient(135deg, #f3e8ff, #ede7f6);
+    border: 2px solid var(--purple-accent);
+  }
+  .highlight.memory::before {
+    content: '🧠 記憶口訣';
+    position: absolute; top: -12px; left: 20px;
+    background: var(--purple-accent);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 20px;
+  }
+  .highlight.figure {
+    background: #f0f7ff;
+    border: 2px solid #3b82f6;
+  }
+  .highlight.figure::before {
+    content: '🔬 圖示說明';
+    position: absolute; top: -12px; left: 20px;
+    background: #3b82f6;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 20px;
+  }
+
+  /* ─── FUNCTIONAL GROUP TAGS ─── */
+  .fg-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .fg-tag {
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 120px;
+    text-align: center;
+    transition: transform .2s;
+    cursor: default;
+  }
+  .fg-tag:hover { transform: translateY(-3px); }
+  .fg-tag .name { font-size: 12px; font-family: 'Noto Sans TC', sans-serif; }
+  .fg-tag.ac { background: var(--acid-chloride); border-color: var(--acid-chloride-b); color: var(--acid-chloride-b); }
+  .fg-tag.an { background: var(--anhydride); border-color: var(--anhydride-b); color: var(--anhydride-b); }
+  .fg-tag.ca { background: var(--carb-acid); border-color: var(--carb-acid-b); color: var(--carb-acid-b); }
+  .fg-tag.es { background: var(--ester); border-color: var(--ester-b); color: var(--ester-b); }
+  .fg-tag.am { background: var(--amide); border-color: var(--amide-b); color: var(--amide-b); }
+  .fg-tag.ni { background: var(--nitrile); border-color: var(--nitrile-b); color: var(--nitrile-b); }
+
+  /* ─── REACTIVITY SCALE ─── */
+  .reactivity-scale {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    margin: 24px 0;
+  }
+  .reactivity-bar {
+    display: flex;
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 16px 0;
+    height: 52px;
+  }
+  .reactivity-segment {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    line-height: 1.2;
+    padding: 4px;
+    transition: filter .2s;
+    cursor: default;
+  }
+  .reactivity-segment:hover { filter: brightness(1.15); }
+  .seg1 { background: #1a8ea0; }
+  .seg2 { background: #f08c00; }
+  .seg3 { background: #d44e78; }
+  .seg4 { background: #3fb06a; }
+  .seg5 { background: #8b5cf6; }
+  .reactivity-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 0 4px;
+    margin-top: 4px;
+  }
+  .reactivity-arrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .reactivity-arrow .bar {
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(to right, var(--amide-b), var(--acid-chloride-b));
+    border-radius: 2px;
+    position: relative;
+  }
+  .reactivity-arrow .bar::after {
+    content: '▶';
+    position: absolute;
+    right: -8px;
+    top: -9px;
+    color: var(--acid-chloride-b);
+    font-size: 16px;
+  }
+
+  /* ─── MECHANISM STEPS ─── */
+  .mechanism {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 28px;
+    margin: 24px 0;
+    color: white;
+  }
+  .mechanism-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mech-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .mech-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: var(--teal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .mech-content h4 { color: var(--teal-light); margin: 0 0 4px; }
+  .mech-content p { color: #a8c4d6; font-size: 15px; }
+  .mech-formula {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 15px;
+    color: var(--gold-light);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .mech-arrow {
+    text-align: center;
+    font-size: 22px;
+    margin: 6px 0;
+    color: var(--teal-light);
+  }
+
+  /* ─── REACTION CARDS ─── */
+  .reaction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .reaction-card {
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid;
+  }
+  .reaction-card h4 { margin-top: 0; }
+  .reaction-card.ac { background: var(--acid-chloride); border-color: var(--acid-chloride-b); }
+  .reaction-card.an { background: var(--anhydride); border-color: var(--anhydride-b); }
+  .reaction-card.ca { background: var(--carb-acid); border-color: var(--carb-acid-b); }
+  .reaction-card.es { background: var(--ester); border-color: var(--ester-b); }
+  .reaction-card.am { background: var(--amide); border-color: var(--amide-b); }
+  .reaction-card.ni { background: #f0f4f8; border-color: var(--nitrile-b); }
+
+  /* ─── EQUATION BOXES ─── */
+  .equation {
+    background: var(--deep);
+    color: var(--teal-light);
+    font-family: 'JetBrains Mono', monospace;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 15px;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.7;
+    border-left: 4px solid var(--teal);
+  }
+  .eq-comment {
+    color: #6a9ab6;
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* ─── TABLE ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 15px;
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  }
+  th {
+    background: var(--deep);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:hover td { background: #eef4fa; transition: background .15s; }
+  .tick { color: var(--green-accent); font-size: 18px; font-weight: 700; }
+  .cross { color: var(--red-accent); font-size: 18px; font-weight: 700; }
+
+  /* ─── SECTION HEADERS FOR EACH DERIVATIVE ─── */
+  .derivative-header {
+    border-radius: 14px 14px 0 0;
+    padding: 20px 28px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .derivative-header h3 {
+    font-size: 22px;
+    color: white;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  .derivative-header .reactivity-badge {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .derivative-body {
+    background: var(--card);
+    border-radius: 0 0 14px 14px;
+    padding: 24px 28px;
+    border: 1px solid var(--border);
+    border-top: none;
+    margin-bottom: 8px;
+  }
+  .dh-ac { background: linear-gradient(135deg, #0a8ea0, #0d6e7e); }
+  .dh-an { background: linear-gradient(135deg, #e8890a, #c06e00); }
+  .dh-ca { background: linear-gradient(135deg, #e01a70, #b5015a); }
+  .dh-es { background: linear-gradient(135deg, #2e7d32, #1b5e20); }
+  .dh-am { background: linear-gradient(135deg, #6a1ebb, #4a148c); }
+  .dh-ni { background: linear-gradient(135deg, #37474f, #1c2e35); }
+
+  /* ─── IR TABLE ─── */
+  .ir-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .ir-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ir-label { width: 120px; font-size: 14px; font-weight: 600; flex-shrink: 0; }
+  .ir-pos {
+    flex: 1;
+    height: 28px;
+    background: #eef2f7;
+    border-radius: 6px;
+    position: relative;
+  }
+  .ir-marker {
+    position: absolute;
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+  }
+
+  /* ─── BIOAPPLICATION ─── */
+  .bioapp {
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+  }
+  .bioapp-header {
+    background: linear-gradient(135deg, #1b3a5c, #0d2e40);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bioapp-header .icon {
+    font-size: 28px;
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .bioapp-body { padding: 20px 24px; background: var(--card); }
+
+  /* ─── KEY CONCEPT PILLS ─── */
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 14px 0;
+  }
+  .pill {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pill.teal { background: #e0f7fa; color: var(--teal); border: 1px solid var(--teal); }
+  .pill.gold { background: #fff8e1; color: #b07700; border: 1px solid var(--gold); }
+  .pill.red { background: #fce4ec; color: #c0003c; border: 1px solid #e91e63; }
+  .pill.green { background: #e8f5e9; color: #2e7d32; border: 1px solid #4caf50; }
+  .pill.purple { background: #f3e8ff; color: #6a1ebb; border: 1px solid #9c27b0; }
+
+  /* ─── NITRILE REACTIONS ─── */
+  .nitrile-react {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .nitrile-card {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid #d0dde8;
+  }
+  .nitrile-card h5 {
+    color: #37474f;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  /* ─── SUMMARY CHART ─── */
+  .summary-table th:first-child { width: 160px; }
+  .summary-table td:first-child {
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease both; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .reactivity-bar { flex-direction: column; height: auto; border-radius: 10px; }
+    .reactivity-segment { height: 44px; }
+    nav { gap: 2px; }
+    nav a { font-size: 12px; padding: 5px 8px; }
+    h2 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#intro">簡介</a>
+  <a href="#structure">結構</a>
+  <a href="#naming">命名</a>
+  <a href="#properties">光譜</a>
+  <a href="#mechanism">機制</a>
+  <a href="#reactions">各類反應</a>
+  <a href="#applications">應用</a>
+  <a href="#nitriles">腈</a>
+  <a href="#summary">總覽</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">有機化學 第 22 章</div>
+  <h1>羧酸及其衍生物<br><span>親核醯基取代反應</span></h1>
+  <p>學習一個統一的反應機制，讀懂酸氯化物、酸酐、酯、醯胺五大家族的相互轉化</p>
+  <div class="hero-formula">R–C(=O)–Z &nbsp;+&nbsp; :Nu⁻ &nbsp;→&nbsp; R–C(=O)–Nu &nbsp;+&nbsp; :Z⁻</div>
+  <p style="font-size:14px; color:#7ab0cc; margin:0">Z 是離去基；Nu 是親核劑——這就是整章的核心！</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ SECTION 1 ═══ -->
+<section id="intro">
+<div class="container">
+  <div class="section-label">22.1–22.2</div>
+  <h2>認識羧酸衍生物家族</h2>
+  <p>本章主角是「<strong>醯基（acyl group）</strong>」——也就是 R–C(=O)– 接上不同電負性原子 Z 所形成的一系列化合物。</p>
+
+  <div class="highlight figure">
+    <strong>圖示說明（章節開篇）：</strong>銀杏內酯 B（Ginkgolide B）是銀杏樹提取物中的主要成份，其緊密的 20 碳環系統在 1967 年被確定結構，1988 年由諾貝爾獎得主 Corey 完成全合成。該分子含有多個<strong>酯基</strong>——本章正是學習這類官能基反應的最佳舞台。
+  </div>
+
+  <h3>五大成員一覽</h3>
+  <div class="fg-tags">
+    <div class="fg-tag ac">R–COCl<div class="name">酸氯化物<br>Acid Chloride<br>⭐⭐⭐⭐⭐ 最活潑</div></div>
+    <div class="fg-tag an">(RCO)₂O<div class="name">酸酐<br>Anhydride<br>⭐⭐⭐⭐</div></div>
+    <div class="fg-tag ca">RCOOH<div class="name">羧酸<br>Carboxylic Acid<br>⭐⭐⭐</div></div>
+    <div class="fg-tag es">RCOOR'<div class="name">酯<br>Ester<br>⭐⭐</div></div>
+    <div class="fg-tag am">RCONR'₂<div class="name">醯胺<br>Amide<br>⭐ 最穩定</div></div>
+  </div>
+
+  <div class="card">
+    <h4>🔑 為什麼它們都能發生親核取代？</h4>
+    <p>因為它們的羰基碳上都連接了一個<strong>電負性原子 Z</strong>，Z 可以充當<strong>離去基（leaving group）</strong>。這和醛、酮不同——醛酮沒有離去基，所以只能發生加成，不能取代。</p>
+    <div class="highlight key">
+      每一個以羰基化合物為起始物的反應，都是<strong>親核醯基取代（Nucleophilic Acyl Substitution）</strong>。
+    </div>
+  </div>
+
+  <h3>結構與鍵結</h3>
+  <div class="reaction-grid">
+    <div class="card">
+      <h4>🔺 羰基碳的兩大特性</h4>
+      <ul style="list-style:disc; padding-left:20px; line-height:2">
+        <li><strong>sp² 混成、平面三角形</strong>：鍵角約 120°，空間位阻小 → 容易被親核劑攻擊</li>
+        <li><strong>C 帶 δ+ 正電</strong>：O 電負性強，使羰基碳成為<strong>親電中心（electrophilic）</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📐 共振穩定性與鹼度的關係</h4>
+      <p>RCOZ 可以畫出 3 個共振結構（比醛酮多一個），Z 的鹼性越強，<strong>共振貢獻越大</strong>，化合物越穩定。</p>
+      <p><strong>鹼性順序（Z⁻）：</strong></p>
+      <div class="equation">Cl⁻ &lt; RCO₂⁻ &lt; OH⁻ ≈ OR'⁻ &lt; NR'₂⁻
+↑弱鹼 = 好離去基        強鹼 = 差離去基↑</div>
+    </div>
+  </div>
+
+  <div class="reactivity-scale">
+    <div style="font-weight:700; font-size:17px; margin-bottom:12px; color:var(--navy)">反應活性 vs 穩定性 比較尺</div>
+    <div class="reactivity-bar">
+      <div class="reactivity-segment seg1">酸氯化物<br>RCOCl</div>
+      <div class="reactivity-segment seg2">酸酐<br>(RCO)₂O</div>
+      <div class="reactivity-segment seg3">羧酸<br>RCOOH</div>
+      <div class="reactivity-segment seg4">酯<br>RCOOR'</div>
+      <div class="reactivity-segment seg5">醯胺<br>RCONR'₂</div>
+    </div>
+    <div class="reactivity-labels">
+      <span>← 反應活性最高（最不穩定）</span>
+      <span>穩定性最高（最難反應）→</span>
+    </div>
+    <div class="reactivity-arrow">
+      <span>活潑</span>
+      <div class="bar"></div>
+      <span>穩定</span>
+    </div>
+    <p style="font-size:14px; color:var(--muted); margin-top:12px">
+      💡 記憶口訣：<strong>「氯酐酸酯胺，活性由強到弱」</strong>——活潑的可以變成穩定的，但穩定的通常不能直接變回去！
+    </p>
+  </div>
+
+  <div class="highlight figure">
+    <strong>圖 22.4（Figure 22.4）說明：</strong>三醯甘油（triacylglycerol）的球棒模型顯示三條長碳鏈透過酯鍵連接到甘油骨架。這種飽和脂肪沒有 C=C 雙鍵，長鏈互相緊密堆疊，在室溫下為固態（如豬油）。這是動物儲存能量的方式，代謝時需要酯酶（lipase）將酯鍵水解。
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECTION 2 ═══ -->
+<section id="naming">
+<div class="container">
+  <div class="section-label">22.3</div>
+  <h2>命名規則</h2>
+  <p>衍生物的命名都以母體<strong>羧酸</strong>為基礎，只需改變字尾。</p>
+
+  <div class="reaction-grid">
+    <div class="reaction-card ac">
+      <h4>酸氯化物 Acid Chloride</h4>
+      <p>將 <code>-ic acid</code> → <code>-yl chloride</code></p>
+      <div class="equation" style="font-size:13px">acetic acid → acetyl chloride (CH₃COCl)
+cyclohexanecarboxylic acid
+  → cyclohexanecarbonyl chloride</div>
+    </div>
+    <div class="reaction-card an">
+      <h4>酸酐 Anhydride</h4>
+      <p>將 <code>acid</code> → <code>anhydride</code>（"酐"字代表失水）</p>
+      <div class="equation" style="font-size:13px">acetic acid + acetic acid → acetic anhydride
+acetic acid + benzoic acid
+  → acetic benzoic anhydride（字母順序）</div>
+    </div>
+    <div class="reaction-card es">
+      <h4>酯 Ester（RCOOR'）</h4>
+      <p><strong>先說 R' 烷基，再說醯基字尾改 -ate</strong></p>
+      <div class="equation" style="font-size:13px">CH₃COOC₂H₅ = ethyl acetate
+  ↑ 烷基  ↑ 醯基(acetic→acet-ate)</div>
+    </div>
+    <div class="reaction-card am">
+      <h4>醯胺 Amide</h4>
+      <p>字尾改 <code>-amide</code>；N 上的烷基前加 <code>N-</code></p>
+      <div class="equation" style="font-size:13px">CH₃CONH₂ = acetamide (1°)
+CH₃CONHCH₂CH₃ = N-ethylacetamide (2°)
+CH₃CON(CH₃)₂ = N,N-dimethylacetamide (3°)</div>
+    </div>
+    <div class="reaction-card ni">
+      <h4>腈 Nitrile（RC≡N）</h4>
+      <p>以<strong>碳原子鏈</strong>命名，CN 那個 C 算進去，字尾加 <code>-nitrile</code></p>
+      <div class="equation" style="font-size:13px">CH₃CH₂CN = propanenitrile（3個C，不是2個！）
+C₆H₅CN = benzonitrile</div>
+    </div>
+    <div class="reaction-card ca">
+      <h4>環狀特例：Lactone & Lactam</h4>
+      <p>環狀酯 = <strong>lactone</strong>；環狀醯胺 = <strong>lactam</strong></p>
+      <div class="equation" style="font-size:13px">5員環酯 = γ-lactone
+6員環酯 = δ-lactone
+4員環醯胺 = β-lactam（青黴素的核心！）</div>
+    </div>
+  </div>
+
+  <div class="highlight memory">
+    <strong>命名速記：</strong>酸氯化物（-yl chloride）、酸酐（anhydride）、酯（alkyl + -ate）、醯胺（-amide），全都從羧酸名稱改字尾，認識羧酸命名就能搞定全部！
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECTION 3 ═══ -->
+<section id="properties">
+<div class="container">
+  <div class="section-label">22.4–22.5</div>
+  <h2>物理與光譜性質</h2>
+
+  <h3>紅外線光譜（IR）—— C=O 伸縮振動</h3>
+  <p>C=O 的 IR 吸收位置是鑑定各類羰基化合物最重要的工具。記住以下規律：</p>
+
+  <div class="card">
+    <div class="ir-bar">
+      <div class="ir-row">
+        <span class="ir-label" style="color:var(--acid-chloride-b)">酸氯化物</span>
+        <div class="ir-pos">
+          <div class="ir-marker" style="left:88%; width:10%; background:var(--acid-chloride-b)">~1800</div>
+        </div>
+      </div>
+      <div class="ir-row">
+        <span class="ir-label" style="color:var(--anhydride-b)">酸酐</span>
+        <div class="ir-pos">
+          <div class="ir-marker" style="left:85%; width:14%; background:var(--anhydride-b)">1820 & 1760<br><span style="font-size:10px;font-weight:400">兩個峰！</span></div>
+        </div>
+      </div>
+      <div class="ir-row">
+        <span class="ir-label" style="color:var(--ester-b)">酯</span>
+        <div class="ir-pos">
+          <div class="ir-marker" style="left:65%; width:20%; background:var(--ester-b)">1735–1745</div>
+        </div>
+      </div>
+      <div class="ir-row">
+        <span class="ir-label" style="color:var(--amide-b)">醯胺</span>
+        <div class="ir-pos">
+          <div class="ir-marker" style="left:30%; width:30%; background:var(--amide-b)">1630–1680</div>
+        </div>
+      </div>
+      <div class="ir-row">
+        <span class="ir-label" style="color:var(--nitrile-b)">腈（C≡N）</span>
+        <div class="ir-pos">
+          <div class="ir-marker" style="left:60%; width:12%; background:var(--nitrile-b)">~2250</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--muted); margin-top:8px">← 1600 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1800 →  (cm⁻¹，示意圖非精確比例)</p>
+  </div>
+
+  <div class="highlight key">
+    <strong>規律：</strong>共振穩定性越高（醯胺），C=O 伸縮頻率越低。環越小，C=O 頻率越高（環張力效應）。酸酐最特別，出現<strong>兩個</strong> C=O 峰。
+  </div>
+
+  <h3>¹H NMR 與 ¹³C NMR</h3>
+  <table>
+    <tr><th>信號來源</th><th>化學位移（ppm）</th><th>備註</th></tr>
+    <tr><td>α 碳上的 C–H（接近 C=O）</td><td>2–2.5 ppm</td><td>所有羧酸衍生物共有</td></tr>
+    <tr><td>醯胺的 N–H（1°、2°）</td><td>7.5–8.5 ppm</td><td>相當去屏蔽</td></tr>
+    <tr><td>¹³C：C=O 羰基碳</td><td>160–180 ppm</td><td>比醛酮（190–215 ppm）稍偏高場</td></tr>
+    <tr><td>¹³C：腈的 C≡N</td><td>115–120 ppm</td><td>sp 混成，比炔（65–100）偏低場</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECTION 4 ═══ -->
+<section id="mechanism">
+<div class="container">
+  <div class="section-label">22.7 ★★★ 最核心</div>
+  <h2>親核醯基取代——核心機制</h2>
+  <p>整章所有反應都遵循<strong>同一個兩步驟機制</strong>：</p>
+
+  <div class="mechanism">
+    <div class="mechanism-title">⚙️ 機制 22.1：親核醯基取代通用機制</div>
+
+    <div class="mech-step">
+      <div class="mech-num">1</div>
+      <div class="mech-content">
+        <h4>親核攻擊（Nucleophilic Attack）</h4>
+        <p>親核劑（:Nu⁻）攻擊親電性的羰基碳，π 鍵斷裂，電子移到氧上，形成 <strong>sp³ 混成的四面體中間體（tetrahedral intermediate）</strong>，氧帶負電。</p>
+        <div class="mech-formula">R–C(=O)–Z  +  :Nu⁻  →  R–C(O⁻)(Nu)–Z
+                                         ↑ 四面體中間體</div>
+      </div>
+    </div>
+
+    <div class="mech-arrow">↓</div>
+
+    <div class="mech-step">
+      <div class="mech-num">2</div>
+      <div class="mech-content">
+        <h4>離去基離開（Elimination of Leaving Group）</h4>
+        <p>氧上的電子對重新形成 C=O π 鍵，Z⁻ 帶著電子對離去，恢復 sp² 羰基，<strong>取代完成</strong>。</p>
+        <div class="mech-formula">R–C(O⁻)(Nu)–Z  →  R–C(=O)–Nu  +  :Z⁻
+                                    ↑ 取代產物</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; padding:14px; background:rgba(255,255,255,0.07); border-radius:8px; font-size:14px; color:#a8c4d6">
+      ⚠️ 若親核劑是中性分子（H₂O、ROH、NH₃），還需要額外的<strong>質子轉移</strong>步驟，但核心兩步驟不變。
+    </div>
+  </div>
+
+  <h3>怎麼判斷反應會不會發生？</h3>
+  <div class="card">
+    <p><strong>關鍵法則：</strong>離去基 Z⁻ 必須是比親核劑 Nu⁻ <strong>更弱的鹼</strong>（即更好的離去基），反應才能進行。</p>
+
+    <div class="highlight info">
+      <strong>判斷步驟：</strong>
+      <ol style="padding-left:20px; line-height:2.2; margin-top:8px">
+        <li>找出起始物的離去基 Z⁻ 和攻擊的親核劑 Nu⁻</li>
+        <li>查鹼性順序：<code>Cl⁻ &lt; RCO₂⁻ &lt; OH⁻ ≈ OR'⁻ &lt; NH₂⁻</code></li>
+        <li>若 Z⁻ 鹼性 &lt; Nu⁻ 鹼性 → <span style="color:var(--green-accent); font-weight:700">✔ 反應進行</span></li>
+        <li>若 Z⁻ 鹼性 &gt; Nu⁻ 鹼性 → <span style="color:var(--red-accent); font-weight:700">✘ 反應不進行</span></li>
+      </ol>
+    </div>
+
+    <div class="highlight memory">
+      <strong>口訣：「活潑的可以往穩定走，穩定的不能往活潑走。」</strong><br>
+      酸氯化物（最活潑）可以變成酯、醯胺……但醯胺（最穩定）不能直接變回酯或酸氯化物。
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECTION 5 ═══ -->
+<section id="reactions">
+<div class="container">
+  <div class="section-label">22.8–22.13</div>
+  <h2>各類衍生物的反應</h2>
+
+  <!-- ── ACID CHLORIDES ── -->
+  <div class="derivative-header dh-ac">
+    <h3>🔵 酸氯化物（Acid Chloride） RCOCl</h3>
+    <span class="reactivity-badge">活性最強 ⭐⭐⭐⭐⭐</span>
+  </div>
+  <div class="derivative-body">
+    <p>Cl⁻ 是<strong>最弱的鹼、最好的離去基</strong>，所以酸氯化物與幾乎所有親核劑都能快速反應，常需加<strong>吡啶（pyridine）</strong>中和副產物 HCl。</p>
+    <table>
+      <tr><th>親核劑</th><th>產物</th><th>反應條件</th></tr>
+      <tr><td>RCO₂⁻（羧酸根）</td><td><strong>酸酐</strong> (RCO)₂O</td><td>直接反應</td></tr>
+      <tr><td>H₂O</td><td><strong>羧酸</strong> RCOOH</td><td>加吡啶</td></tr>
+      <tr><td>R'OH（醇）</td><td><strong>酯</strong> RCOOR'</td><td>加吡啶</td></tr>
+      <tr><td>NH₃（2 equiv）</td><td><strong>1° 醯胺</strong> RCONH₂ + NH₄⁺Cl⁻</td><td>過量氨作鹼</td></tr>
+      <tr><td>R'NH₂（2 equiv）</td><td><strong>2° 醯胺</strong> RCONHR'</td><td>過量胺作鹼</td></tr>
+      <tr><td>R'₂NH（2 equiv）</td><td><strong>3° 醯胺</strong> RCONR'₂</td><td>過量胺作鹼</td></tr>
+    </table>
+    <div class="highlight figure">
+      <strong>生活例子（圖示）：</strong>DEET（防蚊液活性成分 N,N-二乙基間甲苯醯胺）就是用間甲苯酸氯化物與二乙胺反應製成的 3° 醯胺。它不殺蟲——而是混淆昆蟲的感知，讓牠們無法追蹤人體散發的溫濕氣息。
+    </div>
+    <div class="highlight info">
+      <strong>醯胺反應特別說明：</strong>需要用<strong>2 等量</strong>的胺——第 1 等量充當親核劑進行取代，第 2 等量充當鹼來中和副產物 HCl（否則 HCl 會把胺質子化，使其失去親核性）。
+    </div>
+  </div>
+
+  <!-- ── ANHYDRIDES ── -->
+  <div class="derivative-header dh-an">
+    <h3>🟠 酸酐（Anhydride） (RCO)₂O</h3>
+    <span class="reactivity-badge">活性次強 ⭐⭐⭐⭐</span>
+  </div>
+  <div class="derivative-body">
+    <p>酸酐含兩個羰基，親核攻擊發生在<strong>其中一個</strong>羰基碳，另一個羰基成為離去基的一部分（RCO₂⁻ 離去）。</p>
+    <table>
+      <tr><th>親核劑</th><th>產物</th></tr>
+      <tr><td>H₂O</td><td><strong>2 × 羧酸</strong> RCOOH</td></tr>
+      <tr><td>R'OH（醇）</td><td><strong>酯</strong> RCOOR' + RCOOH（副產物）</td></tr>
+      <tr><td>NH₃ / 胺（2 equiv）</td><td><strong>醯胺</strong> RCONH₂ + RCOO⁻NH₄⁺</td></tr>
+    </table>
+    <p>酸酐<strong>不能</strong>轉變為酸氯化物（因為 RCO₂⁻ 鹼性 &gt; Cl⁻，Cl⁻ 不夠好的親核劑）。</p>
+
+    <div class="bioapp">
+      <div class="bioapp-header">
+        <div class="icon">💊</div>
+        <div>
+          <strong>重要例子：乙酸酐的 Acetylation 反應</strong>
+          <div style="font-size:14px; color:#a8c4d6">將乙醯基轉移到 –OH 或 –NH₂ 上</div>
+        </div>
+      </div>
+      <div class="bioapp-body">
+        <div class="pill-row">
+          <span class="pill teal">阿斯匹靈（Aspirin）</span>
+          <span class="pill gold">撲熱息痛（Acetaminophen / Tylenol）</span>
+          <span class="pill red">海洛因（Heroin）</span>
+        </div>
+        <p>三者皆由乙酸酐（acetic anhydride）進行乙醯化反應製得。阿斯匹靈是水楊酸的 –OH 被乙醯化為酯；撲熱息痛是對胺基苯酚的 –NH₂ 被乙醯化為醯胺；嗎啡（morphine）的兩個 –OH 同時被乙醯化，得到二酯——海洛因。</p>
+      </div>
+    </div>
+
+    <div class="highlight figure">
+      <strong>圖示說明：</strong>機制 22.4 演示酸酐與 NH₃ 反應製造醯胺的三步驟：（1）NH₃ 親核攻擊形成四面體中間體；（2）質子轉移；（3）RCO₂⁻ 作為離去基離去，得到 1° 醯胺。
+    </div>
+  </div>
+
+  <!-- ── CARBOXYLIC ACIDS ── -->
+  <div class="derivative-header dh-ca">
+    <h3>🔴 羧酸（Carboxylic Acid） RCOOH</h3>
+    <span class="reactivity-badge">需特殊條件 ⭐⭐⭐</span>
+  </div>
+  <div class="derivative-body">
+    <p>羧酸是有機強酸，鹼性親核劑（如 NH₃、⁻OH）會<strong>先發生酸鹼反應</strong>，而非親核取代。所以需要特殊試劑來「活化」羧酸。</p>
+
+    <div class="highlight figure">
+      <strong>圖 22.3（Figure 22.3）說明：</strong>羧酸可進行五類親核醯基取代反應：（1）用 SOCl₂ 製備酸氯化物；（2）加熱脫水形成環狀酸酐；（3）酸催化與醇製備酯（Fischer esterification）；（4）NH₃ 後加熱製備醯胺；（5）用 DCC 試劑與胺製備醯胺。
+    </div>
+
+    <h4>① 製備酸氯化物：用 SOCl₂（氯化亞碸）</h4>
+    <div class="equation">RCOOH  +  SOCl₂  →  RCOCl  +  SO₂ + HCl
+<span class="eq-comment">機制重點：SOCl₂ 先把 –OH 轉為更好的離去基 OSOCl，再由 Cl⁻ 取代</span></div>
+    <p>這是唯一把穩定衍生物（羧酸）轉化成活潑衍生物（酸氯化物）的方法。</p>
+
+    <h4>② 製備環狀酸酐：二元酸加熱脫水</h4>
+    <div class="equation">丁二酸（succinic acid） + Δ  →  丁二酸酐（succinic anhydride）+ H₂O
+鄰苯二甲酸（phthalic acid） + Δ  →  鄰苯二甲酸酐 + H₂O
+<span class="eq-comment">只有相鄰兩個羧基（可形成5或6員環）才能內酯化</span></div>
+
+    <h4>③ 製備酯：Fischer Esterification（費歇爾酯化）</h4>
+    <div class="highlight key">
+      RCOOH + R'OH &nbsp;⇌&nbsp; RCOOR' + H₂O<br>
+      催化劑：H₂SO₄（酸催化）。此反應為<strong>可逆平衡</strong>，需用過量醇或蒸除水來推動平衡向右。
+    </div>
+    <p>機制核心（6 步驟）：</p>
+    <div class="mechanism" style="padding:20px">
+      <div style="font-size:14px; color:#90b4cc; line-height:2">
+        <strong style="color:var(--gold-light)">Part 1 — 親核劑 R'OH 的加成：</strong><br>
+        ① 酸催化：羰基氧質子化 → 羰基碳更親電<br>
+        ② R'OH 親核攻擊 → 四面體中間體<br>
+        ③ 去質子化<br>
+        <strong style="color:var(--gold-light)">Part 2 — 離去基 H₂O 的離去：</strong><br>
+        ④ OH 質子化 → 變成好離去基 H₂O<br>
+        ⑤ 水離去 → 氧陽離子中間體<br>
+        ⑥ 去質子化 → 酯產物
+      </div>
+    </div>
+    <div class="highlight warning">
+      <strong>碱性條件下羧酸不能發生 Fischer 酯化！</strong>因為 ⁻OH 會把 RCOOH 去質子化成 RCOO⁻（羧酸根），帶負電的羧酸根不會被親核劑攻擊。
+    </div>
+
+    <h4>④ 製備醯胺：與胺直接反應需要 DCC 試劑</h4>
+    <p>直接混合羧酸與胺 → 先發生<strong>酸鹼反應</strong>，生成銨鹽；需加熱 &gt;100°C 才能脫水成醯胺（產率低）。</p>
+    <div class="equation">RCOOH + R'NH₂ → RCOO⁻ R'NH₃⁺  →（加熱Δ）→ RCONHR' + H₂O
+<span class="eq-comment">更好的方法：加入 DCC（二環己基碳二亞胺）</span></div>
+    <div class="highlight info">
+      <strong>DCC 的作用：</strong>DCC 是<strong>脫水劑</strong>，它把羧酸的 –OH 轉化為更好的離去基（活化中間體 O-acylisourea），使胺得以在溫和條件下直接親核取代，快速生成醯胺。副產物為二環己脲（dicyclohexylurea）。DCC 法廣泛應用於胜肽鍵（醯胺鍵）的合成。
+    </div>
+  </div>
+
+  <!-- ── ESTERS ── -->
+  <div class="derivative-header dh-es">
+    <h3>🟢 酯（Ester） RCOOR'</h3>
+    <span class="reactivity-badge">中等活性 ⭐⭐</span>
+  </div>
+  <div class="derivative-body">
+    <p>酯可水解為羧酸，也可與胺反應生成醯胺。水解有酸催化和鹼催化兩條路徑。</p>
+
+    <h4>① 酸催化水解（可逆）</h4>
+    <div class="equation">RCOOR' + H₂O  ⇌  RCOOH + R'OH   (H₂SO₄催化)
+<span class="eq-comment">機制是 Fischer 酯化的逆過程，用大量水推動平衡向右</span></div>
+
+    <h4>② 鹼性水解（皂化，Saponification）——不可逆！</h4>
+    <div class="equation">RCOOR' + ⁻OH  →  RCOO⁻ + R'OH
+<span class="eq-comment">生成的羧酸根 RCOO⁻ 是共振穩定的，驅動平衡，使反應不可逆</span></div>
+    <div class="highlight key">
+      <strong>皂化（Saponification）</strong>：拉丁文"sapo"意為肥皂。脂肪（三醯甘油酯）用鹼水解，生成甘油和脂肪酸鹽——即肥皂！這也是鹼催化酯水解的典型應用。
+    </div>
+    <div class="highlight warning">
+      <strong>⁻OH 是促進劑（promoter），不是催化劑（catalyst）！</strong>因為 ⁻OH 是親核劑，參與反應後被消耗，不會再生，所以稱為「鹼促進」而非「鹼催化」。
+    </div>
+
+    <h4>③ 與胺反應生成醯胺</h4>
+    <div class="equation">RCOOR' + NH₃  →  RCONH₂ + R'OH
+RCOOR' + R''NH₂  →  RCONHR'' + R'OH
+<span class="eq-comment">醇（R'OH）是離去基，pKa ~15–18，比 NH₂⁻ 的鹼性弱，反應可行</span></div>
+
+    <div class="bioapp">
+      <div class="bioapp-header">
+        <div class="icon">🫀</div>
+        <div>
+          <strong>應用：脂質水解（22.12）</strong>
+          <div style="font-size:14px; color:#a8c4d6">三醯甘油的代謝</div>
+        </div>
+      </div>
+      <div class="bioapp-body">
+        <p>動物以<strong>三醯甘油（triacylglycerol）</strong>形式儲存能量——本質上是三個長鏈脂肪酸以酯鍵連接在甘油骨架上。體內的<strong>脂酶（lipase）</strong>催化這些酯鍵的水解，釋放甘油和脂肪酸，供細胞燃燒產能。</p>
+        <div class="highlight figure">
+          <strong>圖 22.6（Figure 22.6）說明：</strong>脂肪酸硫酯（fatty acid thioester）與膽固醇反應，在酶催化下形成<strong>膽固醇酯（cholesteryl ester）</strong>。膽固醇以酯的形式儲存在脂蛋白顆粒中，透過血液循環。LDL（低密度脂蛋白，俗稱「壞膽固醇」）把膽固醇送到組織；HDL（高密度脂蛋白，「好膽固醇」）把膽固醇送回肝臟。LDL 中的膽固醇酯若過多，會沉積在動脈壁形成<strong>粥狀硬化斑塊（plaque）</strong>，是心血管疾病的主因。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight figure">
+      <strong>Olestra（合成脂肪代替品）：</strong>Olestra 是蔗糖（8個 –OH）被脂肪酸酯化的產物。因為分子太大，消化酶無法水解它，所以不被吸收——這讓它成為零卡路里的脂肪代替品，但也會引起腸胃不適。
+    </div>
+  </div>
+
+  <!-- ── AMIDES ── -->
+  <div class="derivative-header dh-am">
+    <h3>🟣 醯胺（Amide） RCONR'₂</h3>
+    <span class="reactivity-badge">最穩定，需強力條件 ⭐</span>
+  </div>
+  <div class="derivative-body">
+    <p>NR'₂⁻ 是最強的鹼、最差的離去基，所以醯胺最穩定，只有在強酸或強鹼、高溫下才能水解。</p>
+    <table>
+      <tr><th>條件</th><th>反應</th><th>產物</th></tr>
+      <tr><td>酸催化（H₃O⁺, 加熱）</td><td>水解</td><td>RCOOH + R'₂NH₂⁺</td></tr>
+      <tr><td>鹼（⁻OH, 加熱）</td><td>水解</td><td>RCOO⁻ + R'₂NH</td></tr>
+    </table>
+    <div class="highlight info">
+      醯胺鍵（peptide bond）是<strong>蛋白質的骨幹</strong>。正因為醯胺最穩定，蛋白質才能在生理條件下維持結構不被隨意水解。
+    </div>
+
+    <div class="bioapp">
+      <div class="bioapp-header">
+        <div class="icon">🦠</div>
+        <div>
+          <strong>應用：β-内醯胺抗生素（22.14）</strong>
+          <div style="font-size:14px; color:#a8c4d6">青黴素 / 頭孢菌素的作用機制</div>
+        </div>
+      </div>
+      <div class="bioapp-body">
+        <p>青黴素（Penicillin）和頭孢菌素（Cephalosporin）的核心結構是<strong>β-內醯胺環（β-lactam）</strong>——一個四員環的醯胺。</p>
+        <p><strong>作用機制：</strong>細菌合成細胞壁時，需要酶來連接糖肽聚合物。β-內醯胺環因為環張力大，C=O 吸收頻率偏高（更活潑），能與此酶的<strong>活性位絲胺酸（serine）–OH</strong> 發生不可逆的親核醯基取代（醯化反應）。酶被永久阻斷，細胞壁無法合成，細菌死亡。</p>
+        <div class="highlight figure">
+          <strong>圖示說明（22.14）：</strong>β-內醯胺環（四員環）因環張力而高度活潑。細菌酶的 Ser–OH 攻擊其羰基碳，開環後形成穩定的共價中間體（酯鍵），酶被永久失活。
+        </div>
+        <div class="highlight warning">
+          <strong>抗藥性問題：</strong>部分細菌產生 β-內醯胺酶（β-lactamase），能水解 β-內醯胺環，使抗生素失效。這是抗藥性的重要機制之一。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECTION 6 ═══ -->
+<section id="applications">
+<div class="container">
+  <div class="section-label">22.16–22.17</div>
+  <h2>應用：合成纖維與生物醯化</h2>
+
+  <div class="reaction-grid">
+    <div class="card">
+      <h4>🧵 尼龍 6,6（Nylon 6,6）——聚醯胺</h4>
+      <p>由兩個六碳單體縮合聚合：</p>
+      <div class="equation" style="font-size:13px">己二醯氯（adipoyl chloride, Cl-CO(CH₂)₄CO-Cl）
++
+己二胺（hexamethylenediamine, H₂N(CH₂)₆NH₂）
+→ 尼龍 6,6 + HCl（縮合聚合物）</div>
+      <p style="font-size:14px; color:var(--muted)">1938 年 DuPont 建廠生產，最初用於製作降落傘，後取代蠶絲廣泛應用。</p>
+      <div class="highlight figure">
+        <strong>圖 22.5（Figure 22.5）說明：</strong>天然纖維的化學本質：羊毛和蠶絲是蛋白質（多個醯胺鍵連接的胺基酸鏈）；棉花和亞麻是纖維素（葡萄糖單元以醚鍵連接的多糖）。聚醯胺的尼龍模仿了蛋白質的醯胺鍵結構，而聚酯的滌綸（Dacron）則模仿了天然酯的連接方式。
+      </div>
+    </div>
+    <div class="card">
+      <h4>🧶 聚酯 PET（Dacron / Terylene / Mylar）</h4>
+      <div class="equation" style="font-size:13px">對苯二甲酸（terephthalic acid）
++
+乙二醇（ethylene glycol）
+→ PET + H₂O（Fischer 酯化縮合）</div>
+      <p style="font-size:14px; color:var(--muted)">可回收再製成環保購物袋、飲料瓶（1號塑膠）、衣物纖維。</p>
+    </div>
+  </div>
+
+  <div class="bioapp">
+    <div class="bioapp-header">
+      <div class="icon">⚗️</div>
+      <div>
+        <strong>生物醯化：乙醯輔酶 A（Acetyl CoA）（22.17）</strong>
+        <div style="font-size:14px; color:#a8c4d6">生命體中最重要的醯基轉移試劑</div>
+      </div>
+    </div>
+    <div class="bioapp-body">
+      <p>細胞內的親核醯基取代叫做<strong>醯基轉移反應（acyl transfer）</strong>。主要試劑是<strong>硫酯（thioester）</strong>，通式 RCOSR'，其中 ⁻SR' 是比 ⁻OR' 更好的離去基（S 鹼性比 O 弱）。</p>
+      <p>最重要的硫酯：<strong>乙醯輔酶 A（acetyl CoA）</strong>，結構為 CH₃CO–SCoA。</p>
+      <div class="highlight key">
+        <strong>例：合成乙醯膽鹼（acetylcholine）</strong><br>
+        乙醯 CoA + 膽鹼（choline）→ 乙醯膽鹼（neurotransmitter）+ CoA–SH<br>
+        乙醯膽鹼是神經細胞間傳遞訊號的神經傳導物質。
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECTION 7 ═══ -->
+<section id="nitriles">
+<div class="container">
+  <div class="section-label">22.18</div>
+  <h2>腈（Nitrile）RC≡N</h2>
+
+  <div class="card">
+    <h4>基本性質</h4>
+    <ul style="list-style:disc; padding-left:20px; line-height:2">
+      <li>含<strong>碳–氮三鍵（C≡N）</strong>，C 為 sp 混成，線型結構（180°）</li>
+      <li>C 的氧化態與羧酸衍生物相同 → 化學行為有相似之處</li>
+      <li><strong>沒有離去基</strong> → 不發生親核取代，而是發生<strong>親核加成（nucleophilic addition）</strong></li>
+      <li>IR 特徵：C≡N 在 ~2250 cm⁻¹；¹³C NMR：115–120 ppm</li>
+    </ul>
+    <div class="highlight figure">
+      <strong>結構圖說明：</strong>腈的 C≡N 類似炔烴的 C≡C，sp 混成，180° 線型。氮的電負性使 C 帶 δ+ 電，親核劑從碳端攻擊。兩個抗癌藥物 Letrozole（商品名 Femara）和 Anastrozole（Arimidex）都含有腈基，作為<strong>芳香化酶抑制劑</strong>，阻斷雌激素合成，用於治療雌激素陽性乳癌。
+    </div>
+  </div>
+
+  <h3>腈的製備</h3>
+  <div class="equation">R–X（伯鹵烷）+  ⁻CN  →（SN2）→  R–C≡N  +  X⁻
+<span class="eq-comment">SN2 取代，碳鏈增加 1 個碳，形成新的 C–C 鍵！（不能用仲、叔鹵烷）</span></div>
+
+  <h3>腈的三大反應</h3>
+  <div class="nitrile-react">
+    <div class="nitrile-card">
+      <h5>① 水解 → 羧酸</h5>
+      <div class="equation" style="font-size:13px">RC≡N + H₂O → RCOOH（酸催化）
+         → RCOO⁻（鹼催化）
+機制：先加成形成亞胺酸，
+互變異構為醯胺，再水解</div>
+      <p style="font-size:13px; color:var(--muted)">三個 C–N 鍵被三個 C–O 鍵取代。</p>
+    </div>
+    <div class="nitrile-card">
+      <h5>② 還原 → 胺 or 醛</h5>
+      <div class="equation" style="font-size:13px">RC≡N + [1] LiAlH₄ / [2] H₂O
+→ RCH₂NH₂  （1° 胺）
+
+RC≡N + [1] DIBAL-H / [2] H₂O
+→ RCHO  （醛）</div>
+      <p style="font-size:13px; color:var(--muted)">LiAlH₄ 加兩當量 H⁻；DIBAL-H 只加一當量，中間體為亞胺（imine），再水解得醛。</p>
+    </div>
+    <div class="nitrile-card">
+      <h5>③ 與 RMgX / RLi 反應 → 酮</h5>
+      <div class="equation" style="font-size:13px">RC≡N + [1] R'MgX / [2] H₂O
+→ R–CO–R'  （酮）</div>
+      <p style="font-size:13px; color:var(--muted)">形成新的 C–C 鍵，中間體為亞胺，水解後得酮。</p>
+    </div>
+  </div>
+
+  <div class="highlight memory">
+    <strong>腈反應記憶表：</strong><br>
+    腈 + H₂O → <strong>羧酸</strong>（多加 OH，脫掉 N）<br>
+    腈 + LiAlH₄ → <strong>1° 胺</strong>（N 留下，加兩個 H）<br>
+    腈 + DIBAL-H → <strong>醛</strong>（N 離去，換成一個 H）<br>
+    腈 + RMgX → <strong>酮</strong>（N 離去，換成 R，生成新 C–C 鍵）
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECTION 8 ═══ -->
+<section id="summary">
+<div class="container">
+  <div class="section-label">22.15 總整理</div>
+  <h2>反應可行性總表（Table 22.5）</h2>
+  <p>「✔ 反應可行」表示較活潑的衍生物可轉變為較不活潑的衍生物。「✘」表示該方向通常不行（除非特殊試劑，如 SOCl₂）。</p>
+
+  <div class="card summary-table">
+    <table>
+      <tr>
+        <th>起始物 ↓ \ 產物 →</th>
+        <th style="color:#9ef3ff">酸氯化物<br>RCOCl</th>
+        <th style="color:#ffd280">酸酐<br>(RCO)₂O</th>
+        <th style="color:#ff9eb5">羧酸<br>RCOOH</th>
+        <th style="color:#98e6a0">酯<br>RCOOR'</th>
+        <th style="color:#c9b0ff">醯胺<br>RCONR'₂</th>
+      </tr>
+      <tr>
+        <td style="background:#0a3a45; color:white; font-weight:700">① 酸氯化物 RCOCl</td>
+        <td>—</td>
+        <td class="tick">✔</td>
+        <td class="tick">✔</td>
+        <td class="tick">✔</td>
+        <td class="tick">✔</td>
+      </tr>
+      <tr>
+        <td style="background:#3d2800; color:white; font-weight:700">② 酸酐 (RCO)₂O</td>
+        <td class="cross">✘</td>
+        <td>—</td>
+        <td class="tick">✔</td>
+        <td class="tick">✔</td>
+        <td class="tick">✔</td>
+      </tr>
+      <tr>
+        <td style="background:#3d0020; color:white; font-weight:700">③ 羧酸 RCOOH</td>
+        <td class="tick" style="font-size:13px">✔<br><small>SOCl₂</small></td>
+        <td class="tick" style="font-size:13px">✔<br><small>加熱</small></td>
+        <td>—</td>
+        <td class="tick">✔</td>
+        <td class="tick">✔</td>
+      </tr>
+      <tr>
+        <td style="background:#0d2e10; color:white; font-weight:700">④ 酯 RCOOR'</td>
+        <td class="cross">✘</td>
+        <td class="cross">✘</td>
+        <td class="tick">✔</td>
+        <td>—</td>
+        <td class="tick">✔</td>
+      </tr>
+      <tr>
+        <td style="background:#22004d; color:white; font-weight:700">⑤ 醯胺 RCONR'₂</td>
+        <td class="cross">✘</td>
+        <td class="cross">✘</td>
+        <td class="tick">✔</td>
+        <td class="cross">✘</td>
+        <td>—</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight key">
+    <strong>總覽表的使用邏輯：</strong>往右下方移動（活潑→穩定）一般可行 ✔；往左上方移動（穩定→活潑）一般需要特殊試劑或不可行 ✘。
+  </div>
+
+  <h3>有趣酯與醯胺生活例子</h3>
+  <div class="reaction-grid">
+    <div class="card">
+      <h4>🍌🥭🍍 水果香氣——低分子量酯</h4>
+      <table style="font-size:14px">
+        <tr><th>酯名</th><th>氣味</th></tr>
+        <tr><td>isoamyl acetate</td><td>香蕉</td></tr>
+        <tr><td>ethyl butanoate</td><td>芒果</td></tr>
+        <tr><td>methyl 2-methylbutanoate</td><td>鳳梨</td></tr>
+      </table>
+      <p style="font-size:13px; color:var(--muted); margin-top:8px">低分子量酯揮發性高，因此有強烈特徵香氣。許多人工香精就是這些酯的合成版本。</p>
+    </div>
+    <div class="card">
+      <h4>💊 藥物中的醯胺</h4>
+      <ul style="list-style:disc; padding-left:20px; line-height:2; font-size:15px">
+        <li><strong>Gleevec（imatinib）</strong>：治療慢性骨髓性白血病的標靶藥，含多個醯胺鍵</li>
+        <li><strong>青黴素（Penicillin G）</strong>：含 β-內醯胺環及 α 位醯胺</li>
+        <li><strong>Met-腦啡（Met-enkephalin）</strong>：含 4 個醯胺鍵的天然鎮痛肽，存在於神經組織</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>一頁速覽：本章關鍵詞</h3>
+  <div class="pill-row">
+    <span class="pill teal">親核醯基取代</span>
+    <span class="pill teal">四面體中間體</span>
+    <span class="pill gold">反應活性順序</span>
+    <span class="pill gold">Fischer 酯化</span>
+    <span class="pill gold">DCC</span>
+    <span class="pill red">皂化 Saponification</span>
+    <span class="pill red">SOCl₂</span>
+    <span class="pill green">縮合聚合物</span>
+    <span class="pill green">尼龍 / PET</span>
+    <span class="pill purple">β-內醯胺抗生素</span>
+    <span class="pill purple">乙醯 CoA</span>
+    <span class="pill teal">腈的水解/還原</span>
+  </div>
+
+  <div class="highlight memory">
+    <strong>🧠 最終口訣——記住這些你就懂了 80%！</strong><br><br>
+    ❶ <strong>「氯酐酸酯胺，活性由強到弱」</strong>——反應活性順序<br>
+    ❷ <strong>「離去基鹼性越弱，越好離去，化合物越活潑」</strong><br>
+    ❸ <strong>「活潑可以往穩定走，穩定不能反過來」</strong>（例外：SOCl₂ 可把羧酸→酸氯化物）<br>
+    ❹ <strong>機制兩步驟：① 親核攻擊（四面體中間體）→ ② 離去基離開（恢復 C=O）</strong><br>
+    ❺ <strong>腈沒有離去基，所以是加成不是取代</strong><br>
+    ❻ <strong>酸催化先質子化 O；鹼催化先 ⁻OH 進攻</strong>
+  </div>
+</div>
+</section>
+
+<footer style="background: var(--navy); color: #6a8a9e; text-align:center; padding: 28px 20px; font-size:14px">
+  <p>有機化學 第 22 章學習筆記 ｜ 親核醯基取代反應（Nucleophilic Acyl Substitution）</p>
+  <p style="margin-top:6px; font-size:12px">內容改編自 Smith, Organic Chemistry 原文書，僅供學習參考</p>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.style.color = '');
+        const link = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (link) link.style.color = '#f5c842';
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Fade-in for cards
+  const cards = document.querySelectorAll('.card, .reaction-card, .bioapp, .mechanism');
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -60px 0px' });
+  cards.forEach(c => {
+    c.style.opacity = '0';
+    c.style.transform = 'translateY(16px)';
+    c.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    fadeObserver.observe(c);
+  });
+</script>
+</body>
+</html>
