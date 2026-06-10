@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第51章｜動物行為學</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0e1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent1: #58a6ff;      /* 概念藍 */
+    --accent2: #3fb950;      /* 生態綠 */
+    --accent3: #f78166;      /* 警示橙紅 */
+    --accent4: #d2a8ff;      /* 進化紫 */
+    --accent5: #ffa657;      /* 本能金 */
+    --highlight-bg: rgba(88,166,255,0.1);
+    --key-bg: rgba(255,166,87,0.15);
+    --key-border: #ffa657;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #0e1117 0%, #1a1f2e 50%, #0e1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(88,166,255,0.08) 0%, transparent 70%);
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--accent1); }
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .tinbergen-box {
+    display: inline-flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 28px;
+    max-width: 640px;
+  }
+  .tb-badge {
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .tb-badge.proximate { background: rgba(88,166,255,0.15); color: var(--accent1); border: 1px solid rgba(88,166,255,0.3); }
+  .tb-badge.ultimate { background: rgba(63,185,80,0.15); color: var(--accent2); border: 1px solid rgba(63,185,80,0.3); }
+
+  /* ===== NAV TABS ===== */
+  .nav-tabs {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,17,23,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; overflow-x: auto; gap: 0;
+    padding: 0 16px;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    flex-shrink: 0;
+    padding: 14px 18px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent1); border-bottom-color: var(--accent1); }
+
+  /* ===== MAIN LAYOUT ===== */
+  .container { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .section-num.c1 { background: rgba(88,166,255,0.15); color: var(--accent1); }
+  .section-num.c2 { background: rgba(63,185,80,0.15); color: var(--accent2); }
+  .section-num.c3 { background: rgba(247,129,102,0.15); color: var(--accent3); }
+  .section-num.c4 { background: rgba(210,168,255,0.15); color: var(--accent4); }
+  .section-header h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ===== CONTENT BLOCKS ===== */
+  .section-page { display: none; }
+  .section-page.active { display: block; }
+
+  p { color: var(--text); margin-bottom: 16px; }
+
+  /* ===== KEY TERM ===== */
+  .key-term {
+    display: inline;
+    background: var(--key-bg);
+    border-bottom: 2px solid var(--key-border);
+    color: var(--accent5);
+    font-weight: 700;
+    padding: 0 3px;
+    border-radius: 2px;
+  }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-left: 4px solid;
+  }
+  .callout.important {
+    background: rgba(255,166,87,0.08);
+    border-color: var(--accent5);
+  }
+  .callout.example {
+    background: rgba(88,166,255,0.07);
+    border-color: var(--accent1);
+  }
+  .callout.definition {
+    background: rgba(210,168,255,0.08);
+    border-color: var(--accent4);
+  }
+  .callout.evolution {
+    background: rgba(63,185,80,0.07);
+    border-color: var(--accent2);
+  }
+  .callout-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .callout.important .callout-label { color: var(--accent5); }
+  .callout.example .callout-label { color: var(--accent1); }
+  .callout.definition .callout-label { color: var(--accent4); }
+  .callout.evolution .callout-label { color: var(--accent2); }
+  .callout p { margin: 0; font-size: 0.95rem; }
+
+  /* ===== HIGHLIGHT BOX (super important) ===== */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(88,166,255,0.12), rgba(210,168,255,0.08));
+    border: 1px solid rgba(88,166,255,0.35);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 28px 0;
+    position: relative;
+  }
+  .highlight-box::before {
+    content: '★ 重要';
+    position: absolute; top: -11px; left: 20px;
+    background: var(--accent1);
+    color: #0e1117;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    padding: 2px 10px;
+    border-radius: 10px;
+  }
+  .highlight-box h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent1);
+    margin-bottom: 10px;
+  }
+  .highlight-box p { margin: 0; font-size: 0.95rem; }
+
+  /* ===== CONCEPT CARDS GRID ===== */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 24px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color: var(--accent1); transform: translateY(-2px); }
+  .card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .card h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .card p { font-size: 0.86rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+  /* ===== COMPARISON TABLE ===== */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.9rem; }
+  .compare-table th {
+    background: var(--surface2);
+    color: var(--accent1);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent1);
+  }
+  .compare-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ===== FORMULA BOX ===== */
+  .formula {
+    background: var(--surface2);
+    border: 1px solid var(--accent4);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 24px 0;
+    text-align: center;
+  }
+  .formula .math {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent4);
+    font-family: 'Noto Serif TC', serif;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+  .formula .math-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.9; }
+
+  /* ===== TIMELINE / SEQUENCE ===== */
+  .flow {
+    display: flex; flex-direction: column; gap: 0;
+    margin: 24px 0;
+    position: relative;
+  }
+  .flow::before {
+    content: '';
+    position: absolute;
+    left: 23px; top: 20px; bottom: 20px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent1), var(--accent2));
+  }
+  .flow-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 12px 0;
+    position: relative;
+  }
+  .flow-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+    z-index: 1;
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px currentColor;
+  }
+  .flow-dot.blue { color: var(--accent1); background: var(--accent1); }
+  .flow-dot.green { color: var(--accent2); background: var(--accent2); }
+  .flow-dot.orange { color: var(--accent3); background: var(--accent3); }
+  .flow-dot.purple { color: var(--accent4); background: var(--accent4); }
+  .flow-content { flex: 1; }
+  .flow-content strong { color: var(--text); display: block; font-size: 0.95rem; margin-bottom: 4px; }
+  .flow-content span { color: var(--text-muted); font-size: 0.87rem; }
+
+  /* ===== MEMORY AIDS ===== */
+  .memory-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .memory-card .label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 12px;
+  }
+  .memory-card h4 {
+    font-size: 1.3rem;
+    color: var(--accent5);
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'Noto Serif TC', serif;
+  }
+  .memory-card p { font-size: 0.9rem; margin: 0; }
+
+  /* ===== QUIZ SECTION ===== */
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .quiz-q {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+    text-align: left;
+  }
+  .quiz-opt:hover { border-color: var(--accent1); background: rgba(88,166,255,0.08); }
+  .quiz-opt.correct { border-color: var(--accent2) !important; background: rgba(63,185,80,0.12) !important; color: var(--accent2) !important; }
+  .quiz-opt.wrong { border-color: var(--accent3) !important; background: rgba(247,129,102,0.1) !important; color: var(--accent3) !important; }
+  .quiz-feedback { margin-top: 12px; font-size: 0.86rem; padding: 10px 14px; border-radius: 8px; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.good { background: rgba(63,185,80,0.1); color: var(--accent2); border: 1px solid rgba(63,185,80,0.3); }
+  .quiz-feedback.bad { background: rgba(247,129,102,0.1); color: var(--accent3); border: 1px solid rgba(247,129,102,0.3); }
+
+  /* ===== SUB-HEADING ===== */
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 32px 0 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  h3::before {
+    content: '';
+    width: 4px; height: 18px;
+    background: var(--accent1);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ===== TAGS ===== */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 16px; }
+  .tag {
+    font-size: 0.74rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  .tag.blue { background: rgba(88,166,255,0.12); color: var(--accent1); }
+  .tag.green { background: rgba(63,185,80,0.12); color: var(--accent2); }
+  .tag.orange { background: rgba(247,129,102,0.12); color: var(--accent3); }
+  .tag.purple { background: rgba(210,168,255,0.12); color: var(--accent4); }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-track {
+    display: flex; gap: 8px; align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .prog-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--border);
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  .prog-dot.done { background: var(--accent2); }
+  .prog-dot.active { background: var(--accent1); }
+  .prog-label { font-size: 0.78rem; color: var(--text-muted); margin-left: 4px; }
+
+  /* ===== SUMMARY TABLE ===== */
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 12px; margin: 20px 0; }
+  .summary-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .summary-item .si-label { font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .summary-item .si-val { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+
+  em { color: var(--accent5); font-style: normal; font-weight: 600; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 32px; }
+    .container { padding: 32px 16px; }
+    .formula .math { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Biology Chapter 51</div>
+  <h1>動物<span>行為學</span><br>Animal Behavior</h1>
+  <p class="hero-sub">從本能到學習、從覓食到利他——解析動物行為背後的演化邏輯</p>
+  <div class="tinbergen-box">
+    <span style="font-size:0.8rem;color:var(--text-muted);width:100%;text-align:center;margin-bottom:4px">丁柏根四大問題框架</span>
+    <span class="tb-badge proximate">🔬 近因：什麼觸發行為？</span>
+    <span class="tb-badge proximate">🧬 近因：發育如何影響？</span>
+    <span class="tb-badge ultimate">🌿 遠因：如何幫助存活？</span>
+    <span class="tb-badge ultimate">🌍 遠因：演化歷史為何？</span>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <a class="nav-tab active" onclick="showSection(0,this)" href="#">📌 概念總覽</a>
+  <a class="nav-tab" onclick="showSection(1,this)" href="#">1. 感覺與行為</a>
+  <a class="nav-tab" onclick="showSection(2,this)" href="#">2. 學習</a>
+  <a class="nav-tab" onclick="showSection(3,this)" href="#">3. 覓食與交配</a>
+  <a class="nav-tab" onclick="showSection(4,this)" href="#">4. 遺傳與利他</a>
+  <a class="nav-tab" onclick="showSection(5,this)" href="#">✏️ 自我測驗</a>
+</nav>
+
+<!-- ========== SECTION 0: OVERVIEW ========== -->
+<div class="section-page active" id="sec0">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-num c1">本章概覽</span>
+    <h2>行為生態學是什麼？</h2>
+  </div>
+
+  <p><span class="key-term">行為（behavior）</span>是動物透過神經系統控制肌肉所做出的動作，包括鳴唱、標記領域，甚至只是蜷縮在一起保暖。要真正理解一個行為，荷蘭科學家 <em>尼可·丁柏根（Niko Tinbergen）</em> 提出必須從四個角度回答問題：</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>觸發因素</h4>
+      <p>什麼刺激啟動了這個行為？身體各系統如何配合？（近因）</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌱</div>
+      <h4>發育影響</h4>
+      <p>成長經驗如何改變動物對刺激的反應？（近因）</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h4>生存功能</h4>
+      <p>這個行為如何幫助動物生存與繁殖？（遠因）</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌳</div>
+      <h4>演化歷史</h4>
+      <p>這個行為如何在演化過程中被天擇塑造？（遠因）</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>近因 vs. 遠因——一定要分清楚！</h4>
+    <p><strong>近因（proximate causation）</strong>問的是「怎麼發生的」——神經、基因、發育機制。<br>
+    <strong>遠因（ultimate causation）</strong>問的是「為什麼存在」——天擇、適應、演化功能。<br><br>
+    舉例：雄刺魚攻擊紅色物體。<em>近因</em>：紅色是釋放攻擊的符號刺激。<em>遠因</em>：攻擊能保護領域，增加繁殖成功率。</p>
+  </div>
+
+  <h3>本章四大概念一覽</h3>
+
+  <table class="compare-table">
+    <tr>
+      <th>概念</th><th>核心問題</th><th>關鍵詞</th>
+    </tr>
+    <tr>
+      <td style="color:var(--accent1);font-weight:700">51.1 感覺輸入與行為</td>
+      <td>什麼觸發行為？動物怎麼導航、溝通？</td>
+      <td>固定行為模式、符號刺激、費洛蒙</td>
+    </tr>
+    <tr>
+      <td style="color:var(--accent2);font-weight:700">51.2 學習</td>
+      <td>經驗如何改變行為？</td>
+      <td>銘印、空間學習、聯結學習、社會學習</td>
+    </tr>
+    <tr>
+      <td style="color:var(--accent3);font-weight:700">51.3 生存與繁殖</td>
+      <td>行為如何最大化適應度？</td>
+      <td>最適覓食、交配系統、性擇</td>
+    </tr>
+    <tr>
+      <td style="color:var(--accent4);font-weight:700">51.4 遺傳與利他</td>
+      <td>行為的遺傳基礎？無私如何演化？</td>
+      <td>包容適應度、漢彌頓法則、親選擇</td>
+    </tr>
+  </table>
+
+  <div class="callout definition">
+    <div class="callout-label">📖 兩大研究領域</div>
+    <p><strong>動物行為學（Ethology）</strong>——在自然環境中觀察行為，著重近因，由丁柏根開創。<br>
+    <strong>行為生態學（Behavioral Ecology）</strong>——探討行為的生態與演化基礎，著重遠因，是現代研究主流。</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ========== SECTION 1: SENSORY & BEHAVIOR ========== -->
+<div class="section-page" id="sec1">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-num c1">概念 51.1</span>
+    <h2>感覺輸入可以觸發簡單與複雜的行為</h2>
+  </div>
+  <div class="tags">
+    <span class="tag blue">固定行為模式</span>
+    <span class="tag blue">符號刺激</span>
+    <span class="tag green">遷徙導航</span>
+    <span class="tag orange">動物溝通</span>
+    <span class="tag purple">費洛蒙</span>
+  </div>
+
+  <h3>固定行為模式（Fixed Action Patterns）</h3>
+
+  <div class="highlight-box">
+    <h4>定義：固定行為模式</h4>
+    <p>一旦被特定刺激觸發，就會<strong>從頭到尾完整執行</strong>、幾乎不可改變的一套行為序列。觸發的外部線索稱為<span class="key-term">符號刺激（sign stimulus）</span>。</p>
+  </div>
+
+  <div class="callout example">
+    <div class="callout-label">🐟 經典實驗：刺魚的紅肚皮</div>
+    <p>丁柏根發現，雄性三刺魚（<em>Gasterosteus aculeatus</em>）會攻擊任何有紅色底面的物體——哪怕是個不像魚的模型。只要模型有紅色，攻擊行為就被觸發。<strong>符號刺激 = 紅色</strong>，而非「是否真的是魚」。</p>
+  </div>
+
+  <div class="callout example">
+    <div class="callout-label">🦅 另一例：飛蛾的躲避行為</div>
+    <p>某些飛蛾聽到蝙蝠的回聲定位聲（或相同頻率的超音波）時，會立即做出迴旋、螺旋等逃避飛行——這也是固定行為模式，一旦觸發即自動完成。</p>
+  </div>
+
+  <h3>遷徙導航（Migration）</h3>
+
+  <p>很多動物每年進行長途<span class="key-term">遷徙（migration）</span>，牠們用三種方式找方向：</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">☀️</div>
+      <h4>太陽羅盤</h4>
+      <p>搭配<strong>晝夜節律時鐘</strong>追蹤太陽位置（因為太陽一整天都在移動）</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⭐</div>
+      <h4>北極星</h4>
+      <p>夜行性動物利用北極星（位置固定）作為方向基準</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧲</div>
+      <h4>地磁場</h4>
+      <p>歸巢鴿等動物能感應地球磁場；頭上戴磁鐵就會迷路</p>
+    </div>
+  </div>
+
+  <h3>生物節律（Behavioral Rhythms）</h3>
+
+  <table class="compare-table">
+    <tr><th>節律類型</th><th>週期</th><th>例子</th></tr>
+    <tr>
+      <td><em>晝夜節律</em>（Circadian rhythm）</td>
+      <td>約24小時</td>
+      <td>日間/夜間活動交替</td>
+    </tr>
+    <tr>
+      <td><em>年週期節律</em>（Circannual rhythm）</td>
+      <td>約一年</td>
+      <td>遷徙、繁殖季節</td>
+    </tr>
+    <tr>
+      <td><em>月亮週期</em></td>
+      <td>約29天</td>
+      <td>提琴手蟹在新月/滿月時求偶（配合最大潮汐）</td>
+    </tr>
+  </table>
+
+  <h3>動物溝通（Animal Communication）</h3>
+
+  <p>一個生物傳送給另一個生物的刺激稱為<span class="key-term">訊號（signal）</span>，訊號的傳送與接收構成<span class="key-term">溝通（communication）</span>。果蠅求偶就依序使用四種溝通模式：</p>
+
+  <div class="flow">
+    <div class="flow-item">
+      <div class="flow-dot blue"></div>
+      <div class="flow-content">
+        <strong>視覺溝通</strong>
+        <span>雄蠅在視野中偵測到雌蠅，將身體轉向她</span>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot green"></div>
+      <div class="flow-content">
+        <strong>化學溝通</strong>
+        <span>用嗅覺偵測雌蠅釋放的費洛蒙，確認是同種</span>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot orange"></div>
+      <div class="flow-content">
+        <strong>觸覺溝通</strong>
+        <span>用前腳觸碰雌蠅，告知自身在場</span>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot purple"></div>
+      <div class="flow-content">
+        <strong>聽覺溝通</strong>
+        <span>振動翅膀發出求偶歌，確認是同種雄性</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>🐝 蜜蜂的搖擺舞——最精密的動物語言</h4>
+    <p>奧地利科學家卡爾·馮·費里希（Karl von Frisch）破解了蜜蜂的「舞蹈語言」：<br><br>
+    · <strong>方向</strong>：直線奔跑相對蜂巢垂直面的角度 = 食物相對太陽的水平角度<br>
+    · <strong>距離</strong>：直線段越長、腹部搖擺次數越多 = 食物越遠<br>
+    · <strong>近距離（&lt;50m）</strong>改跳「圓形舞」，通知附近就有花蜜</p>
+  </div>
+
+  <h3>費洛蒙（Pheromones）</h3>
+
+  <div class="callout definition">
+    <div class="callout-label">定義</div>
+    <p><span class="key-term">費洛蒙</span>是動物排放到環境中、用來與同種個體溝通的化學物質。常見於昆蟲與哺乳類，功能包括求偶、警報、標記蜂巢社會階層等。<br><br>
+    例：雄蠶蛾能從幾公里外偵測到雌蟲的費洛蒙；頭獸魚（fat head minnow）受傷時釋放的警報素，只需1cm²皮膚的量就能讓 58,000 公升的水中魚群產生反應。</p>
+  </div>
+
+  <div class="memory-card">
+    <div class="label">記憶口訣</div>
+    <h4>溝通四型：視・化・觸・聽</h4>
+    <p>視覺（Visual）→ 化學/費洛蒙（Chemical）→ 觸覺（Tactile）→ 聽覺（Auditory）<br>
+    日行性動物（鳥、人）偏<strong>視覺＋聽覺</strong>；夜行性哺乳類偏<strong>嗅覺＋聽覺</strong>。</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ========== SECTION 2: LEARNING ========== -->
+<div class="section-page" id="sec2">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-num c2">概念 51.2</span>
+    <h2>學習在經驗與行為之間建立連結</h2>
+  </div>
+  <div class="tags">
+    <span class="tag green">銘印</span>
+    <span class="tag green">空間學習</span>
+    <span class="tag green">聯結學習</span>
+    <span class="tag green">認知</span>
+    <span class="tag green">社會學習</span>
+  </div>
+
+  <p>行為可分為兩大類：<span class="key-term">先天行為（innate behavior）</span>是所有個體都相同、由基因固定的行為（如蜘蛛結網）；而許多行為會因經驗而改變，這就是<span class="key-term">學習（learning）</span>——因特定經驗而導致的行為改變。</p>
+
+  <div class="callout important">
+    <div class="callout-label">⚠️ 核心概念</div>
+    <p>學習不是「天生 vs. 後天」的二選一！學習能力本身由基因決定，而實際學到什麼則受環境影響。<strong>Nature（天性）決定能學什麼，Nurture（教養）決定學到了什麼。</strong></p>
+  </div>
+
+  <h3>銘印（Imprinting）</h3>
+
+  <div class="highlight-box">
+    <h4>什麼是銘印？</h4>
+    <p><span class="key-term">銘印（imprinting）</span>是在特定的<span class="key-term">敏感期（sensitive period）</span>內，對特定個體或物體建立<strong>持久性行為反應</strong>的學習。敏感期一過，銘印便無法再建立。<br><br>
+    經典實驗：孵化器孵出的灰雁雛鳥，在最初幾小時跟著人類研究者走，便<strong>把人類當成媽媽</strong>，從此跟隨人類而非親生鵝媽媽。</p>
+  </div>
+
+  <div class="callout example">
+    <div class="callout-label">🦅 保育應用：美洲鶴的重新引入計畫</div>
+    <p>科學家曾讓美洲鶴幼鳥銘印在穿著「鶴裝」的人類身上，再駕駛超輕型飛機帶領牠們沿安全路線遷徙。後來策略改為<strong>減少人類干預</strong>，讓族群能自行維繫。</p>
+  </div>
+
+  <h3>空間學習與認知地圖（Spatial Learning）</h3>
+
+  <p>動物建立環境空間結構記憶的能力叫<span class="key-term">空間學習</span>，複雜的空間記憶形成<span class="key-term">認知地圖（cognitive map）</span>。</p>
+
+  <div class="callout example">
+    <div class="callout-label">🐝 丁柏根的挖掘蜂實驗</div>
+    <p>雌挖掘蜂離巢狩獵前，會記憶巢穴周圍地標（如松果圈）。丁柏根把松果圈移位後，蜂回來時飛向松果圈中心，而不是真正的巢穴——<strong>證明蜂使用視覺地標，而非氣味等其他線索。</strong></p>
+  </div>
+
+  <h3>聯結學習（Associative Learning）</h3>
+
+  <table class="compare-table">
+    <tr><th>類型</th><th>定義</th><th>著名例子</th></tr>
+    <tr>
+      <td><em>古典制約</em><br>Classical conditioning</td>
+      <td>任意刺激與特定結果產生聯結</td>
+      <td>巴夫洛夫的狗聽鈴聲就流口水</td>
+    </tr>
+    <tr>
+      <td><em>操作制約</em><br>Operant conditioning</td>
+      <td>行為與獎賞或懲罰產生聯結（試誤學習）</td>
+      <td>藍松鴉吃了難吃的帝王蝶後，學會不再捕食</td>
+    </tr>
+  </table>
+
+  <div class="callout important">
+    <div class="callout-label">⚠️ 重要限制</div>
+    <p>並非所有聯結都能學到！鴿子能把<strong>顏色</strong>與食物聯結，但不能把<strong>聲音</strong>與食物聯結。大鼠能把<strong>氣味</strong>與有害食物聯結，但不能把<strong>視覺或聲音</strong>與食物聯結。能學到的聯結都是在自然環境中<strong>真實發生</strong>的對應關係。</p>
+  </div>
+
+  <h3>認知與問題解決（Cognition）</h3>
+
+  <p><span class="key-term">認知（cognition）</span>是包含意識、推理、回憶、判斷的知識歷程。許多動物（甚至昆蟲）都有認知能力：</p>
+
+  <div class="callout example">
+    <div class="callout-label">🐝 蜜蜂的抽象思考</div>
+    <p>蜜蜂在顏色迷宮中學到「選相同顏色」後，換到黑白條紋迷宮也會「選相同條紋」。這表明蜜蜂能掌握<strong>「相同」vs「不同」的抽象概念</strong>，而非只記得某種顏色。</p>
+  </div>
+
+  <h3>社會學習與文化（Social Learning）</h3>
+
+  <div class="callout definition">
+    <div class="callout-label">定義</div>
+    <p><span class="key-term">社會學習（social learning）</span>：透過觀察他人行為與其結果來學習。<br><br>
+    <span class="key-term">文化（culture）</span>：透過社會學習或教導傳遞資訊的系統，能改變族群中個體的行為表現。<br><br>
+    例：年輕黑猩猩觀察成年個體用石頭砸開棕油果；小長尾猴學習根據不同掠食者（豹、老鷹、蛇）給出對應的正確警報叫聲。</p>
+  </div>
+
+  <div class="memory-card">
+    <div class="label">五種學習記憶表</div>
+    <h4>銘印・空間・聯結・認知・社會</h4>
+    <p>
+    🐥 <strong>銘印</strong>——敏感期內跟誰就認誰<br>
+    🗺️ <strong>空間學習</strong>——記地圖、記地標<br>
+    🔔 <strong>聯結學習</strong>——把A和B連起來（巴夫洛夫鈴聲）<br>
+    🧠 <strong>認知</strong>——推理、解題、抽象思考<br>
+    👥 <strong>社會學習</strong>——看別人怎麼做就學起來
+    </p>
+  </div>
+
+</div>
+</div>
+
+<!-- ========== SECTION 3: FORAGING & MATING ========== -->
+<div class="section-page" id="sec3">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-num c3">概念 51.3</span>
+    <h2>天擇對個體生存與繁殖的塑造</h2>
+  </div>
+  <div class="tags">
+    <span class="tag orange">最適覓食</span>
+    <span class="tag orange">交配系統</span>
+    <span class="tag orange">性擇</span>
+    <span class="tag orange">賽局理論</span>
+  </div>
+
+  <p>從近因轉向<em>遠因</em>：行為「為什麼」在演化上存在？答案是——自然選擇保留了那些提升<strong>個體適應度（fitness）</strong>的行為。</p>
+
+  <h3>覓食行為的演化（Foraging Behavior）</h3>
+
+  <div class="callout example">
+    <div class="callout-label">🦟 果蠅覓食基因實驗</div>
+    <p>果蠅幼蟲的覓食基因 <em>for</em> 有兩種等位基因：<br>
+    · <strong>for<sup>R</sup>（Rover）</strong>：移動距離較遠，適合高密度環境（食物競爭激烈時需探索更大範圍）<br>
+    · <strong>for<sup>s</sup>（Sitter）</strong>：移動距離較短，適合低密度環境（不需要走太遠就有食物）<br><br>
+    實驗將族群維持在低/高密度74個世代後，低密度族群中 for<sup>s</sup> 增加，高密度族群中 for<sup>R</sup> 增加——<strong>可觀察到的行為演化</strong>！</p>
+  </div>
+
+  <div class="highlight-box">
+    <h4>最適覓食模型（Optimal Foraging Model）</h4>
+    <p>自然選擇應該偏好能<strong>最大化覓食收益、最小化覓食代價</strong>的策略。代價包括能量消耗與被掠食風險。<br><br>
+    例：西北烏鴉用嘴叼貝殼，飛到高空摔落使貝殼破裂。研究發現烏鴉偏好從 <em>5公尺</em>高度摔落——剛好是使「總飛行高度」（= 高度×摔落次數）最小的最佳值，符合最適覓食預測。</p>
+  </div>
+
+  <div class="callout evolution">
+    <div class="callout-label">🦌 掠食風險 vs 食物豐度</div>
+    <p>草原鹿（mule deer）大部分時間在<strong>空曠地覓食</strong>——雖然空曠地食物稍少，但各地食物差異不大。相比之下，山獅在<strong>林緣</strong>獵殺草原鹿的頻率遠高於林緣之外。草原鹿的行為反映的是<strong>掠食風險</strong>，而非食物豐度。</p>
+  </div>
+
+  <h3>交配系統（Mating Systems）</h3>
+
+  <table class="compare-table">
+    <tr><th>交配系統</th><th>定義</th><th>性別二態性</th><th>親代撫育</th></tr>
+    <tr>
+      <td><em>一夫一妻制</em><br>Monogamy</td>
+      <td>一雄配一雌</td>
+      <td>雌雄外觀相似</td>
+      <td>雙親共同撫育，常見於雛鳥需大量照顧的鳥類</td>
+    </tr>
+    <tr>
+      <td><em>一夫多妻制</em><br>Polygyny</td>
+      <td>一雄配多雌</td>
+      <td>雄性通常體型大、裝飾多（如麋鹿的大角）</td>
+      <td>雌性主要撫育，雌鳥會快速獨立的鳥類（雉雞、鵪鶉）常見</td>
+    </tr>
+    <tr>
+      <td><em>一妻多夫制</em><br>Polyandry</td>
+      <td>一雌配多雄</td>
+      <td>雌性通常較華麗（如紅頸瓣蹼鷸）</td>
+      <td>雄性主要撫育</td>
+    </tr>
+  </table>
+
+  <div class="callout important">
+    <div class="callout-label">⚠️ 父親確定性 vs 撫育行為</div>
+    <p><strong>父親確定性（certainty of paternity）</strong>越高，雄性越傾向參與撫育：<br>
+    · 體外受精（魚類、兩棲類）：交配和受精同時發生 → 父親確定性高 → 雄性撫育比例高<br>
+    · 體內受精：交配和產卵時間分離 → 父親確定性低 → 雄性撫育比例低<br>
+    → 哺乳類幾乎都是體內受精，雄性單獨撫育的比例極低。</p>
+  </div>
+
+  <h3>性擇與雌性選擇（Sexual Selection）</h3>
+
+  <p><span class="key-term">性擇（sexual selection）</span>是一種由交配成功率差異驅動的天擇。分兩種：</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">❤️</div>
+      <h4>性間選擇（Intersexual selection）</h4>
+      <p>一個性別（通常是雌性）根據另一個性別的特徵選擇配偶。雌性偏好健康、有活力的雄性（長眼柄蠅、孔雀尾羽）。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚔️</div>
+      <h4>性內選擇（Intrasexual selection）</h4>
+      <p>同一性別個體（通常是雄性）互相競爭配偶，如雄袋鼠的「拳擊」決鬥（對抗行為 agonistic behavior）。</p>
+    </div>
+  </div>
+
+  <div class="callout example">
+    <div class="callout-label">🦎 賽局理論：加州石龍子的三色喉嚨</div>
+    <p>加州側紋石龍子（<em>Uta stansburiana</em>）的雄性有橙、藍、黃三種喉色，對應不同交配策略：<br>
+    · <strong>橙喉</strong>——最強勢，守大領域，多雌性<br>
+    · <strong>藍喉</strong>——中等，守小領域，少雌性<br>
+    · <strong>黃喉</strong>——擬雌策略，「偷偷」交配<br><br>
+    如同「剪刀石頭布」：橙克藍、黃克橙、藍克黃，三者在族群中週期性消長，<strong>頻率依存選擇</strong>使三種策略長期共存。</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ========== SECTION 4: GENETICS & ALTRUISM ========== -->
+<div class="section-page" id="sec4">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-num c4">概念 51.4</span>
+    <h2>遺傳分析與包容適應度</h2>
+  </div>
+  <div class="tags">
+    <span class="tag purple">行為的遺傳基礎</span>
+    <span class="tag purple">利他行為</span>
+    <span class="tag purple">漢彌頓法則</span>
+    <span class="tag purple">親選擇</span>
+  </div>
+
+  <h3>行為的遺傳基礎（Genetic Basis of Behavior）</h3>
+
+  <div class="callout example">
+    <div class="callout-label">🦟 果蠅的 fru 基因——單基因控制整套求偶行為</div>
+    <p><em>fru</em>（fruitless）是一個<strong>主調控基因（master regulatory gene）</strong>，它控制果蠅雄性求偶的整個行為序列。<br>
+    · fru 突變失活 → 雄蠅不再向雌蠅求偶<br>
+    · 讓雌蠅表現雄性型 fru → 雌蠅向其他雌蠅求偶<br>
+    → fru 透過調控許多下游基因，決定神經系統的性別特異性連結方式。</p>
+  </div>
+
+  <div class="callout example">
+    <div class="callout-label">🐭 田鼠的配對行為——一個基因的表現量</div>
+    <p>草原田鼠（<em>Microtus ochrogaster</em>）雄性交配後會形成對偶關係、照顧幼鼠。而草地田鼠（<em>M. pennsylvanicus</em>）雄性不建立持久關係。<br><br>
+    關鍵差異：草原田鼠腦中<strong>血管升壓素受體（vasopressin receptor）</strong>的表現量遠高於草地田鼠。將草原田鼠的受體基因轉入草地田鼠後，後者也出現配對行為——<strong>單一基因表現量的改變足以改變複雜行為</strong>。</p>
+  </div>
+
+  <h3>利他行為的演化（Altruism）</h3>
+
+  <div class="callout definition">
+    <div class="callout-label">定義</div>
+    <p><span class="key-term">利他行為（altruism）</span>：降低自身適應度、卻提升其他個體適應度的行為。<br><br>
+    例：貝丁黃鼠（Belding's ground squirrel）看到掠食者靠近時發出警報聲——吸引掠食者注意自己，卻使附近同類逃脫。</p>
+  </div>
+
+  <h3>包容適應度（Inclusive Fitness）</h3>
+
+  <div class="highlight-box">
+    <h4>威廉·漢彌頓的重大突破</h4>
+    <p>個體的<span class="key-term">包容適應度（inclusive fitness）</span>不只計算自己生幾隻後代，還要加上<strong>幫助親屬繁殖所間接傳遞的基因</strong>。<br><br>
+    因為兄弟姊妹平均有<strong>1/2的基因相同</strong>，幫助兄弟姊妹生2隻後代，在基因傳播上和自己生1隻是相同的效果！</p>
+  </div>
+
+  <div class="formula">
+    <div class="math">rB &gt; C</div>
+    <div class="math-desc">
+      <strong>r</strong>（親緣係數，coefficient of relatedness）= 雙方共享基因的比例<br>
+      兄弟姊妹 r = 0.5 ｜ 叔叔/外甥 r = 0.25 ｜ 堂/表兄弟 r = 0.125<br><br>
+      <strong>B</strong>（benefit）= 受助者多生幾隻後代<br>
+      <strong>C</strong>（cost）= 利他者少生幾隻後代<br><br>
+      當 <span style="color:var(--accent4)">r × B &gt; C</span> 時，天擇就會偏向利他行為
+    </div>
+  </div>
+
+  <div class="callout example">
+    <div class="callout-label">📐 漢彌頓法則實例</div>
+    <p>姊姊救落海的弟弟：<br>
+    · B = 2（弟弟可多生的後代）<br>
+    · C = 0.25 × 2 = 0.5（姊姊有25%機率溺死，損失0.5個後代期望值）<br>
+    · r = 0.5（兄弟姊妹）<br>
+    · rB = 0.5 × 2 = 1 &gt; C = 0.5 ✅ → 天擇支持此救援行為</p>
+  </div>
+
+  <div class="callout definition">
+    <div class="callout-label">定義</div>
+    <p><span class="key-term">親選擇（kin selection）</span>：透過提升親緣個體的繁殖成功率，間接有利於自身基因傳播的天擇方式。<br><br>
+    親選擇的強度隨血緣距離增加而<strong>遞減</strong>。英國遺傳學家霍爾丹（J.B.S. Haldane）曾幽默說：「我不會為一個兄弟犧牲性命，但我願意為兩個兄弟，或八個堂/表兄弟。」</p>
+  </div>
+
+  <h3>互惠利他（Reciprocal Altruism）</h3>
+
+  <div class="callout evolution">
+    <div class="callout-label">🦇 互惠利他</div>
+    <p>對<strong>非親屬</strong>的利他行為，可透過「日後回報」的期待來解釋。例如：吸血蝙蝠之間的血液分享、靈長類之間的相互理毛。<br><br>
+    這需要族群夠<strong>穩定</strong>（個體多次相遇）、且有<strong>懲罰「搭便車者」</strong>的機制。賽局理論中的 <em>tit-for-tat（以牙還牙）</em> 策略能解釋互惠利他的演化：初次遇到就合作，對方合作就繼續合作，對方背叛就立刻報復，對方再合作就再度合作。</p>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-item">
+      <div class="si-label">兄弟姊妹 r 值</div>
+      <div class="si-val">0.5（1/2）</div>
+    </div>
+    <div class="summary-item">
+      <div class="si-label">叔/舅/姑/姨 r 值</div>
+      <div class="si-val">0.25（1/4）</div>
+    </div>
+    <div class="summary-item">
+      <div class="si-label">堂/表兄弟 r 值</div>
+      <div class="si-val">0.125（1/8）</div>
+    </div>
+    <div class="summary-item">
+      <div class="si-label">天擇支持利他的條件</div>
+      <div class="si-val">rB &gt; C</div>
+    </div>
+  </div>
+
+  <div class="memory-card">
+    <div class="label">本章最重要公式</div>
+    <h4>漢彌頓法則：rB &gt; C</h4>
+    <p>記法：「親緣×收益 超過 代價」時，天擇支持利他。血緣越遠，基因共享越少，r 越小，利他行為越難演化。</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ========== SECTION 5: QUIZ ========== -->
+<div class="section-page" id="sec5">
+<div class="container">
+
+  <div class="section-header">
+    <span class="section-num c1">自我測驗</span>
+    <h2>測試你的理解程度</h2>
+  </div>
+  <p style="color:var(--text-muted);margin-bottom:28px">點選選項，即時知道答對答錯。共 6 題，涵蓋四大概念。</p>
+
+  <!-- Q1 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Q1. 丁柏根的「近因」問題包含哪兩個層面？</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answer(this,false,'近因是「how」，問的是刺激觸發機制與發育影響，不是演化歷史。')">A. 行為的演化歷史與生存功能</button>
+      <button class="quiz-opt" onclick="answer(this,true,'正確！近因包含：①觸發刺激與身體機制、②發育過程對行為的影響。')">B. 觸發行為的刺激機制，以及發育如何影響行為</button>
+      <button class="quiz-opt" onclick="answer(this,false,'自然選擇的角度屬於遠因（ultimate causation）。')">C. 天擇對行為的塑造，與基因的影響</button>
+      <button class="quiz-opt" onclick="answer(this,false,'覓食和繁殖屬於遠因的功能問題。')">D. 行為如何幫助覓食與繁殖</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Q2. 固定行為模式（Fixed Action Pattern）的特徵是？</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answer(this,false,'固定行為模式不需要學習，是先天的。')">A. 需要學習才能習得，且可以中途停止</button>
+      <button class="quiz-opt" onclick="answer(this,false,'固定行為模式一旦開始通常無法中途停止。')">B. 由複雜刺激觸發，可以隨時改變方向</button>
+      <button class="quiz-opt" onclick="answer(this,true,'正確！固定行為模式由簡單的符號刺激觸發，一旦啟動通常完整執行，是先天的（不需學習）。')">C. 由簡單符號刺激觸發，一旦啟動通常完整執行</button>
+      <button class="quiz-opt" onclick="answer(this,false,'固定行為模式是先天的，與個體學習無關。')">D. 依賴個體學習，由環境塑造而成</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Q3. 蜜蜂搖擺舞中，食物方向如何傳達？</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answer(this,false,'搖擺次數代表距離，不是方向。')">A. 每秒搖擺次數代表食物方向</button>
+      <button class="quiz-opt" onclick="answer(this,false,'食物氣味確實被帶回蜂巢，但方向不是靠氣味傳達。')">B. 舞者帶回的花粉氣味提示食物的位置</button>
+      <button class="quiz-opt" onclick="answer(this,true,'正確！直線跑動相對蜂巢垂直面的角度，就代表食物相對太陽的水平角度。')">C. 直線跑動角度相對蜂巢垂直面，等於食物相對太陽的水平角度</button>
+      <button class="quiz-opt" onclick="answer(this,false,'圓形舞代表食物在很近處，不包含精確方向資訊。')">D. 圓形舞的半徑大小代表食物的方向</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Q4. 銘印（Imprinting）與一般聯結學習最大的差異是？</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answer(this,false,'銘印通常不能在成年後重複，且對象不限食物。')">A. 銘印只在成年期發生，而且只針對食物</button>
+      <button class="quiz-opt" onclick="answer(this,true,'正確！銘印必須在特定的「敏感期」內發生，錯過就無法建立，而且所建立的行為反應是持久的。')">B. 銘印只能在特定「敏感期」內發生，並建立持久反應</button>
+      <button class="quiz-opt" onclick="answer(this,false,'銘印是先天傾向，不需要多次重複。')">C. 銘印需要多次重複才能建立，像操作制約一樣</button>
+      <button class="quiz-opt" onclick="answer(this,false,'銘印效果強烈，極為持久，很難被取消。')">D. 銘印的效果很弱，容易在成長中被取消</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Q5. 依據漢彌頓法則（rB > C），下列何者最可能演化出利他行為？</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answer(this,false,'陌生個體 r ≈ 0，rB 幾乎等於 0，很難超過 C。')">A. 幫助一個完全陌生的個體（r≈0），使其多生10隻後代，自己損失5隻後代</button>
+      <button class="quiz-opt" onclick="answer(this,true,'正確！r=0.5（兄弟），rB = 0.5×6 = 3 > C = 1，漢彌頓法則成立，天擇支持此利他行為。')">B. 幫助兄弟（r=0.5），使其多生6隻後代，自己損失1隻後代</button>
+      <button class="quiz-opt" onclick="answer(this,false,'r=0.125，rB = 0.125×2 = 0.25 < C = 1，法則不成立。')">C. 幫助表兄弟（r=0.125），使其多生2隻後代，自己損失1隻後代</button>
+      <button class="quiz-opt" onclick="answer(this,false,'r=0.25，rB = 0.25×2 = 0.5 < C = 2，法則不成立。')">D. 幫助姪子（r=0.25），使其多生2隻後代，自己損失2隻後代</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Q6. 在交配系統中，「父親確定性高」最可能導致？</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answer(this,false,'一夫多妻制通常與雄性競爭多個配偶有關，不直接是父親確定性高的結果。')">A. 一夫多妻制（Polygyny）的演化</button>
+      <button class="quiz-opt" onclick="answer(this,false,'性別二態性主要受性擇影響，與父親確定性的直接關聯較弱。')">B. 雌雄性別二態性更加顯著</button>
+      <button class="quiz-opt" onclick="answer(this,true,'正確！父親確定性高（如體外受精的魚類），雄性更確定自己是親父，因此更可能演化出雄性撫育行為。')">C. 雄性更可能參與親代撫育（parental care）</button>
+      <button class="quiz-opt" onclick="answer(this,false,'費洛蒙溝通與父親確定性沒有直接的因果關係。')">D. 費洛蒙溝通系統更為複雜</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:32px;text-align:center;">
+    <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px">完成測驗後，回顧答錯的部分！</div>
+    <div style="font-size:1rem;color:var(--accent2)">🎯 本章核心：近因 vs 遠因 · 固定行為模式 · 各類學習 · 最適覓食 · rB &gt; C</div>
+  </div>
+
+</div>
+</div>
+
+<script>
+  // Tab navigation
+  function showSection(idx, el) {
+    document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('sec' + idx).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // Quiz answer handler
+  function answer(btn, correct, msg) {
+    const card = btn.closest('.quiz-card');
+    // Already answered?
+    if (card.dataset.answered) return;
+    card.dataset.answered = '1';
+
+    // Disable all options
+    card.querySelectorAll('.quiz-opt').forEach(b => b.style.pointerEvents = 'none');
+
+    // Mark this button
+    btn.classList.add(correct ? 'correct' : 'wrong');
+
+    // If wrong, show the correct one
+    if (!correct) {
+      card.querySelectorAll('.quiz-opt').forEach(b => {
+        if (b.onclick.toString().includes('true')) b.classList.add('correct');
+      });
+    }
+
+    // Show feedback
+    const fb = card.querySelector('.quiz-feedback');
+    fb.textContent = (correct ? '✅ ' : '❌ ') + msg;
+    fb.className = 'quiz-feedback show ' + (correct ? 'good' : 'bad');
+  }
+</script>
+</body>
+</html>
