@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生物學精選題庫 — 複習用</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg:        #0f1117;
+    --surface:   #181c26;
+    --card:      #1e2334;
+    --border:    #2a3050;
+    --accent:    #4f8ef7;
+    --accent2:   #7ecfb3;
+    --warn:      #f7a24f;
+    --text:      #dde3f0;
+    --muted:     #7a85a3;
+    --correct:   #3ecf8e;
+    --wrong:     #f76f6f;
+
+    --ch42: #4f8ef7;
+    --ch44: #7ecfb3;
+    --ch46: #d97fe8;
+    --ch47: #f7c44f;
+    --ch50: #f7834f;
+    --ch51: #5dd3f7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 56px 24px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,142,247,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: #fff;
+  }
+  header p {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: .9rem;
+  }
+  .header-badge {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .badge {
+    font-size: .75rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  /* ── SIDEBAR NAV ── */
+  .layout {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 0;
+  }
+  nav.toc {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 16px;
+    border-right: 1px solid var(--border);
+  }
+  nav.toc h2 {
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  nav.toc a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: .85rem;
+    transition: background .15s, color .15s;
+    margin-bottom: 2px;
+  }
+  nav.toc a:hover {
+    background: var(--surface);
+    color: var(--text);
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    padding: 40px 32px;
+    min-width: 0;
+  }
+
+  /* ── CHAPTER SECTION ── */
+  .chapter {
+    margin-bottom: 64px;
+  }
+  .chapter-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+    position: relative;
+  }
+  .chapter-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 80px; height: 2px;
+  }
+  .ch-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+    letter-spacing: .1em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .chapter-header h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .chapter-header small {
+    color: var(--muted);
+    font-size: .8rem;
+    margin-left: auto;
+  }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .q-card:hover { border-color: #3a4568; }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 22px 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface);
+    border-radius: 6px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-text {
+    flex: 1;
+    font-size: .95rem;
+    color: var(--text);
+    line-height: 1.65;
+  }
+  .q-toggle {
+    color: var(--muted);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: transform .25s;
+    margin-top: 2px;
+  }
+  .q-card.open .q-toggle { transform: rotate(180deg); }
+
+  /* OPTIONS */
+  .q-options {
+    padding: 0 22px 4px 54px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .opt {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: .88rem;
+    border: 1px solid transparent;
+    transition: background .15s;
+  }
+  .opt-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+    color: var(--muted);
+    min-width: 18px;
+    margin-top: 1px;
+  }
+
+  /* ANSWER */
+  .q-answer {
+    display: none;
+    margin: 12px 22px 20px 54px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .q-card.open .q-answer { display: block; }
+
+  .ans-tag {
+    background: rgba(62,207,142,.12);
+    border: 1px solid rgba(62,207,142,.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .ans-tag .label {
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--correct);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .ans-tag .ans-text {
+    font-size: .9rem;
+    color: #a8f0d0;
+  }
+
+  .explanation {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: .87rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .explanation .label {
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #5dd3f7;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  /* HIGHLIGHT correct option */
+  .opt.correct {
+    background: rgba(62,207,142,.08);
+    border-color: rgba(62,207,142,.25);
+  }
+  .opt.correct .opt-label { color: var(--correct); }
+
+  /* DIVIDER */
+  .q-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 22px;
+  }
+
+  /* PROGRESS BAR */
+  .chapter-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width .4s ease;
+  }
+  .progress-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ── SCROLL TOP ── */
+  #scrollTop {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity .3s, background .2s;
+    pointer-events: none;
+    z-index: 100;
+  }
+  #scrollTop.show { opacity: 1; pointer-events: auto; }
+  #scrollTop:hover { background: var(--surface); color: var(--text); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav.toc { display: none; }
+    main { padding: 24px 16px; }
+    .q-options { padding-left: 22px; }
+    .q-answer { margin-left: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>生物學精選複習題庫</h1>
+  <p>依概念重要性與出題頻率篩選 · 每單元 12 題</p>
+  <div class="header-badge">
+    <span class="badge" style="color:var(--ch42);border-color:var(--ch42)">Ch 42 循環</span>
+    <span class="badge" style="color:var(--ch44);border-color:var(--ch44)">Ch 44 排泄</span>
+    <span class="badge" style="color:var(--ch46);border-color:var(--ch46)">Ch 46 生殖</span>
+    <span class="badge" style="color:var(--ch47);border-color:var(--ch47)">Ch 47 發育</span>
+    <span class="badge" style="color:var(--ch50);border-color:var(--ch50)">Ch 50 感覺</span>
+    <span class="badge" style="color:var(--ch51);border-color:var(--ch51)">Ch 51 行為</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <nav class="toc">
+    <h2>章節導覽</h2>
+    <a href="#ch42"><span class="dot" style="background:var(--ch42)"></span>Ch 42 循環與氣體交換</a>
+    <a href="#ch44"><span class="dot" style="background:var(--ch44)"></span>Ch 44 排泄與滲透調節</a>
+    <a href="#ch46"><span class="dot" style="background:var(--ch46)"></span>Ch 46 動物生殖</a>
+    <a href="#ch47"><span class="dot" style="background:var(--ch47)"></span>Ch 47 動物發育</a>
+    <a href="#ch50"><span class="dot" style="background:var(--ch50)"></span>Ch 50 感覺與運動</a>
+    <a href="#ch51"><span class="dot" style="background:var(--ch51)"></span>Ch 51 動物行為</a>
+  </nav>
+
+  <main>
+
+<!-- ═══════════════════════════ CH 42 ═══════════════════════════ -->
+<section class="chapter" id="ch42">
+  <div class="chapter-header" style="--ch-color:var(--ch42)">
+    <span class="ch-num" style="background:rgba(79,142,247,.15);color:var(--ch42)">CH 42</span>
+    <h2>循環與氣體交換</h2>
+    <small>12 題</small>
+  </div>
+  <div class="chapter-meta">
+    <div class="progress-bar"><div class="progress-fill" style="background:var(--ch42);width:0%" id="prog42"></div></div>
+    <span class="progress-label" id="label42">0 / 12</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q1</span>
+      <span class="q-text">An open circulatory system __________.（開放式循環系統的特徵）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>is less common in crabs and beetles than in mice and snakes</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>unlike a closed circulatory system, does not rely on muscle contraction</span></div>
+      <div class="opt correct"><span class="opt-label">C.</span><span>allows interstitial fluid to mix freely with vascular fluid</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>restricts the backflow of blood by valves in the trachea</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>has no valves</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — allows interstitial fluid to mix freely with vascular fluid</div></div>
+      <div class="explanation"><div class="label">解析</div>開放式循環系統中，血管液（hemolymph）同時充當間質液，兩者可自由混合。見於節肢動物（甲殼類、昆蟲）和大多數軟體動物。</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q2</span>
+      <span class="q-text">In a fish, blood circulates through __________, whereas in a mammal, it circulates through __________.（魚類 vs. 哺乳類血液循環迴路數）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>two circuits; four circuits</span></div>
+      <div class="opt correct"><span class="opt-label">B.</span><span>one circuit; two circuits</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>four circuits; two circuits</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>one circuit; four circuits</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>two circuits; one circuit</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — one circuit; two circuits</div></div>
+      <div class="explanation"><div class="label">解析</div>魚類心臟為單心房＋單心室，血液流經單一迴路。哺乳類（與鳥類）具雙循環：肺循環（pulmonary）與體循環（systemic）。</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q3</span>
+      <span class="q-text">All known birds and mammals have __________.（鳥類與哺乳類循環系統的共同特徵）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt correct"><span class="opt-label">A.</span><span>a double circulatory system and a four-chambered heart</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>a single circulatory system and a four-chambered heart</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>a double circulatory system and a three-chambered heart</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>a double circulatory system and a two-chambered heart</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>a single circulatory system and a two-chambered heart</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — a double circulatory system and a four-chambered heart</div></div>
+      <div class="explanation"><div class="label">解析</div>四腔心臟（左右心房＋左右心室）將含氧血與去氧血完全分離，形成肺循環與體循環雙迴路，效率最高。</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q4</span>
+      <span class="q-text">What is unique about blood in pulmonary arteries compared with blood in other arteries?（肺動脈血液的特殊性）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>Blood in pulmonary arteries is always blue; it is red in all other arteries.</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>It is moving away from the heart.</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>It is moving toward the heart.</span></div>
+      <div class="opt correct"><span class="opt-label">D.</span><span>It is loaded with carbon dioxide.</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>There is no difference; it is the same as blood in other arteries.</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — It is loaded with carbon dioxide.</div></div>
+      <div class="explanation"><div class="label">解析</div>動脈（artery）定義為「離開心臟的血管」，與含氧量無關。肺動脈是唯一攜帶去氧血（高CO₂）的動脈。</div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q5</span>
+      <span class="q-text">Which chamber(s) of a human heart receive(s) and pump(s) oxygenated blood?（接收並泵出含氧血的心臟腔室）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt correct"><span class="opt-label">A.</span><span>Left ventricle and left atrium</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>Left atrium and right atrium</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>Left atrium only</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>Right atrium and right ventricle</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>Left ventricle only</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — Left ventricle and left atrium</div></div>
+      <div class="explanation"><div class="label">解析</div>肺靜脈將含氧血送入左心房，再流至左心室泵入主動脈供全身使用。左側心臟負責體循環。</div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q6</span>
+      <span class="q-text">Pressure is greatest in the ventricles when __________.（心室壓力最大的時機）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>blood arrives at the right ventricle</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>blood arrives at the left atrium</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>AV valves are open and semilunar valves are closed</span></div>
+      <div class="opt correct"><span class="opt-label">D.</span><span>the ventricles contract</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>the atria contract during early systole</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — the ventricles contract</div></div>
+      <div class="explanation"><div class="label">解析</div>心室收縮（systole）時，強大肌肉壓力關閉 AV 瓣並推開半月瓣，此時心室壓力達到峰值。</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q7</span>
+      <span class="q-text">The SA node generates an electrical impulse from its location in __________.（SA 節的位置與功能）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>the left atrium, causing ventricular contraction</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>the left ventricle wall</span></div>
+      <div class="opt correct"><span class="opt-label">C.</span><span>the right atrium, causing atrial contraction</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>the left ventricle, causing atrial contraction</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>none of the listed locations</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — the right atrium, causing atrial contraction</div></div>
+      <div class="explanation"><div class="label">解析</div>竇房結（SA node）位於右心房壁，是心臟的「節律器」，其電訊號先觸發心房收縮，再經 AV 節傳至心室。</div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q8</span>
+      <span class="q-text">A recording shows atria contracting normally, but every few beats the ventricles fail to contract. Which is probably malfunctioning?（心室偶爾不跳的可能原因）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt correct"><span class="opt-label">A.</span><span>AV node</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>Aortic semilunar valve</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>Coronary artery</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>SA node</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>AV valve</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — AV node</div></div>
+      <div class="explanation"><div class="label">解析</div>房室結（AV node）負責將心房的電訊號延遲後傳至心室。若 AV 節功能異常，心室收縮頻率降低，稱為「heart block」。</div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q9</span>
+      <span class="q-text">Your blood pressure is 120/70. The "120" indicates __________, and the "70" indicates __________.（血壓數值的意義）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>pressure in the left ventricle; pressure in the right ventricle</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>arterial pressure; venous pressure</span></div>
+      <div class="opt correct"><span class="opt-label">C.</span><span>arterial pressure during heart contraction; arterial pressure during heart relaxation</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>pressure in the left ventricle; pressure in the left atrium</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>pressure in the systemic system; pressure in the pulmonary system</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — 收縮壓 / 舒張壓（動脈壓）</div></div>
+      <div class="explanation"><div class="label">解析</div>120 mmHg 為收縮壓（systolic，心室收縮時）；70 mmHg 為舒張壓（diastolic，心臟舒張時）。兩者均為動脈壓。</div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q10</span>
+      <span class="q-text">When we compare arteries and veins: walls of arteries are __________, blood pressure inside is __________, and blood is moving __________ the heart.（動脈 vs. 靜脈比較）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt correct"><span class="opt-label">A.</span><span>thicker; higher; away from</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>thinner; lower; away from</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>thinner; lower; toward</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>thicker; lower; toward</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>thinner; higher; away from</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — thicker; higher; away from</div></div>
+      <div class="explanation"><div class="label">解析</div>動脈離開心臟，承受較高血壓，壁較厚有彈性。靜脈回流心臟，壓力低，壁薄並具瓣膜防止逆流。</div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q11</span>
+      <span class="q-text">What would you expect in an individual with low levels of blood protein in the capillaries?（血漿蛋白不足的後果）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>Increased movement of fluid into the capillaries from the extracellular environment</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>Increased blood pressure</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>A net gain of fluid in the capillaries</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>Decreased lymph</span></div>
+      <div class="opt correct"><span class="opt-label">E.</span><span>Edema in the body tissues</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">E — Edema in the body tissues</div></div>
+      <div class="explanation"><div class="label">解析</div>血漿蛋白（如白蛋白）產生膠體滲透壓，吸引組織液回到微血管。蛋白質不足 → 滲透壓降低 → 液體積聚於組織 → 水腫（edema）。</div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="q-card" data-ch="42">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">Q12</span>
+      <span class="q-text">What is atherosclerosis?（動脈粥樣硬化的定義）</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>Chest pain due to a partial blockage of the coronary arteries</span></div>
+      <div class="opt correct"><span class="opt-label">B.</span><span>Hardening of the arteries by accumulation of fatty deposits</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>Damage to or death of cardiac muscle tissue due to a blockage in the coronary arteries</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>A failure of blood to clot</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>Lack of oxygen to the brain, leading to a death of nervous tissue there</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — Hardening of the arteries by accumulation of fatty deposits</div></div>
+      <div class="explanation"><div class="label">解析</div>動脈粥樣硬化（atherosclerosis）= 脂肪斑塊（plaque）沉積在動脈壁，使血管硬化狹窄，是心肌梗塞與中風的主要原因。</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════ CH 44 ═══════════════════════════ -->
+<section class="chapter" id="ch44">
+  <div class="chapter-header">
+    <span class="ch-num" style="background:rgba(126,207,179,.15);color:var(--ch44)">CH 44</span>
+    <h2>排泄與滲透調節</h2>
+    <small>12 題</small>
+  </div>
+  <div class="chapter-meta">
+    <div class="progress-bar"><div class="progress-fill" style="background:var(--ch44);width:0%" id="prog44"></div></div>
+    <span class="progress-label" id="label44">0 / 12</span>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q1</span><span class="q-text">Why do freshwater fish excrete a large amount of very dilute urine?（淡水魚大量排稀尿的原因）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt correct"><span class="opt-label">A.</span><span>Because they live in a hypoosmotic solution, their cells take up excess water that must be excreted.</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>Because they live in a hypoosmotic solution, their cells tend to accumulate a lot of solute.</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>Because they live in a hyperosmotic solution, their cells take up excess water.</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>Because they live in a hyperosmotic solution, their cells accumulate a lot of solute.</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>They excrete solutes to make concentration equal.</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 淡水（低滲）環境中水不斷滲入，需大量排尿</div></div>
+      <div class="explanation"><div class="label">解析</div>淡水魚體液比環境高滲（hyperosmotic to environment），水由外環境經滲透持續流入，必須以大量稀釋尿液排出多餘水分。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q2</span><span class="q-text">Most aquatic animals excrete ammonia, whereas land animals excrete urea or uric acid. What is the most likely explanation?（水生 vs. 陸生動物含氮廢物差異）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>They have different diets.</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>Land animals can get the energy needed to make urea or uric acid.</span></div>
+      <div class="opt correct"><span class="opt-label">C.</span><span>Ammonia is very toxic, and it takes a lot of water to dilute it.</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>Land animals cannot afford the energy needed to make ammonia.</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>Fish need to get rid of ammonia, but land animals need it to live.</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — 氨高毒性需大量水稀釋，陸生動物水資源有限故轉化為尿素/尿酸</div></div>
+      <div class="explanation"><div class="label">解析</div>氨（ammonia）毒性強，需大量水稀釋後才能安全排出。水生動物水源充足可直接排氨；陸生動物則將氨轉化為毒性較低的尿素（需少量水）或尿酸（幾乎不需水）。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q3</span><span class="q-text">The most effective molecule for nitrogenous waste disposal in desert animals would be __________.（沙漠動物最佳含氮廢物）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>ammonia because it uses less energy to make</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>urea because it is less toxic than uric acid</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>uric acid because it takes less energy to make than urea</span></div>
+      <div class="opt correct"><span class="opt-label">D.</span><span>uric acid because it requires very little water for excretion</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>ammonia because it is the most soluble</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — 尿酸（uric acid）可以晶狀固體形式排出，耗水量極少</div></div>
+      <div class="explanation"><div class="label">解析</div>尿酸不溶於水，可形成半固體糊狀排出，對水分保存極為有利。這是沙漠爬蟲類、鳥類的重要適應。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q4</span><span class="q-text">Which excretory system contains structures called flame bulbs that function in filtration?（含有焰球細胞的排泄系統）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>Metanephridia</span></div>
+      <div class="opt correct"><span class="opt-label">B.</span><span>Protonephridia</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>Malpighian tubules</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>Kidneys</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>Nephrons</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — Protonephridia（原腎管）</div></div>
+      <div class="explanation"><div class="label">解析</div>原腎管見於扁蟲等無脊椎動物，含纖毛焰球細胞（flame bulb cells），纖毛擺動過濾體液。後腎管（metanephridia）見於環節動物；馬氏管（Malpighian tubules）見於昆蟲。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q5</span><span class="q-text">The filtrate is first refined and concentrated by the processes of __________, which form the urine that leaves the body.（尿液形成的主要過程）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>filtration and secretion</span></div>
+      <div class="opt correct"><span class="opt-label">B.</span><span>reabsorption and secretion</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>reabsorption and excretion</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>filtration and reabsorption</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>secretion and excretion</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — reabsorption and secretion</div></div>
+      <div class="explanation"><div class="label">解析</div>濾液形成後經：①再吸收（reabsorption）：將有用物質（葡萄糖、胺基酸、水）送回血液；②分泌（secretion）：將多餘離子、藥物等從血液送入腎小管。兩者共同精製濾液成尿液。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q6</span><span class="q-text">The bed of capillaries in a vertebrate kidney where water, urea, and salts are filtered out of the blood is the __________.（腎臟過濾血液的微血管叢）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>Bowman's capsule</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>collecting duct</span></div>
+      <div class="opt correct"><span class="opt-label">C.</span><span>glomerulus</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>loop of Henle</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>proximal convoluted tubule</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — glomerulus（腎小球）</div></div>
+      <div class="explanation"><div class="label">解析</div>腎小球是高壓微血管叢，血壓強迫水、尿素、鹽類等小分子穿過血管壁進入鮑曼囊（Bowman's capsule），形成初始濾液。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q7</span><span class="q-text">In each nephron, the glomerulus and Bowman's capsule __________.（腎小球 + 鮑曼囊的功能）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt correct"><span class="opt-label">A.</span><span>filter the blood and capture the filtrate</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>reabsorb water into the blood</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>break down harmful toxins and poisons</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>reabsorb salts and nutrients</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>refine and concentrate the urine for excretion</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — filter the blood and capture the filtrate</div></div>
+      <div class="explanation"><div class="label">解析</div>鮑曼囊包圍腎小球，利用靜水壓（hydrostatic pressure）使血漿成分濾入囊腔，收集成濾液。大分子（蛋白質、血球）不能通過。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q8</span><span class="q-text">As filtrate passes through the long loop of Henle, salt is removed, concentrating the interstitial fluid. Because of this high salt concentration, the nephron is able to __________.（亨氏環的作用結果）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>excrete the maximum amount of salt</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>neutralize toxins that might accumulate in the kidney</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>control the pH of the interstitial fluid</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>excrete a large amount of water</span></div>
+      <div class="opt correct"><span class="opt-label">E.</span><span>establish a hyperosmotic interstitial medullary concentration</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">E — establish a hyperosmotic interstitial medullary concentration（建立腎髓質高滲濃度梯度）</div></div>
+      <div class="explanation"><div class="label">解析</div>亨氏環透過逆流增益（countercurrent multiplication）機制，在腎髓質間質建立高滲梯度，使集尿管中的水可經滲透作用被再吸收，最終產生濃縮尿液。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q9</span><span class="q-text">What is the function of the ascending loop of Henle?（亨氏環升支的功能）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>It provides water for reabsorption by the interstitial fluid and capillaries.</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>It loses urea to the renal medulla.</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>It absorbs some drugs and poisons from surrounding capillaries.</span></div>
+      <div class="opt correct"><span class="opt-label">D.</span><span>It helps maintain the concentration gradient of NaCl in the interstitial fluid, thus increasing water reabsorption.</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>It collects processed filtrate from the nephrons.</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — 維持間質 NaCl 濃度梯度，促進水再吸收</div></div>
+      <div class="explanation"><div class="label">解析</div>升支管壁對水不通透，NaCl 在內髓以擴散、外髓以主動運輸方式送至間質，維持高滲梯度，使降支與集尿管的水能持續被動滲出。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q10</span><span class="q-text">What is the function of antidiuretic hormone (ADH) in the body?（ADH 的功能）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>During times of increased solute concentrations, ADH causes nephrons to absorb water faster.</span></div>
+      <div class="opt correct"><span class="opt-label">B.</span><span>During times of higher solute concentrations, ADH causes more water to be released from the nephrons to be reabsorbed by the blood.</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>Low levels of ADH are the brain's response to thirst.</span></div>
+      <div class="opt"><span class="opt-label">D.</span><span>ADH is the only hormone that provides control over the kidney as an osmoregulator.</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>ADH controls the rate that filtrate moves from the glomerulus into Bowman's capsule.</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — ADH 提高集尿管通透性，促使水再吸收回血液</div></div>
+      <div class="explanation"><div class="label">解析</div>血液滲透壓升高時（脫水），下視丘偵測並觸發腦垂體後葉釋放 ADH；ADH 作用於集尿管，插入水通道蛋白（aquaporin），使水大量再吸收，尿量減少、濃度上升。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q11</span><span class="q-text">Secretion of ADH from the __________ occurs in response to __________ and causes __________.（ADH 分泌的完整機制）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>thyroid gland; low blood sugar; kidney blood vessels to constrict</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>pituitary gland; low blood osmolarity; decreased permeability to water</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>adrenal gland; high blood osmolarity; increased permeability to water</span></div>
+      <div class="opt correct"><span class="opt-label">D.</span><span>pituitary gland; high blood osmolarity; increased permeability to water of a collecting duct</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>adrenal gland; low blood pressure; increased water and solute reabsorption at the proximal tubule</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — 腦垂體 / 高血液滲透壓 / 集尿管通透性增加</div></div>
+      <div class="explanation"><div class="label">解析</div>三個關鍵：① 來源：腦垂體後葉（posterior pituitary）；② 刺激：高血液滲透壓（脫水狀態）；③ 效果：集尿管水通透性增加 → 水再吸收 → 尿液濃縮。</div>
+    </div>
+  </div>
+
+  <div class="q-card" data-ch="44">
+    <div class="q-header" onclick="toggle(this)"><span class="q-num">Q12</span><span class="q-text">What conditions are responsible for the stimulation of the juxtaglomerular apparatus (JGA)?（JGA 被激活的條件）</span><span class="q-toggle">▾</span></div>
+    <div class="q-divider"></div>
+    <div class="q-options">
+      <div class="opt"><span class="opt-label">A.</span><span>An increase in blood pressure or blood volume within the heart</span></div>
+      <div class="opt"><span class="opt-label">B.</span><span>An increase in the solute concentration of the blood plasma</span></div>
+      <div class="opt"><span class="opt-label">C.</span><span>A decrease in the solute concentration of the blood plasma</span></div>
+      <div class="opt correct"><span class="opt-label">D.</span><span>A decrease in the blood pressure or blood volume in the afferent arteriole</span></div>
+      <div class="opt"><span class="opt-label">E.</span><span>Consumption of alcohol</span></div>
+    </div>
+    <div class="q-answer">
+      <div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — 入球小動脈血壓或血量降低</div></div>
+      <div class="explanation"><div class="label">解析</div>JGA 偵測到血壓/血量下降 → 分泌腎素（renin）→ 活化血管收縮素 II（Angiotensin II）→ 血管收縮＋醛固酮分泌增加Na⁺再吸收 → 血壓回升（RAAS 系統）。</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════ CH 46 ═══════════════════════════ -->
+<section class="chapter" id="ch46">
+  <div class="chapter-header">
+    <span class="ch-num" style="background:rgba(217,127,232,.15);color:var(--ch46)">CH 46</span>
+    <h2>動物生殖</h2>
+    <small>12 題</small>
+  </div>
+  <div class="chapter-meta">
+    <div class="progress-bar"><div class="progress-fill" style="background:var(--ch46);width:0%" id="prog46"></div></div>
+    <span class="progress-label" id="label46">0 / 12</span>
+  </div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q1</span><span class="q-text">Which of the following is not a form of asexual reproduction?（哪項不是無性生殖）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Budding</span></div><div class="opt"><span class="opt-label">B.</span><span>Fragmentation and regeneration</span></div><div class="opt"><span class="opt-label">C.</span><span>Parthenogenesis</span></div><div class="opt correct"><span class="opt-label">D.</span><span>Hermaphroditism</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — Hermaphroditism（雌雄同體）</div></div><div class="explanation"><div class="label">解析</div>雌雄同體個體同時具有雌雄生殖系統，但生殖方式仍為有性生殖（精卵結合），不屬於無性生殖。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q2</span><span class="q-text">An ovarian follicle undergoes several changes. Which sequence is correct, beginning with the oocyte?（卵巢週期正確順序）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Corpus luteum development, follicle development, ovulation</span></div><div class="opt correct"><span class="opt-label">B.</span><span>Follicle development, ovulation, corpus luteum development</span></div><div class="opt"><span class="opt-label">C.</span><span>Corpus luteum development, ovulation, follicle development</span></div><div class="opt"><span class="opt-label">D.</span><span>Follicle development, corpus luteum development, ovulation</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — 濾泡發育 → 排卵 → 黃體形成</div></div><div class="explanation"><div class="label">解析</div>卵巢週期：① 濾泡期（follicular phase）：FSH 刺激濾泡發育；② 排卵（ovulation）：LH 峰值觸發；③ 黃體期（luteal phase）：空濾泡轉化為黃體（corpus luteum），分泌黃體素與雌激素。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q3</span><span class="q-text">Where do developing sperm cells undergo meiosis?（精子在哪裡進行減數分裂）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>In the epididymis</span></div><div class="opt"><span class="opt-label">B.</span><span>In the vas deferens</span></div><div class="opt"><span class="opt-label">C.</span><span>In the seminal vesicle</span></div><div class="opt correct"><span class="opt-label">D.</span><span>In the seminiferous tubules</span></div><div class="opt"><span class="opt-label">E.</span><span>In the prostate gland</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — In the seminiferous tubules（睪丸曲細精管）</div></div><div class="explanation"><div class="label">解析</div>曲細精管（seminiferous tubules）是精子生成（spermatogenesis）的場所；精子隨後移至副睪（epididymis）成熟儲存。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q4</span><span class="q-text">The __________ is/are the site of testosterone production in the testis.（睪固酮的產生位置）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>seminiferous tubules</span></div><div class="opt"><span class="opt-label">B.</span><span>epididymis</span></div><div class="opt correct"><span class="opt-label">C.</span><span>Leydig cells</span></div><div class="opt"><span class="opt-label">D.</span><span>seminal vesicle</span></div><div class="opt"><span class="opt-label">E.</span><span>prostate gland</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — Leydig cells（萊氏細胞）</div></div><div class="explanation"><div class="label">解析</div>萊氏細胞（間質細胞，Leydig cells）散布於曲細精管之間，受 LH 刺激分泌雄性素（androgens），主要為睪固酮（testosterone）。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q5</span><span class="q-text">Sperm cells have several components; the function of the acrosome is to __________.（頂體的功能）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>produce a base to neutralize the acidic environment</span></div><div class="opt"><span class="opt-label">B.</span><span>metabolize the sugars for energy</span></div><div class="opt correct"><span class="opt-label">C.</span><span>release enzymes that help the sperm penetrate the egg</span></div><div class="opt"><span class="opt-label">D.</span><span>propel the sperm as they swim</span></div><div class="opt"><span class="opt-label">E.</span><span>perform all of the listed tasks</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — 釋放水解酶穿透卵子外層</div></div><div class="explanation"><div class="label">解析</div>頂體（acrosome）位於精子頭部前端，是特化的溶酶體，含水解酶。接觸卵子時發生頂體反應（acrosomal reaction），酶溶解卵子外膜（zona pellucida），使精子穿入。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q6</span><span class="q-text">From a single primary oocyte, oogenesis in a mammal will produce __________.（卵子生成的產物）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>four ova</span></div><div class="opt"><span class="opt-label">B.</span><span>four spermatozoa</span></div><div class="opt correct"><span class="opt-label">C.</span><span>an egg and two or three polar bodies</span></div><div class="opt"><span class="opt-label">D.</span><span>a primary oocyte</span></div><div class="opt"><span class="opt-label">E.</span><span>four polar bodies</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — 1個卵 + 2~3個極體</div></div><div class="explanation"><div class="label">解析</div>卵子生成與精子生成不同：減數分裂為不均等細胞質分裂，大部分細胞質保留給卵子，小的極體（polar bodies）通常退化。一個初級卵母細胞最終產生1個卵＋2~3個極體。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q7</span><span class="q-text">In spermatogenesis, each primary spermatocyte gives rise to __________ sperm.（每個初級精母細胞產生幾個精子）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>one</span></div><div class="opt"><span class="opt-label">B.</span><span>two</span></div><div class="opt correct"><span class="opt-label">C.</span><span>four</span></div><div class="opt"><span class="opt-label">D.</span><span>eight</span></div><div class="opt"><span class="opt-label">E.</span><span>millions of</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — four（四個精子）</div></div><div class="explanation"><div class="label">解析</div>初級精母細胞（2n）→ 減數分裂 I → 2個次級精母細胞（n）→ 減數分裂 II → 4個精細胞（n）→ 精子。精子生成為均等分裂，產生4個功能性精子。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q8</span><span class="q-text">Which statement about luteinizing hormone (LH) in the female reproductive system is correct?（LH 在女性生殖中的作用）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>It is produced by the hypothalamus.</span></div><div class="opt"><span class="opt-label">B.</span><span>It causes mitosis of the primary oocyte.</span></div><div class="opt"><span class="opt-label">C.</span><span>It inhibits ovulation.</span></div><div class="opt"><span class="opt-label">D.</span><span>It triggers development of endometrium in the corpus luteum.</span></div><div class="opt correct"><span class="opt-label">E.</span><span>It promotes the release of the secondary oocyte from the ovary.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">E — LH 峰值觸發排卵</div></div><div class="explanation"><div class="label">解析</div>雌激素升至峰值後產生正回饋，觸發腦垂體大量分泌 LH（LH surge）→ 卵巢濾泡破裂、排卵。LH 同時促使空濾泡轉化為黃體。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q9</span><span class="q-text">After ovulation occurs, the empty follicle __________.（排卵後空濾泡的變化）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>can be recycled to produce more eggs</span></div><div class="opt correct"><span class="opt-label">B.</span><span>changes into the corpus luteum and makes hormones</span></div><div class="opt"><span class="opt-label">C.</span><span>quickly degenerates</span></div><div class="opt"><span class="opt-label">D.</span><span>immediately initiates menstruation</span></div><div class="opt"><span class="opt-label">E.</span><span>becomes the site of the implantation of a fertilized egg</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — 轉化為黃體，分泌黃體素與雌激素</div></div><div class="explanation"><div class="label">解析</div>排卵後濾泡細胞在 LH 作用下轉化為黃體（corpus luteum），分泌黃體素（progesterone）與雌激素，維持子宮內膜。若未受孕，約2週後黃體退化，月經開始。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q10</span><span class="q-text">After the menstrual period, which hormone is the first to increase significantly, initiating the ovarian cycle?（月經週期開始時最先升高的賀爾蒙）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Progesterone</span></div><div class="opt correct"><span class="opt-label">B.</span><span>Follicle-stimulating hormone (FSH)</span></div><div class="opt"><span class="opt-label">C.</span><span>Estrogen</span></div><div class="opt"><span class="opt-label">D.</span><span>Luteinizing hormone (LH)</span></div><div class="opt"><span class="opt-label">E.</span><span>Human chorionic gonadotropin (hCG)</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — FSH（濾泡刺激素）最先升高</div></div><div class="explanation"><div class="label">解析</div>黃體退化、雌黃體素降低 → 解除對腦垂體的抑制 → FSH 上升 → 刺激少數濾泡開始發育、分泌雌激素 → 啟動新週期。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q11</span><span class="q-text">What is the source of the hormones that, when suddenly absent, are directly responsible for the onset of menstruation?（月經來潮的賀爾蒙機制）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Hypothalamus</span></div><div class="opt"><span class="opt-label">B.</span><span>Pituitary</span></div><div class="opt"><span class="opt-label">C.</span><span>Ovarian follicle</span></div><div class="opt correct"><span class="opt-label">D.</span><span>Corpus luteum</span></div><div class="opt"><span class="opt-label">E.</span><span>Vestibular glands</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — Corpus luteum（黃體）退化導致月經</div></div><div class="explanation"><div class="label">解析</div>黃體分泌雌激素和黃體素維持子宮內膜。若未受孕，黃體在約14天後退化 → 兩種荷爾蒙驟降 → 子宮內膜血管收縮脫落 → 月經。</div></div></div>
+
+  <div class="q-card" data-ch="46"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q12</span><span class="q-text">Pregnancy tests detect a hormone present only when an embryo is developing. This hormone is secreted by __________.（懷孕測試偵測的荷爾蒙來源）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>the ovary</span></div><div class="opt correct"><span class="opt-label">B.</span><span>the embryo</span></div><div class="opt"><span class="opt-label">C.</span><span>a follicle</span></div><div class="opt"><span class="opt-label">D.</span><span>the pituitary</span></div><div class="opt"><span class="opt-label">E.</span><span>the endometrium</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — 胚胎（trophoblast）分泌 hCG</div></div><div class="explanation"><div class="label">解析</div>胚胎（滋養層 trophoblast）分泌人類絨毛膜促性腺激素（hCG），使黃體持續存活並分泌黃體素維持懷孕。懷孕試紙即偵測尿液中的 hCG。</div></div></div>
+
+</section>
+
+<!-- ═══════════════════════════ CH 47 ═══════════════════════════ -->
+<section class="chapter" id="ch47">
+  <div class="chapter-header">
+    <span class="ch-num" style="background:rgba(247,196,79,.15);color:var(--ch47)">CH 47</span>
+    <h2>動物發育</h2>
+    <small>12 題</small>
+  </div>
+  <div class="chapter-meta">
+    <div class="progress-bar"><div class="progress-fill" style="background:var(--ch47);width:0%" id="prog47"></div></div>
+    <span class="progress-label" id="label47">0 / 12</span>
+  </div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q1</span><span class="q-text">Which of the following describes the correct sequence of stages during embryogenesis?（胚胎發育正確順序）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Zygote, blastula, gastrula</span></div><div class="opt"><span class="opt-label">B.</span><span>Zygote, gastrula, blastula</span></div><div class="opt"><span class="opt-label">C.</span><span>Gastrula, zygote, blastula</span></div><div class="opt"><span class="opt-label">D.</span><span>Blastula, zygote, gastrula</span></div><div class="opt"><span class="opt-label">E.</span><span>Gastrula, blastula, zygote</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — Zygote → Blastula → Gastrula</div></div><div class="explanation"><div class="label">解析</div>受精卵（zygote）→ 卵裂（cleavage）→ 囊胚（blastula，中空球狀）→ 原腸化（gastrulation）→ 原腸胚（gastrula，三胚層形成）→ 器官發生（organogenesis）。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q2</span><span class="q-text">A sea urchin sperm penetrates the jelly coat of an egg and adheres to receptor proteins on the egg's surface as a result of __________.（精子穿透卵膜的機制）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>the acrosomal reaction</span></div><div class="opt"><span class="opt-label">B.</span><span>cleavage</span></div><div class="opt"><span class="opt-label">C.</span><span>gastrulation</span></div><div class="opt"><span class="opt-label">D.</span><span>the cortical reaction</span></div><div class="opt"><span class="opt-label">E.</span><span>depolarization</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — the acrosomal reaction（頂體反應）</div></div><div class="explanation"><div class="label">解析</div>頂體反應：精子頂體釋放水解酶溶解卵膜（jelly coat），精子頭部形狀改變後與卵表面受體結合。之後皮質反應（cortical reaction）形成受精膜防止多精受精。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q3</span><span class="q-text">After a sperm penetrates an egg, a fertilization envelope forms. This envelope __________.（受精膜的功能）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>secretes important hormones</span></div><div class="opt"><span class="opt-label">B.</span><span>produces cortical granules</span></div><div class="opt correct"><span class="opt-label">C.</span><span>prevents more than one sperm from entering the egg</span></div><div class="opt"><span class="opt-label">D.</span><span>attracts additional sperm to the egg</span></div><div class="opt"><span class="opt-label">E.</span><span>is responsible for the "fast block to polyspermy"</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — 防止多精受精（slow block to polyspermy）</div></div><div class="explanation"><div class="label">解析</div>受精膜是「慢速防多精機制」（約1分鐘後形成）：皮質顆粒（cortical granules）釋放酶使卵膜硬化，物理阻擋其他精子進入。快速防多精（fast block）則是受精後細胞膜電位瞬間去極化。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q4</span><span class="q-text">The period of repeated cell divisions without significant cell growth results in formation of the blastula and is called __________.（形成囊胚的細胞分裂過程）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>meiosis</span></div><div class="opt"><span class="opt-label">B.</span><span>binary fission</span></div><div class="opt correct"><span class="opt-label">C.</span><span>cleavage</span></div><div class="opt"><span class="opt-label">D.</span><span>fragmentation</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — cleavage（卵裂）</div></div><div class="explanation"><div class="label">解析</div>卵裂：受精卵連續進行有絲分裂，細胞數增加但整體體積不增大，細胞（blastomeres）越來越小，最終形成囊胚（blastula）。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q5</span><span class="q-text">How is the animal hemisphere of a frog blastula different from the vegetal hemisphere?（動物半球 vs. 植物半球）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>The cells of the vegetal hemisphere have more yolk than the cells of the animal hemisphere.</span></div><div class="opt"><span class="opt-label">B.</span><span>The cells of the vegetal hemisphere do not participate in gastrulation.</span></div><div class="opt"><span class="opt-label">C.</span><span>The vegetal hemisphere is where the blastocoel is located.</span></div><div class="opt"><span class="opt-label">D.</span><span>The cells of the vegetal hemisphere are pigmented more darkly.</span></div><div class="opt"><span class="opt-label">E.</span><span>The blastomeres in the animal hemisphere are larger.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 植物半球細胞含較多卵黃（yolk）</div></div><div class="explanation"><div class="label">解析</div>卵黃集中在植物半球（vegetal pole），使細胞分裂較慢、細胞較大。動物半球（animal pole）卵黃少、細胞分裂快、細胞小且色素較深。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q6</span><span class="q-text">What primitive feature forms during gastrulation?（原腸化形成的原始結構）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>A primitive eye</span></div><div class="opt correct"><span class="opt-label">B.</span><span>A primitive gut</span></div><div class="opt"><span class="opt-label">C.</span><span>A primitive nervous system</span></div><div class="opt"><span class="opt-label">D.</span><span>A primitive heart</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — A primitive gut（原始消化管/原腸 archenteron）</div></div><div class="explanation"><div class="label">解析</div>原腸化（gastrulation）時細胞內陷，形成具開口（胚孔 blastopore）的原腸（archenteron），即原始消化管。同時形成三個胚層：外胚層、中胚層、內胚層。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q7</span><span class="q-text">What is the embryonic origin of the lining of the digestive tube?（消化管內壁的胚胎來源）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Endoderm</span></div><div class="opt"><span class="opt-label">B.</span><span>Ectoderm</span></div><div class="opt"><span class="opt-label">C.</span><span>Mesoderm</span></div><div class="opt"><span class="opt-label">D.</span><span>Both endoderm and mesoderm</span></div><div class="opt"><span class="opt-label">E.</span><span>All three germ layers</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — Endoderm（內胚層）</div></div><div class="explanation"><div class="label">解析</div>三胚層記憶口訣 — 內胚層：消化管內壁、肝、胰、肺上皮；中胚層：骨骼、肌肉、循環、腎臟；外胚層：皮膚表皮、神經系統。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q8</span><span class="q-text">One difference between blastula and gastrula stages is that __________.（囊胚 vs. 原腸胚的區別）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>blastula cells are more differentiated than gastrula cells</span></div><div class="opt"><span class="opt-label">B.</span><span>there are many more cells in a blastula</span></div><div class="opt"><span class="opt-label">C.</span><span>the blastula consists of more cell layers</span></div><div class="opt"><span class="opt-label">D.</span><span>the blastula is a solid ball of cells, but the gastrula is hollow</span></div><div class="opt correct"><span class="opt-label">E.</span><span>there is an opening from the cavity inside the gastrula to the outside</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">E — 原腸胚有開口（胚孔 blastopore）通向外部</div></div><div class="explanation"><div class="label">解析</div>囊胚（blastula）= 中空球，內有囊胚腔（blastocoel）但無對外開口；原腸胚（gastrula）= 原腸腔（archenteron）透過胚孔（blastopore）與外界相通，此孔在後口動物成為肛門、在原口動物成為口。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q9</span><span class="q-text">The human brain develops from __________.（人類大腦的胚胎來源）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>endoderm</span></div><div class="opt"><span class="opt-label">B.</span><span>mesoderm</span></div><div class="opt correct"><span class="opt-label">C.</span><span>ectoderm</span></div><div class="opt"><span class="opt-label">D.</span><span>both mesoderm and ectoderm</span></div><div class="opt"><span class="opt-label">E.</span><span>both ectoderm and endoderm</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — ectoderm（外胚層）</div></div><div class="explanation"><div class="label">解析</div>神經管（neural tube）由背部外胚層內陷形成，最終發育為整個中樞神經系統（腦與脊髓）。神經嵴細胞（neural crest cells）也源自外胚層，分化為周邊神經系統等多種結構。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q10</span><span class="q-text">In humans, the skeleton and muscles develop from the embryonic __________.（骨骼與肌肉的胚胎來源）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>endoderm</span></div><div class="opt"><span class="opt-label">B.</span><span>ectoderm</span></div><div class="opt correct"><span class="opt-label">C.</span><span>mesoderm</span></div><div class="opt"><span class="opt-label">D.</span><span>haploderm</span></div><div class="opt"><span class="opt-label">E.</span><span>endoderm and ectoderm</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — mesoderm（中胚層）</div></div><div class="explanation"><div class="label">解析</div>中胚層衍生：脊索、骨骼系統、肌肉、循環系統（心臟、血管）、泌尿生殖系統、結締組織。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q11</span><span class="q-text">If you wanted to examine the extraembryonic membranes surrounding a lizard or mouse embryo, you would first have to cut through __________.（最外層的胚外膜）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Yolk sac</span></div><div class="opt"><span class="opt-label">B.</span><span>Amnion</span></div><div class="opt"><span class="opt-label">C.</span><span>Endoderm</span></div><div class="opt"><span class="opt-label">D.</span><span>Allantois</span></div><div class="opt correct"><span class="opt-label">E.</span><span>Chorion</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">E — Chorion（絨毛膜）= 最外層</div></div><div class="explanation"><div class="label">解析</div>四種胚外膜由外到內：絨毛膜（chorion，最外層）→ 羊膜（amnion，包圍胚胎）→ 尿囊（allantois，廢物/氣體交換）→ 卵黃囊（yolk sac，早期造血）。</div></div></div>
+
+  <div class="q-card" data-ch="47"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q12</span><span class="q-text">What are the two main genetic and cellular mechanisms that underlie differentiation?（細胞分化的兩大機制）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>The uneven distribution of cytoplasmic determinants and induction</span></div><div class="opt"><span class="opt-label">B.</span><span>The equal distribution of cytoplasmic determinants and induction</span></div><div class="opt"><span class="opt-label">C.</span><span>Temperature and pressure of the surrounding environment</span></div><div class="opt"><span class="opt-label">D.</span><span>Gravity and temperature</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 細胞質決定因子不均等分布 + 細胞誘導（induction）</div></div><div class="explanation"><div class="label">解析</div>① 細胞質決定因子（cytoplasmic determinants）：母親 mRNA 與蛋白質在卵中不均等分布，卵裂後各細胞得到不同組合；② 誘導（induction）：一群細胞分泌信號影響鄰近細胞分化方向，如水晶體誘導實驗。</div></div></div>
+
+</section>
+
+<!-- ═══════════════════════════ CH 50 ═══════════════════════════ -->
+<section class="chapter" id="ch50">
+  <div class="chapter-header">
+    <span class="ch-num" style="background:rgba(247,131,79,.15);color:var(--ch50)">CH 50</span>
+    <h2>感覺與運動</h2>
+    <small>12 題</small>
+  </div>
+  <div class="chapter-meta">
+    <div class="progress-bar"><div class="progress-fill" style="background:var(--ch50);width:0%" id="prog50"></div></div>
+    <span class="progress-label" id="label50">0 / 12</span>
+  </div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q1</span><span class="q-text">Our sense organs cannot detect stimuli like very low frequency sound or cosmic rays. This is best characterized as a failure of sensory __________.（感覺系統無法偵測某些刺激的術語）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Translate</span></div><div class="opt"><span class="opt-label">B.</span><span>Intercept</span></div><div class="opt correct"><span class="opt-label">C.</span><span>Transduce</span></div><div class="opt"><span class="opt-label">D.</span><span>Integrate</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — Transduce（感覺轉導）</div></div><div class="explanation"><div class="label">解析</div>感覺轉導（sensory transduction）= 將刺激能量（光、聲音、化學物質等）轉換為受器細胞的電位變化（receptor potential）。無法偵測某刺激 = 缺乏能轉導該刺激的受器。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q2</span><span class="q-text">A fish detects vibrations in the water via its lateral lines. The lateral line receptors are probably which of the following?（魚類側線的受器類型）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Mechanoreceptors</span></div><div class="opt"><span class="opt-label">B.</span><span>Electromagnetic receptors</span></div><div class="opt"><span class="opt-label">C.</span><span>Chemoreceptors</span></div><div class="opt"><span class="opt-label">D.</span><span>Osmoreceptors</span></div><div class="opt"><span class="opt-label">E.</span><span>Nociceptors</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — Mechanoreceptors（機械感受器）</div></div><div class="explanation"><div class="label">解析</div>機械感受器偵測壓力、拉伸或振動引起的細胞膜形變。魚類側線的毛細胞（hair cells）感應水流振動，與內耳感受器同源。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q3</span><span class="q-text">Organs in the inner ear of mammals are the cochlea, semicircular canals, and vestibule. Match them to their functions.（內耳各結構的功能配對）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Cochlea: hearing / Semicircular canals: equilibrium / Saccule: equilibrium / Utricle: equilibrium</span></div><div class="opt"><span class="opt-label">B.</span><span>Cochlea: hearing / Semicircular canals: hearing / Utricle: equilibrium / Saccule: equilibrium</span></div><div class="opt"><span class="opt-label">C.</span><span>Cochlea: equilibrium / Semicircular canals: hearing / Saccule: hearing / Utricle: equilibrium</span></div><div class="opt"><span class="opt-label">D.</span><span>Cochlea: hearing / Semicircular canals: equilibrium / Utricle: hearing / Saccule: equilibrium</span></div><div class="opt"><span class="opt-label">E.</span><span>Cochlea: equilibrium / Semicircular canals: equilibrium / Saccule: hearing / Utricle: hearing</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 耳蝸聽覺；半規管、球形囊、卵形囊均負責平衡</div></div><div class="explanation"><div class="label">解析</div>耳蝸（cochlea）含柯氏器（organ of Corti）負責聽覺；三個半規管偵測旋轉加速度；球形囊（saccule）與卵形囊（utricle）含耳石（otoliths），偵測直線加速度與重力方向。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q4</span><span class="q-text">Sitting too close to the amplifiers at a concert may __________.（高音量對聽覺的損傷）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>affect the alignment of the semicircular canals</span></div><div class="opt"><span class="opt-label">B.</span><span>cause fluid leakage from the cochlea</span></div><div class="opt"><span class="opt-label">C.</span><span>cause the hammer to damage the anvil and stirrup bones</span></div><div class="opt correct"><span class="opt-label">D.</span><span>damage the hair cells in the ears</span></div><div class="opt"><span class="opt-label">E.</span><span>damage the pinnae</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — 損傷耳蝸內毛細胞（hair cells）</div></div><div class="explanation"><div class="label">解析</div>聲音過大 → 耳蝸液體劇烈振動 → 基底膜過度位移 → 毛細胞上的靜纖毛（stereocilia）永久受損 → 不可逆聽力損失（noise-induced hearing loss）。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q5</span><span class="q-text">If the basilar membranes in the ears were equal in width and flexibility along their length, how would this affect hearing?（基底膜均一性對聽覺的影響）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>The person would be totally deaf.</span></div><div class="opt correct"><span class="opt-label">B.</span><span>The person could not distinguish different pitches.</span></div><div class="opt"><span class="opt-label">C.</span><span>The person could not distinguish loud sounds from quiet sounds.</span></div><div class="opt"><span class="opt-label">D.</span><span>The person would hear normally.</span></div><div class="opt"><span class="opt-label">E.</span><span>The person could distinguish a greater range of pitches.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — 無法辨別不同音調（pitch）</div></div><div class="explanation"><div class="label">解析</div>基底膜（basilar membrane）由底部（高頻）到頂部（低頻）寬度與剛性漸變，使不同頻率聲波在不同位置最大振幅，形成頻率拓樸（tonotopy）。若均一則無法編碼頻率資訊。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q6</span><span class="q-text">A person born without otoliths in the ears would be __________.（缺乏耳石的後果）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>totally deaf</span></div><div class="opt"><span class="opt-label">B.</span><span>unable to determine the rate of motion of the head</span></div><div class="opt correct"><span class="opt-label">C.</span><span>unable to determine the position of the head with respect to gravity</span></div><div class="opt"><span class="opt-label">D.</span><span>hearing-impaired but not totally deaf</span></div><div class="opt"><span class="opt-label">E.</span><span>unable to send action potentials from the ears to the brain</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">C — 無法感知頭部相對於重力的位置</div></div><div class="explanation"><div class="label">解析</div>耳石（otoliths）= 碳酸鈣顆粒，附著在球形囊與卵形囊的毛細胞上；重力或直線加速度使耳石位移，彎曲毛細胞靜纖毛，傳遞平衡訊號。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q7</span><span class="q-text">In the vertebrate eye, the __________ focuses light on the photoreceptors.（將光聚焦於視網膜的結構）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>retina</span></div><div class="opt"><span class="opt-label">B.</span><span>pupil</span></div><div class="opt"><span class="opt-label">C.</span><span>fovea</span></div><div class="opt correct"><span class="opt-label">D.</span><span>lens</span></div><div class="opt"><span class="opt-label">E.</span><span>iris</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — lens（水晶體）</div></div><div class="explanation"><div class="label">解析</div>水晶體（lens）透過睫狀肌改變形狀（accommodation，調節），將光線精確聚焦於視網膜中央窩（fovea）。角膜（cornea）也有折射功能，但調節能力靠水晶體。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q8</span><span class="q-text">Which of the following correctly traces the path of light into your eyes?（光進入眼睛的正確路徑）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Lens, cornea, pupil, retina</span></div><div class="opt correct"><span class="opt-label">B.</span><span>Cornea, pupil, lens, retina</span></div><div class="opt"><span class="opt-label">C.</span><span>Cornea, lens, pupil, retina</span></div><div class="opt"><span class="opt-label">D.</span><span>Lens, pupil, cornea, retina</span></div><div class="opt"><span class="opt-label">E.</span><span>Pupil, cornea, lens, retina</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — Cornea → Pupil → Lens → Retina</div></div><div class="explanation"><div class="label">解析</div>光路：角膜（初折射）→ 瞳孔（光量控制）→ 水晶體（精確聚焦）→ 玻璃體 → 視網膜（感光細胞）。虹膜（iris）控制瞳孔大小。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q9</span><span class="q-text">A baby is born with the normal number of rods but no cones. What would we expect the baby to be?（無視錐細胞的後果）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Completely color-blind</span></div><div class="opt"><span class="opt-label">B.</span><span>Unable to see well at night</span></div><div class="opt"><span class="opt-label">C.</span><span>Only able to see color under bright light</span></div><div class="opt"><span class="opt-label">D.</span><span>Totally blind</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 完全色盲（Completely color-blind）</div></div><div class="explanation"><div class="label">解析</div>視錐細胞（cones）含 3 種感光色素（S/M/L），負責彩色視覺與中央銳利視覺；視桿細胞（rods）含視紫質（rhodopsin），負責暗光視覺與周邊視覺。無視錐 → 完全色盲但夜視正常。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q10</span><span class="q-text">A human born with nonfunctional rhodopsin would __________.（視紫質失去功能的後果）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>lack color vision</span></div><div class="opt correct"><span class="opt-label">B.</span><span>be unable to see in dim light</span></div><div class="opt"><span class="opt-label">C.</span><span>be unable to see in bright light</span></div><div class="opt"><span class="opt-label">D.</span><span>be totally blind</span></div><div class="opt"><span class="opt-label">E.</span><span>be unable to obtain a sharp image by looking straight at an object</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — 無法在弱光下看見（night blindness）</div></div><div class="explanation"><div class="label">解析</div>視紫質（rhodopsin）= 視桿細胞中的感光色素，含視黃醛（retinal）＋視蛋白（opsin），對弱光敏感。缺乏 → 夜盲症。維生素 A 缺乏也會影響視紫質合成。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q11</span><span class="q-text">Which of the following is the correct order of the neural pathways that light travels after hitting the retina?（視網膜神經訊號路徑）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Photoreceptors, bipolar cells, ganglion cells, optic nerve</span></div><div class="opt"><span class="opt-label">B.</span><span>Horizontal cells, ganglion cells, bipolar cells, photoreceptors</span></div><div class="opt"><span class="opt-label">C.</span><span>Photoreceptors, ganglion cells, horizontal cells, amacrine cells</span></div><div class="opt"><span class="opt-label">D.</span><span>Photoreceptors, horizontal cells, ganglion cells, bipolar cells</span></div><div class="opt"><span class="opt-label">E.</span><span>Bipolar cells, photoreceptors, ganglion cells</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 光受器 → 雙極細胞 → 神經節細胞 → 視神經</div></div><div class="explanation"><div class="label">解析</div>視網膜神經路徑：感光細胞（rods/cones）→ 雙極細胞（bipolar cells）→ 神經節細胞（ganglion cells）→ 視神經（optic nerve）→ 視丘（thalamus）→ 大腦視覺皮質。水平細胞與無長突細胞（amacrine）負責側向抑制。</div></div></div>
+
+  <div class="q-card" data-ch="50"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q12</span><span class="q-text">Which statement about muscle contraction is correct?（滑動細絲模型的正確描述）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Thick filaments stretch, whereas thin filaments stay the same length.</span></div><div class="opt"><span class="opt-label">B.</span><span>Thin filaments stretch, whereas thick filaments stay the same length.</span></div><div class="opt"><span class="opt-label">C.</span><span>A typical muscle fiber at rest contains enough ATP for millions of contractions.</span></div><div class="opt correct"><span class="opt-label">D.</span><span>Neither thin nor thick filaments change in size, although the area of overlap between them increases.</span></div><div class="opt"><span class="opt-label">E.</span><span>Iron and fats bound to actin play a critical role in muscle contraction.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — 粗細絲長度不變，重疊區域增加（滑動細絲模型）</div></div><div class="explanation"><div class="label">解析</div>滑動細絲模型（sliding-filament model）：肌肉收縮時，肌凝蛋白（myosin，粗絲）頭部結合肌動蛋白（actin，細絲）並滑動，使 Z 線靠近、肌節縮短，但粗細絲本身長度不變。</div></div></div>
+
+</section>
+
+<!-- ═══════════════════════════ CH 51 ═══════════════════════════ -->
+<section class="chapter" id="ch51">
+  <div class="chapter-header">
+    <span class="ch-num" style="background:rgba(93,211,247,.15);color:var(--ch51)">CH 51</span>
+    <h2>動物行為</h2>
+    <small>12 題</small>
+  </div>
+  <div class="chapter-meta">
+    <div class="progress-bar"><div class="progress-fill" style="background:var(--ch51);width:0%" id="prog51"></div></div>
+    <span class="progress-label" id="label51">0 / 12</span>
+  </div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q1</span><span class="q-text">If a chemical from a dead ant is applied to a live ant, other ants will carry it out of the anthill. Which explains this behavior?（螞蟻搬運行為的機制）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>The chemical is a sign stimulus for a fixed action pattern.</span></div><div class="opt"><span class="opt-label">B.</span><span>The ants have become imprinted on the chemical.</span></div><div class="opt"><span class="opt-label">C.</span><span>The ants are following a stimulus-response chain.</span></div><div class="opt"><span class="opt-label">D.</span><span>The ants can only learn by operant conditioning.</span></div><div class="opt"><span class="opt-label">E.</span><span>The ants are responding to a circadian clock.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 化學物質是引發固定行為模式的信號刺激（sign stimulus）</div></div><div class="explanation"><div class="label">解析</div>固定行為模式（FAP）= 一旦被特定信號刺激（sign stimulus / releaser）觸發，就會完整執行的刻板行為序列，不易中途停止，且不需學習。此例中屍體化學物質是信號刺激。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q2</span><span class="q-text">Which of the following is a fixed action pattern?（哪項是固定行為模式的例子）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>A stickleback fish attacks a wood block with a red bottom.</span></div><div class="opt"><span class="opt-label">B.</span><span>A hamster becomes active at the same time each evening.</span></div><div class="opt"><span class="opt-label">C.</span><span>A wolf tracks its prey.</span></div><div class="opt"><span class="opt-label">D.</span><span>A robin eats a distasteful bug, spits it out, and never eats a bug that looks like that again.</span></div><div class="opt"><span class="opt-label">E.</span><span>A blackback gull returns to the same island breeding grounds each year.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 刺魚攻擊紅色物體</div></div><div class="explanation"><div class="label">解析</div>雄性刺魚在繁殖季腹部變紅；「紅色腹部」是信號刺激，不論形狀（甚至木塊）只要有紅底都觸發攻擊 FAP。選項 D 是學習（嫌惡制約），B 是生理時鐘，E 是遷徙行為。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q3</span><span class="q-text">You wonder why a squirrel bit the tail of another. Which of the following is a question about the proximate cause?（關於近因的問題）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Does the presence of a tail close by cause a squirrel to bite?</span></div><div class="opt"><span class="opt-label">B.</span><span>Does biting help keep other squirrels from stealing food?</span></div><div class="opt"><span class="opt-label">C.</span><span>Was the squirrel defending a mate from an intruder?</span></div><div class="opt"><span class="opt-label">D.</span><span>Is this biting behavior a form of courtship?</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses is correct.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 詢問觸發刺激 = 近因（proximate cause）問題</div></div><div class="explanation"><div class="label">解析</div>Tinbergen 四問：近因（proximate）詢問「什麼刺激觸發行為？什麼生理/神經機制？」；遠因（ultimate）詢問「此行為的演化意義與適應功能為何？」B/C/D 均屬遠因問題。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q4</span><span class="q-text">Which of the following is an example of a circannual rhythm?（年週期節律的例子）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Every spring robins gather in the park to build nests and reproduce.</span></div><div class="opt"><span class="opt-label">B.</span><span>Mosquitoes are most active at dawn and dusk.</span></div><div class="opt"><span class="opt-label">C.</span><span>Just as the sun sets, bats leave the cave in large swarms.</span></div><div class="opt"><span class="opt-label">D.</span><span>Fiddler crabs exhibit courtship behavior based on the phase of the moon.</span></div><div class="opt"><span class="opt-label">E.</span><span>In the heat of the day, most of the mammals at the zoo rest in the shade.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — 每年春天築巢繁殖 = 年週期節律</div></div><div class="explanation"><div class="label">解析</div>年週期節律（circannual rhythm）以約一年為週期；日週期節律（circadian rhythm）以約24小時為週期（B/C/E）；月週期節律（lunar rhythm）以月相為週期（D）。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q5</span><span class="q-text">Graylag geese learn to follow their mothers. This is an example of __________.（灰雁跟隨母親的行為類型）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>cognitive mapping</span></div><div class="opt"><span class="opt-label">B.</span><span>operant conditioning</span></div><div class="opt"><span class="opt-label">C.</span><span>associative learning</span></div><div class="opt correct"><span class="opt-label">D.</span><span>imprinting</span></div><div class="opt"><span class="opt-label">E.</span><span>classical conditioning</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — imprinting（銘印）</div></div><div class="explanation"><div class="label">解析</div>銘印（imprinting）是在特定「關鍵期（critical period）」發生的一種學習，不可逆。Konrad Lorenz 的經典實驗：剛孵化的灰雁在關鍵期將最先看到的移動物體認定為「母親」並持續跟隨。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q6</span><span class="q-text">When Drosophila were exposed to a particular odor and electric shock at the same time, they started to avoid the odor. This is an example of __________.（果蠅學習迴避氣味的類型）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>classical conditioning</span></div><div class="opt"><span class="opt-label">B.</span><span>operant conditioning</span></div><div class="opt"><span class="opt-label">C.</span><span>social learning</span></div><div class="opt"><span class="opt-label">D.</span><span>imprinting</span></div><div class="opt"><span class="opt-label">E.</span><span>cognitive mapping</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — classical conditioning（古典制約）</div></div><div class="explanation"><div class="label">解析</div>古典制約：將中性刺激（氣味）與非制約刺激（電擊）配對，最終中性刺激單獨出現即引起反應。Pavlov 的狗實驗為原型。操作制約則是動物主動行為與獎懲的連結。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q7</span><span class="q-text">In __________, an animal learns to associate one of its behaviors with reward or punishment.（操作制約的定義）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>classical conditioning</span></div><div class="opt correct"><span class="opt-label">B.</span><span>operant conditioning</span></div><div class="opt"><span class="opt-label">C.</span><span>fixed-action-pattern (FAP) learning</span></div><div class="opt"><span class="opt-label">D.</span><span>problem solving</span></div><div class="opt"><span class="opt-label">E.</span><span>imprinting</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — operant conditioning（操作制約）</div></div><div class="explanation"><div class="label">解析</div>操作制約（Skinner box 實驗）：動物自發行為（如按槓桿）得到獎勵或懲罰，增強或減弱該行為頻率。與古典制約不同，動物在此是主動的行為者。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q8</span><span class="q-text">Which of the following best illustrates optimal foraging?（最適覓食理論的最佳例子）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>A robin will repeatedly attack any red object near its territory.</span></div><div class="opt"><span class="opt-label">B.</span><span>Musk oxen will form a circle to fend off a wolf attack.</span></div><div class="opt"><span class="opt-label">C.</span><span>Bats emerge to feed at about the same time each night.</span></div><div class="opt"><span class="opt-label">D.</span><span>A blackbird will warn others in the flock if it senses danger.</span></div><div class="opt correct"><span class="opt-label">E.</span><span>A sunbird will more fiercely defend flowers that produce more food.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">E — 防衛高能量食源 = 最適覓食</div></div><div class="explanation"><div class="label">解析</div>最適覓食理論（optimal foraging theory）：動物以最小能量消耗獲取最大淨能量收益。太陽鳥只在保衛高產蜜花時的能量收益大於消耗時才防衛，完美體現能量成本效益計算。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q9</span><span class="q-text">Off in the distance, you spot four female deer and a single male deer. This reflects which type of mating system?（一雄多雌的交配制度名稱）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt correct"><span class="opt-label">A.</span><span>Polygyny</span></div><div class="opt"><span class="opt-label">B.</span><span>Polyandry</span></div><div class="opt"><span class="opt-label">C.</span><span>Monogamy</span></div><div class="opt"><span class="opt-label">D.</span><span>Monogyny</span></div><div class="opt"><span class="opt-label">E.</span><span>None of the listed responses can be applied to this mating system.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">A — Polygyny（多妻制：一雄多雌）</div></div><div class="explanation"><div class="label">解析</div>交配制度：Polygyny（多妻）= 一雄多雌（鹿、獅子）；Polyandry（多夫）= 一雌多雄；Monogamy（單偶）= 一對一；Promiscuity（雜交）= 無固定配偶。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q10</span><span class="q-text">Altruistic behavior __________.（利他行為的正確描述）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>never occurs in natural populations</span></div><div class="opt"><span class="opt-label">B.</span><span>is expected when the species as a whole benefits from it</span></div><div class="opt"><span class="opt-label">C.</span><span>occurs only when closely related individuals benefit from it</span></div><div class="opt correct"><span class="opt-label">D.</span><span>is expected when it increases the long-term inclusive fitness of the altruists</span></div><div class="opt"><span class="opt-label">E.</span><span>is expected when there are plentiful resources to share</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">D — 提升利他者的整體適應度（inclusive fitness）</div></div><div class="explanation"><div class="label">解析</div>利他行為（altruism）在個體直接適應度降低的同時，若能透過幫助具有共同基因的親屬（kin selection）或互惠（reciprocal altruism）提升包含適應度（inclusive fitness = 直接 + 間接），即可被天擇保留。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q11</span><span class="q-text">The enhanced reproduction of related individuals with common alleles through apparently altruistic behavior is referred to as __________.（透過利他行為幫助親屬傳遞基因的機制）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>Hamilton's rule</span></div><div class="opt correct"><span class="opt-label">B.</span><span>kin selection</span></div><div class="opt"><span class="opt-label">C.</span><span>competitive exclusion</span></div><div class="opt"><span class="opt-label">D.</span><span>adaptive radiation</span></div><div class="opt"><span class="opt-label">E.</span><span>the coefficient of relatedness</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — kin selection（親緣選擇）</div></div><div class="explanation"><div class="label">解析</div>親緣選擇（kin selection）：幫助具有共同等位基因的親屬繁殖，可間接增加自身基因在下一代的頻率。Hamilton's rule：rB &gt; C（r=親緣係數，B=受益者獲益，C=施惠者代價）。工蜂犧牲繁殖機會照顧姐妹蜂后為典型例子。</div></div></div>
+
+  <div class="q-card" data-ch="51"><div class="q-header" onclick="toggle(this)"><span class="q-num">Q12</span><span class="q-text">Which of the following well-known sayings best summarizes the idea of reciprocal altruism?（最能總結互惠利他的諺語）</span><span class="q-toggle">▾</span></div><div class="q-divider"></div><div class="q-options"><div class="opt"><span class="opt-label">A.</span><span>A rolling stone gathers no moss.</span></div><div class="opt correct"><span class="opt-label">B.</span><span>You scratch my back, and I'll scratch yours.</span></div><div class="opt"><span class="opt-label">C.</span><span>A penny saved is a penny earned.</span></div><div class="opt"><span class="opt-label">D.</span><span>A bird in the hand is worth two in the bush.</span></div><div class="opt"><span class="opt-label">E.</span><span>Beauty is in the eye of the beholder.</span></div></div><div class="q-answer"><div class="ans-tag"><div class="label">正確答案</div><div class="ans-text">B — "You scratch my back, and I'll scratch yours."</div></div><div class="explanation"><div class="label">解析</div>互惠利他（reciprocal altruism）：幫助非親緣個體，期待對方日後回報。條件：個體能再次相遇、能辨識對方、作弊者會受到懲罰。吸血蝙蝠分享血食即為著名例子。</div></div></div>
+
+</section>
+
+  </main>
+</div>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  // Toggle card open/close
+  function toggle(header) {
+    const card = header.closest('.q-card');
+    const wasOpen = card.classList.contains('open');
+    card.classList.toggle('open', !wasOpen);
+    updateProgress(card.dataset.ch);
+  }
+
+  // Track progress per chapter
+  function updateProgress(ch) {
+    const cards = document.querySelectorAll(`.q-card[data-ch="${ch}"]`);
+    const opened = [...cards].filter(c => c.classList.contains('open')).length;
+    const total = cards.length;
+    const pct = (opened / total) * 100;
+    const bar = document.getElementById(`prog${ch}`);
+    const lbl = document.getElementById(`label${ch}`);
+    if (bar) bar.style.width = pct + '%';
+    if (lbl) lbl.textContent = `${opened} / ${total}`;
+  }
+
+  // Scroll-top button
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTop');
+    btn.classList.toggle('show', window.scrollY > 400);
+  });
+</script>
+</body>
+</html>
