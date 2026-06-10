@@ -47,37 +47,7 @@
     z-index: -1;
   }
 
-  /* Navigation sidebar */
-  .nav-sidebar {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 8px;
-    z-index: 100;
-    background: rgba(10,22,40,0.8);
-    border-right: 1px solid var(--border-glow);
-    border-radius: 0 12px 12px 0;
-  }
 
-  .nav-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--teal);
-    cursor: pointer;
-    transition: all 0.3s;
-    border: 1px solid var(--aqua);
-  }
-
-  .nav-dot:hover, .nav-dot.active {
-    background: var(--aqua);
-    box-shadow: 0 0 8px var(--aqua);
-    transform: scale(1.3);
-  }
 
   /* Hero header */
   .hero {
@@ -276,7 +246,6 @@
 
   @media (max-width: 640px) {
     .compare-grid { grid-template-columns: 1fr; }
-    .nav-sidebar { display: none; }
   }
 
   .compare-card {
@@ -685,8 +654,14 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    padding: 16px 24px;
+    padding: 12px 24px;
     flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 22, 40, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-glow);
   }
 
   .breadcrumb a {
@@ -799,16 +774,6 @@
 </head>
 <body>
 
-<!-- Navigation dots -->
-<nav class="nav-sidebar" aria-label="章節導航">
-  <div class="nav-dot active" onclick="scrollToSection('intro')" title="前言"></div>
-  <div class="nav-dot" onclick="scrollToSection('concept1')" title="概念1：滲透調節"></div>
-  <div class="nav-dot" onclick="scrollToSection('concept2')" title="概念2：含氮廢物"></div>
-  <div class="nav-dot" onclick="scrollToSection('concept3')" title="概念3：排泄系統"></div>
-  <div class="nav-dot" onclick="scrollToSection('concept4')" title="概念4：腎元"></div>
-  <div class="nav-dot" onclick="scrollToSection('concept5')" title="概念5：荷爾蒙調節"></div>
-  <div class="nav-dot" onclick="scrollToSection('review')" title="複習測驗"></div>
-</nav>
 
 <!-- Hero -->
 <header class="hero fade-in" id="intro">
