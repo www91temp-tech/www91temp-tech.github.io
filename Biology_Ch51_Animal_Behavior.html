@@ -24,6 +24,8 @@
     --key-border: #ffa657;
   }
 
+  html { scroll-behavior: smooth; }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
@@ -147,8 +149,8 @@
   }
 
   /* ===== CONTENT BLOCKS ===== */
-  .section-page { display: none; }
-  .section-page.active { display: block; }
+  .section-page { display: block; scroll-margin-top: 52px; }
+  .section-page + .section-page { border-top: 1px solid var(--border); }
 
   p { color: var(--text); margin-bottom: 16px; }
 
@@ -459,16 +461,16 @@
 
 <!-- NAV TABS -->
 <nav class="nav-tabs">
-  <a class="nav-tab active" onclick="showSection(0,this)" href="#">📌 概念總覽</a>
-  <a class="nav-tab" onclick="showSection(1,this)" href="#">1. 感覺與行為</a>
-  <a class="nav-tab" onclick="showSection(2,this)" href="#">2. 學習</a>
-  <a class="nav-tab" onclick="showSection(3,this)" href="#">3. 覓食與交配</a>
-  <a class="nav-tab" onclick="showSection(4,this)" href="#">4. 遺傳與利他</a>
-  <a class="nav-tab" onclick="showSection(5,this)" href="#">✏️ 自我測驗</a>
+  <a class="nav-tab active" href="#sec0">📌 概念總覽</a>
+  <a class="nav-tab" href="#sec1">1. 感覺與行為</a>
+  <a class="nav-tab" href="#sec2">2. 學習</a>
+  <a class="nav-tab" href="#sec3">3. 覓食與交配</a>
+  <a class="nav-tab" href="#sec4">4. 遺傳與利他</a>
+  <a class="nav-tab" href="#sec5">✏️ 自我測驗</a>
 </nav>
 
 <!-- ========== SECTION 0: OVERVIEW ========== -->
-<div class="section-page active" id="sec0">
+<div class="section-page" id="sec0">
 <div class="container">
 
   <div class="section-header">
@@ -1080,15 +1082,26 @@
 </div>
 
 <script>
-  // Tab navigation
-  function showSection(idx, el) {
-    document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('sec' + idx).classList.add('active');
-    el.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return false;
-  }
+  // Active tab highlight based on scroll position
+  const sections = document.querySelectorAll('.section-page');
+  const tabs = document.querySelectorAll('.nav-tab');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tabs.forEach(t => t.classList.remove('active'));
+        const activeTab = document.querySelector(`.nav-tab[href="#${id}"]`);
+        if (activeTab) {
+          activeTab.classList.add('active');
+          // Auto-scroll the nav bar to keep active tab visible
+          activeTab.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        }
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
 
   // Quiz answer handler
   function answer(btn, correct, msg) {
