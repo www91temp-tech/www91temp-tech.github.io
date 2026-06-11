@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第47章：動物發育 — 圖說總覽</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEF2F7;
+    --card: #FFFFFF;
+    --navy: #1B3A4B;
+    --teal: #006D77;
+    --teal-light: #E8F4F5;
+    --orange: #C75B3B;
+    --orange-light: #FBF0EC;
+    --purple: #5A4A8A;
+    --purple-light: #F0EEFB;
+    --text: #2D3748;
+    --muted: #718096;
+    --border: #D8E2EC;
+    --concept-bar: #006D77;
+    --shadow: 0 2px 12px rgba(27,58,75,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 28px 40px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  }
+  .site-header .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 4px;
+  }
+  .site-header h1 {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .site-header .subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+  }
+  .concept-pills {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .concept-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .concept-pill:hover { background: rgba(255,255,255,0.22); }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+    align-items: start;
+  }
+
+  /* ── TOC SIDEBAR ── */
+  .toc {
+    position: sticky;
+    top: 100px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px 0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    margin-right: 28px;
+  }
+  .toc h3 {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 18px 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .toc-section {
+    padding: 4px 18px 2px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  .toc a {
+    display: block;
+    padding: 5px 18px;
+    font-size: 12.5px;
+    color: var(--text);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+  .toc a:hover {
+    color: var(--teal);
+    border-left-color: var(--teal);
+    background: var(--teal-light);
+  }
+  .toc a .fig-no {
+    font-size: 10px;
+    color: var(--muted);
+    margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main { min-width: 0; }
+
+  /* ── CONCEPT SECTION ── */
+  .concept-section {
+    margin-bottom: 48px;
+  }
+  .concept-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--teal);
+  }
+  .concept-number {
+    background: var(--teal);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .concept-title {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+
+  /* ── FIGURE CARD ── */
+  .fig-card {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .fig-card:hover {
+    box-shadow: 0 4px 20px rgba(27,58,75,0.13);
+  }
+
+  .fig-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 22px 0;
+  }
+  .fig-number-block {
+    flex-shrink: 0;
+    width: 62px;
+    text-align: center;
+  }
+  .fig-number-big {
+    font-family: 'Crimson Text', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--teal);
+    line-height: 1;
+    display: block;
+  }
+  .fig-number-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    display: block;
+    margin-top: 1px;
+  }
+  .fig-title-area { flex: 1; }
+  .fig-title {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .fig-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .badge {
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .badge-standard {
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 1px solid #b2d8db;
+  }
+  .badge-inquiry {
+    background: var(--orange-light);
+    color: var(--orange);
+    border: 1px solid #e8c4b8;
+  }
+  .badge-visualizing {
+    background: var(--purple-light);
+    color: var(--purple);
+    border: 1px solid #c4bde8;
+  }
+  .badge-organism {
+    background: #F7F3E9;
+    color: #7A5C1E;
+    border: 1px solid #ddd0b3;
+  }
+
+  /* ── IMAGE PLACEHOLDER ── */
+  .fig-image-placeholder {
+    margin: 14px 22px;
+    background: #F4F7FA;
+    border: 1.5px dashed #C4D2DE;
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .fig-image-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .fig-image-desc {
+    font-size: 12.5px;
+    color: #5A7080;
+    line-height: 1.55;
+  }
+  .fig-image-desc strong {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #8AABB8;
+    margin-bottom: 3px;
+  }
+
+  /* ── FIGURE BODY ── */
+  .fig-body {
+    padding: 4px 22px 20px;
+  }
+  .fig-description {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .fig-parts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .fig-part {
+    background: #F8FAFC;
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+  }
+  .fig-part.inquiry-part {
+    border-left-color: var(--orange);
+    background: #FEF8F6;
+  }
+  .fig-part-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 4px;
+  }
+  .fig-part.inquiry-part .fig-part-label { color: var(--orange); }
+  .fig-part-text {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* ── WHAT IF ── */
+  .what-if-box {
+    margin: 10px 0 0;
+    background: #FFFBEC;
+    border: 1px solid #E8D88A;
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .what-if-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9A7200;
+    margin-bottom: 4px;
+  }
+  .what-if-text {
+    font-size: 13px;
+    color: #5A4800;
+    line-height: 1.6;
+  }
+
+  /* ── DIVIDER BETWEEN INTRO AND FIGURES ── */
+  .intro-card {
+    background: linear-gradient(135deg, var(--navy) 0%, #2A5470 100%);
+    border-radius: 12px;
+    padding: 24px 26px;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+  .intro-card h2 {
+    font-family: 'Crimson Text', serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  .intro-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .intro-table th {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.75);
+    padding: 7px 12px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .intro-table td {
+    padding: 8px 12px;
+    color: rgba(255,255,255,0.88);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    vertical-align: top;
+  }
+  .intro-table tr:last-child td { border-bottom: none; }
+  .stage-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 11.5px;
+    white-space: nowrap;
+  }
+
+  /* ── SCROLLBAR ── */
+  .toc::-webkit-scrollbar { width: 4px; }
+  .toc::-webkit-scrollbar-track { background: transparent; }
+  .toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; padding: 16px; }
+    .toc { display: none; }
+    .site-header { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="eyebrow">生物學 · Unit Seven: Animal Form and Function</div>
+  <h1>第 47 章：動物發育 — 圖說總覽</h1>
+  <div class="subtitle">Animal Development &nbsp;·&nbsp; 共 27 張圖（Figure 47.1–47.27）</div>
+  <div class="concept-pills">
+    <a href="#concept-1" class="concept-pill">47.1 受精與卵裂</a>
+    <a href="#concept-2" class="concept-pill">47.2 形態發生</a>
+    <a href="#concept-3" class="concept-pill">47.3 細胞命運決定</a>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- TOC -->
+<nav class="toc">
+  <h3>圖目錄</h3>
+  <div class="toc-section">概論</div>
+  <a href="#intro-diagram"><span class="fig-no">—</span>胚胎發育各階段</a>
+  <div class="toc-section">Concept 47.1</div>
+  <a href="#fig-47-1"><span class="fig-no">47.1</span>人類 vs. 雞胚胎</a>
+  <a href="#fig-47-2"><span class="fig-no">47.2</span>頂體與皮質反應</a>
+  <a href="#fig-47-3"><span class="fig-no">47.3</span>🔬 Ca²⁺ 與受精膜</a>
+  <a href="#fig-47-4"><span class="fig-no">47.4</span>哺乳類受精</a>
+  <a href="#fig-47-5"><span class="fig-no">47.5</span>有絲分裂的變異</a>
+  <a href="#fig-47-6"><span class="fig-no">47.6</span>棘皮動物卵裂</a>
+  <a href="#fig-47-7"><span class="fig-no">47.7</span>青蛙卵裂</a>
+  <div class="toc-section">Concept 47.2</div>
+  <a href="#fig-47-8"><span class="fig-no">47.8</span>👁 原腸形成視覺化</a>
+  <a href="#fig-47-9"><span class="fig-no">47.9</span>三胚層衍生物</a>
+  <a href="#fig-47-10"><span class="fig-no">47.10</span>青蛙原腸形成</a>
+  <a href="#fig-47-11"><span class="fig-no">47.11</span>雞胚原腸形成</a>
+  <a href="#fig-47-12"><span class="fig-no">47.12</span>人類早期胚發育</a>
+  <a href="#fig-47-13"><span class="fig-no">47.13</span>爬蟲類帶殼蛋</a>
+  <a href="#fig-47-14"><span class="fig-no">47.14</span>青蛙神經管形成</a>
+  <a href="#fig-47-15"><span class="fig-no">47.15</span>雞胚器官形成</a>
+  <a href="#fig-47-16"><span class="fig-no">47.16</span>細胞形狀改變</a>
+  <a href="#fig-47-17"><span class="fig-no">47.17</span>輻輳延伸</a>
+  <div class="toc-section">Concept 47.3</div>
+  <a href="#fig-47-18"><span class="fig-no">47.18</span>命運圖譜</a>
+  <a href="#fig-47-19"><span class="fig-no">47.19</span>C. elegans 細胞譜系</a>
+  <a href="#fig-47-20"><span class="fig-no">47.20</span>生殖細胞命運</a>
+  <a href="#fig-47-21"><span class="fig-no">47.21</span>P 顆粒分配</a>
+  <a href="#fig-47-22"><span class="fig-no">47.22</span>兩棲類體軸建立</a>
+  <a href="#fig-47-23"><span class="fig-no">47.23</span>🔬 灰色新月區實驗</a>
+  <a href="#fig-47-24"><span class="fig-no">47.24</span>🔬 Spemann-Mangold 實驗</a>
+  <a href="#fig-47-25"><span class="fig-no">47.25</span>脊椎動物肢體發育</a>
+  <a href="#fig-47-26"><span class="fig-no">47.26</span>🔬 ZPA 肢型實驗</a>
+  <a href="#fig-47-27"><span class="fig-no">47.27</span>內臟反位</a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- INTRO DIAGRAM -->
+  <div class="intro-card" id="intro-diagram">
+    <h2>胚胎發育的五大階段（概論圖）</h2>
+    <p style="font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:10px;">本圖為章節首頁示意圖，說明動物胚胎發育從受精卵到成體的完整循環。</p>
+    <table class="intro-table">
+      <tr><th>階段</th><th>說明</th></tr>
+      <tr><td><span class="stage-badge">受精 Fertilization</span></td><td>精子與卵子融合，形成二倍體合子（zygote）。</td></tr>
+      <tr><td><span class="stage-badge">卵裂 Cleavage</span></td><td>快速的卵裂分裂將胚胎轉變為中空的囊胚（blastula），細胞大小減小、數量大增。</td></tr>
+      <tr><td><span class="stage-badge">原腸形成 Gastrulation</span></td><td>囊胚重組為原腸胚（gastrula），形成具有不同細胞層與組織的多層胚胎。</td></tr>
+      <tr><td><span class="stage-badge">器官形成 Organogenesis</span></td><td>胚層組織分化，在特定位置形成各器官的雛形。</td></tr>
+      <tr><td><span class="stage-badge">變態 Metamorphosis</span></td><td>由幼蟲期轉變為成體的過程（部分物種）。</td></tr>
+    </table>
+  </div>
+
+  <!-- ===== CONCEPT 47.1 ===== -->
+  <section class="concept-section" id="concept-1">
+    <div class="concept-header">
+      <span class="concept-number">CONCEPT 47.1</span>
+      <span class="concept-title">受精與卵裂啟動胚胎發育</span>
+    </div>
+
+    <!-- FIG 47.1 -->
+    <div class="fig-card" id="fig-47-1">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.1</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">人類與雞胚胎的相似性</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🧬 人類 · 🐔 雞</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">📷</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          主圖：41 天大的人類胚胎；插圖：3.5 天大的雞胚胎。兩者均可見發育中的眼睛、心臟、消化道及將形成脊椎骨的重複組織塊（體節）。比例尺：1 mm。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          此人類胚胎（主圖）與雞胚胎（插圖）在年齡上相差甚遠（分別為 41 天與 3.5 天），外觀卻驚人地相似。可辨認出正在發育的眼睛、心臟與消化道，以及將形成脊椎骨的重複組織塊。這些相似性反映了許多動物共享早期胚胎發育的基本過程，由此形成共同的基礎體制，再各自演化出獨特的特化形式。
+        </p>
+      </div>
+    </div>
+
+    <!-- FIG 47.2 -->
+    <div class="fig-card" id="fig-47-2">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.2</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">海膽受精中的頂體反應與皮質反應</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🦔 海膽</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🔬</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          五步驟詳細示意圖：精子接觸卵膠質層 → 頂體反應釋放水解酶 → 精卵膜融合（快速多精阻斷）→ 皮質顆粒胞吐（皮質反應）→ 精核進入卵。標示結構包括頂體、肌動蛋白絲、膠質層、精子結合受體、卵黃膜、皮質顆粒、受精膜等。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">① 接觸</div>
+            <div class="fig-part-text">精子頭部接觸卵的膠質層，觸發頂體（acrosome）的胞吐反應。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">② 頂體反應</div>
+            <div class="fig-part-text">頂體釋放水解酶，在膠質層穿出一個通道；肌動蛋白絲延伸形成頂體突起（acrosomal process），其表面蛋白與卵質膜上的特異蛋白結合——此「鎖鑰」辨識機制防止異種受精。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">③ 精卵膜融合 → 快速多精阻斷</div>
+            <div class="fig-part-text">精卵質膜融合後，Na⁺ 湧入卵內造成去極化（depolarization），使其他精子無法再融合。此反應在 1–3 秒內完成，稱為<strong>多精阻斷的快速機制</strong>。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">④ 皮質反應 → 緩慢多精阻斷</div>
+            <div class="fig-part-text">皮質顆粒（cortical granules）與質膜融合，釋放內容物至卵黃膜下方空間，使卵黃膜硬化形成<strong>受精膜（fertilization envelope）</strong>，為長效的多精阻斷機制。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">⑤ 精核進入</div>
+            <div class="fig-part-text">精子細胞核進入卵細胞質，完成受精的最後步驟。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.3 -->
+    <div class="fig-card" id="fig-47-3">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.3</span>
+          <span class="fig-number-label">Inquiry</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">卵中 Ca²⁺ 的分布是否與受精膜的形成有關？</div>
+          <div class="fig-badges">
+            <span class="badge badge-inquiry">🔬 探究實驗</span>
+            <span class="badge badge-organism">🦔 海膽</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🧪</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明（兩組）</strong>
+          上排：光學顯微照片序列，顯示受精後 10 秒、25 秒、35 秒、1 分鐘時受精膜逐漸形成的過程（比例尺 500 μm）。下排：以螢光染料追蹤 Ca²⁺ 波：受精前 1 秒、受精後 10 秒、20 秒、30 秒，波峰從精子進入點向外擴散。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">實驗方法</div>
+            <div class="fig-part-text">研究者將海膽卵與精子混合後，在 10–60 秒時以固定劑定格細胞結構，記錄受精膜形成各階段。另一組實驗中，將能與游離 Ca²⁺ 結合後發光的螢光染料注射至未受精卵中，加入精子後記錄螢光分布。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">實驗結果</div>
+            <div class="fig-part-text">細胞質中 Ca²⁺ 濃度的上升以波的形式從精子進入點開始向外擴散。Ca²⁺ 波通過後，受精膜隨即從卵表面升起。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">結論</div>
+            <div class="fig-part-text">Ca²⁺ 釋放與受精膜形成具有時空上的高度相關性，支持「Ca²⁺ 濃度上升觸發皮質顆粒融合」的假說。後續研究確認：精子結合卵後活化訊號轉導路徑，使內質網釋放 Ca²⁺；此反應在脊椎動物（魚類、哺乳類）中同樣存在。</div>
+          </div>
+        </div>
+        <div class="what-if-box">
+          <div class="what-if-label">❓ What If?</div>
+          <div class="what-if-text">若有某種分子能進入卵並結合 Ca²⁺、阻斷其功能，你會如何以此分子進一步驗證「Ca²⁺ 上升觸發皮質顆粒融合」的假說？</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.4 -->
+    <div class="fig-card" id="fig-47-4">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.4</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">哺乳類的受精過程</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🧬 哺乳類</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🔬</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          插圖顯示精子穿越濾泡細胞層與透明帶（zona pellucida），與卵質膜融合的瞬間。標示結構：濾泡細胞、透明帶、精子基體（中心粒）、精核、皮質顆粒。左側有人體輪廓圖示意比例。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          哺乳類為體內受精，精子必須穿過圍繞卵母細胞的濾泡細胞層，才能接觸到<strong>透明帶（zona pellucida）</strong>——卵的細胞外基質。精子結合透明帶上的精子受體後，誘發頂體反應，協助精子進入。與海膽相同，精子結合觸發皮質反應，皮質顆粒所釋放的酶催化透明帶改變，形成<strong>緩慢多精阻斷</strong>（哺乳類無已知的快速去極化阻斷機制）。哺乳類整個受精過程比海膽慢許多，首次卵裂約在精子結合後 12–36 小時才發生。
+        </p>
+      </div>
+    </div>
+
+    <!-- FIG 47.5 -->
+    <div class="fig-card" id="fig-47-5">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.5</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">胚胎發育中有絲分裂的三種型態</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">概念示意圖</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🟦</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          三組分裂樹狀圖（圓圈代表細胞，字母與顏色代表細胞命運）：(a) 卵裂分裂、(b) 幹細胞分裂、(c) 模式形成分裂。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">(a) 卵裂分裂 Cleavage divisions</div>
+            <div class="fig-part-text">細胞數目快速增加，但細胞體積縮小，胚胎整體大小不變。所有子細胞命運相同（同一字母），尚未分化。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(b) 幹細胞分裂 Stem cell divisions</div>
+            <div class="fig-part-text">一個子細胞保留親代細胞類型（自我更新），另一個子細胞則分化為新的細胞類型（B）。此機制持續補充血球等終身所需的細胞。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(c) 模式形成分裂 Patterning divisions</div>
+            <div class="fig-part-text">子細胞根據在胚胎中的位置訊息而獲得不同命運（C、D 等），是決定不同細胞類型在三維空間中正確位置的關鍵機制。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.6 -->
+    <div class="fig-card" id="fig-47-6">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.6</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">棘皮動物（沙幣）胚胎的卵裂過程</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🦔 棘皮動物</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">📷</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明（四張光學顯微照片）</strong>
+          俯視胚胎赤道面：(a) 受精卵（具受精膜）→ (b) 四細胞期（可見第二次卵裂的有絲分裂紡錘體殘跡）→ (c) 早期囊胚（囊胚腔開始形成）→ (d) 晚期囊胚（單層細胞圍繞囊胚腔）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">(a) 受精卵</div>
+            <div class="fig-part-text">合子在第一次卵裂前夕，外圍仍有受精膜（fertilization envelope）包覆。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(b) 四細胞期</div>
+            <div class="fig-part-text">完成第二次卵裂後，兩對細胞間仍可見有絲分裂紡錘體的殘跡。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(c) 早期囊胚</div>
+            <div class="fig-part-text">經過多次卵裂，胚胎已是多細胞球體，中央囊胚腔（blastocoel）開始形成。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(d) 晚期囊胚</div>
+            <div class="fig-part-text">單層細胞圍繞囊胚腔，完成完整的囊胚。此後胚胎進行形態發生，並從受精膜中孵出，開始游泳。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.7 -->
+    <div class="fig-card" id="fig-47-7">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.7</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">青蛙胚胎的卵裂過程</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐸 青蛙</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">📷</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          含示意圖與 SEM/螢光照片：合子（動物半球、植物半球）→ 2 細胞期（含灰色新月區）→ 4 細胞期 → 8 細胞期（動物極俯視 SEM，可見兩層大小不等的細胞）→ 囊胚橫切面（囊胚腔偏向動物極）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          青蛙卵富含<strong>卵黃（yolk）</strong>，集中於植物極，使兩半球在分裂行為上產生顯著差異。
+        </p>
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">第一、二次卵裂（垂直卵黃軸）</div>
+            <div class="fig-part-text">分裂溝從動物極延伸至植物極（全裂 holoblastic），但因植物極卵黃濃厚，細胞質分裂較遲緩。最終形成四個大小相等、從動物極延伸到植物極的裂球。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">第三次卵裂（赤道附近，偏向動物極）</div>
+            <div class="fig-part-text">卵黃將分裂裝置向動物極推移，導致動物半球細胞明顯小於植物半球細胞，形成大小不等的八細胞期。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">囊胚期（≥128 個細胞）</div>
+            <div class="fig-part-text">囊胚腔（blastocoel）因不均等分裂，完全位於動物半球中。截面圖（約 4000 個細胞）顯示動物半球細胞小而多、植物半球細胞大而少。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== CONCEPT 47.2 ===== -->
+  <section class="concept-section" id="concept-2">
+    <div class="concept-header">
+      <span class="concept-number">CONCEPT 47.2</span>
+      <span class="concept-title">動物的形態發生涉及細胞形狀、位置與存活的特定改變</span>
+    </div>
+
+    <!-- FIG 47.8 -->
+    <div class="fig-card" id="fig-47-8">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.8</span>
+          <span class="fig-number-label">Visualizing</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">原腸形成的視覺化理解</div>
+          <div class="fig-badges">
+            <span class="badge badge-visualizing">👁 圖解視覺化</span>
+            <span class="badge badge-organism">水螅 · 渦蟲 · 🦔 海膽</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🫁</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明（多組）</strong>
+          (上) 表面觀與橫切面序列：囊胚 → 細胞向內凹陷 → 盲管（原腸 archenteron）形成 → 原口（blastopore）開口 → 原腸胚完成。(下) 三縱行對比圖：雙胚層（水螅）、三胚層原口動物（渦蟲）、三胚層後口動物（海膽），各顯示胚層顏色（藍=外胚層、紅=中胚層、黃=內胚層）與最終成體結構對應。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">原腸形成的基本動作——內陷（invagination）</div>
+            <div class="fig-part-text">一片細胞向囊胚腔方向折疊，如同將手指插入輕充氣的氣球。最終形成盲管（原腸），其開口即為原口（blastopore），是胚胎形成的第一個開口。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">雙胚層動物（Diploblasts，如水螅）</div>
+            <div class="fig-part-text">僅形成外胚層與內胚層兩層，原口發育為胃腔開口。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">三胚層原口動物（Protostomes，如渦蟲）</div>
+            <div class="fig-part-text">形成三個胚層，原口發育為<strong>口（mouth）</strong>。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">三胚層後口動物（Deuterostomes，如海膽、脊椎動物）</div>
+            <div class="fig-part-text">形成三個胚層，口從原口<strong>對側</strong>新開口形成，原口發育為<strong>肛門（anus）</strong>。</div>
+          </div>
+        </div>
+        <div class="fig-parts" style="margin-top:14px;">
+          <div class="fig-part" style="border-left-color:#2D3748; background:#F8FAFC;">
+            <div class="fig-part-label" style="color:#2D3748;">三胚層的最終去向</div>
+            <div class="fig-part-text" style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; font-size:13px;">
+              <div><strong style="color:var(--teal);">外胚層</strong><br>皮膚表皮及衍生物（汗腺、毛囊）、神經與感覺系統、腦下垂體、腎上腺髓質、顎骨、牙齒</div>
+              <div><strong style="color:#C75B3B;">中胚層</strong><br>骨骼與肌肉系統、循環與淋巴系統、排泄與生殖系統（生殖細胞除外）、真皮、腎上腺皮質</div>
+              <div><strong style="color:#9A7200;">內胚層</strong><br>消化道內皮及相關器官、呼吸/排泄/生殖道內皮、胸腺、甲狀腺、副甲狀腺</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.9 -->
+    <div class="fig-card" id="fig-47-9">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.9</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">脊椎動物三個胚層的主要衍生物</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐸 脊椎動物通則</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🌿</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          三欄樹狀分支圖，分別以藍（外胚層）、紅（中胚層）、黃（內胚層）表示各胚層如何分化為成體器官與組織。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          本圖為 Figure 47.8 胚層表格的擴充版，以脊椎動物為例，列出每個胚層的主要衍生物。胚層組織的成體排列常反映胚胎時的組織方式：外胚層形成神經系統與體表，中胚層產生肌肉與骨骼，內胚層則排列許多器官與管道的內壁。（個別例外仍存在。）
+        </p>
+      </div>
+    </div>
+
+    <!-- FIG 47.10 -->
+    <div class="fig-card" id="fig-47-10">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.10</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">青蛙胚胎的原腸形成</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐸 青蛙</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🔬</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明（三個階段，各含表面觀與橫切面）</strong>
+          顏色：藍=外胚層、紅=中胚層、黃=內胚層。顯示原口背唇形成、細胞內捲、原腸向內擴展、囊胚腔縮小、最後形成卵黃栓的完整過程。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">步驟 ① 原腸形成開始</div>
+            <div class="fig-part-text">在囊胚背側，細胞向內凹陷形成原口背唇（dorsal lip of blastopore）。動物半球的細胞層開始向背唇翻卷（involution），移入胚胎內部，將形成<strong>內胚層（最內層）與中胚層</strong>。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">步驟 ② 原口延伸、原腸擴大</div>
+            <div class="fig-part-text">原口向胚胎兩側延伸，最終形成環狀。外胚層向下擴展覆蓋表面；內部原腸（archenteron）持續擴張，囊胚腔逐漸縮小消失。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">步驟 ③ 晚期原腸胚</div>
+            <div class="fig-part-text">表面細胞全部成為外胚層；最內層為內胚層；中胚層夾於兩者之間。圓形原口中央殘留充滿卵黃的細胞，稱為<strong>卵黃栓（yolk plug）</strong>。青蛙的肛門由原口發育而來，口從原腸的另一端突破。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.11 -->
+    <div class="fig-card" id="fig-47-11">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.11</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">雞胚胎的原腸形成</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐔 雞</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🔬</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          橫切面示意圖顯示：上胚層（epiblast）細胞往中線移動後向下內移，形成原始線（primitive streak）；向下者形成內胚層，取代下胚層（hypoblast）；向側方移動者形成中胚層；留在表面者為外胚層。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          雞原腸形成開始時，上胚層（epiblast）與下胚層（hypoblast）疊放於卵黃上方。<strong>所有形成胚胎的細胞均來自上胚層</strong>。部分上胚層細胞向中線集中、向下分離、向內移入卵黃側，在中線積累形成可見增厚帶——<strong>原始線（primitive streak）</strong>，其功能等同於青蛙的原口背唇。
+        </p>
+        <p class="fig-description" style="margin-top:8px;">
+          向下移動的細胞成為內胚層（推開下胚層細胞）；向側方遷移的細胞成為中胚層；最後留在表面的上胚層細胞成為外胚層。下胚層細胞最終組成卵黃囊的部分結構及卵黃柄。
+        </p>
+      </div>
+    </div>
+
+    <!-- FIG 47.12 -->
+    <div class="fig-card" id="fig-47-12">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.12</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">人類早期胚胎發育的四個階段</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🧬 人類</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🧬</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明（四個階段圖）</strong>
+          各階段含結構標示：①囊胚（內細胞群、滋胚層、囊胚腔、子宮內膜）→ ②著床（滋胚層擴張、上/下胚層分化）→ ③胚外膜開始形成與原腸形成開始（羊膜腔、卵黃囊、絨毛膜、胚外中胚層）→ ④三胚層胚胎與四個胚外膜形成完成。發育成胚胎本體的組織以藍色印刷。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">① 囊胚到達子宮（卵裂末期）</div>
+            <div class="fig-part-text">超過 100 個細胞排列在中央腔周圍，形成哺乳類版本的囊胚（<strong>blastocyst</strong>）。一端聚集的<strong>內細胞群（inner cell mass）</strong>將發育為胚胎本體，也是胚胎幹細胞的來源。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">② 著床（受精後約 7 天）</div>
+            <div class="fig-part-text">囊胚外層的<strong>滋胚層（trophoblast）</strong>分泌酶，分解子宮內膜分子，使囊胚得以侵入並著床。滋胚層延伸的指狀突起使子宮毛細血管破裂，獲取血液供應。內細胞群形成含上胚層（epiblast）與下胚層（hypoblast）的扁盤。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">③ 胚外膜形成與原腸形成（受精後 10–13 天）</div>
+            <div class="fig-part-text">著床完成後出現四個<strong>胚外膜（extraembryonic membranes）</strong>（雖由胚胎形成，但包覆胚胎外部的特化結構）。原腸形成開始，上胚層細胞經原始線向內移入，形成中胚層與內胚層，與雞的過程相似。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">④ 原腸形成完成（三胚層 + 四個胚外膜）</div>
+            <div class="fig-part-text">形成<strong>羊膜（amnion）</strong>、<strong>絨毛膜（chorion）</strong>、<strong>卵黃囊（yolk sac）</strong>、<strong>尿囊（allantois）</strong>。滋胚層、上胚層細胞與鄰近子宮內膜組織共同形成<strong>胎盤（placenta）</strong>，負責胚胎與母體之間的養分、氣體及代謝廢物交換。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.13 -->
+    <div class="fig-card" id="fig-47-13">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.13</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">爬蟲類的帶殼蛋——羊膜類動物的演化適應</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🦎 爬蟲類</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🥚</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          (a) 爬蟲類蛋的四個胚外膜結構圖（絨毛膜、尿囊、羊膜、卵黃囊）；(b) 紅尾蔓蛇（Gonyosoma oxycephala）破殼而出的照片。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          所有脊椎動物胚胎均需水性環境發育。魚類與兩棲類的胚胎直接在水中發育，無需特殊封閉環境；而爬蟲類（含鳥類）和哺乳類則演化出以下兩種結構之一：①鳥類及其他爬蟲類（以及少數哺乳類——單孔類）的<strong>帶殼蛋</strong>；②有袋類與真獸類哺乳類的<strong>子宮</strong>。兩者皆以羊膜（amnion）形成的液囊圍繞胚胎——因此這些動物統稱<strong>羊膜類（amniotes）</strong>。
+        </p>
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">絨毛膜（Chorion）</div>
+            <div class="fig-part-text">氣體交換場所。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">羊膜（Amnion）</div>
+            <div class="fig-part-text">充滿液體的囊，對胚胎提供物理性保護（即人類的「羊水」）。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">尿囊（Allantois）</div>
+            <div class="fig-part-text">爬蟲類蛋中負責廢物處置；在哺乳類中併入臍帶，形成輸送氧氣/養分並帶走廢物的血管。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">卵黃囊（Yolk sac）</div>
+            <div class="fig-part-text">爬蟲類蛋中包覆卵黃；哺乳類中為早期造血場所，後期造血細胞遷入胚胎本體。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.14 -->
+    <div class="fig-card" id="fig-47-14">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.14</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">青蛙胚胎的神經管形成（Neurulation）</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐸 青蛙</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🔬</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明（三部分）</strong>
+          (a) 神經板形成：光學顯微照片（整體胚胎，標示神經褶）+ 橫切面示意（神經褶、神經板、脊索、三胚層、原腸）；(b) 神經管形成：四步驟橫切面序列（神經板折疊→神經嵴細胞出現→神經管閉合與外胚層分離）；(c) 體節：SEM 側視圖（尾芽期，標示眼、體節、尾芽，比例尺 1 mm）+ 橫切面示意（神經管、神經嵴細胞、脊索、體節、體腔、原腸）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">(a) 神經板形成</div>
+            <div class="fig-part-text">背側中胚層細胞形成<strong>脊索（notochord）</strong>——沿脊索動物胚胎背側延伸的支撐棒。脊索細胞及其他組織分泌的訊號分子，誘導其上方的外胚層增厚形成<strong>神經板（neural plate）</strong>——此為<strong>誘導（induction）</strong>的典型例子。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(b) 神經管形成</div>
+            <div class="fig-part-text">神經板邊緣兩側隆起形成神經褶（neural folds），神經板持續向內折疊，最終捲成<strong>神經管（neural tube）</strong>，並與上方外胚層分離。神經管將在頭部發育為大腦，其餘部分發育為脊髓。（脊索在出生前消失，部分殘留成為成體脊椎椎間盤的核心。）</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(c) 體節（Somites）</div>
+            <div class="fig-part-text">神經管捏離外胚層時，沿邊界形成<strong>神經嵴細胞（neural crest cells）</strong>；另外，脊索兩側的中胚層分離成塊狀的<strong>體節（somites）</strong>，是脊椎動物體節化結構的重要來源——部分形成脊椎骨，部分形成相關肌肉。神經嵴細胞則遷移至胚胎各處，形成周圍神經、部分牙齒及顱骨骨骼等。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.15 -->
+    <div class="fig-card" id="fig-47-15">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.15</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">雞胚胎的器官形成</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐔 雞</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🐣</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          (a) 早期器官形成橫切面：標示神經管、脊索、原腸、側褶（lateral fold）、體節、體腔、內/中/外胚層、卵黃柄、卵黃囊、卵黃。(b) 56 小時雞胚胎光學顯微照片（LM），可見眼睛、前腦、心臟、血管、體節、神經管的雛形。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">(a) 早期器官形成</div>
+            <div class="fig-part-text">胚盤（blastoderm）的邊緣向下折疊，將胚胎從卵黃上「捏」出，形成三層圓管，由卵黃柄（yolk stalk）連接卵黃。原腸在側褶捏合後形成。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(b) 晚期器官形成（56 小時）</div>
+            <div class="fig-part-text">大多數主要器官的雛形已清晰可見：眼、前腦、心臟、血管（延伸至胚外膜）、體節、神經管。此時的發育狀態與相似年齡的青蛙胚胎在機制上高度相似。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.16 -->
+    <div class="fig-card" id="fig-47-16">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.16</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">形態發生中的細胞形狀改變——細胞骨架的重組</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">概念示意圖</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🔵</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          五步驟橫切面序列圖：立方形外胚層細胞 → 微管使細胞沿背腹軸伸長 → 頂端肌動蛋白絲收縮 → 細胞形成楔形 → 神經板向內折疊 → 神經管形成。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          細胞骨架的重組是胚胎組織形狀改變的主要驅動力。以神經管形成為例：
+        </p>
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">① 微管（microtubules）伸長細胞</div>
+            <div class="fig-part-text">沿背腹（dorsal-ventral）軸向排列的微管，協助神經板細胞沿此軸拉長。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">② 肌動蛋白絲（actin filaments）頂端收縮</div>
+            <div class="fig-part-text">細胞頂端（背側端）橫向排列的肌動蛋白絲收縮，使細胞頂端縮窄，形成楔形（wedge shape）。楔形細胞的積累使外胚層層向內彎折——此稱<strong>頂端收縮（apical constriction）</strong>，是發育中使細胞層內陷的常見機制（例如果蠅腹側中胚層形成）。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">③ 持續楔化 → 神經管閉合</div>
+            <div class="fig-part-text">楔形化持續，神經板的兩側緣向中線靠攏並合攏，最終形成封閉的神經管，與表面外胚層分離。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.17 -->
+    <div class="fig-card" id="fig-47-17">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.17</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">細胞層的輻輳延伸（Convergent Extension）</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">概念示意圖</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">↔️</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          三格圖：正方形細胞層 → 輻輳（細胞互相楔入、層變窄）→ 延伸（層變長）。紅色箭頭指示細胞移動方向。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          <strong>輻輳延伸（convergent extension）</strong>是一種形態發生運動：細胞層在一個方向上<strong>收窄（converge）</strong>，同時在垂直方向上<strong>延伸（extend）</strong>。細胞沿目標方向伸長，再互相楔插（如同進劇院的人潮同時前進又排成單列）。此過程發生於多個關鍵時刻：
+        </p>
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">出現場合</div>
+            <div class="fig-part-text">• 雞胚原始線形成（原腸形成）<br>• 海膽胚胎原腸延長<br>• 青蛙原腸胚的內捲過程（使球形胚胎轉為長橢圓形）<br>• 脊索的延長</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== CONCEPT 47.3 ===== -->
+  <section class="concept-section" id="concept-3">
+    <div class="concept-header">
+      <span class="concept-number">CONCEPT 47.3</span>
+      <span class="concept-title">細胞質決定因子與誘導訊號調控細胞命運</span>
+    </div>
+
+    <!-- FIG 47.18 -->
+    <div class="fig-card" id="fig-47-18">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.18</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">兩種脊索動物的命運圖譜（Fate Maps）</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐸 青蛙 · 被囊動物</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🗺️</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          (a) 青蛙囊胚命運圖：以顏色標示各區域（表皮、中樞神經系統、脊索、中胚層、內胚層）分別對應神經管期胚胎各組織的來源；(b) 被囊動物細胞譜系分析：在 64 細胞胚胎注射染料，追蹤染色區域在幼蟲中的分布（光學顯微照片顯示深色標記區域）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">(a) 青蛙囊胚命運圖</div>
+            <div class="fig-part-text">1920 年代，德國胚胎學家 Walther Vogt 以無毒染料標記不同囊胚區域，觀察標記在後期胚胎的位置，繪製出最早的命運圖。後來研究者改良技術，在卵裂期標記單一裂球，追蹤其所有有絲分裂後代的分布。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">(b) 被囊動物的細胞譜系分析</div>
+            <div class="fig-part-text">在卵裂期對單一裂球注射染料，追蹤標記細胞在幼蟲期形成的特定組織，呈現更精細的命運圖。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.19 -->
+    <div class="fig-card" id="fig-47-19">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.19</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">秀麗隱桿線蟲（<em>C. elegans</em>）的細胞譜系</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🪱 <em>C. elegans</em></span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🪱</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          完整細胞譜系樹狀圖（從合子到孵化），重點顯示腸道（intestine）的譜系（源自第一次分裂後的四個細胞之一）。附線蟲解剖示意圖與成體光學顯微照片（LM）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          <em>C. elegans</em> 為土壤中生活的線蟲，體長約 1 mm，體透明，細胞種類少，在實驗室中 3.5 天即可發育成熟兩性個體。Sydney Brenner、Robert Horvitz 與 John Sulston 因此完整解析了每個細胞的發育歷史（譜系）。
+        </p>
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">核心發現</div>
+            <div class="fig-part-text">每隻成體兩性個體恰好有 <strong>959 個體細胞</strong>，由受精卵以幾乎完全一致的方式分裂而來——每個個體的分裂模式相同。腸道完全來自第一次卵裂後四個細胞之一的後代。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">細胞死亡的發現</div>
+            <div class="fig-part-text">譜系分析顯示正常發育過程中恰好有 131 個細胞死亡（程序性細胞死亡）。1980 年代研究者發現，使單一基因失活可讓 131 個細胞全部存活；進一步研究揭示了在各種動物（含人類）中普遍存在的<strong>凋亡（apoptosis）調控路徑</strong>。2002 年，三位科學家共享諾貝爾獎。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.20 -->
+    <div class="fig-card" id="fig-47-20">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.20</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title"><em>C. elegans</em> 中生殖細胞命運的決定——P 顆粒</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🪱 <em>C. elegans</em></span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">💚</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          螢光抗體標記（特異辨識 P 顆粒蛋白，綠色螢光）的新孵化幼蟲：可見 4 個含 P 顆粒的細胞（此視角可見其中 2 個），比例尺 100 μm。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          在所有已研究的動物中，RNA 與蛋白質的複合體負責指定特定細胞成為<strong>生殖細胞（germ cells）</strong>（產生精子或卵子的前驅細胞）。在 <em>C. elegans</em> 中，這類複合體稱為 <strong>P 顆粒（P granules）</strong>，可在新孵化幼蟲的 4 個細胞中偵測到，最終存在於成體性腺中產生精卵的細胞。
+        </p>
+      </div>
+    </div>
+
+    <!-- FIG 47.21 -->
+    <div class="fig-card" id="fig-47-21">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.21</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title"><em>C. elegans</em> 發育中 P 顆粒的不對稱分配</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🪱 <em>C. elegans</em></span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🔬</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明（四個時間點，各含 DIC 與螢光照片）</strong>
+          ① 新受精卵（P 顆粒分布全卵）→ ② 第一次分裂前的合子（P 顆粒移至後極）→ ③ 二細胞期（P 顆粒僅在後側細胞）→ ④ 四細胞期（P 顆粒僅在一個細胞中）。比例尺 20 μm。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          P 顆粒在新受精卵中均勻分布，但在<strong>第一次卵裂前移向合子後極</strong>（posterior end）。第一次分裂後，只有後側的細胞含有 P 顆粒；此後每次分裂，P 顆粒持續以不對稱方式分配，始終只進入某一子細胞。
+        </p>
+        <p class="fig-description" style="margin-top:8px;">
+          P 顆粒的這種行為是<strong>細胞質決定因子（cytoplasmic determinants）</strong>的典型示範：在發育最早期便固定（fix）了生殖細胞的命運。
+        </p>
+      </div>
+    </div>
+
+    <!-- FIG 47.22 -->
+    <div class="fig-card" id="fig-47-22">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.22</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">兩棲類的體軸建立——三個軸的形成機制</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐸 青蛙</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🧭</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          (a) 青蛙蝌蚪三軸示意圖（背腹、前後、左右）；(b) 三步驟圖解：卵的動植物極極性決定前後軸 → 受精時皮質旋轉形成灰色新月區（決定背腹軸）→ 第一次卵裂平分灰色新月區（固定左右軸位置）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">前後軸（卵形成期決定）</div>
+            <div class="fig-part-text">卵的動物極（深色，富含黑色素）與植物極（淺黃色，富含卵黃）的不對稱性，在卵形成期便決定了前後軸的位置。注意：前後軸≠動植物極軸，頭部並不在動物極。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">背腹軸（受精時隨機決定）</div>
+            <div class="fig-part-text">精子在動物半球的任意位置進入，決定了背腹軸的形成位置。精卵融合後，卵表面（質膜與皮層）相對於內部細胞質進行<strong>皮層旋轉（cortical rotation）</strong>，從動物極俯視始終朝向精子進入點旋轉。旋轉使植物皮層分子與動物半球內部細胞質分子相互作用，活化調控蛋白，在灰色新月區（gray crescent，旋轉後暴露的淺色區域）形成背側特性。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">左右軸（前後軸與背腹軸確定後隨之固定）</div>
+            <div class="fig-part-text">第一次卵裂平分灰色新月區，此後左右軸位置亦確定。</div>
+          </div>
+        </div>
+        <div class="what-if-box">
+          <div class="what-if-label">❓ What If?</div>
+          <div class="what-if-text">研究者讓正常皮層旋轉發生後，再強制胚胎進行反方向旋轉，結果得到了雙頭胚胎。試以皮層旋轉影響體軸形成的原理來解釋此結果。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.23 -->
+    <div class="fig-card" id="fig-47-23">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.23</span>
+          <span class="fig-number-label">Inquiry</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">灰色新月區的分配方式如何影響前兩個子細胞的發育潛能？（Spemann, 1938）</div>
+          <div class="fig-badges">
+            <span class="badge badge-inquiry">🔬 探究實驗</span>
+            <span class="badge badge-organism">🐸 蠑螈</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🧪</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          對照組：受精卵背視圖，細線均分兩個裂球（各含一半灰色新月區）→ 兩個正常胚胎。實驗組：受精卵側視圖，以細線勒緊使灰色新月區僅在一個裂球中 → 一個正常胚胎 + 一個無背側結構的「腹片（belly piece）」。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">實驗設計</div>
+            <div class="fig-part-text">Spemann 用細線勒住受精蠑螈卵：對照組以穿過灰色新月區的方式均等分開兩個裂球；實驗組則使細線只讓灰色新月區完全落入其中一個裂球，另一個裂球不含灰色新月區物質。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">結果</div>
+            <div class="fig-part-text">獲得一半或全部灰色新月區物質的裂球 → 發育為正常胚胎；未獲得灰色新月區物質的裂球 → 發育為無背側結構的異常胚胎（「腹片 belly piece」）。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">結論</div>
+            <div class="fig-part-text">第一次卵裂產生的兩個裂球的發育潛能，取決於它們是否獲得灰色新月區中定域的<strong>細胞質決定因子（cytoplasmic determinants）</strong>。正常情況下兩個裂球均為全能（totipotent），因為第一次卵裂平分灰色新月區。</div>
+          </div>
+        </div>
+        <div class="what-if-box">
+          <div class="what-if-label">❓ What If?</div>
+          <div class="what-if-text">40 年前，胚胎學家 Wilhelm Roux 讓第一次卵裂發生後用針刺殺其中一個裂球，留存的裂球（加上死細胞殘骸）發育出類似半個胚胎的異常結構。試解釋死細胞中仍含有的分子，如何解釋 Roux 的結果與 Spemann 對照組結果不同的原因。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.24 -->
+    <div class="fig-card" id="fig-47-24">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.24</span>
+          <span class="fig-number-label">Inquiry</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">原口背唇能否誘導兩棲類胚胎其他部位改變發育命運？（Spemann & Mangold, 1924）</div>
+          <div class="fig-badges">
+            <span class="badge badge-inquiry">🔬 探究實驗</span>
+            <span class="badge badge-organism">🐸 蠑螈 · 爪蟾</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🧪</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          合成圖：正常爪蟾蝌蚪（對照）+ 接受白化蠑螈供體原口背唇移植的受體原腸胚（實驗組左方）→ 發育為連體雙蝌蚪（右方，可見兩個頭部與軀體相連）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">實驗設計</div>
+            <div class="fig-part-text">Spemann 與研究生 Hilde Mangold 將白化種蠑螈早期原腸胚的<strong>原口背唇</strong>移植到有色蠑螈受體胚胎的腹側。由於供體為白化（無色素），可視覺追蹤移植組織的命運。此實驗在爪蟾（<em>Xenopus laevis</em>）上被重複驗證，照片即為爪蟾實驗結果。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">結果</div>
+            <div class="fig-part-text">移植部位形成第二個脊索與神經管，最終在受體胚胎上誘導出一個次級完整胚胎，形成<strong>連體雙蝌蚪</strong>。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">結論 — Spemann 組織者</div>
+            <div class="fig-part-text">原口背唇（現稱 <strong>Spemann's organizer</strong>）能誘導受體組織改變命運，組織（organize）起整個胚胎體制的發育——包括誘導脊索、神經管及其他器官的形成。後續研究確認，組織者的一個重要功能是在胚胎背側<strong>抑制 BMP-4</strong>（骨形態發生蛋白 4），使背側細胞能形成背側結構（脊索、神經管）而非腹側結構。</div>
+          </div>
+        </div>
+        <div class="what-if-box">
+          <div class="what-if-label">❓ What If?</div>
+          <div class="what-if-text">移植使受體組織發育成本不應有的結構，表示訊號一定從背唇傳出。若你鑑定出某蛋白質為候選訊號分子，如何設計實驗（將其注射至原腸胚的腹側細胞）來測試其功能？</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.25 -->
+    <div class="fig-card" id="fig-47-25">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.25</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">組織者區域對脊椎動物肢體發育的調控</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🐔 雞胚</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🐔</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          (a) 肢芽示意圖標示 AER（頂端外胚層脊，SEM 照片顯示其微觀形態，比例尺 50 μm）與 ZPA（極性活動區）的位置，前後軸標示；(b) 雞翅膀 SEM 圖，標示近遠軸、背腹軸、前後軸，趾編號 2、3、4。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          脊椎動物四肢從稱為<strong>肢芽（limb buds）</strong>的突起發育而來，由中胚層組織被一層外胚層覆蓋。每個肢體組件（骨骼、肌肉等）都在三個軸上有精確定位：近遠軸（肩→指尖）、前後軸（拇指→小指）、背腹軸（指關節→掌心）。
+        </p>
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">AER（頂端外胚層脊，Apical Ectodermal Ridge）</div>
+            <div class="fig-part-text">肢芽末端增厚的外胚層區域。分泌<strong>FGF（纖維母細胞生長因子）</strong>，驅動肢體沿<strong>近遠軸</strong>的向外生長。手術切除 AER 可阻斷肢體生長；以浸泡 FGF 的珠子替代 AER，肢體仍可正常發育。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">ZPA（極性活動區，Zone of Polarizing Activity）</div>
+            <div class="fig-part-text">位於肢芽後緣的中胚層特化塊。調控肢體沿<strong>前後軸</strong>的發育：最靠近 ZPA 的細胞形成後側結構（如雞的第 4 趾，相當於我們的小指）；最遠離 ZPA 的細胞形成前側結構（如第 1 趾，相當於拇指）。ZPA 分泌 <strong>Sonic hedgehog 蛋白</strong>（以電玩角色與果蠅同源蛋白命名）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.26 -->
+    <div class="fig-card" id="fig-47-26">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.26</span>
+          <span class="fig-number-label">Inquiry</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">ZPA 在脊椎動物肢體模式形成中扮演什麼角色？</div>
+          <div class="fig-badges">
+            <span class="badge badge-inquiry">🔬 探究實驗</span>
+            <span class="badge badge-organism">🐔 雞</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">🧪</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          實驗設計圖：供體肢芽後側 ZPA 被取出，移植至受體肢芽的前緣（anterior margin）。結果照片：肢體出現鏡像額外趾（趾序：4-3-2-2-3-4）。
+        </div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-parts">
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">實驗設計（1985）</div>
+            <div class="fig-part-text">研究者從供體雞胚取出後緣的 ZPA 組織，移植至受體雞胚肢芽的<strong>前緣（anterior margin）</strong>——正常情況下沒有 ZPA 的位置。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">結果</div>
+            <div class="fig-part-text">受體肢芽發育出額外的趾，呈<strong>鏡像對稱排列</strong>（趾序 4-3-2-2-3-4），正常的趾（2-3-4）仍保留。</div>
+          </div>
+          <div class="fig-part inquiry-part">
+            <div class="fig-part-label">結論</div>
+            <div class="fig-part-text">鏡像複製的現象表明，ZPA 細胞分泌的訊號從來源處擴散，傳遞「後側」的位置資訊；距離 ZPA 越遠，訊號濃度越低，發育為越前側的趾。後續研究更證明，在正常不表現 Sonic hedgehog 的前側肢芽異位表現 Sonic hedgehog，或移植改造為過量表現 Sonic hedgehog 的細胞，均能複製此鏡像結果；小鼠實驗亦顯示此機制在不應出現趾的肢芽區域誘導額外腳趾生長。</div>
+          </div>
+        </div>
+        <div class="what-if-box">
+          <div class="what-if-label">❓ What If?</div>
+          <div class="what-if-text">若你發現 ZPA 在 AER 之後才形成，並據此假設「AER 為 ZPA 形成所必需」，你會如何設計實驗（切除 AER 後觀察 Sonic hedgehog 的表現）來檢驗此假說？</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG 47.27 -->
+    <div class="fig-card" id="fig-47-27">
+      <div class="fig-card-header">
+        <div class="fig-number-block">
+          <span class="fig-number-big">47.27</span>
+          <span class="fig-number-label">Figure</span>
+        </div>
+        <div class="fig-title-area">
+          <div class="fig-title">內臟反位（Situs Inversus）——正常左右不對稱性的逆轉</div>
+          <div class="fig-badges">
+            <span class="badge badge-standard">標準圖</span>
+            <span class="badge badge-organism">🧬 人類</span>
+          </div>
+        </div>
+      </div>
+      <div class="fig-image-placeholder">
+        <span class="fig-image-icon">❤️</span>
+        <div class="fig-image-desc">
+          <strong>圖片說明</strong>
+          對比圖：正常器官位置（心臟在左，肝臟在右，胃與脾在左）vs. 內臟反位（所有位置鏡像翻轉：心臟在右，肝臟在左，胃與脾在右）。標示：肺、心臟、肝臟、脾臟、胃、大腸。
+        </div>
+      </div>
+      <div class="fig-body">
+        <p class="fig-description">
+          <strong>內臟反位（situs inversus）</strong>是胸腹腔器官正常左右不對稱性的完全翻轉。心臟位於右側而非左側，其他器官亦左右互換。單獨發生時通常不引起顯著健康問題。
+        </p>
+        <div class="fig-parts">
+          <div class="fig-part">
+            <div class="fig-part-label">與 Kartagener 症候群的關聯</div>
+            <div class="fig-part-text">內臟反位常見於 <strong>Kartagener 症候群</strong>患者，此症候群同時包括男性不孕（精子鞭毛不動）及鼻竇炎、支氣管感染。研究發現，所有症狀均源於<strong>纖毛不動</strong>的缺陷：精子鞭毛無法跳動；氣道上皮纖毛無法清除黏液與微生物；胚胎早期的纖毛運動無法產生左向液流，打破左右對稱。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">纖毛在左右軸建立中的角色</div>
+            <div class="fig-part-text">目前的模型指出：早期胚胎特定區域纖毛的運動產生<strong>向左的液流</strong>，使胚胎左右不對稱性得以建立。當此液流消失時（如纖毛不動），左右軸不對稱性隨機形成，一半的受影響胚胎發育為內臟反位。</div>
+          </div>
+          <div class="fig-part">
+            <div class="fig-part-label">單纖毛（monocilia）的更廣泛角色</div>
+            <div class="fig-part-text">靜止的初級纖毛（monocilia）幾乎存在於所有細胞（每個細胞一根），在發育中作為細胞表面的「天線」，接收多種訊號蛋白（包括 Sonic hedgehog），調節細胞命運。纖毛功能異常與多囊腎病、神經系統發育缺陷等疾病相關。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+</div>
+
+</body>
+</html>
