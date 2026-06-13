@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第20章：羰基化學入門</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f8f6f0;
+    --accent: #c0392b;
+    --accent2: #2980b9;
+    --accent3: #27ae60;
+    --accent4: #8e44ad;
+    --gold: #d4a017;
+    --light-bg: #ffffff;
+    --section-bg: #f0ede5;
+    --highlight-bg: #fff3cd;
+    --highlight-border: #ffc107;
+    --formula-bg: #e8f4fd;
+    --danger-bg: #fdecea;
+    --danger-border: #c0392b;
+    --success-bg: #eafaf1;
+    --success-border: #27ae60;
+    --purple-bg: #f5eef8;
+    --purple-border: #8e44ad;
+    --border-radius: 10px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 16px;
+    /* 讓錨點平滑滾動 */
+    scroll-behavior: smooth; 
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(192,57,43,0.15);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(41,128,185,0.12);
+  }
+  .chapter-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c0392b;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  header p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: #0e0930;
+    border-bottom: 2px solid #e0ddd5;
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav ul::-webkit-scrollbar { display: none; }
+  nav ul li a {
+    display: block;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: #f7f5f5;
+    font-size: 13.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  nav ul li a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  /* 當前所在區塊的導覽列樣式 */
+  nav ul li a.active {
+    color: #ffc107;
+    border-bottom-color: #ffc107;
+    font-weight: 700;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 32px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 60px;
+    /* 設置滾動補償，防止標題被置頂固定導覽列遮擋 */
+    scroll-margin-top: 80px; 
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--accent);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  .section-num.blue { background: var(--accent2); }
+  .section-num.green { background: var(--accent3); }
+  .section-num.purple { background: var(--accent4); }
+  .section-num.gold { background: var(--gold); }
+  h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+  p {
+    margin-bottom: 14px;
+    color: #333;
+  }
+
+  /* ── KEY BOX ── */
+  .key-box {
+    border-left: 4px solid var(--accent);
+    background: var(--highlight-bg);
+    padding: 16px 20px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    margin: 20px 0;
+  }
+  .key-box.blue {
+    border-left-color: var(--accent2);
+    background: var(--formula-bg);
+  }
+  .key-box.green {
+    border-left-color: var(--accent3);
+    background: var(--success-bg);
+  }
+  .key-box.purple {
+    border-left-color: var(--accent4);
+    background: var(--purple-bg);
+  }
+  .key-box-title {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .key-box.blue .key-box-title { color: var(--accent2); }
+  .key-box.green .key-box-title { color: var(--accent3); }
+  .key-box.purple .key-box-title { color: var(--accent4); }
+
+  /* ── ALERT ── */
+  .alert {
+    background: var(--danger-bg);
+    border: 2px solid var(--danger-border);
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert-icon { font-size: 20px; flex-shrink: 0; }
+  .alert strong { color: var(--accent); }
+
+  /* ── FORMULA CARD ── */
+  .formula-card {
+    background: var(--formula-bg);
+    border: 1.5px solid #bee3f8;
+    border-radius: var(--border-radius);
+    padding: 20px 24px;
+    margin: 18px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+  .formula-card .label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .formula-main {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a5276;
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* ── COMPOUND GRID ── */
+  .compound-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .compound-card {
+    background: white;
+    border: 1.5px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 14px 16px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .compound-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .compound-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .compound-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #1a5276;
+    margin-bottom: 6px;
+  }
+  .compound-desc {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* ── REACTION ARROW ── */
+  .reaction-box {
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1.5px solid #dde;
+    padding: 20px 24px;
+    margin: 18px 0;
+    box-shadow: var(--shadow);
+  }
+  .reaction-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+  .reactant { color: #1a5276; font-weight: 700; }
+  .product { color: #1a6b3a; font-weight: 700; }
+  .arrow {
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .reagent-label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 20px;
+    color: #555;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 14px;
+  }
+  .compare-table thead tr {
+    background: var(--ink);
+    color: white;
+  }
+  .compare-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .compare-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: #f8f8f8; }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .tag-red { background: #fdecea; color: #c0392b; }
+  .tag-blue { background: #e8f4fd; color: #2980b9; }
+  .tag-green { background: #eafaf1; color: #27ae60; }
+  .tag-gold { background: #fef9e7; color: #d4a017; }
+
+  /* ── MECHANISM STEPS ── */
+  .mechanism {
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1.5px solid #dde;
+    overflow: hidden;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+  }
+  .mechanism-title {
+    background: var(--ink);
+    color: white;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mechanism-step {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #eee;
+  }
+  .mechanism-step:last-child { border-bottom: none; }
+  .step-num {
+    background: #f0f0f0;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 18px;
+    width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-right: 1px solid #eee;
+  }
+  .step-content {
+    padding: 14px 18px;
+    flex: 1;
+  }
+  .step-title {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .step-desc {
+    font-size: 13.5px;
+    color: #444;
+    line-height: 1.6;
+  }
+  .step-formula {
+    font-family: 'JetBrains Mono', monospace;
+    background: #f8f8f8;
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #1a5276;
+  }
+
+  /* ── HIGHLIGHT ── */
+  .hl {
+    background: linear-gradient(120deg, #fff176 0%, #ffe082 100%);
+    padding: 0 3px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .hl-red {
+    background: linear-gradient(120deg, #ffcdd2 0%, #ef9a9a 100%);
+    padding: 0 3px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .hl-blue {
+    background: linear-gradient(120deg, #bbdefb 0%, #90caf9 100%);
+    padding: 0 3px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .hl-green {
+    background: linear-gradient(120deg, #c8e6c9 0%, #a5d6a7 100%);
+    padding: 0 3px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  /* ── FIGURE BOX ── */
+  .figure-box {
+    background: #f8f6f0;
+    border: 1.5px solid #e0ddd5;
+    border-radius: var(--border-radius);
+    padding: 18px 20px;
+    margin: 20px 0;
+  }
+  .figure-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .figure-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .figure-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* ── MEMORY AIDS ── */
+  .memory-card {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    color: white;
+    border-radius: var(--border-radius);
+    padding: 22px 26px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .memory-card::before {
+    content: '💡';
+    position: absolute;
+    top: 14px; right: 18px;
+    font-size: 28px;
+    opacity: 0.3;
+  }
+  .memory-card-title {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffc107;
+    margin-bottom: 10px;
+  }
+  .memory-card p {
+    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    margin: 0;
+  }
+  .memory-card ul {
+    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    padding-left: 22px;
+    margin-top: 8px;
+  }
+  .memory-card li { margin-bottom: 4px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    margin: 48px 0;
+    border-radius: 2px;
+  }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-section {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    margin: 24px 0;
+  }
+  .summary-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+  }
+
+  /* ── REACTION PATHWAY ── */
+  .pathway {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 14px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    margin: 10px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .pathway-box {
+    background: white;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 12px;
+    color: #1a5276;
+    font-weight: 700;
+  }
+  .pathway-arrow {
+    color: #888;
+    font-size: 16px;
+  }
+  .pathway-reagent {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 11px;
+    color: #888;
+  }
+
+  /* ── OXIDATION LADDER ── */
+  .ox-ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 18px 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1.5px solid #ddd;
+  }
+  .ox-rung {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid #eee;
+    gap: 14px;
+  }
+  .ox-rung:last-child { border-bottom: none; }
+  .ox-arrow-col {
+    width: 32px;
+    text-align: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .ox-compound {
+    flex: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .ox-label {
+    font-size: 12px;
+    color: #888;
+    min-width: 120px;
+    text-align: right;
+  }
+  .ox-rung:nth-child(1) { background: #fff3cd; }
+  .ox-rung:nth-child(2) { background: #fde8d8; }
+  .ox-rung:nth-child(3) { background: #fdecea; }
+
+  /* ── REAGENT COMPARISON ── */
+  .reagent-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 14px 0;
+  }
+  .reagent-pill {
+    background: white;
+    border: 2px solid;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .pill-strong { border-color: var(--accent); color: var(--accent); }
+  .pill-mild { border-color: var(--accent2); color: var(--accent2); }
+  .pill-dibal { border-color: var(--accent3); color: var(--accent3); }
+
+  /* ── STAR CALLOUT ── */
+  .star-callout {
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .star-callout .star { font-size: 22px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 32px;
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header { padding: 40px 20px 36px; }
+    header h1 { font-size: 1.7rem; }
+    main { padding: 32px 18px; }
+    nav { padding: 0 16px; }
+    .compound-grid { grid-template-columns: repeat(2, 1fr); }
+    .pathway { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="chapter-num">有機化學 · 第20章</div>
+  <h1>羰基化學入門：<br>有機金屬試劑·氧化與還原</h1>
+  <p>從「親核攻擊」這個核心概念出發，掌握本章所有反應的本質</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#s1">羰基介紹</a></li>
+    <li><a href="#s2">兩大反應</a></li>
+    <li><a href="#s3">氧化還原預覽</a></li>
+    <li><a href="#s4">醛酮還原</a></li>
+    <li><a href="#s5">立體化學</a></li>
+    <li><a href="#s6">對掌選擇還原</a></li>
+    <li><a href="#s7">羧酸衍生物還原</a></li>
+    <li><a href="#s8">醛的氧化</a></li>
+    <li><a href="#s9">有機金屬試劑</a></li>
+    <li><a href="#s10">Grignard 反應</a></li>
+    <li><a href="#s11">逆合成分析</a></li>
+    <li><a href="#s12">保護基</a></li>
+    <li><a href="#s13">α,β-不飽和羰基</a></li>
+    <li><a href="#summary">總整理</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<div class="section" id="s1">
+  <div class="section-header">
+    <span class="section-num">20.1</span>
+    <h2>羰基化合物介紹</h2>
+  </div>
+
+  <p>羰基（<strong>C=O</strong>）是有機化學中最重要的官能基，沒有之一。它的碳缺電子、π 鍵容易斷裂，能參與各式各樣的反應。本章從 Chapter 20 到 24 都圍繞著羰基展開。</p>
+
+  <div class="key-box">
+    <div class="key-box-title">🔑 核心結構</div>
+    羰基碳是 <span class="hl">sp² 混成、三角平面形</span>，所有鍵角約 120°。雙鍵由 σ 鍵 and π 鍵組成，π 鍵位於平面上下。
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-label">Figure 20.1</div>
+    <div class="figure-title">甲醛（CH₂=O）的靜電勢圖</div>
+    <div class="figure-desc">
+      靜電勢圖中，<span class="hl-red">紅色/黃色區域（氧原子周圍）= 電子豐富（δ⁻）</span>，<span class="hl-blue">藍色區域（碳原子）= 電子缺乏（δ⁺）</span>。這直觀地說明了羰基的極性：氧吸引電子，碳成為親電中心，是親核試劑攻擊的目標。
+    </div>
+  </div>
+
+  <h3>兩大類羰基化合物</h3>
+
+  <div class="compound-grid">
+    <div class="compound-card">
+      <div class="compound-name">醛 Aldehyde</div>
+      <div class="compound-formula">R–CHO</div>
+      <div class="compound-desc">羰基碳上至少有一個 H 原子；更不擁擠、更活潑</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">酮 Ketone</div>
+      <div class="compound-formula">R–CO–R'</div>
+      <div class="compound-desc">兩個烷基或芳基連接羰基；較擁擠、較穩定</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">羧酸 Carboxylic Acid</div>
+      <div class="compound-formula">R–COOH</div>
+      <div class="compound-desc">含 –OH 離去基；可進行親核取代</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">酸氯化物 Acid Chloride</div>
+      <div class="compound-formula">R–COCl</div>
+      <div class="compound-desc">Cl⁻ 是最佳離去基；<span class="hl-red">反應性最高</span></div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">酯 Ester</div>
+      <div class="compound-formula">R–COOR'</div>
+      <div class="compound-desc">含 –OR' 離去基；活性居中</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">醯胺 Amide</div>
+      <div class="compound-formula">R–CONH₂</div>
+      <div class="compound-desc">⁻NH₂ 是最差離去基；<span class="hl-green">反應性最低</span></div>
+    </div>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">⚡</span>
+    <div><strong>關鍵差異：</strong>羰基碳上<strong>有沒有離去基</strong>，決定了這個化合物走「親核加成」還是「親核取代」的路徑。這是理解本章所有反應的核心！</div>
+  </div>
+
+  <h3>為什麼羰基如此活潑？</h3>
+  <p>氧的電負度遠大於碳，使 C=O 鍵高度極化：<span class="hl-red">C 端（δ⁺）= 親電中心</span>，<span class="hl-blue">O 端（δ⁻）= 電子豐富</span>。加上羰基碳是 sp² 混成（未擁擠），親核試劑可以容易地從上下兩面進攻 π 鍵。</p>
+
+  <div class="memory-card">
+    <div class="memory-card-title">記憶口訣</div>
+    <p>羰基碳「三缺一」：<br>
+    ① 缺電子（電負度差異）<br>
+    ② 不擁擠（sp² 三角形）<br>
+    ③ π 鍵弱（容易斷裂）<br>
+    → 所以親核試劑最愛攻擊它！</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s2">
+  <div class="section-header">
+    <span class="section-num blue">20.2</span>
+    <h2>羰基化合物的兩大基本反應</h2>
+  </div>
+
+  <p>記住這三個基本原則，就能看懂本章所有反應：</p>
+
+  <div class="key-box blue">
+    <div class="key-box-title">三大反應原則</div>
+    <ol style="padding-left: 20px; color: #1a5276;">
+      <li>親核試劑攻擊親電試劑</li>
+      <li>π 鍵容易斷裂</li>
+      <li>與好的離去基相連的鍵容易斷裂</li>
+    </ol>
+  </div>
+
+  <h3>路徑一：親核加成（醛、酮）</h3>
+  <p>醛和酮沒有離去基，所以親核試劑攻擊後，只能「留下來」——形成加成產物。</p>
+
+  <div class="mechanism">
+    <div class="mechanism-title">⚙️ 機制 20.1：親核加成（兩步驟）</div>
+    <div class="mechanism-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">親核攻擊 Nucleophilic Attack</div>
+        <div class="step-desc">親核試劑（Nu⁻）攻擊缺電子的羰基碳，π 鍵斷裂，電子對轉移到氧上，形成帶負電的烷氧基中間體（alkoxide）。碳從 sp² 變為 sp³。</div>
+        <div class="step-formula">Nu⁻ + R₂C=O → R₂C(O⁻)(Nu)</div>
+      </div>
+    </div>
+    <div class="mechanism-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">質子化 Protonation</div>
+        <div class="step-desc">水（H₂O）或其他質子來源使帶負電的氧原子質子化，得到最終的醇類加成產物。</div>
+        <div class="step-formula">R₂C(O⁻)(Nu) + H₂O → R₂C(OH)(Nu) + OH⁻</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="star-callout">
+    <span class="star">★</span>
+    醛的反應性 > 酮：醛空間較小（只有一個 R 基），且烷基少→電子給予少→羰基碳更缺電子→更活潑！
+  </div>
+
+  <h3>路徑二：親核取代（含離去基的羰基化合物）</h3>
+  <p>羧酸衍生物（酸氯化物、酯、醯胺等）的羰基碳上有離去基（Z），親核取代後，離去基帶著電子對離開。</p>
+
+  <div class="mechanism">
+    <div class="mechanism-title">⚙️ 機制 20.2：親核取代（兩步驟）</div>
+    <div class="mechanism-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">親核攻擊 → 四面體中間體</div>
+        <div class="step-desc">Nu⁻ 攻擊羰基碳，π 鍵斷裂，形成 sp³ 的四面體中間體，氧帶負電。</div>
+      </div>
+    </div>
+    <div class="mechanism-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">離去基脫離 → 恢復 C=O</div>
+        <div class="step-desc">氧上的電子對重新形成 π 鍵，同時離去基 Z⁻ 帶著電子對離開。結果：Nu 取代了 Z。</div>
+        <div class="step-formula">R-CO-Z + Nu⁻ → R-CO-Nu + Z⁻</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>離去基能力決定反應活性順序</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>化合物</th>
+        <th>離去基</th>
+        <th>離去能力</th>
+        <th>反應活性</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>酸氯化物</strong> RCOCl</td>
+        <td>Cl⁻</td>
+        <td><span class="tag tag-red">最強</span></td>
+        <td><span class="tag tag-red">最高</span></td>
+      </tr>
+      <tr>
+        <td>羧酸 RCOOH</td>
+        <td>OH⁻</td>
+        <td><span class="tag tag-gold">中等</span></td>
+        <td><span class="tag tag-gold">中等</span></td>
+      </tr>
+      <tr>
+        <td>酯 RCOOR'</td>
+        <td>OR'⁻</td>
+        <td><span class="tag tag-gold">中等</span></td>
+        <td><span class="tag tag-gold">中等</span></td>
+      </tr>
+      <tr>
+        <td><strong>醯胺</strong> RCONH₂</td>
+        <td>⁻NH₂</td>
+        <td><span class="tag tag-green">最弱</span></td>
+        <td><span class="tag tag-green">最低</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="key-box">
+    <div class="key-box-title">💡 記憶方法</div>
+    鹼性越強的離去基，離去能力越弱。<br>
+    <strong>Cl⁻（很弱的鹼）→ 最好的離去基 → 酸氯化物反應性最高</strong><br>
+    <strong>NH₂⁻（很強的鹼）→ 最差的離去基 → 醯胺反應性最低</strong>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s3">
+  <div class="section-header">
+    <span class="section-num green">20.3</span>
+    <h2>氧化還原預覽</h2>
+  </div>
+
+  <p>有機化學中氧化還原的判斷方法不像電化學那樣計算氧化態，而是數碳原子的鍵結變化：</p>
+
+  <div class="key-box green">
+    <div class="key-box-title">⚗️ 氧化還原定義</div>
+    <strong style="color: #c0392b;">氧化（Oxidation）</strong>：C–O 鍵增加，或 C–H 鍵減少<br>
+    <strong style="color: #2980b9;">還原（Reduction）</strong>：C–O 鍵減少，或 C–H 鍵增加
+  </div>
+
+  <h3>氧化程度階梯</h3>
+  <div class="ox-ladder">
+    <div class="ox-rung">
+      <div class="ox-compound" style="color: #27ae60;">醇 R–CH₂–OH</div>
+      <div class="ox-label">氧化程度最低 ↓</div>
+    </div>
+    <div class="ox-rung">
+      <div class="ox-compound" style="color: #d4a017;">醛 / 酮 R–CHO / R₂C=O</div>
+      <div class="ox-label">中間</div>
+    </div>
+    <div class="ox-rung">
+      <div class="ox-compound" style="color: #c0392b;">羧酸衍生物 R–COOH</div>
+      <div class="ox-label">氧化程度最高 ↑</div>
+    </div>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-label">氧化還原路徑圖</div>
+    <div class="figure-title">羰基化合物的氧化還原轉換關係</div>
+    <div class="figure-desc">
+      醇 ←→ 醛/酮 ←→ 羧酸衍生物<br><br>
+      向右（→）方向：<span class="hl-red">氧化（[O]）</span><br>
+      向left（←）方向：<span class="hl-blue">還原（[H]）</span><br><br>
+      醛在中間位置，<strong>既可被氧化（→羧酸），也可被還原（→醇）</strong>。<br>
+      羧酸衍生物已高度氧化，只能進行還原反應。
+    </div>
+  </div>
+
+  <h3>本章三大實用反應</h3>
+  <table class="compare-table">
+    <thead>
+      <tr><th>反應</th><th>起始物</th><th>產物</th><th>章節</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>還原</td>
+        <td>醛、酮</td>
+        <td>1° 或 2° 醇</td>
+        <td>20.4–20.6</td>
+      </tr>
+      <tr>
+        <td>還原</td>
+        <td>羧酸衍生物</td>
+        <td>醛 或 1° 醇</td>
+        <td>20.7</td>
+      </tr>
+      <tr>
+        <td>氧化</td>
+        <td>醛</td>
+        <td>羧酸</td>
+        <td>20.8</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s4">
+  <div class="section-header">
+    <span class="section-num">20.4</span>
+    <h2>醛和酮的還原</h2>
+  </div>
+
+  <p>最常用的還原試劑是金屬氫化物試劑，它們提供氫負離子（<span class="hl">H:⁻</span>）作為親核試劑。</p>
+
+  <h3>兩大主要試劑比較</h3>
+
+  <div class="reagent-pills">
+    <div class="reagent-pill pill-strong">LiAlH₄（強）</div>
+    <div class="reagent-pill pill-mild">NaBH₄（溫和）</div>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>特性</th>
+        <th>NaBH₄</th>
+        <th>LiAlH₄</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>強度</td>
+        <td><span class="tag tag-blue">溫和</span></td>
+        <td><span class="tag tag-red">強</span></td>
+      </tr>
+      <tr>
+        <td>選擇性</td>
+        <td><span class="tag tag-green">高選擇性</span><br>只還原醛、酮</td>
+        <td><span class="tag tag-red">低選擇性</span><br>幾乎還原所有極性官能基</td>
+      </tr>
+      <tr>
+        <td>溶劑</td>
+        <td>CH₃OH（甲醇）</td>
+        <td>乙醚（無水條件）<br><em>水與 LiAlH₄ 劇烈反應，需事後加水</em></td>
+      </tr>
+      <tr>
+        <td>親核試劑來源</td>
+        <td>B–H 鍵（較弱極性）</td>
+        <td>Al–H 鍵（較強極性→更強親核性）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert">
+    <span class="alert-icon">⚠️</span>
+    <div><strong>注意：</strong>LiAlH₄ 遇水會劇烈反應！必須在<strong>無水條件</strong>下操作，還原完成後才加水進行質子化。</div>
+  </div>
+
+  <h3>機制 20.3：LiAlH₄ 還原醛/酮</h3>
+  <div class="mechanism">
+    <div class="mechanism-title">⚙️ 親核加成機制</div>
+    <div class="mechanism-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">AlH₄⁻ 提供 H:⁻ 攻擊羰基碳</div>
+        <div class="step-desc">Al–H 鍵斷裂，H:⁻ 轉移到羰基碳，形成新的 C–H 鍵。π 鍵斷裂，電子轉移到氧上，形成帶負電的烷氧基（alkoxide）中間體。</div>
+        <div class="step-formula">AlH₄⁻ + R₂C=O → R₂CH–O–AlH₃⁻</div>
+      </div>
+    </div>
+    <div class="mechanism-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">H₂O 質子化烷氧基 → 得到醇</div>
+        <div class="step-desc">反應結束後加入水，使帶負電的氧原子獲得質子，形成最終的醇類產物，並生成新的 O–H 鍵。</div>
+        <div class="step-formula">R₂CH–O⁻ + H₂O → R₂CH–OH + OH⁻</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="key-box green">
+    <div class="key-box-title">產物規律</div>
+    <strong>醛</strong>（RCHO）+ H₂ → <strong>1° 醇</strong>（RCH₂OH）<br>
+    <strong>酮</strong>（R₂CO）+ H₂ → <strong>2° 醇</strong>（R₂CHOH）
+  </div>
+
+  <h3>選擇性還原：當分子含多個官能基時</h3>
+  <div class="figure-box">
+    <div class="figure-label">Figure 20.2 相關應用</div>
+    <div class="figure-title">選擇性還原的策略</div>
+    <div class="figure-desc">
+      以 cyclohex-2-enone（含 C=C 和 C=O 兩個 π 鍵）為例：<br><br>
+      • <span class="hl-green">NaBH₄</span> → 只還原 C=O → 得到烯丙醇（allylic alcohol）<br>
+      • <span class="hl-blue">H₂（1當量），Pd/C</span> → 只還原 C=C → 得到酮<br>
+      • <span class="hl-red">H₂（過量），Pd/C</span> → 還原兩個 π 鍵 → 得到飽和醇<br><br>
+      記憶口訣：<strong>氫化（H₂/Pd）先還 C=C，硼氫鈉只還 C=O。</strong>
+    </div>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-label">Figure 20.2</div>
+    <div class="figure-title">NaBH₄ 在有機合成中的應用</div>
+    <div class="figure-desc">
+      <strong>布洛芬（Ibuprofen）的合成：</strong>前驅物用 NaBH₄ 在 CH₃OH 中還原，再經三步驟得到消炎藥布洛芬（Motrin/Advil）。<br><br>
+      <strong>麝香酮（Muscone）的合成：</strong>前驅物用 NaBH₄ 還原後再經四步驟，得到麝香的主要成分麝香酮。這種原本只能從麝香鹿（中國和西藏山區特有物種）身上取得的珍貴香料，如今可以在實驗室中合成。
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s5">
+  <div class="section-header">
+    <span class="section-num blue">20.5</span>
+    <h2>羰基還原的立體化學</h2>
+  </div>
+
+  <p>還原反應將 sp² 混成的平面羰基碳轉變為 sp³ 四面體碳。當反應產生新的立體中心時，會發生什麼？</p>
+
+  <div class="key-box blue">
+    <div class="key-box-title">核心原理</div>
+    羰基碳是 sp² <strong>平面</strong>的，親核試劑（H:⁻）可以從平面的上方或下方以<strong>相等的機率</strong>攻擊 π 鍵。因此，兩個對映異構體以<strong>等量</strong>形成 → 得到<strong>外消旋混合物（racemic mixture）</strong>。
+  </div>
+
+  <div class="mechanism">
+    <div class="mechanism-title">⚙️ 為何得到外消旋混合物？</div>
+    <div class="mechanism-step">
+      <div class="step-num">↑</div>
+      <div class="step-content">
+        <div class="step-title">從上方攻擊</div>
+        <div class="step-desc">H:⁻ 從 π 鍵上方進入 → 形成某一種構型的烷氧基中間體 → 質子化後得到（R）醇</div>
+      </div>
+    </div>
+    <div class="mechanism-step">
+      <div class="step-num">↓</div>
+      <div class="step-content">
+        <div class="step-title">從下方攻擊</div>
+        <div class="step-desc">H:⁻ 從 π 鍵下方進入 → 形成另一種構型的烷氧基中間體 → 質子化後得到（S）醇</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="star-callout">
+    <span class="star">★</span>
+    結論：以 NaBH₄ 或 LiAlH₄ 還原<strong>非對掌</strong>的酮時，如果產生新的立體中心，必然得到<strong>等量的兩種對映異構體（外消旋混合物）</strong>。
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s6">
+  <div class="section-header">
+    <span class="section-num green">20.6</span>
+    <h2>對掌選擇性羰基還原</h2>
+  </div>
+
+  <p>若需要只得到單一對映異構體，必須使用<strong>對掌性還原試劑</strong>。這與 Sharpless 不對稱環氧化策略相同。</p>
+
+  <h3>CBS 試劑</h3>
+  <p>CBS 試劑由 <strong>硼烷（BH₃）</strong> 與對掌性的<strong>噁唑硼烷（oxazaborolidine）</strong>反應製備。因由 Corey、Bakshi、Shibata 三位化學家開發，故稱 CBS 試劑。</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>試劑</th>
+        <th>H:⁻ 進攻方向</th>
+        <th>主要產物</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>(S)-CBS 試劑</strong></td>
+        <td>從 C=O <strong>正面</strong>進攻</td>
+        <td><span class="hl-red">R</span> 醇（主要產物）</td>
+      </tr>
+      <tr>
+        <td><strong>(R)-CBS 試劑</strong></td>
+        <td>從 C=O <strong>背面</strong>進攻</td>
+        <td><span class="hl-blue">S</span> 醇（主要產物）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="figure-box">
+    <div class="figure-label">Figure 20.3</div>
+    <div class="figure-title">對掌選擇性還原——沙美特羅（Salmeterol）合成的關鍵步驟</div>
+    <div class="figure-desc">
+      沙美特羅是一種長效支氣管擴張劑，用於治療氣喘。其合成中利用 <strong>(R)-CBS 試劑</strong>對酮進行對掌選擇性還原，得到 (R) 構型的醇 A，再經四步驟合成 <strong>(R)-沙美特羅（商品名 Serevent）</strong>。<br><br>
+      使用 (S)-CBS 還原丙苯酮，可得到 <strong>97% ee（對映體過量）</strong>的 R 醇——幾乎只有一種對映體！
+    </div>
+  </div>
+
+  <h3>生物體內的對掌選擇性還原</h3>
+  <p>細胞內的還原試劑是 <span class="hl">NADH（菸鹼醯胺腺嘌呤二核苷酸）</span>，由維生素菸鹼酸（Niacin，大豆等食物中含有）合成。</p>
+
+  <div class="key-box purple">
+    <div class="key-box-title">生物體的完美選擇性</div>
+    NADH 也是提供 H:⁻ 的親核試劑。與實驗室試劑不同，<strong>生物還原在酶的催化下</strong>，永遠只形成<strong>單一對映異構體</strong>（100% 選擇性）。<br><br>
+    例如：丙酮酸（pyruvic acid）在乳酸去氫酶（lactate dehydrogenase）催化下，由 NADH 還原只得到 <strong>(S)-乳酸</strong>。劇烈運動時肌肉中乳酸堆積，就是因為氧氣不足，無法繼續代謝丙酮酸，只好先還原為乳酸。
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s7">
+  <div class="section-header">
+    <span class="section-num">20.7</span>
+    <h2>羧酸衍生物的還原</h2>
+  </div>
+
+  <p>羧酸衍生物（RCOZ）的還原比較複雜，因為產物取決於離去基的種類和還原試劑的強度。</p>
+
+  <h3>三種金屬氫化試劑</h3>
+
+  <div class="reagent-pills">
+    <div class="reagent-pill pill-strong">LiAlH₄（強，非選擇性）</div>
+    <div class="reagent-pill pill-dibal">DIBAL-H（溫和）</div>
+    <div class="reagent-pill pill-mild">LiAlH[OC(CH₃)₃]₃（溫和）</div>
+  </div>
+
+  <p><strong>DIBAL-H</strong>（二異丁基氫化鋁）：兩個龐大的異丁基使它比 LiAlH₄ 活性低。</p>
+  <p><strong>LiAlH[OC(CH₃)₃]₃</strong>：三個吸電子的氧原子降低了鋁的親核性。</p>
+
+  <h3>酸氯化物和酯的還原</h3>
+
+  <div class="reaction-box">
+    <div class="reaction-row">
+      <span class="reactant">RCOCl 或 RCOOR'</span>
+      <span class="arrow">→<br><small>強試劑 LiAlH₄</small></span>
+      <span class="product">RCH₂OH（1° 醇）</span>
+    </div>
+    <div class="reaction-row">
+      <span class="reactant">RCOCl 或 RCOOR'</span>
+      <span class="arrow">→<br><small>溫和試劑 DIBAL-H</small></span>
+      <span class="product">RCHO（醛）</span>
+    </div>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-label">Figure 20.4</div>
+    <div class="figure-title">DIBAL-H 在西加毒素 CTX3C 合成中的應用</div>
+    <div class="figure-desc">
+      西加毒素（Ciguatoxin CTX3C）是存在於400多種熱帶暖水魚中的強效神經毒素，每年有數千人因食用含此毒素的珊瑚礁魚類而中毒。2001年，研究人員完成了其實驗室合成，其中一個關鍵步驟就是：利用 <strong>DIBAL-H</strong> 將複雜多環醚中間體的<strong>酯基選擇性還原為醛基</strong>，再經後續多步驟得到目標分子。這展示了選擇性還原在複雜天然物合成中的重要性。
+    </div>
+  </div>
+
+  <h3>羧酸和醯胺的還原</h3>
+
+  <div class="key-box">
+    <div class="key-box-title">重要規則</div>
+    • 羧酸（RCOOH）+ LiAlH₄ → <strong>1° 醇</strong>（唯一可用的還原反應）<br>
+    • 醯胺（RCONH₂）+ LiAlH₄ → <strong>胺（amine）</strong>⚠️（注意！不是醇）<br>
+    醯胺還原為胺的原因：⁻NH₂ 是非常差的離去基，<strong>從不</strong>在還原中離開，因此氮原子保留在產物中。
+  </div>
+
+  <h3>Table 20.1：金屬氫化試劑總整理</h3>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>試劑</th>
+        <th>起始物</th>
+        <th>→</th>
+        <th>產物</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="6"><strong>LiAlH₄</strong><br><span class="tag tag-red">強，非選擇</span></td>
+        <td>RCHO（醛）</td><td>→</td><td>RCH₂OH</td>
+      </tr>
+      <tr><td>R₂CO（酮）</td><td>→</td><td>R₂CHOH</td></tr>
+      <tr><td>RCOOH（羧酸）</td><td>→</td><td>RCH₂OH</td></tr>
+      <tr><td>RCOOR'（酯）</td><td>→</td><td>RCH₂OH</td></tr>
+      <tr><td>RCOCl（酸氯化物）</td><td>→</td><td>RCH₂OH</td></tr>
+      <tr><td>RCONH₂（醯胺）</td><td>→</td><td style="color:var(--accent);font-weight:700;">RCH₂NH₂ ★胺</td></tr>
+      <tr>
+        <td><strong>NaBH₄</strong><br><span class="tag tag-blue">溫和，選擇</span></td>
+        <td>RCHO 或 R₂CO</td><td>→</td><td>RCH₂OH 或 R₂CHOH</td>
+      </tr>
+      <tr>
+        <td><strong>LiAlH[OC(CH₃)₃]₃</strong></td>
+        <td>RCOCl（酸氯化物）</td><td>→</td><td>RCHO（醛）</td>
+      </tr>
+      <tr>
+        <td><strong>DIBAL-H</strong></td>
+        <td>RCOOR'（酯）</td><td>→</td><td>RCHO（醛）</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s8">
+  <div class="section-header">
+    <span class="section-num blue">20.8</span>
+    <h2>醛的氧化</h2>
+  </div>
+
+  <p>羰基化合物最常見的氧化反應是<strong>醛氧化為羧酸</strong>。酮因羰基碳上無氫原子，不發生此反應。</p>
+
+  <div class="reaction-box">
+    <div class="reaction-row">
+      <span class="reactant">R–CHO（醛）</span>
+      <span class="arrow">→<br><small>CrO₃, K₂Cr₂O₇, KMnO₄</small></span>
+      <span class="product">R–COOH（羧酸）</span>
+    </div>
+  </div>
+
+  <h3>托倫斯試劑（Tollens' Reagent）</h3>
+  <p>使用 <span class="hl">Ag₂O 在 NH₄OH 水溶液中</span>（稱為托倫斯試劑），可選擇性氧化醛，即使其他官能基存在也不受影響。最大特色是 Ag⁺ 被還原為金屬銀（Ag），在玻璃瓶內壁形成<strong>銀鏡</strong>！</p>
+
+  <div class="key-box">
+    <div class="key-box-title">🔬 托倫斯試驗（銀鏡反應）</div>
+    • <strong>正反應</strong>（醛存在）：醛 + Ag⁺ → 羧酸 + <span class="hl">Ag（銀鏡）</span><br>
+    • <strong>負反應</strong>（無醛）：無銀鏡生成<br><br>
+    這是鑑別<strong>醛（正）</strong>和<strong>酮（負）</strong>的經典方法！
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s9">
+  <div class="section-header">
+    <span class="section-num green">20.9</span>
+    <h2>有機金屬試劑</h2>
+  </div>
+
+  <p>有機金屬試劑含有<strong>碳–金屬鍵（C–M）</strong>。由於金屬的電負度遠小於碳，碳帶部分負電（δ⁻），因此這類試劑既是強鹼，也是強親核試劑。</p>
+
+  <h3>三類有機金屬試劑</h3>
+
+  <div class="compound-grid">
+    <div class="compound-card">
+      <div class="compound-name">有機鋰試劑</div>
+      <div class="compound-formula">R–Li</div>
+      <div class="compound-desc">C–Li 鍵極性最大；<span class="hl-red">反應性最強</span>。Li 電負度 = 1.0</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">Grignard 試劑</div>
+      <div class="compound-formula">R–Mg–X</div>
+      <div class="compound-desc">C–Mg 鍵強極性；<span class="hl-red">反應性強</span>。Mg 電負度 = 1.3。以乙醚為溶劑</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">有機銅試劑（cuprate）</div>
+      <div class="compound-formula">R₂Cu⁻Li⁺</div>
+      <div class="compound-desc">C–Cu 鍵較弱極性；<span class="hl-green">反應性較低</span>。Cu 電負度 = 1.8</div>
+    </div>
+  </div>
+
+  <div class="star-callout">
+    <span class="star">★</span>
+    <strong>極性越大 → 反應性越強</strong><br>
+    RLi ≈ RMgX（很強）＞ R₂CuLi（較弱）
+  </div>
+
+  <h3>試劑製備</h3>
+
+  <div class="reaction-box">
+    <div style="margin-bottom: 10px;"><strong>有機鋰試劑：</strong></div>
+    <div class="reaction-row">
+      <span class="reactant">R–X（鹵烷）</span>
+      <span class="arrow">→ <small>2 Li</small></span>
+      <span class="product">R–Li</span>
+      <span class="reagent-label">鋰與鹵素交換</span>
+    </div>
+    <div style="margin: 14px 0 10px;"><strong>Grignard 試劑：</strong></div>
+    <div class="reaction-row">
+      <span class="reactant">R–X（鹵烷）</span>
+      <span class="arrow">→ <small>Mg / 乙醚</small></span>
+      <span class="product">R–Mg–X</span>
+      <span class="reagent-label">金屬插入 C–X 鍵</span>
+    </div>
+    <div style="margin: 14px 0 10px;"><strong>有機銅試劑：</strong></div>
+    <div class="reaction-row">
+      <span class="reactant">2 R–Li</span>
+      <span class="arrow">→ <small>CuI</small></span>
+      <span class="product">R₂CuLi + LiI</span>
+      <span class="reagent-label">由有機鋰試劑製備</span>
+    </div>
+  </div>
+
+  <h3>有機金屬試劑的兩個角色</h3>
+
+  <div class="key-box">
+    <div class="key-box-title">⚠️ 重要注意事項</div>
+    <strong>作為強鹼：</strong>RLi/RMgX 迅速奪取水、醇、羧酸、胺的質子！<br>
+    → R–M + H₂O → R–H + M–OH<br><br>
+    這就是為什麼反應必須在<strong>無水條件</strong>下進行。水要在加成完成後才能加入（用於質子化）。<br><br>
+    <strong>作為親核試劑：</strong>攻擊親電的碳原子，形成新的 C–C 鍵！
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s10">
+  <div class="section-header">
+    <span class="section-num">20.10</span>
+    <h2>有機金屬試劑與醛酮的反應</h2>
+  </div>
+
+  <p>這是有機合成中最重要的 C–C 成鍵反應之一！有機鋰或 Grignard 試劑與醛酮反應後加水，得到醇類。</p>
+
+  <div class="reaction-box">
+    <div class="reaction-row">
+      <span class="reactant">R₂C=O</span>
+      <span class="arrow">→ <small>[1] R''MgX 或 R''Li<br>[2] H₂O</small></span>
+      <span class="product">醇（含新 C–C 鍵）</span>
+    </div>
+  </div>
+
+  <h3>機制 20.6：親核加成</h3>
+  <div class="mechanism">
+    <div class="mechanism-title">⚙️ Grignard 試劑加成到醛/酮</div>
+    <div class="mechanism-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">R''⁻ 攻擊羰基碳 → 形成新 C–C 鍵</div>
+        <div class="step-desc">有機金屬試劑中的碳（δ⁻）作為親核試劑，攻擊羰基碳（δ⁺），π 鍵斷裂，形成帶負電的烷氧基中間體，同時建立一個新的 C–C 鍵。</div>
+      </div>
+    </div>
+    <div class="mechanism-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">H₂O 質子化烷氧基 → 得到醇</div>
+        <div class="step-desc">加入水後，烷氧基的氧原子被質子化，形成含新 OH 基的醇類產物。</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>醛酮種類決定醇的級別</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>起始物</th><th>+ R''MgX 或 R''Li</th><th>→ 產物</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>甲醛</strong> CH₂=O</td>
+        <td>+ R''–M</td>
+        <td><span class="hl-green">1° 醇</span> R''CH₂OH</td>
+      </tr>
+      <tr>
+        <td><strong>其他醛</strong> RCHO</td>
+        <td>+ R''–M</td>
+        <td><span class="hl-blue">2° 醇</span> RCH(OH)R''</td>
+      </tr>
+      <tr>
+        <td><strong>酮</strong> R₂C=O</td>
+        <td>+ R''–M</td>
+        <td><span class="hl-red">3° 醇</span> R₂C(OH)R''</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="figure-box">
+    <div class="figure-label">Figure 20.5</div>
+    <div class="figure-title">乙炔雌二醇（Ethynylestradiol）的合成</div>
+    <div class="figure-desc">
+      乙炔雌二醇是口服避孕藥的重要成分。其合成的關鍵步驟是：以<strong>乙炔化鋰（鋰乙炔化物）</strong>與甾體酮類進行親核加成，形成含炔基的三級醇，再一步轉化為乙炔雌二醇。這展示了有機金屬試劑在複雜天然物合成中建立 C–C 鍵的關鍵作用。
+    </div>
+  </div>
+
+  <h3>立體化學：加成也得外消旋混合物</h3>
+  <p>與還原反應一樣，Grignard 加成從 sp² 平面的兩面均等進攻，若產生新立體中心，得到外消旋混合物（等量的兩種對映體）。</p>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s11">
+  <div class="section-header">
+    <span class="section-num blue">20.11</span>
+    <h2>Grignard 產物的逆合成分析</h2>
+  </div>
+
+  <p><strong>逆合成分析（Retrosynthetic Analysis）</strong>是從目標分子「倒推」所需原料的思維策略，是有機合成設計的核心工具。</p>
+
+  <div class="key-box blue">
+    <div class="key-box-title">逆合成的箭頭符號</div>
+    使用雙線箭頭 ⟹ 表示「反推」（與合成方向相反）<br>
+    找到羰基碳（未來的 C–OH 碳）兩側可能斷開的 C–C 鍵
+  </div>
+
+  <h3>2° 醇的逆合成</h3>
+  <p>2° 醇通常有<strong>兩種</strong>逆合成路線（以丁烷-2-醇為例）：</p>
+
+  <div class="reaction-box">
+    <div style="margin-bottom: 8px;"><strong>路線一：</strong></div>
+    <div class="reaction-row">
+      <span class="product">butan-2-ol</span>
+      <span class="arrow">⟹</span>
+      <span class="reactant">propanal</span>
+      <span class="arrow">+</span>
+      <span class="reactant">CH₃MgX</span>
+    </div>
+    <div style="margin: 12px 0 8px;"><strong>路線二：</strong></div>
+    <div class="reaction-row">
+      <span class="product">butan-2-ol</span>
+      <span class="arrow">⟹</span>
+      <span class="reactant">acetaldehyde (CH₃CHO)</span>
+      <span class="arrow">+</span>
+      <span class="reactant">CH₃CH₂MgX</span>
+    </div>
+  </div>
+
+  <div class="memory-card">
+    <div class="memory-card-title">逆合成步驟口訣</div>
+    <p>目標醇 C–OH 的碳是原本的羰基碳：</p>
+    <ul>
+      <li>確認 C–OH 兩側各有哪些基團</li>
+      <li>選擇從哪個 C–C 鍵斷開</li>
+      <li>斷開處：一側給 Grignard（R''MgX），另一側給醛/酮</li>
+      <li>3° 醇有三種路線（三個不同 C–C 鍵可斷開）</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s12">
+  <div class="section-header">
+    <span class="section-num green">20.12</span>
+    <h2>保護基</h2>
+  </div>
+
+  <p>有個大問題：Grignard 試劑是<strong>強鹼</strong>，如果分子中同時含有<strong>OH 或 NH 基團</strong>，Grignard 試劑會先奪取質子，而不是進行親核加成！</p>
+
+  <div class="alert">
+    <span class="alert-icon">⚠️</span>
+    <div>含有 ROH、RCOOH、RNH₂、R₂NH、RCONH₂、RSH 的底物，會與有機金屬試劑發生酸鹼反應，而不是親核加成！</div>
+  </div>
+
+  <h3>保護基策略（三步法）</h3>
+
+  <div class="figure-box">
+    <div class="figure-label">Figure 20.7</div>
+    <div class="figure-title">保護基的一般策略</div>
+    <div class="figure-desc">
+      以 5-羥基戊烷-2-酮（含 OH 和 C=O 兩個官能基）加 CH₃MgCl 為例：<br><br>
+      <strong>步驟一 保護（Protection）：</strong>將 OH 轉化為 TBDMS 醚（叔丁基二甲基矽基醚），加入 TBDMS-Cl + 咪唑<br>
+      <strong>步驟二 反應：</strong>加入 CH₃MgCl，進行親核加成，再加水質子化，得到受保護的三級醇<br>
+      <strong>步驟三 去保護（Deprotection）：</strong>加入四丁基氟化銨（Bu₄N⁺F⁻），F⁻ 親矽性強，切斷 O–Si 鍵，恢復 OH 基<br><br>
+      最終產物：<strong>4-甲基戊烷-1,4-二醇</strong>
+    </div>
+  </div>
+
+  <h3>TBDMS 矽醚保護基</h3>
+  <div class="key-box">
+    <div class="key-box-title">🛡️ 保護和去保護</div>
+    <strong>保護：</strong>R–OH + TBDMS-Cl + 咪唑 → R–O–Si(CH₃)₂C(CH₃)₃（矽醚）<br>
+    <strong>去保護：</strong>R–O–TBDMS + Bu₄N⁺F⁻ → R–OH + F–Si（矽醚斷裂）<br><br>
+    F⁻ 對矽有很強的親和力（Si–F 鍵極強），因此用氟化物可選擇性切除矽醚保護基。
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s13">
+  <div class="section-header">
+    <span class="section-num purple">20.13</span>
+    <h2>α,β-不飽和羰基化合物</h2>
+  </div>
+
+  <p><strong>α,β-不飽和羰基化合物</strong>是含有共軛的 C=C 和 C=O 兩個π鍵的分子（中間只隔一個σ鍵）。</p>
+
+  <div class="key-box purple">
+    <div class="key-box-title">共振結構的重要性</div>
+    三個共振結構顯示：除了羰基碳（δ⁺），β 碳也帶有部分正電（δ⁺）！<br>
+    → <strong>親核試劑可以攻擊兩個不同位置：羰基碳（C=O 端）或 β 碳</strong>
+  </div>
+
+  <h3>兩種加成模式</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>加成類型</th>
+        <th>攻擊位置</th>
+        <th>產物</th>
+        <th>使用試劑</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="hl-blue">1,2-加成</span><br><small>直接加成</small></td>
+        <td>羰基碳（C=O）</td>
+        <td>烯丙醇（allylic alcohol）</td>
+        <td><span class="tag tag-red">RLi、RMgX</span><br>（強親核試劑）</td>
+      </tr>
+      <tr>
+        <td><span class="hl-red">1,4-加成</span><br><small>共軛加成</small></td>
+        <td>β 碳</td>
+        <td>羰基化合物</td>
+        <td><span class="tag tag-blue">R₂CuLi（有機銅）</span><br>（弱親核試劑）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="star-callout">
+    <span class="star">★</span>
+    <strong>金屬決定模式：</strong>Grignard/有機鋰 → 1,2-加成（加在 C=O 上）；有機銅（cuprate）→ 1,4-加成（加在 β 碳）
+  </div>
+
+  <h3>機制概覽</h3>
+  <div class="mechanism">
+    <div class="mechanism-title">⚙️ 1,4-加成（共軛加成）機制</div>
+    <div class="mechanism-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">親核攻擊 β 碳</div>
+        <div class="step-desc">Nu⁻ 攻擊 β 碳，形成共振穩定的烯醇陰離子（enolate）中間體（可在碳或氧兩端反應）</div>
+      </div>
+    </div>
+    <div class="mechanism-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">質子化 → 互變異構</div>
+        <div class="step-desc">烯醇陰離子在碳端質子化→直接得產物；或在氧端質子化→形成烯醇→互變異構（tautomerization）→同樣得到 1,4-加成產物</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>有機金屬試劑與羧酸衍生物的反應</h3>
+  <p>有機鋰和 Grignard 試劑與酯或酸氯化物反應，加兩當量試劑，得到<strong>三級醇</strong>（兩個相同的 R 基）。</p>
+
+  <div class="reaction-box">
+    <div class="reaction-row">
+      <span class="reactant">RCOCl 或 RCOOR'</span>
+      <span class="arrow">→ <small>[1] 2×R''MgX<br>[2] H₂O</small></span>
+      <span class="product">R–C(OH)(R'')₂（3° 醇）</span>
+    </div>
+  </div>
+
+  <h3>有機銅（Cuprate）與酸氯化物：製備酮</h3>
+  <p>要止步於<strong>酮</strong>（不繼續到 3° 醇），需要用反應性較弱的有機銅試劑，且只有酸氯化物（有最佳離去基 Cl⁻）能反應：</p>
+
+  <div class="reaction-box">
+    <div class="reaction-row">
+      <span class="reactant">RCOCl</span>
+      <span class="arrow">→ <small>R'₂CuLi</small></span>
+      <span class="product">R–CO–R'（酮）</span>
+    </div>
+  </div>
+
+  <h3>反應與 CO₂、環氧化物</h3>
+
+  <div class="key-box">
+    <div class="key-box-title">Grignard 試劑與 CO₂ — 羧化反應</div>
+    R–MgX + CO₂ → 烷氧基中間體 →（H₃O⁺質子化）→ <strong>R–COOH（羧酸）</strong><br><br>
+    這讓鹵烷可以轉化為多一個碳的羧酸（常用於增碳）：<br>
+    R–X → R–MgX（加Mg）→ R–COOH（加CO₂，再酸化）
+  </div>
+
+  <div class="key-box blue">
+    <div class="key-box-title">Grignard 試劑開環氧化物</div>
+    有機金屬試劑（RLi、RMgX、R₂CuLi）都能開環氧化物的環，形成醇。<br>
+    規則：<strong>親核攻擊發生在空間較小（位阻較小）的碳上</strong>，且為 SN2 背面進攻。
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="summary">
+  <div class="section-header">
+    <span class="section-num gold">總整理</span>
+    <h2>本章核心概念一覽</h2>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-title">🔑 三大思考核心</div>
+    <div class="key-box">
+      <div class="key-box-title">第一原則</div>
+      <strong>羰基碳缺電子（δ⁺）→ 是親核試劑攻擊的目標</strong>
+    </div>
+    <div class="key-box blue">
+      <div class="key-box-title">第二原則</div>
+      <strong>有無離去基，決定走「加成」還是「取代」</strong><br>
+      無離去基（醛、酮）→ 親核加成<br>
+      有離去基（羧酸衍生物）→ 親核取代
+    </div>
+    <div class="key-box green">
+      <div class="key-box-title">第三原則</div>
+      <strong>R–M 鍵的極性決定反應性</strong><br>
+      RLi ≈ RMgX（強，大多數反應）＞ R₂CuLi（弱，選擇性反應）
+    </div>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-title">📊 還原試劑選擇速查表</div>
+    <table class="compare-table">
+      <thead>
+        <tr><th>目標轉換</th><th>最佳試劑</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>醛/酮 → 醇（選擇性）</td><td>NaBH₄ / CH₃OH</td></tr>
+        <tr><td>醛/酮/羧酸衍生物 → 醇（通用）</td><td>LiAlH₄，再加 H₂O</td></tr>
+        <tr><td>酯或酸氯化物 → 醛（部分還原）</td><td>DIBAL-H（低溫）</td></tr>
+        <tr><td>酸氯化物 → 醛（部分還原）</td><td>LiAlH[OC(CH₃)₃]₃</td></tr>
+        <tr><td>醯胺 → 胺（特殊！非醇）</td><td>LiAlH₄</td></tr>
+        <tr><td>酮 → 單一對映體醇</td><td>(S)- 或 (R)-CBS 試劑</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-title">🧪 有機金屬試劑反應總覽（20.16）</div>
+    <table class="compare-table">
+      <thead>
+        <tr><th>起始物</th><th>試劑</th><th>產物</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>甲醛 CH₂=O</td>
+          <td>RLi 或 RMgX</td>
+          <td><span class="hl-green">1° 醇</span></td>
+        </tr>
+        <tr>
+          <td>醛 RCHO</td>
+          <td>R''Li 或 R''MgX</td>
+          <td><span class="hl-blue">2° 醇</span></td>
+        </tr>
+        <tr>
+          <td>酮 R₂CO</td>
+          <td>R''Li 或 R''MgX</td>
+          <td><span class="hl-red">3° 醇</span></td>
+        </tr>
+        <tr>
+          <td>酯/酸氯化物</td>
+          <td>2×RLi 或 RMgX</td>
+          <td><span class="hl-red">3° 醇（兩個相同 R）</span></td>
+        </tr>
+        <tr>
+          <td>酸氯化物</td>
+          <td>R₂CuLi（銅試劑）</td>
+          <td>酮（止步於酮！）</td>
+        </tr>
+        <tr>
+          <td>CO₂</td>
+          <td>RMgX → H₃O⁺</td>
+          <td>羧酸（增一碳）</td>
+        </tr>
+        <tr>
+          <td>環氧化物</td>
+          <td>RLi / RMgX / R₂CuLi</td>
+          <td>醇（SN2，攻擊位阻小端）</td>
+        </tr>
+        <tr>
+          <td>α,β-不飽和酮（強）</td>
+          <td>RLi 或 RMgX</td>
+          <td>烯丙醇（1,2-加成）</td>
+        </tr>
+        <tr>
+          <td>α,β-不飽和酮（弱）</td>
+          <td>R₂CuLi（銅試劑）</td>
+          <td>β 取代酮（1,4-加成）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="memory-card">
+    <div class="memory-card-title">🏆 期末考前必記要點</div>
+    <ul>
+      <li>羰基碳 = 親電中心（δ⁺），永遠被親核試劑攻擊</li>
+      <li>醛比酮活潑（空間小 + 電子密度低）</li>
+      <li>NaBH₄ 選擇性還原 C=O；H₂/Pd 先還 C=C</li>
+      <li>LiAlH₄ 還原醯胺得胺（不是醇！）</li>
+      <li>Grignard/有機鋰是強親核試劑+強鹼，必須無水操作</li>
+      <li>有機銅（cuprate）活性弱，用於製備酮或 1,4-加成</li>
+      <li>含 OH/NH 的底物加 Grignard 前，先用保護基保護</li>
+      <li>對掌選擇性還原用 CBS 試劑；生物體用 NADH</li>
+      <li>托倫斯試驗（銀鏡反應）只有醛呈陽性，酮呈陰性</li>
+    </ul>
+  </div>
+
+</div>
+
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    // 建立 Intersection Observer
+    const observerOptions = {
+      root: null,
+      // 微調觸發範圍（-20% ~ -60%），讓視窗中間偏上的區塊能精準被選中
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          
+          // 移除所有連結的 active 樣式
+          navLinks.forEach(link => link.classList.remove('active'));
+          
+          // 為當前區塊對應的導覽連結加上 active
+          const activeLink = document.querySelector(`nav ul li a[href="#${id}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+            
+            // 讓導覽列在手機板/可橫向滾動時，自動將 active 項目的位置置中
+            activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      });
+    }, observerOptions);
+
+    // 開始追蹤所有區塊
+    sections.forEach(section => observer.observe(section));
+  });
+</script>
+
+</body>
+</html>
