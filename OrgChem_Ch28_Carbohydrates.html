@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第28章: 碳水化合物 </title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --surface2: #f0ede6;
+    --border: #ddd9d0;
+    --text: #2a2520;
+    --text-muted: #6b6358;
+    --accent: #2e7d52;       /* 葉綠色 — 植物/自然 */
+    --accent2: #c0522a;      /* 暖橘紅 — 強調/警告 */
+    --accent3: #1a5c8a;      /* 深藍 — 結構/鍵結 */
+    --accent4: #8b3fa8;      /* 紫 — 反應機構 */
+    --yellow: #f0c040;
+    --highlight-bg: #fffbe6;
+    --highlight-border: #e8c840;
+    --red-box: #fdf0ee;
+    --red-border: #c0522a;
+    --green-box: #eef7f2;
+    --green-border: #2e7d52;
+    --blue-box: #eef4fb;
+    --blue-border: #1a5c8a;
+    --purple-box: #f5f0fb;
+    --purple-border: #8b3fa8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a3d2b 0%, #2e7d52 50%, #1a5c8a 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='3' fill='rgba(255,255,255,0.05)'/%3E%3Ccircle cx='0' cy='0' r='2' fill='rgba(255,255,255,0.04)'/%3E%3Ccircle cx='80' cy='80' r='2' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E");
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero h1 .ch { font-size: 0.55em; opacity: 0.85; }
+  .hero p {
+    font-size: 17px;
+    opacity: 0.88;
+    max-width: 640px;
+    margin: 0 auto 28px;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 32px; font-weight: 700; color: var(--yellow); }
+  .hero-stat .label { font-size: 12px; opacity: 0.75; }
+
+  /* NAV */
+  nav {
+    background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+    padding: 0 24px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    position: sticky; top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  nav a {
+    display: inline-block;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* MAIN LAYOUT */
+  main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* SECTIONS */
+  .section {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--surface2);
+  }
+  .section-num {
+    background: var(--accent);
+    color: white;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    color: var(--text);
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 24px 0 10px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  h4 { font-size: 15px; font-weight: 700; margin: 16px 0 8px; color: var(--text); }
+  p { margin-bottom: 12px; }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-left: 4px solid;
+  }
+  .callout.key {
+    background: var(--highlight-bg);
+    border-color: var(--highlight-border);
+  }
+  .callout.key::before { content: '⭐ 核心概念'; font-weight: 700; display: block; margin-bottom: 6px; color: #a07a00; font-size: 12px; letter-spacing: 1px; }
+  .callout.warn {
+    background: var(--red-box);
+    border-color: var(--red-border);
+  }
+  .callout.warn::before { content: '⚠️ 注意'; font-weight: 700; display: block; margin-bottom: 6px; color: var(--accent2); font-size: 12px; letter-spacing: 1px; }
+  .callout.info {
+    background: var(--blue-box);
+    border-color: var(--blue-border);
+  }
+  .callout.info::before { content: '💡 補充說明'; font-weight: 700; display: block; margin-bottom: 6px; color: var(--accent3); font-size: 12px; letter-spacing: 1px; }
+  .callout.react {
+    background: var(--purple-box);
+    border-color: var(--purple-border);
+  }
+  .callout.react::before { content: '⚗️ 反應機構'; font-weight: 700; display: block; margin-bottom: 6px; color: var(--accent4); font-size: 12px; letter-spacing: 1px; }
+  .callout.memory {
+    background: var(--green-box);
+    border-color: var(--green-border);
+  }
+  .callout.memory::before { content: '🧠 記憶口訣'; font-weight: 700; display: block; margin-bottom: 6px; color: var(--accent); font-size: 12px; letter-spacing: 1px; }
+
+  /* HIGHLIGHT TEXT */
+  .hi { background: #fff3a0; padding: 1px 4px; border-radius: 3px; font-weight: 700; }
+  .hi-red { background: #ffd6d0; padding: 1px 4px; border-radius: 3px; font-weight: 700; color: #8b2000; }
+  .hi-blue { background: #d0e8ff; padding: 1px 4px; border-radius: 3px; font-weight: 700; color: #003f8b; }
+  .hi-green { background: #d0f0e0; padding: 1px 4px; border-radius: 3px; font-weight: 700; color: #005c30; }
+  .hi-purple { background: #e8d4f8; padding: 1px 4px; border-radius: 3px; font-weight: 700; color: #5c0090; }
+
+  /* CARDS GRID */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0; }
+  .card {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .card .card-icon { font-size: 32px; margin-bottom: 8px; }
+  .card .card-title { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .card .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .card.accent { background: var(--green-box); border-color: var(--green-border); }
+  .card.red { background: var(--red-box); border-color: var(--red-border); }
+  .card.blue { background: var(--blue-box); border-color: var(--blue-border); }
+  .card.purple { background: var(--purple-box); border-color: var(--purple-border); }
+
+  /* COMPARISON TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .compare-table th {
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); }
+  .compare-table tr:nth-child(even) td { background: var(--surface2); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .compare-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+  /* FORMULA BOX */
+  .formula {
+    background: #1e1e2e;
+    color: #e0e0f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    margin: 12px 0;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+  .formula .chem-red { color: #ff7070; }
+  .formula .chem-green { color: #70ff90; }
+  .formula .chem-blue { color: #70b0ff; }
+  .formula .chem-yellow { color: #ffd060; }
+
+  /* FIGURE BLOCK */
+  .figure-block {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .figure-header {
+    background: var(--surface2);
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .figure-body { padding: 20px; }
+
+  /* STEP BOX */
+  .steps { list-style: none; padding: 0; margin: 12px 0; }
+  .steps li {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--accent3);
+    color: white;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* RING DIAGRAM (SVG-based) */
+  .diagram-wrap { text-align: center; padding: 16px 0; }
+  .diagram-wrap svg { max-width: 100%; }
+
+  /* SUGAR FAMILY TREE */
+  .tree-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 6px 0; }
+  .tree-node {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .tree-node.red-node { border-color: var(--accent2); background: var(--red-box); }
+  .tree-node.blue-node { border-color: var(--accent3); background: var(--blue-box); }
+  .tree-connector { text-align: center; color: var(--text-muted); font-size: 18px; line-height: 1.2; }
+
+  /* ACCORDION */
+  details { border: 1px solid var(--border); border-radius: 8px; margin: 10px 0; overflow: hidden; }
+  summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    background: var(--surface2);
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '▸'; transition: transform 0.2s; }
+  details[open] summary::after { transform: rotate(90deg); }
+  details .detail-body { padding: 16px 18px; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+  .badge.reducing { background: #d0f0e0; color: #005c30; }
+  .badge.nonreducing { background: #ffd6d0; color: #8b2000; }
+
+  /* REACTION ARROW */
+  .rxn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+  .rxn .arrow { font-size: 22px; color: var(--accent); flex-shrink: 0; }
+  .rxn .reagent { font-size: 11px; color: var(--text-muted); text-align: center; max-width: 120px; }
+  .rxn-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+
+  /* SUMMARY STRIP */
+  .summary-strip {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent3) 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .summary-strip h2 { color: white; font-size: 20px; margin-bottom: 16px; }
+  .strip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .strip-item { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 14px; }
+  .strip-item .si-title { font-size: 12px; opacity: 0.8; margin-bottom: 4px; letter-spacing: 1px; text-transform: uppercase; }
+  .strip-item .si-val { font-size: 16px; font-weight: 700; }
+
+  /* PROGRESS / TIMELINE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .tl-item { position: relative; margin-bottom: 18px; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -26px; top: 6px;
+    width: 12px; height: 12px;
+    background: var(--accent); border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .section { padding: 22px 18px; }
+    nav a { padding: 12px 10px; font-size: 12px; }
+    .hero { padding: 40px 20px 36px; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-tag">有機化學 第 28 章</div>
+  <h1>醣類<br><span class="ch">Carbohydrates</span></h1>
+  <p>從葡萄糖到 DNA，從麵包澱粉到木頭纖維素——解開地球上最豐富的生物分子。</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">~50%</div><div class="label">地球生物量</div></div>
+    <div class="hero-stat"><div class="num">16</div><div class="label">醛糖立體異構物</div></div>
+    <div class="hero-stat"><div class="num">C₆H₁₂O₆</div><div class="label">葡萄糖分子式</div></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#intro">簡介</a>
+  <a href="#mono">單醣</a>
+  <a href="#stereochem">立體化學</a>
+  <a href="#cyclic">環狀結構</a>
+  <a href="#glycosides">糖苷</a>
+  <a href="#reactions">反應</a>
+  <a href="#di">雙醣</a>
+  <a href="#poly">多醣</a>
+  <a href="#others">其他衍生物</a>
+  <a href="#summary">總複習</a>
+</nav>
+
+<main>
+
+<!-- SECTION 0: INTRO -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <div class="section-num">28.1</div>
+    <h2>什麼是醣類？</h2>
+  </div>
+
+  <p>醣類（Carbohydrates）的分子式可以寫成 <strong>C<sub>n</sub>(H₂O)<sub>n</sub></strong>，是自然界中含量最豐富的有機化合物，在生物體中扮演多重角色：儲存能量、提供結構支撐、細胞辨識訊號等。</p>
+
+  <div class="callout key">
+    碳水化合物是<span class="hi">多羥基的醛或酮（polyhydroxy aldehydes / ketones）</span>，或能水解得到這類化合物的物質。廣義包括：糖、澱粉、纖維素、甲殼素等。
+  </div>
+
+  <!-- Figure 28.1 -->
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.1 — 碳水化合物的多樣面貌</div>
+    <div class="figure-body">
+      <div class="card-grid">
+        <div class="card accent">
+          <div class="card-icon">🍬</div>
+          <div class="card-title">β-D-葡萄糖</div>
+          <div class="card-desc">最常見的單醣。血糖的主要來源，細胞最愛的即時能量。</div>
+        </div>
+        <div class="card blue">
+          <div class="card-icon">🌲</div>
+          <div class="card-title">纖維素 Cellulose</div>
+          <div class="card-desc">木材和植物莖的主要成分。葡萄糖以 β-糖苷鍵連接而成。</div>
+        </div>
+        <div class="card red">
+          <div class="card-icon">💊</div>
+          <div class="card-title">小紅莓黴素 Doxorubicin</div>
+          <div class="card-desc">抗癌藥物，結構中含有醣環。用於白血病、乳癌等治療。</div>
+        </div>
+        <div class="card purple">
+          <div class="card-icon">🧬</div>
+          <div class="card-title">去氧腺苷酸</div>
+          <div class="card-desc">DNA 的四種核苷酸之一，醣的部份為去氧核糖。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>光合作用 vs 代謝</h3>
+  <p>碳水化合物是能量的「倉庫」，透過光合作用合成並儲存，再透過代謝釋放能量：</p>
+
+  <div class="formula">
+    <span class="chem-green">光合作用（儲能）：</span><br>
+    6 CO₂ + 6 H₂O  <span class="chem-yellow">→ hν/葉綠素 →</span>  C₆H₁₂O₆ (葡萄糖) + 6 O₂
+    <br><br>
+    <span class="chem-red">代謝（釋能）：</span><br>
+    C₆H₁₂O₆ + 6 O₂  <span class="chem-yellow">→</span>  6 CO₂ + 6 H₂O + <span class="chem-yellow">大量能量</span>
+  </div>
+
+  <div class="callout info">
+    雖然脂質每公克提供更多能量，但<strong>葡萄糖溶於水</strong>，可快速由血液輸送，在激烈運動需要爆發力時是首選。
+  </div>
+</section>
+
+<!-- SECTION: MONO -->
+<section class="section" id="mono">
+  <div class="section-header">
+    <div class="section-num">28.2</div>
+    <h2>單醣 Monosaccharides</h2>
+  </div>
+
+  <p>單醣是最簡單的碳水化合物，含有 <span class="hi">3～7 個碳</span>，每個碳大多連接一個羥基。</p>
+
+  <div class="callout key">
+    <strong>兩大類單醣：</strong><br>
+    ▸ <span class="hi-red">醛糖 Aldose</span>：羰基（C=O）在 <strong>C1</strong>（醛基），如葡萄糖（D-glucose）<br>
+    ▸ <span class="hi-blue">酮糖 Ketose</span>：羰基（C=O）在 <strong>C2</strong>（酮基），如果糖（D-fructose）
+  </div>
+
+  <h3>按碳數命名</h3>
+  <table class="compare-table">
+    <tr>
+      <th>碳數</th><th>字根</th><th>醛糖例子</th><th>酮糖例子</th>
+    </tr>
+    <tr><td>3</td><td>triose（三糖）</td><td>D-甘油醛</td><td>二羥丙酮</td></tr>
+    <tr><td>4</td><td>tetrose（四糖）</td><td>D-赤藻糖</td><td>D-赤藻酮糖</td></tr>
+    <tr><td>5</td><td>pentose（五糖）</td><td>D-核糖</td><td>D-核酮糖</td></tr>
+    <tr><td>6</td><td>hexose（六糖）</td><td>D-葡萄糖</td><td>D-果糖</td></tr>
+  </table>
+
+  <div class="callout memory">
+    命名公式：<strong>碳數 + ose = 糖的大小</strong>，再加 aldo-（醛）或 keto-（酮）說明種類。<br>
+    例：葡萄糖 = <em>aldo</em> + <em>hex</em> + ose = 醛己糖
+  </div>
+
+  <h3>有趣的生活例子</h3>
+  <div class="card-grid">
+    <div class="card red">
+      <div class="card-icon">🍯</div>
+      <div class="card-title">D-果糖</div>
+      <div class="card-desc">甜度是蔗糖的<strong>約兩倍</strong>，低卡食品因此可用更少的果糖達到同樣甜度。</div>
+    </div>
+    <div class="card blue">
+      <div class="card-icon">☀️</div>
+      <div class="card-title">二羥丙酮 Dihydroxyacetone</div>
+      <div class="card-desc">人工曬黑乳液的有效成分——會讓皮膚暫時變棕色。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: STEREOCHEM -->
+<section class="section" id="stereochem">
+  <div class="section-header">
+    <div class="section-num">28.2A–C</div>
+    <h2>立體化學：Fischer 投影式與 D/L 組態</h2>
+  </div>
+
+  <h3>Fischer 投影式規則</h3>
+  <p>糖的立體中心常用「十字型」的 Fischer 投影式表示：</p>
+
+  <div class="figure-block">
+    <div class="figure-header">📋 Fischer 投影式的規則（圖示說明）</div>
+    <div class="figure-body">
+      <ul class="steps">
+        <li>
+          <div class="step-num">1</div>
+          <div>碳骨架<strong>垂直排列</strong>，醛基（CHO）或酮基置於<strong>頂端或靠近頂端</strong>。</div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div><span class="hi-red">水平鍵</span>朝<strong>前方</strong>（楔形鍵，指向你），如同手臂往前伸。</div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div><span class="hi-blue">垂直鍵</span>朝<strong>後方</strong>（虛線楔形鍵，遠離你），如同腿往後退。</div>
+        </li>
+      </ul>
+
+      <!-- SVG for Fischer diagram -->
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="max-width:420px">
+          <!-- Left: 3D representation hint -->
+          <text x="60" y="20" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#555">3D 概念示意</text>
+          <!-- Vertical bond (back) -->
+          <line x1="60" y1="40" x2="60" y2="160" stroke="#1a5c8a" stroke-width="3" stroke-dasharray="6 3"/>
+          <!-- Horizontal bond (front) -->
+          <line x1="10" y1="100" x2="110" y2="100" stroke="#c0522a" stroke-width="3"/>
+          <!-- Carbon center -->
+          <circle cx="60" cy="100" r="8" fill="#2a2520"/>
+          <!-- Labels -->
+          <text x="60" y="35" text-anchor="middle" font-size="12" fill="#1a5c8a">上 (後)</text>
+          <text x="60" y="178" text-anchor="middle" font-size="12" fill="#1a5c8a">下 (後)</text>
+          <text x="5" y="116" text-anchor="middle" font-size="12" fill="#c0522a">左</text>
+          <text x="115" y="116" text-anchor="middle" font-size="12" fill="#c0522a">右</text>
+          <text x="62" y="104" font-size="11" fill="white" font-weight="bold">C</text>
+
+          <!-- Arrow -->
+          <text x="150" y="105" font-size="28" fill="#2e7d52">→</text>
+
+          <!-- Right: Fischer cross -->
+          <text x="280" y="20" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#555">Fischer 投影式</text>
+          <line x1="280" y1="40" x2="280" y2="160" stroke="#1a5c8a" stroke-width="3"/>
+          <line x1="220" y1="100" x2="340" y2="100" stroke="#c0522a" stroke-width="3"/>
+          <text x="280" y="36" text-anchor="middle" font-size="12" fill="#1a5c8a">CHO（醛）</text>
+          <text x="280" y="176" text-anchor="middle" font-size="12" fill="#1a5c8a">CH₂OH</text>
+          <text x="210" y="98" text-anchor="end" font-size="12" fill="#c0522a">OH</text>
+          <text x="350" y="98" text-anchor="start" font-size="12" fill="#c0522a">H</text>
+          <circle cx="280" cy="100" r="5" fill="#2a2520"/>
+
+          <!-- Key -->
+          <rect x="160" y="155" width="240" height="36" rx="6" fill="#f0ede6"/>
+          <text x="175" y="170" font-size="11" fill="#c0522a">─── 水平鍵 = 朝前</text>
+          <text x="175" y="185" font-size="11" fill="#1a5c8a">─ ─ 垂直鍵 = 朝後</text>
+        </svg>
+      </div>
+
+      <div class="callout warn">
+        ⚠️ <strong>千萬不要</strong>在紙面上旋轉 Fischer 投影式！旋轉 90° 會把分子變成它的鏡像（對掌異構物）。
+      </div>
+    </div>
+  </div>
+
+  <h3>D/L 命名系統</h3>
+
+  <div class="callout key">
+    比較分子中<strong>距離醛基最遠的立體中心</strong>上 OH 基的位置：<br>
+    ▸ <span class="hi-green">OH 在右邊 → D-醣</span>（自然界絕大多數醣為 D 型）<br>
+    ▸ <span class="hi-red">OH 在左邊 → L-醣</span>（較少見）
+  </div>
+  
+    <!-- Figure 28.2 -->
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.2 — D-glucose 的 Fischer 投影式</div>
+    <div class="figure-body">
+      <svg class="figure-visual" width="360" height="280" viewBox="0 0 360 280">
+        <!-- vertical backbone -->
+        <line x1="90" y1="30" x2="90" y2="250" stroke="#333" stroke-width="2"/>
+        <!-- CHO at top -->
+        <text x="90" y="28" text-anchor="middle" font-size="10" fill="#888">(C1)</text>
+        <text x="130" y="48" text-anchor="start" font-size="12" fill="#333">CHO</text>
+        <line x1="90" y1="45" x2="130" y2="45" stroke="#b02020" stroke-width="1.5"/>
+        <!-- C2: OH right, H left -->
+        <line x1="40" y1="85" x2="140" y2="85" stroke="#333" stroke-width="1.5"/>
+        <text x="35" y="89" text-anchor="end" font-size="12" fill="#333">H</text>
+        <text x="145" y="89" text-anchor="start" font-size="12" font-weight="700" fill="#b05c2a">OH</text>
+        <text x="90" y="78" text-anchor="middle" font-size="9" fill="#888">C2</text>
+        <!-- C3: OH left, H right -->
+        <line x1="40" y1="120" x2="140" y2="120" stroke="#333" stroke-width="1.5"/>
+        <text x="35" y="124" text-anchor="end" font-size="12" font-weight="700" fill="#1a5f8a">HO</text>
+        <text x="145" y="124" text-anchor="start" font-size="12" fill="#333">H</text>
+        <text x="90" y="113" text-anchor="middle" font-size="9" fill="#888">C3</text>
+        <!-- C4: OH right -->
+        <line x1="40" y1="155" x2="140" y2="155" stroke="#333" stroke-width="1.5"/>
+        <text x="35" y="159" text-anchor="end" font-size="12" fill="#333">H</text>
+        <text x="145" y="159" text-anchor="start" font-size="12" font-weight="700" fill="#b05c2a">OH</text>
+        <text x="90" y="148" text-anchor="middle" font-size="9" fill="#888">C4</text>
+        <!-- C5: OH right (determines D/L) -->
+        <line x1="40" y1="190" x2="140" y2="190" stroke="#2d7a4f" stroke-width="2.5"/>
+        <text x="35" y="194" text-anchor="end" font-size="12" fill="#333">H</text>
+        <text x="145" y="194" text-anchor="start" font-size="13" font-weight="700" fill="#2d7a4f">OH ← D型！</text>
+        <text x="90" y="183" text-anchor="middle" font-size="9" fill="#888">C5 ★</text>
+        <!-- CH2OH at bottom -->
+        <text x="130" y="248" text-anchor="start" font-size="12" fill="#333">CH₂OH</text>
+        <text x="90" y="237" text-anchor="middle" font-size="9" fill="#888">(C6)</text>
+        <!-- D label -->
+        <rect x="210" y="170" width="130" height="36" rx="8" fill="#ddf0e8" stroke="#2d7a4f" stroke-width="1.5"/>
+        <text x="275" y="185" text-anchor="middle" font-size="11" font-weight="700" fill="#1a5a30">C5的 –OH 在右</text>
+        <text x="275" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="#1a5a30">∴ D-葡萄糖</text>
+        <line x1="145" y1="190" x2="208" y2="190" stroke="#2d7a4f" stroke-width="1" stroke-dasharray="4 3"/>
+      </svg>
+      <div class="fig-caption">D-葡萄糖的 Fischer 投影式。C5（距離醛基最遠的手性碳）上 –OH 朝右，故屬於 D 型。自然界中幾乎所有醣類均為 D 型。</div>
+    </div>
+  </div>
+  
+  <!-- Figure 28.3 -->
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.3 — D-醛糖家族（醛糖族譜）</div>
+    <div class="figure-body">
+      <p style="margin-bottom:14px; color: var(--text-muted); font-size: 14px;">由最簡單的 D-甘油醛出發，每次 Kiliani-Fischer 合成增加一個碳，向下延伸。</p>
+
+      <div class="tree-row">
+        <div class="tree-node blue-node">D-甘油醛<br><small>3C 醛三糖</small></div>
+      </div>
+      <div class="tree-connector">↙&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↘</div>
+      <div class="tree-row">
+        <div class="tree-node">D-赤藻糖<br><small>4C</small></div>
+        <div class="tree-node">D-蘇糖<br><small>4C</small></div>
+      </div>
+      <div class="tree-connector">↙↘&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↙↘</div>
+      <div class="tree-row">
+        <div class="tree-node">D-核糖<br><small>5C ⭐</small></div>
+        <div class="tree-node">D-阿拉伯糖<br><small>5C</small></div>
+        <div class="tree-node">D-木糖<br><small>5C</small></div>
+        <div class="tree-node">D-來蘇糖<br><small>5C</small></div>
+      </div>
+      <div class="tree-connector">↓↓&nbsp;&nbsp;↓↓&nbsp;&nbsp;↓↓&nbsp;&nbsp;↓↓</div>
+      <div class="tree-row">
+        <div class="tree-node red-node">D-葡萄糖<br><small>6C ⭐⭐</small></div>
+        <div class="tree-node red-node">D-甘露糖<br><small>6C</small></div>
+        <div class="tree-node">D-半乳糖<br><small>6C ⭐</small></div>
+        <div class="tree-node">（更多...）<br><small>共 8 個 D-醛己糖</small></div>
+      </div>
+
+       <div class="callout key">
+        D型糖與對應的L型糖互為<strong>對映異構物</strong>：所有手性碳構型均相反，互為鏡像，無法疊合。<br>
+      例：D-glucose ↔ L-glucose（所有 –OH 方向完全相反）
+      </div>
+      
+      <div class="callout memory" style="margin-top:16px">
+        記憶重點：醛己糖有 <strong>4 個立體中心</strong>，故有 2⁴ = <strong>16 種立體異構物</strong>（8 對對掌體，8 個 D 型 + 8 個 L 型）。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: CYCLIC -->
+<section class="section" id="cyclic">
+  <div class="section-header">
+    <div class="section-num">28.6</div>
+    <h2>環狀結構：半縮醛的形成</h2>
+  </div>
+
+  <p>單醣在水溶液中大部分以<strong>環狀半縮醛（hemiacetal）</strong>形式存在，而非開鏈形式。這是因為分子內的 OH 基攻擊羰基，形成穩定的環。</p>
+
+  <div class="callout key">
+    ▸ 六員環醣（最常見）稱為 <span class="hi-red">吡喃糖 Pyranose</span>（C5 的 OH 環化）<br>
+    ▸ 五員環醣稱為 <span class="hi-blue">呋喃糖 Furanose</span>（C4 的 OH 環化）
+  </div>
+
+  <!-- Figure 28.6 -->
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.6 — 葡萄糖的三種形式：α、β 及開鏈</div>
+    <div class="figure-body">
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" style="max-width:600px">
+          <!-- α-D-glucose box -->
+          <rect x="10" y="30" width="160" height="160" rx="10" fill="#eef4fb" stroke="#1a5c8a" stroke-width="2"/>
+          <text x="90" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a5c8a">α-D-葡萄糖</text>
+          <text x="90" y="75" text-anchor="middle" font-size="18" fill="#1a5c8a">⬡</text>
+          <text x="90" y="100" text-anchor="middle" font-size="13" fill="#333">OH 在 C1 下方</text>
+          <text x="90" y="118" text-anchor="middle" font-size="13" fill="#333">（與 CH₂OH 反式）</text>
+          <rect x="30" y="130" width="120" height="28" rx="6" fill="#1a5c8a"/>
+          <text x="90" y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="white">平衡含量：37%</text>
+          <text x="90" y="182" text-anchor="middle" font-size="12" fill="#555">可分離結晶</text>
+       
+          <!-- Acyclic center -->
+          <rect x="210" y="30" width="160" height="160" rx="10" fill="#f7f5f0" stroke="#888" stroke-width="2" stroke-dasharray="6 3"/>
+          <text x="290" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#555">開鏈形式</text>
+          <text x="290" y="80" text-anchor="middle" font-size="26" fill="#aaa">≡</text>
+          <text x="290" y="105" text-anchor="middle" font-size="13" fill="#777">含自由醛基</text>
+          <rect x="230" y="120" width="120" height="28" rx="6" fill="#999"/>
+          <text x="290" y="139" text-anchor="middle" font-size="13" font-weight="bold" fill="white">微量 (&lt;1%)</text>
+          <text x="290" y="165" text-anchor="middle" font-size="12" fill="#555">具還原性</text>
+          <text x="290" y="180" text-anchor="middle" font-size="11" fill="#c0522a">▲ 平衡中但極少</text>
+        
+          <!-- β-D-glucose box -->
+          <rect x="410" y="30" width="160" height="160" rx="10" fill="#eef7f2" stroke="#2e7d52" stroke-width="2"/>
+          <text x="490" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e7d52">β-D-葡萄糖</text>
+          <text x="490" y="75" text-anchor="middle" font-size="18" fill="#2e7d52">⬡</text>
+          <text x="490" y="100" text-anchor="middle" font-size="13" fill="#333">OH 在 C1 上方</text>
+          <text x="490" y="118" text-anchor="middle" font-size="13" fill="#333">（與 CH₂OH 順式）</text>
+          <rect x="430" y="130" width="120" height="28" rx="6" fill="#2e7d52"/>
+          <text x="490" y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="white">平衡含量：63%</text>
+          <text x="490" y="182" text-anchor="middle" font-size="12" fill="#555">較穩定（全為赤道向鍵）</text>
+        </svg>
+      </div>
+
+
+      <div class="callout key">
+        <strong>互旋現象 Mutarotation：</strong>將任何一種純態的葡萄糖溶於水，最終達到平衡，混合物含 α(37%) + β(63%) + 開鏈(微量)。<br>
+        原因：半縮醛可自由開環再環化，C1 每次環化都可能形成 α 或 β。
+      </div>
+    </div>
+  </div>
+
+  <h3>Haworth 投影式 — 立體畫法</h3>
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure — 如何從 Fischer 投影式轉換為 Haworth 投影式</div>
+    <div class="figure-body">
+      <ul class="steps">
+        <li>
+          <div class="step-num">1</div>
+          <div>畫六員環，<strong>氧原子置於右上角</strong>。</div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div>對 D-醣：<span class="hi-red">CH₂OH 畫在環的上方</span>。</div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div>決定異頭碳（C1）的構型：
+            <br>▸ <span class="hi-blue">α 異頭物</span>：OH 在<strong>下方（軸向 axial）</strong>（D-醣中與 CH₂OH 反式）
+            <br>▸ <span class="hi-green">β 異頭物</span>：OH 在<strong>上方（赤道向 equatorial）</strong>（D-醣中與 CH₂OH 順式）
+          </div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div>其餘立體中心：<strong>Fischer 投影式右側 → Haworth 下方</strong>；Fischer 左側 → Haworth 上方。</div>
+        </li>
+      </ul>
+
+      <div class="callout memory">
+        口訣：「右下左上，CH₂OH 朝上，氧在右上」——D-醣 Haworth 投影式的黃金口訣
+      </div>
+    </div>
+  </div>
+
+  <h3>椅形構型 — 最真實的 3D 結構</h3>
+
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.7 — β-D-葡萄糖的椅形構型</div>
+    <div class="figure-body">
+      <p>β-D-葡萄糖是葡萄糖中最穩定的形式，因為<strong>所有大的取代基（OH、CH₂OH）都位於赤道向鍵（equatorial）位置</strong>，空間障礙最小。</p>
+    </div>
+      <div class="callout info">
+        葡萄糖是最普遍的單醣，正是因為它在椅形構型中所有取代基都偏好赤道向鍵，能量最低、最穩定！
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: GLYCOSIDES -->
+<section class="section" id="glycosides">
+  <div class="section-header">
+    <div class="section-num">28.7</div>
+    <h2>糖苷 Glycosides</h2>
+  </div>
+
+  <p>單醣的半縮醛 OH 基（異頭碳上的 OH）與醇反應，形成<strong>縮醛</strong>，稱為<span class="hi">糖苷（glycoside）</span>。</p>
+
+  <div class="formula">
+    α-D-葡萄糖  <span class="chem-yellow">+ CH₃OH + HCl</span>  →  α-甲基葡萄糖苷 + β-甲基葡萄糖苷
+    <br>（半縮醛 → 縮醛，只有異頭 OH 會反應）
+  </div>
+
+  <div class="callout key">
+    <strong>糖苷 vs 半縮醛的關鍵差異：</strong><br>
+    ▸ <span class="hi-red">半縮醛（-OH）</span>：在水中開環 ⇌ 可互旋 ⇌ 是<strong>還原糖（reducing sugars）</strong><br>
+    ▸ <span class="hi-green">縮醛（-OR）= 糖苷</span>：不開環，<strong>不互旋</strong>，是<strong>非還原糖</strong>
+  </div>
+
+  <h3>糖苷形成機構（Mechanism 28.1）</h3>
+  <div class="figure-block">
+    <div class="figure-header">📋 Mechanism 28.1 — 糖苷如何形成</div>
+    <div class="figure-body">
+      <ul class="steps">
+        <li>
+          <div class="step-num">1</div>
+          <div>HCl 質子化半縮醛的 OH 基</div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div>失去 H₂O，形成<strong>共振穩定的碳正離子（氧碳正離子 oxocarbenium ion）</strong>——環狀平面結構</div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div>CH₃OH 從平面<strong>上方或下方</strong>進行親核攻擊</div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div>失去質子，分別得到 α 和 β 兩種糖苷</div>
+        </li>
+      </ul>
+      <div class="callout info">
+        只有異頭碳的 OH 才有此反應性，因為失去 OH 後能形成共振穩定的碳正離子；其他 OH 失去後無法共振穩定，故不反應。
+      </div>
+    </div>
+  </div>
+
+  <h3>糖苷水解</h3>
+  <div class="callout react">
+    糖苷（縮醛）+ H₃O⁺ + H₂O → 半縮醛（α + β 混合）+ 醇<br>
+    機構與形成反應的逆過程完全相同。
+  </div>
+
+  <h3>自然界的糖苷</h3>
+  <div class="card-grid">
+    <div class="card red">
+      <div class="card-icon">🥔</div>
+      <div class="card-title">茄鹼 Solanine</div>
+      <div class="card-desc">馬鈴薯葉和綠色部分的毒素，含有三個單醣環以糖苷鍵連接。</div>
+    </div>
+    <div class="card accent">
+      <div class="card-icon">🌿</div>
+      <div class="card-title">水楊苷 Salicin</div>
+      <div class="card-desc">白柳樹皮中的天然止痛成分，水解可得水楊醇，是阿斯匹靈的祖先。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: REACTIONS -->
+<section class="section" id="reactions">
+  <div class="section-header">
+    <div class="section-num">28.8–28.10</div>
+    <h2>單醣的反應</h2>
+  </div>
+
+  <div class="card-grid" style="margin-bottom:20px">
+    <div class="card blue"><div class="card-icon">🔄</div><div class="card-title">OH 基的反應</div><div class="card-desc">醚化（甲基化）、酯化（乙醯化）</div></div>
+    <div class="card red"><div class="card-icon">🔥</div><div class="card-title">羰基氧化</div><div class="card-desc">醛糖酸、糖二酸、還原/非還原糖</div></div>
+    <div class="card purple"><div class="card-icon">↕</div><div class="card-title">碳鏈增減</div><div class="card-desc">Wohl 降解（減 1C）、Kiliani-Fischer 合成（增 1C）</div></div>
+  </div>
+
+  <h3>28.8 OH 基的反應</h3>
+
+  <details>
+    <summary>醚化（甲基化）— 保護 OH 基</summary>
+    <div class="detail-body">
+      <p>用 <strong>Ag₂O + CH₃I</strong> 或 <strong>NaH + CH₃I</strong> 將所有 OH 基甲基化。<br>
+      普通的醚（非糖苷位）對酸穩定；但<strong>糖苷鍵（縮醛醚）可被酸水解</strong>。這個差異在結構鑑定上很有用。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>酯化（乙醯化）</summary>
+    <div class="detail-body">
+      <p>用 <strong>乙酸酐（Ac₂O）+ 吡啶</strong>將所有 OH 基轉為乙酸酯。<br>
+      目的：單醣極性大，難溶於有機溶劑；乙醯化後可溶於有機溶劑，方便操作。</p>
+    </div>
+  </details>
+
+  <h3>28.9 羰基的氧化與還原</h3>
+
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.8 — 還原糖 vs 非還原糖</div>
+    <div class="figure-body">
+
+      <table class="compare-table">
+        <tr>
+          <th>類型</th>
+          <th>結構特徵</th>
+          <th>與 Tollens/Benedict/Fehling 試劑</th>
+          <th>例子</th>
+        </tr>
+        <tr>
+          <td><strong>還原糖</strong> <span class="badge reducing">Reducing</span></td>
+          <td>含<strong>半縮醛</strong>，可開環形成自由醛基</td>
+          <td>✅ 有反應（Ag↓ 或 Cu₂O↓）</td>
+          <td>葡萄糖、麥芽糖、乳糖、所有單醣</td>
+        </tr>
+        <tr>
+          <td><strong>非還原糖</strong> <span class="badge nonreducing">Nonreducing</span></td>
+          <td>含<strong>縮醛</strong>（糖苷），無法開環</td>
+          <td>❌ 無反應</td>
+          <td>蔗糖、糖苷（甲基葡萄糖苷等）</td>
+        </tr>
+      </table>
+
+      <h4>氧化產物</h4>
+      <div class="rxn">
+        <div>醛糖</div>
+        <div class="rxn-wrap">
+          <div class="arrow">→</div>
+          <div class="reagent">Br₂/H₂O 或<br>Tollens/Benedict</div>
+        </div>
+        <div><span class="hi-green">醛糖酸 Aldonic acid</span>（僅 C1 氧化）</div>
+      </div>
+      <div class="rxn">
+        <div>醛糖</div>
+        <div class="rxn-wrap">
+          <div class="arrow">→</div>
+          <div class="reagent">HNO₃/H₂O（硝酸，強）</div>
+        </div>
+        <div><span class="hi-red">糖二酸 Aldaric acid</span>（C1 和 C6 同時氧化）</div>
+      </div>
+
+      <div class="callout info">
+        <strong>對稱性判斷：</strong>若糖二酸有對稱面，則為非光學活性（消旋或meso），這可用來推斷單醣結構。
+      </div>
+
+      <h4>還原產物</h4>
+      <div class="rxn">
+        <div>醛糖</div>
+        <div class="rxn-wrap">
+          <div class="arrow">→</div>
+          <div class="reagent">NaBH₄ / CH₃OH</div>
+        </div>
+        <div><span class="hi-blue">醣醇 Alditol</span>（C1 的 CHO → CH₂OH）<br>
+        例：D-葡萄糖 → 葡萄糖醇（山梨醇 sorbitol）</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>28.10 碳鏈增減</h3>
+
+  <div class="card-grid">
+    <div class="card red">
+      <div class="card-icon">➖</div>
+      <div class="card-title">Wohl 降解<br>（鏈縮短）</div>
+      <div class="card-desc">
+        <strong>三步驟：</strong><br>
+        ① 與 NH₂OH 形成肟（oxime）<br>
+        ② Ac₂O 脫水為腈（nitrile = cyanohydrin）<br>
+        ③ 鹼性條件去 HCN → 短一碳的醛糖<br>
+        <br>兩個 C2 差向異構體 → 同一產物
+      </div>
+    </div>
+    <div class="card accent">
+      <div class="card-icon">➕</div>
+      <div class="card-title">Kiliani-Fischer 合成<br>（鏈加長）</div>
+      <div class="card-desc">
+        <strong>三步驟：</strong><br>
+        ① NaCN + HCl 形成氰醇<br>
+        ② H₂ + Pd-BaSO₄ 還原腈為亞胺<br>
+        ③ H₃O⁺ 水解亞胺 → 多一碳的醛糖<br>
+        <br>一個起始物 → 兩種 C2 差向異構體
+      </div>
+    </div>
+  </div>
+
+  <div class="callout memory">
+    <strong>Wohl vs Kiliani-Fischer 是「逆操作」：</strong><br>
+    Wohl：從醛端移除一個碳 → 兩個起始物（C2 差向異構體）→ 同一個產物<br>
+    Kiliani-Fischer：從醛端加一個碳 → 一個起始物 → 兩個產物（C2 差向異構體）
+  </div>
+</section>
+
+<!-- SECTION: DI -->
+<section class="section" id="di">
+  <div class="section-header">
+    <div class="section-num">28.11</div>
+    <h2>雙醣 Disaccharides</h2>
+  </div>
+
+  <p>雙醣由<strong>兩個單醣環</strong>以<span class="hi">糖苷鍵（glycosidic linkage）</span>連接。糖苷鍵由一個環的異頭碳（C1）連到另一個環上的任意 OH。</p>
+
+  <h3>三大重要雙醣對比</h3>
+
+  <!-- Figure 28.9 area -->
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.9 相關 — 麥芽糖、乳糖、蔗糖比較</div>
+    <div class="figure-body">
+      <table class="compare-table">
+        <tr>
+          <th>雙醣</th>
+          <th>組成單醣</th>
+          <th>糖苷鍵</th>
+          <th>還原性</th>
+          <th>互旋</th>
+          <th>來源/備註</th>
+        </tr>
+        <tr>
+          <td><strong>麥芽糖 Maltose</strong></td>
+          <td>葡萄糖 + 葡萄糖</td>
+          <td><span class="hi">1→4-α</span></td>
+          <td>✅ 還原糖</td>
+          <td>✅ 有</td>
+          <td>澱粉水解產物；麥芽汁</td>
+        </tr>
+        <tr>
+          <td><strong>乳糖 Lactose</strong></td>
+          <td>半乳糖 + 葡萄糖</td>
+          <td><span class="hi-blue">1→4-β</span></td>
+          <td>✅ 還原糖</td>
+          <td>✅ 有</td>
+          <td>牛奶；乳糖不耐症與 β-半乳糖苷酶相關</td>
+        </tr>
+        <tr>
+          <td><strong>蔗糖 Sucrose</strong></td>
+          <td>葡萄糖 + 果糖</td>
+          <td><span class="hi-green">α,β-1,2</span>（兩個異頭碳都用）</td>
+          <td>❌ <strong>非還原糖</strong></td>
+          <td>❌ 無</td>
+          <td>蔗糖、甜菜根；最常見雙醣</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <strong>蔗糖為什麼是非還原糖？</strong><br>
+    因為葡萄糖和果糖的<strong>兩個異頭碳都參與</strong>形成糖苷鍵，沒有任何半縮醛 OH 殘餘，所以完全無法開環形成醛基，也就無法還原 Tollens/Benedict 試劑。
+  </div>
+
+  <div class="callout info">
+    <strong>人工甜味劑（Figure 28.10）</strong>：<br>
+    蔗糖的甜度讓人愉悅，但熱量高。三大人工甜味劑發現趣聞：<br>
+    • 蔗糖素（Splenda）：1976 年化學家<em>誤嘗</em>化合物而發現<br>
+    • 阿斯巴甜（Equal）：1965 年研究員舔了髒手指而發現<br>
+    • 糖精（Sweet'n Low）：1879 年化學家忘記洗手而發現<br>
+    ——三種都是「意外的甜蜜」😄
+  </div>
+</section>
+
+<!-- SECTION: POLY -->
+<section class="section" id="poly">
+  <div class="section-header">
+    <div class="section-num">28.12</div>
+    <h2>多醣 Polysaccharides</h2>
+  </div>
+
+  <p>多醣含<strong>三個以上單醣</strong>，透過糖苷鍵連接成高分子。三種最重要的天然多醣都是<span class="hi">葡萄糖的聚合物</span>，差別在糖苷鍵的方向（α 或 β）。</p>
+
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 5.2 相關 — 三大多醣的結構比較</div>
+    <div class="figure-body">
+      <table class="compare-table">
+        <tr>
+          <th>多醣</th>
+          <th>糖苷鍵類型</th>
+          <th>結構</th>
+          <th>溶水性</th>
+          <th>人類可消化</th>
+          <th>功能/來源</th>
+        </tr>
+        <tr>
+          <td><strong>纖維素<br>Cellulose</strong></td>
+          <td><span class="hi-blue">1→4-β</span></td>
+          <td>線性、片狀堆疊</td>
+          <td>❌（氫鍵網絡）</td>
+          <td>❌（無 β-葡萄糖苷酶）</td>
+          <td>植物細胞壁；木材；棉花</td>
+        </tr>
+        <tr>
+          <td><strong>澱粉：直鏈澱粉<br>Amylose</strong></td>
+          <td><span class="hi">1→4-α</span></td>
+          <td>螺旋形線性</td>
+          <td>✅</td>
+          <td>✅（α-葡萄糖苷酶）</td>
+          <td>占澱粉約 20%；玉米、米、小麥</td>
+        </tr>
+        <tr>
+          <td><strong>澱粉：支鏈澱粉<br>Amylopectin</strong></td>
+          <td>1→4-α（主鏈）<br><span class="hi-red">+ 1→6-α（分支）</span></td>
+          <td>高度分支</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>占澱粉約 80%；更多末端方便快速釋放</td>
+        </tr>
+        <tr>
+          <td><strong>肝醣<br>Glycogen</strong></td>
+          <td>1→4-α（主鏈）<br><span class="hi-purple">+ 1→6-α（大量分支）</span></td>
+          <td>分支更密集</td>
+          <td>✅</td>
+          <td>✅</td>
+          <td>動物的醣類儲存形式；肝臟和肌肉</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <strong>α vs β 糖苷鍵的大不同：</strong><br>
+    ▸ <span class="hi">α-鍵（澱粉、肝醣）</span>：使鏈彎曲成螺旋，<strong>人類可以消化</strong><br>
+    ▸ <span class="hi-blue">β-鍵（纖維素）</span>：使鏈伸直可堆疊成堅硬片狀，<strong>人類無法消化</strong>（因缺少 β-葡萄糖苷酶）<br>
+    → 只有反芻動物（牛、鹿）的腸道細菌有 β-葡萄糖苷酶
+  </div>
+
+  <div class="callout info">
+    <strong>纖維素乙酸酯（Cellulose acetate）</strong>：纖維素用乙酸酐（+ H₂SO₄）處理，OH 基全部轉為酯基。可紡成有光澤的纖維，製作「acetate 布料」。
+  </div>
+</section>
+
+<!-- SECTION: OTHERS -->
+<section class="section" id="others">
+  <div class="section-header">
+    <div class="section-num">28.13</div>
+    <h2>其他重要衍生物</h2>
+  </div>
+
+  <h3>28.13A 胺基醣 Amino Sugars</h3>
+  <p>將某個非異頭碳上的 OH 換成 NH₂，就得到<span class="hi">胺基醣</span>。</p>
+
+  <div class="card-grid">
+    <div class="card accent">
+      <div class="card-icon">💪</div>
+      <div class="card-title">D-葡萄糖胺<br>D-Glucosamine</div>
+      <div class="card-desc">C2 的 OH → NH₂。關節炎補充劑的主成分，雖非藥物但廣泛使用。</div>
+    </div>
+    <div class="card blue">
+      <div class="card-icon">🦀</div>
+      <div class="card-title">甲殼素 Chitin</div>
+      <div class="card-desc">N-乙醯-D-葡萄糖胺以 1→4-β 鍵聚合而成，是地球第二豐富的多醣。蝦蟹外殼的主要成分。</div>
+    </div>
+    <div class="card purple">
+      <div class="card-icon">💉</div>
+      <div class="card-title">胺基糖苷抗生素</div>
+      <div class="card-desc">如妥布黴素（Tobramycin）、丁胺卡那黴素（Amikacin），含有胺基醣的三醣，有效對抗嚴重細菌感染。</div>
+    </div>
+  </div>
+
+  <h3>28.13B N-糖苷 → 核苷 → 核苷酸 → DNA/RNA</h3>
+
+  <div class="figure-block">
+    <div class="figure-header">📋 Figure 28.11 — RNA 與 DNA 的醣骨架（核心概念！）</div>
+    <div class="figure-body">
+      <div class="timeline">
+        <div class="tl-item">
+          <p><strong>糖 + 鹼（胺類）→ N-糖苷（核苷 Nucleoside）</strong><br>
+          異頭碳（C1）與含氮鹼基（N 原子）連接，形成 β-N-糖苷鍵。</p>
+        </div>
+        <div class="tl-item">
+          <p><strong>核苷 + 磷酸 → 核苷酸 Nucleotide</strong><br>
+          醣上的 OH 與磷酸酯化，得到核苷酸（RNA/DNA 的建構單元）。</p>
+        </div>
+        <div class="tl-item">
+          <p><strong>核苷酸聚合 → RNA 或 DNA</strong><br>
+          各核苷酸以磷酸二酯鍵（3'→5'）串接，形成核酸主鏈。</p>
+        </div>
+      </div>
+
+      <table class="compare-table" style="margin-top:16px">
+        <tr>
+          <th>核酸</th>
+          <th>醣基</th>
+          <th>鹼基</th>
+          <th>功能</th>
+        </tr>
+        <tr>
+          <td><strong>RNA</strong></td>
+          <td><span class="hi-green">D-核糖</span>（C2 有 OH）</td>
+          <td>A, G, C, <span class="hi">U（尿嘧啶）</span></td>
+          <td>基因訊息傳遞 → 蛋白質合成</td>
+        </tr>
+        <tr>
+          <td><strong>DNA</strong></td>
+          <td><span class="hi-blue">2-去氧-D-核糖</span>（C2 無 OH）</td>
+          <td>A, G, C, <span class="hi-red">T（胸腺嘧啶）</span></td>
+          <td>遺傳訊息的永久儲存</td>
+        </tr>
+      </table>
+
+      <div class="callout memory">
+        <strong>RNA vs DNA 的醣差異記憶法：</strong><br>
+        DNA 的「去氧」= C2 位置「去掉」一個氧（OH → H）<br>
+        RNA 保有 C2-OH → 更容易水解 → 適合短期傳訊
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="summary-strip" id="summary">
+  <h2>📚 總複習速查表</h2>
+  <div class="strip-grid">
+    <div class="strip-item">
+      <div class="si-title">單醣命名</div>
+      <div class="si-val">碳數前綴 + aldose/ketose</div>
+    </div>
+    <div class="strip-item">
+      <div class="si-title">D/L 判斷</div>
+      <div class="si-val">最遠立體中心 OH 在右=D，左=L</div>
+    </div>
+    <div class="strip-item">
+      <div class="si-title">α/β 異頭物</div>
+      <div class="si-val">D-醣：OH下=α，OH上=β</div>
+    </div>
+    <div class="strip-item">
+      <div class="si-title">還原糖</div>
+      <div class="si-val">含半縮醛 = 還原糖</div>
+    </div>
+    <div class="strip-item">
+      <div class="si-title">蔗糖特殊</div>
+      <div class="si-val">非還原糖（兩個異頭碳都用了）</div>
+    </div>
+    <div class="strip-item">
+      <div class="si-title">澱粉 vs 纖維素</div>
+      <div class="si-val">α鍵=可消化，β鍵=不可消化</div>
+    </div>
+    <div class="strip-item">
+      <div class="si-title">Wohl</div>
+      <div class="si-val">醛糖鏈 -1C（從醛端移除）</div>
+    </div>
+    <div class="strip-item">
+      <div class="si-title">Kiliani-Fischer</div>
+      <div class="si-val">醛糖鏈 +1C（得兩個差向異構體）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCORDION REVIEW -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-num">🧪</div>
+    <h2>重要反應總整理（點擊展開）</h2>
+  </div>
+
+  <details>
+    <summary>氧化反應 — 如何判斷還原糖？</summary>
+    <div class="detail-body">
+      <p>用 <strong>Tollens 試劑</strong>（Ag₂O/NH₄OH）或 <strong>Benedict/Fehling 試劑</strong>（Cu²⁺）測試：</p>
+      <ul style="padding-left:20px; line-height:2">
+        <li>出現銀鏡或磚紅色 Cu₂O 沉澱 → 含自由醛基 → <strong>還原糖</strong></li>
+        <li>無反應 → <strong>非還原糖</strong>（純縮醛，如糖苷或蔗糖）</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>環化規則 — 哪個 OH 環化？</summary>
+    <div class="detail-body">
+      <ul style="padding-left:20px; line-height:2">
+        <li>醛己糖（如葡萄糖）：C5 的 OH 環化 → 六員吡喃環</li>
+        <li>醛戊糖（如核糖）：C4 的 OH 環化 → 五員呋喃環</li>
+        <li>酮己糖（如果糖）：C5 的 OH 環化 → 五員呋喃環（因為 C2 是羰基）</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>糖苷鍵命名 — 如何讀？</summary>
+    <div class="detail-body">
+      <p>以「1→4-α-糖苷鍵」為例：</p>
+      <ul style="padding-left:20px; line-height:2">
+        <li><strong>1</strong> = 一個單醣的異頭碳（C1）</li>
+        <li><strong>4</strong> = 連到另一個單醣的 C4</li>
+        <li><strong>α</strong> = 異頭碳的構型（α=下，β=上，D-醣）</li>
+      </ul>
+      <p>例：麥芽糖 = 1→4-α；乳糖 = 1→4-β；蔗糖 = 1,2-α,β</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>立體異構物數目計算</summary>
+    <div class="detail-body">
+      <p>立體中心數 n → 最多 2ⁿ 種立體異構物：</p>
+      <ul style="padding-left:20px; line-height:2">
+        <li>醛三糖（甘油醛）：1 個立體中心 → 2¹ = 2 種（1 D + 1 L）</li>
+        <li>醛四糖：2 個立體中心 → 2² = 4 種</li>
+        <li>醛戊糖：3 個立體中心 → 2³ = 8 種</li>
+        <li>醛己糖：4 個立體中心 → 2⁴ = <strong>16 種</strong>（8 D + 8 L）</li>
+        <li>環化後葡萄糖：5 個立體中心（+異頭碳）→ 32 種可能</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Fischer 投影式 → Haworth 投影式 → 椅形構型 轉換步驟</summary>
+    <div class="detail-body">
+      <p><strong>Fischer → Haworth：</strong></p>
+      <ul style="padding-left:20px; line-height:2">
+        <li>①畫六員環，O在右上角</li>
+        <li>② D-醣：CH₂OH 畫上方</li>
+        <li>③ α異頭物：C1-OH 向下；β異頭物：C1-OH 向上</li>
+        <li>④ Fischer 右側 → Haworth 下方；Fischer 左側 → Haworth 上方</li>
+      </ul>
+      <p><strong>Haworth → 椅形：</strong></p>
+      <ul style="padding-left:20px; line-height:2">
+        <li>O 原子作為「上仰」位置</li>
+        <li>Haworth 上方取代基 → 椅形上鍵；Haworth 下方 → 椅形下鍵</li>
+        <li>判斷是軸向鍵還是赤道向鍵取決於碳的位置</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+</main>
+
+</body>
+</html>
