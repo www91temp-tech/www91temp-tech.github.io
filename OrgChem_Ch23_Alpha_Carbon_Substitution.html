@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第24章：α碳取代反應</title>
+<style>
+:root {
+  --bg:        #F4F7FC;
+  --bg-card:   #FFFFFF;
+  --bg-card2:  #E6EFFD;
+  --border:    #D0DFF2;
+  --cyan:      #0599F5;
+  --coral:     #E04848;
+  --amber:     #B37400;
+  --green:     #2D8A4E;
+  --purple:    #8241B8;
+  --text:      #121D33;
+  --muted:     #62758F;
+  --highlight: #E1ECFC;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  font-size:15px;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#060C1A 0%,#0D2045 60%,#091530 100%);
+  border-bottom:2px solid var(--cyan);
+  padding:2.5rem 1.5rem 2rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(79,200,232,0.12) 0%,transparent 70%);
+}
+.chap-badge{
+  display:inline-block;
+  background:rgba(79,200,232,0.15);
+  border:1px solid var(--cyan);
+  color:var(--cyan);
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  padding:.3rem .9rem;
+  border-radius:20px;
+  margin-bottom:.9rem;
+}
+header h1{
+  font-size:clamp(1.5rem,4vw,2.4rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+  color:#fff;
+  line-height:1.2;
+  margin-bottom:.6rem;
+}
+header h1 span{color:var(--cyan);}
+header p{color:var(--muted);font-size:.95rem;max-width:600px;margin:0 auto;}
+
+/* ===== STICKY NAV ===== */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,15,30,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  overflow-x:auto;
+  white-space:nowrap;
+  padding:.4rem .5rem;
+  display:flex;gap:.3rem;
+}
+nav a{
+  display:inline-block;
+  padding:.4rem .85rem;
+  border-radius:6px;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:600;
+  transition:all .2s;
+  white-space:nowrap;
+}
+nav a:hover{color:#fff;background:var(--highlight);}
+nav a.active{background:var(--cyan);color:#06111F;font-weight:700;}
+  
+/* ===== SECTIONS ===== */
+main{max-width:960px;margin:0 auto;padding:2rem 1.2rem 4rem;}
+section{margin-bottom:3.5rem;scroll-margin-top:52px;}
+section h2{
+  font-size:1.45rem;font-weight:800;
+  color:var(--text); /* 修正：修正原本寫死的 #fff */
+  border-left:4px solid var(--cyan);
+  padding-left:.75rem;
+  margin-bottom:1.4rem;
+}
+section h3{
+  font-size:1.05rem;font-weight:700;
+  color:var(--cyan);
+  margin:1.4rem 0 .6rem;
+}
+p{margin-bottom:.85rem;}
+
+/* ===== CARDS ===== */
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.2rem 1.4rem;
+  margin-bottom:1.1rem;
+  box-shadow: 0 2px 8px rgba(18, 29, 51, 0.04); 
+}
+.card-title{
+  font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;
+  margin-bottom:.6rem;
+  color: var(--muted); 
+}
+
+/* ===== CALLOUT BOXES ===== */
+.box{border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem;}
+.box-cyan{background:rgba(0,122,155,.05);border-left:3px solid var(--cyan);}
+.box-coral{background:rgba(224,72,72,.05);border-left:3px solid var(--coral);}
+.box-amber{background:rgba(179,116,0,.05);border-left:3px solid var(--amber);}
+.box-green{background:rgba(45,138,78,.05);border-left:3px solid var(--green);}
+.box-purple{background:rgba(130,65,184,.05);border-left:3px solid var(--purple);}
+
+.box .label{
+  font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:.4rem;
+}
+.box-cyan .label{color:var(--cyan);}
+.box-coral .label{color:var(--coral);}
+.box-amber .label{color:var(--amber);}
+.box-green .label{color:var(--green);}
+.box-purple .label{color:var(--purple);}
+
+/* ===== KEY HIGHLIGHT ===== */
+.key{
+  background:linear-gradient(90deg,rgba(179,116,0,.08),rgba(179,116,0,.02));
+  border:1px solid rgba(179,116,0,.2);
+  border-radius:8px;
+  padding:1rem 1.2rem;
+  margin:1rem 0;
+}
+.key .key-title{
+  color:var(--amber);font-weight:800;font-size:.85rem;
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;
+}
+.key ul{padding-left:1.2rem;}
+.key li{margin-bottom:.35rem;}
+
+/* ===== REACTION SCHEMES ===== */
+.rxn{
+  background:var(--bg-card2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.2rem;
+  margin:1rem 0;
+  overflow-x:auto;
+}
+.rxn-title{
+  font-size:.75rem;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.1em;
+  margin-bottom:.85rem;
+  border-bottom:1px solid var(--border);
+  padding-bottom:.5rem;
+}
+.rxn-flow{
+  display:flex;align-items:center;flex-wrap:wrap;gap:.5rem 0;
+  min-width:max-content;
+}
+.compound{
+  text-align:center;
+  min-width:90px;
+  padding:.3rem .6rem;
+}
+.compound .chem{
+  font-size:.95rem;line-height:1.4;
+  font-family:'Courier New',monospace;
+  color:var(--text);
+  font-weight: 600;
+}
+.compound .cname{
+  font-size:.72rem;color:var(--muted);margin-top:.2rem;
+}
+.arrow{
+  font-size:1.3rem;color:var(--cyan);
+  padding:0 .4rem;
+  flex-shrink:0;
+}
+.arrow.eq{color:var(--amber);}
+.arrow-label{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 .6rem;gap:.1rem;
+}
+.arrow-label .arr-line{
+  color:var(--cyan);font-size:1.1rem;
+}
+.arrow-label .reagent{
+  font-size:.72rem;color:var(--cyan);
+  background:rgba(0,122,155,.08);
+  border-radius:4px;padding:.1rem .4rem;
+  white-space:nowrap;
+}
+.new-bond{color:var(--coral);font-weight:700;}
+
+/* ===== MECHANISM STEPS ===== */
+.mech{display:flex;flex-direction:column;gap:.6rem;margin:.8rem 0;}
+.step{
+  display:flex;gap:.8rem;align-items:flex-start;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:8px;padding:.8rem 1rem;
+}
+.step-num{
+  background:var(--cyan);
+  color:#FFFFFF;
+  border-radius:50%;width:1.6rem;height:1.6rem;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.85rem;
+  flex-shrink:0;margin-top:.1rem;
+}
+.step-body{}
+.step-body strong{color:var(--amber);}
+.step-body .chem{
+  display:block;margin-top:.35rem;
+  font-family:'Courier New',monospace;
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius:4px;padding:.4rem .7rem;
+  font-size:.88rem;
+  color: var(--text);
+}
+
+/* ===== COMPARISON TABLE ===== */
+.compare-table{width:100%;border-collapse:collapse;margin:1rem 0;}
+.compare-table th{
+  background:var(--bg-card2);
+  color:var(--cyan);font-size:.82rem;
+  font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  padding:.65rem .85rem;border:1px solid var(--border);
+  text-align:left;
+}
+.compare-table td{
+  padding:.6rem .85rem;
+  border:1px solid var(--border);
+  vertical-align:top;
+  font-size:.9rem;
+}
+.compare-table tr:nth-child(even) td{background:rgba(0, 0, 0, 0.015);}
+.compare-table .good{color:var(--green);font-weight:600;}
+.compare-table .bad{color:var(--coral);font-weight:600;}
+
+/* ===== pKa TABLE ===== */
+.pka-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:.5rem;margin:1rem 0;
+}
+.pka-item{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--bg-card);
+  border-radius:6px;padding:.5rem .85rem;
+  border:1px solid var(--border);
+}
+.pka-item .formula{font-family:'Courier New',monospace;font-size:.85rem;}
+.pka-badge{
+  font-weight:800;font-size:.9rem;border-radius:5px;
+  padding:.2rem .55rem;
+}
+.pka-high{background:rgba(45,138,78,.1);color:var(--green);}
+.pka-mid{background:rgba(0,122,155,.1);color:var(--cyan);}
+.pka-low{background:rgba(130,65,184,.1);color:var(--purple);}
+
+/* ===== FIGURE BOX ===== */
+.figure-box{
+  border:1px solid rgba(0,122,155,.2);
+  border-radius:8px;
+  background:rgba(0,122,155,.03);
+  padding:1rem 1.2rem;margin:.8rem 0;
+}
+.fig-label{
+  font-size:.72rem;font-weight:800;letter-spacing:.12em;
+  color:var(--cyan);text-transform:uppercase;margin-bottom:.4rem;
+}
+
+/* ===== SYNTHESIS FLOW ===== */
+.synth-flow{
+  display:flex;flex-direction:column;gap:.4rem;margin:.8rem 0;
+}
+.synth-step{
+  display:grid;grid-template-columns:2rem 1fr;gap:.6rem;
+  align-items:center;
+}
+.synth-num{
+  background:var(--border);color:var(--cyan);
+  border-radius:50%;width:1.9rem;height:1.9rem;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.82rem;flex-shrink:0;
+}
+.synth-arrow{text-align:center;color:var(--muted);font-size:1rem;}
+.synth-box{
+  background:var(--bg-card2);border:1px solid var(--border);
+  border-radius:7px;padding:.65rem .9rem;
+}
+.synth-box .reagent-tag{
+  font-size:.75rem;color:var(--amber);font-weight:600;
+  margin-bottom:.2rem;
+}
+.synth-box .result-tag{
+  font-size:.75rem;color:var(--green);font-weight:600;
+  margin-bottom:.2rem;
+}
+
+/* ===== EMPHASIS ===== */
+.hl{color:var(--amber);font-weight:700;}
+.hl-r{color:var(--coral);font-weight:700;}
+.hl-c{color:var(--cyan);font-weight:700;}
+.hl-g{color:var(--green);font-weight:700;}
+
+/* ===== PILL BADGE ===== */
+.pill{
+  display:inline-block;
+  padding:.15rem .55rem;border-radius:20px;
+  font-size:.78rem;font-weight:700;
+  vertical-align:middle;margin:0 .15rem;
+}
+.pill-cyan{background:rgba(0,122,155,.1);color:var(--cyan);}
+.pill-coral{background:rgba(224,72,72,.1);color:var(--coral);}
+.pill-amber{background:rgba(179,116,0,.1);color:var(--amber);}
+.pill-green{background:rgba(45,138,78,.1);color:var(--green);}
+.pill-purple{background:rgba(130,65,184,.1);color:var(--purple);}
+
+/* ===== RETRO BOX ===== */
+.retro{
+  background:var(--bg-card);
+  border:1px dashed rgba(130,65,184,.35);
+  border-radius:8px;padding:1rem 1.2rem;margin:.8rem 0;
+}
+.retro .retro-title{color:var(--purple);font-weight:700;font-size:.85rem;margin-bottom:.5rem;}
+
+/* ===== MEMORY BOX ===== */
+.memory{
+  background:linear-gradient(135deg,rgba(45,138,78,.05),rgba(0,122,155,.03));
+  border-radius:8px;border:1px solid rgba(45,138,78,.2);
+  padding:.85rem 1.1rem;margin:.8rem 0;
+  font-size:.9rem;
+}
+.memory::before{content:'💡 記憶技巧  ';font-weight:700;color:var(--green);}
+
+/* ===== DIVIDER ===== */
+.sec-divider{
+  border:none;border-top:1px solid var(--border);
+  margin:2rem 0;
+}
+
+/* ===== TAG ===== */
+.tag{
+  display:inline-block;font-size:.72rem;font-weight:700;
+  border-radius:4px;padding:.1rem .4rem;margin-right:.3rem;
+}
+.tag-acid{background:rgba(224,72,72,.1);color:var(--coral);}
+.tag-base{background:rgba(0,122,155,.1);color:var(--cyan);}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  header h1{font-size:1.3rem;}
+  .pka-grid{grid-template-columns:1fr;}
+  .compare-table{font-size:.82rem;}
+}
+</style> 
+  
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header>
+  <div class="chap-badge">有機化學 · 第 23 章</div>
+  <h1>羰基化合物在 <span>α 碳</span> 的取代反應</h1>
+  <p>Substitution Reactions of Carbonyl Compounds at the α Carbon</p>
+</header>
+
+<!-- ===================== NAV ===================== -->
+<nav id="main-nav">
+  <a href="#intro" class="active">大局觀</a>
+  <a href="#enols">醇式 Enols</a>
+  <a href="#enolates">烯醇負離子 Enolates</a>
+  <a href="#unsym">動力/熱力烯醇酯</a>
+  <a href="#racemize">消旋化</a>
+  <a href="#halogen">鹵化反應</a>
+  <a href="#alkylation">直接烷化</a>
+  <a href="#malonic">丙二酸酯合成</a>
+  <a href="#acetoacetic">乙醯乙酸酯合成</a>
+  <a href="#summary">📋 總整理</a>
+</nav>
+
+<main>
+
+<!-- ===================== SECTION 0: BIG PICTURE ===================== -->
+<section id="intro">
+  <h2>大局觀 — 為什麼要學 α 碳？</h2>
+
+  <p>在第 20–22 章，我們學的反應都是「親核劑攻擊親電性的羰基碳 C=O」。但這章要學一個新思路：<br>
+  <span class="hl">羰基化合物可以扮演「親核劑」的角色</span>，攻擊電親劑（E⁺），讓新的基團接在 α 碳上。</p>
+
+  <div class="box box-amber">
+    <div class="label">⚡ 核心問題</div>
+    <strong>什麼是 α 碳？</strong><br>
+    α 碳就是「緊鄰 C=O 的那個碳」。接在 α 碳上的氫，稱為 <strong>α 氫</strong>（α hydrogen）。
+  </div>
+
+  <!-- α carbon position diagram -->
+  <div class="rxn">
+    <div class="rxn-title">α 碳的位置</div>
+    <div style="font-family:'Courier New',monospace;font-size:1rem;line-height:2;padding:.5rem;overflow-x:auto;">
+      <pre style="background:none;color:#121D33;font-size:.9rem;">
+        O               O
+        ‖               ‖
+    R — C — C<span style="color:var(--coral);font-weight:700;font-size:1.1rem;">H₂</span> — …     R — C — <span style="color:var(--coral);font-weight:700;font-size:1.1rem;">C</span> — …
+            ↑                       ↑
+          α 碳                    α 碳（上方的 H 稱 α 氫）
+      </pre>
+    </div>
+  </div>
+
+  <h3>本章兩大角色：醇式 vs 烯醇負離子</h3>
+  <div class="rxn">
+    <div class="rxn-title">反應路徑大綱（圖示說明：Figure 23.1 overview）</div>
+    <div class="rxn-flow" style="justify-content:center;flex-wrap:wrap;gap:1rem;">
+      <div class="compound">
+        <div class="chem">R-C(=O)-CH₂-H</div>
+        <div class="cname">含 α-H 的羰基化合物</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;">
+        <div class="arrow-label">
+          <div class="arr-line">→</div>
+          <div class="reagent">酸催化</div>
+        </div>
+        <div class="arrow-label">
+          <div class="arr-line">→</div>
+          <div class="reagent">鹼催化</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.5rem;">
+        <div class="compound" style="border:1px solid var(--amber);border-radius:6px;">
+          <div class="chem" style="color:var(--amber);">醇式 (Enol)</div>
+          <div class="cname">中性，含 OH</div>
+        </div>
+        <div class="compound" style="border:1px solid var(--cyan);border-radius:6px;">
+          <div class="chem" style="color:var(--cyan);">烯醇負離子 (Enolate)</div>
+          <div class="cname">帶負電，O⁻</div>
+        </div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="compound">
+        <div class="chem">R-C(=O)-CH₂-<span class="new-bond">E</span></div>
+        <div class="cname">α 碳取代產物（H 被 E 取代）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="key">
+    <div class="key-title">🎯 本章學到哪些反應？</div>
+    <ul>
+      <li><span class="pill pill-coral">α 鹵化</span> 把 α-H 換成 X（Cl、Br、I）</li>
+      <li><span class="pill pill-green">直接烷化</span> 把 α-H 換成烷基 R — 形成新的 C–C 鍵</li>
+      <li><span class="pill pill-cyan">丙二酸酯合成</span> 由 diethyl malonate 合成羧酸</li>
+      <li><span class="pill pill-purple">乙醯乙酸酯合成</span> 由 ethyl acetoacetate 合成甲基酮</li>
+    </ul>
+  </div>
+
+  <div class="box box-cyan">
+    <div class="label">臨床連結</div>
+    <strong>Tamoxifen（他莫昔芬）</strong>是廣泛用於乳癌治療的抗癌藥物，其合成關鍵步驟正是利用烯醇負離子在 α 碳形成新的 C–C 鍵。本章最後會介紹這個合成。
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 1: ENOLS ===================== -->
+<section id="enols">
+  <h2>23.2 醇式互變異構（Enols）</h2>
+
+  <p><strong>互變異構（tautomerism）</strong>是同一分子的兩種結構，差別只在一個質子（H⁺）和一個雙鍵的位置。<br>
+  酮式（keto）和醇式（enol）是最常見的一對互變異構體。</p>
+
+  <div class="rxn">
+    <div class="rxn-title">酮式 ⇌ 醇式 平衡</div>
+    <div class="rxn-flow" style="justify-content:center;">
+      <div class="compound">
+        <div class="chem">  O<br>  ‖<br>R-C-CH₂-H</div>
+        <div class="cname">酮式 (Keto form)<br>含 C═O + α-H</div>
+      </div>
+      <div class="arrow eq">⇌</div>
+      <div class="compound">
+        <div class="chem">  OH<br>  |<br>R-C═CH₂</div>
+        <div class="cname">醇式 (Enol form)<br>含 C═C + OH</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-coral">
+    <div class="label">⚠️ 關鍵數據</div>
+    對於大多數簡單酮/醛，平衡強烈偏向<strong>酮式</strong>（&gt;99%），因為 C═O 鍵比 C═C 鍵強得多。<br>
+    醇式通常 <strong>&lt;1%</strong>。
+  </div>
+
+  <h3>例外：β-二羰基化合物（β-Dicarbonyl Compounds）</h3>
+  <p>當兩個羰基中間只隔一個碳（1,3-二羰基），醇式含量可超過酮式！</p>
+
+  <div class="figure-box">
+    <div class="fig-label">📐 Figure 說明（課本圖）</div>
+    <strong>Pentane-2,4-dione（戊-2,4-二酮）的互變異構平衡</strong>：<br>
+    酮式只佔 <strong>24%</strong>，醇式竟佔 <strong>76%</strong>！<br><br>
+    醇式穩定的兩個原因：<br>
+    ① <span class="hl-c">共軛（Conjugation）</span>：醇式的 C═C 與相鄰 C═O 形成共軛，分散電子密度 <br>
+    ② <span class="hl-g">分子內氫鍵（Intramolecular H-bond）</span>：OH 與另一個 C═O 形成六員環的氫鍵，特別穩定
+  </div>
+
+  <div class="rxn">
+    <div class="rxn-title">Pentane-2,4-dione 特殊平衡</div>
+    <div class="rxn-flow" style="justify-content:center;gap:1.2rem;">
+      <div class="compound">
+        <div class="chem">CH₃-C(=O)-CH₂-C(=O)-CH₃</div>
+        <div class="cname">酮式 <span style="color:var(--coral);">24%</span></div>
+      </div>
+      <div class="arrow eq">⇌</div>
+      <div class="compound">
+        <div class="chem" style="color:var(--green);">CH₃-C(OH)═CH-C(=O)-CH₃</div>
+        <div class="cname">醇式 <span style="color:var(--green);font-weight:700;">76%</span>（六員環氫鍵）</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>互變異構的機制（Mechanism）</h3>
+  <p>酸和鹼都能催化，但步驟順序不同：</p>
+
+  <div class="card">
+    <div class="card-title" style="color:var(--coral);">
+      <span class="tag tag-acid">酸催化</span> 機制（Mechanism 23.1）
+    </div>
+    <div class="mech">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>先質子化</strong>（protonation）：H₃O⁺ 將 H⁺ 加到羰基 O 上，形成共振穩定的碳陽離子<br>
+          <span class="chem">C=O  →  C=OH⁺  （共振穩定）</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>後去質子化</strong>（deprotonation）：H₂O 從 α 碳取走 H，形成醇式<br>
+          <span class="chem">C=OH⁺ (有α-H)  →  C(OH)=C  （醇式）</span>
+        </div>
+      </div>
+    </div>
+    <div class="memory">酸的口訣：先加 H，再拿走 α-H</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="color:var(--cyan);">
+      <span class="tag tag-base">鹼催化</span> 機制（Mechanism 23.2）
+    </div>
+    <div class="mech">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>先去質子化</strong>（deprotonation）：⁻OH 取走 α-H，形成共振穩定的<span class="hl-c">烯醇負離子</span><br>
+          <span class="chem">C(=O)-CH₂H  + ⁻OH  →  [烯醇負離子] + H₂O</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>後質子化</strong>（protonation）：H₂O 將 H⁺ 給氧，形成醇式<br>
+          <span class="chem">[O⁻-C=C]  + H₂O  →  [HO-C=C]（醇式）</span>
+        </div>
+      </div>
+    </div>
+    <div class="memory">鹼的口訣：先拿走 α-H，再加 H 到 O 上</div>
+  </div>
+
+  <h3>醇式如何反應？</h3>
+  <div class="box box-green">
+    <div class="label">核心概念</div>
+    醇式是富電子分子（electron-rich），α 碳因 O 的共振效應帶有負電，所以 <strong>醇式扮演親核劑</strong>，從 α 碳攻擊親電子試劑 E⁺。<br><br>
+    反應後，α 碳上的 H 被 E 取代。
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 2: ENOLATES ===================== -->
+<section id="enolates">
+  <h2>23.3 烯醇負離子（Enolates）</h2>
+
+  <p>烯醇負離子（enolate）是比醇式更強大的親核劑，因為它帶負電荷。</p>
+
+  <div class="rxn">
+    <div class="rxn-title">烯醇負離子的形成</div>
+    <div class="rxn-flow" style="justify-content:center;align-items:flex-start;gap:1rem;">
+      <div class="compound">
+        <div class="chem">  O<br>  ‖<br>R-C-CH₂-H</div>
+        <div class="cname">羰基化合物<br>（pKₐ ≈ 20）</div>
+      </div>
+      <div class="arrow-label">
+        <div class="arr-line">→</div>
+        <div class="reagent">Base :B⁻</div>
+      </div>
+      <div class="compound" style="border:1px solid var(--cyan);border-radius:6px;">
+        <div class="chem" style="color:var(--cyan);">  O⁻        O<br>  |          ‖<br>R-C=CH₂ ⟺ R-C-CH₂⁻</div>
+        <div class="cname">烯醇負離子（兩個共振結構）</div>
+      </div>
+      <div class="arrow">+</div>
+      <div class="compound">
+        <div class="chem">HB</div>
+        <div class="cname">共軛酸</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>為什麼 α-H 比較酸？— pKₐ 比較</h3>
+
+  <div class="figure-box">
+    <div class="fig-label">📊 Figure 23.1 — 電荷分布比較</div>
+    <strong>丙酮烯醇負離子 vs 醇鹽（alkoxide）的靜電位圖</strong>：<br><br>
+    • 丙酮烯醇負離子：負電荷<span class="hl-c">分散</span>在 O（淡紅色）和 α-C（淡綠色）— 共振穩定<br>
+    • 醇鹽（R-O⁻）：負電荷<span class="hl-r">集中</span>在 O 原子（深紅色）— 不穩定<br><br>
+    ✅ 共振穩定→ 共軛鹼更穩定 → 酸性更強（pKₐ 更小）
+  </div>
+
+  <div class="pka-grid">
+    <div class="pka-item">
+      <span class="formula">CH₃CH₃ (乙烷)</span>
+      <span class="pka-badge pka-low">pKₐ 50</span>
+    </div>
+    <div class="pka-item">
+      <span class="formula">CH₂=CHCH₃ (丙烯)</span>
+      <span class="pka-badge pka-low">pKₐ 43</span>
+    </div>
+    <div class="pka-item">
+      <span class="formula">CH₃CH₂OH (乙醇)</span>
+      <span class="pka-badge pka-mid">pKₐ 16</span>
+    </div>
+    <div class="pka-item">
+      <span class="formula">酮/醛（α-H）</span>
+      <span class="pka-badge pka-mid">pKₐ ~20</span>
+    </div>
+    <div class="pka-item">
+      <span class="formula">酯（ester α-H）</span>
+      <span class="pka-badge pka-mid">pKₐ 25</span>
+    </div>
+    <div class="pka-item">
+      <span class="formula">β-二羰基化合物</span>
+      <span class="pka-badge pka-high">pKₐ 9–13</span>
+    </div>
+  </div>
+  <p style="font-size:.8rem;color:var(--muted);">▲ pKₐ 越小 = 越酸（越容易失去 H⁺）</p>
+
+  <div class="key">
+    <div class="key-title">酸性規律 — 必背！</div>
+    <ul>
+      <li>共軛鹼越穩定 → 原酸越強 → pKₐ 越小</li>
+      <li>負電荷在 <span class="hl-g">O 上</span> 比在 C 上更穩定 → 醇比烷更酸</li>
+      <li><span class="hl">兩個 C=O 夾住的 CH₂（β-二羰基）</span> 的 α-H 最酸！（負電荷可分散到兩個 O）</li>
+    </ul>
+  </div>
+
+  <h3>選用哪種鹼？（Table 23.3）</h3>
+  <table class="compare-table">
+    <tr>
+      <th>鹼</th>
+      <th>共軛酸 pKₐ</th>
+      <th>生成烯醇負離子比例</th>
+      <th>特色</th>
+    </tr>
+    <tr>
+      <td>⁻OH（氫氧化鈉）</td>
+      <td>15.7</td>
+      <td class="bad">&lt;1%</td>
+      <td>弱，只在 β-二羰基有用</td>
+    </tr>
+    <tr>
+      <td>⁻OEt（NaOEt）</td>
+      <td>16</td>
+      <td class="bad">&lt;1%</td>
+      <td>常用於 malonic/acetoacetic ester 合成</td>
+    </tr>
+    <tr>
+      <td>⁻OtBu（KOtBu）</td>
+      <td>18</td>
+      <td class="bad">1–10%</td>
+      <td>中等，有立體障礙</td>
+    </tr>
+    <tr>
+      <td>NaH（氫化鈉）</td>
+      <td>35</td>
+      <td class="good">100%</td>
+      <td>強，但會釋出 H₂ 氣體</td>
+    </tr>
+    <tr>
+      <td style="color:var(--amber);font-weight:700;">LDA</td>
+      <td>40</td>
+      <td class="good" style="font-weight:700;">100%</td>
+      <td style="color:var(--amber);">⭐ 強、體積大、非親核性</td>
+    </tr>
+  </table>
+
+  <div class="box box-amber">
+    <div class="label">⭐ 最重要的鹼 — LDA</div>
+    <strong>LDA（Lithium Diisopropylamide，二異丙基醯胺鋰）</strong><br>
+    化學式：Li⁺ ⁻N[CH(CH₃)₂]₂<br><br>
+    • <span class="hl">強鹼</span>（pKₐ ~40）：幾乎 100% 轉化為烯醇負離子<br>
+    • <span class="hl">非親核性</span>：兩個龐大的異丙基讓 N 無法當親核劑<br>
+    • <span class="hl">反應條件</span>：THF（非質子溶劑）、–78°C<br><br>
+    <em>由 nBuLi + 二異丙基胺現配</em>
+  </div>
+
+  <h3>烯醇負離子的反應性：雙面親核劑</h3>
+  <div class="box box-purple">
+    <div class="label">Ambident Nucleophile（雙面親核劑）</div>
+    烯醇負離子有<strong>兩個反應位點</strong>：O 和 C（α 碳）都帶負電荷。<br><br>
+    理論上可從 O 或 C 反應，但 <span class="hl-r">實際上幾乎從 C（α 碳）反應</span>，因為 α 碳的親核性較強。
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 3: KINETIC vs THERMODYNAMIC ===================== -->
+<section id="unsym">
+  <h2>23.4 不對稱羰基化合物的烯醇負離子</h2>
+
+  <p>當酮的兩側 α 碳不同（例如 2-甲基環己酮），去質子化可以產生<strong>兩種不同的烯醇負離子</strong>。</p>
+
+  <div class="rxn">
+    <div class="rxn-title">2-甲基環己酮的兩種可能烯醇負離子</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:.5rem;">
+      <div style="border:2px solid var(--coral);border-radius:8px;padding:.8rem;text-align:center;">
+        <div style="color:var(--coral);font-weight:700;font-size:.85rem;margin-bottom:.4rem;">🏃 動力學烯醇負離子</div>
+        <div style="font-family:'Courier New',monospace;font-size:.9rem;color:#C8DFFF;">
+          取走 <span style="color:var(--coral);">二級 H（2° H）</span><br>
+          → 較少取代的 C=C
+        </div>
+        <div style="color:var(--muted);font-size:.8rem;margin-top:.4rem;">形成較快，較不穩定</div>
+      </div>
+      <div style="border:2px solid var(--green);border-radius:8px;padding:.8rem;text-align:center;">
+        <div style="color:var(--green);font-weight:700;font-size:.85rem;margin-bottom:.4rem;">⚖️ 熱力學烯醇負離子</div>
+        <div style="font-family:'Courier New',monospace;font-size:.9rem;color:#C8DFFF;">
+          取走 <span style="color:var(--green);">三級 H（3° H）</span><br>
+          → 較多取代的 C=C
+        </div>
+        <div style="color:var(--muted);font-size:.8rem;margin-top:.4rem;">形成較慢，較穩定</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>如何選擇性地得到其中一種？</h3>
+
+  <table class="compare-table">
+    <tr>
+      <th></th>
+      <th>🏃 動力學烯醇負離子</th>
+      <th>⚖️ 熱力學烯醇負離子</th>
+    </tr>
+    <tr>
+      <td><strong>取代程度</strong></td>
+      <td>較少取代（less substituted）</td>
+      <td>較多取代（more substituted）</td>
+    </tr>
+    <tr>
+      <td><strong>穩定性</strong></td>
+      <td class="bad">較不穩定</td>
+      <td class="good">較穩定</td>
+    </tr>
+    <tr>
+      <td><strong>使用的鹼</strong></td>
+      <td><span style="color:var(--amber);">LDA</span>（強、體積大）</td>
+      <td>NaOEt 或 KOtBu</td>
+    </tr>
+    <tr>
+      <td><strong>溶劑</strong></td>
+      <td>THF（非質子）</td>
+      <td>EtOH 或 tBuOH（質子）</td>
+    </tr>
+    <tr>
+      <td><strong>溫度</strong></td>
+      <td><span style="color:var(--coral);">–78°C</span>（超低溫）</td>
+      <td>25°C（室溫）</td>
+    </tr>
+  </table>
+
+  <div class="key">
+    <div class="key-title">🔑 判斷口訣</div>
+    <ul>
+      <li><span class="hl-r">LDA + THF + –78°C</span> → 動力學（Kinetic）→ 較少取代那邊</li>
+      <li><span class="hl-g">RO⁻ + ROH + 25°C</span> → 熱力學（Thermodynamic）→ 較多取代那邊</li>
+    </ul>
+  </div>
+
+  <div class="box box-cyan">
+    <div class="label">原理解釋</div>
+    <strong>動力學</strong>：LDA 體積大，優先攻擊位阻較小的（2° H），溫度低防止進一步平衡<br>
+    <strong>熱力學</strong>：在質子溶劑中，烯醇負離子可被質子化再去質子化，最終平衡趨向最穩定（更多取代的）那種
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 4: RACEMIZATION ===================== -->
+<section id="racemize">
+  <h2>23.5 α 碳的消旋化（Racemization）</h2>
+
+  <div class="figure-box">
+    <div class="fig-label">📐 Figure 23.2 — 丙酮烯醇負離子的幾何結構</div>
+    <strong>烯醇負離子的 α 碳是 sp² 雜化、平面結構！</strong><br><br>
+    • O 原子、羰基 C、和 α-C <span class="hl-c">三者共面</span>（trigonal planar）<br>
+    • 每個原子都有 p 軌域，三個 p 軌域重疊形成共軛體系<br>
+    • α-C 的電子對在 p 軌域上，能與 C=O 的 π 電子共軛
+  </div>
+
+  <div class="box box-coral">
+    <div class="label">⚠️ 重要結果：消旋化</div>
+    當 α 碳本來是立體中心（不對稱碳），形成烯醇負離子後：<br><br>
+    1. α-C 變成 <span class="hl-r">sp² 平面</span>，失去立體化學資訊<br>
+    2. H₂O 再質子化時，從平面<strong>兩側的機率相等</strong><br>
+    3. 結果得到 <span class="hl-r">消旋混合物（racemic mixture）</span>，光學活性消失
+  </div>
+
+  <div class="rxn">
+    <div class="rxn-title">消旋化機制示意</div>
+    <div class="rxn-flow" style="justify-content:center;">
+      <div class="compound">
+        <div class="chem" style="color:var(--purple);">(R)-酮<br>（光學活性）</div>
+      </div>
+      <div class="arrow-label">
+        <div class="arr-line">→</div>
+        <div class="reagent">⁻OH/H₂O</div>
+      </div>
+      <div class="compound" style="border:1px solid var(--cyan);border-radius:6px;">
+        <div class="chem" style="color:var(--cyan);">平面烯醇負離子<br>（sp², 無手性）</div>
+      </div>
+      <div class="arrow-label">
+        <div class="arr-line">→</div>
+        <div class="reagent">H₂O 從兩側等機率攻擊</div>
+      </div>
+      <div class="compound">
+        <div class="chem">(R)-酮 : (S)-酮<br>= 1 : 1</div>
+        <div class="cname" style="color:var(--coral);">消旋混合物</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="memory">若 α 碳是立體中心，接觸鹼性水溶液後光學活性會逐漸消失 — 這是消旋化的特徵！</div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 5: HALOGENATION ===================== -->
+<section id="halogen">
+  <h2>23.7 α 碳的鹵化反應（Halogenation）</h2>
+
+  <p>將酮/醛與 X₂（Cl₂、Br₂、I₂）在酸或鹼存在下反應，可將 α-H 換成鹵素。</p>
+
+  <div class="rxn">
+    <div class="rxn-title">鹵化通式</div>
+    <div class="rxn-flow" style="justify-content:center;">
+      <div class="compound">
+        <div class="chem">R-C(=O)-CH₂-H</div>
+      </div>
+      <div class="arrow-label">
+        <div class="arr-line">→</div>
+        <div class="reagent">X₂, H⁺ 或 ⁻OH</div>
+      </div>
+      <div class="compound">
+        <div class="chem">R-C(=O)-CH₂-<span class="new-bond">X</span></div>
+        <div class="cname">α-鹵化產物</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>23.7A 酸催化鹵化（Mechanism 23.3）— 單取代</h3>
+  <p>反應在醋酸（CH₃CO₂H）中進行，過程分為「酮 → 醇式」再「醇式 + 鹵素」兩大部分：</p>
+
+  <div class="mech">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>質子化</strong>：H⁺ 加到 C=O 的 O 上，形成共振穩定的碳陽離子<br>
+        <span class="chem">C=O + H⁺  →  C=OH⁺</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>去質子化</strong>：H₂O 取走 α-H，形成醇式（enol）<br>
+        <span class="chem">C=OH⁺(有α-H) + H₂O  →  C(OH)=C（醇式）</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>醇式親核攻擊 X₂</strong>：α-C 攻擊鹵素，形成新的 C–X 鍵<br>
+        <span class="chem new-bond">C(OH)=C + X–X  →  C(OH⁺)–C–X + X⁻</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>去質子化</strong>：X⁻ 取走 OH 的 H，得到最終產物<br>
+        <span class="chem">→  C(=O)-CH(X)-R</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-coral">
+    <div class="label">⚠️ 酸催化特點</div>
+    酸催化通常只發生<strong>單取代</strong>（mono-substitution），因為加了 X 後，αC 附近電子密度降低，不容易再形成醇式中間體。
+  </div>
+
+  <h3>23.7B 鹼催化鹵化（Mechanism 23.4）— 多取代</h3>
+
+  <div class="mech">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>去質子化</strong>：⁻OH 取走 α-H，形成烯醇負離子<br>
+        <span class="chem">C(=O)-CH₂H + ⁻OH  →  [烯醇負離子] + H₂O</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>親核攻擊 X₂</strong>：α-C 攻擊鹵素，形成新的 C–X 鍵<br>
+        <span class="chem new-bond">[烯醇負離子] + X–X  →  C(=O)-CH₂-X + X⁻</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-amber">
+    <div class="label">⚠️ 鹼催化危險！多取代！</div>
+    鹼催化時，<span class="hl-r">第一個 X 加進去後，因其電負性使 α-H 更容易被去質子化</span>，因此步驟 1-2 會重複多次，導致多個 X 取代在同一個 α 碳上。
+  </div>
+
+  <h3>鹵仿反應（Haloform Reaction）— 甲基酮的特殊反應</h3>
+
+  <div class="box box-purple">
+    <div class="label">📌 特殊反應</div>
+    <strong>甲基酮（R-CO-CH₃）+ 過量 X₂ + 鹼</strong> → 發生「氧化裂解」：<br><br>
+    <div style="text-align:center;font-family:'Courier New',monospace;font-size:.9rem;color:#121D33;margin:.5rem 0;">
+      R-CO-CH₃  →  R-COO⁻（羧酸鹽）  +  HCX₃（鹵仿）
+    </div>
+    C–C 鍵斷裂！這是一個非常特殊的機制（先三鹵取代，再鹼水解裂解）。
+  </div>
+
+  <div class="mech">
+    <div class="step">
+      <div class="step-num">Part 1</div>
+      <div class="step-body">
+        <strong>三步鹵化</strong>：⁻OH 去質子，X₂ 反應，重複三次<br>
+        <span class="chem">R-CO-CH₃  →  R-CO-CH₂X  →  R-CO-CHX₂  →  R-CO-CX₃</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">Part 2</div>
+      <div class="step-body">
+        <strong>鹼水解裂解</strong>：⁻OH 親核加成到 C=O，⁻CX₃ 作為離去基，形成羧酸鹽<br>
+        <span class="chem">R-CO-CX₃  + ⁻OH  →  R-COO⁻  +  HCX₃</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-green">
+    <div class="label">🧪 碘仿試驗（Iodoform Test）</div>
+    用 I₂ + ⁻OH 與甲基酮反應，生成<strong>碘仿（CHI₃，淡黃色固體）沉澱</strong> = 陽性反應。<br>
+    非甲基酮不產生沉澱 = 陰性反應。<br>
+    <em>（此為早期鑑別甲基酮的方法）</em>
+  </div>
+
+  <div class="figure-box">
+    <div class="fig-label">📊 Figure 23.3 — 鹵化反應三種路徑總整理</div>
+    <table class="compare-table" style="margin:0.5rem 0;">
+      <tr>
+        <th>條件</th>
+        <th>中間體</th>
+        <th>產物</th>
+      </tr>
+      <tr>
+        <td><span class="tag tag-acid">酸</span> X₂ / CH₃CO₂H</td>
+        <td>醇式（Enol）</td>
+        <td>單取代 α-鹵酮/醛</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-base">鹼</span> X₂ / ⁻OH（一般）</td>
+        <td>烯醇負離子</td>
+        <td>多取代 α-鹵酮/醛</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-base">鹼</span> 過量 X₂ / ⁻OH（甲基酮）</td>
+        <td>三鹵烯醇負離子</td>
+        <td><span style="color:var(--coral);">羧酸鹽 + 鹵仿（CHX₃）</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>23.7C α-鹵羰基化合物的後續反應</h3>
+  <p>生成的 α-鹵酮可以進一步：</p>
+  <ul style="padding-left:1.5rem;margin-bottom:.8rem;">
+    <li><strong>消除（Elimination）</strong>：用 Li₂CO₃ + LiBr，生成 α,β-不飽和羰基化合物（α,β-unsaturated carbonyl）</li>
+    <li><strong>S<sub>N</sub>2 取代</strong>：α-C 的鹵素被親核劑（如胺、硫醇）取代，應用在藥物合成中（例：奎寧的合成，Figure 23.4）</li>
+  </ul>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 6: DIRECT ALKYLATION ===================== -->
+<section id="alkylation">
+  <h2>23.8 直接烯醇負離子烷化（Direct Enolate Alkylation）</h2>
+
+  <p>用鹼和烷基鹵化物（RX），可以在 α 碳形成全新的 <span class="hl-r">C–C 鍵</span>，這是有機合成中增長碳鏈最重要的方法之一。</p>
+
+  <div class="rxn">
+    <div class="rxn-title">直接烷化通式</div>
+    <div class="rxn-flow" style="justify-content:center;flex-wrap:wrap;gap:.5rem;">
+      <div class="compound">
+        <div class="chem">R-C(=O)-CH₂-H</div>
+      </div>
+      <div class="arrow-label">
+        <div class="arr-line">→</div>
+        <div class="reagent">[1] LDA/THF, –78°C</div>
+      </div>
+      <div class="compound" style="border:1px solid var(--cyan);border-radius:6px;">
+        <div class="chem" style="color:var(--cyan);">烯醇負離子</div>
+      </div>
+      <div class="arrow-label">
+        <div class="arr-line">→</div>
+        <div class="reagent">[2] R'–X (SN2)</div>
+      </div>
+      <div class="compound">
+        <div class="chem">R-C(=O)-CH₂-<span class="new-bond">R'</span></div>
+        <div class="cname">新的 C–C 鍵（紅色）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="key">
+    <div class="key-title">關鍵條件</div>
+    <ul>
+      <li><span class="hl">步驟 1</span>：LDA（強非親核性鹼）+ THF + –78°C → 100% 轉化為烯醇負離子</li>
+      <li><span class="hl">步驟 2</span>：烯醇負離子用 SN2 攻擊 RX → 必須使用 CH₃X 或一級（1°）烷基鹵化物<br>
+        <span class="hl-r">❌ 3° 烷基鹵、乙烯型鹵（vinyl halide）、芳環鹵不適用</span></li>
+    </ul>
+  </div>
+
+  <h3>立體化學</h3>
+  <div class="box box-cyan">
+    <div class="label">消旋混合物</div>
+    若烷化後引入新的立體中心，因為烯醇負離子是 <strong>平面（sp²）</strong> 結構，RX 可以從兩側進攻，得到<strong>消旋混合物（racemic mixture）</strong>。
+  </div>
+
+  <h3>23.8B 不對稱酮的區域選擇性烷化</h3>
+  <p>以 2-甲基環己酮為例：</p>
+  <table class="compare-table">
+    <tr>
+      <th>目標產物</th>
+      <th>條件（生成哪種烯醇負離子）</th>
+      <th>加入 CH₃I 後</th>
+    </tr>
+    <tr>
+      <td>2,6-二甲基（A）</td>
+      <td>LDA / THF / –78°C → 動力學烯醇負離子（較少取代側）</td>
+      <td>CH₃ 接在較少取代側</td>
+    </tr>
+    <tr>
+      <td>2,2-二甲基（B）</td>
+      <td>KOtBu / tBuOH / 25°C → 熱力學烯醇負離子（較多取代側）</td>
+      <td>CH₃ 接在較多取代側</td>
+    </tr>
+  </table>
+
+  <h3>23.8C 應用：Tamoxifen（他莫昔芬）合成</h3>
+  <div class="box box-green">
+    <div class="label">🏥 真實藥物合成</div>
+    Tamoxifen 是廣泛使用的乳癌治療藥物（品牌名 Nolvadex，1970 年代上市）。<br><br>
+    合成關鍵步驟：<br>
+    酮 A <span class="hl-c">+ NaH（強鹼）→ 烯醇負離子</span> <span class="hl-r">+ CH₃CH₂I → 化合物 B（高產率）</span><br><br>
+    B 再經多步反應轉化為 Tamoxifen（只有 Z 式有效）。
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 7: MALONIC ESTER ===================== -->
+<section id="malonic">
+  <h2>23.9 丙二酸酯合成法（Malonic Ester Synthesis）</h2>
+
+  <div class="box box-cyan">
+    <div class="label">合成目標</div>
+    以<strong>丙二酸二乙酯（diethyl malonate，CH₂(CO₂Et)₂）</strong>為起始物，合成在 α 碳有一個或兩個烷基的<strong>羧酸（carboxylic acid）</strong>。
+    <div style="text-align:center;margin-top:.7rem;font-family:'Courier New',monospace;">
+      CH₂(CO₂Et)₂  →  <span style="color:var(--green);">R-CH₂-COOH</span>（一烷基）或 <span style="color:var(--green);">R-CR'-COOH</span>（二烷基）
+    </div>
+  </div>
+
+  <h3>背景知識：脫羧反應（Decarboxylation）</h3>
+  <div class="box box-amber">
+    <div class="label">關鍵反應：β-二酸加熱失去 CO₂</div>
+    β-二酸（兩個 COOH 中間只隔一個碳）加熱後，透過六員環的過渡態失去 CO₂：<br><br>
+    <div style="text-align:center;font-family:'Courier New',monospace;">
+      HOOC-CH₂-COOH  →<sup>Δ</sup>→  CH₃-COOH  +  CO₂ ↑
+    </div>
+    <br>β-酮酸（β-keto acid）同樣容易脫羧，生成酮。
+  </div>
+
+  <h3>三步合成流程</h3>
+  <div class="synth-flow">
+    <div class="synth-step">
+      <div class="synth-num">1</div>
+      <div class="synth-box">
+        <div class="reagent-tag">試劑：NaOEt（⁻OEt）</div>
+        <strong>去質子化（Deprotonation）</strong><br>
+        丙二酸酯的 α-H（兩個 C=O 中間，pKₐ ≈ 13）極酸，NaOEt 即可去質子<br>
+        CH₂(CO₂Et)₂ + ⁻OEt → ⁻CH(CO₂Et)₂（三個共振結構，特別穩定）
+      </div>
+    </div>
+    <div style="text-align:center;color:var(--muted);font-size:1.2rem;">↓</div>
+    <div class="synth-step">
+      <div class="synth-num">2</div>
+      <div class="synth-box">
+        <div class="reagent-tag">試劑：R–X（CH₃ 或 1° 烷基鹵化物）</div>
+        <strong>烷化（Alkylation）</strong>（SN2 機制）<br>
+        烯醇負離子攻擊 RX，形成新 C–C 鍵<br>
+        ⁻CH(CO₂Et)₂ + R-X → R-CH(CO₂Et)₂ + X⁻
+      </div>
+    </div>
+    <div style="text-align:center;color:var(--muted);font-size:1.2rem;">↓</div>
+    <div class="synth-step">
+      <div class="synth-num">3</div>
+      <div class="synth-box">
+        <div class="result-tag">試劑：H₃O⁺（aq.），Δ 加熱</div>
+        <strong>水解 + 脫羧（Hydrolysis + Decarboxylation）</strong><br>
+        酯基水解為 COOH（β-二酸），再加熱脫去 CO₂<br>
+        R-CH(CO₂Et)₂ →<sup>H₃O⁺</sup> R-CH(COOH)₂ →<sup>Δ</sup> R-CH₂-COOH + CO₂
+      </div>
+    </div>
+  </div>
+
+  <h3>若需要二烷基羧酸：重複步驟 1–2</h3>
+  <div class="rxn">
+    <div class="rxn-title">二烷基羧酸合成（兩次烷化）</div>
+    <div style="font-family:'Courier New',monospace;font-size:.88rem;color:#C8DFFF;padding:.5rem;overflow-x:auto;">
+      CH₂(CO₂Et)₂ <br>
+      <span style="color:var(--cyan);">  [1] NaOEt</span> ↓<br>
+      <span style="color:var(--coral);">  [2] R–X（第一個烷基）</span>→ R-CH(CO₂Et)₂<br>
+      <span style="color:var(--cyan);">  [3] NaOEt</span> ↓<br>
+      <span style="color:var(--coral);">  [4] R'–X（第二個烷基）</span>→ R-C(R')(CO₂Et)₂<br>
+      <span style="color:var(--green);">  [5] H₃O⁺, Δ</span> → <strong style="color:var(--green);">R-C(R')-COOH</strong>（α 碳上有兩個 R）
+    </div>
+  </div>
+
+  <h3>逆合成分析（Retrosynthetic Analysis）</h3>
+  <div class="retro">
+    <div class="retro-title">🔄 逆推步驟</div>
+    <ol style="padding-left:1.3rem;">
+      <li>找到 COOH 的 α 碳</li>
+      <li>確認 α 碳上有哪些烷基（R、R'）</li>
+      <li>每個烷基 = 一個烷基鹵化物（R–X 或 R'–X）</li>
+      <li>其餘骨架來自丙二酸二乙酯</li>
+    </ol>
+  </div>
+
+  <h3>分子內版本：合成環狀羧酸</h3>
+  <div class="box box-green">
+    <div class="label">環形成</div>
+    使用<strong>二鹵化物（dihalide）Br(CH₂)ₙBr</strong> 作為親電子試劑，進行分子內 SN2，可以合成三至六員環的羧酸。<br>
+    例：1,4-二溴丁烷 + 丙二酸酯 → 環戊烷羧酸
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 8: ACETOACETIC ESTER ===================== -->
+<section id="acetoacetic">
+  <h2>23.10 乙醯乙酸酯合成法（Acetoacetic Ester Synthesis）</h2>
+
+  <div class="box box-purple">
+    <div class="label">合成目標</div>
+    以<strong>乙醯乙酸乙酯（ethyl acetoacetate，CH₃COCH₂CO₂Et）</strong>為起始物，合成在 α 碳有烷基的<strong>甲基酮（methyl ketone）</strong>。<br><br>
+    <div style="text-align:center;margin-top:.5rem;font-family:'Courier New',monospace;">
+      CH₃COCH₂CO₂Et  →  <span style="color:var(--green);">R-CH₂-COCH₃</span>（一烷基）或 <span style="color:var(--green);">R-CR'-COCH₃</span>（二烷基）
+    </div>
+  </div>
+
+  <h3>步驟完全相同，只是起始物和終產物不同</h3>
+  <div class="synth-flow">
+    <div class="synth-step">
+      <div class="synth-num">1</div>
+      <div class="synth-box">
+        <div class="reagent-tag">試劑：NaOEt</div>
+        <strong>去質子化</strong><br>
+        乙醯乙酸酯的 α-H（β-酮酯，pKₐ ≈ 10.7）非常酸，NaOEt 即可<br>
+        CH₃CO-CH₂-CO₂Et + ⁻OEt → 烯醇負離子
+      </div>
+    </div>
+    <div style="text-align:center;color:var(--muted);font-size:1.2rem;">↓</div>
+    <div class="synth-step">
+      <div class="synth-num">2</div>
+      <div class="synth-box">
+        <div class="reagent-tag">試劑：R–X（CH₃ 或 1° 烷基鹵化物）</div>
+        <strong>烷化（SN2）</strong><br>
+        CH₃CO-CH₂-CO₂Et + R-X → CH₃CO-CHR-CO₂Et + X⁻
+      </div>
+    </div>
+    <div style="text-align:center;color:var(--muted);font-size:1.2rem;">↓</div>
+    <div class="synth-step">
+      <div class="synth-num">3</div>
+      <div class="synth-box">
+        <div class="result-tag">試劑：H₃O⁺, Δ</div>
+        <strong>水解 + 脫羧</strong><br>
+        酯水解為 β-酮酸，加熱脫去 CO₂，得到<span style="color:var(--green);">甲基酮</span><br>
+        CH₃CO-CHR-CO₂Et →<sup>H₃O⁺</sup> CH₃CO-CHR-COOH →<sup>Δ</sup> CH₃CO-CH₂R + CO₂
+      </div>
+    </div>
+  </div>
+
+  <h3>兩種合成法比較</h3>
+  <table class="compare-table">
+    <tr>
+      <th></th>
+      <th>丙二酸酯合成法</th>
+      <th>乙醯乙酸酯合成法</th>
+      <th>直接烷化</th>
+    </tr>
+    <tr>
+      <td><strong>起始物</strong></td>
+      <td>CH₂(CO₂Et)₂</td>
+      <td>CH₃CO-CH₂-CO₂Et</td>
+      <td>任意酮/醛</td>
+    </tr>
+    <tr>
+      <td><strong>產物類型</strong></td>
+      <td class="good">羧酸（RCOOH）</td>
+      <td class="good">甲基酮（RCOCH₃）</td>
+      <td>烷化酮/醛</td>
+    </tr>
+    <tr>
+      <td><strong>使用的鹼</strong></td>
+      <td>NaOEt（弱即可）</td>
+      <td>NaOEt（弱即可）</td>
+      <td><span style="color:var(--amber);">LDA（必須強鹼）</span></td>
+    </tr>
+    <tr>
+      <td><strong>步驟數</strong></td>
+      <td class="bad">3 步（多）</td>
+      <td class="bad">3 步（多）</td>
+      <td class="good">2 步（少）</td>
+    </tr>
+    <tr>
+      <td><strong>成本</strong></td>
+      <td class="good">較低（NaOEt 便宜）</td>
+      <td class="good">較低</td>
+      <td class="bad">較高（LDA 貴）</td>
+    </tr>
+  </table>
+
+  <div class="memory">乙醯乙酸酯合成法的記憶口訣：「酮-酯夾中間，NaOEt 去質子，R-X 烷化，酸水解脫 CO₂，得到甲基酮！」</div>
+
+  <h3>逆合成分析</h3>
+  <div class="retro">
+    <div class="retro-title">🔄 逆推步驟（以甲基酮為目標）</div>
+    <ol style="padding-left:1.3rem;">
+      <li>確認 <strong>CH₃CO–</strong> 部分（來自乙醯乙酸酯）</li>
+      <li>找到 α 碳上的烷基 R（每個 R 來自一個 R–X）</li>
+      <li>其餘骨架來自乙醯乙酸乙酯</li>
+    </ol>
+  </div>
+</section>
+
+<hr class="sec-divider">
+
+<!-- ===================== SECTION 9: SUMMARY ===================== -->
+<section id="summary">
+  <h2>📋 全章總整理</h2>
+
+  <h3>關鍵名詞快速查閱</h3>
+  <table class="compare-table">
+    <tr><th>名詞</th><th>定義</th><th>重點</th></tr>
+    <tr>
+      <td><span class="hl-c">α 碳</span></td>
+      <td>緊鄰 C=O 的碳</td>
+      <td>本章所有反應都在這裡發生</td>
+    </tr>
+    <tr>
+      <td><span class="hl-amber">α 氫</span></td>
+      <td>接在 α 碳上的 H</td>
+      <td>pKₐ ≈ 20，因共振穩定而酸性偏大</td>
+    </tr>
+    <tr>
+      <td><span class="hl">醇式 (Enol)</span></td>
+      <td>含 C=C + OH 的酮互變異構體</td>
+      <td>中性，親核性弱，&lt;1%（一般）</td>
+    </tr>
+    <tr>
+      <td><span class="hl-c">烯醇負離子 (Enolate)</span></td>
+      <td>從 α-H 去質子後的帶負電中間體</td>
+      <td>強親核劑，從 α-C 反應</td>
+    </tr>
+    <tr>
+      <td><span class="hl-r">LDA</span></td>
+      <td>鋰二異丙基醯胺</td>
+      <td>強、體積大、非親核，100% 轉化，THF/–78°C</td>
+    </tr>
+    <tr>
+      <td>動力學烯醇負離子</td>
+      <td>較快形成的烯醇負離子</td>
+      <td>較少取代；LDA/THF/–78°C</td>
+    </tr>
+    <tr>
+      <td>熱力學烯醇負離子</td>
+      <td>較穩定的烯醇負離子</td>
+      <td>較多取代；RO⁻/ROH/25°C</td>
+    </tr>
+    <tr>
+      <td>鹵仿反應</td>
+      <td>甲基酮的氧化裂解</td>
+      <td>過量 X₂/鹼 → RCOO⁻ + CHX₃</td>
+    </tr>
+    <tr>
+      <td>脫羧</td>
+      <td>β-二酸或 β-酮酸加熱失去 CO₂</td>
+      <td>透過六員環過渡態</td>
+    </tr>
+  </table>
+
+  <h3>反應條件速查卡</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.7rem;margin-top:.6rem;">
+
+    <div class="card">
+      <div class="card-title" style="color:var(--coral);">鹵化（酸催化）</div>
+      <div style="font-size:.9rem;">
+        <strong>試劑</strong>：X₂ / CH₃CO₂H<br>
+        <strong>中間體</strong>：醇式<br>
+        <strong>產物</strong>：單取代 α-鹵酮/醛
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--cyan);">鹵化（鹼催化）</div>
+      <div style="font-size:.9rem;">
+        <strong>試劑</strong>：X₂ / ⁻OH<br>
+        <strong>中間體</strong>：烯醇負離子<br>
+        <strong>產物</strong>：多取代（通常無法控制）
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--purple);">鹵仿反應</div>
+      <div style="font-size:.9rem;">
+        <strong>起始物</strong>：甲基酮（R-CO-CH₃）<br>
+        <strong>試劑</strong>：過量 X₂ / ⁻OH<br>
+        <strong>產物</strong>：RCOO⁻ + CHX₃↓
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--green);">直接烷化</div>
+      <div style="font-size:.9rem;">
+        <strong>試劑</strong>：[1] LDA/THF/–78°C → [2] R–X<br>
+        <strong>新鍵</strong>：C–C 鍵在 α 碳<br>
+        <strong>限制</strong>：只能用 CH₃ 或 1° RX（SN2）
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--amber);">丙二酸酯合成</div>
+      <div style="font-size:.9rem;">
+        <strong>起始物</strong>：CH₂(CO₂Et)₂<br>
+        <strong>三步</strong>：NaOEt → R-X → H₃O⁺/Δ<br>
+        <strong>產物</strong>：含烷基的羧酸
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--purple);">乙醯乙酸酯合成</div>
+      <div style="font-size:.9rem;">
+        <strong>起始物</strong>：CH₃CO-CH₂-CO₂Et<br>
+        <strong>三步</strong>：NaOEt → R-X → H₃O⁺/Δ<br>
+        <strong>產物</strong>：含烷基的甲基酮
+      </div>
+    </div>
+
+  </div>
+
+  <h3 style="margin-top:1.5rem;">最常考的 pKₐ 值</h3>
+  <div style="background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:.5rem 0;overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:.88rem;font-family:'Courier New',monospace;">
+      <tr style="color:var(--muted);">
+        <th style="padding:.3rem .6rem;text-align:left;">類型</th>
+        <th style="padding:.3rem .6rem;text-align:center;">pKₐ</th>
+        <th style="padding:.3rem .6rem;text-align:left;">說明</th>
+      </tr>
+      <tr><td style="padding:.3rem .6rem;">烷烴（CH₃CH₃）</td><td style="text-align:center;color:var(--purple);">50</td><td style="color:var(--muted);padding:.3rem .6rem;">無共振，幾乎不酸</td></tr>
+      <tr><td style="padding:.3rem .6rem;">醯胺（RCONH₂）</td><td style="text-align:center;color:var(--purple);">30</td><td style="color:var(--muted);padding:.3rem .6rem;"></td></tr>
+      <tr><td style="padding:.3rem .6rem;">酯/腈（R α-H）</td><td style="text-align:center;color:var(--cyan);">25</td><td style="color:var(--muted);padding:.3rem .6rem;"></td></tr>
+      <tr><td style="padding:.3rem .6rem;color:var(--amber);font-weight:700;">醛/酮（α-H）</td><td style="text-align:center;color:var(--amber);font-weight:700;">~20</td><td style="color:var(--amber);padding:.3rem .6rem;">⭐ 本章核心</td></tr>
+      <tr><td style="padding:.3rem .6rem;">醇（R-OH）</td><td style="text-align:center;color:var(--cyan);">16–18</td><td style="color:var(--muted);padding:.3rem .6rem;"></td></tr>
+      <tr><td style="padding:.3rem .6rem;">β-酮酯（α-H）</td><td style="text-align:center;color:var(--green);">10.7</td><td style="color:var(--green);padding:.3rem .6rem;">強酸，NaOEt 夠用</td></tr>
+      <tr><td style="padding:.3rem .6rem;color:var(--green);font-weight:700;">β-二酮（α-H）</td><td style="text-align:center;color:var(--green);font-weight:700;">9</td><td style="color:var(--green);padding:.3rem .6rem;">⭐ 最酸的 α-H</td></tr>
+      <tr><td style="padding:.3rem .6rem;">羧酸（RCOOH）</td><td style="text-align:center;color:var(--coral);">4.8</td><td style="color:var(--coral);padding:.3rem .6rem;">不是 α-H，O-H</td></tr>
+    </table>
+  </div>
+
+  <div class="box box-amber" style="margin-top:1.5rem;">
+    <div class="label">💊 本章重要藥物應用</div>
+    <ul style="padding-left:1.2rem;">
+      <li><strong>Tamoxifen</strong>（乳癌藥）：NaH → enolate → 烷化（C–C 鍵形成）</li>
+      <li><strong>Quinine</strong>（抗瘧疾藥）：α-鹵酮的分子內 SN2 成環（Figure 23.4）</li>
+      <li><strong>Naproxen</strong>（止痛藥）：烯醇負離子烷化（Problem 23.17）</li>
+      <li><strong>Capsaicin</strong>（辣椒素）：丙二酸酯合成法製備側鏈</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+
+<script>
+// Active nav link based on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+      if (active) {
+        active.classList.add('active');
+        active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+sections.forEach(s => observer.observe(s));
+
+// Smooth nav click
+navLinks.forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
