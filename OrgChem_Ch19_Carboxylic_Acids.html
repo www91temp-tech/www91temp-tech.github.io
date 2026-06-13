@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第19章：羧酸與 O–H 鍵的酸性</title>
+<style>
+  :root {
+    --navy: #1c2d4a;
+    --blue: #2c6fad;
+    --teal: #1a8a8a;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --amber-border: #fbbf24;
+    --green: #047857;
+    --green-bg: #ecfdf5;
+    --green-border: #6ee7b7;
+    --red: #b91c1c;
+    --red-bg: #fff1f2;
+    --red-border: #fca5a5;
+    --purple: #6d28d9;
+    --purple-bg: #f5f3ff;
+    --purple-border: #c4b5fd;
+    --bg: #f1f5fb;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --mono: 'Courier New', monospace;
+  }
+
+  /* 新增：目前所在區塊的高亮樣式 */
+  .nav-btn.active {
+    color: #5dd5c8;
+    border-color: #5dd5c8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'Noto Sans TC', BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0f2040 0%, #1c3f6e 50%, #0e5f5f 100%);
+    color: white;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(100,200,200,0.06) 0%, transparent 40%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero h1 span { color: #5dd5c8; }
+  .hero-sub {
+    font-size: 16px;
+    opacity: 0.8;
+    max-width: 640px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .molecule-deco {
+    position: absolute;
+    right: 60px; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.12;
+    font-size: 140px;
+    font-weight: 900;
+    letter-spacing: -10px;
+    color: white;
+    font-family: var(--mono);
+    pointer-events: none;
+    display: none;
+  }
+  @media(min-width: 900px) { .molecule-deco { display: block; } }
+
+  /* ── NAV ── */
+  .nav-wrapper {
+    background: var(--navy);
+    padding: 0 40px;
+    overflow-x: auto;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    scrollbar-width: none;
+  }
+  .nav-wrapper::-webkit-scrollbar { display: none; }
+  .nav-inner { display: flex; gap: 4px; }
+  .nav-btn {
+    display: inline-block;
+    padding: 10px 14px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { color: white; border-color: #5dd5c8; }
+
+  /* ── MAIN LAYOUT ── */
+  .main { max-width: 980px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--bg);
+  }
+  .sec-num {
+    background: var(--navy);
+    color: white;
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+  .section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .section h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 20px 0 10px;
+  }
+  .section p { margin-bottom: 12px; }
+
+  /* ── CALLOUT BOXES ── */
+  .box {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-left: 4px solid;
+  }
+  .box-key {
+    background: var(--amber-bg);
+    border-color: var(--amber-border);
+  }
+  .box-key::before {
+    content: '⭐ 重點';
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .box-fig {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+  .box-fig::before {
+    content: '🔬 圖示說明';
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--green);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .box-warn {
+    background: var(--red-bg);
+    border-color: var(--red-border);
+  }
+  .box-warn::before {
+    content: '⚠️ 注意';
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .box-tip {
+    background: var(--purple-bg);
+    border-color: var(--purple-border);
+  }
+  .box-tip::before {
+    content: '💡 小技巧';
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--purple);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .box-life {
+    background: #f0fdf4;
+    border-color: #86efac;
+  }
+  .box-life::before {
+    content: '🌿 生活中的羧酸';
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    color: #16a34a;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  /* ── HIGHLIGHT PILL ── */
+  .hl {
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-weight: 700;
+    color: #92400e;
+    font-size: 0.95em;
+  }
+  .hl-blue {
+    background: #dbeafe;
+    border-color: #93c5fd;
+    color: #1e3a8a;
+  }
+  .hl-green {
+    background: #dcfce7;
+    border-color: #86efac;
+    color: #14532d;
+  }
+  .hl-red {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    color: #7f1d1d;
+  }
+
+  /* ── FORMULA ── */
+  .formula {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-family: var(--mono);
+    font-size: 15px;
+    margin: 12px 0;
+    color: #334155;
+    overflow-x: auto;
+  }
+
+  /* ── TABLE ── */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .tbl th {
+    background: var(--navy);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .tbl th:first-child { border-radius: 8px 0 0 0; }
+  .tbl th:last-child { border-radius: 0 8px 0 0; }
+  .tbl td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .tbl tr:nth-child(even) td { background: #f8fafc; }
+  .tbl tr:last-child td { border-bottom: none; }
+
+  /* ── PKA BAR CHART ── */
+  .pka-chart { margin: 20px 0; }
+  .pka-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .pka-label {
+    font-size: 13px;
+    font-family: var(--mono);
+    width: 180px;
+    flex-shrink: 0;
+    color: var(--text);
+  }
+  .pka-bar-wrap {
+    flex: 1;
+    background: #e2e8f0;
+    border-radius: 4px;
+    height: 22px;
+    overflow: visible;
+    position: relative;
+  }
+  .pka-bar {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+    justify-content: flex-end;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    min-width: 42px;
+    transition: width 0.8s ease;
+  }
+  .pka-note {
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── STEP BOXES ── */
+  .steps { counter-reset: step-c; }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-n {
+    background: var(--blue);
+    color: white;
+    min-width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  @media(max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 16px 0; }
+  @media(max-width: 700px) { .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── MINI CARD ── */
+  .mini-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .mini-card .label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .mini-card .val {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    font-family: var(--mono);
+  }
+  .mini-card .desc { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* ── BIG EMPHASIS ── */
+  .big-em {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    border-left: 5px solid var(--amber-border);
+    padding-left: 14px;
+    margin: 20px 0;
+    line-height: 1.5;
+  }
+
+  /* ── NMR SPEC TABLE ── */
+  .spec-row {
+    display: flex;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .spec-key {
+    background: var(--teal);
+    color: white;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+  }
+  .spec-val {
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  /* ── COMPARE ── */
+  .compare {
+    display: flex;
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin: 16px 0;
+  }
+  .cmp-item {
+    flex: 1;
+    padding: 14px 16px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .cmp-item:last-child { border-right: none; }
+  .cmp-item .cmp-name { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .cmp-item .cmp-val { font-size: 22px; font-weight: 800; font-family: var(--mono); }
+  .cmp-item .cmp-tag { font-size: 12px; margin-top: 4px; }
+
+  /* ── REACTION ARROW ── */
+  .rxn {
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin: 14px 0;
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--text);
+    overflow-x: auto;
+  }
+  .rxn-arrow { color: var(--blue); font-weight: 700; }
+
+  /* ── ZWITTERION ── */
+  .zwit-diagram {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    padding: 20px;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .zwit-form {
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: 2px solid;
+    background: white;
+  }
+  .zwit-form .name { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .zwit-form .struct { font-family: var(--mono); font-size: 14px; margin-bottom: 6px; }
+  .zwit-form .ph { font-size: 12px; color: var(--muted); }
+  .zwit-arrow { font-size: 28px; color: var(--blue); }
+
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--navy);
+    color: white;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 2px;
+  }
+
+  /* ── SCROLL SMOOTH ── */
+  html { scroll-behavior: smooth; }
+
+  /* ── TEAL HEADER ── */
+  .teal-header {
+    background: linear-gradient(90deg, var(--teal), #1fa5a5);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    margin: 18px 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── SUMMARY TABLE ── */
+  .sum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .sum-card {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .sum-card .s-title { font-size: 12px; font-weight: 700; color: #0369a1; margin-bottom: 6px; }
+  .sum-card .s-val { font-size: 14px; font-family: var(--mono); color: var(--text); }
+
+  /* print */
+  @media print {
+    .nav-wrapper { display: none; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">有機化學 第19章</div>
+  <h1>羧酸與 <span>O–H 鍵</span>的酸性</h1>
+  <p class="hero-sub">Carboxylic Acids — 從結構、命名、物理性質到酸鹼反應</p>
+  <div class="molecule-deco">COOH</div>
+</div>
+
+<nav class="nav-wrapper">
+  <div class="nav-inner">
+    <a class="nav-btn" href="#s1">結構</a>
+    <a class="nav-btn" href="#s2">命名</a>
+    <a class="nav-btn" href="#s3">物理性質</a>
+    <a class="nav-btn" href="#s4">光譜</a>
+    <a class="nav-btn" href="#s5">有趣的羧酸</a>
+    <a class="nav-btn" href="#s6">阿斯匹靈</a>
+    <a class="nav-btn" href="#s7">製備</a>
+    <a class="nav-btn" href="#s8">反應概觀</a>
+    <a class="nav-btn" href="#s9">酸性</a>
+    <a class="nav-btn" href="#s10">誘導效應</a>
+    <a class="nav-btn" href="#s11">苯甲酸</a>
+    <a class="nav-btn" href="#s12">萃取</a>
+    <a class="nav-btn" href="#s13">磺酸</a>
+    <a class="nav-btn" href="#s14">胺基酸</a>
+    <a class="nav-btn" href="#summary">📝 總整理</a>
+  </div>
+</nav>
+
+<div class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header">
+      <div class="sec-num">19.1</div>
+      <h2>結構與鍵結</h2>
+    </div>
+
+    <p><strong>羧酸（carboxylic acid）</strong>含有一個 <span class="hl">羧基（carboxy group，–COOH）</span>。這個名字來自 <em>carbonyl（C=O）+ hydroxy（OH）</em>的組合。</p>
+
+    <div class="box box-key">
+      羧基中央的碳原子同時與一個氧形成 <strong>雙鍵（C=O）</strong>，並與另一個氧形成 <strong>單鍵（C–OH）</strong>。縮寫寫法為 <span style="font-family:monospace;font-weight:700">RCOOH</span> 或 <span style="font-family:monospace;font-weight:700">RCO₂H</span>。
+    </div>
+
+    <div class="grid2">
+      <div class="mini-card">
+        <div class="label">混成軌域</div>
+        <div class="val">sp²</div>
+        <div class="desc">羧基碳被三組原子包圍 → 三角平面，鍵角約 120°</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">C=O 鍵長</div>
+        <div class="val">121 pm</div>
+        <div class="desc">C–O 單鍵為 136 pm；雙鍵較短，符合更高鍵級</div>
+      </div>
+    </div>
+
+    <p>乙酸的 C–OH 單鍵（136 pm）比醇的 C–O 單鍵（143 pm）還短，原因是羧基碳是 <span class="hl hl-blue">sp²</span> 雜化（s 特性較高），醇的碳是 <span class="hl">sp³</span> 雜化（s 特性較低）。</p>
+
+    <div class="box box-fig">
+      <strong>Figure 19.1｜乙酸的靜電位能圖</strong><br>
+      圖中以顏色代表電荷分布：<br>
+      • 🔴 紅色區域（兩個氧原子）= <strong>電子密度高（負電）</strong><br>
+      • 🔵 藍色區域（羰基碳、OH 的氫）= <strong>電子密度低（正電）</strong><br>
+      這說明 O 比 C 和 H 更具電負性，導致鍵結有極性。
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header">
+      <div class="sec-num">19.2</div>
+      <h2>命名法</h2>
+    </div>
+
+    <h3>A. IUPAC 命名</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          若 COOH 接在碳鏈上 → 找最長含 COOH 的碳鏈，將母烷烴的 <strong>-e</strong> 改成 <span class="hl">-oic acid</span><br>
+          若 COOH 接在環上 → 命名環，再加 <span class="hl">carboxylic acid</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          編號使 COOH 在 C1（省略數字 1），其餘取代基依一般規則命名
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-tip">
+      COOH 本身的碳也算在最長碳鏈中！例如 hexanoic acid（6碳）中，第1個碳就是 COOH 的碳。
+    </div>
+
+    <h3>B. 常用名（Common Names）</h3>
+    <p>常用名 = 母名（parent name）+ <strong>-ic acid</strong>。取代基位置用希臘字母標示：</p>
+    <div class="formula">COOH – Cα – Cβ – Cγ – Cδ – ... – Cω</div>
+
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>C 數</th>
+          <th>IUPAC 名</th>
+          <th>常用名</th>
+          <th>母名字根</th>
+          <th>記憶線索</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>methanoic acid</td><td><strong>formic acid</strong>（甲酸）</td><td>form-</td><td>螞蟻（formica）螫人的酸</td></tr>
+        <tr><td>2</td><td>ethanoic acid</td><td><strong>acetic acid</strong>（乙酸）</td><td>acet-</td><td>醋（acetum）的酸味</td></tr>
+        <tr><td>3</td><td>propanoic acid</td><td><strong>propionic acid</strong>（丙酸）</td><td>propion-</td><td>—</td></tr>
+        <tr><td>4</td><td>butanoic acid</td><td><strong>butyric acid</strong>（丁酸）</td><td>butyr-</td><td>奶油（butyrum）腐壞的味道</td></tr>
+        <tr><td>5</td><td>pentanoic acid</td><td><strong>valeric acid</strong>（戊酸）</td><td>valer-</td><td>—</td></tr>
+        <tr><td>6</td><td>hexanoic acid</td><td><strong>caproic acid</strong>（己酸）</td><td>capro-</td><td>銀杏種子難聞的臭味</td></tr>
+        <tr><td>芳香</td><td>benzenecarboxylic acid</td><td><strong>benzoic acid</strong>（苯甲酸）</td><td>benzo-</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <h3>C. 二酸命名（dioic acid）</h3>
+    <p>含兩個 COOH → IUPAC 後綴改為 <span class="hl">-dioic acid</span>。三個最簡單的二酸常用俗名：</p>
+    <div class="grid3">
+      <div class="mini-card" style="text-align:center">
+        <div class="val" style="font-size:16px">草酸</div>
+        <div class="desc">oxalic acid<br>(ethanedioic acid)<br>菠菜、大黃中</div>
+      </div>
+      <div class="mini-card" style="text-align:center">
+        <div class="val" style="font-size:16px">丙二酸</div>
+        <div class="desc">malonic acid<br>(propanedioic acid)</div>
+      </div>
+      <div class="mini-card" style="text-align:center">
+        <div class="val" style="font-size:16px">琥珀酸</div>
+        <div class="desc">succinic acid<br>(butanedioic acid)</div>
+      </div>
+    </div>
+
+    <h3>D. 羧酸鹽命名</h3>
+    <p>將羧酸的 <em>-ic acid</em> 改為 <span class="hl">-ate</span>，並加上金屬陽離子名稱。</p>
+    <div class="box box-fig">
+      <strong>Figure 19.2｜金屬鹽命名範例</strong><br>
+      • <strong>sodium acetate</strong>（醋酸鈉）= sodium + acet + -ate<br>
+      • <strong>potassium propanoate</strong>（丙酸鉀）= potassium + propano + -ate
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header">
+      <div class="sec-num">19.3</div>
+      <h2>物理性質</h2>
+    </div>
+
+    <p>羧酸是目前學過極性<strong>最強</strong>的有機化合物，因為它同時具備：</p>
+    <div class="grid3">
+      <div class="mini-card" style="background:#fff5f5;border-color:#fca5a5">
+        <div class="label">分子間作用力 ①</div>
+        <div class="val" style="font-size:15px">偶極-偶極</div>
+        <div class="desc">極性 C=O 和 O–H 鍵</div>
+      </div>
+      <div class="mini-card" style="background:#fffbeb;border-color:#fbbf24">
+        <div class="label">分子間作用力 ②</div>
+        <div class="val" style="font-size:15px">氫鍵</div>
+        <div class="desc">兩個羧酸分子互相形成「二聚體」（dimer）</div>
+      </div>
+      <div class="mini-card" style="background:#f0fdf4;border-color:#86efac">
+        <div class="label">分子間作用力 ③</div>
+        <div class="val" style="font-size:15px">凡得瓦力</div>
+        <div class="desc">所有分子都有</div>
+      </div>
+    </div>
+
+    <div class="box box-fig">
+      <strong>Figure 19.3｜羧酸二聚體（dimer）</strong><br>
+      兩個乙酸分子透過<strong>兩條氫鍵</strong>彼此連結——一個分子的 C=O 與另一個分子的 O–H 形成氫鍵，形成穩定的環狀二聚體。這就是羧酸沸點異常高的原因。
+    </div>
+
+    <div class="teal-header">沸點比較（分子量相近的化合物）</div>
+    <div class="pka-chart">
+      <div class="pka-row">
+        <div class="pka-label">丁烷 (MW=58)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:5%;background:#94a3b8">0°C</div>
+        </div>
+        <div class="pka-note">只有凡得瓦力</div>
+      </div>
+      <div class="pka-row">
+        <div class="pka-label">丙酮 (MW=58)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:42%;background:#60a5fa">48°C</div>
+        </div>
+        <div class="pka-note">+ 偶極-偶極</div>
+      </div>
+      <div class="pka-row">
+        <div class="pka-label">1-丙醇 (MW=60)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:81%;background:#34d399">97°C</div>
+        </div>
+        <div class="pka-note">+ 氫鍵</div>
+      </div>
+      <div class="pka-row">
+        <div class="pka-label">乙酸 (MW=60)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:100%;background:#f97316">118°C ⭐</div>
+        </div>
+        <div class="pka-note">+ 兩條氫鍵</div>
+      </div>
+    </div>
+
+    <div class="box box-key">
+      <strong>水溶性規律：</strong><br>
+      • ≤ 5 個碳的羧酸 → <span class="hl hl-green">可溶於水</span>（能與水形成氫鍵）<br>
+      • &gt; 5 個碳的羧酸 → <span class="hl hl-red">不溶於水</span>（非極性烷基太大），溶於非極性有機溶劑
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header">
+      <div class="sec-num">19.4</div>
+      <h2>光譜性質</h2>
+    </div>
+
+    <h3>紅外線光譜（IR）— 兩個特徵吸收</h3>
+    <div class="grid2">
+      <div class="spec-row">
+        <div class="spec-key">C=O</div>
+        <div class="spec-val"><span class="hl hl-blue">~1710 cm⁻¹</span><br><small style="color:#64748b">強吸收峰</small></div>
+      </div>
+      <div class="spec-row">
+        <div class="spec-key">O–H</div>
+        <div class="spec-val"><span class="hl">2500–3500 cm⁻¹</span><br><small style="color:#64748b">非常寬廣的強吸收，有時會遮蓋 C–H 峰</small></div>
+      </div>
+    </div>
+
+    <div class="box box-fig">
+      <strong>Figure 19.4｜丁酸的 IR 光譜</strong><br>
+      • 在 <strong>1712 cm⁻¹</strong> 出現強烈的 C=O 吸收<br>
+      • 在 <strong>2500–3500 cm⁻¹</strong> 出現非常寬廣的 O–H 吸收，幾乎把 C–H 的峰（~3000 cm⁻¹）蓋掉了<br>
+      ✔ 看到這兩個峰同時出現，幾乎可以確定是羧酸！
+    </div>
+
+    <h3>¹H NMR 核磁共振</h3>
+    <div class="spec-row" style="margin-bottom:8px">
+      <div class="spec-key">O–H 質子</div>
+      <div class="spec-val"><span class="hl hl-red">10–12 ppm</span> — 所有常見有機化合物中最低場！（高度去屏蔽）</div>
+    </div>
+    <div class="spec-row">
+      <div class="spec-key">α 碳上的 H</div>
+      <div class="spec-val"><span class="hl">2–2.5 ppm</span> — 受 COOH 輕微去屏蔽</div>
+    </div>
+
+    <h3>¹³C NMR</h3>
+    <div class="spec-row">
+      <div class="spec-key">C=O 碳</div>
+      <div class="spec-val"><span class="hl hl-blue">170–210 ppm</span> — 高度去屏蔽</div>
+    </div>
+
+    <div class="box box-fig">
+      <strong>Figure 19.5｜丙酸的 ¹H 和 ¹³C NMR 光譜</strong><br>
+      丙酸 CH₃CH₂COOH 有三種不同的碳/氫：<br>
+      • Hₐ（CH₃）：<strong>1.1 ppm</strong>，三重峰（triplet）<br>
+      • H_b（CH₂）：<strong>2.4 ppm</strong>，四重峰（quartet）<br>
+      • H_c（OH）：<strong>12.1 ppm</strong>，單一峰（singlet，可能很寬）<br>
+      • ¹³C：Cₐ=9 ppm, Cb=28 ppm, <strong>Cc（C=O）=181 ppm</strong>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header">
+      <div class="sec-num">19.5</div>
+      <h2>有趣的羧酸</h2>
+    </div>
+
+    <div class="box box-life">
+      <div class="grid2" style="margin:0">
+        <div>
+          <strong>🐜 甲酸（formic acid, HCOOH）</strong><br>
+          某些螞蟻螫人時釋放的酸，名字來自拉丁文 <em>formica</em>（螞蟻），有嗆鼻氣味。
+        </div>
+        <div>
+          <strong>🍶 乙酸（acetic acid, CH₃COOH）</strong><br>
+          醋的酸味來源。乙醇暴露在空氣中被氧化即生成乙酸，讓酒變酸。純乙酸又稱冰醋酸（glacial acetic acid），熔點 17°C，常溫下可凝固。
+        </div>
+        <div>
+          <strong>😰 丁酸（butyric acid, CH₃CH₂CH₂COOH）</strong><br>
+          體臭和腐敗奶油的氣味來源，名字來自拉丁文 <em>butyrum</em>（奶油）。
+        </div>
+        <div>
+          <strong>🌿 草酸 & 乳酸</strong><br>
+          草酸（oxalic acid）存在菠菜和大黃中；乳酸（lactic acid）使酸牛奶有特殊酸味，人體無氧運動也會生成乳酸。
+        </div>
+      </div>
+    </div>
+
+    <h3>防腐劑中的羧酸鹽</h3>
+    <p>羧酸的鈉鹽/鉀鹽常用作食品防腐劑：</p>
+    <ul style="padding-left:20px;line-height:2">
+      <li><strong>苯甲酸鈉（sodium benzoate）</strong>：抑制真菌，用於軟性飲料</li>
+      <li><strong>山梨酸鉀（potassium sorbate）</strong>：延長烘焙食品等保存期限</li>
+    </ul>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header">
+      <div class="sec-num">19.6</div>
+      <h2>阿斯匹靈、花生四烯酸與前列腺素</h2>
+    </div>
+
+    <div class="big-em">阿斯匹靈（aspirin）如何止痛？ → 阻斷前列腺素的合成！</div>
+
+    <p><strong>阿斯匹靈（acetylsalicylic acid）</strong>是一個合成的羧酸，由 Felix Hoffmann 於 1899 年首次商業化合成（其父罹患類風濕性關節炎，促使他研發）。</p>
+
+    <div class="box box-key">
+      <strong>止痛機制：</strong><br>
+      阿斯匹靈 → 抑制<strong>環氧合酶（cyclooxygenase）</strong>→ 阻斷 花生四烯酸（arachidonic acid）→ PGG₂ → 前列腺素 的合成路徑<br><br>
+      <strong>前列腺素（prostaglandins）</strong>是負責疼痛和發炎的 20 碳脂肪酸（含五元環）。
+    </div>
+
+    <p>1982 年諾貝爾生理醫學獎頒給了 John Vane、Bengt Samuelsson 和 Sune Bergstrom，以表彰他們闡明阿斯匹靈機制的貢獻。</p>
+
+    <div class="box box-fig">
+      <strong>阿斯匹靈相關化合物</strong><br>
+      • <strong>水楊酸（salicylic acid）</strong>：從草地芥末（meadowsweet）中分離，但會刺激口腔和胃黏膜<br>
+      • <strong>水楊苷（salicin）</strong>：從柳樹皮中分離，名稱 aspirin 來自 a-（乙醯基）+ spir-（meadowsweet 的拉丁屬名 spirea）<br>
+      • <strong>拉他諾前列素（latanoprost）/ 貝美前列素（bimatoprost）</strong>：前列腺素類似物，用於治療青光眼（降低眼壓）
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header">
+      <div class="sec-num">19.7</div>
+      <h2>羧酸的製備</h2>
+    </div>
+
+    <p>羧基碳高度氧化（有三個 C–O 鍵），因此<strong>羧酸通常由氧化反應製備</strong>。</p>
+
+    <div class="teal-header">三種主要氧化製備法</div>
+
+    <div class="step" style="margin-bottom:18px">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>一級醇（1° alcohol）的氧化</strong><br>
+        試劑：Na₂Cr₂O₇、K₂Cr₂O₇ 或 CrO₃（在 H₂SO₄ / H₂O 中）
+        <div class="rxn">R–CH₂OH <span class="rxn-arrow">──[K₂Cr₂O₇, H₂SO₄]──→</span> R–COOH</div>
+        <small style="color:#64748b">注意：二級醇只會氧化到酮，不會繼續生成羧酸</small>
+      </div>
+    </div>
+
+    <div class="step" style="margin-bottom:18px">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>烷基苯（alkyl benzene）的氧化</strong><br>
+        試劑：KMnO₄（苯環側鏈至少有一個苄位 C–H）
+        <div class="rxn">PhCH₂R（或 PhCH₂CH₃ 等）<span class="rxn-arrow">──KMnO₄──→</span> PhCOOH（苯甲酸）</div>
+        <div class="box box-warn" style="margin-top:8px">
+          無論側鏈多長，<strong>產物永遠是苯甲酸（benzoic acid）</strong>！
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <strong>炔烴（alkyne）的氧化裂解</strong><br>
+        試劑：O₃，然後加水（H₂O）
+        <div class="rxn">內部炔烴 <span class="rxn-arrow">──[1] O₃, [2] H₂O──→</span> 兩個羧酸</div>
+        <div class="rxn">末端炔烴 <span class="rxn-arrow">──[1] O₃, [2] H₂O──→</span> 一個羧酸 + CO₂</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header">
+      <div class="sec-num">19.8</div>
+      <h2>羧酸的反應概觀</h2>
+    </div>
+
+    <p>羧酸有多個反應位點：</p>
+
+    <div class="grid3">
+      <div class="mini-card" style="background:#fffbeb;border-color:#fbbf24">
+        <div class="label" style="color:#d97706">最重要 ⭐</div>
+        <div class="val" style="font-size:14px">O–H 鍵斷裂</div>
+        <div class="desc">被鹼奪走質子 → Brønsted-Lowry 酸反應（本章重點）</div>
+      </div>
+      <div class="mini-card" style="background:#eff6ff;border-color:#bfdbfe">
+        <div class="label" style="color:#1d4ed8">次要 ①</div>
+        <div class="val" style="font-size:14px">O 上的孤對電子</div>
+        <div class="desc">被強酸質子化（在羰基氧上）→ 羧酸弱鹼性（第22章重要）</div>
+      </div>
+      <div class="mini-card" style="background:#f0fdf4;border-color:#86efac">
+        <div class="label" style="color:#166534">次要 ②</div>
+        <div class="val" style="font-size:14px">親核攻擊</div>
+        <div class="desc">親核試劑攻擊電正性的羰基碳 → π 鍵斷裂（第22章）</div>
+      </div>
+    </div>
+
+    <div class="box box-key">
+      質子化發生在<strong>羰基氧（C=O 的 O）</strong>，而非 OH 的氧，因為質子化後的共振穩定結構更多，使產物更穩定。
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header">
+      <div class="sec-num">19.9</div>
+      <h2>羧酸 — 強有機 Brønsted-Lowry 酸</h2>
+    </div>
+
+    <div class="big-em">羧酸為什麼酸性強？因為它的共軛鹼（羧酸根陰離子）被共振高度穩定化！</div>
+
+    <p>羧酸和鹼反應，生成<strong>羧酸根陰離子（carboxylate anion）</strong>：</p>
+    <div class="rxn">R–COOH + :B <span class="rxn-arrow">⇌</span> R–COO⁻ + H–B⁺</div>
+
+    <div class="box box-key">
+      <strong>乙酸根（acetate）的共振結構：</strong><br>
+      CH₃COO⁻ 有<strong>兩個等值共振結構</strong>，負電荷均等分布在兩個氧上。<br>
+      實驗證明：醋酸根的兩個 C–O 鍵長相同，均為 <strong>127 pm</strong>（介於 C–O 單鍵 136 pm 和 C=O 121 pm 之間），印證了共振雜化。
+    </div>
+
+    <div class="teal-header">為什麼羧酸比醇和酚更酸？</div>
+    <div class="compare">
+      <div class="cmp-item">
+        <div class="cmp-name">乙醇（ROH）</div>
+        <div class="cmp-val" style="color:#ef4444">pKₐ = 16</div>
+        <div class="cmp-tag" style="color:#ef4444">最弱酸</div>
+        <div style="font-size:12px;color:#64748b;margin-top:6px">乙氧基（ethoxide）無額外共振穩定</div>
+      </div>
+      <div class="cmp-item">
+        <div class="cmp-name">苯酚（phenol）</div>
+        <div class="cmp-val" style="color:#f97316">pKₐ = 10</div>
+        <div class="cmp-tag" style="color:#f97316">中等酸</div>
+        <div style="font-size:12px;color:#64748b;margin-top:6px">苯氧基有5個共振結構，但部分負電荷在碳（電負性較小）</div>
+      </div>
+      <div class="cmp-item">
+        <div class="cmp-name">乙酸（RCOOH）</div>
+        <div class="cmp-val" style="color:#16a34a">pKₐ = 4.8</div>
+        <div class="cmp-tag" style="color:#16a34a">最強有機酸 ⭐</div>
+        <div style="font-size:12px;color:#64748b;margin-top:6px">乙酸根有2個等值共振結構，負電荷完全在兩個電負性氧原子上</div>
+      </div>
+    </div>
+
+    <div class="box box-fig">
+      <strong>Figure 19.7｜乙酸、苯酚、乙醇酸性比較總結</strong><br>
+      酸性（pKₐ）↑ 大 = 酸性弱，共軛鹼 ↓ 不穩定<br>
+      • 乙酸根（acetate）：最穩定（兩個等值共振，都在 O 上）<br>
+      • 苯氧基（phenoxide）：次穩定（5個共振，但部分在碳上，且有芳香性損失）<br>
+      • 乙氧基（ethoxide）：最不穩定（無額外共振）
+    </div>
+
+    <h3>常用的脫質子試劑</h3>
+    <p>對 pKₐ ≈ 5 的羧酸，需使用<strong>共軛酸 pKₐ &gt; 5 的鹼</strong>才能有效脫質子：</p>
+    <table class="tbl">
+      <thead><tr><th>鹼</th><th>共軛酸</th><th>共軛酸 pKₐ</th><th>能否脫羧酸質子？</th></tr></thead>
+      <tbody>
+        <tr><td>NaHCO₃</td><td>H₂CO₃</td><td>6.4</td><td>✅ 是（連弱鹼也行！）</td></tr>
+        <tr><td>NH₃</td><td>NH₄⁺</td><td>9.4</td><td>✅ 是</td></tr>
+        <tr><td>Na₂CO₃</td><td>HCO₃⁻</td><td>10.2</td><td>✅ 是</td></tr>
+        <tr><td>NaOH</td><td>H₂O</td><td>15.7</td><td>✅ 是</td></tr>
+        <tr><td>NaH</td><td>H₂</td><td>35</td><td>✅ 是</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:14px;color:#64748b">（苯酚 pKₐ=10，需要 pKₐ>10 的鹼；乙醇 pKₐ=16，只有 NaH 夠強）</p>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header">
+      <div class="sec-num">19.10</div>
+      <h2>脂肪族羧酸中的誘導效應</h2>
+    </div>
+
+    <div class="big-em">「靠近 COOH 的基團能幫忙穩定負電荷，酸性就更強！」</div>
+
+    <div class="grid2">
+      <div class="box box-warn" style="margin:0">
+        <strong>電子提供基（electron-donating groups）</strong><br>
+        如烷基（R–）推電子→ 使共軛鹼更不穩定 → 酸性<strong>降低</strong><br>
+        例：(CH₃)₃CCOOH，pKₐ = <strong>5.1</strong>（比乙酸弱）
+      </div>
+      <div class="box box-key" style="margin:0">
+        <strong>電子吸引基（electron-withdrawing groups）</strong><br>
+        如鹵素（Cl, F）拉電子→ 使共軛鹼更穩定 → 酸性<strong>增強</strong><br>
+        例：ClCH₂COOH，pKₐ = <strong>2.8</strong>（比乙酸強）
+      </div>
+    </div>
+
+    <div class="teal-header">三個重要規律</div>
+
+    <div class="step">
+      <div class="step-n" style="background:#d97706">①</div>
+      <div class="step-body">
+        <strong>電負性取代基愈多，酸性愈強</strong>
+        <div class="compare" style="margin-top:10px">
+          <div class="cmp-item"><div class="cmp-name">ClCH₂COOH</div><div class="cmp-val">pKₐ = 2.8</div></div>
+          <div class="cmp-item"><div class="cmp-name">Cl₂CHCOOH</div><div class="cmp-val">pKₐ = 1.3</div></div>
+          <div class="cmp-item"><div class="cmp-name">Cl₃CCOOH</div><div class="cmp-val">pKₐ = 0.9</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="background:#d97706">②</div>
+      <div class="step-body">
+        <strong>取代基電負性愈高，酸性愈強</strong>
+        <div class="compare" style="margin-top:10px">
+          <div class="cmp-item"><div class="cmp-name">ClCH₂COOH</div><div class="cmp-val">pKₐ = 2.8</div></div>
+          <div class="cmp-item"><div class="cmp-name">FCH₂COOH</div><div class="cmp-val" style="color:#16a34a">pKₐ = 2.6</div><div class="cmp-tag">F 電負性 > Cl</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="background:#d97706">③</div>
+      <div class="step-body">
+        <strong>取代基離 COOH 愈近，酸性愈強</strong>
+        <div class="compare" style="margin-top:10px">
+          <div class="cmp-item"><div class="cmp-name">4-氯丁酸</div><div class="cmp-val">pKₐ = 4.5</div><div class="cmp-tag">Cl 最遠</div></div>
+          <div class="cmp-item"><div class="cmp-name">3-氯丁酸</div><div class="cmp-val">pKₐ = 4.1</div></div>
+          <div class="cmp-item"><div class="cmp-name">2-氯丁酸</div><div class="cmp-val" style="color:#16a34a">pKₐ = 2.9</div><div class="cmp-tag">Cl 最近 ⭐</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header">
+      <div class="sec-num">19.11</div>
+      <h2>取代苯甲酸</h2>
+    </div>
+
+    <p>苯環上的取代基既影響電親子芳香取代反應，也影響苯甲酸衍生物的酸性。</p>
+
+    <div class="grid2">
+      <div class="box box-warn" style="margin:0">
+        <strong>規則一：電子提供基（D）</strong><br>
+        推電子給羧酸根 → 不穩定 → 酸性<strong>降低</strong><br>
+        pKₐ &gt; 4.2（苯甲酸的 pKₐ）<br><br>
+        常見例子：–NH₂、–OH、–OR、–R
+      </div>
+      <div class="box box-key" style="margin:0">
+        <strong>規則二：電子吸引基（W）</strong><br>
+        從羧酸根拉走電子 → 穩定 → 酸性<strong>增強</strong><br>
+        pKₐ &lt; 4.2（苯甲酸的 pKₐ）<br><br>
+        常見例子：–NO₂、–CN、–COOH、–X（鹵素）
+      </div>
+    </div>
+
+    <div class="box box-tip">
+      <strong>記憶連結（與第18章一致）：</strong><br>
+      • 活化苯環（electrophilic aromatic substitution 反應快）的基團 = 電子提供基 → 使苯甲酸<strong>較不酸</strong><br>
+      • 去活化苯環的基團 = 電子吸引基 → 使苯甲酸<strong>較酸</strong>
+    </div>
+
+    <div class="box box-fig">
+      <strong>Figure 19.8｜取代基對苯甲酸酸性的影響（對應電芳取代反應）</strong><br>
+      例：<br>
+      • p-甲氧基苯甲酸（p-methoxybenzoic acid）：–OCH₃ 為電子提供基 → pKₐ > 4.2（較苯甲酸弱）<br>
+      • p-硝基苯甲酸（p-nitrobenzoic acid）：–NO₂ 為電子吸引基 → pKₐ < 4.2（較苯甲酸強）<br>
+      排列酸性強弱：<strong>p-甲氧基苯甲酸 &lt; 苯甲酸 &lt; p-硝基苯甲酸</strong>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header">
+      <div class="sec-num">19.12</div>
+      <h2>萃取（Extraction）</h2>
+    </div>
+
+    <p><strong>萃取</strong>是利用化合物在兩種不相溶溶劑（水層 vs 有機層）中的溶解度差異，來分離混合物的技術。使用「<strong>分液漏斗（separatory funnel）</strong>」來操作。</p>
+
+    <div class="box box-fig">
+      <strong>Figure 19.9｜分液漏斗的使用</strong><br>
+      兩種不相溶液體加入分液漏斗後，密度較低的在上層，密度較高的在下層。<br>
+      打開下方旋塞即可分離下層液體，上層則從上口倒出。<br>
+      常用有機溶劑：二氯甲烷（CH₂Cl₂）、乙醚、己烷（密度皆小於水）
+    </div>
+
+    <div class="big-em">如何用萃取分離苯甲酸（PhCOOH）和環己醇（cyclohexanol）？</div>
+    <p>兩者都溶於有機溶劑、不溶於水，直接萃取無法分離。但利用酸鹼化學就可以：</p>
+
+    <div class="box box-fig">
+      <strong>Figure 19.10｜萃取分離步驟</strong><br>
+      <strong>Step 1：</strong>兩種化合物都溶解在 CH₂Cl₂ 中<br>
+      <strong>Step 2：</strong>加入 10% NaOH 溶液 →<br>
+      &nbsp;&nbsp;苯甲酸（pKₐ=4.2）被 NaOH 脫質子 → <strong>苯甲酸鈉（PhCOO⁻Na⁺）溶入水層</strong><br>
+      &nbsp;&nbsp;環己醇（pKₐ≈17）太弱，NaOH 無法脫質子 → <strong>留在有機層</strong><br>
+      <strong>Step 3：</strong>打開旋塞分離兩層 → 分離完成！<br><br>
+      ✔ 若要回收苯甲酸：對水層加強酸（HCl）使 PhCOO⁻ 重新質子化 → PhCOOH 析出
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header">
+      <div class="sec-num">19.13</div>
+      <h2>磺酸（Sulfonic Acids）</h2>
+    </div>
+
+    <p>磺酸的通式為 <span class="hl hl-blue">R–SO₃H</span>，比羧酸少見，但非常重要。最常用的是 <strong>對甲苯磺酸（p-toluenesulfonic acid，TsOH）</strong>。</p>
+
+    <div class="box box-key">
+      <strong>磺酸為何是強酸？</strong><br>
+      pKₐ ≈ <span class="hl">–7</span>（遠比羧酸的 ~5 強！接近強無機酸）<br>
+      原因：共軛鹼 <strong>磺酸根陰離子（sulfonate anion，RSO₃⁻）</strong>有 <strong>三個共振結構</strong>，負電荷均等分散在三個氧原子上，極度穩定！
+    </div>
+
+    <p>磺酸根是很好的<strong>離去基（leaving group）</strong>，因為它是極弱的鹼（共軛酸 pKₐ 很低），在親核取代反應中非常有用（見第9章）。</p>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header">
+      <div class="sec-num">19.14</div>
+      <h2>胺基酸（Amino Acids）</h2>
+    </div>
+
+    <div class="big-em">胺基酸 = 同時含有「羧酸（–COOH）」和「胺基（–NH₂）」的兩性化合物</div>
+
+    <h3>A. 結構簡介</h3>
+    <p>大多數天然胺基酸，胺基連在 <strong>α 碳</strong>上，稱為 <strong>α-胺基酸</strong>。通式：</p>
+    <div class="formula">H₂N–C*H(R)–COOH    (* = 立體中心，除 glycine 外)</div>
+    <div class="box box-key">
+      人體共需 20 種胺基酸，但只能自行合成其中 10 種。另外 10 種稱為<strong>必需胺基酸（essential amino acids）</strong>，必須從飲食中攝取（幾乎每天）。<br><br>
+      • 穀類（wheat, rice, corn）含少量離胺酸（lysine）<br>
+      • 豆類含少量甲硫胺酸（methionine）<br>
+      ✅ 搭配食用即可獲得全部必需胺基酸！（例：米飯 +豆腐、玉米薄餅 + 豆子）
+    </div>
+
+    <p>除 glycine（R=H）外，所有天然胺基酸的 α 碳都有立體中心，且自然界中只存在 <span class="hl hl-green">L-異構物</span>（大多為 S 構形，cysteine 例外）。</p>
+
+    <h3>代表性胺基酸表</h3>
+    <table class="tbl">
+      <thead><tr><th>R 基</th><th>名稱</th><th>縮寫</th><th>單字母</th></tr></thead>
+      <tbody>
+        <tr><td>–H</td><td>甘胺酸 glycine</td><td>Gly</td><td>G</td></tr>
+        <tr><td>–CH₃</td><td>丙胺酸 alanine</td><td>Ala</td><td>A</td></tr>
+        <tr><td>–CH₂C₆H₅</td><td>苯丙胺酸 phenylalanine</td><td>Phe</td><td>F</td></tr>
+        <tr><td>–CH₂OH</td><td>絲胺酸 serine</td><td>Ser</td><td>S</td></tr>
+        <tr><td>–CH₂SH</td><td>半胱胺酸 cysteine</td><td>Cys</td><td>C</td></tr>
+        <tr><td>–(CH₂)₄NH₂</td><td>離胺酸 lysine</td><td>Lys</td><td>K</td></tr>
+        <tr><td>–CH₂CH₂COOH</td><td>麩胺酸 glutamic acid</td><td>Glu</td><td>E</td></tr>
+      </tbody>
+    </table>
+
+    <h3>B. 酸鹼性質 — 兩性離子（Zwitterion）</h3>
+    <div class="box box-warn">
+      <strong>胺基酸的中性形式（H₂N–CHR–COOH）實際上並不存在！</strong><br>
+      羧基的質子會轉移給胺基 → 形成同時帶正電和負電的<strong>兩性離子（zwitterion）</strong>
+    </div>
+
+    <div class="zwit-diagram">
+      <div class="zwit-form" style="border-color:#ef4444">
+        <div class="name" style="color:#ef4444">酸性（pH ≤ 2）</div>
+        <div class="struct">⁺H₃N–CHR–COOH</div>
+        <div class="ph">淨電荷 +1</div>
+      </div>
+      <div class="zwit-arrow">⇌<br><small style="font-size:11px;color:#64748b">pH↑（加鹼）</small></div>
+      <div class="zwit-form" style="border-color:#16a34a">
+        <div class="name" style="color:#16a34a">中性（pH ≈ 6，兩性離子）</div>
+        <div class="struct">⁺H₃N–CHR–COO⁻</div>
+        <div class="ph">淨電荷 = 0 ✅</div>
+      </div>
+      <div class="zwit-arrow">⇌<br><small style="font-size:11px;color:#64748b">pH↑（再加鹼）</small></div>
+      <div class="zwit-form" style="border-color:#2563eb">
+        <div class="name" style="color:#2563eb">鹼性（pH ≥ 10）</div>
+        <div class="struct">H₂N–CHR–COO⁻</div>
+        <div class="ph">淨電荷 –1</div>
+      </div>
+    </div>
+
+    <div class="box box-fig">
+      <strong>Figure 19.11｜丙胺酸（alanine, R=CH₃）的酸鹼反應總結</strong><br>
+      • pH ≤ 2：Form B（+1 charge）——羧基被質子化<br>
+      • pH ≈ 6：Form A（zwitterion，中性）——兩性離子，這才是真正的「中性形態」<br>
+      • pH ≥ 10：Form C（−1 charge）——胺基被去質子化<br><br>
+      胺基酸固態、高熔點、可溶於水（因為是鹽類），不溶於有機溶劑（如乙醚）
+    </div>
+
+    <h3>C. 等電點（Isoelectric Point，pI）</h3>
+    <div class="box box-key">
+      <strong>等電點 pI</strong>：胺基酸主要以中性兩性離子形式存在的 pH 值<br><br>
+      計算公式：
+      <div class="formula">pI = [pKₐ(COOH) + pKₐ(NH₃⁺)] / 2</div>
+      例：丙胺酸的 pKₐ(COOH) = 2.35，pKₐ(NH₃⁺) = 9.87<br>
+      → pI = (2.35 + 9.87) / 2 = <strong>6.12</strong>
+    </div>
+  </div>
+
+  <div class="section" id="summary" style="border:2px solid var(--amber-border)">
+    <div class="section-header">
+      <div class="sec-num" style="background:var(--amber)">📝</div>
+      <h2>總整理：快速複習卡</h2>
+    </div>
+
+    <div class="teal-header">一、光譜辨識速查</div>
+    <table class="tbl">
+      <thead><tr><th>技術</th><th>位置 / 數值</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>IR</td><td><span class="hl">~1710 cm⁻¹</span></td><td>C=O 強吸收</td></tr>
+        <tr><td>IR</td><td><span class="hl">2500–3500 cm⁻¹</span></td><td>O–H 寬且強吸收（識別特徵！）</td></tr>
+        <tr><td>¹H NMR</td><td><span class="hl hl-red">10–12 ppm</span></td><td>O–H 質子（最低場）</td></tr>
+        <tr><td>¹H NMR</td><td>2–2.5 ppm</td><td>α 碳上的 H</td></tr>
+        <tr><td>¹³C NMR</td><td><span class="hl hl-blue">170–210 ppm</span></td><td>C=O 碳（高度去屏蔽）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="teal-header">二、酸性大小一眼看穿</div>
+    <div class="pka-chart">
+      <div class="pka-row">
+        <div class="pka-label">強無機酸 (HCl)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:100%;background:#7f1d1d">pKₐ &lt; 0</div>
+        </div>
+        <div class="pka-note">最強酸</div>
+      </div>
+      <div class="pka-row">
+        <div class="pka-label">磺酸 (RSO₃H)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:94%;background:#b91c1c">pKₐ ≈ –7</div>
+        </div>
+        <div class="pka-note">強有機酸</div>
+      </div>
+      <div class="pka-row">
+        <div class="pka-label">羧酸 (RCOOH)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:55%;background:#d97706">pKₐ ≈ 4–5 ⭐</div>
+        </div>
+        <div class="pka-note">強有機Brønsted酸</div>
+      </div>
+      <div class="pka-row">
+        <div class="pka-label">苯酚 (C₆H₅OH)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:44%;background:#059669">pKₐ ≈ 10</div>
+        </div>
+        <div class="pka-note">弱有機酸</div>
+      </div>
+      <div class="pka-row">
+        <div class="pka-label">醇 (ROH)</div>
+        <div class="pka-bar-wrap">
+          <div class="pka-bar" style="width:22%;background:#2563eb">pKₐ ≈ 16–18</div>
+        </div>
+        <div class="pka-note">更弱的有機酸</div>
+      </div>
+    </div>
+
+    <div class="teal-header">三、影響酸性的因素</div>
+    <div class="grid3">
+      <div class="mini-card" style="background:var(--amber-bg);border-color:var(--amber-border)">
+        <div class="label" style="color:var(--amber)">共振效應</div>
+        <div style="font-size:13px">負電荷越分散（共振結構越穩定）→ 酸性越強<br>羧酸根 > 苯氧基 > 烷氧基</div>
+      </div>
+      <div class="mini-card" style="background:var(--green-bg);border-color:var(--green-border)">
+        <div class="label" style="color:var(--green)">誘導效應（脂肪族）</div>
+        <div style="font-size:13px">電負性吸電基（Cl, F）→ 酸性增強<br>烷基供電基 → 酸性降低<br>距離越近，效果越大</div>
+      </div>
+      <div class="mini-card" style="background:var(--purple-bg);border-color:var(--purple-border)">
+        <div class="label" style="color:var(--purple)">苯甲酸衍生物</div>
+        <div style="font-size:13px">活化基（供電）→ pKₐ > 4.2（酸性弱）<br>去活化基（吸電）→ pKₐ &lt; 4.2（酸性強）</div>
+      </div>
+    </div>
+
+    <div class="teal-header">四、胺基酸pH形態記憶口訣</div>
+    <div class="box box-tip">
+      <strong>「低 pH 帶正電，高 pH 帶負電，isoelectric point 淨電荷為零」</strong><br><br>
+      pH 很低（≤ 2）：加了很多 H⁺ → COOH 不離子化 → 整體帶 <strong>+1</strong><br>
+      pH ≈ pI（等電點）：兩性離子，淨電荷 = <strong>0</strong><br>
+      pH 很高（≥ 10）：OH⁻ 把 NH₃⁺ 的質子拿走 → 整體帶 <strong>−1</strong><br><br>
+      pI = [pKₐ(COOH) + pKₐ(NH₃⁺)] / 2
+    </div>
+
+    <div class="teal-header">五、本章重要反應速覽</div>
+    <table class="tbl">
+      <thead><tr><th>類型</th><th>反應/原則</th><th>關鍵</th></tr></thead>
+      <tbody>
+        <tr><td>製備①</td><td>1° 醇 + K₂Cr₂O₇ → RCOOH</td><td>氧化反應</td></tr>
+        <tr><td>製備②</td><td>烷基苯 + KMnO₄ → 苯甲酸</td><td>永遠得苯甲酸</td></tr>
+        <tr><td>製備③</td><td>炔 + O₃/H₂O → RCOOH</td><td>氧化裂解</td></tr>
+        <tr><td>酸鹼</td><td>RCOOH + NaOH → RCOONa + H₂O</td><td>生成可溶性鹽</td></tr>
+        <tr><td>酸鹼</td><td>RCOOH + NaHCO₃ → RCOONa + H₂O + CO₂</td><td>連碳酸氫鈉都夠強</td></tr>
+        <tr><td>萃取</td><td>RCOOH + 鹼 → 水溶鹽（水層）；中性有機物留有機層</td><td>利用溶解度差異</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<script>
+  // 1. 平滑捲動功能（保留並微調，確保點擊後能對齊）
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const target = document.querySelector(btn.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // 2. 自動漸顯動態長條圖（保留原功能）
+  const bars = document.querySelectorAll('.pka-bar');
+  const barObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'scaleX(1)';
+      }
+    });
+  }, { threshold: 0.1 });
+  bars.forEach(bar => {
+    const w = bar.style.width;
+    bar.style.width = w;
+    bar.style.opacity = '0.85';
+    barObserver.observe(bar);
+  });
+
+  // 3. 新增功能：導覽列滾動自動高亮目前所在區塊
+  const sections = document.querySelectorAll('.main .section');
+  const navBtns = document.querySelectorAll('.nav-btn');
+
+  const navObserverOptions = {
+    root: null,
+    // 當區塊進入畫面頂部算起往下 30% 到 70% 的主要視覺區域時，觸發狀態更新
+    rootMargin: '-30% 0px -60% 0px',
+    threshold: 0
+  };
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        
+        // 清除所有按鈕的 active 狀態
+        navBtns.forEach(btn => btn.classList.remove('active'));
+        
+        // 找到當前對應的按鈕並加上 active
+        const activeBtn = document.querySelector(`.nav-btn[href="#${id}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+          
+          // 自動幫導覽列水平捲動，確保高亮的項目在手機板畫面上看得到
+          activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        }
+      }
+    });
+  }, navObserverOptions);
+
+  sections.forEach(section => navObserver.observe(section));
+</script>
+</body>
+</html>
