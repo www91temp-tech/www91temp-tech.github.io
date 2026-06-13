@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第21章：醛與酮──親核加成反應</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #F8FAFC;
+    --card:      #FFFFFF;
+    --card2:     #F1F5F9;
+    --amber:     #D97706;
+    --teal:      #0D9488;
+    --coral:     #E11D48;
+    --violet:    #6D28D9;
+    --green:     #0A7A33;
+    --text:      #1E293B;
+    --muted:     #64748B;
+    --border:    #E2E8F0;
+    --highlight: #FEF3C7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    scroll-timeline: --page-scroll block;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: #1c0130;
+    border-bottom: 2px solid var(--amber);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'C=O';
+    position: absolute; top: -20px; right: 60px;
+    font-size: 180px; font-family: 'JetBrains Mono', monospace;
+    color: rgba(217,119,6,0.04); font-weight: 900; line-height: 1;
+  }
+  .hero .chapter-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px,5vw,52px);
+    color: #dacfe3; line-height: 1.15;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .hero h1 span { color: var(--amber); }
+  .hero .subtitle {
+    margin-top: 14px; color: #c9b6d9;
+    font-size: 14px; max-width: 600px; margin-inline: auto;
+  }
+  .hero .formula-strip {
+    margin-top: 28px; display: flex; justify-content: center;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .formula-strip .badge {
+    background: rgba(217,119,6,0.08); border: 1px solid rgba(217,119,6,0.25);
+    border-radius: 20px; padding: 5px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--amber);
+  }
+
+  /* ── NAV BAR ── */
+  .navbar {
+    position: sticky; top: 0; z-index: 100;
+    background: #180726;
+    backdrop-filter: blur(11px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    display: flex; gap: 4px; flex-wrap: wrap;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .navbar a {
+    display: block; padding: 12px 14px;
+    color: #f3edf7; text-decoration: none;
+    font-size: 14px; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .navbar a:hover { color: var(--amber); border-color: var(--amber); }
+
+  /* CSS 現代滾動驅動動畫：當特定區塊進入視窗時自動點亮對應導覽連結 */
+  @supports (animation-timeline: view()) {
+    body {
+      timeline-scope: --intro, --naming, --properties, --prep, --general, --hydride, --cn, --wittig, --amines, --water, --acetal, --cyclic, --carbo, --review;
+    }
+    #intro { view-timeline: --intro block; }
+    #naming { view-timeline: --naming block; }
+    #properties { view-timeline: --properties block; }
+    #prep { view-timeline: --prep block; }
+    #general { view-timeline: --general block; }
+    #hydride { view-timeline: --hydride block; }
+    #cn { view-timeline: --cn block; }
+    #wittig { view-timeline: --wittig block; }
+    #amines { view-timeline: --amines block; }
+    #water { view-timeline: --water block; }
+    #acetal { view-timeline: --acetal block; }
+    #cyclic { view-timeline: --cyclic block; }
+    #carbo { view-timeline: --carbo block; }
+    #review { view-timeline: --review block; }
+
+    .navbar a[href="#intro"] { animation: active-nav linear; animation-timeline: --intro; }
+    .navbar a[href="#naming"] { animation: active-nav linear; animation-timeline: --naming; }
+    .navbar a[href="#properties"] { animation: active-nav linear; animation-timeline: --properties; }
+    .navbar a[href="#prep"] { animation: active-nav linear; animation-timeline: --prep; }
+    .navbar a[href="#general"] { animation: active-nav linear; animation-timeline: --general; }
+    .navbar a[href="#hydride"] { animation: active-nav linear; animation-timeline: --hydride; }
+    .navbar a[href="#cn"] { animation: active-nav linear; animation-timeline: --cn; }
+    .navbar a[href="#wittig"] { animation: active-nav linear; animation-timeline: --wittig; }
+    .navbar a[href="#amines"] { animation: active-nav linear; animation-timeline: --amines; }
+    .navbar a[href="#water"] { animation: active-nav linear; animation-timeline: --water; }
+    .navbar a[href="#acetal"] { animation: active-nav linear; animation-timeline: --acetal; }
+    .navbar a[href="#cyclic"] { animation: active-nav linear; animation-timeline: --cyclic; }
+    .navbar a[href="#carbo"] { animation: active-nav linear; animation-timeline: --carbo; }
+    .navbar a[href="#review"] { animation: active-nav linear; animation-timeline: --review; }
+
+    @keyframes active-nav {
+      0%, 100% { color: var(--muted); border-color: transparent; }
+      20%, 80% { color: var(--amber); border-color: var(--amber); font-weight: 700; }
+    }
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .wrapper { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* ── SECTION TITLES ── */
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin: 52px 0 24px;
+    scroll-margin-top: 70px; /* 避免導覽列擋住章節標題 */
+  }
+  .section-header .num {
+    background: var(--amber); color: #fff;
+    font-weight: 900; font-size: 13px;
+    width: 34px; height: 34px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--text); line-height: 1.2;
+  }
+  .section-header .tag {
+    margin-left: auto; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--border); padding: 3px 10px; border-radius: 10px;
+  }
+
+  h3 { font-size: 15px; color: var(--amber); margin: 22px 0 10px; font-weight: 700; }
+  h4 { font-size: 13px; color: var(--teal); margin: 16px 0 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  p  { margin-bottom: 12px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 24px; margin-bottom: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01), 0 2px 4px -1px rgba(0,0,0,0.01);
+  }
+  .card.amber  { border-left: 4px solid var(--amber); background: #FFFDF9; }
+  .card.teal   { border-left: 4px solid var(--teal); background: #F2FBFB; }
+  .card.coral  { border-left: 4px solid var(--coral); background: #FFF1F2; }
+  .card.violet { border-left: 4px solid var(--violet); background: #F5F3FF; }
+  .card.green  { border-left: 4px solid var(--green); background: #F0FDF0; }
+
+  /* ── FIGURE BOX ── */
+  .figure-box {
+    background: var(--card2);
+    border: 1px dashed #A78BFA;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .figure-box .fig-label {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--violet); margin-bottom: 6px; font-weight: 700;
+  }
+  .figure-box .fig-title { color: var(--text); font-weight: 700; margin-bottom: 8px; }
+  .figure-box p { font-size: 13px; color: var(--muted); margin: 0; }
+
+  /* ── KEY RULE ── */
+  .key-rule {
+    background: linear-gradient(90deg, #FEF3C7, #FFFBEB);
+    border: 1px solid rgba(217,119,6,0.3);
+    border-radius: 10px; padding: 16px 20px; margin: 14px 0;
+  }
+  .key-rule::before {
+    content: '⭐ 重要觀念';
+    display: block; font-size: 10px; letter-spacing: 2px;
+    color: var(--amber); margin-bottom: 6px; font-weight: 700;
+    text-transform: uppercase;
+  }
+  .key-rule p { margin: 0; font-size: 14px; color: #78350F; }
+
+  /* ── REACTION BOX ── */
+  .reaction-box {
+    background: #F8FAFC;
+    border: 1px solid var(--teal);
+    border-radius: 10px; padding: 18px 20px; margin: 14px 0;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  }
+  .reaction-box .rx-title {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px; font-weight: 700;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .reaction-box .arrow { color: var(--amber); margin: 0 6px; }
+  .reaction-box .reagent {
+    display: inline-block; background: rgba(13,148,136,0.08);
+    border: 1px solid rgba(13,148,136,0.25); border-radius: 4px;
+    padding: 1px 7px; font-size: 12px; color: var(--teal);
+  }
+  .reaction-box .product {
+    color: var(--green); font-weight: 600;
+  }
+  .reaction-box .reactant { color: var(--text); }
+
+  /* ── MECHANISM STEPS ── */
+  .mech-box {
+    background: #FFFFFF; border: 1px solid #DDD6FE;
+    border-radius: 12px; padding: 20px 22px; margin: 14px 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+  }
+  .mech-box .mech-title {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--violet); margin-bottom: 16px; font-weight: 700;
+  }
+  .mech-step {
+    display: flex; gap: 16px; margin-bottom: 14px; align-items: flex-start;
+  }
+  .mech-step:last-child { margin-bottom: 0; }
+  .mech-step .step-num {
+    background: var(--violet); color: #fff;
+    width: 26px; height: 26px; min-width: 26px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .mech-step .step-content { flex: 1; font-size: 14px; }
+  .mech-step .step-content code {
+    background: rgba(109,40,217,0.08); padding: 1px 6px;
+    border-radius: 3px; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--violet);
+  }
+
+  /* ── COMPARE TABLE ── */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+  .compare-table th {
+    background: #E2E8F0; color: #78350F;
+    padding: 10px 14px; text-align: left;
+    border-bottom: 2px solid var(--amber);
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .compare-table td {
+    padding: 9px 14px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    background: #FFF;
+  }
+  .compare-table tr:hover td { background: #FFFBEB; }
+  .compare-table .highlight-row td { background: #FEF3C7; color: #78350F; font-weight: 600; }
+
+  /* ── REACTIVITY DIAGRAM ── */
+  .reactivity-bar {
+    display: flex; gap: 0; margin: 16px 0; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .reactivity-bar .rx-item {
+    flex: 1; padding: 14px 12px; text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .rx-item.most   { background: #DCFCE7; color: #15803D; }
+  .rx-item.mid    { background: #FEF3C7; color: #B45309; }
+  .rx-item.least  { background: #FFE4E6; color: #B91C1C; }
+  .rx-item .label { font-size: 10px; color: var(--muted); margin-top: 4px; font-family: 'Noto Sans TC'; }
+
+  /* ── SUMMARY GRID ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px; margin: 14px 0;
+  }
+  .summary-card {
+    background: #FFFFFF; border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  .summary-card .sc-label {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .summary-card .sc-title {
+    font-weight: 700; color: var(--text); margin-bottom: 6px; font-size: 14px;
+  }
+  .summary-card .sc-body { font-size: 12px; color: var(--muted); }
+
+  /* ── WARNING BOX ── */
+  .warning-box {
+    background: #FFF1F2; border: 1px solid rgba(225,29,72,0.3);
+    border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 13px;
+    color: #9F1239;
+  }
+  .warning-box::before { content: '⚠ 注意'; color: var(--coral); font-weight: 700; margin-right: 8px; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip {
+    background: #F2FBFB; border: 1px solid rgba(13,148,136,0.3);
+    border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 13px;
+    color: #115E59;
+  }
+  .memory-tip::before { content: '💡 記憶訣竅'; color: var(--teal); font-weight: 700; display: block; margin-bottom: 4px; }
+
+  /* ── BIO BOX ── */
+  .bio-box {
+    background: #F5F3FF; border: 1px solid rgba(109,40,217,0.25);
+    border-radius: 8px; padding: 14px 16px; margin: 12px 0; font-size: 13px;
+    color: #5B21B6;
+  }
+  .bio-box::before { content: '🌿 生物應用'; color: var(--violet); font-weight: 700; display: block; margin-bottom: 4px; }
+
+  /* ── CODE INLINE ── */
+  code {
+    background: rgba(0,0,0,0.05);
+    padding: 1px 6px; border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 92%; color: #B45309;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* ── REACTION OVERVIEW TABLE ── */
+  .rx-overview {
+    width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0;
+  }
+  .rx-overview th {
+    background: #E2E8F0; padding: 10px 12px;
+    color: var(--teal); text-align: left;
+    border-bottom: 2px solid var(--teal);
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .rx-overview td {
+    padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: middle;
+    background: #FFF;
+  }
+  .rx-overview tr:nth-child(even) td { background: #F8FAFC; }
+  .rx-tag {
+    display: inline-block; border-radius: 4px; padding: 2px 8px;
+    font-size: 12px; font-weight: 700;
+  }
+  .rx-tag.basic  { background: #FEF3C7;  color: #B45309; }
+  .rx-tag.acid   { background: #FFE4E6; color: #B91C1C; }
+  .rx-tag.either { background: #E0F2FE;  color: #0369A1; }
+
+  .back-top {
+    position: fixed; bottom: 30px; right: 24px;
+    background: var(--amber); color: #fff;
+    border: none; border-radius: 50%; width: 40px; height: 40px;
+    font-size: 18px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(217,119,6,0.25);
+    display: flex; align-items: center; justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="chapter-label">有機化學 · 第21章</div>
+  <h1>醛與酮<br><span>親核加成反應</span></h1>
+  <p class="subtitle">Aldehydes and Ketones — Nucleophilic Addition<br>本章核心反應：親核試劑攻擊羰基碳</p>
+  <div class="formula-strip">
+    <span class="badge">RCHO 醛</span>
+    <span class="badge">R₂C=O 酮</span>
+    <span class="badge">C=O 羰基</span>
+    <span class="badge">Nu: → C⁺</span>
+    <span class="badge">sp² 平面</span>
+  </div>
+</div>
+
+<nav class="navbar">
+  <a href="#intro">導論</a>
+  <a href="#naming">命名</a>
+  <a href="#properties">性質</a>
+  <a href="#prep">製備</a>
+  <a href="#general">通則機制</a>
+  <a href="#hydride">H⁻/R⁻</a>
+  <a href="#cn">氰醇</a>
+  <a href="#wittig">Wittig</a>
+  <a href="#amines">胺類</a>
+  <a href="#water">水合</a>
+  <a href="#acetal">縮醛</a>
+  <a href="#cyclic">環形半縮醛</a>
+  <a href="#carbo">碳水化合物</a>
+  <a href="#review">總複習</a>
+</nav>
+
+<div class="wrapper">
+
+<div id="intro" class="section-header">
+  <div class="num">1</div>
+  <h2>導論：認識醛與酮</h2>
+  <span class="tag">§21.1</span>
+</div>
+
+<div class="card amber">
+  <h3>什麼是羰基化合物？</h3>
+  <p>醛與酮都含有 <code>C=O</code>（羰基，carbonyl group）。</p>
+  <ul style="padding-left:20px; margin-bottom:10px;">
+    <li><strong style="color:var(--amber)">醛（RCHO）</strong>：羰基碳上至少連接一個 H 原子</li>
+    <li><strong style="color:var(--teal)">酮（RCOR'）</strong>：羰基碳上連接兩個烷基或芳基（沒有 H）</li>
+  </ul>
+  <p style="font-size:13px;color:var(--muted)">⚠ 醛的寫法 <code>RCHO</code> 中，H 是接在 C 上，不是 O 上！</p>
+</div>
+
+<div class="key-rule">
+  <p>羰基碳的兩大特性：<br>
+  ① <strong>sp² 混成，平面三角形</strong>（鍵角約 120°，空間較不擁擠）<br>
+  ② 氧原子電負度大，使羰基碳帶 <strong>δ⁺（親電子性）</strong> → 容易被親核試劑攻擊</p>
+</div>
+
+<h3>反應活性大小</h3>
+<p>羰基碳上的烷基越多，活性越低（立體效應＋電子效應）：</p>
+
+<div class="reactivity-bar">
+  <div class="rx-item most">
+    H₂C=O<br>甲醛
+    <div class="label">最活潑 🔥</div>
+  </div>
+  <div class="rx-item mid">
+    RCHO<br>醛
+    <div class="label">中等</div>
+  </div>
+  <div class="rx-item least">
+    R₂C=O<br>酮
+    <div class="label">最不活潑</div>
+  </div>
+</div>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 說明</div>
+  <div class="fig-title">羰基化合物的反應活性趨勢圖</div>
+  <p>圖示中，箭頭向左代表「對親核試劑的反應活性增加」，從酮(R₂C=O)到醛(RCHO)再到甲醛(H₂C=O)；箭頭向右代表「立體障礙增加」。烷基取代越多，阻擋親核試劑接近的空間越大，且供電子烷基使羰基碳δ⁺降低，故活性越低。</p>
+</div>
+
+<div class="bio-box">
+  本章開頭介紹的天然藥物 <strong>digoxin（地高辛）</strong> 用於治療充血性心臟衰竭，含有三個縮醛單元（acetals），這些縮醛正是由羰基加成反應形成的。每 1000 kg 乾燥毛地黃葉可萃取 1 kg 的 digoxin。
+</div>
+
+<hr class="divider">
+
+<div id="naming" class="section-header">
+  <div class="num">2</div>
+  <h2>命名規則</h2>
+  <span class="tag">§21.2</span>
+</div>
+
+<h3>醛的 IUPAC 命名</h3>
+<div class="card teal">
+  <h4>兩種情況</h4>
+  <p><strong>情況 A：CHO 接在鏈上</strong> → 找含 CHO 的最長碳鏈，把 <code>-e</code> 改成 <code>-al</code>；CHO 碳為 C1，但名稱中省略「1」。</p>
+  <p><strong>情況 B：CHO 接在環上</strong> → 環名 + <code>-carbaldehyde</code>，環的 CHO 附著點為 C1。</p>
+</div>
+
+<table class="compare-table">
+  <thead>
+    <tr><th>範例結構</th><th>IUPAC 名稱</th><th>說明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>CH₃CHO</code></td><td>ethanal（乙醛）</td><td>2C，後綴 -al</td></tr>
+    <tr><td><code>CH₃CH₂CHO</code></td><td>propanal（丙醛）</td><td>3C，CHO 在 C1</td></tr>
+    <tr><td>2,3-二甲基丁醛</td><td>2,3-dimethylbutanal</td><td>最長鏈4C，甲基在C2、C3</td></tr>
+    <tr><td>環己烷-CHO（乙基在C2）</td><td>2-ethylcyclohexanecarbaldehyde</td><td>環上用 -carbaldehyde</td></tr>
+  </tbody>
+</table>
+
+<h3>常用俗名（必背！）</h3>
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="sc-title">formaldehyde 甲醛</div>
+    <div class="sc-body">IUPAC: methanal<br>工業重要原料，防腐劑（福馬林 formalin = 37% 水溶液）</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-title">acetaldehyde 乙醛</div>
+    <div class="sc-body">IUPAC: ethanal<br>乙醇氧化的中間產物</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-title">benzaldehyde 苯甲醛</div>
+    <div class="sc-body">IUPAC: benzenecarbaldehyde<br>苦杏仁味，用於食品香料</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-title">acetone 丙酮</div>
+    <div class="sc-body">IUPAC: propan-2-one<br>最常用有機溶劑；糖尿病患者血液中偏高</div>
+  </div>
+</div>
+
+<h3>α、β 位置標示（俗名系統）</h3>
+<div class="card">
+  <p>俗名系統中，緊鄰 CHO 的碳叫 <strong style="color:var(--amber)">α碳</strong>，再下一個是 <strong style="color:var(--teal)">β碳</strong>，依此類推。</p>
+  <p style="font-family:'JetBrains Mono'; font-size:13px; margin-top:8px;">
+    <span style="color:var(--muted)">CHO — </span><span style="color:var(--amber)">Cα</span> — <span style="color:var(--teal)">Cβ</span> — <span style="color:var(--violet)">Cγ</span> — ...
+  </p>
+  <p style="font-size:13px; color:var(--muted); margin-top:6px;">IUPAC 的編號從 C=O 碳（C1）開始往外數；希臘字母編號從緊鄰 C=O 的碳（α）開始。</p>
+</div>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 21.1 說明</div>
+  <div class="fig-title">三個醛的命名範例</div>
+  <p>圖中展示三個醛：<br>
+  ①  2-chloropropanal（α-chloropropionaldehyde）：2 號碳（即 α 碳）上有 Cl<br>
+  ② 3-methylpentanal（β-methylvaleraldehyde）：3 號碳（β 碳）上有甲基<br>
+  ③ phenylethanal（phenylacetaldehyde）：2 號碳上連接苯環</p>
+</div>
+
+<h3>酮的 IUPAC 命名</h3>
+<div class="card teal">
+  <p>找含 C=O 的最長碳鏈，後綴改 <code>-one</code>，給 C=O 碳最小編號。</p>
+  <p>環狀酮：編號從羰基碳（C1）開始，取代基取得最小號碼方向。</p>
+</div>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 21.2 說明</div>
+  <div class="fig-title">兩個酮的命名範例</div>
+  <p>① 2-methylpentan-3-one：5碳鏈，C3 為羰基碳，C2 有甲基；俗名 ethyl isopropyl ketone<br>
+  ② m-bromoacetophenone（3-bromoacetophenone）：苯環上的間位（C3）有 Br，C1 連接乙醯基</p>
+</div>
+
+<div class="memory-tip">
+  <strong>酮俗名口訣</strong>：把 C=O 兩側的烷基「字母順序排列」+ ketone。例如 ethyl methyl ketone（乙甲酮 = 丁酮）。三個特殊俗名必背：<strong>acetone</strong>（丙酮）、<strong>acetophenone</strong>（苯乙酮）、<strong>benzophenone</strong>（二苯甲酮）。
+</div>
+
+<hr class="divider">
+
+<div id="properties" class="section-header">
+  <div class="num">3</div>
+  <h2>物理與光譜性質</h2>
+  <span class="tag">§21.3–21.4</span>
+</div>
+
+<h3>物理性質</h3>
+<div class="card">
+  <p>醛與酮的極性羰基使分子間有<strong>偶極–偶極作用力</strong>，但沒有 O−H 鍵，所以<strong>無法互相氫鍵</strong>。</p>
+  <ul style="padding-left:20px;">
+    <li>沸點比分子量相近的醇<strong>低</strong>，但比烴類<strong>高</strong></li>
+    <li>≤5碳的醛酮與水互溶（可與水形成氫鍵）；>5碳者不溶於水</li>
+  </ul>
+</div>
+
+<h3>IR 光譜特徵</h3>
+<table class="compare-table">
+  <thead>
+    <tr><th>吸收峰</th><th>波數（cm⁻¹）</th><th>說明</th></tr>
+  </thead>
+  <tbody>
+    <tr class="highlight-row"><td><strong>C=O 伸縮振動</strong></td><td><strong>~1700–1780</strong></td><td>所有羰基化合物的特徵峰，非常強</td></tr>
+    <tr><td>醛的 sp² C–H</td><td>2700–2830（兩個峰）</td><td>只有醛有這組峰！可鑑別醛與酮</td></tr>
+    <tr><td>一般醛 C=O</td><td>~1730</td><td>—</td></tr>
+    <tr><td>一般酮 C=O</td><td>~1715</td><td>—</td></tr>
+    <tr><td>環狀酮（環越小）</td><td>↑ 升高（應力↑）</td><td>環己酮1715 < 環戊酮1745 < 環丁酮1780</td></tr>
+    <tr><td>共軛羰基（C=C–C=O）</td><td>↓ 降低約30</td><td>共振使 C=O 帶部分單鍵特性，鍵較弱</td></tr>
+  </tbody>
+</table>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 21.3 說明</div>
+  <div class="fig-title">丙醛（propanal）的 IR 光譜</div>
+  <p>① 1739 cm⁻¹：強 C=O 吸收峰<br>
+  ② 2813 和 2716 cm⁻¹：醛基 sp² C–H 的兩個特徵峰（這是鑑別醛的關鍵！）</p>
+</div>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 21.4 說明</div>
+  <div class="fig-title">共軛對 C=O 吸收位置的影響</div>
+  <p>非共軛酮（環己基乙酮）：1709 cm⁻¹<br>
+  共軛酮（苯乙酮，苯環與 C=O 共軛）：1685 cm⁻¹ → 向低波數移動<br>
+  環己酮：1715 cm⁻¹；環己烯酮（C=C 與 C=O 共軛）：1685 cm⁻¹<br>
+  結論：共軛使 π 電子離域，C=O 鍵減弱，吸收峰向低波數（紅移）移動約30 cm⁻¹。</p>
+</div>
+
+<h3>NMR 光譜特徵</h3>
+<table class="compare-table">
+  <thead>
+    <tr><th>訊號類型</th><th>化學位移</th><th>說明</th></tr>
+  </thead>
+  <tbody>
+    <tr class="highlight-row"><td><strong>醛基 CHO 的 H（¹H NMR）</strong></td><td><strong>9–10 ppm（超低場）</strong></td><td>強去屏蔽，最具特徵的醛訊號</td></tr>
+    <tr><td>α 碳上的 H</td><td>2–2.5 ppm</td><td>甲基酮在 ~2.1 ppm 出單峰</td></tr>
+    <tr><td>C=O 碳（¹³C NMR）</td><td>190–215 ppm</td><td>大幅去屏蔽，易辨識</td></tr>
+  </tbody>
+</table>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 21.5 說明</div>
+  <div class="fig-title">丙醛的 ¹H 和 ¹³C NMR 光譜</div>
+  <p>¹H NMR：三種氫，Hₐ（CHO）在 9.8 ppm 呈三重峰，Hb（CH₂）在 2.4 ppm，Hc（CH₃）在 1.1 ppm 呈三重峰<br>
+  ¹³C NMR：三種碳，Cₐ（C=O）在 203 ppm（極低場），Cb 在 36 ppm，Cc 在 9 ppm</p>
+</div>
+
+<hr class="divider">
+
+<div id="prep" class="section-header">
+  <div class="num">4</div>
+  <h2>醛與酮的製備</h2>
+  <span class="tag">§21.6</span>
+</div>
+
+<h3>製備醛的方法</h3>
+<table class="compare-table">
+  <thead>
+    <tr><th>方法</th><th>試劑</th><th>起始物</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1° 醇氧化</td><td><code>PCC</code></td><td>RCH₂OH → RCHO</td></tr>
+    <tr><td>酯類還原（部分）</td><td><code>[1] DIBAL-H [2] H₂O</code></td><td>酯 → 醛</td></tr>
+    <tr><td>醯氯還原（部分）</td><td><code>[1] LiAlH[OC(CH₃)₃]₃ [2] H₂O</code></td><td>醯氯 → 醛</td></tr>
+    <tr><td>炔烴的硼氫化–氧化</td><td><code>[1] R₂BH [2] H₂O₂, ⁻OH</code></td><td>端炔 → 醛</td></tr>
+    <tr><td>烯烴臭氧化裂解</td><td><code>O₃; 然後 Zn/H₂O 或 (CH₃)₂S</code></td><td>含 RHC= 的烯 → 醛</td></tr>
+  </tbody>
+</table>
+
+<h3>製備酮的方法</h3>
+<table class="compare-table">
+  <thead>
+    <tr><th>方法</th><th>試劑</th><th>起始物</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>2° 醇氧化</td><td><code>CrO₃、Na₂Cr₂O₇、PCC</code></td><td>R₂CHOH → R₂C=O</td></tr>
+    <tr><td>醯氯與有機銅酸鋰反應</td><td><code>[1] R'₂CuLi [2] H₂O</code></td><td>醯氯 → 酮</td></tr>
+    <tr><td>Friedel–Crafts 醯化</td><td><code>醯氯 + AlCl₃</code></td><td>苯 → 芳香酮</td></tr>
+    <tr><td>炔烴水合</td><td><code>H₂O, H₂SO₄, HgSO₄</code></td><td>R–C≡C–H → 甲基酮</td></tr>
+    <tr><td>烯烴臭氧化裂解</td><td><code>O₃; 然後 Zn/H₂O</code></td><td>含 R₂C= 的烯 → 酮</td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<div id="general" class="section-header">
+  <div class="num">5</div>
+  <h2>反應通則：親核加成機制</h2>
+  <span class="tag">§21.7</span>
+</div>
+
+<div class="key-rule">
+  <p>醛與酮的特徵反應是<strong>親核加成（Nucleophilic Addition）</strong>：<br>
+  親核試劑 Nu:⁻ 攻擊帶 δ⁺ 的羰基碳 → C–Nu 鍵形成，C=O π鍵斷裂 → 氧負離子 → 質子化。<br>
+  總結：<strong>H 和 Nu 加到 C=O 上</strong>。</p>
+</div>
+
+<h3>機制 21.1：帶負電荷親核試劑（強親核試劑）</h3>
+<div class="mech-box">
+  <div class="mech-title">Mechanism 21.1 — 兩步驟（親核試劑先、質子化後）</div>
+  <div class="mech-step">
+    <div class="step-num">1</div>
+    <div class="step-content">親核試劑 <code>Nu:⁻</code> 攻擊羰基碳<br>
+    C=O 的 π 鍵斷裂，電子推到 O 上，形成帶負電的烷氧基陰離子（alkoxide）<br>
+    C 從 sp² 變成 <strong>sp³</strong>（四面體）</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">2</div>
+    <div class="step-content">O⁻ 被 H₂O 質子化 → 形成加成產物（含 OH 基）<br>
+    同時再生 ⁻OH</div>
+  </div>
+</div>
+
+<h3>機制 21.2：中性弱親核試劑需要酸催化</h3>
+<div class="mech-box">
+  <div class="mech-title">Mechanism 21.2 — 三步驟（質子化先、親核攻擊後）</div>
+  <div class="mech-step">
+    <div class="step-num">1</div>
+    <div class="step-content">酸 H–A 先將羰基氧<strong>質子化</strong> → 形成共振穩定的碳陽離子（C=OH⁺）<br>
+    羰基碳帶<strong>淨正電荷</strong>，親電子性大增</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">2</div>
+    <div class="step-content">弱親核試劑 H–Nu: 攻擊活化後的羰基碳</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">3</div>
+    <div class="step-content">去質子化 → 中性加成產物；<strong>酸催化劑 H–A 再生</strong></div>
+  </div>
+</div>
+
+<div class="card coral">
+  <h4>酸催化的意義</h4>
+  <p>中性羰基：電中性，弱親核試劑難以攻擊<br>
+  質子化羰基（C=OH⁺）：帶淨正電荷，<strong>親電子性大幅增加</strong><br>
+  → 凡是遇到強酸，第一步永遠是「羰基氧先被質子化」！</p>
+</div>
+
+<div class="warning-box">
+Cl⁻、Br⁻、I⁻ 雖是好的取代反應親核試劑，但<strong>不</strong>有效加成到羰基上——因為它們是比生成的烷氧基更弱的鹼，平衡偏向起始物。
+</div>
+
+<h3>本章親核加成反應總覽</h3>
+<table class="rx-overview">
+  <thead>
+    <tr><th>親核試劑</th><th>產物</th><th>催化</th><th>章節</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>NaBH₄ 或 LiAlH₄（H:⁻）</td><td>醇（alcohol）</td><td><span class="rx-tag either">無需</span></td><td>§21.8</td></tr>
+    <tr><td>RMgX 或 RLi（R:⁻）</td><td>醇（alcohol，含新 C–C 鍵）</td><td><span class="rx-tag either">無需</span></td><td>§21.8</td></tr>
+    <tr><td>⁻CN（NaCN/HCl）</td><td>氰醇（cyanohydrin）</td><td><span class="rx-tag either">無需</span></td><td>§21.9</td></tr>
+    <tr><td>Ph₃P=CR₂（Wittig 試劑）</td><td>烯烴（alkene）</td><td><span class="rx-tag either">無需</span></td><td>§21.10</td></tr>
+    <tr><td>RNH₂（1° 胺）</td><td>亞胺（imine，C=NR）</td><td><span class="rx-tag acid">弱酸</span></td><td>§21.11</td></tr>
+    <tr><td>R₂NH（2° 胺）</td><td>烯胺（enamine，C=C–N）</td><td><span class="rx-tag acid">弱酸</span></td><td>§21.12</td></tr>
+    <tr><td>H₂O</td><td>gem-二醇（hydrate）</td><td><span class="rx-tag either">酸或鹼</span></td><td>§21.13</td></tr>
+    <tr><td>ROH（醇，2 當量）</td><td>縮醛（acetal）</td><td><span class="rx-tag acid">酸</span></td><td>§21.14</td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<div id="hydride" class="section-header">
+  <div class="num">6</div>
+  <h2>氫化物與碳陰離子加成（複習）</h2>
+  <span class="tag">§21.8</span>
+</div>
+
+<div class="reaction-box">
+  <div class="rx-title">還原到醇</div>
+  <span class="reactant">RCHO 或 R₂C=O</span>
+  <span class="arrow">──</span>
+  <span class="reagent">NaBH₄/CH₃OH 或 [1] LiAlH₄ [2] H₂O</span>
+  <span class="arrow">──→</span>
+  <span class="product">1° 或 2° 醇</span>
+</div>
+
+<div class="reaction-box">
+  <div class="rx-title">Grignard / 有機鋰加成</div>
+  <span class="reactant">RCHO 或 R₂C=O + R''MgX 或 R''Li</span>
+  <span class="arrow">──</span>
+  <span class="reagent">[1] 加入 [2] H₂O</span>
+  <span class="arrow">──→</span>
+  <span class="product">1°/2°/3° 醇（含新 C–C 鍵）</span>
+</div>
+
+<div class="mech-box">
+  <div class="mech-title">Grignard 加成機制（兩步驟）</div>
+  <div class="mech-step">
+    <div class="step-num">1</div>
+    <div class="step-content"><code>R''⁻</code>（碳陰離子）攻擊 sp² 羰基碳，從<strong>兩側都可進攻</strong>（因為平面三角形）→ 形成烷氧基陰離子（sp³ 中間體）</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">2</div>
+    <div class="step-content">H₂O 質子化 O⁻ → 得到醇產物</div>
+  </div>
+</div>
+
+<div class="key-rule">
+  <p>由於親核試劑從平面兩側進攻 sp² 羰基碳，若產生新的立體中心，會得到<strong>兩種非鏡像異構物（diastereomers）</strong>的混合物。</p>
+</div>
+
+<hr class="divider">
+
+<div id="cn" class="section-header">
+  <div class="num">7</div>
+  <h2>氰醇的形成（⁻CN 加成）</h2>
+  <span class="tag">§21.9</span>
+</div>
+
+<div class="reaction-box">
+  <div class="rx-title">氰醇形成</div>
+  <span class="reactant">醛或酮</span>
+  <span class="arrow"> + </span>
+  <span class="reagent">NaCN / HCl</span>
+  <span class="arrow">──→</span>
+  <span class="product">cyanohydrin（氰醇）：−OH 和 −CN 同在一個碳上</span>
+</div>
+
+<div class="key-rule">
+  <p>氰醇形成的意義：<strong>增加一個碳原子</strong>，形成新的 C–C 鍵（−CN 碳接到原本羰基碳上）。</p>
+</div>
+
+<div class="mech-box">
+  <div class="mech-title">Mechanism 21.3 — 氰醇形成（兩步驟）</div>
+  <div class="mech-step">
+    <div class="step-num">1</div>
+    <div class="step-content">CN⁻（強親核試劑）攻擊羰基碳 → 形成<strong>新 C–C 鍵</strong>，C=O π鍵斷裂，O 帶負電</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">2</div>
+    <div class="step-content">O⁻ 被 HCN 質子化 → 得到氰醇；同時再生 CN⁻（HCN 由 CN⁻ + HCl 生成）</div>
+  </div>
+</div>
+
+<div class="warning-box">
+單純 HCN（不含 CN⁻）無法使反應發生。必須有游離的 <strong>CN⁻</strong> 作為親核試劑才能攻擊羰基。
+</div>
+
+<h3>氰醇的進一步轉化</h3>
+<div class="card">
+  <p><strong>水解</strong>：氰醇的 –CN 可在酸或鹼加熱下水解成 –COOH（三個 C–N 鍵全被 C–O 鍵取代），製得 α-羥基酸（α-hydroxy acid）。</p>
+  <p><strong>逆反應</strong>：鹼處理氰醇 → 去質子化，再脫離 CN⁻ → 回到羰基化合物。</p>
+</div>
+
+<div class="bio-box">
+  <strong>天然氰醇衍生物</strong><br>
+  • <strong>linamarin</strong>：存在於木薯（cassava）中，代謝後釋放有毒 HCN<br>
+  • <strong>amygdalin</strong>：存在於桃、杏、野生櫻桃的核仁中，代謝同樣產生 HCN<br>
+  • 木薯若不妥善加工（水煮或烤），其中的 linamarin 被酵素分解釋放 HCN，可導致中毒甚至死亡。<br>
+  • Amygdalin 和其合成衍生物 <strong>laetrile</strong> 曾被吹捧為抗癌藥，但療效未獲證實。
+</div>
+
+<hr class="divider">
+
+<div id="wittig" class="section-header">
+  <div class="num">8</div>
+  <h2>Wittig 反應</h2>
+  <span class="tag">§21.10</span>
+</div>
+
+<div class="card amber">
+  <h3>核心概念：C=O 變成 C=C</h3>
+  <p>Wittig 反應用 <strong>Wittig 試劑（phosphorus ylide）</strong> 將醛或酮的羰基轉換成烯烴：</p>
+  <div style="font-family:'JetBrains Mono'; font-size:13px; margin:10px 0; color:var(--amber);">
+    R₂C=O &nbsp;+&nbsp; Ph₃P⁺–⁻CR"₂ &nbsp;→&nbsp; R₂C=CR"₂ &nbsp;+&nbsp; Ph₃P=O
+  </div>
+  <p>1979年 Nobel 化學獎得主 Georg Wittig 因發現此反應而獲獎。</p>
+</div>
+
+<h3>Wittig 試劑的製備（兩步驟）</h3>
+<div class="mech-box">
+  <div class="mech-title">合成磷葉立德（Ylide）</div>
+  <div class="mech-step">
+    <div class="step-num">1</div>
+    <div class="step-content"><strong>SN2 反應</strong>：三苯基膦（Ph₃P:）攻擊<strong>1° 鹵烷</strong>（最好是 CH₃X 或 RCH₂X）→ 形成磷鹽（phosphonium salt）<br>
+    <code>Ph₃P: + R"CH₂X → Ph₃P⁺–CH₂R" X⁻</code></div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">2</div>
+    <div class="step-content"><strong>強鹼（如 BuLi）去質子化</strong>磷鹽上的 C–H → 形成碳陰離子（ylide）<br>
+    <code>Ph₃P⁺–CH₂R" + BuLi → Ph₃P⁺–⁻CHR" ↔ Ph₃P=CHR"</code></div>
+  </div>
+</div>
+
+<h3>Wittig 反應機制（兩步驟）</h3>
+<div class="mech-box">
+  <div class="mech-title">Mechanism 21.4 — Wittig 反應</div>
+  <div class="mech-step">
+    <div class="step-num">1</div>
+    <div class="step-content">Ylide 的帶負電碳攻擊羰基碳，同時 O 攻擊帶正電 P → 形成四員環中間體 <strong>oxaphosphetane</strong>（含 O–C–C–P 環）</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">2</div>
+    <div class="step-content">oxaphosphetane 消去分解：形成 <strong>烯烴</strong>（新 C=C）和 Ph₃P=O（強 P=O 鍵提供反應驅動力）</div>
+  </div>
+</div>
+
+<div class="key-rule">
+  <p>Wittig 反應一次形成 <strong>兩個 C–C 新鍵</strong>（一個 σ 鍵、一個 π 鍵）。<br>
+  副產物為 Ph₃P=O（三苯基氧化膦），形成強 P=O 鍵是反應自發進行的驅動力。</p>
+</div>
+
+<div class="warning-box">
+Wittig 反應的限制：有時會形成 E/Z 烯烴異換物的混合物（無法完全控制立體化學）。
+</div>
+
+<div class="bio-box">
+<strong>β-胡蘿蔔素（β-carotene）的合成</strong>（Figure 21.8）<br>
+β-胡蘿蔔素是胡蘿蔔中的橙色色素，也是維生素 A 的前驅物。其合成利用 Wittig 反應一步形成中間的共軛雙鍵，是 Wittig 反應在天然物合成中的典型應用。反應中 E 式烯烴為主要產物。
+</div>
+
+<h3>逆合成分析：由烯烴推回起始物</h3>
+<div class="card">
+  <p>將 C=C 斷開（切在你想形成的那個雙鍵），其中一端接 O → 這就是醛/酮；另一端接 Ph₃P= → 這就是 Wittig 試劑。</p>
+  <p style="color:var(--muted); font-size:13px;">通常選擇將 Ph₃P= 接在<strong>較不擁擠</strong>的那端，以提高產率。</p>
+</div>
+
+<hr class="divider">
+
+<div id="amines" class="section-header">
+  <div class="num">9</div>
+  <h2>胺類加成：亞胺與烯胺</h2>
+  <span class="tag">§21.11–21.12</span>
+</div>
+
+<h3>1° 胺 → 亞胺（Imine / Schiff Base）</h3>
+<div class="reaction-box">
+  <div class="rx-title">亞胺形成（弱酸催化）</div>
+  <span class="reactant">醛或酮 + R''NH₂</span>
+  <span class="arrow"> ──弱酸(pH 4-5)──→ </span>
+  <span class="product">亞胺（R₂C=NR''）+ H₂O</span>
+</div>
+
+<div class="key-rule">
+  <p>反應結果：<strong>C=O 被 C=N 取代</strong><br>
+  中間體：<strong>carbinolamine</strong>（羥胺中間體，OH 和 NHR'' 在同一碳上）→ 失去 H₂O → 亞胺</p>
+</div>
+
+<div class="mech-box">
+  <div class="mech-title">Mechanism 21.5 — 亞胺形成（五步驟）</div>
+  <div class="mech-step">
+    <div class="step-num">1</div>
+    <div class="step-content">1° 胺的 N（孤電子對）攻擊羰基碳 → 形成 N–C 鍵（sp³ 中間體）</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">2</div>
+    <div class="step-content">質子轉移（proton transfer）→ 形成 carbinolamine（R₂C(OH)(NHR'')）</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">3</div>
+    <div class="step-content">酸將 OH 質子化 → –OH₂⁺（好的離去基）</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">4</div>
+    <div class="step-content">失去 H₂O → 形成共振穩定的 iminium ion（C=N⁺HR''）</div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">5</div>
+    <div class="step-content">失去 N 上的 H（去質子化）→ 形成亞胺（C=NR''）</div>
+  </div>
+</div>
+
+<div class="warning-box">
+最適 pH 為 4–5（弱酸）。酸性太強時：胺被完全質子化（RNH₃⁺），失去孤電子對，無法進行親核攻擊！
+</div>
+
+<div class="bio-box">
+  <strong>視覺的化學（Figure 21.9）</strong><br>
+  視網膜桿細胞中，<strong>11-cis-retinal</strong>（視黃醛）與蛋白質 opsin 中的 1° 胺發生亞胺形成反應，生成 <strong>rhodopsin</strong>（視紫素）。<br>
+  光照射後：11-cis 雙鍵異構化為 11-trans → 蛋白質構形劇變 → 改變 Ca²⁺ 濃度 → 傳遞神經衝動到大腦 → <strong>產生視覺！</strong>
+</div>
+
+<h3>2° 胺 → 烯胺（Enamine）</h3>
+<div class="reaction-box">
+  <div class="rx-title">烯胺形成（弱酸催化）</div>
+  <span class="reactant">醛或酮 + R₂NH</span>
+  <span class="arrow"> ──弱酸──→ </span>
+  <span class="product">烯胺（N 接在 C=C 上）+ H₂O</span>
+</div>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 21.10 說明</div>
+  <div class="fig-title">1° 胺 vs 2° 胺與羰基化合物反應的比較</div>
+  <p>兩者機制相同，差別在最後一步：<br>
+  • <strong>1° 胺</strong>：iminium ion 中間體上 N 還有 H，可失去 N–H 質子 → 形成 <strong>C=N（亞胺）</strong><br>
+  • <strong>2° 胺</strong>：iminium ion 中間體上 N <strong>沒有</strong> H，只能失去相鄰 C–H 質子 → 形成 <strong>C=C（烯胺）</strong></p>
+</div>
+
+<div class="key-rule">
+  <p><strong>亞胺 vs 烯胺的關鍵區別：</strong><br>
+  1° 胺（R–NH₂）→ <strong>imine</strong>（C=NR，氮上無多餘H時停止）<br>
+  2° 胺（R₂–NH）→ <strong>enamine</strong>（C=C，因為N上無H可失去）</p>
+</div>
+
+<h3>水解（逆反應）</h3>
+<div class="card">
+  <p>亞胺和烯胺均可在稀酸（H₃O⁺）中水解，機制為形成的逆反應，分別回到原本的醛/酮與胺。</p>
+</div>
+
+<hr class="divider">
+
+<div id="water" class="section-header">
+  <div class="num">10</div>
+  <h2>水的加成（水合反應）</h2>
+  <span class="tag">§21.13</span>
+</div>
+
+<div class="reaction-box">
+  <div class="rx-title">水合反應</div>
+  <span class="reactant">R₂C=O + H₂O</span>
+  <span class="arrow"> ──H⁺ 或 ⁻OH──→ </span>
+  <span class="product">gem-diol（偕二醇 / 水合物）R₂C(OH)₂</span>
+</div>
+
+<h3>熱力學：哪種化合物水合程度高？</h3>
+<table class="compare-table">
+  <thead>
+    <tr><th>化合物</th><th>水合物比例</th><th>原因</th></tr>
+  </thead>
+  <tbody>
+    <tr class="highlight-row"><td>甲醛（HCHO）</td><td><strong>99.9%</strong></td><td>最不穩定的羰基（無烷基），平衡偏向水合物</td></tr>
+    <tr><td>乙醛（CH₃CHO）</td><td>58%</td><td>一個供電子甲基，羰基稍穩定</td></tr>
+    <tr><td>丙酮（(CH₃)₂CO）</td><td><strong>0.2%</strong></td><td>兩個烷基穩定羰基，幾乎不水合</td></tr>
+    <tr><td>三氯乙醛（CCl₃CHO）</td><td>接近100%</td><td>三個 Cl 吸電子，大幅去穩定羰基</td></tr>
+  </tbody>
+</table>
+
+<div class="key-rule">
+  <p>烷基（供電子）→ <strong>穩定</strong>羰基 → 水合比例↓<br>
+  拉電子基（如 CCl₃）→ <strong>去穩定</strong>羰基 → 水合比例↑</p>
+</div>
+
+<h3>動力學：酸鹼均可催化</h3>
+<div class="card">
+  <p><strong>鹼催化</strong>：⁻OH 直接作為強親核試劑攻擊羰基（機制 21.7，兩步驟）</p>
+  <p><strong>酸催化</strong>：H⁺ 先質子化羰基氧 → 增強親電性 → H₂O 再進攻（機制 21.8，三步驟）</p>
+  <p style="color:var(--muted); font-size:13px;">注意：催化劑只影響反應速率，不改變平衡。起始物若不穩定，催化劑也無法提高水合物的平衡比例。</p>
+</div>
+
+<hr class="divider">
+
+<div id="acetal" class="section-header">
+  <div class="num">11</div>
+  <h2>醇的加成：縮醛形成</h2>
+  <span class="tag">§21.14–21.15</span>
+</div>
+
+<div class="card amber">
+  <h3>縮醛的定義</h3>
+  <p>同一個碳上連接<strong>兩個 OR 基</strong>（烷氧基），即 R₂C(OR')₂。</p>
+  <p>由醛或酮與<strong>2 當量醇</strong>在酸催化下反應，並脫去 1 當量水。</p>
+</div>
+
+<div class="reaction-box">
+  <div class="rx-title">縮醛形成（酸催化）</div>
+  <span class="reactant">R₂C=O + 2 R'OH</span>
+  <span class="arrow"> ──TsOH（酸催化）──→ </span>
+  <span class="product">R₂C(OR')₂ + H₂O</span>
+</div>
+
+<div class="reaction-box">
+  <div class="rx-title">環狀縮醛（用乙二醇）</div>
+  <span class="reactant">酮 + HOCH₂CH₂OH</span>
+  <span class="arrow"> ──TsOH──→ </span>
+  <span class="product">環狀縮醛（五員環，含兩個 O）+ H₂O</span>
+</div>
+
+<div class="warning-box">
+縮醛 ≠ 醚：縮醛同一碳上有兩個 C–O 鍵，使其化學性質迥異於普通醚（只有一個 C–O–C）。
+</div>
+
+<h3>機制（兩段式）：半縮醛 → 縮醛</h3>
+<div class="mech-box">
+  <div class="mech-title">Mechanism 21.9 — 縮醛形成</div>
+  <div class="mech-step">
+    <div class="step-num">Part 1</div>
+    <div class="step-content"><strong>半縮醛（hemiacetal）形成</strong>：酸先質子化羰基 → R'OH 進攻 → 去質子化 → 生成半縮醛（同一碳上有 OH 和 OR'）<br>
+    <code>R₂C=O + R'OH → R₂C(OH)(OR')（半縮醛）</code></div>
+  </div>
+  <div class="mech-step">
+    <div class="step-num">Part 2</div>
+    <div class="step-content"><strong>半縮醛 → 縮醛</strong>：質子化 OH → 失去 H₂O（形成共振穩定碳陽離子）→ 第二個 R'OH 進攻 → 去質子化 → 生成縮醛<br>
+    <code>R₂C(OH)(OR') + R'OH → R₂C(OR')₂ + H₂O</code></div>
+  </div>
+</div>
+
+<div class="key-rule">
+  <p>縮醛形成是<strong>可逆反應</strong>，通常平衡偏向起始物（羰基+醇）。<br>
+  製備縮醛時必須<strong>移除生成的水</strong>（Le Chatelier 原理），例如使用 Dean–Stark 脫水裝置，強迫平衡向產物方向移動。</p>
+</div>
+
+<div class="figure-box">
+  <div class="fig-label">Figure 21.11 說明</div>
+  <div class="fig-title">Dean–Stark 脫水裝置</div>
+  <p>原理：羰基化合物、醇和酸催化劑溶於苯中加熱。苯和水會共同揮發（共沸），冷凝液流入 Dean–Stark 管中。水密度較大沉在下層，可從旋塞放出。苯回流至反應瓶繼續循環。不斷移除水使反應右移，提高縮醛產率。</p>
+</div>
+
+<h3>縮醛作為保護基（§21.15）</h3>
+<div class="card green">
+  <h3>保護羰基的策略</h3>
+  <p>合成含多個官能基的分子時，有時需要暫時保護羰基，使其不參與某步反應：</p>
+  <ol style="padding-left:20px; line-height:2;">
+    <li>用乙二醇 + TsOH 將羰基轉換成<strong>環狀縮醛</strong>（保護）</li>
+    <li>進行其他化學反應（縮醛在中性或鹼性條件穩定！）</li>
+    <li>用稀酸水解縮醛 → 恢復羰基（去保護）</li>
+  </ol>
+  <p style="color:var(--muted); font-size:13px;">縮醛不與強還原劑（NaBH₄、LiAlH₄）、Grignard 試劑反應，因此可選擇性保護羰基。</p>
+</div>
+
+<hr class="divider">
+
+<div id="cyclic" class="section-header">
+  <div class="num">12</div>
+  <h2>環狀半縮醛</h2>
+  <span class="tag">§21.16</span>
+</div>
+
+<div class="card">
+  <p>當分子中同時含有 OH 和 C=O 基，且距離適合形成 5 或 6 員環時，可發生<strong>分子內環化</strong>，生成環狀半縮醛（lactol）。</p>
+  <p>環狀半縮醛的羰基碳上同時含有：<br>
+  ① 一個 –OH 基（來自環外）<br>
+  ② 一個 –OR 基（環內 O，即原來的醇 OH）</p>
+</div>
+
+<div class="figure-box">
+  <div class="fig-label">Figure — 環狀半縮醛數據</div>
+  <div class="fig-title">羥基醛的環化平衡</div>
+  <p>5-hydroxypentanal（6C 鏈）環化 → 六員環半縮醛：平衡有 <strong>94%</strong> 呈環狀<br>
+  4-hydroxybutanal（5C 鏈）環化 → 五員環半縮醛：平衡有 <strong>89%</strong> 呈環狀<br>
+  五員環和六員環的張力最小，因此這兩種環化反應特別有利。分子內反應（兩個官能基固定在同一分子）速率更快。</p>
+</div>
+
+<div class="key-rule">
+  <p>環化產生新的立體中心（原本的羰基碳），因此得到<strong>等量的兩種對映異構物</strong>（enantiomers）。</p>
+</div>
+
+<div class="card">
+  <h4>環狀半縮醛 → 環狀縮醛</h4>
+  <p>環狀半縮醛加醇＋酸 → 把 OH 換成 OR → 環狀縮醛。<br>
+  機制：OH 質子化 → 失去 H₂O → 共振穩定碳陽離子 → 醇進攻 → 去質子化。<br>
+  重要：<strong>只有半縮醛的 OH 會反應</strong>，普通醇的 OH 不反應。</p>
+</div>
+
+<hr class="divider">
+
+<div id="carbo" class="section-header">
+  <div class="num">13</div>
+  <h2>碳水化合物入門</h2>
+  <span class="tag">§21.17</span>
+</div>
+
+<div class="card violet">
+  <h3>碳水化合物的定義</h3>
+  <p><strong>碳水化合物</strong>是含有多個 OH 基的醛或酮（polyhydroxy aldehydes and ketones），或是可水解成這類化合物的物質，俗稱糖類（sugars and starches）。</p>
+  <p>與蛋白質、脂肪酸、核苷酸並列為四大類生物大分子。</p>
+</div>
+
+<div class="bio-box">
+  <strong>葡萄糖（glucose）與乳糖（lactose）中的半縮醛與縮醛</strong><br>
+  • 葡萄糖是血液中輸送到細胞的主要糖分。胰島素調節血糖濃度，糖尿病是胰島素分泌不足導致血糖異常升高的疾病。<br>
+  • β-D-glucose 的環狀結構是一個<strong>六員環狀半縮醛</strong>，由開鏈的羥基醛自發環化形成。<br>
+  • 乳糖（牛奶中的主要醣類）含有一個<strong>縮醛</strong>碳（醣苷鍵的碳）和一個<strong>半縮醛</strong>碳，體現了本章學習的縮醛化學。</p>
+</div>
+
+<div class="key-rule">
+  <p>糖類的半縮醛形成方式與實驗室中相同：羥基醛進行分子內環化。葡萄糖就是由含 6 個碳的羥基醛（開鏈式）環化而成六員環半縮醛。</p>
+</div>
+
+<hr class="divider">
+
+<div id="review" class="section-header">
+  <div class="review"></div>
+  <h2>本章總複習</h2>
+</div>
+
+<div class="card coral">
+  <h3>🔑 最重要的5個概念</h3>
+  <ol style="padding-left:20px; line-height:2.2;">
+    <li><strong>親核加成是醛酮的特徵反應</strong>：Nu:⁻ 攻擊 δ⁺ 的 sp² 羰基碳 → 形成 sp³ 中間體 → 質子化</li>
+    <li><strong>反應活性：HCHO > RCHO > R₂CO</strong>（烷基越多，活性越低）</li>
+    <li><strong>強親核試劑</strong>（H⁻、R⁻、CN⁻）→ 無需酸催化，直接攻擊；<strong>弱親核試劑</strong>（H₂O、ROH、胺）→ 需要酸先活化羰基</li>
+    <li><strong>縮醛是可逆的保護基</strong>：酸催化 ROH 加成形成縮醛，稀酸水解可去除保護</li>
+    <li><strong>Wittig 反應把 C=O 換成 C=C</strong>：磷葉立德進攻羰基 → 透過 oxaphosphetane 中間體 → 消去 Ph₃P=O</li>
+  </ol>
+</div>
+
+<div class="summary-grid" style="margin-top:20px">
+  <div class="summary-card">
+    <div class="sc-label">1° 胺</div>
+    <div class="sc-title">→ 亞胺（Imine）</div>
+    <div class="sc-body">C=O 被 C=NR 取代<br>中間體：carbinolamine<br>最適 pH 4–5</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-label">2° 胺</div>
+    <div class="sc-title">→ 烯胺（Enamine）</div>
+    <div class="sc-body">C=O 轉變為 C=C–N<br>N 上無 H，故形成 C=C</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-label">NaCN/HCl</div>
+    <div class="sc-title">→ 氰醇</div>
+    <div class="sc-body">新增一個碳（C–C 鍵）<br>CN⁻ 為真正親核試劑</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-label">ROH / 酸</div>
+    <div class="sc-title">→ 縮醛</div>
+    <div class="sc-body">2 當量 ROH<br>需移除水驅動平衡<br>可逆，作為保護基</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-label">H₂O / 酸或鹼</div>
+    <div class="sc-title">→ gem-二醇</div>
+    <div class="sc-body">甲醛幾乎全水合<br>丙酮幾乎不水合</div>
+  </div>
+  <div class="summary-card">
+    <div class="sc-label">Wittig 試劑</div>
+    <div class="sc-title">→ 烯烴</div>
+    <div class="sc-body">C=O → C=C<br>副產物 Ph₃P=O<br>Nobel Prize 1979</div>
+  </div>
+</div>
+
+</body>
+</html>
