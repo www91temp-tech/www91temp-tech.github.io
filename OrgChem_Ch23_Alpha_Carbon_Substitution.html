@@ -193,20 +193,20 @@ p{margin-bottom:.85rem;}
   font-size:.72rem;color:var(--muted);margin-top:.2rem;
 }
 .arrow{
-  font-size:1.3rem;color:var(--cyan);
+  font-size:1.3rem;color:var(--coral);
   padding:0 .4rem;
   flex-shrink:0;
 }
-.arrow.eq{color:var(--amber);}
+.arrow.eq{color:var(--coral);}
 .arrow-label{
   display:flex;flex-direction:column;align-items:center;
   padding:0 .6rem;gap:.1rem;
 }
 .arrow-label .arr-line{
-  color:var(--cyan);font-size:1.1rem;
+  color:var(--coral);font-size:1.1rem;
 }
 .arrow-label .reagent{
-  font-size:.72rem;color:var(--cyan);
+  font-size:.72rem;color:var(--coral);
   background:rgba(0,122,155,.08);
   border-radius:4px;padding:.1rem .4rem;
   white-space:nowrap;
@@ -454,7 +454,7 @@ p{margin-bottom:.85rem;}
           <div class="chem" style="color:var(--amber);">烯醇 (Enol)</div>
           <div class="cname">中性，含 OH</div>
         </div>
-        <div class="compound" style="border:1px solid var(--cyan);border-radius:6px;">
+        <div class="compound" style="border:1px solid var(--green);border-radius:6px;">
           <div class="chem" style="color:var(--green);">烯醇負離子 (Enolate)</div>
           <div class="cname">帶負電，O⁻</div>
         </div>
@@ -496,12 +496,12 @@ p{margin-bottom:.85rem;}
     <div class="rxn-title">酮式 ⇌ 烯醇 平衡</div>
     <div class="rxn-flow" style="justify-content:center;">
       <div class="compound">
-        <div class="chem">  O<br>  ‖<br>R-C-CH₂-H</div>
-        <div class="cname">酮式 (Keto form)<br>含 C═O + α-H</div>
+        <div class="chem">O<br>‖<br>　　R-C-CH₂-H</div>
+        <div class="cname">　　酮式 (Keto form)<br>　　含 C═O + α-H</div>
       </div>
       <div class="arrow eq">⇌</div>
       <div class="compound">
-        <div class="chem">  OH<br>  |<br>R-C═CH₂</div>
+        <div class="chem">  OH<br>  |<br>　R-C═CH₂</div>
         <div class="cname">烯醇 (Enol form)<br>含 C═C + OH</div>
       </div>
     </div>
@@ -521,8 +521,8 @@ p{margin-bottom:.85rem;}
     <strong>Pentane-2,4-dione（戊-2,4-二酮）的互變異構平衡</strong>：<br>
     酮式只佔 <strong>24%</strong>，烯醇竟佔 <strong>76%</strong>！<br><br>
     烯醇穩定的兩個原因：<br>
-    ① <span class="hl-c">共軛（Conjugation）</span>：烯醇的 C═C 與相鄰 C═O 形成共軛，分散電子密度 <br>
-    ② <span class="hl-g">分子內氫鍵（Intramolecular H-bond）</span>：OH 與另一個 C═O 形成六員環的氫鍵，特別穩定
+    ① <span class="hl-g">共軛（Conjugation）</span>：烯醇的 C═C 與相鄰 C═O 形成共軛，分散電子密度 <br>
+    ② <span class="hl-r">分子內氫鍵（Intramolecular H-bond）</span>：OH 與另一個 C═O 形成六員環的氫鍵，特別穩定
   </div>
 
   <div class="rxn">
@@ -551,14 +551,14 @@ p{margin-bottom:.85rem;}
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <strong>先質子化</strong>（protonation）：H₃O⁺ 將 H⁺ 加到羰基 O 上，形成共振穩定的碳陽離子<br>
+          <strong>質子化</strong>（protonation）：H₃O⁺ 將 H⁺ 加到羰基 O 上，形成共振穩定的碳陽離子<br>
           <span class="chem">C=O  →  C=OH⁺  （共振穩定）</span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <strong>後去質子化</strong>（deprotonation）：H₂O 從 α 碳取走 H，形成烯醇<br>
+          <strong>去質子化</strong>（deprotonation）：H₂O 從 α 碳取走 H，形成烯醇<br>
           <span class="chem">C=OH⁺ (有α-H)  →  C(OH)=C  （烯醇）</span>
         </div>
       </div>
@@ -574,14 +574,14 @@ p{margin-bottom:.85rem;}
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <strong>先去質子化</strong>（deprotonation）：⁻OH 取走 α-H，形成共振穩定的<span class="hl-c">烯醇負離子</span><br>
+          <strong>去質子化</strong>（deprotonation）：⁻OH 取走 α-H，形成共振穩定的<span class="hl-c">烯醇負離子</span><br>
           <span class="chem">C(=O)-CH₂H  + ⁻OH  →  [烯醇負離子] + H₂O</span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <strong>後質子化</strong>（protonation）：H₂O 將 H⁺ 給氧，形成烯醇<br>
+          <strong>質子化</strong>（protonation）：H₂O 將 H⁺ 給氧，形成烯醇<br>
           <span class="chem">[O⁻-C=C]  + H₂O  →  [HO-C=C]（烯醇）</span>
         </div>
       </div>
@@ -592,7 +592,7 @@ p{margin-bottom:.85rem;}
   <h3>烯醇如何反應？</h3>
   <div class="box box-green">
     <div class="label">核心概念</div>
-    烯醇是富電子分子（electron-rich），α 碳因 O 的共振效應帶有負電，所以 <strong>烯醇扮演親核劑</strong>，從 α 碳攻擊親電子試劑 E⁺。<br><br>
+    烯醇是富電子分子（electron-rich），α 碳因 O 的共振效應帶有負電，所以<strong>烯醇扮演親核劑</strong>，從 α 碳攻擊親電子試劑 E⁺。<br><br>
     反應後，α 碳上的 H 被 E 取代。
   </div>
 </section>
@@ -609,15 +609,15 @@ p{margin-bottom:.85rem;}
     <div class="rxn-title">烯醇負離子的形成</div>
     <div class="rxn-flow" style="justify-content:center;align-items:flex-start;gap:1rem;">
       <div class="compound">
-        <div class="chem">  O<br>  ‖<br>R-C-CH₂-H</div>
+        <div class="chem">O<br>‖<br>　　R-C-CH₂-H</div>
         <div class="cname">羰基化合物<br>（pKₐ ≈ 20）</div>
       </div>
       <div class="arrow-label">
         <div class="arr-line">→</div>
         <div class="reagent">Base :B⁻</div>
       </div>
-      <div class="compound" style="border:1px solid var(--cyan);border-radius:6px;">
-        <div class="chem" style="color:var(--cyan);">  O⁻        O<br>  |          ‖<br>R-C=CH₂ ⟺ R-C-CH₂⁻</div>
+      <div class="compound" style="border:1px solid var(--green);border-radius:6px;">
+        <div class="chem" style="color:var(--green);">O⁻　　　　　　　　O<br>|　　　　　　　　　‖<br>　R-C=CH₂ 　⟺　　R-C-CH₂⁻</div>
         <div class="cname">烯醇負離子（兩個共振結構）</div>
       </div>
       <div class="arrow">+</div>
@@ -632,8 +632,8 @@ p{margin-bottom:.85rem;}
 
   <div class="figure-box">
     <div class="fig-label">📊 Figure 23.1 — 電荷分布比較</div>
-    <strong>丙酮烯醇負離子 vs 醇鹽（alkoxide）的靜電位圖</strong>：<br><br>
-    • 丙酮烯醇負離子：負電荷<span class="hl-c">分散</span>在 O（淡紅色）和 α-C（淡綠色）— 共振穩定<br>
+    <strong>丙酮烯醇負離子（acetone enolate） vs 醇鹽（alkoxide）的靜電位圖</strong>：<br><br>
+    • 丙酮烯醇負離子：負電荷<span class="hl-g">分散</span>在 O（淡紅色）和 α-C（淡綠色）— 共振穩定<br>
     • 醇鹽（R-O⁻）：負電荷<span class="hl-r">集中</span>在 O 原子（深紅色）— 不穩定<br><br>
     ✅ 共振穩定→ 共軛鹼更穩定 → 酸性更強（pKₐ 更小）
   </div>
@@ -647,17 +647,17 @@ p{margin-bottom:.85rem;}
       <span class="formula">CH₂=CHCH₃ (丙烯)</span>
       <span class="pka-badge pka-low">pKₐ 43</span>
     </div>
-    <div class="pka-item">
-      <span class="formula">CH₃CH₂OH (乙醇)</span>
-      <span class="pka-badge pka-mid">pKₐ 16</span>
+        <div class="pka-item">
+      <span class="formula">酯（ester α-H）</span>
+      <span class="pka-badge pka-mid">pKₐ 25</span>
     </div>
     <div class="pka-item">
       <span class="formula">酮/醛（α-H）</span>
       <span class="pka-badge pka-mid">pKₐ ~20</span>
     </div>
     <div class="pka-item">
-      <span class="formula">酯（ester α-H）</span>
-      <span class="pka-badge pka-mid">pKₐ 25</span>
+      <span class="formula">CH₃CH₂OH (乙醇)</span>
+      <span class="pka-badge pka-mid">pKₐ 16</span>
     </div>
     <div class="pka-item">
       <span class="formula">β-二羰基化合物</span>
@@ -670,7 +670,7 @@ p{margin-bottom:.85rem;}
     <div class="key-title">酸性規律 — 必背！</div>
     <ul>
       <li>共軛鹼越穩定 → 原酸越強 → pKₐ 越小</li>
-      <li>負電荷在 <span class="hl-g">O 上</span> 比在 C 上更穩定 → 醇比烷更酸</li>
+      <li>負電荷在 <span class="hl-r">O 上</span> 比在 C 上更穩定 → 醇比烷更酸</li>
       <li><span class="hl">兩個 C=O 夾住的 CH₂（β-二羰基）</span> 的 α-H 最酸！（負電荷可分散到兩個 O）</li>
     </ul>
   </div>
@@ -690,13 +690,13 @@ p{margin-bottom:.85rem;}
       <td>弱，只在 β-二羰基有用</td>
     </tr>
     <tr>
-      <td>⁻OEt（NaOEt）</td>
+      <td>⁻OEt（NaOEt）Na⁺ ⁻OCH₂CH₃</td>
       <td>16</td>
       <td class="bad">&lt;1%</td>
       <td>常用於 malonic/acetoacetic ester 合成</td>
     </tr>
     <tr>
-      <td>⁻OtBu（KOtBu）</td>
+      <td>⁻OtBu（KOtBu）K⁺ ⁻OC(CH₃)₃</td>
       <td>18</td>
       <td class="bad">1–10%</td>
       <td>中等，有立體障礙</td>
@@ -746,7 +746,7 @@ p{margin-bottom:.85rem;}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:.5rem;">
       <div style="border:2px solid var(--coral);border-radius:8px;padding:.8rem;text-align:center;">
         <div style="color:var(--coral);font-weight:700;font-size:.85rem;margin-bottom:.4rem;">🏃 動力學烯醇負離子</div>
-        <div style="font-family:'Courier New',monospace;font-size:.9rem;color:#C8DFFF;">
+        <div style="font-family:'Courier New',monospace;font-size:.9rem;color:#62758F;">
           取走 <span style="color:var(--coral);">二級 H（2° H）</span><br>
           → 較少取代的 C=C
         </div>
@@ -754,7 +754,7 @@ p{margin-bottom:.85rem;}
       </div>
       <div style="border:2px solid var(--green);border-radius:8px;padding:.8rem;text-align:center;">
         <div style="color:var(--green);font-weight:700;font-size:.85rem;margin-bottom:.4rem;">⚖️ 熱力學烯醇負離子</div>
-        <div style="font-family:'Courier New',monospace;font-size:.9rem;color:#C8DFFF;">
+        <div style="font-family:'Courier New',monospace;font-size:.9rem;color:#62758F;">
           取走 <span style="color:var(--green);">三級 H（3° H）</span><br>
           → 較多取代的 C=C
         </div>
@@ -832,14 +832,14 @@ p{margin-bottom:.85rem;}
     當 α 碳本來是立體中心（不對稱碳），形成烯醇負離子後：<br><br>
     1. α-C 變成 <span class="hl-r">sp² 平面</span>，失去立體化學資訊<br>
     2. H₂O 再質子化時，從平面<strong>兩側的機率相等</strong><br>
-    3. 結果得到 <span class="hl-r">消旋混合物（racemic mixture）</span>，光學活性消失
+    3. 結果得到<span class="hl-r">消旋混合物（racemic mixture）</span>，光學活性消失
   </div>
 
   <div class="rxn">
     <div class="rxn-title">消旋化機制示意</div>
     <div class="rxn-flow" style="justify-content:center;">
       <div class="compound">
-        <div class="chem" style="color:var(--purple);">(R)-酮<br>（光學活性）</div>
+        <div class="chem" style="color:var(--purple);">(S)-酮<br>（光學活性）</div>
       </div>
       <div class="arrow-label">
         <div class="arr-line">→</div>
@@ -853,7 +853,7 @@ p{margin-bottom:.85rem;}
         <div class="reagent">H₂O 從兩側等機率攻擊</div>
       </div>
       <div class="compound">
-        <div class="chem">(R)-酮 : (S)-酮<br>= 1 : 1</div>
+        <div class="chem">(S)-酮 : (R)-酮<br>= 1 : 1</div>
         <div class="cname" style="color:var(--coral);">消旋混合物</div>
       </div>
     </div>
@@ -908,8 +908,8 @@ p{margin-bottom:.85rem;}
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-body">
-        <strong>烯醇親核攻擊 X₂</strong>：α-C 攻擊鹵素，形成新的 C–X 鍵<br>
-        <span class="chem new-bond">C(OH)=C + X–X  →  C(OH⁺)–C–X + X⁻</span>
+        <strong>親核攻擊 X₂</strong>：α-C 攻擊鹵素，形成新的 C–X 鍵<br>
+        <span class="chem new-bond">C(OH)=C（烯醇） + X–X  →  C(OH⁺)–C–X + X⁻</span>
       </div>
     </div>
     <div class="step">
@@ -923,7 +923,7 @@ p{margin-bottom:.85rem;}
 
   <div class="box box-coral">
     <div class="label">⚠️ 酸催化特點</div>
-    酸催化通常只發生<strong>單取代</strong>（mono-substitution），因為加了 X 後，αC 附近電子密度降低，不容易再形成烯醇中間體。
+    酸催化通常只發生<strong>單取代</strong>（mono-substitution），因為加了 X 後，α-C 附近電子密度降低，不容易再形成烯醇中間體。
   </div>
 
   <h3>23.7B 鹼催化鹵化（Mechanism 23.4）— 多取代</h3>
@@ -963,14 +963,14 @@ p{margin-bottom:.85rem;}
 
   <div class="mech">
     <div class="step">
-      <div class="step-num">Part 1</div>
+      <div class="step-num">1</div>
       <div class="step-body">
         <strong>三步鹵化</strong>：⁻OH 去質子，X₂ 反應，重複三次<br>
         <span class="chem">R-CO-CH₃  →  R-CO-CH₂X  →  R-CO-CHX₂  →  R-CO-CX₃</span>
       </div>
     </div>
     <div class="step">
-      <div class="step-num">Part 2</div>
+      <div class="step-num">2</div>
       <div class="step-body">
         <strong>鹼水解裂解</strong>：⁻OH 親核加成到 C=O，⁻CX₃ 作為離去基，形成羧酸鹽<br>
         <span class="chem">R-CO-CX₃  + ⁻OH  →  R-COO⁻  +  HCX₃</span>
@@ -1037,8 +1037,8 @@ p{margin-bottom:.85rem;}
         <div class="arr-line">→</div>
         <div class="reagent">[1] LDA/THF, –78°C</div>
       </div>
-      <div class="compound" style="border:1px solid var(--cyan);border-radius:6px;">
-        <div class="chem" style="color:var(--cyan);">烯醇負離子</div>
+      <div class="compound" style="border:1px solid var(--green);border-radius:6px;">
+        <div class="chem" style="color:var(--green);">烯醇負離子</div>
       </div>
       <div class="arrow-label">
         <div class="arr-line">→</div>
@@ -1091,7 +1091,7 @@ p{margin-bottom:.85rem;}
     <div class="label">🏥 真實藥物合成</div>
     Tamoxifen 是廣泛使用的乳癌治療藥物（品牌名 Nolvadex，1970 年代上市）。<br><br>
     合成關鍵步驟：<br>
-    酮 A <span class="hl-c">+ NaH（強鹼）→ 烯醇負離子</span> <span class="hl-r">+ CH₃CH₂I → 化合物 B（高產率）</span><br><br>
+    酮 A <span class="hl-c">+ NaH（強鹼）→ 烯醇負離子</span> <span class="hl-r">+ CH₃CH₂I </span>→ 化合物 B（高產率）<br><br>
     B 再經多步反應轉化為 Tamoxifen（只有 Z 式有效）。
   </div>
 </section>
@@ -1294,22 +1294,22 @@ p{margin-bottom:.85rem;}
   <table class="compare-table">
     <tr><th>名詞</th><th>定義</th><th>重點</th></tr>
     <tr>
-      <td><span class="hl-c">α 碳</span></td>
+      <td><span class="hl">α 碳</span></td>
       <td>緊鄰 C=O 的碳</td>
       <td>本章所有反應都在這裡發生</td>
     </tr>
     <tr>
-      <td><span class="hl-amber">α 氫</span></td>
+      <td>α 氫</td>
       <td>接在 α 碳上的 H</td>
       <td>pKₐ ≈ 20，因共振穩定而酸性偏大</td>
     </tr>
     <tr>
-      <td><span class="hl">烯醇 (Enol)</span></td>
+      <td><span class="hl-c">烯醇 (Enol)</span></td>
       <td>含 C=C + OH 的酮互變異構體</td>
       <td>中性，親核性弱，&lt;1%（一般）</td>
     </tr>
     <tr>
-      <td><span class="hl-c">烯醇負離子 (Enolate)</span></td>
+      <td><span class="hl-g">烯醇負離子 (Enolate)</span></td>
       <td>從 α-H 去質子後的帶負電中間體</td>
       <td>強親核劑，從 α-C 反應</td>
     </tr>
