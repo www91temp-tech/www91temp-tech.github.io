@@ -28,7 +28,6 @@
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 15px;
     line-height: 1.8;
-    scroll-timeline: --page-scroll block;
   }
 
   /* ── HERO ── */
@@ -91,46 +90,10 @@
     transition: color .2s, border-color .2s;
   }
   .navbar a:hover { color: var(--amber); border-color: var(--amber); }
-
-  /* CSS 現代滾動驅動動畫：當特定區塊進入視窗時自動點亮對應導覽連結 */
-  @supports (animation-timeline: view()) {
-    body {
-      timeline-scope: --intro, --naming, --properties, --prep, --general, --hydride, --cn, --wittig, --amines, --water, --acetal, --cyclic, --carbo, --review;
-    }
-    #intro { view-timeline: --intro block; }
-    #naming { view-timeline: --naming block; }
-    #properties { view-timeline: --properties block; }
-    #prep { view-timeline: --prep block; }
-    #general { view-timeline: --general block; }
-    #hydride { view-timeline: --hydride block; }
-    #cn { view-timeline: --cn block; }
-    #wittig { view-timeline: --wittig block; }
-    #amines { view-timeline: --amines block; }
-    #water { view-timeline: --water block; }
-    #acetal { view-timeline: --acetal block; }
-    #cyclic { view-timeline: --cyclic block; }
-    #carbo { view-timeline: --carbo block; }
-    #review { view-timeline: --review block; }
-
-    .navbar a[href="#intro"] { animation: active-nav linear; animation-timeline: --intro; }
-    .navbar a[href="#naming"] { animation: active-nav linear; animation-timeline: --naming; }
-    .navbar a[href="#properties"] { animation: active-nav linear; animation-timeline: --properties; }
-    .navbar a[href="#prep"] { animation: active-nav linear; animation-timeline: --prep; }
-    .navbar a[href="#general"] { animation: active-nav linear; animation-timeline: --general; }
-    .navbar a[href="#hydride"] { animation: active-nav linear; animation-timeline: --hydride; }
-    .navbar a[href="#cn"] { animation: active-nav linear; animation-timeline: --cn; }
-    .navbar a[href="#wittig"] { animation: active-nav linear; animation-timeline: --wittig; }
-    .navbar a[href="#amines"] { animation: active-nav linear; animation-timeline: --amines; }
-    .navbar a[href="#water"] { animation: active-nav linear; animation-timeline: --water; }
-    .navbar a[href="#acetal"] { animation: active-nav linear; animation-timeline: --acetal; }
-    .navbar a[href="#cyclic"] { animation: active-nav linear; animation-timeline: --cyclic; }
-    .navbar a[href="#carbo"] { animation: active-nav linear; animation-timeline: --carbo; }
-    .navbar a[href="#review"] { animation: active-nav linear; animation-timeline: --review; }
-
-    @keyframes active-nav {
-      0%, 100% { color: var(--muted); border-color: transparent; }
-      20%, 80% { color: var(--amber); border-color: var(--amber); font-weight: 700; }
-    }
+  .navbar a.active { 
+    color: var(--amber); 
+    border-color: var(--amber); 
+    font-weight: 700; 
   }
 
   /* ── MAIN LAYOUT ── */
@@ -140,7 +103,7 @@
   .section-header {
     display: flex; align-items: center; gap: 14px;
     margin: 52px 0 24px;
-    scroll-margin-top: 70px; /* 避免導覽列擋住章節標題 */
+    scroll-margin-top: 70px;
   }
   .section-header .num {
     background: var(--amber); color: #fff;
@@ -1182,6 +1145,35 @@ Wittig 反應的限制：有時會形成 E/Z 烯烴異換物的混合物（無�
     <div class="sc-body">C=O → C=C<br>副產物 Ph₃P=O<br>Nobel Prize 1979</div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll(".section-header");
+    const navLinks = document.querySelectorAll(".navbar a");
+
+    const observerOptions = {
+      root: null, 
+      threshold: 0.6,
+      rootMargin: "-20% 0px -20% 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${id}`) {
+              link.classList.add("active");
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+  });
+</script>
 
 </body>
 </html>
