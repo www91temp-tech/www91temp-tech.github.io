@@ -25,7 +25,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     font-size: 15px;
     line-height: 1.8;
   }
@@ -42,7 +42,7 @@
   .hero::before {
     content: 'C=O';
     position: absolute; top: -20px; right: 60px;
-    font-size: 180px; font-family: 'JetBrains Mono', monospace;
+    font-size: 180px; font-family: 'Segoe UI', monospace;
     color: rgba(217,119,6,0.04); font-weight: 900; line-height: 1;
   }
   .hero .chapter-label {
@@ -67,7 +67,7 @@
   .formula-strip .badge {
     background: rgba(217,119,6,0.08); border: 1px solid rgba(217,119,6,0.25);
     border-radius: 20px; padding: 5px 14px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Segoe UI', monospace;
     font-size: 13px; color: var(--amber);
   }
 
@@ -172,12 +172,12 @@
     background: #F8FAFC;
     border: 1px solid var(--teal);
     border-radius: 10px; padding: 18px 20px; margin: 14px 0;
-    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    font-family: 'Segoe UI', monospace; font-size: 13px;
   }
   .reaction-box .rx-title {
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--teal); margin-bottom: 10px; font-weight: 700;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
   }
   .reaction-box .arrow { color: var(--amber); margin: 0 6px; }
   .reaction-box .reagent {
@@ -213,8 +213,8 @@
   .mech-step .step-content { flex: 1; font-size: 14px; }
   .mech-step .step-content code {
     background: rgba(109,40,217,0.08); padding: 1px 6px;
-    border-radius: 3px; font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; color: var(--violet);
+    border-radius: 3px; font-family: 'Segoe UI', monospace;
+    font-size: 13px; color: var(--violet);
   }
 
   /* ── COMPARE TABLE ── */
@@ -240,13 +240,13 @@
   }
   .reactivity-bar .rx-item {
     flex: 1; padding: 14px 12px; text-align: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Segoe UI', monospace;
     font-size: 13px;
   }
   .rx-item.most   { background: #DCFCE7; color: #15803D; }
   .rx-item.mid    { background: #FEF3C7; color: #B45309; }
   .rx-item.least  { background: #FFE4E6; color: #B91C1C; }
-  .rx-item .label { font-size: 10px; color: var(--muted); margin-top: 4px; font-family: 'Noto Sans TC'; }
+  .rx-item .label { font-size: 12px; color: var(--muted); margin-top: 4px; font-family: 'Segoe UI'; }
 
   /* ── SUMMARY GRID ── */
   .summary-grid {
@@ -296,8 +296,8 @@
   code {
     background: rgba(0,0,0,0.05);
     padding: 1px 6px; border-radius: 3px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 92%; color: #B45309;
+    font-family: 'Arial Black', monospace;
+    font-size: 13px; color: #B45309;
   }
 
   /* ── SCROLLBAR ── */
@@ -435,8 +435,8 @@
 <h3>醛的 IUPAC 命名</h3>
 <div class="card teal">
   <h4>兩種情況</h4>
-  <p><strong>情況 A：CHO 接在鏈上</strong> → 找含 CHO 的最長碳鏈，把 <code>-e</code> 改成 <code>-al</code>；CHO 碳為 C1，但名稱中省略「1」。</p>
-  <p><strong>情況 B：CHO 接在環上</strong> → 環名 + <code>-carbaldehyde</code>，環的 CHO 附著點為 C1。</p>
+  <p><strong>CHO 接在鏈上</strong> → 找含 CHO 的最長碳鏈，把母烷烴的 <strong>-e</strong> 改成 <code>-al</code>；CHO 碳在 C1（省略數字 1）</p>
+  <p><strong>CHO 接在環上</strong> → 環名 + <code>-carbaldehyde</code>，環的 CHO 附著點為 C1。</p>
 </div>
 
 <table class="compare-table">
@@ -474,7 +474,7 @@
 <h3>α、β 位置標示（俗名系統）</h3>
 <div class="card">
   <p>俗名系統中，緊鄰 CHO 的碳叫 <strong style="color:var(--amber)">α碳</strong>，再下一個是 <strong style="color:var(--teal)">β碳</strong>，依此類推。</p>
-  <p style="font-family:'JetBrains Mono'; font-size:13px; margin-top:8px;">
+  <p style="font-family:'Segoe UI'; font-size:13px; margin-top:8px;">
     <span style="color:var(--muted)">CHO — </span><span style="color:var(--amber)">Cα</span> — <span style="color:var(--teal)">Cβ</span> — <span style="color:var(--violet)">Cγ</span> — ...
   </p>
   <p style="font-size:13px; color:var(--muted); margin-top:6px;">IUPAC 的編號從 C=O 碳（C1）開始往外數；希臘字母編號從緊鄰 C=O 的碳（α）開始。</p>
@@ -790,10 +790,9 @@ Cl⁻、Br⁻、I⁻ 雖是好的取代反應親核試劑，但<strong>不</stro
 <div class="card amber">
   <h3>核心概念：C=O 變成 C=C</h3>
   <p>Wittig 反應用 <strong>Wittig 試劑（phosphorus ylide）</strong> 將醛或酮的羰基轉換成烯烴：</p>
-  <div style="font-family:'JetBrains Mono'; font-size:13px; margin:10px 0; color:var(--amber);">
+  <div style="font-family:'Segoe UI'; font-size:13px; margin:10px 0; color:var(--amber);">
     R₂C=O &nbsp;+&nbsp; Ph₃P⁺–⁻CR"₂ &nbsp;→&nbsp; R₂C=CR"₂ &nbsp;+&nbsp; Ph₃P=O
   </div>
-  <p>1979年 Nobel 化學獎得主 Georg Wittig 因發現此反應而獲獎。</p>
 </div>
 
 <h3>Wittig 試劑的製備（兩步驟）</h3>
