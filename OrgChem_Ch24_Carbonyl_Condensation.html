@@ -96,7 +96,7 @@
     border-radius: 50%;
     width: 52px; height: 52px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: white;
+    font-size: 12px; font-weight: 700; color: white;
   }
   .bond-atom.carbon { background: rgba(220,38,38,0.25); border-color: #f87171; color: #fca5a5; }
   .bond-line {
@@ -230,10 +230,10 @@
     overflow-x: auto;
   }
   .rxn-box .arrow { color: #34d399; }
-  .rxn-box .bond { color: #f87171; font-weight: 700; }
+  .rxn-box .bond { color: #f87171; font-size: 14px; }
   .rxn-box .reagent { color: #93c5fd; font-size: 13px; }
-  .rxn-box .label { color: #a78bfa; font-size: 12px; }
-  .rxn-box .product { color: #6ee7b7; }
+  .rxn-box .label { color: #a78bfa; font-size: 13px; }
+  .rxn-box .product { color: #a78bfa; font-size: 13px; }
 
   /* ── COMPARISON TABLE ── */
   .compare-grid {
@@ -552,7 +552,7 @@
 <!-- INTRO BANNER -->
 <div class="chapter-intro">
   🧪 <strong>本章核心概念：</strong>第24章的每一個反應都在羰基的 α 碳形成<strong>新的碳碳鍵</strong>。
-  親核的烯醇化物（enolate）攻擊親電的羰基碳，是本章所有反應的共同邏輯。
+  親核的烯醇陰離子（enolate）攻擊親電的羰基碳，是本章所有反應的共同邏輯。
   記住這個模板，所有複雜機構都會迎刃而解。
 </div>
 
@@ -566,7 +566,7 @@
     </div>
   </div>
 
-  <p>本章研究的是<strong>羰基縮合反應</strong>（carbonyl condensation reactions）——兩個羰基化合物之間的反應。其中一個作為<span class="tag tag-blue">親核劑（烯醇）</span>，另一個作為<span class="tag tag-red">親電劑（羰基碳）</span>。</p>
+  <p>本章研究的是<strong>羰基縮合反應</strong>（carbonyl condensation reactions）——兩個羰基化合物之間的反應。其中一個作為<span class="tag tag-blue">親核劑（烯醇陰離子）</span>，另一個作為<span class="tag tag-red">親電劑（羰基碳）</span>。</p>
 
   <div class="callout key">
     <div class="callout-title">🔑 最重要的一句話</div>
@@ -628,15 +628,15 @@
       <th>鹼</th>
       <th>產物</th>
     </tr>
-    <tr><td><strong>Aldol</strong></td><td>醛或酮 + 醛或酮</td><td>⁻OH（催化量）</td><td>β-羥基羰基化合物</td></tr>
+    <tr><td><strong>Aldol</strong></td><td>兩分子同種醛或酮</td><td>⁻OH（催化量）</td><td>β-羥基羰基化合物</td></tr>
     <tr><td><strong>交叉 Aldol</strong></td><td>兩種不同醛/酮</td><td>⁻OH</td><td>單一β-羥基羰基</td></tr>
     <tr><td><strong>定向 Aldol</strong></td><td>酮 + 醛</td><td>LDA（強鹼）</td><td>特定β-羥基酮</td></tr>
     <tr><td><strong>分子內 Aldol</strong></td><td>二羰基化合物</td><td>⁻OEt</td><td>五元或六元環</td></tr>
     <tr><td><strong>Claisen</strong></td><td>酯 + 酯</td><td>NaOEt（當量）</td><td>β-酮酯</td></tr>
     <tr><td><strong>交叉 Claisen</strong></td><td>兩種不同酯/酯+酮</td><td>NaOEt</td><td>β-二羰基化合物</td></tr>
     <tr><td><strong>Dieckmann</strong></td><td>二酯（分子內）</td><td>NaOEt</td><td>環狀β-酮酯</td></tr>
-    <tr><td><strong>Michael</strong></td><td>烯醇 + α,β-不飽和羰基</td><td>⁻OH 或 ⁻OEt</td><td>1,5-二羰基化合物</td></tr>
-    <tr><td><strong>Robinson 環化</strong></td><td>烯醇 + α,β-不飽和酮</td><td>⁻OH 或 ⁻OEt</td><td>環己-2-烯酮六元環</td></tr>
+    <tr><td><strong>Michael</strong></td><td>烯醇陰離子 + α,β-不飽和羰基</td><td>⁻OH 或 ⁻OEt</td><td>1,5-二羰基化合物</td></tr>
+    <tr><td><strong>Robinson 環化</strong></td><td>烯醇陰離子 + α,β-不飽和酮</td><td>⁻OH 或 ⁻OEt</td><td>環己-2-烯酮六元環</td></tr>
   </table>
 </div>
 
@@ -661,17 +661,17 @@
     <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.1：Aldol 反應本質上是親核加成反應</div>
     <div class="figure-body">
       <strong>一般的親核加成：</strong> 親核劑（:Nu⁻）攻擊羰基碳 → 生成醇鹽<br>
-      <strong>Aldol 反應的特別之處：</strong> 親核劑是<em>烯醇化物（enolate）</em>，它攻擊另一分子的羰基碳，形成新的 C–C 鍵。<br>
-      💡 兩者的邏輯一模一樣，只是「親核劑」換成了烯醇化物！
+      <strong>Aldol 反應的特別之處：</strong> 親核劑是<em>烯醇陰離子（enolate） </em>，它攻擊另一分子的羰基碳，形成新的 C–C 鍵。<br>
+      💡 兩者的邏輯一模一樣，只是「親核劑」換成了烯醇陰離子！
     </div>
   </div>
 
   <h3 style="margin: 20px 0 12px; color: var(--ink);">▌ 典型反應：乙醛的 Aldol 縮合</h3>
 
   <div class="rxn-box">
-    2 CH₃CHO  <span class="reagent">(乙醛)</span><br>
+    2 CH₃CHO  <span class="reagent">乙醛</span><br>
     <span class="arrow">──⁻OH, H₂O──▶</span><br>
-    CH₃–CH(OH)–CH₂–CHO  <span class="label">← 3-羥基丁醛（β-羥基醛，Aldol 產物）</span><br>
+    CH₃–CH(OH)<span class="bond">–</span>CH₂–CHO  <span class="label">← 3-羥基丁醛（β-羥基醛，Aldol 產物）</span><br>
     <span class="bond">↑ 紅色標記：這裡形成了新的 C–C 鍵</span>
   </div>
 
@@ -680,11 +680,11 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">1</div>
-      <div class="mech-step-body"><strong>形成烯醇化物</strong><br>⁻OH 移除 α-H，生成共振穩定的烯醇化物</div>
+      <div class="mech-step-body"><strong>形成烯醇陰離子</strong><br>⁻OH 移除 α-H，生成共振穩定的烯醇陰離子</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">2</div>
-      <div class="mech-step-body"><strong>親核加成</strong><br>烯醇化物攻擊另一分子醛的羰基碳<br><span class="hl-red">→ 新 C–C 鍵在這裡形成！</span></div>
+      <div class="mech-step-body"><strong>親核加成</strong><br>烯醇陰離子攻擊另一分子醛的羰基碳<br><span class="hl-red">→ 新 C–C 鍵在這裡形成！</span></div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">3</div>
@@ -695,8 +695,8 @@
   <div class="callout key">
     <div class="callout-title">⚖️ 平衡位置</div>
     <ul class="check">
-      <li><strong>醛：</strong>平衡傾向於<em>生成物側</em>，反應通常成功</li>
-      <li><strong>酮：</strong>平衡傾向於<em>原料側</em>，但可通過脫水驅動平衡右移</li>
+      <li><strong>醛：</strong>平衡傾向於<em>生成物側 </em>，反應通常成功</li>
+      <li><strong>酮：</strong>平衡傾向於<em>原料側 </em>，但可通過脫水驅動平衡右移</li>
     </ul>
   </div>
 
@@ -707,9 +707,9 @@
   <div class="figure-card">
     <div class="figure-header"><span class="fig-icon">🖼</span> 脫水反應示例</div>
     <div class="figure-body">
-      <strong>反應 [1]</strong>：2分子乙醛 → β-羥基醛 →（-H₂O）→ <em>丁烯醛（crotonaldehyde）</em><br>
+      <strong>反應 [1]</strong>：2分子乙醛 → β-羥基醛 →（-H₂O）→ <em>2-丁烯醛（crotonaldehyde） </em><br>
       <strong>反應 [2]</strong>：2分子苯乙酮 → β-羥基酮 → 因為產物與苯環進一步共軛，<strong>脫水自動發生，無法分離中間體</strong><br>
-      ⚠️ 當 α,β-不飽和羰基化合物進一步與 C=C 或苯環共軛時，脫水是<em>自發且不可逆的</em>
+      ⚠️ 當 α,β-不飽和羰基化合物進一步與 C=C 或苯環共軛時，脫水是<em>自發且不可逆的 </em>
     </div>
   </div>
 
@@ -718,18 +718,18 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">1</div>
-      <div class="mech-step-body"><strong>⁻OH 移除 α-H</strong><br>形成共振穩定烯醇化物（陰離子中間體）</div>
+      <div class="mech-step-body"><strong>⁻OH 移除 α-H</strong><br>形成共振穩定烯醇陰離子（陰離子中間體）</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">2</div>
-      <div class="mech-step-body"><strong>⁻OH 離去</strong><br>烯醇化物的電子對形成新 π 鍵，同時 ⁻OH 離去</div>
+      <div class="mech-step-body"><strong>⁻OH 離去</strong><br>烯醇陰離子的電子對形成新 π 鍵，同時 ⁻OH 離去</div>
     </div>
   </div>
 
   <div class="callout rule">
     <div class="callout-title">📐 E1cB 機構記憶法</div>
     <strong>E1cB</strong> = Elimination（消去）, unimolecular（單分子）, Conjugate Base（共軛鹼）<br>
-    中間體是<em>碳負離子（carbanion）</em>而非碳正離子——這和 E1 不同！<br>
+    中間體是<em>碳負離子（carbanion） </em>而非碳陽離子——這和 E1 不同！<br>
     普通醇只能在酸中脫水；<strong>β-羥基羰基化合物在鹼中也能脫水</strong>，因為共軛雙鍵的穩定性提供了驅動力。
   </div>
 
@@ -764,21 +764,21 @@
     </div>
   </div>
 
-  <p><strong>交叉 Aldol 反應</strong>（crossed aldol / mixed aldol）是指兩種<em>不同的</em>羰基化合物之間的 Aldol 反應。</p>
+  <p><strong>交叉 Aldol 反應</strong>（crossed aldol / mixed aldol）是指兩種<em>不同的 </em>羰基化合物之間的 Aldol 反應。</p>
 
   <div class="callout warning">
     <div class="callout-title">⚠️ 重大問題</div>
-    若兩種醛都含有 α-H，可能生成<strong>四種不同產物</strong>（兩個各自成烯醇，與兩個各自作親電劑），合成價值極低！
+    若兩種醛都含有 α-H，可能生成<strong>四種不同產物</strong>（兩個各自成烯醇陰離子，與兩個各自作親電劑），合成價值極低！
   </div>
 
   <div class="figure-card">
     <div class="figure-header"><span class="fig-icon">🖼</span> 兩種不同醛（均含 α-H）的交叉 Aldol</div>
     <div class="figure-body">
       以乙醛（CH₃CHO）和丙醛（CH₃CH₂CHO）為例：<br>
-      • 乙醛形成烯醇 + 乙醛作親電劑 → 產物 A<br>
-      • 乙醛形成烯醇 + 丙醛作親電劑 → 產物 B<br>
-      • 丙醛形成烯醇 + 乙醛作親電劑 → 產物 C<br>
-      • 丙醛形成烯醇 + 丙醛作親電劑 → 產物 D<br>
+      • 乙醛形成烯醇陰離子 + 乙醛作親電劑 → 產物 A<br>
+      • 乙醛形成烯醇陰離子 + 丙醛作親電劑 → 產物 B<br>
+      • 丙醛形成烯醇陰離子 + 乙醛作親電劑 → 產物 C<br>
+      • 丙醛形成烯醇陰離子 + 丙醛作親電劑 → 產物 D<br>
       <strong>結論：混合物，合成上無用！</strong>
     </div>
   </div>
@@ -791,14 +791,14 @@
       <div class="step-body">
         <div class="step-title">只有一個羰基化合物有 α-H</div>
         <p>常用的<strong>無 α-H 親電劑</strong>：<span class="tag tag-blue">甲醛（HCHO）</span><span class="tag tag-blue">苯甲醛（PhCHO）</span></p>
-        <p>例：苯甲醛（親電劑）+ 乙醛（形成烯醇）→ 脫水後得肉桂醛（cinnamaldehyde）</p>
+        <p>例：苯甲醛（親電劑）+ 乙醛（形成烯醇陰離子）→ 脫水後得肉桂醛（cinnamaldehyde）</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">②</div>
       <div class="step-body">
         <div class="step-title">使用活性亞甲基化合物（active methylene compound）</div>
-        <p>β-二羰基化合物（如丙二酸二乙酯 CH₂(COOEt)₂）的 α-H 特別酸性，<strong>優先生成烯醇</strong>。</p>
+        <p>β-二羰基化合物（如丙二酸二乙酯 CH₂(COOEt)₂）的 α-H 特別酸性，<strong>優先生成烯醇陰離子</strong>。</p>
         <div class="memory-box" style="margin-top:10px;">
           <div class="mem-title">常見活性亞甲基化合物</div>
           <div class="mem-content">
@@ -810,22 +810,23 @@
         </div>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num">③</div>
-      <div class="step-body">
-        <div class="step-title">使用 LDA 定向生成烯醇（見 24.3）</div>
-        用強鹼 LDA 事先形成特定烯醇，再加入第二個羰基化合物。
-      </div>
-    </div>
-  </div>
-
+    
   <div class="figure-card">
     <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.2：苯甲醛與丙二酸二乙酯的交叉 Aldol</div>
     <div class="figure-body">
-      β-二羰基化合物（丙二酸二乙酯）在 NaOEt/EtOH 中形成烯醇化物（這個烯醇特別穩定）。<br>
+      β-二羰基化合物（丙二酸二乙酯）在 NaOEt/EtOH 中形成烯醇陰離子（特別穩定）。<br>
       苯甲醛作為親電劑被攻擊。<br>
       初始的 β-羥基中間體<strong>不分離</strong>，自動脫水形成高度共軛的最終產物。<br>
-      💡 <strong>β-二羰基化合物永遠作為烯醇端（親核劑），醛永遠作為親電端。</strong>
+      💡 <strong>β-二羰基化合物永遠作為烯醇陰離子（親核劑），醛永遠作為親電端。</strong>
+    </div>
+  </div>
+    
+    <div class="step">
+      <div class="step-num">③</div>
+      <div class="step-body">
+        <div class="step-title">使用 LDA 定向生成烯醇陰離子（見 24.3）</div>
+        用強鹼 LDA 事先形成特定烯醇陰離子，再加入第二個羰基化合物。
+      </div>
     </div>
   </div>
 
@@ -853,12 +854,12 @@
     </div>
   </div>
 
-  <p><strong>定向 Aldol 反應</strong>解決了兩個羰基化合物都含有 α-H 時的選擇性問題。策略是「分步進行」：先用強鹼形成<em>特定的</em>烯醇，再加入親電劑。</p>
+  <p><strong>定向 Aldol 反應</strong>解決了兩個羰基化合物都含有 α-H 時的選擇性問題。策略是「分步進行」：先用強鹼形成<em>特定的 </em>烯醇陰離子，再加入親電劑。</p>
 
   <div class="callout mechanism">
     <div class="callout-title">🔧 操作步驟</div>
     <ol style="padding-left: 18px; line-height: 2;">
-      <li>用 <strong>LDA</strong>（二異丙基氨基锂，強且非親核的鹼）處理<em>其中一個</em>羰基化合物，<strong>定量形成動力學烯醇</strong></li>
+      <li>用 <strong>LDA</strong>（二異丙基醯胺鋰，強且非親核的鹼）處理<em>其中一個 </em>羰基化合物，<strong>定量形成動力學烯醇陰離子</strong></li>
       <li>加入第二個羰基化合物（親電劑）</li>
     </ol>
   </div>
@@ -869,15 +870,15 @@
       <ul class="check">
         <li>非常強的鹼（pKa ~36）</li>
         <li>非親核性（空間位阻大，不會攻擊羰基）</li>
-        <li>可以定量形成烯醇</li>
+        <li>可以定量形成烯醇陰離子</li>
         <li>對不對稱酮，優先去除<strong>較少取代的 α-H</strong>（動力學產物）</li>
       </ul>
     </div>
     <div class="compare-card right">
       <h4>⚗️ 普通鹼（⁻OH）的限制</h4>
       <ul class="check">
-        <li>平衡量的鹼，烯醇只有少量</li>
-        <li>兩種羰基化合物都可能形成烯醇</li>
+        <li>平衡量的鹼，烯醇陰離子只有少量</li>
+        <li>兩種羰基化合物都可能形烯醇陰離子</li>
         <li>若都有 α-H，會得到混合物</li>
       </ul>
     </div>
@@ -887,7 +888,7 @@
     <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.4：定向 Aldol 用於合成 periplanone B（美洲蟑螂性費洛蒙）</div>
     <div class="figure-body">
       合成美洲蟑螂性費洛蒙的關鍵步驟中：<br>
-      • 環狀酮先用 LDA/THF 處理，形成特定烯醇化物<br>
+      • 環狀酮先用 LDA/THF 處理，形成特定烯醇陰離子<br>
       • 再與醛發生親核加成，精確形成一個新 C–C 鍵<br>
       • 後續幾步轉化即得 periplanone B<br>
       💡 說明定向 Aldol 在全合成中的重要性：當你需要<strong>精確控制</strong>哪個 C–C 鍵先形成時，就用 LDA。
@@ -899,7 +900,7 @@
     <div class="figure-body">
       ar-turmerone 是薑黃精油的主成分。分析方法：<br>
       目標分子是 α,β-不飽和羰基化合物 → 找 C=C 兩端（α 和 β 碳）→ 斷開 α–β 鍵<br>
-      一半給酮（形成烯醇），另一半給醛（作親電劑）<br>
+      一半給酮（形成烯醇陰離子），另一半給醛（作親電劑）<br>
       → 用 LDA 方法即可定向合成
     </div>
   </div>
@@ -934,8 +935,7 @@
   <h3 style="margin: 20px 0 12px; color: var(--ink);">▌ 典型例子：己烷-2,5-二酮 → 五元環</h3>
 
   <div class="rxn-box">
-    <span class="label">【己烷-2,5-二酮（1,4-二羰基）】</span><br>
-    CH₃–CO–CH₂–CH₂–CO–CH₃<br>
+    CH₃–CO–CH₂–CH₂–CO–CH₃ <span class="reagent">己烷-2,5-二酮（1,4-二羰基）</span><br>
     <span class="arrow">── NaOEt/EtOH ──▶</span><br>
     <span class="product">3-甲基環戊-2-烯酮（五元環）</span> + EtOH<br>
     <span class="bond">形成 1個新σ鍵（環化）+ 1個新π鍵（脫水）</span>
@@ -943,9 +943,9 @@
 
   <div class="callout info">
     <div class="callout-title">💡 為什麼三元環不形成？</div>
-    同一個二酮可能形成兩種烯醇化物：烯醇A → 五元環（穩定）；烯醇B → 三元環（高能量，極不穩定）。
+    同一個二酮可能形成兩種烯醇陰離子：烯醇陰離子A → 五元環（穩定）；烯醇陰離子B → 三元環（高能量，極不穩定）。
     由於平衡，系統<strong>只走向穩定的五元環</strong>，三元環根本不形成。
-    這說明：<em>熱力學驅動環的尺寸選擇</em>。
+    這說明：<em>熱力學驅動環的尺寸選擇 </em>。
   </div>
 
   <div class="figure-card">
@@ -973,10 +973,10 @@
   <p><strong>Claisen 反應</strong>是酯版本的 Aldol 反應。兩分子酯在烷氧基鹼（alkoxide base，如 NaOEt）作用下，生成 <span class="hl-red">β-酮酯</span>（beta-keto ester）。</p>
 
   <div class="rxn-box">
-    <span class="label">【典型 Claisen：乙酸乙酯自縮合】</span><br>
-    2 CH₃COOEt  <span class="reagent">（乙酸乙酯）</span><br>
+    【典型 Claisen：乙酸乙酯自縮合】<br>
+    2 CH₃COOEt  <span class="reagent">乙酸乙酯</span><br>
     <span class="arrow">──[1] NaOEt  [2] H₃O⁺──▶</span><br>
-    <span class="product">CH₃–CO–CH₂–COOEt</span>  <span class="label">← 乙酰乙酸乙酯（β-酮酯）</span><br>
+    CH₃–CO<span class="bond">–</span>CH₂–COOEt  <span class="product">乙醯乙酸乙酯（β-酮酯）</span><br>
     <span class="bond">↑ 紅色：新形成的 C–C 鍵</span>
   </div>
 
@@ -984,7 +984,7 @@
     <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.6：Claisen 是酯的親核取代</div>
     <div class="figure-body">
       <strong>一般親核取代（酯）：</strong> 親核劑攻擊羰基碳 → 四面體中間體 → 離去基離去<br>
-      <strong>Claisen 反應：</strong> 烯醇化物作親核劑，攻擊另一個酯分子的羰基碳 → 四面體中間體 → ⁻OEt 離去<br>
+      <strong>Claisen 反應：</strong> 烯醇陰離子作親核劑，攻擊另一個酯分子的羰基碳 → 四面體中間體 → ⁻OEt 離去<br>
       核心差異：比 Aldol 多了「<strong>離去基（⁻OEt）離去</strong>」這一步！所以得到的是取代產物，而非加成產物。
     </div>
   </div>
@@ -994,11 +994,11 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">1</div>
-      <div class="mech-step-body"><strong>烯醇化物生成</strong><br>⁻OEt 移除 α-H</div>
+      <div class="mech-step-body"><strong>烯醇陰離子生成</strong><br>⁻OEt 移除 α-H</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">2</div>
-      <div class="mech-step-body"><strong>親核加成</strong><br>烯醇攻擊另一酯的羰基<br><span class="hl-red">→ 新 C–C 鍵！</span></div>
+      <div class="mech-step-body"><strong>親核加成</strong><br>烯醇陰離子攻擊另一酯的羰基<br><span class="hl-red">→ 新 C–C 鍵！</span></div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">3</div>
@@ -1016,17 +1016,17 @@
 
   <div class="callout warning">
     <div class="callout-title">⚠️ 重要限制</div>
-    Claisen 反應的驅動力是步驟4（β-酮酯失去 α-H 形成穩定烯醇）。因此，<strong>酯的 α 碳必須有 2 或 3 個 H</strong>（即 CH₃CO₂R' 或 RCH₂CO₂R' 型酯）才能成功進行 Claisen 反應！
+    Claisen 反應的驅動力是步驟4（β-酮酯失去 α-H 形成穩定烯醇陰離子）。因此，<strong>酯的 α 碳必須有 2 或 3 個 H</strong>（即 CH₃CO₂R' 或 RCH₂CO₂R' 型酯）才能成功進行 Claisen 反應！
   </div>
 
   <div class="compare-grid">
     <div class="compare-card left">
       <h4>Aldol vs Claisen 核心差異</h4>
-      <p style="font-size:14px;"><strong>Aldol：</strong>醛/酮作親電劑 → 四面體中間體 → <em>沒有離去基</em> → 親核<strong>加成</strong>產物（β-羥基羰基）</p>
+      <p style="font-size:14px;"><strong>Aldol：</strong>醛/酮作親電劑 → 四面體中間體 → <em>沒有離去基 </em> → 親核<strong>加成</strong>產物（β-羥基羰基）</p>
     </div>
     <div class="compare-card right">
       <h4>&nbsp;</h4>
-      <p style="font-size:14px;"><strong>Claisen：</strong>酯作親電劑 → 四面體中間體 → <em>⁻OR 離去</em> → 親核<strong>取代</strong>產物（β-酮酯）</p>
+      <p style="font-size:14px;"><strong>Claisen：</strong>酯作親電劑 → 四面體中間體 → <em>⁻OR 離去 </em> → 親核<strong>取代</strong>產物（β-酮酯）</p>
     </div>
   </div>
 
@@ -1049,7 +1049,7 @@
     </div>
   </div>
 
-  <p>與交叉 Aldol 類似，兩種不同的羰基化合物也可以進行 <strong>交叉 Claisen 反應</strong>，但需要特定條件才能得到單一產物。</p>
+  <p>與交叉 Aldol 類似，兩種不同的羰基化合物也可以進行<strong>交叉 Claisen 反應</strong>，但需要特定條件才能得到單一產物。</p>
 
   <h3 style="margin: 20px 0 12px; color: var(--ink);">▌ 兩種有合成價值的情況</h3>
 
@@ -1059,17 +1059,17 @@
       <div class="step-body">
         <div class="step-title">兩個酯，只有一個有 α-H</div>
         <p>常用的<strong>無 α-H 酯</strong>：<span class="tag tag-purple">甲酸乙酯（HCO₂Et）</span><span class="tag tag-purple">苯甲酸乙酯（PhCO₂Et）</span></p>
-        <p>例：苯甲酸乙酯（親電劑）+ 乙酸乙酯（形成烯醇）→ 得到單一 β-酮酯</p>
+        <p>例：苯甲酸乙酯（親電劑）+ 乙酸乙酯（形成烯醇陰離子）→ 得到單一 β-酮酯</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">②</div>
       <div class="step-body">
         <div class="step-title">酮 + 酯（無 α-H 的酯）</div>
-        <p>烯醇來自酮，酯作親電劑（效果最好的是無 α-H 的酯）。<br>
+        <p>烯醇陰離子來自酮，酯作親電劑（效果最好的是無 α-H 的酯）。<br>
         產物是 β-二羰基化合物（但不一定是 β-酮酯）。</p>
         <div class="rxn-box" style="margin-top:8px; font-size:13px;">
-          環己酮 + 甲酸乙酯（HCO₂Et）<br>
+          <span class="reagent">環己酮 + 甲酸乙酯（HCO₂Et）</span><br>
           <span class="arrow">── NaOEt / H₃O⁺ ──▶</span><br>
           <span class="product">2-（羥甲亞基）環己酮（β-二羰基）</span>
         </div>
@@ -1082,11 +1082,11 @@
   <div class="callout info">
     <div class="callout-title">🧪 其他有用的羰基親電劑</div>
     <table class="chem-table" style="margin-top:8px;">
-      <tr><th>試劑</th><th>與酯烯醇反應</th><th>產物</th></tr>
-      <tr><td>草酸二乙酯（diethyl carbonate）</td><td>酯烯醇化物</td><td>β-二酯</td></tr>
-      <tr><td>氯甲酸乙酯（ethyl chloroformate）</td><td>酮烯醇化物</td><td>β-酮酯（Cl⁻ 是更好的離去基！）</td></tr>
+      <tr><th>試劑</th><th>與酯烯醇陰離子反應</th><th>產物</th></tr>
+      <tr><td>草酸二乙酯（diethyl carbonate）</td><td>酯烯醇陰離子</td><td>β-二酯</td></tr>
+      <tr><td>氯甲酸乙酯（ethyl chloroformate）</td><td>酮烯醇陰離子</td><td>β-酮酯（Cl⁻ 是更好的離去基！）</td></tr>
     </table>
-    氯甲酸乙酯特別有用，因為可以輕鬆得到 β-酮酯，而這是乙酰乙酸乙酯合成法（acetoacetic ester synthesis）的重要原料。
+    氯甲酸乙酯特別有用，因為可以輕鬆得到 β-酮酯，而這是乙醯乙酸乙酯合成法（acetoacetic ester synthesis）的重要原料。
   </div>
 </div>
 
@@ -1100,7 +1100,7 @@
     </div>
   </div>
 
-  <p><strong>Dieckmann 反應</strong>是<em>分子內</em>的 Claisen 反應——使用<strong>二酯</strong>（diester）作原料，在分子內形成環，得到環狀 β-酮酯。</p>
+  <p><strong>Dieckmann 反應</strong>是<em>分子內 </em>的 Claisen 反應——使用<strong>二酯</strong>（diester）作原料，在分子內形成環，得到環狀 β-酮酯。</p>
 
   <div class="callout key">
     <div class="callout-title">📐 成環規則（與分子內 Aldol 類似）</div>
@@ -1121,7 +1121,7 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">1–2</div>
-      <div class="mech-step-body"><strong>烯醇化物攻擊</strong><br>鹼移除 α-H → 烯醇攻擊分子另一端酯的羰基<br><span class="hl-red">新 C–C 鍵形成</span></div>
+      <div class="mech-step-body"><strong>烯醇陰離子攻擊</strong><br>鹼移除 α-H → 烯醇陰離子攻擊分子另一端酯的羰基<br><span class="hl-red">新 C–C 鍵形成</span></div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">3</div>
@@ -1152,14 +1152,14 @@
     </div>
   </div>
 
-  <p><strong>Michael 反應</strong>（也稱 1,4-共軛加成）是烯醇化物對 <strong>α,β-不飽和羰基化合物</strong>（enone/enal）的 1,4-加成，生成 <span class="hl-red">1,5-二羰基化合物</span>。</p>
+  <p><strong>Michael 反應</strong>（也稱 1,4-共軛加成）是烯醇陰離子對 <strong>α,β-不飽和羰基化合物</strong>（enone/enal）的 1,4-加成，生成 <span class="hl-red">1,5-二羰基化合物</span>。</p>
 
   <div class="callout info">
     <div class="callout-title">💡 為什麼是 1,4-加成？</div>
     α,β-不飽和羰基化合物有<strong>兩個親電位點</strong>：<br>
     • <span class="tag tag-red">羰基碳（1,2-位置）</span>：直接加成，軟硬酸鹼理論中「硬」親核劑偏好<br>
     • <span class="tag tag-blue">β 碳（1,4-位置）</span>：共軛加成（Michael 加成），「軟」親核劑偏好<br>
-    烯醇化物是軟親核劑，所以優先在 β 碳加成！
+    烯醇陰離子是軟親核劑，所以優先在 β 碳加成！
   </div>
 
   <h3 style="margin: 20px 0 12px; color: var(--ink);">▌ 機構（Mechanism 24.6）</h3>
@@ -1167,29 +1167,29 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">1</div>
-      <div class="mech-step-body"><strong>形成烯醇化物</strong><br>鹼移除供體分子的 α-H</div>
+      <div class="mech-step-body"><strong>形成烯醇陰離子</strong><br>鹼移除供體分子的 α-H</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">2</div>
-      <div class="mech-step-body"><strong>1,4-加成</strong><br>烯醇攻擊 α,β-不飽和物的 <strong>β 碳</strong><br><span class="hl-red">新 C–C 鍵在 β 位形成！</span></div>
+      <div class="mech-step-body"><strong>1,4-加成</strong><br>烯醇陰離子攻擊 α,β-不飽和物的 <strong>β 碳</strong><br><span class="hl-red">新 C–C 鍵在 β 位形成！</span></div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">3</div>
-      <div class="mech-step-body"><strong>質子化</strong><br>烯醇化物中間體被質子化，得 1,5-二羰基化合物</div>
+      <div class="mech-step-body"><strong>質子化</strong><br>烯醇陰離子中間體被質子化，得 1,5-二羰基化合物</div>
     </div>
   </div>
 
   <div class="rxn-box">
-    <span class="label">【典型 Michael：活性亞甲基化合物 + 甲基乙烯基酮】</span><br>
-    <span class="reagent">乙酰丙酮（nucleophile）+ 丁-3-烯-2-酮（methyl vinyl ketone, MVK）</span><br>
+    【典型 Michael：活性亞甲基化合物 + 甲基乙烯基酮】<br>
+    <span class="reagent">乙醯丙酮（nucleophile）+ 丁-3-烯-2-酮（methyl vinyl ketone, MVK）</span><br>
     <span class="arrow">── ⁻OH/H₂O ──▶</span><br>
-    <span class="product">2-乙酰基-5-庚二酮 → 1,5-二羰基化合物</span><br>
-    <span class="bond">新 C–C 鍵形成在烯醇化物（α碳）與 MVK 的 β 碳之間</span>
+    <span class="product">2-乙醯基-5-庚二酮 → 1,5-二羰基化合物</span><br>
+    <span class="bond">新 C–C 鍵形成在烯醇陰離子（α碳）與 MVK 的 β 碳之間</span>
   </div>
 
   <div class="callout key">
     <div class="callout-title">⭐ Michael 受體與供體</div>
-    <p style="margin-bottom:8px;"><strong>Michael 供體（nucleophile）：</strong>任何可生成烯醇化物的化合物</p>
+    <p style="margin-bottom:8px;"><strong>Michael 供體（nucleophile）：</strong>任何可生成烯醇陰離子的化合物</p>
     <p style="margin-bottom:8px;"><span class="tag tag-green">β-二羰基（最佳）</span><span class="tag tag-green">β-酮酯</span><span class="tag tag-green">普通酮/酯</span></p>
     <p style="margin-bottom:8px;"><strong>Michael 受體（electrophile，α,β-不飽和羰基化合物）：</strong></p>
     <p><span class="tag tag-red">烯酮（enone）</span><span class="tag tag-red">烯醛（enal）</span><span class="tag tag-red">烯酸酯（acrylate）</span><span class="tag tag-red">腈乙烯（acrylonitrile）</span></p>
@@ -1229,11 +1229,11 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">1</div>
-      <div class="mech-step-body">鹼移除最酸的 H（兩個羰基之間），生成烯醇化物</div>
+      <div class="mech-step-body">鹼移除最酸的 H（兩個羰基之間），生成烯醇陰離子</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">2</div>
-      <div class="mech-step-body">烯醇共軛加成到 α,β-不飽和酮的 β 碳<br><span class="hl-red">第一個新 C–C σ 鍵</span></div>
+      <div class="mech-step-body">烯醇陰離子共軛加成到 α,β-不飽和酮的 β 碳<br><span class="hl-red">第一個新 C–C σ 鍵</span></div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">3</div>
@@ -1245,11 +1245,11 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">4</div>
-      <div class="mech-step-body">鹼再次移除 α-H，形成新烯醇化物</div>
+      <div class="mech-step-body">鹼再次移除 α-H，形成新烯醇陰離子</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">5</div>
-      <div class="mech-step-body">烯醇化物在分子內攻擊另一個羰基<br><span class="hl-red">第二個新 C–C σ 鍵 → 六元環形成！</span></div>
+      <div class="mech-step-body">烯醇陰離子在分子內攻擊另一個羰基<br><span class="hl-red">第二個新 C–C σ 鍵 → 六元環形成！</span></div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">6</div>
@@ -1261,7 +1261,7 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">7</div>
-      <div class="mech-step-body">鹼移除 α-H → 烯醇化物</div>
+      <div class="mech-step-body">鹼移除 α-H → 烯醇陰離子</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">8</div>
@@ -1286,7 +1286,7 @@
       看到 cyclohex-2-enone（α,β-不飽和酮六元環），就知道可以用 Robinson 環化合成它！<br>
       逆合成步驟：<br>
       <strong>步驟1：</strong>找到 cyclohex-2-enone 環的位置，若需要可以旋轉或翻轉分子（但不要移錯鍵！）<br>
-      <strong>步驟2：</strong>斷開 C=C（這一半給烯醇來源，加 H 補全）；再斷開 β 碳旁邊的 C–C（這一半給 α,β-不飽和酮，加 O 補全）<br>
+      <strong>步驟2：</strong>斷開 C=C（這一半給烯醇陰離子來源，加 H 補全）；再斷開 β 碳旁邊的 C–C（這一半給 α,β-不飽和酮，加 O 補全）<br>
       → 就能識別兩個起始原料
     </div>
   </div>
@@ -1309,7 +1309,7 @@
 
   <div class="summary-banner">
     <h3>🧠 本章最核心的三句話</h3>
-    <div class="summary-row"><div class="summary-dot">①</div><div class="summary-text"><strong>所有反應都用相同邏輯：</strong>烯醇化物（親核劑）+ 羰基化合物（親電劑）→ 新 C–C 鍵在 α 碳</div></div>
+    <div class="summary-row"><div class="summary-dot">①</div><div class="summary-text"><strong>所有反應都用相同邏輯：</strong>烯醇陰離子（親核劑）+ 羰基化合物（親電劑）→ 新 C–C 鍵在 α 碳</div></div>
     <div class="summary-row"><div class="summary-dot">②</div><div class="summary-text"><strong>有無離去基決定產物：</strong>醛/酮（無離去基）→ 加成（Aldol，β-羥基羰基）；酯（有 ⁻OR 離去基）→ 取代（Claisen，β-酮酯）</div></div>
     <div class="summary-row"><div class="summary-dot">③</div><div class="summary-text"><strong>Michael + 分子內 Aldol = Robinson：</strong>一個反應，三個新鍵，一個六元環</div></div>
   </div>
@@ -1345,7 +1345,7 @@
       <td>兩個都有 α-H 的酮+醛</td>
       <td><span class="tag tag-purple">定向 Aldol</span></td>
       <td>LDA（強鹼）</td>
-      <td>先生成烯醇，再加親電劑</td>
+      <td>先生成烯醇陰離子，再加親電劑</td>
     </tr>
     <tr>
       <td>1,4- 或 1,5-二酮</td>
@@ -1366,7 +1366,7 @@
       <td>1,6→五元環；1,7→六元環</td>
     </tr>
     <tr>
-      <td>烯醇 + α,β-不飽和羰基</td>
+      <td>烯醇陰離子 + α,β-不飽和羰基</td>
       <td><span class="tag tag-red">Michael</span></td>
       <td>⁻OH 或 ⁻OEt</td>
       <td>產物是 1,5-二羰基化合物</td>
@@ -1393,7 +1393,7 @@
       <tr><td style="padding:6px 0; font-weight:700;">1,5-二羰基化合物</td><td style="padding:6px 0;">Michael 加成的產物；兩個羰基相隔三個碳</td></tr>
       <tr><td style="padding:6px 0; font-weight:700;">cyclohex-2-enone 環</td><td style="padding:6px 0;">Robinson 環化的標誌性產物骨架</td></tr>
       <tr><td style="padding:6px 0; font-weight:700;">縮合反應（condensation）</td><td style="padding:6px 0;">反應中有小分子（H₂O 或醇）被消去</td></tr>
-      <tr><td style="padding:6px 0; font-weight:700;">烯醇化物（enolate）</td><td style="padding:6px 0;">含 C=C–O⁻ 共振結構的陰離子；本章所有反應的親核劑</td></tr>
+      <tr><td style="padding:6px 0; font-weight:700;">烯醇陰離子（enolate）</td><td style="padding:6px 0;">含 C=C–O⁻ 共振結構的陰離子；本章所有反應的親核劑</td></tr>
     </table>
   </div>
 
@@ -1403,7 +1403,7 @@
     <div class="ov-card c1" style="cursor:default; text-align:left; padding:16px;">
       <div style="font-size:24px; margin-bottom:8px;">💊</div>
       <strong style="font-size:14px;">布洛芬（Ibuprofen）</strong>
-      <p style="font-size:12px; margin-top:6px; color:#475569;">合成步驟之一涉及烯醇化物與羰基親電劑的反應——正是本章的核心邏輯。商品名：Motrin、Advil。</p>
+      <p style="font-size:12px; margin-top:6px; color:#475569;">合成步驟之一涉及烯醇陰離子與羰基親電劑的反應——正是本章的核心邏輯。商品名：Motrin、Advil。</p>
     </div>
     <div class="ov-card c2" style="cursor:default; text-align:left; padding:16px;">
       <div style="font-size:24px; margin-bottom:8px;">🌸</div>
@@ -1426,7 +1426,7 @@
     <div class="mem-title">🎓 終極記憶框架</div>
     <div class="mem-content">
       本章所有反應，就是在問三件事：<br>
-      <span class="hl">1. 誰是親核劑？</span>（烯醇化物——由哪個羰基化合物生成）<br>
+      <span class="hl">1. 誰是親核劑？</span>（烯醇陰離子——由哪個羰基化合物生成）<br>
       <span class="hl">2. 誰是親電劑？</span>（有 C=O 的羰基碳，或 α,β-不飽和物的 β 碳）<br>
       <span class="hl">3. 有沒有離去基？</span>（有 → 取代，Claisen 型；沒有 → 加成，Aldol 型）<br><br>
       把每個反應代入這三個問題，機構就清晰了。
