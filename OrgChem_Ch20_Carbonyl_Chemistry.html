@@ -14,7 +14,7 @@
     --accent2: #2980b9;
     --accent3: #27ae60;
     --accent4: #8e44ad;
-    --gold: #d4a017;
+    --gold: #f7dfa1;
     --light-bg: #ffffff;
     --section-bg: #f0ede5;
     --highlight-bg: #fff3cd;
@@ -364,7 +364,7 @@
   .tag-red { background: #fdecea; color: #c0392b; }
   .tag-blue { background: #e8f4fd; color: #2980b9; }
   .tag-green { background: #eafaf1; color: #27ae60; }
-  .tag-gold { background: #fef9e7; color: #d4a017; }
+  .tag-gold { background: #fef9e7; color: #fa7000; }
 
   /* ── MECHANISM STEPS ── */
   .mechanism {
@@ -708,7 +708,7 @@
     <h2>羰基化合物介紹</h2>
   </div>
 
-  <p>羰基（<strong>C=O</strong>）是有機化學中最重要的官能基，沒有之一。它的碳缺電子、π 鍵容易斷裂，能參與各式各樣的反應。本章從 Chapter 20 到 24 都圍繞著羰基展開。</p>
+  <p>羰基（<strong>C=O</strong>，carbonyl group）是有機化學中最重要的官能基。它的碳缺電子、π 鍵容易斷裂，能參與各式各樣的反應。本章從 Chapter 20 到 24 都圍繞著羰基展開。</p>
 
   <div class="key-box">
     <div class="key-box-title">🔑 核心結構</div>
@@ -726,6 +726,26 @@
   <h3>兩大類羰基化合物</h3>
 
   <div class="compound-grid">
+        <div class="compound-card">
+      <div class="compound-name">羧酸 Carboxylic Acid</div>
+      <div class="compound-formula">R–COOH</div>
+      <div class="compound-desc">含 –OH 離去基；<br>可進行親核取代</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">酸氯化物 Acid Chloride</div>
+      <div class="compound-formula">R–COCl</div>
+      <div class="compound-desc">Cl⁻ 是最佳離去基；<br><span class="hl-red">反應性最高</span></div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">酯 Ester</div>
+      <div class="compound-formula">R–COOR'</div>
+      <div class="compound-desc">含 –OR' 離去基；<br>活性居中</div>
+    </div>
+    <div class="compound-card">
+      <div class="compound-name">醯胺 Amide</div>
+      <div class="compound-formula">R–CONH₂</div>
+      <div class="compound-desc">⁻NH₂ 是最差離去基；<br><span class="hl-green">反應性最低</span></div>
+    </div>
     <div class="compound-card">
       <div class="compound-name">醛 Aldehyde</div>
       <div class="compound-formula">R–CHO</div>
@@ -734,37 +754,18 @@
     <div class="compound-card">
       <div class="compound-name">酮 Ketone</div>
       <div class="compound-formula">R–CO–R'</div>
-      <div class="compound-desc">兩個烷基或芳基連接羰基；較擁擠、較穩定</div>
-    </div>
-    <div class="compound-card">
-      <div class="compound-name">羧酸 Carboxylic Acid</div>
-      <div class="compound-formula">R–COOH</div>
-      <div class="compound-desc">含 –OH 離去基；可進行親核取代</div>
-    </div>
-    <div class="compound-card">
-      <div class="compound-name">酸氯化物 Acid Chloride</div>
-      <div class="compound-formula">R–COCl</div>
-      <div class="compound-desc">Cl⁻ 是最佳離去基；<span class="hl-red">反應性最高</span></div>
-    </div>
-    <div class="compound-card">
-      <div class="compound-name">酯 Ester</div>
-      <div class="compound-formula">R–COOR'</div>
-      <div class="compound-desc">含 –OR' 離去基；活性居中</div>
-    </div>
-    <div class="compound-card">
-      <div class="compound-name">醯胺 Amide</div>
-      <div class="compound-formula">R–CONH₂</div>
-      <div class="compound-desc">⁻NH₂ 是最差離去基；<span class="hl-green">反應性最低</span></div>
+      <div class="compound-desc">兩個烷基或芳香基連接羰基；較擁擠、較穩定</div>
     </div>
   </div>
 
   <div class="alert">
     <span class="alert-icon">⚡</span>
-    <div><strong>關鍵差異：</strong>羰基碳上<strong>有沒有離去基</strong>，決定了這個化合物走「親核加成」還是「親核取代」的路徑。這是理解本章所有反應的核心！</div>
+    <div><strong>關鍵差異：</strong>羰基碳上<strong>有沒有離去基</strong>，決定了這個化合物走「親核取代」還是「親核加成」的路徑。這是理解本章所有反應的核心！</div>
   </div>
 
   <h3>為什麼羰基如此活潑？</h3>
-  <p>氧的電負度遠大於碳，使 C=O 鍵高度極化：<span class="hl-red">C 端（δ⁺）= 親電中心</span>，<span class="hl-blue">O 端（δ⁻）= 電子豐富</span>。加上羰基碳是 sp² 混成（未擁擠），親核試劑可以容易地從上下兩面進攻 π 鍵。</p>
+  <p>氧的電負度遠大於碳，使 C=O 鍵高度極化：<span class="hl-blue">C 端（δ⁺）= 親電中心</span>，<span class="hl-red">O 端（δ⁻）= 電子豐富</span>。<br>
+  加上羰基碳是 sp² 混成（不擁擠），親核試劑可以容易地從上下兩面進攻 π 鍵。</p>
 
   <div class="memory-card">
     <div class="memory-card-title">記憶口訣</div>
@@ -820,7 +821,7 @@
 
   <div class="star-callout">
     <span class="star">★</span>
-    醛的反應性 > 酮：醛空間較小（只有一個 R 基），且烷基少→電子給予少→羰基碳更缺電子→更活潑！
+    反應性：醛 > 酮，醛空間較小（只有一個 R 基），且烷基少→電子給予少→羰基碳更缺電子→更活潑！
   </div>
 
   <h3>路徑二：親核取代（含離去基的羰基化合物）</h3>
@@ -912,15 +913,15 @@
   <div class="ox-ladder">
     <div class="ox-rung">
       <div class="ox-compound" style="color: #27ae60;">醇 R–CH₂–OH</div>
-      <div class="ox-label">氧化程度最低 ↓</div>
+      <div class="ox-label">氧化程度最低</div>
     </div>
     <div class="ox-rung">
-      <div class="ox-compound" style="color: #d4a017;">醛 / 酮 R–CHO / R₂C=O</div>
+      <div class="ox-compound" style="color: #fa7000;">醛 R–CHO / 酮 R₂C=O</div>
       <div class="ox-label">中間</div>
     </div>
     <div class="ox-rung">
-      <div class="ox-compound" style="color: #c0392b;">羧酸衍生物 R–COOH</div>
-      <div class="ox-label">氧化程度最高 ↑</div>
+      <div class="ox-compound" style="color: #c0392b;">羧酸 R–COOH / 羧酸衍生物</div>
+      <div class="ox-label">氧化程度最高</div>
     </div>
   </div>
 
@@ -929,8 +930,8 @@
     <div class="figure-title">羰基化合物的氧化還原轉換關係</div>
     <div class="figure-desc">
       醇 ←→ 醛/酮 ←→ 羧酸衍生物<br><br>
-      向右（→）方向：<span class="hl-red">氧化（[O]）</span><br>
-      向左（←）方向：<span class="hl-blue">還原（[H]）</span><br><br>
+      向右（→）：<span class="hl-red">氧化（[O]）</span><br>
+      向左（←）：<span class="hl-blue">還原（[H]）</span><br><br>
       醛在中間位置，<strong>既可被氧化（→羧酸），也可被還原（→醇）</strong>。<br>
       羧酸衍生物已高度氧化，只能進行還原反應。
     </div>
@@ -985,8 +986,8 @@
     <thead>
       <tr>
         <th>特性</th>
-        <th>NaBH₄</th>
-        <th>LiAlH₄</th>
+        <th>NaBH₄（Sodium borohydride）</th>
+        <th>LiAlH₄（Lithium aluminum hydride）</th>
       </tr>
     </thead>
     <tbody>
@@ -1026,7 +1027,7 @@
       <div class="step-content">
         <div class="step-title">AlH₄⁻ 提供 H:⁻ 攻擊羰基碳</div>
         <div class="step-desc">Al–H 鍵斷裂，H:⁻ 轉移到羰基碳，形成新的 C–H 鍵。π 鍵斷裂，電子轉移到氧上，形成帶負電的烷氧基（alkoxide）中間體。</div>
-        <div class="step-formula">AlH₄⁻ + R₂C=O → R₂CH–O–AlH₃⁻</div>
+        <div class="step-formula">AlH₄⁻ + R₂C=O → R₂CH–O⁻ + AlH₃</div>
       </div>
     </div>
     <div class="mechanism-step">
@@ -1080,9 +1081,8 @@
 
   <div class="key-box blue">
     <div class="key-box-title">核心原理</div>
-    羰基碳是 sp² <strong>平面</strong>的，親核試劑（H:⁻）可以從平面的上方或下方以<strong>相等的機率</strong>攻擊 π 鍵。因此，兩個對映異構體以<strong>等量</strong>形成 → 得到<strong>外消旋混合物（racemic mixture）</strong>。
+    羰基碳是 sp² <strong>平面</strong>的，親核試劑（H:⁻）可以從平面的上方或下方以<strong>相等的機率</strong>攻擊 π 鍵。因此，兩種鏡像異構物以<strong>等量</strong>形成 → 得到<strong>外消旋混合物（racemic mixture）</strong>。
   </div>
-
   <div class="mechanism">
     <div class="mechanism-title">⚙️ 為何得到外消旋混合物？</div>
     <div class="mechanism-step">
@@ -1103,7 +1103,7 @@
 
   <div class="star-callout">
     <span class="star">★</span>
-    結論：以 NaBH₄ 或 LiAlH₄ 還原非對掌的酮時，如果產生新的立體中心，必然得到等量的兩種對映異構體（外消旋混合物）。
+    結論：以 NaBH₄ 或 LiAlH₄ 還原非對掌的酮時，如果產生新的立體中心，必然得到等量的兩種鏡像異構物（外消旋混合物）。
   </div>
 </div>
 
@@ -1115,7 +1115,7 @@
     <h2>對掌選擇性羰基還原</h2>
   </div>
 
-  <p>若需要只得到單一對映異構體，必須使用<strong>對掌性還原試劑</strong>。這與 Sharpless 不對稱環氧化策略相同。</p>
+  <p>若需要只得到單一鏡像異構物，必須使用<strong>對掌性還原試劑</strong>。這與 Sharpless 不對稱環氧化策略相同。</p>
 
   <h3>CBS 試劑</h3>
   <p>CBS 試劑由 <strong>硼烷（BH₃）</strong> 與對掌性的<strong>噁唑硼烷（oxazaborolidine）</strong>反應製備。因由 Corey、Bakshi、Shibata 三位化學家開發，故稱 CBS 試劑。</p>
@@ -1156,7 +1156,7 @@
 
   <div class="key-box purple">
     <div class="key-box-title">生物體的完美選擇性</div>
-    NADH 也是提供 H:⁻ 的親核試劑。與實驗室試劑不同，<strong>生物還原在酶的催化下</strong>，永遠只形成<strong>單一對映異構體</strong>（100% 選擇性）。<br><br>
+    NADH 也是提供 H:⁻ 的親核試劑。與實驗室試劑不同，<strong>生物還原在酶的催化下</strong>，永遠只形成<strong>單一鏡像異構物</strong>（100% 選擇性）。<br><br>
     例如：丙酮酸（pyruvic acid）在乳酸去氫酶（lactate dehydrogenase）催化下，由 NADH 還原只得到 <strong>(S)-乳酸</strong>。劇烈運動時肌肉中乳酸堆積，就是因為氧氣不足，無法繼續代謝丙酮酸，只好先還原為乳酸。
   </div>
 </div>
