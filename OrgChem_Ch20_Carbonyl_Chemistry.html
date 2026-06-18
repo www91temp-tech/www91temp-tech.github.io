@@ -53,7 +53,7 @@
     overflow: hidden;
   }
   header::before {
-    content: '';
+    content: ";
     position: absolute;
     top: -40px; right: -40px;
     width: 300px; height: 300px;
@@ -61,7 +61,7 @@
     background: rgba(192,57,43,0.15);
   }
   header::after {
-    content: '';
+    content: ";
     position: absolute;
     bottom: -60px; left: -60px;
     width: 250px; height: 250px;
@@ -164,7 +164,6 @@
   .section-num.blue { background: var(--accent2); }
   .section-num.green { background: var(--accent3); }
   .section-num.purple { background: var(--accent4); }
-  .section-num.gold { background: var(--gold); }
   h2 {
     font-family: var(--mono);
     font-size: 1.6rem;
@@ -686,16 +685,18 @@
     <li><a href="#s1">羰基介紹</a></li>
     <li><a href="#s2">兩大反應</a></li>
     <li><a href="#s3">氧化還原預覽</a></li>
-    <li><a href="#s4">醛酮還原</a></li>
+    <li><a href="#s4">醛 / 酮還原</a></li>
     <li><a href="#s5">立體化學</a></li>
     <li><a href="#s6">對掌選擇還原</a></li>
     <li><a href="#s7">羧酸衍生物還原</a></li>
     <li><a href="#s8">醛的氧化</a></li>
     <li><a href="#s9">有機金屬試劑</a></li>
-    <li><a href="#s10">Grignard 反應</a></li>
+    <li><a href="#s10">醛 / 酮反應</a></li>
     <li><a href="#s11">逆合成分析</a></li>
     <li><a href="#s12">保護基</a></li>
-    <li><a href="#s13">α,β-不飽和羰基</a></li>
+    <li><a href="#s13">羧酸衍生物反應</a></li>
+    <li><a href="#s14">其他反應</a></li>
+    <li><a href="#s15">α,β-不飽和羰基</a></li>
     <li><a href="#summary">總整理</a></li>
   </ul>
 </nav>
@@ -929,7 +930,7 @@
     <div class="figure-label">氧化還原路徑圖</div>
     <div class="figure-title">羰基化合物的氧化還原轉換關係</div>
     <div class="figure-desc">
-      醇 ←→ 醛/酮 ←→ 羧酸衍生物<br><br>
+      醇 ←→ 醛 / 酮 ←→ 羧酸衍生物<br><br>
       向右（→）：<span class="hl-red">氧化（[O]）</span><br>
       向左（←）：<span class="hl-blue">還原（[H]）</span><br><br>
       醛在中間位置，<strong>既可被氧化（→羧酸），也可被還原（→醇）</strong>。<br>
@@ -1019,7 +1020,7 @@
     <div><strong>注意：</strong>LiAlH₄ 遇水會劇烈反應！必須在<strong>無水條件</strong>下操作，還原完成後才加水進行質子化。</div>
   </div>
 
-  <h3>機制 20.3：LiAlH₄ 還原醛/酮</h3>
+  <h3>機制 20.3：LiAlH₄ 還原醛 / 酮</h3>
   <div class="mechanism">
     <div class="mechanism-title">⚙️ 親核加成機制</div>
     <div class="mechanism-step">
@@ -1187,12 +1188,12 @@
   <div class="reaction-box">
     <div class="reaction-row">
       <span class="reactant">RCOCl 或 RCOOR'</span>
-      <span class="arrow"><small>‒‒ 強試劑 LiAlH₄ ‒→</small></span>
+      <span class="arrow"><small>‒‒ 強試劑 LiAlH₄ →</small></span>
       <span class="product">RCH₂OH（1° 醇）</span>
     </div>
     <div class="reaction-row">
       <span class="reactant">RCOCl 或 RCOOR'</span>
-      <span class="arrow"><small>‒‒ 溫和試劑 DIBAL-H ‒→</small></span>
+      <span class="arrow"><small>‒‒ 溫和試劑 DIBAL-H →</small></span>
       <span class="product">RCHO（醛）</span>
     </div>
   </div>
@@ -1263,7 +1264,7 @@
   <div class="reaction-box">
     <div class="reaction-row">
       <span class="reactant">R–CHO（醛）</span>
-      <span class="arrow"><small>‒‒ CrO₃, K₂Cr₂O₇, KMnO₄ ‒→</small></span>
+      <span class="arrow"><small>‒‒ CrO₃, K₂Cr₂O₇, KMnO₄ →</small></span>
       <span class="product">R–COOH（羧酸）</span>
     </div>
   </div>
@@ -1295,17 +1296,17 @@
     <div class="compound-card">
       <div class="compound-name">有機鋰試劑</div>
       <div class="compound-formula">R–Li</div>
-      <div class="compound-desc">C–Li 鍵極性最大；<span class="hl-red">反應性最強</span>。Li 電負度 = 1.0</div>
+      <div class="compound-desc">C–Li 鍵極性最大；<br><span class="hl-red">反應性最強</span>。<br>Li 電負度 = 1.0</div>
     </div>
     <div class="compound-card">
       <div class="compound-name">Grignard 試劑</div>
       <div class="compound-formula">R–Mg–X</div>
-      <div class="compound-desc">C–Mg 鍵強極性；<span class="hl-red">反應性強</span>。Mg 電負度 = 1.3。以乙醚為溶劑</div>
+      <div class="compound-desc">C–Mg 鍵強極性；<br><span class="hl-red">反應性強</span>。<br>Mg 電負度 = 1.3。<br>以乙醚為溶劑</div>
     </div>
     <div class="compound-card">
       <div class="compound-name">有機銅試劑（cuprate）</div>
       <div class="compound-formula">R₂Cu⁻Li⁺</div>
-      <div class="compound-desc">C–Cu 鍵較弱極性；<span class="hl-green">反應性較低</span>。Cu 電負度 = 1.8</div>
+      <div class="compound-desc">C–Cu 鍵較弱極性；<br><span class="hl-green">反應性較低</span>。<br>Cu 電負度 = 1.8</div>
     </div>
   </div>
 
@@ -1320,21 +1321,21 @@
     <div style="margin-bottom: 10px;"><strong>有機鋰試劑：</strong></div>
     <div class="reaction-row">
       <span class="reactant">R–X（鹵烷）</span>
-      <span class="arrow"><small>‒‒ 2 Li ‒→</small></span>
+      <span class="arrow"><small>‒‒ 2 Li →</small></span>
       <span class="product">R–Li</span>
       <span class="reagent-label">鋰與鹵素交換</span>
     </div>
     <div style="margin: 14px 0 10px;"><strong>Grignard 試劑：</strong></div>
     <div class="reaction-row">
       <span class="reactant">R–X（鹵烷）</span>
-      <span class="arrow"><small>‒‒ Mg / 乙醚 ‒→</small></span>
+      <span class="arrow"><small>‒‒ Mg / 乙醚 →</small></span>
       <span class="product">R–Mg–X</span>
       <span class="reagent-label">金屬插入 C–X 鍵</span>
     </div>
     <div style="margin: 14px 0 10px;"><strong>有機銅試劑：</strong></div>
     <div class="reaction-row">
       <span class="reactant">2 R–Li</span>
-      <span class="arrow"><small>‒‒ CuI ‒→</small></span>
+      <span class="arrow"><small>‒‒ CuI →</small></span>
       <span class="product">R₂CuLi + LiI</span>
       <span class="reagent-label">由有機鋰試劑製備</span>
     </div>
@@ -1344,7 +1345,7 @@
 
   <div class="key-box">
     <div class="key-box-title">⚠️ 重要注意事項</div>
-    <strong>作為強鹼：</strong>RLi/RMgX 迅速奪取水、醇、羧酸、胺的質子！→ <br>
+    <strong>作為強鹼：</strong>RLi / RMgX 迅速奪取水、醇、羧酸、胺的質子！ <br>
     R–M + H₂O → R–H + M–OH<br>
     這就是為什麼反應必須在<strong>無水條件</strong>下進行。水要在加成完成後才能加入（用於質子化）。<br>
     <strong>作為親核試劑：</strong>攻擊親電的碳原子，形成新的 C–C 鍵！
@@ -1356,28 +1357,28 @@
 <div class="section" id="s10">
   <div class="section-header">
     <span class="section-num">20.10</span>
-    <h2>有機金屬試劑與醛酮的反應</h2>
+    <h2>有機金屬試劑與醛 / 酮的反應</h2>
   </div>
 
-  <p>這是有機合成中最重要的 C–C 成鍵反應之一！有機鋰或 Grignard 試劑與醛酮反應後加水，得到醇類。</p>
+  <p>這是有機合成中最重要的 C–C 成鍵反應之一！有機鋰或 Grignard 試劑與醛 / 酮反應後加水，得到醇類。</p>
 
   <div class="reaction-box">
     <div class="reaction-row">
       <span class="reactant">R₂C=O</span>
       <span class="arrow">‒‒ </span>
-      <span class="arrow"><small>[1] R''MgX 或 R''Li<br>[2] H₂O</small></span>
-      <span class="arrow"> ‒→</span>
+      <span class="arrow"><small>[1] R"MgX 或 R"Li<br>[2] H₂O</small></span>
+      <span class="arrow"> →</span>
       <span class="product">醇（含新 C–C 鍵）</span>
     </div>
   </div>
 
   <h3>機制 20.6：親核加成</h3>
   <div class="mechanism">
-    <div class="mechanism-title">⚙️ Grignard 試劑加成到醛/酮</div>
+    <div class="mechanism-title">⚙️ Grignard 試劑加成到醛 / 酮</div>
     <div class="mechanism-step">
       <div class="step-num">1</div>
       <div class="step-content">
-        <div class="step-title">R''⁻ 攻擊羰基碳 → 形成新 C–C 鍵</div>
+        <div class="step-title">R"⁻ 攻擊羰基碳 → 形成新 C–C 鍵</div>
         <div class="step-desc">有機金屬試劑中的碳（δ⁻）作為親核試劑，攻擊羰基碳（δ⁺），π 鍵斷裂，形成帶負電的烷氧基中間體，同時建立一個新的 C–C 鍵。</div>
       </div>
     </div>
@@ -1390,27 +1391,27 @@
     </div>
   </div>
 
-  <h3>醛酮種類決定醇的級別</h3>
+  <h3>醛 / 酮種類決定醇的級別</h3>
 
   <table class="compare-table">
     <thead>
-      <tr><th>起始物</th><th>+ R''MgX 或 R''Li</th><th>→ 產物</th></tr>
+      <tr><th>起始物</th><th>+ R"MgX 或 R"Li</th><th>→ 產物</th></tr>
     </thead>
     <tbody>
       <tr>
         <td><strong>甲醛</strong> CH₂=O</td>
-        <td>+ R''–M</td>
-        <td><span class="hl-green">1° 醇</span> R''CH₂OH</td>
+        <td>+ R"–M</td>
+        <td><span class="hl-green">1° 醇</span> R"CH₂OH</td>
       </tr>
       <tr>
         <td><strong>其他醛</strong> RCHO</td>
-        <td>+ R''–M</td>
-        <td><span class="hl-blue">2° 醇</span> RCH(OH)R''</td>
+        <td>+ R"–M</td>
+        <td><span class="hl-blue">2° 醇</span> RCH(OH)R"</td>
       </tr>
       <tr>
         <td><strong>酮</strong> R₂C=O</td>
-        <td>+ R''–M</td>
-        <td><span class="hl-red">3° 醇</span> R₂C(OH)R''</td>
+        <td>+ R"–M</td>
+        <td><span class="hl-red">3° 醇</span> R₂C(OH)R"</td>
       </tr>
     </tbody>
   </table>
@@ -1471,7 +1472,7 @@
     <ul>
       <li>確認 C–OH 兩側各有哪些基團</li>
       <li>選擇從哪個 C–C 鍵斷開</li>
-      <li>斷開處：一側給 Grignard（R''MgX），另一側給醛/酮</li>
+      <li>斷開處：一側給 Grignard（R"MgX），另一側給醛 / 酮</li>
       <li>3° 醇有三種路線（三個不同 C–C 鍵可斷開）</li>
     </ul>
   </div>
@@ -1489,7 +1490,7 @@
 
   <div class="alert">
     <span class="alert-icon">⚠️</span>
-    <div>含有 ROH、RCOOH、RNH₂、R₂NH、RCONH₂、RSH 的底物，會與有機金屬試劑發生酸鹼反應，而不是親核加成！</div>
+    <div>含有 ROH、RCOOH、RNH₂、R₂NH、RCONH₂、RSH 的化合物，會與有機金屬試劑發生酸鹼反應，而不是親核加成！</div>
   </div>
 
   <h3>保護基策略（三步法）</h3>
@@ -1519,7 +1520,62 @@
 
 <div class="section" id="s13">
   <div class="section-header">
-    <span class="section-num purple">20.13</span>
+    <span class="section-num">20.13</span>
+    <h2>有機金屬試劑與羧酸衍生物反應</h2>
+  </div>
+  <p>有機鋰和 Grignard 試劑與酯或酸氯化物反應，加兩當量試劑，得到<strong>三級醇</strong>（兩個相同的 R 基）。</p>
+
+  <div class="reaction-box">
+    <div class="reaction-row">
+      <span class="reactant">RCOCl 或 RCOOR'</span>
+      <span class="arrow">‒‒ </span>
+      <span class="arrow"><small>[1] 2×R"MgX<br>[2] H₂O</small></span>
+      <span class="arrow"> →</span>
+      <span class="product">R–C(OH)(R")₂（3° 醇）</span>
+    </div>
+  </div>
+
+  <h3>有機銅（Cuprate）與酸氯化物：製備酮</h3>
+  <p>要止步於<strong>酮</strong>（不繼續到 3° 醇），需要用反應性較弱的有機銅試劑，且只有酸氯化物（有最佳離去基 Cl⁻）能反應：</p>
+
+  <div class="reaction-box">
+    <div class="reaction-row">
+      <span class="reactant">RCOCl</span>
+      <span class="arrow">‒‒ </span>
+      <span class="arrow"><small>R'₂CuLi</small></span>
+      <span class="arrow"> →</span>
+      <span class="product">R–CO–R'（酮）</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="s14">
+  <div class="section-header">
+    <span class="section-num blue">20.14</span>
+    <h2>Grignard 與 CO₂、環氧化物反應</h2>
+  </div>
+  
+  <div class="key-box">
+    <div class="key-box-title">Grignard 試劑與 CO₂ — 羧化反應（carboxylation）</div>
+    R–MgX + CO₂ → 烷氧基中間體 →（H₃O⁺ 質子化）→ <strong>R–COOH（羧酸）</strong><br><br>
+    這讓鹵烷可以轉化為多一個碳的羧酸（常用於增碳）：<br>
+    R–X → R–MgX（加 Mg / 乙醚）→ R–COOH（加 CO₂，再酸化）
+  </div>
+
+  <div class="key-box blue">
+    <div class="key-box-title">Grignard 試劑開環氧化物</div>
+    有機金屬試劑（RLi、RMgX、R₂CuLi）都能開環氧化物的環，形成醇。<br>
+    規則：<strong>親核攻擊發生在空間較小（位阻較小）的碳上</strong>，且為 SN2 背面進攻。
+  </div>
+</div>
+  
+<hr class="divider">
+
+<div class="section" id="s15">
+  <div class="section-header">
+    <span class="section-num green">20.15</span>
     <h2>α,β-不飽和羰基化合物</h2>
   </div>
 
@@ -1581,54 +1637,13 @@
       </div>
     </div>
   </div>
-
-  <h3>有機金屬試劑與羧酸衍生物的反應</h3>
-  <p>有機鋰和 Grignard 試劑與酯或酸氯化物反應，加兩當量試劑，得到<strong>三級醇</strong>（兩個相同的 R 基）。</p>
-
-  <div class="reaction-box">
-    <div class="reaction-row">
-      <span class="reactant">RCOCl 或 RCOOR'</span>
-      <span class="arrow">‒‒ </span>
-      <span class="arrow"><small>[1] 2×R''MgX<br>[2] H₂O</small></span>
-      <span class="arrow"> ‒→</span>
-      <span class="product">R–C(OH)(R'')₂（3° 醇）</span>
-    </div>
-  </div>
-
-  <h3>有機銅（Cuprate）與酸氯化物：製備酮</h3>
-  <p>要止步於<strong>酮</strong>（不繼續到 3° 醇），需要用反應性較弱的有機銅試劑，且只有酸氯化物（有最佳離去基 Cl⁻）能反應：</p>
-
-  <div class="reaction-box">
-    <div class="reaction-row">
-      <span class="reactant">RCOCl</span>
-      <span class="arrow">‒‒ </span>
-      <span class="arrow"><small>R'₂CuLi</small></span>
-      <span class="arrow"> ‒→</span>
-      <span class="product">R–CO–R'（酮）</span>
-    </div>
-  </div>
-
-  <h3>反應與 CO₂、環氧化物</h3>
-
-  <div class="key-box">
-    <div class="key-box-title">Grignard 試劑與 CO₂ — 羧化反應</div>
-    R–MgX + CO₂ → 烷氧基中間體 →（H₃O⁺質子化）→ <strong>R–COOH（羧酸）</strong><br><br>
-    這讓鹵烷可以轉化為多一個碳的羧酸（常用於增碳）：<br>
-    R–X → R–MgX（加Mg）→ R–COOH（加CO₂，再酸化）
-  </div>
-
-  <div class="key-box blue">
-    <div class="key-box-title">Grignard 試劑開環氧化物</div>
-    有機金屬試劑（RLi、RMgX、R₂CuLi）都能開環氧化物的環，形成醇。<br>
-    規則：<strong>親核攻擊發生在空間較小（位阻較小）的碳上</strong>，且為 SN2 背面進攻。
-  </div>
 </div>
 
 <hr class="divider">
 
 <div class="section" id="summary">
   <div class="section-header">
-    <span class="section-num gold">總整理</span>
+    <span class="section-num purple">總整理</span>
     <h2>本章核心概念一覽</h2>
   </div>
 
@@ -1658,8 +1673,8 @@
         <tr><th>目標轉換</th><th>最佳試劑</th></tr>
       </thead>
       <tbody>
-        <tr><td>醛/酮 → 醇（選擇性）</td><td>NaBH₄ / CH₃OH</td></tr>
-        <tr><td>醛/酮/羧酸衍生物 → 醇（通用）</td><td>LiAlH₄，再加 H₂O</td></tr>
+        <tr><td>醛 / 酮 → 醇（選擇性）</td><td>NaBH₄ / CH₃OH</td></tr>
+        <tr><td>醛 / 酮 / 羧酸衍生物 → 醇（通用）</td><td>LiAlH₄，再加 H₂O</td></tr>
         <tr><td>酯或酸氯化物 → 醛（部分還原）</td><td>DIBAL-H（低溫）</td></tr>
         <tr><td>酸氯化物 → 醛（部分還原）</td><td>LiAlH[OC(CH₃)₃]₃</td></tr>
         <tr><td>醯胺 → 胺（特殊！非醇）</td><td>LiAlH₄</td></tr>
@@ -1682,12 +1697,12 @@
         </tr>
         <tr>
           <td>醛 RCHO</td>
-          <td>R''Li 或 R''MgX</td>
+          <td>R"Li 或 R"MgX</td>
           <td><span class="hl-blue">2° 醇</span></td>
         </tr>
         <tr>
           <td>酮 R₂CO</td>
-          <td>R''Li 或 R''MgX</td>
+          <td>R"Li 或 R"MgX</td>
           <td><span class="hl-red">3° 醇</span></td>
         </tr>
         <tr>
