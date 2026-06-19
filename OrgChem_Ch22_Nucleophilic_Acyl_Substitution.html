@@ -38,7 +38,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: -apple-system, 'Noto Sans TC', BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.8;
@@ -99,7 +99,7 @@
     letter-spacing: 1px;
   }
   .hero h1 {
-    font-family: 'Noto Serif TC', serif;
+    font-family: var(--mono);
     font-size: clamp(24px, 5vw, 42px);
     font-weight: 700;
     line-height: 1.3;
@@ -120,7 +120,7 @@
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 12px;
     padding: 16px 28px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     font-size: 20px;
     color: var(--teal-light);
     letter-spacing: 2px;
@@ -160,7 +160,7 @@
   }
 
   h2 {
-    font-family: 'Noto Serif TC', serif;
+    font-family: var(--mono);
     font-size: 28px;
     font-weight: 700;
     color: var(--navy);
@@ -282,7 +282,7 @@
   .fg-tag {
     border-radius: 8px;
     padding: 10px 18px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     font-size: 14px;
     font-weight: 600;
     border: 2px solid;
@@ -290,13 +290,13 @@
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    min-width: 120px;
+    min-width: 200px;
     text-align: center;
     transition: transform .2s;
     cursor: default;
   }
   .fg-tag:hover { transform: translateY(-3px); }
-  .fg-tag .name { font-size: 12px; font-family: 'Noto Sans TC', sans-serif; }
+  .fg-tag .name { font-size: 12px; font-family: var(--mono); }
   .fg-tag.ac { background: var(--acid-chloride); border-color: var(--acid-chloride-b); color: var(--acid-chloride-b); }
   .fg-tag.an { background: var(--anhydride); border-color: var(--anhydride-b); color: var(--anhydride-b); }
   .fg-tag.ca { background: var(--carb-acid); border-color: var(--carb-acid-b); color: var(--carb-acid-b); }
@@ -381,7 +381,7 @@
     color: white;
   }
   .mechanism-title {
-    font-family: 'Noto Serif TC', serif;
+    font-family: var(--mono);
     font-size: 18px;
     font-weight: 700;
     color: var(--gold-light);
@@ -410,7 +410,7 @@
   .mech-content h4 { color: var(--teal-light); margin: 0 0 4px; }
   .mech-content p { color: #a8c4d6; font-size: 15px; }
   .mech-formula {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     background: rgba(255,255,255,0.08);
     border-radius: 8px;
     padding: 12px 16px;
@@ -430,7 +430,7 @@
   /* ─── REACTION CARDS ─── */
   .reaction-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 16px;
     margin: 20px 0;
   }
@@ -451,7 +451,7 @@
   .equation {
     background: var(--deep);
     color: var(--teal-light);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     border-radius: 10px;
     padding: 14px 18px;
     margin: 12px 0;
@@ -644,7 +644,7 @@
   .summary-table th:first-child { width: 160px; }
   .summary-table td:first-child {
     font-weight: 700;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     font-size: 13px;
   }
 
@@ -701,7 +701,7 @@
 
   <h3>五大成員一覽</h3>
   <div class="fg-tags">
-    <div class="fg-tag ac">R–COCl<div class="name">酸氯化物<br>Acid Chloride<br>⭐⭐⭐⭐⭐ 最活潑</div></div>
+    <div class="fg-tag ac">RCOCl<div class="name">酸氯化物<br>Acid Chloride<br>⭐⭐⭐⭐⭐ 最活潑</div></div>
     <div class="fg-tag an">(RCO)₂O<div class="name">酸酐<br>Anhydride<br>⭐⭐⭐⭐</div></div>
     <div class="fg-tag ca">RCOOH<div class="name">羧酸<br>Carboxylic Acid<br>⭐⭐⭐</div></div>
     <div class="fg-tag es">RCOOR'<div class="name">酯<br>Ester<br>⭐⭐</div></div>
@@ -710,7 +710,7 @@
 
   <div class="card">
     <h4>🔑 為什麼它們都能發生親核取代？</h4>
-    <p>因為它們的羰基碳上都連接了一個<strong>電負性原子 Z</strong>，Z 可以充當<strong>離去基（leaving group）</strong>。這和醛、酮不同——醛酮沒有離去基，所以只能發生加成，不能取代。</p>
+    <p>因為它們的羰基碳上都連接了一個<strong>電負性原子 Z</strong>，Z 可以充當<strong>離去基（leaving group）</strong>。<br>這和醛、酮不同——醛 / 酮沒有離去基，所以只能發生加成，不能取代。</p>
     <div class="highlight key">
       每一個以羰基化合物為起始物的反應，都是<strong>親核醯基取代（Nucleophilic Acyl Substitution）</strong>。
     </div>
@@ -727,7 +727,7 @@
     </div>
     <div class="card">
       <h4>📐 共振穩定性與鹼度的關係</h4>
-      <p>RCOZ 可以畫出 3 個共振結構（比醛酮多一個），Z 的鹼性越強，<strong>共振貢獻越大</strong>，化合物越穩定。</p>
+      <p>RCOZ 可以畫出 3 個共振結構（比醛 / 酮多一個），Z 的鹼性越強，<strong>共振貢獻越大</strong>，化合物越穩定。</p>
       <p><strong>鹼性順序（Z⁻）：</strong></p>
       <div class="equation">Cl⁻ &lt; RCO₂⁻ &lt; OH⁻ ≈ OR'⁻ &lt; NR'₂⁻
 ↑弱鹼 = 好離去基        強鹼 = 差離去基↑</div>
@@ -735,7 +735,7 @@
   </div>
 
   <div class="reactivity-scale">
-    <div style="font-weight:700; font-size:17px; margin-bottom:12px; color:var(--navy)">反應活性 vs 穩定性 比較尺</div>
+    <div style="font-weight:700; font-size:17px; margin-bottom:12px; color:var(--navy)">反應活性 vs 穩定性</div>
     <div class="reactivity-bar">
       <div class="reactivity-segment seg1">酸氯化物<br>RCOCl</div>
       <div class="reactivity-segment seg2">酸酐<br>(RCO)₂O</div>
@@ -753,7 +753,7 @@
       <span>穩定</span>
     </div>
     <p style="font-size:14px; color:var(--muted); margin-top:12px">
-      💡 記憶口訣：<strong>「氯酐酸酯胺，活性由強到弱」</strong>——活潑的可以變成穩定的，但穩定的通常不能直接變回去！
+      💡 記憶口訣：<strong>「氯酐酸酯胺，活性強到弱」</strong>——活潑的可以變成穩定的，但穩定的通常不能直接變回去！
     </p>
   </div>
 
@@ -772,35 +772,35 @@
 
   <div class="reaction-grid">
     <div class="reaction-card ac">
-      <h4>酸氯化物 Acid Chloride</h4>
-      <p>將 <code>-ic acid</code> → <code>-yl chloride</code></p>
+      <h4>酸氯化物 Acid Chloride（RCOCl）</h4>
+      <p>將 <strong>-ic acid</strong> → <strong>-yl chloride</strong><br>
+      將 <strong>-carboxylic acid</strong> → <strong>-carbonyl chloride</strong></p>
       <div class="equation" style="font-size:13px">acetic acid → acetyl chloride (CH₃COCl)
 cyclohexanecarboxylic acid
   → cyclohexanecarbonyl chloride</div>
     </div>
     <div class="reaction-card an">
-      <h4>酸酐 Anhydride</h4>
-      <p>將 <code>acid</code> → <code>anhydride</code>（"酐"字代表失水）</p>
+      <h4>酸酐 Anhydride（(RCO)₂O）</h4>
+      <p>將 <strong>acid</strong> → <strong>anhydride</strong>（"酐"字代表失水）</p>
       <div class="equation" style="font-size:13px">acetic acid + acetic acid → acetic anhydride
 acetic acid + benzoic acid
   → acetic benzoic anhydride（字母順序）</div>
     </div>
     <div class="reaction-card es">
       <h4>酯 Ester（RCOOR'）</h4>
-      <p><strong>先說 R' 烷基，再說醯基字尾改 -ate</strong></p>
-      <div class="equation" style="font-size:13px">CH₃COOC₂H₅ = ethyl acetate
-  ↑ 烷基  ↑ 醯基(acetic→acet-ate)</div>
+      <p>先說 R' 烷基，再說醯基 <strong>-ic acid</strong> → <strong>-ate</strong></p>
+      <div class="equation" style="font-size:13px">CH₃COOC₂H₅ = ethyl acetate（烷基在前，醯基在後）</div>
     </div>
     <div class="reaction-card am">
-      <h4>醯胺 Amide</h4>
-      <p>字尾改 <code>-amide</code>；N 上的烷基前加 <code>N-</code></p>
+      <h4>醯胺 Amide（RCONR'₂）</h4>
+      <p>字尾（-ic acid、-oic acid、-ylic acid）改 <strong>-amide</strong><br>N 上的烷基前加 <strong>N-</strong></p>
       <div class="equation" style="font-size:13px">CH₃CONH₂ = acetamide (1°)
 CH₃CONHCH₂CH₃ = N-ethylacetamide (2°)
 CH₃CON(CH₃)₂ = N,N-dimethylacetamide (3°)</div>
     </div>
     <div class="reaction-card ni">
       <h4>腈 Nitrile（RC≡N）</h4>
-      <p>以<strong>碳原子鏈</strong>命名，CN 那個 C 算進去，字尾加 <code>-nitrile</code></p>
+      <p>以<strong>碳原子鏈</strong>命名，CN 那個 C 算進去，字尾加 <strong>-nitrile</strong></p>
       <div class="equation" style="font-size:13px">CH₃CH₂CN = propanenitrile（3個C，不是2個！）
 C₆H₅CN = benzonitrile</div>
     </div>
@@ -809,14 +809,37 @@ C₆H₅CN = benzonitrile</div>
       <p>環狀酯 = <strong>lactone</strong>；環狀醯胺 = <strong>lactam</strong></p>
       <div class="equation" style="font-size:13px">5員環酯 = γ-lactone
 6員環酯 = δ-lactone
-4員環醯胺 = β-lactam（青黴素的核心！）</div>
+4員環醯胺 = β-lactam（青黴素的核心！）
+5員環醯胺 = γ-lactam</div>
     </div>
   </div>
 
   <div class="highlight memory">
     <strong>命名速記：</strong>酸氯化物（-yl chloride）、酸酐（anhydride）、酯（alkyl + -ate）、醯胺（-amide），全都從羧酸名稱改字尾，認識羧酸命名就能搞定全部！
   </div>
-</div>
+
+  <h3>有趣酯與醯胺生活例子</h3>
+  <div class="reaction-grid">
+    <div class="card">
+      <h4>🍌🥭🍍 水果香氣——低分子量酯</h4>
+      <table style="font-size:14px">
+        <tr><th>酯名</th><th>氣味</th></tr>
+        <tr><td>isoamyl acetate</td><td>香蕉</td></tr>
+        <tr><td>ethyl butanoate</td><td>芒果</td></tr>
+        <tr><td>methyl 2-methylbutanoate</td><td>鳳梨</td></tr>
+      </table>
+      <p style="font-size:13px; color:var(--muted); margin-top:8px">低分子量酯揮發性高，因此有強烈特徵香氣。<br>許多人工香精就是這些酯的合成版本。</p>
+    </div>
+    <div class="card">
+      <h4>💊 藥物中的醯胺</h4>
+      <ul style="list-style:disc; padding-left:20px; line-height:2; font-size:15px">
+        <li><strong>Gleevec（imatinib）</strong>：治療慢性骨髓性白血病的標靶藥，含多個醯胺鍵</li>
+        <li><strong>青黴素（Penicillin G）</strong>：含 β-內醯胺環及 α 位醯胺</li>
+        <li><strong>Met-腦啡（Met-enkephalin）</strong>：含 4 個醯胺鍵的天然鎮痛肽，存在於神經組織</li>
+      </ul>
+    </div>
+  </div>
+    
 </section>
 
 <!-- ═══════════════════════════════════════════ SECTION 3 ═══ -->
@@ -1102,7 +1125,8 @@ RCOOR' + R''NH₂  →  RCONHR'' + R'OH
 → 尼龍 6,6 + HCl（縮合聚合物）</div>
       <p style="font-size:14px; color:var(--muted)">1938 年 DuPont 建廠生產，最初用於製作降落傘，後取代蠶絲廣泛應用。</p>
       <div class="highlight figure">
-        <strong>圖 22.5（Figure 22.5）說明：</strong>天然纖維的化學本質：羊毛和蠶絲是蛋白質（多個醯胺鍵連接的胺基酸鏈）；棉花和亞麻是纖維素（葡萄糖單元以醚鍵連接的多糖）。聚醯胺的尼龍模仿了蛋白質的醯胺鍵結構，而聚酯的滌綸（Dacron）則模仿了天然酯的連接方式。
+        <strong>Figure 22.5 說明：</strong><br>
+        天然纖維的化學本質：羊毛和蠶絲是蛋白質（多個醯胺鍵連接的胺基酸鏈）；棉花和亞麻是纖維素（葡萄糖單元以醚鍵連接的多糖）。聚醯胺的尼龍模仿了蛋白質的醯胺鍵結構，而聚酯的滌綸（Dacron）則模仿了天然酯的連接方式。
       </div>
     </div>
     <div class="card">
@@ -1214,7 +1238,7 @@ RC≡N + [1] DIBAL-H / [2] H₂O
         <th style="color:#c9b0ff">醯胺<br>RCONR'₂</th>
       </tr>
       <tr>
-        <td style="background:#0a3a45; color:white; font-weight:700">① 酸氯化物 RCOCl</td>
+        <td style="background:#021121; color:#9ef3ff; font-weight:700">① 酸氯化物 RCOCl</td>
         <td>—</td>
         <td class="tick">✔</td>
         <td class="tick">✔</td>
@@ -1222,7 +1246,7 @@ RC≡N + [1] DIBAL-H / [2] H₂O
         <td class="tick">✔</td>
       </tr>
       <tr>
-        <td style="background:#3d2800; color:white; font-weight:700">② 酸酐 (RCO)₂O</td>
+        <td style="background:#021121; color:#ffd280; font-weight:700">② 酸酐 (RCO)₂O</td>
         <td class="cross">✘</td>
         <td>—</td>
         <td class="tick">✔</td>
@@ -1230,7 +1254,7 @@ RC≡N + [1] DIBAL-H / [2] H₂O
         <td class="tick">✔</td>
       </tr>
       <tr>
-        <td style="background:#3d0020; color:white; font-weight:700">③ 羧酸 RCOOH</td>
+        <td style="background:#021121; color:#ff9eb5; font-weight:700">③ 羧酸 RCOOH</td>
         <td class="tick" style="font-size:13px">✔<br><small>SOCl₂</small></td>
         <td class="tick" style="font-size:13px">✔<br><small>加熱</small></td>
         <td>—</td>
@@ -1238,7 +1262,7 @@ RC≡N + [1] DIBAL-H / [2] H₂O
         <td class="tick">✔</td>
       </tr>
       <tr>
-        <td style="background:#0d2e10; color:white; font-weight:700">④ 酯 RCOOR'</td>
+        <td style="background:#021121; color:#98e6a0; font-weight:700">④ 酯 RCOOR'</td>
         <td class="cross">✘</td>
         <td class="cross">✘</td>
         <td class="tick">✔</td>
@@ -1246,7 +1270,7 @@ RC≡N + [1] DIBAL-H / [2] H₂O
         <td class="tick">✔</td>
       </tr>
       <tr>
-        <td style="background:#22004d; color:white; font-weight:700">⑤ 醯胺 RCONR'₂</td>
+        <td style="background:#021121; color:#c9b0ff; font-weight:700">⑤ 醯胺 RCONR'₂</td>
         <td class="cross">✘</td>
         <td class="cross">✘</td>
         <td class="tick">✔</td>
@@ -1260,29 +1284,8 @@ RC≡N + [1] DIBAL-H / [2] H₂O
     <strong>總覽表的使用邏輯：</strong>往右下方移動（活潑→穩定）一般可行 ✔；往左上方移動（穩定→活潑）一般需要特殊試劑或不可行 ✘。
   </div>
 
-  <h3>有趣酯與醯胺生活例子</h3>
-  <div class="reaction-grid">
-    <div class="card">
-      <h4>🍌🥭🍍 水果香氣——低分子量酯</h4>
-      <table style="font-size:14px">
-        <tr><th>酯名</th><th>氣味</th></tr>
-        <tr><td>isoamyl acetate</td><td>香蕉</td></tr>
-        <tr><td>ethyl butanoate</td><td>芒果</td></tr>
-        <tr><td>methyl 2-methylbutanoate</td><td>鳳梨</td></tr>
-      </table>
-      <p style="font-size:13px; color:var(--muted); margin-top:8px">低分子量酯揮發性高，因此有強烈特徵香氣。許多人工香精就是這些酯的合成版本。</p>
-    </div>
-    <div class="card">
-      <h4>💊 藥物中的醯胺</h4>
-      <ul style="list-style:disc; padding-left:20px; line-height:2; font-size:15px">
-        <li><strong>Gleevec（imatinib）</strong>：治療慢性骨髓性白血病的標靶藥，含多個醯胺鍵</li>
-        <li><strong>青黴素（Penicillin G）</strong>：含 β-內醯胺環及 α 位醯胺</li>
-        <li><strong>Met-腦啡（Met-enkephalin）</strong>：含 4 個醯胺鍵的天然鎮痛肽，存在於神經組織</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3>一頁速覽：本章關鍵詞</h3>
+  
+  <h3>本章關鍵詞</h3>
   <div class="pill-row">
     <span class="pill teal">親核醯基取代</span>
     <span class="pill teal">四面體中間體</span>
@@ -1299,7 +1302,7 @@ RC≡N + [1] DIBAL-H / [2] H₂O
   </div>
 
   <div class="highlight memory">
-    <strong>🧠 最終口訣——記住這些你就懂了 80%！</strong><br><br>
+    <strong>🧠 最終口訣——記住這些就懂了 80%！</strong><br><br>
     ❶ <strong>「氯酐酸酯胺，活性由強到弱」</strong>——反應活性順序<br>
     ❷ <strong>「離去基鹼性越弱，越好離去，化合物越活潑」</strong><br>
     ❸ <strong>「活潑可以往穩定走，穩定不能反過來」</strong>（例外：SOCl₂ 可把羧酸→酸氯化物）<br>
