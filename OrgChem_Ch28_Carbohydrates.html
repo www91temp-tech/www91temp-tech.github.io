@@ -36,7 +36,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: -apple-system, 'Noto Sans TC', BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 16px;
     line-height: 1.8;
   }
@@ -67,7 +67,7 @@
     margin-bottom: 20px;
   }
   .hero h1 {
-    font-family: 'Noto Serif TC', serif;
+    font-family: var(--mono);
     font-size: clamp(28px, 5vw, 52px);
     font-weight: 700;
     margin-bottom: 12px;
@@ -150,7 +150,7 @@
     flex-shrink: 0;
   }
   h2 {
-    font-family: 'Noto Serif TC', serif;
+    font-family: var(--mono);
     font-size: 22px;
     color: var(--text);
   }
@@ -245,7 +245,7 @@
     color: #e0e0f0;
     border-radius: 8px;
     padding: 16px 20px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     font-size: 14px;
     margin: 12px 0;
     overflow-x: auto;
@@ -349,7 +349,7 @@
     gap: 12px;
     flex-wrap: wrap;
     margin: 12px 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     font-size: 14px;
   }
   .rxn .arrow { font-size: 22px; color: var(--accent); flex-shrink: 0; }
@@ -421,7 +421,7 @@
 
 <section class="section" id="intro">
   <div class="section-header">
-    <div class="section-num">28.1</div>
+    <div class="section-num">1</div>
     <h2>什麼是醣類？</h2>
   </div>
 
@@ -445,15 +445,15 @@
           <div class="card-title">纖維素 Cellulose</div>
           <div class="card-desc">木材和植物莖的主要成分。葡萄糖以 β-糖苷鍵連接而成。</div>
         </div>
-        <div class="card red">
-          <div class="card-icon">💊</div>
-          <div class="card-title">小紅莓黴素 Doxorubicin</div>
-          <div class="card-desc">抗癌藥物，結構中含有醣環。用於白血病、乳癌等治療。</div>
-        </div>
         <div class="card purple">
           <div class="card-icon">🧬</div>
           <div class="card-title">去氧腺苷酸</div>
           <div class="card-desc">DNA 的四種核苷酸之一，醣的部份為去氧核糖。</div>
+        </div>
+        <div class="card red">
+          <div class="card-icon">💊</div>
+          <div class="card-title">小紅莓黴素 Doxorubicin</div>
+          <div class="card-desc">抗癌藥物，結構中含有醣環。用於白血病、乳癌等治療。</div>
         </div>
       </div>
     </div>
@@ -477,7 +477,7 @@
 
 <section class="section" id="mono">
   <div class="section-header">
-    <div class="section-num">28.2</div>
+    <div class="section-num">2</div>
     <h2>單醣 Monosaccharides</h2>
   </div>
 
@@ -522,7 +522,7 @@
 
 <section class="section" id="stereochem">
   <div class="section-header">
-    <div class="section-num">28.2A–C</div>
+    <div class="section-num">2A–C</div>
     <h2>立體化學：Fischer 投影式與 D/L 組態</h2>
   </div>
 
@@ -536,20 +536,20 @@
         <li>
           <div class="step-num">1</div>
           <div>碳骨架<strong>垂直排列</strong>，醛基（CHO）或酮基置於<strong>頂端或靠近頂端</strong>。</div>
-        </div>
+        </li>
         <li>
           <div class="step-num">2</div>
           <div><span class="hi-red">水平鍵</span>朝<strong>前方</strong>（楔形鍵，指向你），如同手臂往前伸。</div>
-        </div>
+        </li>
         <li>
           <div class="step-num">3</div>
           <div><span class="hi-blue">垂直鍵</span>朝<strong>後方</strong>（虛線楔形鍵，遠離你），如同腿往後退。</div>
-        </div>
+        </li>
       </ul>
 
       <div class="diagram-wrap">
         <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="max-width:420px">
-          <text x="60" y="20" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#555">3D 概念示意</text>
+          <text x="60" y="20" text-anchor="middle" font-family= var(--mono) font-size="13" fill="#555">3D 概念示意</text>
           <line x1="60" y1="40" x2="60" y2="160" stroke="#1a5c8a" stroke-width="3" stroke-dasharray="6 3"/>
           <line x1="10" y1="100" x2="110" y2="100" stroke="#c0522a" stroke-width="3"/>
           <circle cx="60" cy="100" r="8" fill="#2a2520"/>
@@ -561,7 +561,7 @@
 
           <text x="150" y="105" font-size="28" fill="#2e7d52">→</text>
 
-          <text x="280" y="20" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#555">Fischer 投影式</text>
+          <text x="280" y="20" text-anchor="middle" font-family= var(--mono) font-size="13" fill="#555">Fischer 投影式</text>
           <line x1="280" y1="40" x2="280" y2="160" stroke="#1a5c8a" stroke-width="3"/>
           <line x1="220" y1="100" x2="340" y2="100" stroke="#c0522a" stroke-width="3"/>
           <text x="280" y="36" text-anchor="middle" font-size="12" fill="#1a5c8a">CHO（醛）</text>
@@ -577,7 +577,7 @@
       </div>
 
       <div class="callout warn">
-        ⚠️ <strong>千萬不要</strong>在紙面上旋轉 Fischer 投影式！旋轉 90° 會把分子變成它的鏡像（對掌異構物）。
+        <strong>千萬不要</strong>在紙面上旋轉 Fischer 投影式！旋轉 90° 會把分子變成它的鏡像（對掌異構物）。
       </div>
     </div>
   </div>
@@ -658,7 +658,7 @@
       </div>
       
       <div class="callout memory" style="margin-top:16px">
-        記憶重點：醛己糖有 <strong>4 個立體中心</strong>，故有 2⁴ = <strong>16 種立體異構物</strong>（8 對對掌體，8 個 D 型 + 8 個 L 型）。
+        醛己糖有 <strong>4 個立體中心</strong>，故有 2⁴ = <strong>16 種立體異構物</strong>（8 對對掌體，8 個 D 型 + 8 個 L 型）。
       </div>
     </div>
   </div>
@@ -666,7 +666,7 @@
 
 <section class="section" id="cyclic">
   <div class="section-header">
-    <div class="section-num">28.6</div>
+    <div class="section-num">6</div>
     <h2>環狀結構：半縮醛的形成</h2>
   </div>
 
@@ -726,22 +726,22 @@
         <li>
           <div class="step-num">1</div>
           <div>畫六員環，<strong>氧原子置於右上角</strong>。</div>
-        </div>
+        </li>
         <li>
           <div class="step-num">2</div>
           <div>對 D-醣：<span class="hi-red">CH₂OH 畫在環的上方</span>。</div>
-        </div>
+        </li>
         <li>
           <div class="step-num">3</div>
           <div>決定異頭碳（C1）的構型：
             <br>▸ <span class="hi-blue">α 異頭物</span>：OH 在<strong>下方（軸向 axial）</strong>（D-醣中與 CH₂OH 反式）
             <br>▸ <span class="hi-green">β 異頭物</span>：OH 在<strong>上方（赤道向 equatorial）</strong>（D-醣中與 CH₂OH 順式）
           </div>
-        </div>
+        </li>
         <li>
           <div class="step-num">4</div>
           <div>其餘立體中心：<strong>Fischer 投影式右側 → Haworth 下方</strong>；Fischer 左側 → Haworth 上方。</div>
-        </div>
+        </li>
       </ul>
 
       <div class="callout memory">
@@ -764,7 +764,7 @@
 
 <section class="section" id="glycosides">
   <div class="section-header">
-    <div class="section-num">28.7</div>
+    <div class="section-num">7</div>
     <h2>糖苷 Glycosides</h2>
   </div>
 
@@ -789,19 +789,19 @@
         <li>
           <div class="step-num">1</div>
           <div>HCl 質子化半縮醛的 OH 基</div>
-        </div>
+        </li>
         <li>
           <div class="step-num">2</div>
           <div>失去 H₂O，形成<strong>共振穩定的碳正離子（氧碳正離子 oxocarbenium ion）</strong>——環狀平面結構</div>
-        </div>
+        </li>
         <li>
           <div class="step-num">3</div>
           <div>CH₃OH 從平面<strong>上方或下方</strong>進行親核攻擊</div>
-        </div>
+        </li>
         <li>
           <div class="step-num">4</div>
           <div>失去質子，分別得到 α 和 β 兩種糖苷</div>
-        </div>
+        </li>
       </ul>
       <div class="callout info">
         只有異頭碳的 OH 才有此反應性，因為失去 OH 後能形成共振穩定的碳正離子；其他 OH 失去後無法共振穩定，故不反應。
@@ -820,19 +820,19 @@
     <div class="card red">
       <div class="card-icon">🥔</div>
       <div class="card-title">茄鹼 Solanine</div>
-      <div class="card-desc">馬鈴薯葉和綠色部分的毒素，含有三個單醣環以糖苷鍵連接。</div>
+      <div class="card-desc">馬鈴薯葉和綠色部分的毒素<br>含有三個單醣環以糖苷鍵連接。</div>
     </div>
     <div class="card accent">
       <div class="card-icon">🌿</div>
       <div class="card-title">水楊苷 Salicin</div>
-      <div class="card-desc">白柳樹皮中的天然止痛成分，水解可得水楊醇，是阿斯匹靈的祖先。</div>
+      <div class="card-desc">白柳樹皮中的天然止痛成分<br>水解可得水楊醇，是阿斯匹靈的祖先。</div>
     </div>
   </div>
 </section>
 
 <section class="section" id="reactions">
   <div class="section-header">
-    <div class="section-num">28.8–28.10</div>
+    <div class="section-num">8–10</div>
     <h2>單醣的反應</h2>
   </div>
 
@@ -842,7 +842,7 @@
     <div class="card purple"><div class="card-icon">↕</div><div class="card-title">碳鏈增減</div><div class="card-desc">Wohl 降解（減 1C）、Kiliani-Fischer 合成（增 1C）</div></div>
   </div>
 
-  <h3>28.8 OH 基的反應</h3>
+  <h3>8 OH 基的反應</h3>
   <details>
     <summary>醚化（甲基化）— 保護 OH 基</summary>
     <div class="detail-body">
@@ -859,7 +859,7 @@
     </div>
   </details>
 
-  <h3>28.9 羰基的氧化與還原</h3>
+  <h3>9 羰基的氧化與還原</h3>
   <div class="figure-block">
     <div class="figure-header">📋 Figure 28.8 — 還原糖 vs 非還原糖</div>
     <div class="figure-body">
@@ -871,13 +871,13 @@
           <th>例子</th>
         </tr>
         <tr>
-          <td><strong>還原糖</strong> <span class="badge reducing">Reducing</span></td>
+          <td><strong>還原糖</strong> <br> <span class="badge reducing">Reducing</span></td>
           <td>含<strong>半縮醛</strong>，可開環形成自由醛基</td>
           <td>✅ 有反應（Ag↓ 或 Cu₂O↓）</td>
           <td>葡萄糖、麥芽糖、乳糖、所有單醣</td>
         </tr>
         <tr>
-          <td><strong>非還原糖</strong> <span class="badge nonreducing">Nonreducing</span></td>
+          <td><strong>非還原糖</strong> <br> <span class="badge nonreducing">Nonreducing</span></td>
           <td>含<strong>縮醛</strong>（糖苷），無法開環</td>
           <td>❌ 無反應</td>
           <td>蔗糖、糖苷（甲基葡萄糖苷等）</td>
@@ -919,7 +919,7 @@
     </div>
   </div>
 
-  <h3>28.10 碳鏈增減</h3>
+  <h3>10 碳鏈增減</h3>
   <div class="card-grid">
     <div class="card red">
       <div class="card-icon">➖</div>
@@ -954,7 +954,7 @@
 
 <section class="section" id="di">
   <div class="section-header">
-    <div class="section-num">28.11</div>
+    <div class="section-num">11</div>
     <h2>雙醣 Disaccharides</h2>
   </div>
 
@@ -1018,7 +1018,7 @@
 
 <section class="section" id="poly">
   <div class="section-header">
-    <div class="section-num">28.12</div>
+    <div class="section-num">12</div>
     <h2>多醣 Polysaccharides</h2>
   </div>
 
@@ -1045,7 +1045,7 @@
           <td>植物細胞壁；木材；棉花</td>
         </tr>
         <tr>
-          <td><strong>澱粉：直鏈澱粉<br>Amylose</strong></td>
+          <td><strong>澱粉<br>直鏈澱粉<br>Amylose</strong></td>
           <td><span class="hi">1→4-α</span></td>
           <td>螺旋形線性</td>
           <td>✅</td>
@@ -1053,7 +1053,7 @@
           <td>占澱粉約 20%；玉米、米、小麥</td>
         </tr>
         <tr>
-          <td><strong>澱粉：支鏈澱粉<br>Amylopectin</strong></td>
+          <td><strong>澱粉<br>支鏈澱粉<br>Amylopectin</strong></td>
           <td>1→4-α（主鏈）<br><span class="hi-red">+ 1→6-α（分支）</span></td>
           <td>高度分支</td>
           <td>✅</td>
@@ -1086,11 +1086,11 @@
 
 <section class="section" id="others">
   <div class="section-header">
-    <div class="section-num">28.13</div>
+    <div class="section-num">13</div>
     <h2>其他重要衍生物</h2>
   </div>
 
-  <h3>28.13A 胺基醣 Amino Sugars</h3>
+  <h3>13A 胺基醣 Amino Sugars</h3>
   <p>將某個非異頭碳上的 OH 換成 NH₂，就得到<span class="hi">胺基醣</span>。</p>
 
   <div class="card-grid">
@@ -1111,7 +1111,7 @@
     </div>
   </div>
 
-  <h3>28.13B N-糖苷 → 核苷 → 核苷酸 → DNA/RNA</h3>
+  <h3>13B N-糖苷 → 核苷 → 核苷酸 → DNA/RNA</h3>
   <div class="figure-block">
     <div class="figure-header">📋 Figure 28.11 — RNA 與 DNA 的醣骨架（核心概念！）</div>
     <div class="figure-body">
