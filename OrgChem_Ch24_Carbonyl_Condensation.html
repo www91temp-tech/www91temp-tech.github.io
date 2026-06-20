@@ -392,7 +392,7 @@
     padding: 16px;
     background: #f8fafc;
     font-size: 14px; color: var(--text-body);
-    line-height: 1.7;
+    line-height: 2;
   }
 
   /* ── COMPARISON TABLE ── */
@@ -628,12 +628,12 @@
       <th>鹼</th>
       <th>產物</th>
     </tr>
-    <tr><td><strong>Aldol</strong></td><td>兩分子同種醛或酮</td><td>⁻OH（催化量）</td><td>β-羥基羰基化合物</td></tr>
-    <tr><td><strong>交叉 Aldol</strong></td><td>兩種不同醛/酮</td><td>⁻OH</td><td>單一β-羥基羰基</td></tr>
-    <tr><td><strong>定向 Aldol</strong></td><td>酮 + 醛</td><td>LDA（強鹼）</td><td>特定β-羥基酮</td></tr>
+    <tr><td><strong>Aldol</strong></td><td>兩分子醛 / 酮</td><td>⁻OH（催化量）</td><td>β-羥基羰基化合物</td></tr>
+    <tr><td><strong>交叉 Aldol</strong></td><td>兩種不同醛 / 酮</td><td>⁻OH</td><td>單一 β-羥基羰基</td></tr>
+    <tr><td><strong>定向 Aldol</strong></td><td>酮 + 醛</td><td>LDA（強鹼）</td><td>特定 β-羥基酮</td></tr>
     <tr><td><strong>分子內 Aldol</strong></td><td>二羰基化合物</td><td>⁻OEt</td><td>五元或六元環</td></tr>
-    <tr><td><strong>Claisen</strong></td><td>酯 + 酯</td><td>NaOEt（當量）</td><td>β-酮酯</td></tr>
-    <tr><td><strong>交叉 Claisen</strong></td><td>兩種不同酯/酯+酮</td><td>NaOEt</td><td>β-二羰基化合物</td></tr>
+    <tr><td><strong>Claisen</strong></td><td>兩分子酯</td><td>NaOEt（當量）</td><td>β-酮酯</td></tr>
+    <tr><td><strong>交叉 Claisen</strong></td><td>兩種不同酯 或 酯 + 酮</td><td>NaOEt</td><td>β-二羰基化合物</td></tr>
     <tr><td><strong>Dieckmann</strong></td><td>二酯（分子內）</td><td>NaOEt</td><td>環狀β-酮酯</td></tr>
     <tr><td><strong>Michael</strong></td><td>烯醇陰離子 + α,β-不飽和羰基</td><td>⁻OH 或 ⁻OEt</td><td>1,5-二羰基化合物</td></tr>
     <tr><td><strong>Robinson 環化</strong></td><td>烯醇陰離子 + α,β-不飽和酮</td><td>⁻OH 或 ⁻OEt</td><td>環己-2-烯酮六元環</td></tr>
@@ -658,7 +658,7 @@
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.1：Aldol 反應本質上是親核加成反應</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> Figure 24.1：Aldol 反應本質上是親核加成反應</div>
     <div class="figure-body">
       <strong>一般的親核加成：</strong> 親核試劑（:Nu⁻）攻擊羰基碳 → 生成醇鹽<br>
       <strong>Aldol 反應的特別之處：</strong> 親核試劑是<em>烯醇陰離子（enolate） </em>，它攻擊另一分子的羰基碳，形成新的 C–C 鍵。<br>
@@ -669,7 +669,7 @@
   <h3 style="margin: 20px 0 12px; color: var(--ink);">▌ 典型反應：乙醛的 Aldol 縮合</h3>
 
   <div class="rxn-box">
-    2 CH₃CHO  <span class="reagent">乙醛</span><br>
+    2 CH₃CHO  <span class="reagent">乙醛（acetaldehyde）</span><br>
     <span class="arrow">──⁻OH, H₂O──▶</span><br>
     CH₃–CH(OH)<span class="bond">–</span>CH₂–CHO  <span class="label">← 3-羥基丁醛（β-羥基醛，Aldol 產物）</span><br>
     <span class="bond">↑ 紅色標記：這裡形成了新的 C–C 鍵</span>
@@ -680,7 +680,7 @@
   <div class="mech-flow">
     <div class="mech-step">
       <div class="mech-step-num">1</div>
-      <div class="mech-step-body"><strong>形成烯醇陰離子</strong><br>⁻OH 移除 α-H，生成共振穩定的烯醇陰離子</div>
+      <div class="mech-step-body"><strong>形成烯醇陰離子</strong><br>⁻OH 移除 α-H，<br>生成共振穩定的烯醇陰離子</div>
     </div>
     <div class="mech-step">
       <div class="mech-step-num">2</div>
@@ -688,7 +688,7 @@
     </div>
     <div class="mech-step">
       <div class="mech-step-num">3</div>
-      <div class="mech-step-body"><strong>質子化</strong><br>水使醇鹽（alkoxide）質子化，得到 β-羥基醛</div>
+      <div class="mech-step-body"><strong>質子化</strong><br>水使醇鹽（alkoxide）質子化，<br>得到 β-羥基醛</div>
     </div>
   </div>
 
@@ -705,10 +705,10 @@
   <p>β-羥基羰基化合物可以脫去 H₂O，生成 <span class="hl-red">α,β-不飽和羰基化合物</span>（conjugated enone/enal）。脫水後就叫做「Aldol 縮合」（因為小分子 H₂O 被脫去）。</p>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> 脫水反應示例</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> 脫水反應示例</div>
     <div class="figure-body">
-      <strong>反應 [1]</strong>：2分子乙醛 → β-羥基醛 →（-H₂O）→ <em>2-丁烯醛（crotonaldehyde） </em><br>
-      <strong>反應 [2]</strong>：2分子苯乙酮 → β-羥基酮 → 因為產物與苯環進一步共軛，<strong>脫水自動發生，無法分離中間體</strong><br>
+      <strong>反應 [1]</strong>：2分子 乙醛 → β-羥基醛 →（-H₂O）→ 2-丁烯醛（2-butenal，又稱巴豆醛 crotonaldehyde）<br>
+      <strong>反應 [2]</strong>：2分子 苯乙酮 → β-羥基酮 → 因為產物與苯環進一步共軛，<strong>脫水自動發生，無法分離中間體</strong><br>
       ⚠️ 當 α,β-不飽和羰基化合物進一步與 C=C 或苯環共軛時，脫水是<em>自發且不可逆的 </em>
     </div>
   </div>
@@ -772,7 +772,7 @@
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> 兩種不同醛（均含 α-H）的交叉 Aldol</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> 兩種不同醛（均含 α-H）的交叉 Aldol</div>
     <div class="figure-body">
       以乙醛（CH₃CHO）和丙醛（CH₃CH₂CHO）為例：<br>
       • 乙醛形成烯醇陰離子 + 乙醛作親電子劑 → 產物 A<br>
@@ -790,7 +790,7 @@
       <div class="step-num">①</div>
       <div class="step-body">
         <div class="step-title">只有一個羰基化合物有 α-H</div>
-        <p>常用的<strong>無 α-H 親電子劑</strong>：<span class="tag tag-blue">甲醛（HCHO）</span><span class="tag tag-blue">苯甲醛（PhCHO）</span></p>
+        <p>常用的<strong>無 α-H 親電子劑</strong>：<span class="tag tag-blue">甲醛（Formaldehyde，HCHO）</span><span class="tag tag-blue">苯甲醛（Benzaldehyde，PhCHO）</span></p>
         <p>例：苯甲醛（親電子劑）+ 乙醛（形成烯醇陰離子）→ 脫水後得肉桂醛（cinnamaldehyde）</p>
       </div>
     </div>
@@ -804,7 +804,7 @@
           <div class="mem-content">
             β-二酯：<span class="hl">EtOOC–CH₂–COOEt</span><br>
             β-酮酯：<span class="hl">R–CO–CH₂–COOEt</span><br>
-            α-氰基羰基：<span class="hl">NC–CH₂–COOEt</span><br>
+            α-氰基羰基：<span class="hl">NC–CH₂–C(=O)CH₃</span><br>
             1,3-二腈：<span class="hl">NC–CH₂–CN</span>
           </div>
         </div>
@@ -812,12 +812,12 @@
     </div>
     
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.2：苯甲醛與丙二酸二乙酯的交叉 Aldol</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> Figure 24.2：苯甲醛與丙二酸二乙酯的交叉 Aldol</div>
     <div class="figure-body">
-      β-二羰基化合物（丙二酸二乙酯）在 NaOEt/EtOH 中形成烯醇陰離子（特別穩定）。<br>
-      苯甲醛作為親電子劑被攻擊。<br>
+      β-二羰基化合物（如丙二酸二乙酯，Diethyl malonate）在 NaOEt/EtOH 中形成烯醇陰離子（特別穩定）。<br>
+      苯甲醛作為親電子劑，被烯醇陰離子攻擊。<br>
       初始的 β-羥基中間體<strong>不分離</strong>，自動脫水形成高度共軛的最終產物。<br>
-      💡 <strong>β-二羰基化合物永遠作為烯醇陰離子（親核試劑），醛永遠作為親電端。</strong>
+      💡 <strong>β-二羰基化合物永遠作為烯醇陰離子（親核試劑），醛永遠作為親電子劑。</strong>
     </div>
   </div>
     
@@ -831,7 +831,7 @@
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.3：β-羥基羰基化合物的後續轉化</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> Figure 24.3：β-羥基羰基化合物的後續轉化</div>
     <div class="figure-body">
       以環己酮 + 甲醛的 Aldol 產物為例：<br>
       [1] <strong>NaBH₄ 還原</strong> → 1,3-二醇<br>
@@ -854,12 +854,12 @@
     </div>
   </div>
 
-  <p><strong>定向 Aldol 反應</strong>解決了兩個羰基化合物都含有 α-H 時的選擇性問題。策略是「分步進行」：先用強鹼形成<em>特定的 </em>烯醇陰離子，再加入親電子劑。</p>
+  <p><strong>定向 Aldol 反應</strong>解決了兩個羰基化合物都含有 α-H 時的選擇性問題。<br>策略是「分步進行」：先用強鹼形成<em>特定的 </em>烯醇陰離子，再加入親電子劑。</p>
 
   <div class="callout mechanism">
     <div class="callout-title">🔧 操作步驟</div>
     <ol style="padding-left: 18px; line-height: 2;">
-      <li>用 <strong>LDA</strong>（二異丙基醯胺鋰，強且非親核的鹼）處理<em>其中一個 </em>羰基化合物，<strong>定量形成動力學烯醇陰離子</strong></li>
+      <li>用 <strong>LDA</strong>（二異丙基胺基鋰，強且非親核性的鹼）處理<em>其中一個 </em>羰基化合物，<strong>定量形成動力學烯醇陰離子</strong></li>
       <li>加入第二個羰基化合物（親電子劑）</li>
     </ol>
   </div>
@@ -878,17 +878,17 @@
       <h4>⚗️ 普通鹼（⁻OH）的限制</h4>
       <ul class="check">
         <li>平衡量的鹼，烯醇陰離子只有少量</li>
-        <li>兩種羰基化合物都可能形烯醇陰離子</li>
+        <li>兩種羰基化合物都可能形成烯醇陰離子</li>
         <li>若都有 α-H，會得到混合物</li>
       </ul>
     </div>
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.4：定向 Aldol 用於合成 periplanone B（美洲蟑螂性費洛蒙）</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> Figure 24.4：定向 Aldol 用於合成 periplanone B（美洲蟑螂性費洛蒙）</div>
     <div class="figure-body">
       合成美洲蟑螂性費洛蒙的關鍵步驟中：<br>
-      • 環狀酮先用 LDA/THF 處理，形成特定烯醇陰離子<br>
+      • 環狀酮先用強鹼 LDA/THF 處理，形成特定烯醇陰離子<br>
       • 再與醛發生親核加成，精確形成一個新 C–C 鍵<br>
       • 後續幾步轉化即得 periplanone B<br>
       💡 說明定向 Aldol 在全合成中的重要性：當你需要<strong>精確控制</strong>哪個 C–C 鍵先形成時，就用 LDA。
@@ -896,7 +896,7 @@
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> 薑黃素 ar-turmerone 的逆合成</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> 薑黃素 ar-turmerone 的逆合成</div>
     <div class="figure-body">
       ar-turmerone 是薑黃精油的主成分。分析方法：<br>
       目標分子是 α,β-不飽和羰基化合物 → 找 C=C 兩端（α 和 β 碳）→ 斷開 α–β 鍵<br>
@@ -949,7 +949,7 @@
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.5：W.S. Johnson 合成黃體酮（Progesterone）的關鍵步驟</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> Figure 24.5：W.S. Johnson 合成黃體酮（Progesterone）的關鍵步驟</div>
     <div class="figure-body">
       黃體酮是重要的女性性激素。最後一個六元環的合成：<br>
       <strong>步驟1：</strong>臭氧氧化裂解 C=C（O₃, 然後 Zn/H₂O）→ 生成 1,5-二羰基化合物<br>
@@ -981,7 +981,7 @@
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> Figure 24.6：Claisen 是酯的親核取代</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> Figure 24.6：Claisen 是酯的親核取代</div>
     <div class="figure-body">
       <strong>一般親核取代（酯）：</strong> 親核試劑攻擊羰基碳 → 四面體中間體 → 離去基離去<br>
       <strong>Claisen 反應：</strong> 烯醇陰離子作親核試劑，攻擊另一個酯分子的羰基碳 → 四面體中間體 → ⁻OEt 離去<br>
@@ -1022,7 +1022,7 @@
   <div class="compare-grid">
     <div class="compare-card left">
       <h4>Aldol vs Claisen 核心差異</h4>
-      <p style="font-size:14px;"><strong>Aldol：</strong>醛/酮作親電子劑 → 四面體中間體 → <em>沒有離去基 </em> → 親核<strong>加成</strong>產物（β-羥基羰基）</p>
+      <p style="font-size:14px;"><strong>Aldol：</strong>醛 / 酮作親電子劑 → 四面體中間體 → <em>沒有離去基 </em> → 親核<strong>加成</strong>產物（β-羥基羰基）</p>
     </div>
     <div class="compare-card right">
       <h4>&nbsp;</h4>
@@ -1033,7 +1033,7 @@
   <div class="memory-box">
     <div class="mem-title">🧠 一句話記憶</div>
     <div class="mem-content">
-      「<span class="hl">Aldol 用醛/酮（加成）</span>，<span class="hl">Claisen 用酯（取代）</span>，
+      「<span class="hl">Aldol 用醛 / 酮（加成）</span>，<span class="hl">Claisen 用酯（取代）</span>，
       兩者都在 α 碳形成新 C–C 鍵，機構邏輯完全一樣！」
     </div>
   </div>
@@ -1281,7 +1281,7 @@
   </div>
 
   <div class="figure-card">
-    <div class="figure-header"><span class="fig-icon">🖼</span> Robinson 環化的逆合成分析</div>
+    <div class="figure-header"><span class="fig-icon">📝</span> Robinson 環化的逆合成分析</div>
     <div class="figure-body">
       看到 cyclohex-2-enone（α,β-不飽和酮六元環），就知道可以用 Robinson 環化合成它！<br>
       逆合成步驟：<br>
@@ -1310,7 +1310,7 @@
   <div class="summary-banner">
     <h3>🧠 本章最核心的三句話</h3>
     <div class="summary-row"><div class="summary-dot">①</div><div class="summary-text"><strong>所有反應都用相同邏輯：</strong>烯醇陰離子（親核試劑）+ 羰基化合物（親電子劑）→ 新 C–C 鍵在 α 碳</div></div>
-    <div class="summary-row"><div class="summary-dot">②</div><div class="summary-text"><strong>有無離去基決定產物：</strong>醛/酮（無離去基）→ 加成（Aldol，β-羥基羰基）；酯（有 ⁻OR 離去基）→ 取代（Claisen，β-酮酯）</div></div>
+    <div class="summary-row"><div class="summary-dot">②</div><div class="summary-text"><strong>有無離去基決定產物：</strong>醛 / 酮（無離去基）→ 加成（Aldol，β-羥基羰基）；酯（有 ⁻OR 離去基）→ 取代（Claisen，β-酮酯）</div></div>
     <div class="summary-row"><div class="summary-dot">③</div><div class="summary-text"><strong>Michael + 分子內 Aldol = Robinson：</strong>一個反應，三個新鍵，一個六元環</div></div>
   </div>
 
@@ -1324,7 +1324,7 @@
       <th>關鍵注意</th>
     </tr>
     <tr>
-      <td>醛/酮自縮合</td>
+      <td>醛 / 酮自縮合</td>
       <td><span class="tag tag-blue">Aldol</span></td>
       <td>⁻OH（催化量）</td>
       <td>醛效果好，酮需驅動</td>
