@@ -21,12 +21,12 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* 為了讓內容多時能正常滾動，改為 flex-start */
+            align-items: flex-start;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 650px; /* 稍微加寬一點讓長檔名更好看 */
+            max-width: 650px;
             width: 90%;
             padding: 3rem 2rem;
             text-align: center;
@@ -41,29 +41,75 @@
         p.description {
             font-size: 1.1rem;
             color: var(--secondary-text);
-            margin-bottom: 2rem;
-        }
-
-        /* 分類區塊樣式 */
-        .category-section {
-            margin-bottom: 2.5rem;
-            text-align: left; /* 讓分類標題與列表靠左，更易於閱讀 */
-        }
-
-        .category-title {
-            font-size: 1.4rem;
-            color: var(--text-color);
-            border-bottom: 2px solid #eaecef;
-            padding-bottom: 0.5rem;
             margin-bottom: 1rem;
-            font-weight: 600;
         }
 
-        /* 筆記清單樣式優化 */
+        /* 搜尋框 */
+        .search-box {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.7rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #d1d5da;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            font-family: inherit;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--link-color);
+            box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.15);
+        }
+
+        /* 分類區塊樣式：用 <details> 達成收合效果 */
+        .category-section {
+            margin-bottom: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-section summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        .category-section summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .category-section summary .count {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--secondary-text);
+            margin-left: 0.5rem;
+        }
+
+        .category-section summary .arrow {
+            margin-left: auto;
+            padding-left: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            transition: transform 0.2s ease;
+        }
+
+        .category-section[open] summary .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* 筆記清單樣式 */
         #file-list ul {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0.5rem 0 1rem 0;
         }
 
         #file-list li {
@@ -78,6 +124,10 @@
             background-color: #f6f8fa;
         }
 
+        #file-list li.hidden {
+            display: none;
+        }
+
         #file-list a {
             color: var(--link-color);
             text-decoration: none;
@@ -85,8 +135,13 @@
             display: block;
         }
 
+        .no-results {
+            color: var(--secondary-text);
+            padding: 2rem 0;
+        }
+
         footer {
-            margin-top: 4rem;
+            margin-top: 3rem;
             font-size: 0.9rem;
             color: #888;
             text-align: center;
@@ -99,6 +154,14 @@
         <h1>👋 Hi 學習者</h1>
         <p class="description">這是我的 GitHub Pages 空間，以下是我的學習筆記：</p>
 
+        <input
+            type="text"
+            id="search-input"
+            class="search-box"
+            placeholder="🔍 搜尋筆記標題..."
+            autocomplete="off"
+        >
+
         <div id="file-list">讀取筆記清單中...</div>
 
         <footer>
@@ -107,98 +170,130 @@
     </div>
 
     <script>
-        const username = 'www91temp-tech';
-        const repo = 'www91temp-tech.github.io';
+        // 讀取本地維護的 notes.json，不再即時呼叫 GitHub API
+        // 新增筆記時：把檔案放進對應資料夾，並在 notes.json 的對應 category 補上 {title, file}
+        const MANIFEST_URL = 'notes.json';
 
-        // 建立一個字典，用來將英文前綴對應到您想要的中文分類名稱
-        const categoryMapping = {
-            'Biochemistry': '🧪 生化 (Biochemistry)',
-            'Biology': '🧬 普生 (Biology)',
-            'OrgChem': '⚗️ 有機化 (OrgChem)'
-            // 若未來有其他科目，可以在這裡繼續新增，例如：
-            // 'Physics': '⚛️ 物理',
-            // 'Pharmacology': '💊 藥理'
-        };
+        // 記住使用者上次展開的分類（純前端，不影響資料結構）
+        const STORAGE_KEY = 'joy915_open_categories';
+
+        function getOpenState() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+            } catch {
+                return {};
+            }
+        }
+
+        function saveOpenState(state) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            } catch {
+                // localStorage 不可用時靜默失敗，不影響核心功能
+            }
+        }
 
         async function loadFiles() {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/`);
-                if (!response.ok) throw new Error('無法取得檔案列表');
-                
-                const files = await response.json();
-                const listElement = document.getElementById('file-list');
-                
-                // 過濾檔案：必須是 .html 且不是 index.html
-                const htmlFiles = files.filter(file => 
-                    file.name.endsWith('.html') && 
-                    file.name.toLowerCase() !== 'index.html'
-                );
+            const listElement = document.getElementById('file-list');
 
-                if (htmlFiles.length === 0) {
+            try {
+                const response = await fetch(MANIFEST_URL);
+                if (!response.ok) throw new Error('無法取得 notes.json');
+
+                const data = await response.json();
+                const categories = data.categories || [];
+
+                if (categories.length === 0) {
                     listElement.innerHTML = '<p>目前尚無筆記檔案。</p>';
                     return;
                 }
 
-                // 將檔案依據名稱前綴進行分類 (Grouping)
-                const groupedFiles = {};
+                listElement.innerHTML = '';
+                const openState = getOpenState();
 
-                htmlFiles.forEach(file => {
-                    // 去除副檔名並解碼
-                    const displayName = decodeURIComponent(file.name.replace('.html', ''));
-                    
-                    // 以底線 "_" 分割檔名來取得前綴
-                    const nameParts = displayName.split('_');
-                    let rawCategory = nameParts[0]; 
+                categories.forEach(category => {
+                    const notes = category.notes || [];
+                    if (notes.length === 0) return; // 跳過空分類，避免顯示空白區塊
 
-                    // 檢查有沒有底線，沒有的話歸類為「其他」
-                    if (nameParts.length === 1) {
-                        rawCategory = 'Other';
-                    }
+                    const details = document.createElement('details');
+                    details.className = 'category-section';
+                    details.dataset.categoryKey = category.key;
 
-                    // 將前綴轉換為我們設定好的中文名稱（如果沒設定，就保留原本的英文前綴）
-                    const finalCategoryName = categoryMapping[rawCategory] || (rawCategory === 'Other' ? '📁 其他筆記' : `📁 ${rawCategory}`);
+                    // 預設：第一個分類展開，其餘收合；若使用者有歷史紀錄則套用歷史紀錄
+                    const hasHistory = Object.prototype.hasOwnProperty.call(openState, category.key);
+                    details.open = hasHistory ? openState[category.key] : (categories[0].key === category.key);
 
-                    // 將檔案放入對應的分類陣列中
-                    if (!groupedFiles[finalCategoryName]) {
-                        groupedFiles[finalCategoryName] = [];
-                    }
-                    groupedFiles[finalCategoryName].push({
-                        displayName: displayName,
-                        path: file.path
+                    details.addEventListener('toggle', () => {
+                        const state = getOpenState();
+                        state[category.key] = details.open;
+                        saveOpenState(state);
                     });
-                });
 
-                // 開始產生 HTML 畫面
-                listElement.innerHTML = ''; // 清除載入文字
+                    const summary = document.createElement('summary');
+                    summary.innerHTML = `${category.label} <span class="count">· ${notes.length} 篇</span><span class="arrow">▶</span>`;
+                    details.appendChild(summary);
 
-                // 遍歷所有分類來建立區塊
-                for (const [categoryName, categoryFiles] of Object.entries(groupedFiles)) {
-                    // 建立分類容器
-                    const section = document.createElement('div');
-                    section.className = 'category-section';
-
-                    // 建立分類標題
-                    const title = document.createElement('h2');
-                    title.className = 'category-title';
-                    title.textContent = categoryName;
-                    section.appendChild(title);
-
-                    // 建立該分類底下的檔案列表
                     const ul = document.createElement('ul');
-                    categoryFiles.forEach(fileData => {
+                    notes.forEach(note => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="${fileData.path}">${fileData.displayName}</a>`;
+                        const href = `${category.folder}/${note.file}`;
+                        li.dataset.title = note.title.toLowerCase();
+                        li.innerHTML = `<a href="${href}">${note.title}</a>`;
                         ul.appendChild(li);
                     });
+                    details.appendChild(ul);
 
-                    section.appendChild(ul);
-                    listElement.appendChild(section);
-                }
+                    listElement.appendChild(details);
+                });
+
+                setupSearch();
 
             } catch (error) {
                 console.error(error);
-                document.getElementById('file-list').innerHTML = '<p>載入失敗，請稍後再試。</p>';
+                listElement.innerHTML = '<p>載入失敗，請確認 notes.json 是否存在且格式正確。</p>';
             }
+        }
+
+        function setupSearch() {
+            const input = document.getElementById('search-input');
+            const listElement = document.getElementById('file-list');
+
+            input.addEventListener('input', () => {
+                const query = input.value.trim().toLowerCase();
+                const sections = listElement.querySelectorAll('.category-section');
+                let totalVisible = 0;
+
+                sections.forEach(section => {
+                    const items = section.querySelectorAll('li');
+                    let visibleInSection = 0;
+
+                    items.forEach(li => {
+                        const matches = query === '' || li.dataset.title.includes(query);
+                        li.classList.toggle('hidden', !matches);
+                        if (matches) visibleInSection++;
+                    });
+
+                    totalVisible += visibleInSection;
+                    section.style.display = visibleInSection === 0 ? 'none' : '';
+
+                    // 搜尋時自動展開有結果的分類，清空搜尋則恢復原狀
+                    if (query !== '' && visibleInSection > 0) {
+                        section.open = true;
+                    }
+                });
+
+                let noResultsEl = listElement.querySelector('.no-results');
+                if (totalVisible === 0 && query !== '') {
+                    if (!noResultsEl) {
+                        noResultsEl = document.createElement('p');
+                        noResultsEl.className = 'no-results';
+                        noResultsEl.textContent = '找不到符合的筆記。';
+                        listElement.appendChild(noResultsEl);
+                    }
+                } else if (noResultsEl) {
+                    noResultsEl.remove();
+                }
+            });
         }
 
         loadFiles();
