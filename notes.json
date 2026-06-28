@@ -5,42 +5,7 @@
       "label": "🧪 生化 (Biochemistry)",
       "folder": "Biochemistry",
       "notes": [
-        {
-          "title": "Ch08 figure notes",
-          "file": "Biochemistry_Ch08_figure_notes.html"
-        },
-        {
-          "title": "Ch08 Nucleotides and Nucleic Acids",
-          "file": "Biochemistry_Ch08_Nucleotides_and_Nucleic_Acids.html"
-        },
-        {
-          "title": "Ch12 Biochemical Signaling",
-          "file": "Biochemistry_Ch12_Biochemical_Signaling.html"
-        },
-        {
-          "title": "Ch12 figure notes",
-          "file": "Biochemistry_Ch12_figure_notes.html"
-        },
-        {
-          "title": "Ch22 Nucleotide Biosynthesis",
-          "file": "Biochemistry_Ch22_Nucleotide_Biosynthesis.html"
-        },
-        {
-          "title": "Ch24 Genes and Chromosomes",
-          "file": "Biochemistry_Ch24_Genes_and_Chromosomes.html"
-        },
-        {
-          "title": "Ch25 DNA Metabolism",
-          "file": "Biochemistry_Ch25_DNA_Metabolism.html"
-        },
-        {
-          "title": "Ch26 RNA Metabolism",
-          "file": "Biochemistry_Ch26_RNA_Metabolism.html"
-        },
-        {
-          "title": "Ch27 Protein Metabolism",
-          "file": "Biochemistry_Ch27_Protein_Metabolism.html"
-        }
+       
       ]
     },
     {
@@ -48,50 +13,7 @@
       "label": "🧬 普生 (Biology)",
       "folder": "Biology",
       "notes": [
-        {
-          "title": "Ch42 Circulation & Gas Exchange",
-          "file": "Biology_Ch42_Circulation_Gas_Exchange.html"
-        },
-        {
-          "title": "Ch42 figure notes",
-          "file": "Biology_Ch42_figure_notes.html"
-        },
-        {
-          "title": "Ch44 figure notes",
-          "file": "Biology_Ch44_figure_notes.html"
-        },
-        {
-          "title": "Ch44 Osmoregulation & Excretion",
-          "file": "Biology_Ch44_Osmoregulation_Excretion.html"
-        },
-        {
-          "title": "Ch45 Animal Reproductive Systems",
-          "file": "Biology_Ch45_Animal_Reproductive_Systems.html"
-        },
-        {
-          "title": "Ch47 Animal Development",
-          "file": "Biology_Ch47_Animal_Development.html"
-        },
-        {
-          "title": "Ch47 figure notes",
-          "file": "Biology_Ch47_figures_notes.html"
-        },
-        {
-          "title": "Ch50 figure notes",
-          "file": "Biology_Ch50_figure_notes.html"
-        },
-        {
-          "title": "Ch50 Sensory and Motor Mechanisms",
-          "file": "Biology_Ch50_Sensory_and_Motor_Mechanisms.html"
-        },
-        {
-          "title": "Ch51 Animal Behavior",
-          "file": "Biology_Ch51_Animal_Behavior.html"
-        },
-        {
-          "title": "Review Quiz",
-          "file": "Biology_Review_Quiz.html"
-        }
+        
       ]
     },
     {
@@ -99,34 +21,7 @@
       "label": "⚗️ 有機化 (OrgChem)",
       "folder": "OrgChem",
       "notes": [
-        {
-          "title": "Ch19 Carboxylic Acids",
-          "file": "OrgChem_Ch19_Carboxylic_Acids.html"
-        },
-        {
-          "title": "Ch20 Carbonyl Chemistry",
-          "file": "OrgChem_Ch20_Carbonyl_Chemistry.html"
-        },
-        {
-          "title": "Ch21 Aldehydes Ketones",
-          "file": "OrgChem_Ch21_Aldehydes_Ketones.html"
-        },
-        {
-          "title": "Ch22 Nucleophilic Acyl Substitution",
-          "file": "OrgChem_Ch22_Nucleophilic_Acyl_Substitution.html"
-        },
-        {
-          "title": "Ch23 Alpha Carbon Substitution",
-          "file": "OrgChem_Ch23_Alpha_Carbon_Substitution.html"
-        },
-        {
-          "title": "Ch24 Carbonyl Condensation",
-          "file": "OrgChem_Ch24_Carbonyl_Condensation.html"
-        },
-        {
-          "title": "Ch28 Carbohydrates",
-          "file": "OrgChem_Ch28_Carbohydrates.html"
-        }
+       
       ]
     }
   ]
