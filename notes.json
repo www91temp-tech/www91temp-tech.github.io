@@ -6,12 +6,12 @@
       "folder": "Biochemistry",
       "notes": [
         {
-          "title": "Ch08 figure notes",
-          "file": "Biochemistry_Ch08_figure_notes.html"
-        },
-        {
           "title": "Ch08 Nucleotides and Nucleic Acids",
           "file": "Biochemistry_Ch08_Nucleotides_and_Nucleic_Acids.html"
+        },
+        {
+          "title": "Ch08 figure notes",
+          "file": "Biochemistry_Ch08_figure_notes.html"
         },
         {
           "title": "Ch12 Biochemical Signaling",
@@ -53,16 +53,16 @@
           "file": "Biology_Ch42_Circulation_Gas_Exchange.html"
         },
         {
-          "title": "Ch42 圖表筆記",
+          "title": "Ch42 figure notes",
           "file": "Biology_Ch42_figure_notes.html"
-        },
-        {
-          "title": "Ch44 圖表筆記",
-          "file": "Biology_Ch44_figure_notes.html"
         },
         {
           "title": "Ch44 Osmoregulation & Excretion",
           "file": "Biology_Ch44_Osmoregulation_Excretion.html"
+        },
+        {
+          "title": "Ch44 figure notes",
+          "file": "Biology_Ch44_figure_notes.html"
         },
         {
           "title": "Ch45 Animal Reproductive Systems",
@@ -73,16 +73,16 @@
           "file": "Biology_Ch47_Animal_Development.html"
         },
         {
-          "title": "Ch47 圖表筆記",
+          "title": "Ch47 figure notes",
           "file": "Biology_Ch47_figures_notes.html"
-        },
-        {
-          "title": "Ch50 圖表筆記",
-          "file": "Biology_Ch50_figure_notes.html"
         },
         {
           "title": "Ch50 Sensory and Motor Mechanisms",
           "file": "Biology_Ch50_Sensory_and_Motor_Mechanisms.html"
+        },
+        {
+          "title": "Ch50 figure notes",
+          "file": "Biology_Ch50_figure_notes.html"
         },
         {
           "title": "Ch51 Animal Behavior",
