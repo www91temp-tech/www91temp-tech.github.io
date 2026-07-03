@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>醫學字彙 160 · Medical Vocabulary in 160 Days</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+:root{
+  --paper:        #F3EFE6;
+  --paper-deep:   #E9E1CD;
+  --ink:          #1B2A2E;
+  --ink-soft:     #51635F;
+  --scrub:        #2E6B5E;
+  --scrub-deep:   #1C453B;
+  --vital:        #C0392B;
+  --vital-soft:   #E7C9C2;
+  --line:         #D8CFBA;
+  --card:         #FBF9F2;
+  --radius:       10px;
+  --max:          1080px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Sans TC','Inter',sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; }
+:focus-visible{ outline:2px solid var(--scrub-deep); outline-offset:2px; }
+
+.mono{ font-family:'IBM Plex Mono',monospace; letter-spacing:.02em; }
+.serif{ font-family:'Spectral',serif; }
+code{ font-family:'IBM Plex Mono',monospace; background:var(--paper-deep); padding:1px 5px; border-radius:4px; font-size:.92em; }
+
+/* ---------- shell ---------- */
+.shell{ max-width:var(--max); margin:0 auto; padding:0 24px 80px; }
+
+header.site{
+  padding:40px 24px 0;
+  max-width:var(--max);
+  margin:0 auto;
+}
+.site-top{
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap:16px; flex-wrap:wrap;
+}
+.site-title{ font-size:13px; }
+.site-title .mark{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px;
+  color:var(--scrub-deep); text-transform:uppercase; letter-spacing:.12em;
+}
+.site-title .mark .dot{ width:7px; height:7px; border-radius:50%; background:var(--vital); }
+h1.headline{
+  font-family:'Spectral',serif; font-weight:700;
+  font-size:clamp(28px,4vw,42px);
+  margin:6px 0 4px; color:var(--ink);
+}
+.tagline{ color:var(--ink-soft); font-size:15px; max-width:520px; }
+
+.stat-strip{
+  display:flex; gap:28px; align-items:center;
+  font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-soft);
+  white-space:nowrap;
+}
+.stat-strip b{ color:var(--ink); font-size:20px; display:block; font-weight:600; }
+
+/* ekg signature divider */
+.ekg-wrap{ margin:22px 0 8px; }
+.ekg-wrap svg{ width:100%; height:46px; display:block; }
+.ekg-line{
+  fill:none; stroke:var(--vital); stroke-width:2;
+  stroke-dasharray:600; stroke-dashoffset:600;
+  animation:draw 2.6s ease-out forwards;
+}
+@media (prefers-reduced-motion:reduce){ .ekg-line{ animation:none; stroke-dashoffset:0; } }
+@keyframes draw{ to{ stroke-dashoffset:0; } }
+.ekg-base{ stroke:var(--line); stroke-width:1; fill:none; }
+
+/* ---------- jump / search bar ---------- */
+.toolbar{
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  margin:18px 0 28px; padding:14px 16px;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+}
+.toolbar form{ display:flex; gap:8px; align-items:center; }
+.toolbar label{ font-size:13px; color:var(--ink-soft); white-space:nowrap; }
+.toolbar input[type=number]{
+  width:64px; padding:7px 8px; border:1px solid var(--line); border-radius:6px;
+  font-family:'IBM Plex Mono',monospace; font-size:14px; background:#fff;
+}
+.btn{
+  border:1px solid var(--scrub-deep); background:var(--scrub); color:#fff;
+  padding:8px 14px; border-radius:6px; font-size:13px; font-weight:500;
+  transition:background .15s;
+}
+.btn:hover{ background:var(--scrub-deep); }
+.btn.ghost{ background:transparent; color:var(--scrub-deep); border-color:var(--line); }
+.btn.ghost:hover{ background:var(--paper-deep); }
+.btn[disabled]{ opacity:.35; cursor:not-allowed; }
+.toolbar .hint{ font-size:12px; color:var(--ink-soft); margin-left:auto; }
+
+/* ---------- block / day grid (home) ---------- */
+details.block{
+  border:1px solid var(--line); border-radius:var(--radius);
+  margin-bottom:12px; background:var(--card); overflow:hidden;
+}
+details.block > summary{
+  list-style:none; cursor:pointer; padding:14px 18px;
+  display:flex; align-items:center; gap:12px;
+  font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--scrub-deep);
+}
+details.block > summary::-webkit-details-marker{ display:none; }
+details.block > summary .chev{ transition:transform .15s; font-size:11px; color:var(--ink-soft); }
+details.block[open] > summary .chev{ transform:rotate(90deg); }
+details.block > summary .range{ color:var(--ink-soft); font-weight:400; }
+
+.day-grid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr));
+  gap:10px; padding:0 16px 16px;
+}
+.day-card{
+  display:block; padding:12px 12px 10px;
+  background:#fff; border:1px solid var(--line); border-radius:8px;
+  transition:border-color .15s, transform .1s;
+}
+.day-card:hover{ border-color:var(--scrub); transform:translateY(-1px); }
+.day-card .num{
+  font-family:'IBM Plex Mono',monospace; font-size:20px; font-weight:600; color:var(--ink);
+}
+.day-card .meta{ font-size:11px; color:var(--ink-soft); margin-top:2px; }
+.day-card .tag{
+  display:inline-block; margin-top:8px; font-size:10px; padding:2px 7px;
+  border-radius:20px; font-family:'IBM Plex Mono',monospace; letter-spacing:.03em;
+}
+.tag.ready{ background:#E3EEE9; color:var(--scrub-deep); }
+.tag.empty{ background:var(--paper-deep); color:var(--ink-soft); }
+
+/* ---------- day detail view ---------- */
+.day-header{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  flex-wrap:wrap; gap:12px; margin:34px 0 18px;
+  border-bottom:1px solid var(--line); padding-bottom:18px;
+}
+.day-header .back{
+  display:inline-flex; align-items:center; gap:6px; font-size:13px;
+  color:var(--scrub-deep); margin-bottom:10px;
+}
+.day-header h2{
+  font-family:'Spectral',serif; font-size:34px; margin:0; display:flex; align-items:baseline; gap:12px;
+}
+.day-header h2 .n{ font-family:'IBM Plex Mono',monospace; color:var(--scrub-deep); font-weight:600; }
+.day-header .progress{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); }
+.day-nav{ display:flex; gap:8px; }
+
+.day-filter{
+  display:flex; gap:8px; margin-bottom:18px;
+}
+.day-filter input{
+  flex:1; padding:10px 12px; border:1px solid var(--line); border-radius:6px;
+  font-size:14px; background:var(--card);
+}
+
+.word-list{ border-top:1px solid var(--line); }
+.word-row{
+  display:grid; grid-template-columns:48px 1fr auto;
+  align-items:center; gap:16px;
+  padding:14px 6px; border-bottom:1px solid var(--line);
+}
+.word-row:nth-child(even){ background:rgba(216,207,186,.18); }
+.word-row .idx{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); }
+.word-row .terms{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.word-row .en{ font-family:'Spectral',serif; font-weight:600; font-size:19px; }
+.word-row .zh{ color:var(--ink-soft); font-size:14px; }
+.word-row.placeholder .en, .word-row.placeholder .zh{ color:#A8A096; font-style:italic; }
+
+.speak-btn{
+  display:inline-flex; align-items:center; gap:6px;
+  border:1px solid var(--scrub-deep); background:#fff; color:var(--scrub-deep);
+  padding:7px 12px; border-radius:20px; font-size:12px; font-family:'IBM Plex Mono',monospace;
+  transition:background .15s,color .15s;
+}
+.speak-btn:hover{ background:var(--scrub); color:#fff; }
+.speak-btn[disabled]{
+  opacity:.4; cursor:not-allowed; border-color:var(--line); color:var(--ink-soft);
+}
+.speak-btn svg{ width:13px; height:13px; }
+
+.day-footer-nav{
+  display:flex; justify-content:space-between; margin-top:24px;
+}
+
+.view{ display:none; }
+.view.active{ display:block; }
+
+footer.site{
+  max-width:var(--max); margin:0 auto; padding:30px 24px 60px;
+  color:var(--ink-soft); font-size:12px; border-top:1px solid var(--line); margin-top:30px;
+}
+
+@media (max-width:560px){
+  .word-row{ grid-template-columns:32px 1fr; row-gap:8px; }
+  .word-row .idx{ grid-row:1/3; }
+  .speak-btn{ grid-column:2; justify-self:start; }
+  .day-header h2{ font-size:26px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-top">
+    <div class="site-title">
+      <span class="mark"><span class="dot"></span>Clinical Vocabulary Index</span>
+      <h1 class="headline">醫學字彙 160</h1>
+      <p class="tagline">規劃 160 天，每天字數依資料彈性調整。中英對照，點擊喇叭圖示即可前往韋氏字典（Merriam-Webster）收聽發音。</p>
+    </div>
+    <div class="stat-strip" id="statStrip">
+      <div><b id="statDaysReady">–</b>天已建立 / days ready</div>
+      <div><b id="statWords">–</b>詞彙 / terms</div>
+    </div>
+  </div>
+  <div class="ekg-wrap" aria-hidden="true">
+    <svg viewBox="0 0 1000 46" preserveAspectRatio="none">
+      <path class="ekg-base" d="M0,30 L1000,30"></path>
+      <path class="ekg-line" d="M0,30 L80,30 L100,30 L112,8 L124,42 L136,16 L150,30 L300,30 L320,30 L332,8 L344,42 L356,16 L370,30 L520,30 L540,30 L552,8 L564,42 L576,16 L590,30 L740,30 L760,30 L772,8 L784,42 L796,16 L810,30 L1000,30"></path>
+    </svg>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- ===================== HOME VIEW ===================== -->
+  <section id="home" class="view active">
+
+    <div class="toolbar">
+      <form id="jumpForm">
+        <label for="jumpInput">前往天數 / Jump to day</label>
+        <input type="number" id="jumpInput" min="1" max="160" placeholder="1–160">
+        <button class="btn" type="submit">前往</button>
+      </form>
+      <span class="hint">點擊下方任一天卡片，或輸入天數直接跳轉。</span>
+    </div>
+
+    <div id="blockContainer"></div>
+  </section>
+
+  <!-- ===================== DAY VIEW ===================== -->
+  <section id="dayView" class="view">
+
+    <div class="day-header">
+      <div>
+        <a href="#/" class="back">← 回索引 Back to index</a>
+        <h2><span class="n" id="dayNum">001</span> <span id="dayTitle">主題</span></h2>
+        <div class="progress" id="dayProgress">DAY 1 / 160</div>
+      </div>
+      <div class="day-nav">
+        <button class="btn ghost" id="prevDayTop">← 前一天</button>
+        <button class="btn ghost" id="nextDayTop">後一天 →</button>
+      </div>
+    </div>
+
+    <div class="day-filter">
+      <input type="search" id="filterInput" placeholder="篩選此日單字（中文或英文）… filter today's words">
+    </div>
+
+    <div class="word-list" id="wordList"></div>
+
+    <div class="day-footer-nav">
+      <button class="btn ghost" id="prevDayBottom">← 前一天</button>
+      <button class="btn ghost" id="nextDayBottom">後一天 →</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  詞彙資料來自同目錄下的 <code>anatomy_words.csv</code>，以 Excel／Google Sheet 編輯後匯出取代該檔即可更新內容，網頁不需要修改。尚未建立資料的天數會顯示「待新增」。
+</footer>
+
+<script>
+/* =====================================================================
+   資料來源：anatomy_words.csv（與本檔放在同一個資料夾）
+   欄位：day, day_title, en, zh
+     - day        第幾天（1–160 的整數）
+     - day_title  該天主題，同一天只要任一列填寫即可，可留空
+     - en         英文字彙
+     - zh         中文翻譯
+   一行 = 一個單字。同一天可以有任意筆數（機動字數），
+   要新增/刪減某天的單字，直接在 CSV 增加或刪除對應的列即可。
+   ===================================================================== */
+const TOTAL_DAYS = 160;   // 整體規劃天數（即使尚未填資料也會顯示在首頁）
+let DATA = {};            // 執行時由 anatomy_words.csv 動態建立：DATA[day] = { title, words:[{en,zh}] }
+
+function parseCSV(text){
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1); // 去除 Excel/Sheets 匯出常見的 BOM
+  const rows = [];
+  let row = [], field = '', inQuotes = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (inQuotes){
+      if (c === '"'){
+        if (text[i+1] === '"'){ field += '"'; i++; }
+        else inQuotes = false;
+      } else field += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n'){ row.push(field); rows.push(row); row = []; field = ''; }
+      else if (c === '\r'){ /* 忽略，配合 \r\n 換行 */ }
+      else field += c;
+    }
+  }
+  if (field.length || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(r => r.some(v => v.trim() !== ''));
+}
+
+function buildDataFromCSV(text){
+  const rows = parseCSV(text);
+  if (!rows.length) return;
+  const header = rows[0].map(h => h.trim().toLowerCase());
+  const idxDay = header.indexOf('day');
+  const idxTitle = header.indexOf('day_title');
+  const idxEn = header.indexOf('en');
+  const idxZh = header.indexOf('zh');
+
+  for (let r = 1; r < rows.length; r++){
+    const cols = rows[r];
+    const day = parseInt((cols[idxDay]||'').trim(), 10);
+    if (!day) continue;
+    const en = (idxEn>-1 ? cols[idxEn] : '' )?.trim() || '';
+    const zh = (idxZh>-1 ? cols[idxZh] : '' )?.trim() || '';
+    if (!en && !zh) continue;
+
+    if (!DATA[day]) DATA[day] = { title:'', words:[] };
+    const title = idxTitle>-1 ? (cols[idxTitle]||'').trim() : '';
+    if (title && !DATA[day].title) DATA[day].title = title;
+    DATA[day].words.push({ en, zh });
+  }
+}
+
+function totalWordCount(){
+  return Object.values(DATA).reduce((sum, d) => sum + d.words.length, 0);
+}
+
+function mwLink(term){
+  return 'https://www.merriam-webster.com/dictionary/' + encodeURIComponent(term.trim());
+}
+
+function speakerSvg(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 9 3 15 7 15 12 19 12 5 7 9 3 9"></polygon><path d="M16 9a4 4 0 010 6"></path></svg>';
+}
+
+function updateStats(){
+  const daysReady = Object.keys(DATA).length;
+  document.getElementById('statDaysReady').textContent = daysReady + ' / ' + TOTAL_DAYS;
+  document.getElementById('statWords').textContent = totalWordCount().toLocaleString();
+}
+
+/* ---------------- build homepage block grid ---------------- */
+function buildHome(){
+  const container = document.getElementById('blockContainer');
+  container.innerHTML = '';
+  const blockSize = 10;
+  const blockCount = Math.ceil(TOTAL_DAYS / blockSize);
+
+  for (let b = 0; b < blockCount; b++){
+    const start = b*blockSize+1;
+    const end = Math.min(start+blockSize-1, TOTAL_DAYS);
+
+    const details = document.createElement('details');
+    details.className = 'block';
+    if (b === 0) details.open = true;
+
+    const summary = document.createElement('summary');
+    summary.innerHTML =
+      '<span class="chev">▶</span>' +
+      'Block ' + String(b+1).padStart(2,'0') +
+      ' <span class="range">· Day ' + String(start).padStart(3,'0') + '–' + String(end).padStart(3,'0') + '</span>';
+    details.appendChild(summary);
+
+    const grid = document.createElement('div');
+    grid.className = 'day-grid';
+
+    for (let d = start; d <= end; d++){
+      const dayData = DATA[d];
+      const ready = !!(dayData && dayData.words.length);
+      const card = document.createElement('a');
+      card.href = '#/day/' + d;
+      card.className = 'day-card';
+      card.innerHTML =
+        '<div class="num">' + String(d).padStart(3,'0') + '</div>' +
+        '<div class="meta">' + (ready ? dayData.words.length + ' 個單字' : '尚無資料') + '</div>' +
+        '<span class="tag ' + (ready?'ready':'empty') + '">' + (ready?'已建立':'待新增') + '</span>';
+      grid.appendChild(card);
+    }
+    details.appendChild(grid);
+    container.appendChild(details);
+  }
+}
+
+/* ---------------- build day detail view ---------------- */
+function buildDay(dayNum, filterText){
+  filterText = (filterText||'').trim().toLowerCase();
+  const data = DATA[dayNum];
+
+  document.getElementById('dayNum').textContent = String(dayNum).padStart(3,'0');
+  document.getElementById('dayProgress').textContent = 'DAY ' + dayNum + ' / ' + TOTAL_DAYS;
+
+  const list = document.getElementById('wordList');
+  list.innerHTML = '';
+
+  if (!data || !data.words.length){
+    document.getElementById('dayTitle').textContent = '';
+    list.innerHTML =
+      '<div class="word-row placeholder" style="grid-template-columns:1fr;">' +
+      '<div class="terms"><span class="en">這天還沒有資料 · No data yet</span>' +
+      '<span class="zh">請在 anatomy_words.csv 加入 day=' + dayNum + ' 的列，即可顯示在這裡。</span></div></div>';
+    document.getElementById('filterInput').value = '';
+    document.getElementById('filterInput').disabled = true;
+  } else {
+    document.getElementById('dayTitle').textContent = data.title || '';
+    document.getElementById('filterInput').disabled = false;
+
+    data.words.forEach((w, i) => {
+      if (filterText && !(w.en.toLowerCase().includes(filterText) || w.zh.includes(filterText))) return;
+      const row = document.createElement('div');
+      row.className = 'word-row';
+      row.innerHTML =
+        '<div class="idx mono">' + String(i+1).padStart(2,'0') + '</div>' +
+        '<div class="terms"><span class="en">' + (w.en || '（未填寫）') + '</span><span class="zh">' + (w.zh || '（未填寫）') + '</span></div>' +
+        '<button class="speak-btn" ' + (w.en?'':'disabled') + ' data-term="' + w.en + '">' +
+          speakerSvg() + (w.en ? '韋氏發音' : '無英文字') +
+        '</button>';
+      list.appendChild(row);
+    });
+
+    list.querySelectorAll('.speak-btn:not([disabled])').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.open(mwLink(btn.dataset.term), '_blank', 'noopener');
+      });
+    });
+  }
+
+  const prevBtns = [document.getElementById('prevDayTop'), document.getElementById('prevDayBottom')];
+  const nextBtns = [document.getElementById('nextDayTop'), document.getElementById('nextDayBottom')];
+  prevBtns.forEach(b => { b.disabled = dayNum <= 1; b.onclick = () => location.hash = '#/day/' + (dayNum-1); });
+  nextBtns.forEach(b => { b.disabled = dayNum >= TOTAL_DAYS; b.onclick = () => location.hash = '#/day/' + (dayNum+1); });
+
+  document.getElementById('filterInput').oninput = (e) => buildDay(dayNum, e.target.value);
+}
+
+/* ---------------- simple hash router ---------------- */
+function showView(id){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function route(){
+  const hash = location.hash || '#/';
+  const m = hash.match(/^#\/day\/(\d+)/);
+  if (m){
+    let d = parseInt(m[1], 10);
+    if (d < 1) d = 1;
+    if (d > TOTAL_DAYS) d = TOTAL_DAYS;
+    showView('dayView');
+    buildDay(d, '');
+    window.scrollTo({top:0, behavior:'instant'});
+  } else {
+    buildHome();
+    showView('home');
+  }
+}
+
+document.getElementById('jumpForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const v = parseInt(document.getElementById('jumpInput').value, 10);
+  if (v >= 1 && v <= TOTAL_DAYS) location.hash = '#/day/' + v;
+});
+
+window.addEventListener('hashchange', route);
+
+fetch('anatomy_words.csv')
+  .then(res => {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.text();
+  })
+  .then(text => {
+    buildDataFromCSV(text);
+    updateStats();
+    route();
+  })
+  .catch(err => {
+    document.getElementById('blockContainer').innerHTML =
+      '<div class="toolbar" style="border-color:var(--vital);">' +
+      '<span class="hint" style="margin-left:0;color:var(--vital);">' +
+      '無法載入 anatomy_words.csv（' + err.message + '）。' +
+      '若你是直接用瀏覽器開啟此 HTML 檔案，請改用本機伺服器測試，例如在此資料夾下執行：' +
+      '<code class="mono">python3 -m http.server</code>，再開啟 http://localhost:8000/ 對應的網址。' +
+      '</span></div>';
+    console.error(err);
+  });
+</script>
+
+</body>
+</html>
