@@ -128,6 +128,17 @@
           "file": "OrgChem_Ch28_Carbohydrates.html"
         }
       ]
+    },
+    {
+      "key": "Anatomy_words",
+      "label": "📋 解剖學字彙 (Anatomy_words)",
+      "folder": "Anatomy_words",
+      "notes": [
+        {
+          "title": "解剖學字彙查詢",
+          "file": "index.html"
+        }
+      ]
     }
   ]
 }
