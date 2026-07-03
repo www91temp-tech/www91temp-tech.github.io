@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>解剖學字彙 160 · Medical Vocabulary in 160 Days</title>
+<title>解剖學字彙 160 · Anatomy Vocabulary in 160 Days</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap');
 
@@ -124,7 +124,7 @@ details.block[open] > summary .chev{ transform:rotate(90deg); }
 details.block > summary .range{ color:var(--ink-soft); font-weight:400; }
 
 .day-grid{
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr));
+  display:grid; grid-template-columns:repeat(10, 1fr);
   gap:10px; padding:0 16px 16px;
 }
 .day-card{
@@ -219,9 +219,9 @@ footer.site{
 <header class="site">
   <div class="site-top">
     <div class="site-title">
-      <span class="mark"><span class="dot"></span>Clinical Vocabulary Index</span>
-      <h1 class="headline">醫學字彙 160</h1>
-      <p class="tagline">規劃 160 天，每天字數依資料彈性調整。中英對照，點擊喇叭圖示即可前往韋氏字典（Merriam-Webster）收聽發音。</p>
+      <span class="mark"><span class="dot"></span>Anatomy Vocabulary</span>
+      <h1 class="headline">解剖學字彙 160</h1>
+      <p class="tagline">中英對照，點擊喇叭圖示即可前往韋氏字典（Merriam-Webster）收聽發音。</p>
     </div>
     <div class="stat-strip" id="statStrip">
       <div><b id="statDaysReady">–</b>天已建立 / days ready</div>
@@ -244,7 +244,7 @@ footer.site{
     <div class="toolbar">
       <form id="jumpForm">
         <label for="jumpInput">前往天數 / Jump to day</label>
-        <input type="number" id="jumpInput" min="1" max="160" placeholder="1–160">
+        <input type="number" id="jumpInput" min="1" max="160" placeholder="">
         <button class="btn" type="submit">前往</button>
       </form>
       <span class="hint">點擊下方任一天卡片，或輸入天數直接跳轉。</span>
@@ -283,7 +283,7 @@ footer.site{
 </main>
 
 <footer class="site">
-  詞彙資料來自同目錄下的 <code>anatomy_words.csv</code>，以 Excel／Google Sheet 編輯後匯出取代該檔即可更新內容，網頁不需要修改。尚未建立資料的天數會顯示「待新增」。
+  解剖學字彙
 </footer>
 
 <script>
