@@ -51,6 +51,7 @@ CATEGORY_META = {
     'Biochemistry': '🧪 生化 (Biochemistry)',
     'Biology':      '🧬 普生 (Biology)',
     'OrgChem':      '⚗️ 有機化 (OrgChem)',
+    'Anatomy_words':'📋 解剖學字彙 (Anatomy_words)',
     # 新增科目時，在這裡加一行即可，例如：
     # 'Physics':    '⚛️ 物理 (Physics)',
 }
