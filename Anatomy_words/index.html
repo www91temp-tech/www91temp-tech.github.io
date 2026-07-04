@@ -124,8 +124,14 @@ details.block[open] > summary .chev{ transform:rotate(90deg); }
 details.block > summary .range{ color:var(--ink-soft); font-weight:400; }
 
 .day-grid{
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(100px, 1fr));
+  display:grid; grid-template-columns:repeat(5, 1fr);
   gap:10px; padding:0 16px 16px;
+}
+@media (max-width:900px){
+  .day-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:360px){
+  .day-grid{ grid-template-columns:repeat(1, 1fr); }
 }
 .day-card{
   display:block; padding:12px 12px 10px;
@@ -205,7 +211,6 @@ footer.site{
   .word-row .idx{ grid-row:1/3; }
   .speak-btn{ grid-column:2; justify-self:start; }
   .day-header h2{ font-size:26px; }
-  .day-grid{ grid-template-columns:repeat(auto-fill, minmax(80px, 1fr)); }
 }
 
 /* ---------- back to top ---------- */
@@ -293,7 +298,7 @@ footer.site{
 </main>
 
 <footer class="site">
-  解剖學字彙
+  
 </footer>
 
 <button id="backToTop" type="button" aria-label="回到頂端 Back to top">↑ 回到頂端</button>
