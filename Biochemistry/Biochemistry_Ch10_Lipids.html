@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第10章：脂質｜學習手冊</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --paper:#ffffff;
+    --ink:#20262b;
+    --ink-soft:#4b545c;
+    --line:#e3ddd0;
+    --accent:#b5651d;      /* 脂肪酸暖橘棕 */
+    --accent-soft:#f3e3d2;
+    --p1:#2f6f4f;           /* 儲存/能量 綠 */
+    --p1-bg:#e6f2ea;
+    --p2:#2a5f8a;           /* 膜結構 藍 */
+    --p2-bg:#e5eff6;
+    --p3:#8a3b6b;           /* 訊號/色素 紫紅 */
+    --p3-bg:#f6e7f0;
+    --p4:#856404;           /* 分析方法 黃褐 */
+    --p4-bg:#faf1d6;
+    --med:#a23b3b;          /* 醫學案例 紅 */
+    --med-bg:#fbe9e9;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.85;
+    font-size:16px;
+  }
+  header.masthead{
+    background:linear-gradient(135deg,#2b2118 0%,#4a3420 55%,#6b4423 100%);
+    color:#f6ede0;
+    padding:2.4rem 1.2rem 1.8rem;
+    text-align:center;
+  }
+  header.masthead .kicker{
+    letter-spacing:.25em;
+    font-size:.78rem;
+    color:#e0c39a;
+    text-transform:uppercase;
+    margin-bottom:.5rem;
+  }
+  header.masthead h1{
+    margin:.2rem 0 .3rem;
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    font-weight:700;
+    letter-spacing:.02em;
+  }
+  header.masthead p.sub{
+    margin:0;
+    color:#d9c7ac;
+    font-size:.95rem;
+  }
+  nav.tabbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  nav.tabbar ul{
+    list-style:none;
+    display:flex;
+    gap:.2rem;
+    margin:0;
+    padding:0 .4rem;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.tabbar ul::-webkit-scrollbar{display:none;}
+  nav.tabbar a{
+    display:inline-block;
+    white-space:nowrap;
+    padding:.85rem .9rem;
+    font-size:.88rem;
+    font-weight:500;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:3px solid transparent;
+    transition:.15s;
+  }
+  nav.tabbar a:hover{color:var(--accent); border-bottom-color:var(--accent-soft);}
+  nav.tabbar a.active{color:var(--accent); border-bottom-color:var(--accent);}
+
+  main{
+    max-width:840px;
+    margin:0 auto;
+    padding:1.6rem 1.1rem 4rem;
+  }
+  section.chapter{
+    margin-bottom:3rem;
+    padding-top:.6rem;
+  }
+  section.chapter > h2{
+    font-size:1.5rem;
+    color:var(--accent);
+    border-bottom:3px solid var(--accent-soft);
+    padding-bottom:.5rem;
+    margin-top:0;
+  }
+  h3.subhead{
+    font-size:1.18rem;
+    margin-top:2.1rem;
+    color:#2b2118;
+    background:linear-gradient(90deg,var(--accent-soft),transparent);
+    padding:.5rem .7rem;
+    border-radius:6px;
+    border-left:5px solid var(--accent);
+  }
+  p{margin:.9rem 0;}
+  .lead{
+    font-size:1.02rem;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1rem 1.2rem;
+  }
+  strong.term{color:var(--accent); font-weight:700;}
+  small.en{color:#8a8377; font-weight:400; font-size:.85em;}
+
+  /* 原理 P1-P4 卡片 */
+  .principle-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:.8rem;
+    margin:1.4rem 0;
+  }
+  .p-card{
+    border-radius:var(--radius);
+    padding:1rem 1.1rem;
+    border:1px solid var(--line);
+  }
+  .p-card .tag{
+    display:inline-block;
+    font-weight:700;
+    font-size:.75rem;
+    padding:.15rem .55rem;
+    border-radius:20px;
+    color:#fff;
+    margin-bottom:.5rem;
+  }
+  .p-card.p1{background:var(--p1-bg);} .p-card.p1 .tag{background:var(--p1);}
+  .p-card.p2{background:var(--p2-bg);} .p-card.p2 .tag{background:var(--p2);}
+  .p-card.p3{background:var(--p3-bg);} .p-card.p3 .tag{background:var(--p3);}
+  .p-card.p4{background:var(--p4-bg);} .p-card.p4 .tag{background:var(--p4);}
+  .p-card p{margin:.2rem 0 0; font-size:.92rem; color:var(--ink-soft);}
+
+  /* 標籤徽章：用於段落標記所屬原理 */
+  .badge{
+    display:inline-block;
+    font-size:.72rem;
+    font-weight:700;
+    padding:.1rem .5rem;
+    border-radius:20px;
+    color:#fff;
+    vertical-align:middle;
+    margin-right:.4rem;
+  }
+  .badge.p1{background:var(--p1);}
+  .badge.p2{background:var(--p2);}
+  .badge.p3{background:var(--p3);}
+  .badge.p4{background:var(--p4);}
+  .badge.med{background:var(--med);}
+
+  /* 關鍵慣例 / 重點方塊 */
+  .box{
+    border-radius:var(--radius);
+    padding:1rem 1.2rem;
+    margin:1.3rem 0;
+    border:1px solid var(--line);
+  }
+  .box.convention{
+    background:#eef4fb;
+    border-left:5px solid var(--p2);
+  }
+  .box.convention .box-title{color:var(--p2);}
+  .box.medicine{
+    background:var(--med-bg);
+    border-left:5px solid var(--med);
+  }
+  .box.medicine .box-title{color:var(--med);}
+  .box.summary{
+    background:#f1f8f0;
+    border-left:5px solid var(--p1);
+  }
+  .box.summary .box-title{color:var(--p1);}
+  .box-title{
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    font-size:.82rem;
+    margin-bottom:.5rem;
+    display:block;
+  }
+  .box ul{margin:.3rem 0; padding-left:1.3rem;}
+  .box li{margin:.35rem 0;}
+
+  /* 編號流程 */
+  .flow{
+    counter-reset:flow-step;
+    margin:1.3rem 0;
+    display:flex;
+    flex-direction:column;
+    gap:.6rem;
+  }
+  .flow .step{
+    counter-increment:flow-step;
+    position:relative;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:.85rem 1rem .85rem 3rem;
+  }
+  .flow .step::before{
+    content:counter(flow-step);
+    position:absolute;
+    left:.7rem; top:50%;
+    transform:translateY(-50%);
+    width:1.6rem;height:1.6rem;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-weight:700;
+    font-size:.85rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .flow .step b{color:var(--accent);}
+
+  /* 表格 */
+  .table-wrap{overflow-x:auto; margin:1.2rem 0;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--paper);
+    font-size:.92rem;
+    min-width:480px;
+  }
+  caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:.4rem;
+    font-size:.95rem;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:.55rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  thead th{
+    background:var(--accent-soft);
+    color:#3a2a15;
+  }
+  tbody tr:nth-child(even){background:#faf7f2;}
+
+  .compare-table thead th{background:#e5eff6; color:var(--p2);}
+
+  figure{
+    margin:1.4rem 0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1rem;
+    text-align:center;
+  }
+  figure svg{max-width:100%;height:auto;}
+  figcaption{
+    font-size:.85rem;
+    color:var(--ink-soft);
+    margin-top:.6rem;
+    text-align:left;
+  }
+  figcaption b{color:var(--accent);}
+
+  code{
+    background:#eee7da;
+    padding:.1rem .35rem;
+    border-radius:4px;
+    font-size:.9em;
+  }
+
+  details.recap{
+    background:#fff;
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+    padding:.7rem 1rem;
+    margin:1.3rem 0;
+  }
+  details.recap summary{
+    cursor:pointer;
+    font-weight:700;
+    color:var(--accent);
+  }
+
+  #topbtn{
+    position:fixed;
+    right:1.1rem;
+    bottom:1.1rem;
+    width:3rem;height:3rem;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    font-size:1.3rem;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+    cursor:pointer;
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:60;
+  }
+  #topbtn.show{display:flex;}
+
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#9a9284;
+    font-size:.85rem;
+  }
+
+  @media (max-width:600px){
+    body{font-size:15px;}
+    header.masthead{padding:1.8rem .9rem 1.4rem;}
+    main{padding:1.2rem .8rem 3rem;}
+    nav.tabbar a{padding:.7rem .65rem; font-size:.82rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="kicker">CHAPTER 10 · BIOCHEMISTRY</div>
+  <h1>脂質</h1>
+  <p class="sub">從脂肪酸到荷爾蒙：認識細胞裡「不溶於水」的分子家族</p>
+</header>
+
+<nav class="tabbar">
+  <ul id="navlist">
+    <li><a href="#intro">導論</a></li>
+    <li><a href="#sec1">10.1 儲存脂質</a></li>
+    <li><a href="#sec2">10.2 膜結構脂質</a></li>
+    <li><a href="#sec3">10.3 訊號・輔因子・色素</a></li>
+    <li><a href="#sec4">10.4 脂質分析技術</a></li>
+    <li><a href="#recap">重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ================= 導論 ================= -->
+<section class="chapter" id="intro">
+  <h2>導論：什麼是脂質？</h2>
+  <p class="lead">
+    <strong class="term">脂質 <small class="en">Lipids</small></strong>
+    是一群化學結構差異很大的分子，它們唯一的共同點就是<strong>不溶於水（疏水性）</strong>。
+    正因為「不溶於水」這個物理特性，脂質才能同時勝任脂肪儲存、細胞膜構造、訊號傳遞、色素、輔因子等看似毫不相關的工作。
+  </p>
+  <p>
+    本章不依化學結構分類，而是依照「脂質在細胞裡做什麼」來介紹，並歸納成下面四個核心原則（P1–P4），
+    之後每一段落也會用相同顏色的徽章標示屬於哪一個原則，方便抓住脈絡。
+  </p>
+
+  <div class="principle-grid">
+    <div class="p-card p1">
+      <span class="tag">P1 能量儲存</span>
+      <p><strong>脂肪酸</strong>是高度還原的碳氫化合物，是細胞儲存化學能最有效率的形式；以三酸甘油酯儲存脂肪不需額外攜帶水分。</p>
+    </div>
+    <div class="p-card p2">
+      <span class="tag">P2 膜的構造</span>
+      <p>膜脂質＝<strong>疏水尾巴＋親水頭部</strong>，這種兩性特質讓它們能自組裝成雙層膜，同時展示分子供辨識與訊號使用。</p>
+    </div>
+    <div class="p-card p3">
+      <span class="tag">P3 訊號與其他功能</span>
+      <p>除了能量與膜構造，許多脂質是<strong>細胞內外的訊息分子</strong>：荷爾蒙、電子載體、色素等，量少但作用強大。</p>
+    </div>
+    <div class="p-card p4">
+      <span class="tag">P4 結構決定性質</span>
+      <p>脂質的化學結構直接決定其物理性質；可用酵素分解、層析、質譜等方法鑑定脂質的原子結構。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10.1 ================= -->
+<section class="chapter" id="sec1">
+  <h2>10.1　儲存脂質 <small class="en">Storage Lipids</small></h2>
+
+  <h3 class="subhead">脂肪酸：碳氫化合物的衍生物 <span class="badge p1">P1</span></h3>
+  <p>
+    <strong class="term">脂肪酸 <small class="en">fatty acid</small></strong>
+    是帶有一個羧基（—COOH）的長鏈碳氫化合物，碳鏈長度從 4 到 36 個碳不等。可分為：
+  </p>
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>飽和 vs 不飽和脂肪酸：關鍵差異</caption>
+    <thead><tr><th>特性</th><th>飽和脂肪酸 <small class="en">saturated</small></th><th>不飽和脂肪酸 <small class="en">unsaturated</small></th></tr></thead>
+    <tbody>
+      <tr><td>碳鏈結構</td><td>無雙鍵，鏈可自由旋轉，呈完全伸展形</td><td>含一個以上雙鍵，幾乎都是 <em>cis</em> 型，造成鏈彎折</td></tr>
+      <tr><td>分子堆疊</td><td>可緊密排列成近似結晶的陣列</td><td>彎折處無法緊密堆疊，分子間作用力較弱</td></tr>
+      <tr><td>熔點</td><td>較高（如硬脂酸 18:0，69.6 °C）</td><td>較低（如油酸 18:1，13.4 °C）</td></tr>
+      <tr><td>室溫外觀（25 °C）</td><td>蠟狀固體</td><td>油狀液體</td></tr>
+      <tr><td>代表例子</td><td>棕櫚酸 16:0、硬脂酸 18:0</td><td>油酸 18:1、亞麻油酸 18:2</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="20" font-size="13" fill="#4b545c">(a) 飽和脂肪酸：完全伸展、可緊密堆疊</text>
+      <g stroke="#2f6f4f" stroke-width="4" fill="none" stroke-linecap="round">
+        <polyline points="20,60 45,80 70,60 95,80 120,60 145,80 170,60 195,80 220,60"/>
+        <polyline points="20,100 45,120 70,100 95,120 120,100 145,120 170,100 195,120 220,100"/>
+        <polyline points="20,140 45,160 70,140 95,160 120,140 145,160 170,140 195,160 220,140"/>
+      </g>
+      <text x="270" y="20" font-size="13" fill="#4b545c">(b) 不飽和脂肪酸：cis 雙鍵造成彎折</text>
+      <g stroke="#b5651d" stroke-width="4" fill="none" stroke-linecap="round">
+        <polyline points="290,100 315,120 340,100 365,120 390,90 415,60 440,90 465,110 490,90 515,110" />
+        <circle cx="390" cy="90" r="5" fill="#a23b3b" stroke="none"/>
+        <circle cx="415" cy="60" r="5" fill="#a23b3b" stroke="none"/>
+      </g>
+      <text x="390" y="145" font-size="11" fill="#a23b3b">紅點＝cis 雙鍵位置，造成~30°彎折</text>
+    </svg>
+    <figcaption><b>Fig. 10-1：</b>飽和脂肪酸鏈平直，能像鉛筆一樣整齊排列；不飽和脂肪酸因 cis 雙鍵產生固定彎折角度，彼此堆疊時留有空隙、作用力較弱，因此熔點較低、常溫下呈液態。</figcaption>
+  </figure>
+
+  <div class="box convention">
+    <span class="box-title">關鍵慣例 Key Convention｜脂肪酸的簡寫命名</span>
+    <p>「碳數：雙鍵數」，例如 <strong>16:0</strong> 表示 16 個碳、無雙鍵（棕櫚酸）；<strong>18:1</strong> 表示 18 個碳、1 個雙鍵（油酸）。</p>
+    <ul>
+      <li>羧基碳固定編號為 <strong>C-1</strong>，往後依序 C-2、C-3…</li>
+      <li>雙鍵位置以 <strong>Δ（delta）</strong>加上較小的碳號表示，例如油酸雙鍵在 C-9–C-10 之間，記作 <strong>18:1(Δ⁹)</strong>。</li>
+    </ul>
+  </div>
+
+  <div class="box convention">
+    <span class="box-title">關鍵慣例｜Omega（ω）命名法</span>
+    <p>從<strong>甲基端（離羧基最遠的那端）</strong>開始數，該碳定為 C-1（即 ω 碳）。</p>
+    <ul>
+      <li>雙鍵離甲基端第 3-4 個碳 → <strong>ω-3 脂肪酸</strong>（例如 EPA、DHA、α-次亞麻油酸 ALA）</li>
+      <li>雙鍵離甲基端第 6-7 個碳 → <strong>ω-6 脂肪酸</strong></li>
+    </ul>
+    <p>人體無法自行合成 ALA，須從飲食攝取；地中海飲食富含 ω-3，被認為與較低心血管疾病風險有關。</p>
+  </div>
+
+  <h3 class="subhead">三酸甘油酯：甘油的脂肪酸酯 <span class="badge p1">P1</span></h3>
+  <p>
+    <strong class="term">三酸甘油酯 <small class="en">triacylglycerol</small></strong>（俗稱中性脂肪、脂肪）由
+    <strong>一分子甘油（glycerol）</strong> 與 <strong>三分子脂肪酸</strong> 以酯鍵連接而成。
+    三個脂肪酸相同者稱「簡單三酸甘油酯」，不同者稱「混合三酸甘油酯」（自然界較常見）。
+  </p>
+
+  <figure>
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="18" font-size="13" fill="#4b545c">甘油骨架（C1–C3）與三條脂肪酸尾巴（酯鍵連接）</text>
+      <g font-size="12" fill="#20262b">
+        <rect x="30" y="40" width="26" height="26" rx="4" fill="#f3e3d2" stroke="#b5651d"/>
+        <rect x="30" y="87" width="26" height="26" rx="4" fill="#f3e3d2" stroke="#b5651d"/>
+        <rect x="30" y="134" width="26" height="26" rx="4" fill="#f3e3d2" stroke="#b5651d"/>
+        <text x="35" y="58" font-size="11">C1</text>
+        <text x="35" y="105" font-size="11">C2</text>
+        <text x="35" y="152" font-size="11">C3</text>
+        <line x1="56" y1="53" x2="90" y2="53" stroke="#20262b" stroke-width="2"/>
+        <line x1="56" y1="100" x2="90" y2="100" stroke="#20262b" stroke-width="2"/>
+        <line x1="56" y1="147" x2="90" y2="147" stroke="#20262b" stroke-width="2"/>
+        <text x="93" y="50" fill="#a23b3b">酯鍵 O</text>
+        <text x="93" y="97" fill="#a23b3b">酯鍵 O</text>
+        <text x="93" y="144" fill="#a23b3b">酯鍵 O</text>
+      </g>
+      <g stroke="#2f6f4f" stroke-width="4" fill="none" stroke-linecap="round">
+        <polyline points="130,53 155,40 180,53 205,40 230,53 255,40 280,53"/>
+        <polyline points="130,100 155,113 180,100 205,88 230,68 255,88 280,68"/>
+        <polyline points="130,147 155,160 180,147 205,160 230,147 255,160 280,147"/>
+      </g>
+      <text x="300" y="53" font-size="11" fill="#4b545c">脂肪酸鏈 1（如硬脂酸）</text>
+      <text x="300" y="100" font-size="11" fill="#4b545c">脂肪酸鏈 2（如亞麻油酸，含雙鍵）</text>
+      <text x="300" y="147" font-size="11" fill="#4b545c">脂肪酸鏈 3（如棕櫚酸）</text>
+    </svg>
+    <figcaption><b>Fig. 10-2：</b>甘油三個羥基分別與脂肪酸的羧基形成酯鍵。當 C-1 與 C-3 上的脂肪酸不同時，C-2 就成為<strong>掌性中心</strong>。</figcaption>
+  </figure>
+
+  <div class="box summary">
+    <span class="box-title">為什麼用脂肪而不是肝醣儲存能量？</span>
+    <ul>
+      <li><strong>能量密度高</strong>：脂肪酸碳原子還原程度較高，氧化釋放的能量是等重醣類的兩倍以上。</li>
+      <li><strong>不需水合</strong>：脂肪疏水，不像肝醣每克需額外帶 2 克水，攜帶更「輕便」。</li>
+      <li>代價：脂肪不易溶於水，動員速度較慢，因此醣類仍是快速能量來源。</li>
+    </ul>
+  </div>
+
+  <h3 class="subhead">氫化與反式脂肪：對健康的影響 <span class="badge med">醫學</span></h3>
+  <p>
+    植物油氧化後會變得油耗味（酸敗）。工業上以<strong>部分氫化</strong>將雙鍵轉為單鍵，可提升油品穩定性（如人造奶油），
+    但過程中部分 cis 雙鍵會轉為 <strong>trans（反式）雙鍵</strong>。
+  </p>
+  <div class="box medicine">
+    <span class="box-title">醫學筆記｜反式脂肪與心血管疾病</span>
+    <ul>
+      <li>反式脂肪會提高血中三酸甘油酯與 LDL（壞膽固醇），降低 HDL（好膽固醇）</li>
+      <li>可能增加身體發炎反應，是心臟病的額外風險因子</li>
+      <li>目前各國法規已限制或禁止加工食品中使用反式脂肪</li>
+    </ul>
+  </div>
+
+  <h3 class="subhead">蠟：儲能兼防水 <span class="badge p1">P1</span></h3>
+  <p>
+    <strong class="term">蠟 <small class="en">wax</small></strong> 是長鏈脂肪酸與長鏈醇形成的酯，熔點比三酸甘油酯高（60–100 °C）。
+    浮游生物以蠟作為主要能量儲存形式；蜂蠟、羊毛脂、巴西棕櫚蠟等則廣泛用於化妝品與藥品產業，也是植物葉片防止水分過度蒸散的保護層。
+  </p>
+
+  <details class="recap">
+    <summary>10.1 小結</summary>
+    <ul>
+      <li>脂肪酸多為偶數碳、不分支，雙鍵幾乎都是 cis 型</li>
+      <li>三酸甘油酯＝甘油＋3 個脂肪酸酯鍵；主要用途是能量儲存與保溫</li>
+      <li>脂解酶（lipase）水解三酸甘油酯釋出脂肪酸供燃燒使用</li>
+      <li>反式脂肪來自部分氫化，與心血管疾病風險增加有關</li>
+      <li>蠟＝長鏈脂肪酸＋長鏈醇，兼具儲能與防水功能</li>
+    </ul>
+  </details>
+</section>
+
+<!-- ================= 10.2 ================= -->
+<section class="chapter" id="sec2">
+  <h2>10.2　膜結構脂質 <small class="en">Structural Lipids in Membranes</small></h2>
+  <p class="lead">
+    <span class="badge p2">P2</span>膜脂質是<strong>兩性分子 <small class="en">amphipathic</small></strong>：
+    一端疏水、一端親水。這種特性讓它們在水中自然排列成<strong>雙層膜 <small class="en">bilayer</small></strong>，
+    疏水尾巴相對躲在內側，親水頭朝外接觸水。本節介紹四大類膜脂質：
+    <strong>磷脂質（phospholipid）</strong>、<strong>醣脂質（glycolipid）</strong>、
+    <strong>古菌四醚脂質（archaeal tetraether lipid）</strong>、<strong>固醇類（sterol）</strong>。
+  </p>
+
+  <figure>
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="18" font-size="11" fill="#4b545c">膜脂質的雙層排列示意（親水頭朝外、疏水尾朝內）</text>
+      <g>
+        <!-- water top -->
+        <rect x="0" y="25" width="560" height="20" fill="#e5eff6"/>
+        <text x="470" y="39" font-size="11" fill="#2a5f8a">水（胞外）</text>
+        <!-- water bottom -->
+        <rect x="0" y="175" width="560" height="20" fill="#e5eff6"/>
+        <text x="470" y="189" font-size="11" fill="#2a5f8a">水（胞內）</text>
+      </g>
+      <g id="lipids"></g>
+      <script><![CDATA[
+      ]]></script>
+      <!-- draw repeated lipid units manually -->
+      <g stroke="#2f6f4f" stroke-width="3" fill="none" stroke-linecap="round">
+        <!-- top row tails going down -->
+        <polyline points="40,60 40,95"/>
+        <polyline points="55,60 55,95"/>
+        <polyline points="90,60 90,95"/>
+        <polyline points="105,60 105,95"/>
+        <polyline points="140,60 140,95"/>
+        <polyline points="155,60 155,95"/>
+        <polyline points="190,60 190,95"/>
+        <polyline points="205,60 205,95"/>
+        <polyline points="240,60 240,95"/>
+        <polyline points="255,60 255,95"/>
+        <polyline points="290,60 290,95"/>
+        <polyline points="305,60 305,95"/>
+        <polyline points="340,60 340,95"/>
+        <polyline points="355,60 355,95"/>
+        <polyline points="390,60 390,95"/>
+        <polyline points="405,60 405,95"/>
+        <polyline points="440,60 440,95"/>
+        <polyline points="455,60 455,95"/>
+        <polyline points="490,60 490,95"/>
+        <polyline points="505,60 505,95"/>
+        <!-- bottom row tails going up -->
+        <polyline points="40,160 40,125"/>
+        <polyline points="55,160 55,125"/>
+        <polyline points="90,160 90,125"/>
+        <polyline points="105,160 105,125"/>
+        <polyline points="140,160 140,125"/>
+        <polyline points="155,160 155,125"/>
+        <polyline points="190,160 190,125"/>
+        <polyline points="205,160 205,125"/>
+        <polyline points="240,160 240,125"/>
+        <polyline points="255,160 255,125"/>
+        <polyline points="290,160 290,125"/>
+        <polyline points="305,160 305,125"/>
+        <polyline points="340,160 340,125"/>
+        <polyline points="355,160 355,125"/>
+        <polyline points="390,160 390,125"/>
+        <polyline points="405,160 405,125"/>
+        <polyline points="440,160 440,125"/>
+        <polyline points="455,160 455,125"/>
+        <polyline points="490,160 490,125"/>
+        <polyline points="505,160 505,125"/>
+      </g>
+      <g fill="#2a5f8a">
+        <circle cx="47" cy="55" r="10"/><circle cx="97" cy="55" r="10"/><circle cx="147" cy="55" r="10"/>
+        <circle cx="197" cy="55" r="10"/><circle cx="247" cy="55" r="10"/><circle cx="297" cy="55" r="10"/>
+        <circle cx="347" cy="55" r="10"/><circle cx="397" cy="55" r="10"/><circle cx="447" cy="55" r="10"/><circle cx="497" cy="55" r="10"/>
+        <circle cx="47" cy="165" r="10"/><circle cx="97" cy="165" r="10"/><circle cx="147" cy="165" r="10"/>
+        <circle cx="197" cy="165" r="10"/><circle cx="247" cy="165" r="10"/><circle cx="297" cy="165" r="10"/>
+        <circle cx="347" cy="165" r="10"/><circle cx="397" cy="165" r="10"/><circle cx="447" cy="165" r="10"/><circle cx="497" cy="165" r="10"/>
+      </g>
+    </svg>
+    <figcaption><b>示意圖：</b>藍色圓球＝親水頭部（磷酸／醣基等），綠色鋸齒線＝疏水脂肪酸尾巴。頭部朝向水相，尾巴聚在膜中央，形成穩定的雙層屏障。</figcaption>
+  </figure>
+
+  <h3 class="subhead">甘油磷脂質：磷脂酸的衍生物 <span class="badge p2">P2</span></h3>
+  <p>
+    <strong class="term">甘油磷脂質 <small class="en">glycerophospholipid</small></strong>（又稱磷酸甘油酯）：
+    甘油 C-1、C-2 接兩條脂肪酸（酯鍵），C-3 則透過<strong>磷酸雙酯鍵</strong>連接一個極性頭基，母體化合物為
+    <strong>磷脂酸 <small class="en">phosphatidic acid</small></strong>。頭基不同，就得到不同名稱的磷脂：
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>常見甘油磷脂質與頭基（依 Fig. 10-8 簡化）</caption>
+    <thead><tr><th>名稱</th><th>頭基</th><th>pH 7 淨電荷</th></tr></thead>
+    <tbody>
+      <tr><td>磷脂酸 Phosphatidic acid</td><td>（無，即 —H）</td><td>約 −2</td></tr>
+      <tr><td>磷脂醯乙醇胺 Phosphatidylethanolamine</td><td>乙醇胺</td><td>0</td></tr>
+      <tr><td>磷脂醯膽鹼 Phosphatidylcholine</td><td>膽鹼</td><td>0</td></tr>
+      <tr><td>磷脂醯絲胺酸 Phosphatidylserine</td><td>絲胺酸</td><td>−1</td></tr>
+      <tr><td>磷脂醯肌醇 4,5-雙磷酸 PIP₂</td><td>肌醇 4,5-雙磷酸</td><td>約 −4</td></tr>
+      <tr><td>心磷脂 Cardiolipin</td><td>另一分子磷脂酸的甘油</td><td>−2</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    小提醒：<strong>心磷脂</strong>幾乎只出現在<strong>粒線體內膜</strong>，這與粒線體源自古細菌內共生的理論一致。
+  </p>
+
+  <div class="box convention">
+    <span class="box-title">補充｜醚脂質 Ether Lipids</span>
+    <p>
+      多數甘油磷脂以<strong>酯鍵</strong>連接脂肪酸，但少數（如<strong>縮醛磷脂 <small class="en">plasmalogen</small></strong>）以<strong>醚鍵</strong>連接，
+      對磷脂酶較有抵抗力。心臟組織中約一半的磷脂是縮醛磷脂；<strong>血小板活化因子</strong>則是另一種醚脂質，是重要的發炎訊號分子。
+    </p>
+  </div>
+
+  <h3 class="subhead">醣脂質與古菌脂質：環境的演化適應 <span class="badge p2">P2</span></h3>
+  <p>
+    植物細胞的膜脂質以<strong>半乳糖脂 <small class="en">galactolipid</small></strong>為主（占維管束植物膜脂質 70–80%！），
+    構造是二醯甘油接上 1–2 個半乳糖，不含磷酸——推測是植物為了節省土壤中珍貴的磷而演化出的替代方案。
+  </p>
+  <p>
+    極端環境古菌（如高溫、強酸、高鹽環境）的膜脂質則用<strong>醚鍵</strong>將長鏈（32 碳）分支烴類連接在甘油「兩端」，
+    分子長度是一般磷脂的兩倍，可直接橫跨整個細胞膜，耐熱耐酸性極佳。
+  </p>
+
+  <h3 class="subhead">鞘脂質：以鞘胺醇為骨架 <span class="badge p2">P2</span></h3>
+  <p>
+    <strong class="term">鞘脂質 <small class="en">sphingolipid</small></strong>不含甘油，而是以
+    <strong>鞘胺醇 <small class="en">sphingosine</small></strong>為骨架：C-2 的胺基以醯胺鍵接一條脂肪酸，
+    C-1 則接不同的頭基。先接上脂肪酸、頭基還是氫原子的最簡單型態稱為<strong>神經醯胺 <small class="en">ceramide</small></strong>，
+    是所有鞘脂質的共同母體。
+  </p>
+
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>鞘脂質三大亞類比較</caption>
+    <thead><tr><th>亞類</th><th>頭基（—X）</th><th>電荷</th><th>特色 / 分布</th></tr></thead>
+    <tbody>
+      <tr><td><strong>神經鞘磷脂</strong><br><small class="en">Sphingomyelin</small></td><td>磷酸膽鹼</td><td>0（中性）</td><td>與磷脂醯膽鹼性質相似；富含於神經髓鞘</td></tr>
+      <tr><td><strong>中性醣脂</strong><br>（腦苷脂 <small class="en">cerebroside</small>）</td><td>單一醣（半乳糖或葡萄糖）</td><td>0</td><td>半乳糖型見於神經組織；葡萄糖型見於非神經組織</td></tr>
+      <tr><td><strong>球脂<br><small class="en">Globoside</small></strong></td><td>2 個以上的醣</td><td>0</td><td>與腦苷脂合稱「中性醣脂質」</td></tr>
+      <tr><td><strong>神經節苷脂</strong><br><small class="en">Ganglioside</small></td><td>複雜寡醣＋唾液酸（Neu5Ac）</td><td>負（唾液酸解離）</td><td>細胞辨識位點；決定血型；與多種疾病相關</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box convention">
+    <span class="box-title">容易搞混：磷脂醯膽鹼 vs 神經鞘磷脂</span>
+    <p>
+      兩者外觀、尺寸、電荷都非常相似，差別在骨架：
+      <strong>磷脂醯膽鹼</strong>骨架是甘油＋兩條酯鍵脂肪酸；
+      <strong>神經鞘磷脂</strong>骨架是鞘胺醇＋一條醯胺鍵脂肪酸。
+      這是判斷「甘油磷脂 vs 鞘磷脂」最快的方法。
+    </p>
+  </div>
+
+  <p>
+    人類血型（A、B、O）其實就是由紅血球細胞膜上<strong>醣鞘脂的寡醣頭基</strong>差異決定的——這些醣基同時也接在某些血液蛋白上，
+    所以「醣脂質決定血型」與「醣蛋白決定血型」兩種說法並不衝突。
+  </p>
+
+  <div class="box medicine">
+    <span class="box-title">醫學筆記｜鞘脂堆積症（溶小體儲積病）</span>
+    <p>
+      鞘脂質在<strong>溶小體</strong>中被一系列專一酵素逐步分解。若某一酵素基因缺陷，中間產物會異常堆積：
+    </p>
+    <div class="flow">
+      <div class="step"><b>神經鞘磷脂酶缺陷</b> → 神經鞘磷脂堆積 → <em>Niemann-Pick 氏症</em>：嬰兒智能障礙、早夭</div>
+      <div class="step"><b>己糖胺酶 A 缺陷</b> → 神經節苷脂 GM2 堆積 → <em>Tay-Sachs 氏症</em>：進行性發育遲緩、失明、多於 3–4 歲前死亡</div>
+    </div>
+    <p>可透過產前基因檢測（絨毛取樣、羊膜穿刺）提早發現風險。</p>
+  </div>
+
+  <h3 class="subhead">磷脂酶：膜脂質的分解工具 <span class="badge p2">P2</span></h3>
+  <p>不同磷脂酶（phospholipase A、C、D）專一切割磷脂分子上不同的鍵結位置，是研究膜脂質結構的重要工具，也常被用於實驗室分析：</p>
+  <div class="flow">
+    <div class="step"><b>磷脂酶 A₁ / A₂</b>：分別切除 C-1 / C-2 上的脂肪酸酯鍵，產生「溶血磷脂」</div>
+    <div class="step"><b>溶血磷脂酶</b>：切除剩下的最後一條脂肪酸</div>
+    <div class="step"><b>磷脂酶 C</b>：切割磷酸與甘油間的磷酸雙酯鍵 → 釋出水溶性頭基＋脂溶性二醯甘油</div>
+    <div class="step"><b>磷脂酶 D</b>：切割磷酸與頭基之間的鍵</div>
+  </div>
+
+  <h3 class="subhead">固醇類：四個相連的碳環 <span class="badge p2">P2</span></h3>
+  <p>
+    <strong class="term">固醇 <small class="en">sterol</small></strong>是幾乎所有真核細胞膜都有的結構脂質，
+    核心是<strong>類固醇骨架</strong>——三個六碳環＋一個五碳環，剛性且幾乎平面，環間 C—C 鍵無法自由旋轉。
+    <strong>膽固醇 <small class="en">cholesterol</small></strong>是動物細胞的代表性固醇：C-3 的羥基是極性頭，
+    其餘的環系統與側鏈是疏水部分，是典型的兩性分子。
+  </p>
+
+  <figure>
+    <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="18" font-size="11" fill="#4b545c">膽固醇的四環骨架（示意，非精確化學結構）</text>
+      <g fill="none" stroke="#8a3b6b" stroke-width="3">
+        <polygon points="40,90 70,65 110,70 120,105 85,125"/>
+        <polygon points="110,70 150,55 185,75 175,110 120,105"/>
+        <polygon points="185,75 220,60 255,80 245,115 175,110"/>
+        <polygon points="245,115 280,105 300,135 275,160 245,145"/>
+      </g>
+      <text x="60" y="100" font-size="12" fill="#8a3b6b">A</text>
+      <text x="145" y="85" font-size="12" fill="#8a3b6b">B</text>
+      <text x="215" y="90" font-size="12" fill="#8a3b6b">C</text>
+      <text x="270" y="130" font-size="12" fill="#8a3b6b">D</text>
+      <line x1="30" y1="95" x2="10" y2="100" stroke="#2a5f8a" stroke-width="3"/>
+      <circle cx="8" cy="102" r="4" fill="#2a5f8a"/>
+      <text x="0" y="120" font-size="10" fill="#2a5f8a">C-3 —OH<br/>(極性頭)</text>
+      <polyline points="300,135 330,145 345,125 370,135" fill="none" stroke="#2f6f4f" stroke-width="3"/>
+      <text x="310" y="165" font-size="10" fill="#2f6f4f">C-17 疏水側鏈</text>
+    </svg>
+    <figcaption><b>Fig. 10-15：</b>A、B、C、D 四環組成剛性骨架，C-3 的羥基（藍）是唯一的親水部位，C-17 側鏈（綠）與環系統共同構成疏水主體。</figcaption>
+  </figure>
+
+  <p>
+    固醇也是許多重要衍生物的前驅物：<strong>膽酸（bile acid）</strong>是膽固醇的極性衍生物，在腸道中作為清潔劑乳化脂肪，幫助消化酶作用；
+    類固醇荷爾蒙（見 10.3 節）也源自固醇骨架。植物有 stigmasterol、真菌有 ergosterol，但細菌<strong>無法自行合成固醇</strong>。
+  </p>
+
+  <details class="recap">
+    <summary>10.2 小結</summary>
+    <ul>
+      <li>膜脂質皆為兩性分子：疏水尾＋親水頭，自組裝成雙層膜</li>
+      <li>甘油磷脂＝甘油＋2 脂肪酸（酯鍵）＋磷酸雙酯頭基；心磷脂集中在粒線體內膜</li>
+      <li>植物用半乳糖脂（無磷）、古菌用醚鍵長鏈脂質，都是環境/資源的演化適應</li>
+      <li>鞘脂質以鞘胺醇為骨架，分神經鞘磷脂／中性醣脂／神經節苷脂三類；鞘脂分解異常會導致多種遺傳疾病</li>
+      <li>固醇（如膽固醇）具四環剛性骨架，兼具膜結構與荷爾蒙前驅物角色</li>
+    </ul>
+  </details>
+</section>
+
+<!-- ================= 10.3 ================= -->
+<section class="chapter" id="sec3">
+  <h2>10.3　脂質作為訊號、輔因子與色素 <small class="en">Signals, Cofactors, Pigments</small></h2>
+  <p class="lead">
+    <span class="badge p3">P3</span>
+    這類脂質在細胞中含量很少，卻扮演「主動」角色：荷爾蒙、細胞內訊息分子、電子載體、光吸收色素等。
+  </p>
+
+  <h3 class="subhead">磷脂醯肌醇與鞘脂衍生物：細胞內訊號 <span class="badge p3">P3</span></h3>
+  <p>
+    細胞膜內側的 <strong>PIP₂（磷脂醯肌醇 4,5-雙磷酸）</strong>是重要的「訊息儲存庫」：
+  </p>
+  <div class="flow">
+    <div class="step">細胞外荷爾蒙（如<strong>血管加壓素</strong>）與細胞表面受體結合</div>
+    <div class="step">活化膜上的<strong>磷脂酶 C</strong></div>
+    <div class="step">磷脂酶 C 水解 PIP₂ → 產生 <strong>IP₃（水溶性）</strong>與<strong>二醯甘油（留在膜上）</strong></div>
+    <div class="step">IP₃ 觸發內質網釋放 Ca²⁺；二醯甘油＋Ca²⁺ 共同活化<strong>蛋白激酶 C</strong></div>
+    <div class="step">蛋白激酶 C 磷酸化下游蛋白質，產生細胞反應</div>
+  </div>
+  <p>此外，<strong>PIP₃</strong>可作為細胞膜上多蛋白複合體組裝的「停靠點」；鞘胺醇衍生物（神經醯胺、神經鞘磷脂）也能調控蛋白激酶，參與細胞分裂、分化與細胞凋亡。</p>
+
+  <h3 class="subhead">類二十碳酸：旁分泌荷爾蒙 <span class="badge p3">P3</span></h3>
+  <p>
+    <strong class="term">類二十碳酸 <small class="en">eicosanoid</small></strong>
+    衍生自 20 碳的<strong>花生四烯酸</strong>（arachidonate）或 EPA，是<strong>旁分泌</strong>荷爾蒙——只作用於分泌來源附近的細胞。
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>四大類類二十碳酸</caption>
+    <thead><tr><th>類別</th><th>構造特徵</th><th>代表功能</th></tr></thead>
+    <tbody>
+      <tr><td><strong>前列腺素</strong><br><small class="en">Prostaglandin, PG</small></td><td>五碳環</td><td>子宮平滑肌收縮、發炎、發燒、疼痛</td></tr>
+      <tr><td><strong>血栓素</strong><br><small class="en">Thromboxane, TX</small></td><td>含醚的六碳環</td><td>血小板聚集、促進血液凝固</td></tr>
+      <tr><td><strong>白三烯</strong><br><small class="en">Leukotriene, LT</small></td><td>三個共軛雙鍵，無環</td><td>氣管平滑肌收縮，與氣喘、過敏性休克有關</td></tr>
+      <tr><td><strong>脂氧素</strong><br><small class="en">Lipoxin, LX</small></td><td>多個羥基，無環</td><td>強效抗發炎（低劑量阿斯匹靈可促進其合成）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box medicine">
+    <span class="box-title">醫學筆記｜NSAID 止痛藥的作用原理</span>
+    <p>
+      阿斯匹靈、布洛芬等<strong>非類固醇消炎藥（NSAID）</strong>會抑制<strong>環氧化酶 COX</strong>，
+      阻斷花生四烯酸轉變為前列腺素與血栓素的路徑，因此能消炎、止痛、退燒。
+      每日低劑量阿斯匹靈則會促進脂氧素合成，用於預防心血管疾病。
+    </p>
+  </div>
+
+  <h3 class="subhead">類固醇荷爾蒙：長距離的基因調控訊號 <span class="badge p3">P3</span></h3>
+  <p>
+    類固醇是固醇的氧化衍生物，失去 D 環上的烷基側鏈、極性較膽固醇高。它們透過血液（結合載體蛋白）運送到目標組織，
+    進入細胞後與<strong>核內受體蛋白</strong>結合，直接調控基因表現。代表性荷爾蒙：性荷爾蒙、腎上腺皮質分泌的皮質醇與醛固酮。
+    人工合成的<strong>普賴松（prednisone）</strong>則透過抑制磷脂酶 A₂（連帶抑制花生四烯酸釋放）達到強效抗發炎效果。
+  </p>
+
+  <h3 class="subhead">植物揮發性訊號 <span class="badge p3">P3</span></h3>
+  <p>
+    植物會製造上千種脂溶性揮發物來吸引授粉者、驅趕草食動物或與其他植物「溝通」。例如由亞麻酸衍生的
+    <strong>茉莉酸（jasmonate）</strong>在昆蟲啃食時觸發防禦反應；牻牛兒醇（天竺葵香氣）、蒎烯（松樹）、檸檬烯（萊姆）皆屬此類，
+    許多也被用於香水工業。
+  </p>
+
+  <h3 class="subhead">脂溶性維生素：異戊二烯的家族 <span class="badge p3">P3</span></h3>
+  <p>
+    維生素 A、D、E、K 都是由<strong>異戊二烯（isoprene，五碳單位）</strong>縮合而成的化合物：
+  </p>
+  <div class="table-wrap">
+  <table>
+    <caption>脂溶性維生素一覽</caption>
+    <thead><tr><th>維生素</th><th>主要形式</th><th>生理角色</th></tr></thead>
+    <tbody>
+      <tr><td><strong>維生素 D</strong></td><td>D₃（膽鈣化醇，皮膚經 UV 由 7-脫氫膽固醇合成）</td><td>經肝、腎活化為<strong>骨化三醇</strong>，調控腸道鈣吸收；缺乏導致佝僂病</td></tr>
+      <tr><td><strong>維生素 A</strong></td><td>視黃醇；由 β-胡蘿蔔素轉化</td><td>視覺色素（視紫質）成分；調控基因表現、細胞分化；缺乏導致夜盲症</td></tr>
+      <tr><td><strong>維生素 E</strong></td><td>生育酚（tocopherol）</td><td>抗氧化劑，保護不飽和脂肪酸與膜脂質不被自由基破壞</td></tr>
+      <tr><td><strong>維生素 K</strong></td><td>K₁（葉綠醌）、K₂（腸道菌合成）</td><td>促凝血酶原活化，凝血必需；華法林可拮抗其作用（也是滅鼠藥／抗凝血藥）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="box medicine">
+    <span class="box-title">醫學筆記｜黃金米與維生素A缺乏</span>
+    <p>
+      全球每年約有 25 萬名兒童因維生素 A 缺乏而失明，且其中半數會在失明一年內死亡。
+      「黃金米計畫」透過基因工程讓稻米胚乳也能生成 β-胡蘿蔔素（維生素 A 前驅物），是重要的營養改善策略。
+    </p>
+  </div>
+
+  <h3 class="subhead">醌類與多元醇：電子載體與糖基載體 <span class="badge p3">P3</span></h3>
+  <p>
+    <strong>輔酶 Q（泛醌 ubiquinone）</strong>在粒線體、<strong>質體醌（plastoquinone）</strong>在葉綠體中，
+    作為脂溶性電子載體參與 ATP 合成的氧化還原反應（詳見第19章）。
+    <strong>多元醇 <small class="en">dolichol</small></strong>則是異戊二烯醇，用來活化並「固定」醣基，
+    參與細菌細胞壁、醣蛋白與醣脂質的合成。
+  </p>
+
+  <h3 class="subhead">共軛雙烯色素與聚酮類天然物 <span class="badge p3">P3</span></h3>
+  <p>
+    含多個交替單雙鍵（共軛雙烯）的脂質，因電子可離域，能吸收可見光而呈現顏色——如 β-胡蘿蔔素（橘黃）、
+    金絲雀羽毛的黃色色素等。<strong>聚酮類 <small class="en">polyketide</small></strong>則是次級代謝物，
+    合成路徑與脂肪酸類似，臨床上常作為抗生素（紅黴素）、抗真菌藥（兩性黴素 B）或降膽固醇藥物（洛伐他汀）。
+  </p>
+
+  <details class="recap">
+    <summary>10.3 小結</summary>
+    <ul>
+      <li>PIP₂ 水解產生 IP₃ ＋ 二醯甘油，是重要的細胞內雙訊息系統</li>
+      <li>類二十碳酸（PG、TX、LT、LX）源自花生四烯酸，是強效旁分泌訊號，NSAID 可抑制其合成</li>
+      <li>類固醇荷爾蒙經血液運輸、進核內調控基因表現</li>
+      <li>維生素 A、D、E、K 皆為異戊二烯衍生物，各司視覺／鈣代謝／抗氧化／凝血功能</li>
+      <li>輔酶Q、質體醌參與電子傳遞；多元醇負責糖基活化；聚酮類廣泛用於醫藥</li>
+    </ul>
+  </details>
+</section>
+
+<!-- ================= 10.4 ================= -->
+<section class="chapter" id="sec4">
+  <h2>10.4　脂質研究方法 <small class="en">Working with Lipids</small></h2>
+  <p class="lead">
+    <span class="badge p4">P4</span>因脂質不溶於水，其萃取與分離需要有機溶劑，方法也和蛋白質、醣類不同。
+  </p>
+
+  <h3 class="subhead">脂質分析標準流程</h3>
+  <div class="flow">
+    <div class="step"><b>萃取</b>：組織以氯仿／甲醇／水混合液勻漿，離心後分成兩相——氯仿相含脂質，甲醇/水相含蛋白質與醣類</div>
+    <div class="step"><b>分離</b>：依極性差異，用<strong>吸附層析</strong>（矽膠管柱）或<strong>薄層層析 TLC</strong>分開脂質種類，極性愈高、洗脫愈晚</div>
+    <div class="step"><b>氣相層析 GC</b>：先將脂肪酸轉為甲酯（衍生化）以提高揮發性，再依沸點/溶解度差異分離</div>
+    <div class="step"><b>專一水解</b>：以特定磷脂酶（A、C、D）切割特定鍵結，產物再以 TLC/GC/HPLC 鑑定，推回原結構</div>
+    <div class="step"><b>質譜分析 MS</b>：依碎片質荷比（m/z）確認碳鏈長度與雙鍵位置，或用「散彈法」直接分析未分離的粗萃取物</div>
+    <div class="step"><b>建構脂質體 Lipidome</b>：整合上述數據，建立特定細胞/組織在特定條件下的完整脂質圖譜</div>
+  </div>
+
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>薄層層析（TLC）vs 氣相層析（GC）vs 質譜（MS）</caption>
+    <thead><tr><th>方法</th><th>原理</th><th>適合分析</th></tr></thead>
+    <tbody>
+      <tr><td>TLC / 吸附層析</td><td>依極性大小，於矽膠上以毛細作用分離</td><td>快速分離脂質「類別」（如磷脂 vs 中性脂）</td></tr>
+      <tr><td>氣相層析 GC</td><td>依揮發性／沸點差異，經惰性氣體帶動通過管柱</td><td>分離不同鏈長、不同飽和度的脂肪酸衍生物</td></tr>
+      <tr><td>質譜 MS</td><td>依碎片質荷比 m/z 鑑定分子結構</td><td>精確確認碳鏈長度、雙鍵位置；可做「散彈法」全脂質體分析</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    LIPID MAPS 資料庫已建立一套系統性分類，將脂質分為八大化學類別（脂肪酸 FA、甘油酯 GL、甘油磷脂 GP、鞘脂 SP、
+    固醇脂 ST、異戊二烯醇脂 PR、糖脂 SL、聚酮類 PK），每種脂質都能以 12 碼「LM_ID」唯一識別——
+    這與本章依「功能」分類的方式互補，各有優勢。
+  </p>
+
+  <details class="recap">
+    <summary>10.4 小結</summary>
+    <ul>
+      <li>脂質萃取需用有機溶劑（如氯仿/甲醇/水），而非純水系統</li>
+      <li>TLC、吸附層析依極性分離；GC 依揮發性分離；兩者常搭配質譜做結構鑑定</li>
+      <li>特定磷脂酶可切割特定鍵結，幫助推導未知脂質結構</li>
+      <li>「散彈法」質譜可直接分析粗萃取物，加速「脂質體」全貌研究</li>
+    </ul>
+  </details>
+</section>
+
+<!-- ================= 重點回顧 ================= -->
+<section class="chapter" id="recap">
+  <h2>重點名詞回顧 <small class="en">Key Terms</small></h2>
+  <p>建議自我測驗：能否用一句話解釋以下每個名詞？</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>類別</th><th>關鍵名詞</th></tr></thead>
+    <tbody>
+      <tr><td>儲存脂質</td><td>脂肪酸、多元不飽和脂肪酸 PUFA、ω-3脂肪酸、三酸甘油酯、脂解酶、蠟</td></tr>
+      <tr><td>膜脂質</td><td>磷脂質、甘油磷脂、醚脂質、縮醛磷脂、醣脂質、半乳糖脂、鞘脂質、神經醯胺、神經鞘磷脂、醣鞘脂、腦苷脂、球脂、神經節苷脂、固醇、膽固醇、膽酸</td></tr>
+      <tr><td>訊號脂質</td><td>類二十碳酸、前列腺素、血栓素、白三烯、脂氧素、維生素、生育酚、多元醇、聚酮類</td></tr>
+      <tr><td>研究概念</td><td>脂質體 lipidome</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+</main>
+
+<button id="topbtn" title="回到上方" aria-label="回到上方">↑</button>
+
+<footer>
+
+</footer>
+
+<script>
+  // 回到上方按鈕
+  const topBtn = document.getElementById('topbtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // nav 高亮目前所在區塊
+  const sections = document.querySelectorAll('section.chapter');
+  const navLinks = document.querySelectorAll('#navlist a');
+  function onScroll(){
+    let current = '';
+    sections.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 90 && rect.bottom > 90) current = sec.id;
+    });
+    navLinks.forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>
