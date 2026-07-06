@@ -5,29 +5,29 @@ day,day_title,en,zh
 1,身體結構入門指南,Lung,肺
 1,身體結構入門指南,Spleen,脾
 1,身體結構入門指南,Sternum,胸骨
-1,身體結構入門指南,MEDIAN,正中面
-1,身體結構入門指南,SAGITTAL,矢狀面
-1,身體結構入門指南,CORONAL,冠狀面
-1,身體結構入門指南,FRONTAL,額面
-1,身體結構入門指南,TRANSVERSE,橫切面
-1,身體結構入門指南,CROSS,橫切面
-1,身體結構入門指南,CRANIAL,頭顱的
-1,身體結構入門指南,SUPERIOR,上方的
-1,身體結構入門指南,ANTERIOR,前面的
-1,身體結構入門指南,VENTRAL,腹部的
-1,身體結構入門指南,ROSTRAL,嘴側的
-1,身體結構入門指南,POSTERIOR,後面的
-1,身體結構入門指南,DORSAL,背部的
-1,身體結構入門指南,MEDIAL,內側的
-1,身體結構入門指南,LATERAL,外側的
-1,身體結構入門指南,PROXIMAL,近端的
-1,身體結構入門指南,DISTAL,遠端的
-1,身體結構入門指南,CAUDAL,尾部的
-1,身體結構入門指南,INFERIOR,下方的
-1,身體結構入門指南,SUPERFICIAL,淺層的
-1,身體結構入門指南,DEEP,深的
-1,身體結構入門指南,IPSILATERAL,同側的
-1,身體結構入門指南,CONTRALATERAL,對側的
+1,身體結構入門指南,Median,正中面
+1,身體結構入門指南,Sagittal,矢狀面
+1,身體結構入門指南,Coronal,冠狀面
+1,身體結構入門指南,Frontal,額面
+1,身體結構入門指南,Transverse,橫切面
+1,身體結構入門指南,Cross,橫切面
+1,身體結構入門指南,Cranial,頭顱的
+1,身體結構入門指南,Superior,上方的
+1,身體結構入門指南,Anterior,前面的
+1,身體結構入門指南,Ventral,腹部的
+1,身體結構入門指南,Rostral,嘴側的
+1,身體結構入門指南,Posterior,後面的
+1,身體結構入門指南,Dorsal,背部的
+1,身體結構入門指南,Medial,內側的
+1,身體結構入門指南,Lateral,外側的
+1,身體結構入門指南,Proximal,近端的
+1,身體結構入門指南,Distal,遠端的
+1,身體結構入門指南,Caudal,尾部的
+1,身體結構入門指南,Inferior,下方的
+1,身體結構入門指南,Superficial,淺層的
+1,身體結構入門指南,Deep,深的
+1,身體結構入門指南,Ipsilateral,同側的
+1,身體結構入門指南,Contralateral,對側的
 2,身體系統（1）,Adrenal gland,腎上腺
 2,身體系統（1）,Artery,動脈
 2,身體系統（1）,Brain,腦
@@ -338,7 +338,7 @@ day,day_title,en,zh
 13,表皮,Superficial fascia,淺筋膜
 13,表皮,Stratum basale,基底層
 13,表皮,Stratum corneum,角質層
-13,表皮,stratum granulosum,顆粒層
+13,表皮,Stratum granulosum,顆粒層
 13,表皮,Stratum lucidum,透明層
 13,表皮,Stratum spinosum,棘狀層
 13,表皮,Sweat pore,汗孔
@@ -461,14 +461,15 @@ day,day_title,en,zh
 18,關節的分類,Articular cartilage,關節軟骨
 18,關節的分類,Articulating bones,以關節相連的骨頭
 18,關節的分類,Articulation,關節
-18,關節的分類,Ball-and-socket joint,杵白關節
+18,關節的分類,Ball-and-socket joint,杵臼關節
 18,關節的分類,Bicondylar knee joint,雙髁膝關節
 18,關節的分類,Bursa,滑液囊
 18,關節的分類,Capitulum,肱骨小頭
 18,關節的分類,Carpometacarpal joint,腕掌關節
 18,關節的分類,Cartilaginous joint,軟骨關節
 18,關節的分類,Collateral ligament,副韌帶
-18,關節的分類,Condyloid joint / Condylar joint,髁狀關節
+18,關節的分類,Condyloid joint,髁狀關節
+18,關節的分類,Condylar joint,髁狀關節
 18,關節的分類,Diarthrosis,可動關節
 18,關節的分類,Ellipsoid joint,橢圓關節
 18,關節的分類,Epiphyseal plate,骨骺板
@@ -485,13 +486,15 @@ day,day_title,en,zh
 18,關節的分類,Intertarsal joint,跗骨間關節
 18,關節的分類,Intervertebral disc,椎間盤
 18,關節的分類,Joint capsule,關節囊
-18,關節的分類,Muscle / Tendon,肌肉/肌腱
+18,關節的分類,Muscle,肌肉
+18,關節的分類,Tendon,肌腱
 18,關節的分類,Partially Movable Joint,微動關節
 18,關節的分類,Periosteum,骨膜
 18,關節的分類,Pivot joint,車軸關節
 18,關節的分類,Radiocarpal joint,橈腕關節
 18,關節的分類,Sacroiliac joint,薦髂關節
-18,關節的分類,Saddle joint / Sellar joint,鞍狀關節
+18,關節的分類,Saddle joint,鞍狀關節
+18,關節的分類,Sellar joint,鞍狀關節
 18,關節的分類,Sternal angle,胸骨角
 18,關節的分類,Suture,骨縫
 18,關節的分類,Symphysis pubis,恥骨聯合
@@ -502,7 +505,7 @@ day,day_title,en,zh
 18,關節的分類,Synovial cavity,滑液腔
 18,關節的分類,Synovial joint,滑液關節
 18,關節的分類,Synovial membrane,滑液膜
-18,關節的分類,Temporomandibular joint,顯顎關節
+18,關節的分類,Temporomandibular joint,顳顎關節
 18,關節的分類,Vertebral body,椎體
 19,動作相關術語,Abduction,外展
 19,動作相關術語,Adduction,內收
@@ -559,7 +562,8 @@ day,day_title,en,zh
 20,頭顱骨的組成（1）,Lacrimal bone,淚骨
 20,頭顱骨的組成（1）,Lambdoidal suture,人字縫
 20,頭顱骨的組成（1）,Lateral orbital buttress,眶外壁
-20,頭顱骨的組成（1）,Lateral/medial pterygoid plates,翼外板/翼內板
+20,頭顱骨的組成（1）,Lateral pterygoid plates,翼外板
+20,頭顱骨的組成（1）,medial pterygoid plates,翼內板
 20,頭顱骨的組成（1）,Mandible,下頷骨
 20,頭顱骨的組成（1）,Mandibular foramen,下頷孔
 20,頭顱骨的組成（1）,Mastoid process,乳突
