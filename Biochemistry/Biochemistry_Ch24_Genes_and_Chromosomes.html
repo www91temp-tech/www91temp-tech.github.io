@@ -20,8 +20,8 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:"Noto Serif TC","Georgia",serif;font-size:16px;line-height:1.9;overflow-x:hidden}
-h1,h2,h3{font-family:"Cinzel",serif;letter-spacing:.04em}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:1.9;overflow-x:hidden}
+h1,h2,h3{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;letter-spacing:.04em}
 h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900}
 h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700}
 h3{font-size:clamp(1rem,2vw,1.3rem);font-weight:700}
@@ -32,7 +32,7 @@ p:last-child{margin-bottom:0}
 .mono{font-family:"JetBrains Mono",monospace}
 
 /* NAV */
-.nav{position:sticky;top:0;z-index:100;background:rgba(7,16,30,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.6rem 1.5rem}
+.nav{position:sticky;display: flex;justify-content: center;top:0;z-index:100;background:rgba(7,16,30,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.6rem 1.5rem}
 .nav-i{max-width:960px;margin:0 auto;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
 .nav-title{font-family:"Cinzel",serif;font-size:.72rem;color:var(--muted);flex:1;white-space:nowrap}
 .nav-links{display:flex;gap:.5rem;flex-wrap:wrap}
@@ -45,7 +45,7 @@ p:last-child{margin-bottom:0}
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,#0d2040 0%,#07101e 65%)}
 .hero-canvas{position:absolute;top:0;left:0;width:100%;height:100%;opacity:.2;pointer-events:none}
-.ch-label{font-family:"Cinzel",serif;font-size:.75rem;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem}
+.ch-label{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:.75rem;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem}
 .hero h1{background:linear-gradient(130deg,#60efff 0%,#c084fc 45%,#fbbf24 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.25rem;line-height:1.2}
 .hero-sub{color:var(--muted);font-size:.92rem;max-width:560px;margin-bottom:2rem;line-height:1.8}
 .badges{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
@@ -60,14 +60,14 @@ p:last-child{margin-bottom:0}
 .p-card.c2{border-left:3px solid var(--p)}
 .p-card.c3{border-left:3px solid var(--a)}
 .p-card.c4{border-left:3px solid var(--cyan)}
-.p-n{font-family:"Cinzel",serif;font-size:2.5rem;font-weight:900;opacity:.1;position:absolute;top:-.3rem;right:.4rem;line-height:1}
+.p-n{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:2.5rem;font-weight:900;opacity:.1;position:absolute;top:-.3rem;right:.4rem;line-height:1}
 .p-icon{font-size:1.4rem;margin-bottom:.5rem}
 .p-card p{font-size:.82rem;color:var(--muted);line-height:1.65;margin:0}
 
 /* SECTIONS */
 .section{padding:0 0 1rem}
 .sec-header{padding:3rem 0 1.5rem;border-top:2px solid var(--sc,var(--border));margin-top:.5rem}
-.sec-num{font-family:"Cinzel",serif;font-size:.7rem;letter-spacing:.3em;color:var(--sc,var(--muted));text-transform:uppercase;margin-bottom:.4rem}
+.sec-num{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:.7rem;letter-spacing:.3em;color:var(--sc,var(--muted));text-transform:uppercase;margin-bottom:.4rem}
 .sec-header h2{color:var(--sc,var(--text));margin-bottom:.6rem}
 .sec-lead{color:var(--muted);font-size:.9rem;line-height:1.75}
 .sub{margin:2rem 0}
@@ -76,7 +76,7 @@ p:last-child{margin-bottom:0}
 /* FIGURE */
 .fig{margin:1.75rem 0;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .fig-head{padding:.65rem 1.2rem;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
-.fig-num{font-family:"Cinzel",serif;font-size:.68rem;color:var(--sc,var(--cyan));letter-spacing:.1em;padding:.18rem .65rem;border:1px solid currentColor;border-radius:999px;white-space:nowrap}
+.fig-num{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:.68rem;color:var(--sc,var(--cyan));letter-spacing:.1em;padding:.18rem .65rem;border:1px solid currentColor;border-radius:999px;white-space:nowrap}
 .fig-ttl{font-size:.82rem;color:var(--muted)}
 .fig-svg{padding:1rem 1.25rem;display:flex;justify-content:center;overflow-x:auto}
 .fig-svg svg{max-width:100%;height:auto;display:block}
@@ -123,12 +123,12 @@ tr:hover td{background:var(--surface);color:var(--text)}
 /* STEPS */
 .steps{display:flex;flex-wrap:wrap;gap:1px;margin:1.25rem 0;background:var(--border);border-radius:10px;overflow:hidden}
 .step{flex:1;min-width:120px;background:var(--bg);padding:.9rem 1rem;text-align:center}
-.step-n{font-family:"Cinzel",serif;font-size:.7rem;color:var(--sc,var(--cyan));letter-spacing:.2em}
+.step-n{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:.7rem;color:var(--sc,var(--cyan));letter-spacing:.2em}
 .step p{font-size:.78rem;color:var(--muted);margin-top:.25rem;margin-bottom:0}
 
 /* SUMMARY */
 .sum{margin:2.5rem 0;padding:1.75rem;background:var(--surface);border:1px solid var(--sc,var(--border));border-radius:12px}
-.sum h3{font-family:"Cinzel",serif;font-size:.85rem;color:var(--sc,var(--text));letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
+.sum h3{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:.85rem;color:var(--sc,var(--text));letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
 .sum-list{list-style:none;padding:0}
 .sum-list li{padding:.45rem 0 .45rem 1.4rem;position:relative;font-size:.84rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.65}
 .sum-list li:last-child{border-bottom:none}
@@ -138,9 +138,9 @@ tr:hover td{background:var(--surface);color:var(--text)}
 .kt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:.65rem;margin-top:1.25rem}
 .kt-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.65rem .9rem;transition:all .2s}
 .kt-card:hover{background:var(--surface2);border-color:var(--cyan)}
-.kt-en{font-family:"Cinzel",serif;font-size:.72rem;color:var(--cyan);letter-spacing:.04em;margin-bottom:.2rem}
-.kt-zh{font-size:.75rem;color:var(--muted)}
-.kt-def{font-size:.72rem;color:rgba(122,136,152,.7);margin-top:.15rem;line-height:1.5}
+.kt-en{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-size:.72rem;color:var(--cyan);letter-spacing:.04em;margin-bottom:.2rem}
+.kt-zh{font-size:.78rem;color:var(--cyan)}
+.kt-def{font-size:.72rem;color:var(--muted);margin-top:.15rem;line-height:1.5}
 
 /* FADE IN */
 .fi{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
@@ -151,19 +151,6 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
 </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-i">
-    <div class="nav-title">Ch. 24 · Genes & Chromosomes</div>
-    <div class="nav-links">
-      <a href="#s1" class="nl g">24.1 染色體元素</a>
-      <a href="#s2" class="nl p">24.2 DNA 超螺旋</a>
-      <a href="#s3" class="nl a">24.3 染色體結構</a>
-      <a href="#terms" class="nl">關鍵詞彙</a>
-    </div>
-  </div>
-</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -178,6 +165,19 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
     <span class="badge">🏥 拓撲異構酶與藥物</span>
   </div>
 </section>
+  
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-i">
+    <div class="nav-links">
+      <a href="#s1" class="nl g">24.1 染色體元素</a>
+      <a href="#s2" class="nl p">24.2 DNA 超螺旋</a>
+      <a href="#s3" class="nl a">24.3 染色體結構</a>
+      <a href="#terms" class="nl">關鍵詞彙</a>
+    </div>
+  </div>
+</nav>
+
 
 <!-- FOUR PRINCIPLES -->
 <div class="wrap principles fi" style="padding:2.5rem 0;border-bottom:1px solid var(--border)">
@@ -1346,7 +1346,7 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
 <!-- ============================================================ CHAPTER SUMMARY ============================================================ -->
 <section style="padding:2.5rem 0;border-top:1px solid var(--border);background:linear-gradient(180deg,rgba(7,16,30,0) 0%,rgba(13,32,64,.4) 100%)">
 <div class="wrap">
-  <h2 style="font-size:1.1rem;color:var(--cyan);letter-spacing:.15em;margin-bottom:1.5rem;font-family:Cinzel,serif">📋 全章總複習</h2>
+  <h2 style="font-size:1.1rem;color:var(--cyan);letter-spacing:.15em;margin-bottom:1.5rem;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;>📋 全章總複習</h2>
   <div class="cmp">
     <div class="cmp-c" style="border:1px solid rgba(34,197,94,.4);text-align:left;padding:1.25rem">
       <h4 style="color:var(--g);margin-bottom:.75rem">24.1 染色體元素</h4>
@@ -1364,9 +1364,6 @@ footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.75rem;bord
 </div>
 </section>
 
-<footer>
-  <p style="margin-top:.5rem;color:rgba(122,136,152,.5)">圖示為示意圖，非原書圖片的重製</p>
-</footer>
 
 <!-- ============================================================ JAVASCRIPT ============================================================ -->
 <script>
