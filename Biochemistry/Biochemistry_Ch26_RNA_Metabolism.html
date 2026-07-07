@@ -91,7 +91,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,'No
 .tbl td:first-child{color:var(--yellow);font-weight:600}
 
 /* ─── GRID 2 ─── */
-.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin:14px 0}
 .gc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
 .gc .ic{font-size:1.7rem;margin-bottom:8px}
 .gc h4{font-size:14px;font-weight:700;margin-bottom:7px;color:var(--text)}
@@ -143,12 +143,13 @@ hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
 /* ─── TOP NAV ─── */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,17,23,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
-.topnav-inner{max-width:1040px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:16px;height:52px}
+.topnav{
+  position: sticky;top:0;left:0;right:0;z-index:1000;background:rgba(15,17,23,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.topnav-inner{max-width:1040px;margin:0 auto;padding:0 20px;display:flex;justify-content: center;align-items:center;gap:16px;height:52px}
 .topnav-brand{font-family:monospace;font-size:11px;color:var(--accent);white-space:nowrap;font-weight:700;letter-spacing:1.5px;flex-shrink:0;padding-right:8px;border-right:1px solid var(--border)}
-.topnav-links{display:flex;align-items:center;gap:3px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.topnav-links{display:flex;justify-content: center;align-items:center;gap:3px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .topnav-links::-webkit-scrollbar{display:none}
-.tnav-a{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:13px;white-space:nowrap;transition:color .2s,background .2s,border-color .2s;border:1px solid transparent;flex-shrink:0}
+.tnav-a{display:flex;justify-content: center;align-items:center;gap:6px;padding:5px 11px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:13px;white-space:nowrap;transition:color .2s,background .2s,border-color .2s;border:1px solid transparent;flex-shrink:0}
 .tnav-a:hover{color:var(--text);background:var(--surface2);border-color:var(--border)}
 .tnav-a.active{color:var(--accent);background:rgba(78,158,255,.1);border-color:rgba(78,158,255,.3)}
 .tnav-n{font-family:monospace;font-size:10px;color:var(--muted);opacity:.7;flex-shrink:0}
@@ -158,26 +159,12 @@ hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--
 </head>
 <body>
 
-<!-- TOP NAV -->
-<nav class="topnav" id="topnav">
-  <div class="topnav-inner">
-    <span class="topnav-brand">Ch26 RNA代謝</span>
-    <div class="topnav-links">
-      <a href="#s0" class="tnav-a" data-sec="s0"><span class="tnav-n"></span>RNA 的多重身份</a>
-      <a href="#s1" class="tnav-a" data-sec="s1"><span class="tnav-n">26.1</span>DNA 依賴性 RNA 合成</a>
-      <a href="#s2" class="tnav-a" data-sec="s2"><span class="tnav-n">26.2</span>RNA 加工</a>
-      <a href="#s3" class="tnav-a" data-sec="s3"><span class="tnav-n">26.3</span>反轉錄與 RNA 複製</a>
-      <a href="#s4" class="tnav-a" data-sec="s4"><span class="tnav-n">26.4</span>核酶與 RNA 世界</a>
-      <a href="#sq" class="tnav-a" data-sec="sq"><span class="tnav-n">✏️</span>自我測驗</a>
-    </div>
-  </div>
-</nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-chip">生物化學 · Chapter 26</div>
+  <div class="hero-chip">Chapter 26 · BIOCHEMISTRY</div>
   <h1>RNA<em> 代謝</em></h1>
-  <p class="hero-sub">從 DNA 轉錄到 RNA、加工修剪、反轉錄，再到生命起源的 RNA 世界假說——完整導覽</p>
+  <p class="hero-sub">從 DNA 轉錄到 RNA、加工修剪、反轉錄，再到生命起源的 RNA 世界假說</p>
   <div class="hero-tags">
     <span class="hero-tag">🧬 轉錄</span>
     <span class="hero-tag">✂️ RNA 加工</span>
@@ -188,6 +175,20 @@ hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--
   </div>
 </div>
 
+<!-- TOP NAV -->
+<nav class="topnav" id="topnav">
+  <div class="topnav-inner">   
+    <div class="topnav-links">
+      <a href="#s0" class="tnav-a" data-sec="s0"><span class="tnav-n"></span>引言</a>
+      <a href="#s1" class="tnav-a" data-sec="s1"><span class="tnav-n">26.1</span>DNA 依賴性 RNA 合成</a>
+      <a href="#s2" class="tnav-a" data-sec="s2"><span class="tnav-n">26.2</span>RNA 加工</a>
+      <a href="#s3" class="tnav-a" data-sec="s3"><span class="tnav-n">26.3</span>反轉錄與 RNA 複製</a>
+      <a href="#s4" class="tnav-a" data-sec="s4"><span class="tnav-n">26.4</span>核酶與 RNA 世界</a>
+      <a href="#sq" class="tnav-a" data-sec="sq"><span class="tnav-n">✏️</span>自我測驗</a>
+    </div>
+  </div>
+</nav>
+ 
 <div class="wrap">
 
 <!-- ══════════════════════════════ -->
@@ -797,11 +798,6 @@ hr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--
     <div class="a">✅ 核糖體大次單元（50S/60S）的肽醯轉移酶活性中心完全由 rRNA 組成——晶體結構顯示活性位點附近沒有蛋白質側鏈。蛋白質只是結構性輔助，不直接催化。<br><br>這意味著：<strong>蛋白質合成的催化核心是 RNA</strong>。如果現代 RNA 能催化製造所有蛋白質，那麼在蛋白質出現之前，RNA 就有能力驅動整個代謝系統——RNA 世界假說的核心論點。核糖體 rRNA 就是那個 RNA 世界留下來的「化石」。</div>
   </div>
 
-</div>
-
-<!-- FOOTER -->
-<div style="text-align:center;margin-top:70px;color:var(--muted);font-size:13px;font-family:monospace;line-height:2">
-  <p>Chapter 26 · RNA Metabolism</p>
 </div>
 
 </div><!-- /wrap -->
