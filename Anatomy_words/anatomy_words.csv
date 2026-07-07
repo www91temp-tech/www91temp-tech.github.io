@@ -107,7 +107,7 @@ day,day_title,en,zh
 4,腔隙與襯膜,Small intestine,小腸
 4,腔隙與襯膜,Sternum,胸骨
 4,腔隙與襯膜,Stomach,胃
-4,腔隙與襯膜,Thoracic diaphragm,胸隔/橫隔膜
+4,腔隙與襯膜,Thoracic diaphragm,胸膈/橫膈膜
 4,腔隙與襯膜,Thoracic wall,胸壁
 4,腔隙與襯膜,Urinary bladder,膀胱
 4,腔隙與襯膜,Urinary tract,泌尿道
@@ -118,13 +118,13 @@ day,day_title,en,zh
 5,細胞簡介,Centrosome,中心體
 5,細胞簡介,Endocytosis,胞飲作用
 5,細胞簡介,Epithelial cell,上皮細胞
-5,細胞簡介,Exocytosis,胞洩作用
+5,細胞簡介,Exocytosis,胞吐作用
 5,細胞簡介,Fibroblast,纖維母細胞
 5,細胞簡介,Inclusion,包含體
 5,細胞簡介,Neuron,神經元
 5,細胞簡介,Skeletal muscle,骨骼肌
 5,細胞簡介,Smooth muscle,平滑肌
-5,細胞簡介,White blood,白血球
+5,細胞簡介,White blood cell,白血球
 5,細胞簡介,Aster,星狀體
 5,細胞簡介,Cell membrane,細胞膜
 5,細胞簡介,Centriole,中心粒
@@ -208,7 +208,7 @@ day,day_title,en,zh
 8,支持性結締組織,Trabecula,骨小樑
 8,支持性結締組織,Vertebral body,椎體
 8,支持性結締組織,Vertebral column,脊柱
-8,支持性結締組織,Volkman's canal,佛氏管
+8,支持性結締組織,Volkmann's canal,佛氏管
 9,肌肉組織,Capillary,微血管
 9,肌肉組織,Cardiac muscle,心肌
 9,肌肉組織,Connective tissue,結締組織
@@ -232,30 +232,30 @@ day,day_title,en,zh
 9,肌肉組織,Skeletal muscle,骨骼肌
 9,肌肉組織,Smooth muscle,平滑肌
 9,肌肉組織,Sphincter,括約肌
-9,肌肉組織,Striated muscle,横紋肌
+9,肌肉組織,Striated muscle,橫紋肌
 9,肌肉組織,Tendon,肌腱
 9,肌肉組織,Visceral muscle,內臟肌
 9,肌肉組織,White fiber,白肌纖維
-10,骨胳肌的細微結構,Actin,肌動蛋白
-10,骨胳肌的細微結構,Adenosine triphosphate,三磷酸腺苷（ATP）
-10,骨胳肌的細微結構,Bundle of fibers,肌纖維束
-10,骨胳肌的細微結構,Cross bridge,橫橋
-10,骨胳肌的細微結構,Mitochondrion,粒線體
-10,骨胳肌的細微結構,Muscle fiber,肌纖維
-10,骨胳肌的細微結構,Muscle,肌肉
-10,骨胳肌的細微結構,Myofibril,肌原纖維
-10,骨胳肌的細微結構,Myosin,肌凝蛋白
-10,骨胳肌的細微結構,Sarcolemma,肌纖維膜
-10,骨胳肌的細微結構,Sarcomere,肌節
-10,骨胳肌的細微結構,Sarcoplasmic reticulum,肌漿內質網（SR）
-10,骨胳肌的細微結構,Skeletal muscle cell,骨骼肌細胞
-10,骨胳肌的細微結構,Thick filament,粗肌絲
-10,骨胳肌的細微結構,Thin filament,細肌絲
-10,骨胳肌的細微結構,Transverse tubule system,橫小管系統（TTS）
+10,骨骼肌的細微結構,Actin,肌動蛋白
+10,骨骼肌的細微結構,Adenosine triphosphate,三磷酸腺苷（ATP）
+10,骨骼肌的細微結構,Bundle of fibers,肌纖維束
+10,骨骼肌的細微結構,Cross bridge,橫橋
+10,骨骼肌的細微結構,Mitochondrion,粒線體
+10,骨骼肌的細微結構,Muscle fiber,肌纖維
+10,骨骼肌的細微結構,Muscle,肌肉
+10,骨骼肌的細微結構,Myofibril,肌原纖維
+10,骨骼肌的細微結構,Myosin,肌凝蛋白
+10,骨骼肌的細微結構,Sarcolemma,肌纖維膜
+10,骨骼肌的細微結構,Sarcomere,肌節
+10,骨骼肌的細微結構,Sarcoplasmic reticulum,肌漿內質網（SR）
+10,骨骼肌的細微結構,Skeletal muscle cell,骨骼肌細胞
+10,骨骼肌的細微結構,Thick filament,粗肌絲
+10,骨骼肌的細微結構,Thin filament,細肌絲
+10,骨骼肌的細微結構,Transverse tubule system,橫小管系統（TTS）
 11,神經組織,Axon,軸突
 11,神經組織,Bipolar neuron,雙極神經元
 11,神經組織,Blood vessel,血管
-11,神經組織,Blood-brain barrier,血腦障蔽
+11,神經組織,Blood-brain barrier,血腦屏障
 11,神經組織,Brain,腦
 11,神經組織,Cell body,細胞本體
 11,神經組織,Central process,中樞突
@@ -681,7 +681,7 @@ day,day_title,en,zh
 22,顳顎關節（顱顎關節）,Synovial cavity,滑液腔
 22,顳顎關節（顱顎關節）,Temporal bone,顳骨
 22,顳顎關節（顱顎關節）,Temporomandibular joint,（TMJ） 顳顎關節
-22,顳顎關節（顱顎關節）,Zygomatic arch,顴骨
+22,顳顎關節（顱顎關節）,Zygomatic arch,顴弓
 23,脊柱,Annulus fibrosus,纖維環
 23,脊柱,Anterior longitudinal ligament,前縱韌帶
 23,脊柱,Articular process,關節突
@@ -739,8 +739,8 @@ day,day_title,en,zh
 24,頸椎和胸椎骨,Facet for occipital condyle,枕髁關節面
 24,頸椎和胸椎骨,Facet joint,小面關節
 24,頸椎和胸椎骨,Foramen magnum,枕骨大孔
-24,頸椎和胸椎骨,Interior articular process,下關節突
-24,頸椎和胸椎骨,Interior costal demifacet,下肋半關節面
+24,頸椎和胸椎骨,Inferior articular process,下關節突
+24,頸椎和胸椎骨,Inferior costal demifacet,下肋半關節面
 24,頸椎和胸椎骨,Intervertebral disc,椎間盤
 24,頸椎和胸椎骨,Intervertebral foramen,椎間孔
 24,頸椎和胸椎骨,Lamina,椎板
@@ -778,7 +778,7 @@ day,day_title,en,zh
 25,腰椎、薦椎和尾椎骨,Facet joint,小面關節
 25,腰椎、薦椎和尾椎骨,Femur,股骨
 25,腰椎、薦椎和尾椎骨,Ilium,髂骨
-25,腰椎、薦椎和尾椎骨,Interior articular process,下關節突
+25,腰椎、薦椎和尾椎骨,Inferior articular process,下關節突
 25,腰椎、薦椎和尾椎骨,Intervertebral foramen,椎間孔
 25,腰椎、薦椎和尾椎骨,Lamina,椎板
 25,腰椎、薦椎和尾椎骨,Lumbar facet,腰椎小面
@@ -827,8 +827,8 @@ day,day_title,en,zh
 26,胸廓,Syndesmosis,韌帶聯合
 26,胸廓,Synovial plane joint,滑液型平面關節
 26,胸廓,Thoracic diaphragm,橫膈膜/胸膈
-26,胸廓,Transverse process,横突
-26,胸廓,True rib,真助
+26,胸廓,Transverse process,橫突
+26,胸廓,True rib,真肋
 26,胸廓,Tubercle of the rib,肋結節
 26,胸廓,Tubercle,結節
 26,胸廓,Vertebra prominens,隆椎
@@ -875,7 +875,7 @@ day,day_title,en,zh
 27,肩帶和肱骨,Sternoclavicular ligament,胸鎖韌帶
 27,肩帶和肱骨,Subscapular fossa,肩胛下窩
 27,肩帶和肱骨,Superior angle,上角
-27,肩帶和肱骨,Superior notch,上切迹
+27,肩帶和肱骨,Superior notch,上切跡
 27,肩帶和肱骨,Supraspinous fossa,棘上窩
 27,肩帶和肱骨,Surgical neck,外科頸
 27,肩帶和肱骨,Trapezoid ligament,斜方韌帶
@@ -929,7 +929,7 @@ day,day_title,en,zh
 29,前臂骨,Pronation,旋前
 29,前臂骨,Proximal radioulnar joint,近端橈尺關節
 29,前臂骨,Radial head,橈骨頭
-29,前臂骨,Radial notch,橈骨切迹
+29,前臂骨,Radial notch,橈骨切跡
 29,前臂骨,Radial tuberosity,橈骨粗隆
 29,前臂骨,Radiocarpal joint,橈腕關節
 29,前臂骨,Radius,橈骨
@@ -939,7 +939,7 @@ day,day_title,en,zh
 29,前臂骨,Supination,旋後
 29,前臂骨,Triquetral bone,三角骨
 29,前臂骨,Trochlea,滑車
-29,前臂骨,trochlear notch,滑車切迹
+29,前臂骨,trochlear notch,滑車切跡
 29,前臂骨,Ulna,尺骨
 29,前臂骨,Ulnar tuberosity,尺骨粗隆
 30,肘部與相關關節,Annular ligament,環狀韌帶
@@ -963,14 +963,14 @@ day,day_title,en,zh
 30,肘部與相關關節,Proximal radioulnar joint,近端橈尺關節
 30,肘部與相關關節,Radial collateral ligament,橈骨側副韌帶
 30,肘部與相關關節,Radial head,橈骨頭
-30,肘部與相關關節,Radial notch of ulna,尺骨之橈骨切迹
+30,肘部與相關關節,Radial notch of ulna,尺骨之橈骨切跡
 30,肘部與相關關節,Radius,橈骨
 30,肘部與相關關節,Synovial cavity,滑液腔
 30,肘部與相關關節,Synovial membrane,滑液膜
 30,肘部與相關關節,Tendon,肌腱
 30,肘部與相關關節,Triceps brachii muscle,肱三頭肌
 30,肘部與相關關節,Trochlea,滑車
-30,肘部與相關關節,Trochlear notch,滑車切迹
+30,肘部與相關關節,Trochlear notch,滑車切跡
 30,肘部與相關關節,Ulna,尺骨
 30,肘部與相關關節,Ulnar collateral ligament,尺側副韌帶
 31,手與腕的骨骼/關節,1st CM joint,第一腕掌關節
@@ -997,7 +997,7 @@ day,day_title,en,zh
 31,手與腕的骨骼/關節,Metacarpal bone,掌骨
 31,手與腕的骨骼/關節,Metacarpophalangeal joint,掌指關節
 31,手與腕的骨骼/關節,Middle phalanx,中節指骨
-31,手與腕的骨骼/關節,Phalange,指骨
+31,手與腕的骨骼/關節,Phalanges,指骨(單數phalanx)
 31,手與腕的骨骼/關節,Pisiform,豆狀骨
 31,手與腕的骨骼/關節,Proximal Interphalangeal joint,近側指間關節
 31,手與腕的骨骼/關節,Proximal phalanx,近側節指骨
@@ -1049,7 +1049,7 @@ day,day_title,en,zh
 33,髂骨、骨盆帶及骨盆,Coccyx,尾骨
 33,髂骨、骨盆帶及骨盆,False pelvis,假骨盆
 33,髂骨、骨盆帶及骨盆,Femur,股骨
-33,髂骨、骨盆帶及骨盆,Greater sciatic notch,大坐骨切迹
+33,髂骨、骨盆帶及骨盆,Greater sciatic notch,大坐骨切跡
 33,髂骨、骨盆帶及骨盆,Hip bone,髖骨
 33,髂骨、骨盆帶及骨盆,Hip joint,髖關節
 33,髂骨、骨盆帶及骨盆,Iliac crest,髂嵴
@@ -1063,7 +1063,7 @@ day,day_title,en,zh
 33,髂骨、骨盆帶及骨盆,Ischial tuberosity,坐骨粗隆
 33,髂骨、骨盆帶及骨盆,Ischiopubic bone,坐恥骨
 33,髂骨、骨盆帶及骨盆,Ischium,坐骨
-33,髂骨、骨盆帶及骨盆,Lesser sciatic notch,小坐骨切迹
+33,髂骨、骨盆帶及骨盆,Lesser sciatic notch,小坐骨切跡
 33,髂骨、骨盆帶及骨盆,Linea terminalis,髂恥線
 33,髂骨、骨盆帶及骨盆,Obturator foramen,閉孔
 33,髂骨、骨盆帶及骨盆,Os coxae,髖骨
@@ -1100,7 +1100,7 @@ day,day_title,en,zh
 34,男女兩性的骨盆,Ischiofemoral ligament,坐股韌帶
 34,男女兩性的骨盆,Lesser sciatic foramen,坐骨小孔
 34,男女兩性的骨盆,Ligament,韌帶
-34,男女兩性的骨盆,Ligamentum Flavum,黃韌帶
+34,男女兩性的骨盆,Ligamentum flavum,黃韌帶
 34,男女兩性的骨盆,Obturator membrane,閉孔膜
 34,男女兩性的骨盆,Pelvic outlet,骨盆出口
 34,男女兩性的骨盆,Pelvimetry,骨盆測量
@@ -1113,7 +1113,7 @@ day,day_title,en,zh
 34,男女兩性的骨盆,Sacrospinous ligament,薦棘韌帶
 34,男女兩性的骨盆,Sacrotuberous ligament,薦結節韌帶
 34,男女兩性的骨盆,Sacrum,薦骨
-34,男女兩性的骨盆,Sub-pubic angle,恥骨下角
+34,男女兩性的骨盆,Subpubic angle,恥骨下角
 34,男女兩性的骨盆,Superior pubic ligament,恥骨上韌帶
 34,男女兩性的骨盆,Supraspinous ligament,棘上韌帶
 35,薦髂關節和髖關節,Acetabular labrum,髖臼唇
@@ -1294,9 +1294,9 @@ day,day_title,en,zh
 38,踝關節和足部的骨骼,Tarsal sinus,跗骨竇
 38,踝關節和足部的骨骼,Tarsals,跗骨
 38,踝關節和足部的骨骼,Tibia,脛骨
-38,踝關節和足部的骨骼,Transverse arch,横弓
+38,踝關節和足部的骨骼,Transverse arch,橫弓
 38,踝關節和足部的骨骼,transverse talar joint,橫距關節
-38,踝關節和足部的骨骼,transverse tarsal joint,横跗關節
+38,踝關節和足部的骨骼,transverse tarsal joint,橫跗關節
 38,踝關節和足部的骨骼,Tuberosity,粗隆
 39,骨骼和關節複習,Clavicle,鎖骨
 39,骨骼和關節複習,Coccyx,尾骨
@@ -1375,7 +1375,7 @@ day,day_title,en,zh
 42,臉部表情肌,Buccinator,頰肌
 42,臉部表情肌,Clavicle,鎖骨
 42,臉部表情肌,Compressor,壓肌
-42,臉部表情肌,Corrugator supercili,皺眉肌
+42,臉部表情肌,Corrugator supercilii,皺眉肌
 42,臉部表情肌,Deltoid,三角肌
 42,臉部表情肌,Depressor anguli oris,降口角肌
 42,臉部表情肌,Depressor labii inferioris,降下唇肌
@@ -1508,7 +1508,7 @@ day,day_title,en,zh
 45,背部和後頸部的深層肌群,Sternocleidomastoid muscle,胸鎖乳突肌
 45,背部和後頸部的深層肌群,Suboccipital muscles,枕下肌群
 45,背部和後頸部的深層肌群,Superior nuchal line,上項線
-45,背部和後頸部的深層肌群,Transverse process,横突
+45,背部和後頸部的深層肌群,Transverse process,橫突
 45,背部和後頸部的深層肌群,transversospinalis group,橫棘肌群
 45,背部和後頸部的深層肌群,Vertebra,脊椎
 46,骨性胸廓與後腹壁的肌群,12th rib,第12肋
@@ -1586,7 +1586,7 @@ day,day_title,en,zh
 47,前腹壁與腹股溝部的肌群,Round ligament,圓韌帶
 47,前腹壁與腹股溝部的肌群,Scrotum,陰囊
 47,前腹壁與腹股溝部的肌群,Serratus anterior muscle,前鋸肌
-47,前腹壁與腹股溝部的肌群,sheath of rectus abdominis,腹直肌鞘
+47,前腹壁與腹股溝部的肌群,Sheath of rectus abdominis,腹直肌鞘
 47,前腹壁與腹股溝部的肌群,Skin and fat of scrotum,陰囊的外皮和脂肪
 47,前腹壁與腹股溝部的肌群,Spermatic cord,精索
 47,前腹壁與腹股溝部的肌群,Sternum,胸骨
@@ -1673,14 +1673,14 @@ day,day_title,en,zh
 49,會陰部的肌群,Perineum,會陰
 49,會陰部的肌群,Prepuce,包皮
 49,會陰部的肌群,Prostatic urethra,尿道攝護腺部
-49,會陰部的肌群,Prostrate,攝護腺
+49,會陰部的肌群,Prostate,攝護腺
 49,會陰部的肌群,Pubic tubercle,恥骨結節
 49,會陰部的肌群,Pubococcygeus muscle,恥骨尾骨肌
 49,會陰部的肌群,Raphe,縫
 49,會陰部的肌群,Sacrotuberous ligament,薦結節韌帶
 49,會陰部的肌群,Spermatic cord,精索
 49,會陰部的肌群,Superficial transverse perineal muscle,會陰淺橫肌
-49,會陰部的肌群,Superior transverse perineal muscle,會陰上横肌
+49,會陰部的肌群,Superior transverse perineal muscle,會陰上橫肌
 49,會陰部的肌群,Symphysis pubis,恥骨聯合
 49,會陰部的肌群,Urethra,尿道
 49,會陰部的肌群,Urogenital diaphragm,泌尿生殖膈
@@ -1706,7 +1706,7 @@ day,day_title,en,zh
 50,穩定肩胛骨的肌群,Superior angle,上角
 50,穩定肩胛骨的肌群,Superior nuchal line,上項線
 50,穩定肩胛骨的肌群,T12,第12 節胸椎
-50,穩定肩胛骨的肌群,Transverse process of atlas,寰椎（第一頸椎）的横突
+50,穩定肩胛骨的肌群,Transverse process of atlas,寰椎（第一頸椎）的橫突
 50,穩定肩胛骨的肌群,Trapezius,斜方肌
 50,穩定肩胛骨的肌群,Vertebral border of scapula,肩胛骨脊柱緣
 51,旋轉袖肌群,Abduction,外展
@@ -1866,8 +1866,8 @@ day,day_title,en,zh
 55,手關節的動作肌群（內在肌群）,Opponens digiti minimi,小指對掌肌
 55,手關節的動作肌群（內在肌群）,Opponens pollicis,拇指對掌肌
 55,手關節的動作肌群（內在肌群）,Palmar Aponeurosis,掌腱膜
-55,手關節的動作肌群（內在肌群）,palmar interosseus,掌側骨間肌
-55,手關節的動作肌群（內在肌群）,Palmar ligament.,掌韌帶
+55,手關節的動作肌群（內在肌群）,palmar interosseous,掌側骨間肌
+55,手關節的動作肌群（內在肌群）,Palmar ligament,掌韌帶
 55,手關節的動作肌群（內在肌群）,Pisiform bone,豆狀骨
 55,手關節的動作肌群（內在肌群）,Proximal phalanx,近側指節骨
 55,手關節的動作肌群（內在肌群）,Radius,橈骨
@@ -1903,7 +1903,7 @@ day,day_title,en,zh
 56,肌肉複習,Brachioradialis,肱橈肌
 56,肌肉複習,Pronator teres,旋前圓肌
 56,肌肉複習,Flexor carpi radialis,橈側腕屈肌
-56,肌肉複習,Palmar longus,掌長肌
+56,肌肉複習,Palmaris longus,掌長肌
 56,肌肉複習,Flexor carpi ulnaris,尺側腕屈肌
 56,肌肉複習,Extensor carpi radialis longus,橈側伸腕長肌
 56,肌肉複習,Extensor carpi radialis brevis,橈側伸腕短肌
@@ -1943,7 +1943,7 @@ day,day_title,en,zh
 57,臀部肌群,Sacral plexus,薦神經叢
 57,臀部肌群,Sacrotuberous ligament,薦結節韌帶
 57,臀部肌群,Sacrum,薦骨
-57,臀部肌群,Sciatic notch,坐骨切迹
+57,臀部肌群,Sciatic notch,坐骨切跡
 57,臀部肌群,Shaft,骨幹
 57,臀部肌群,Superior gluteal artery,臀上動脈
 57,臀部肌群,Tensor fasciae latae,闊筋膜張肌
@@ -2503,7 +2503,7 @@ day,day_title,en,zh
 74,腦幹/小腦,Hindbrain,後腦
 74,腦幹/小腦,Hypophysis,腦下垂體
 74,腦幹/小腦,Hypothalamus,下視丘
-74,腦幹/小腦,Interior cerebellar peduncle,下小腦腳
+74,腦幹/小腦,Inferior cerebellar peduncle,下小腦腳
 74,腦幹/小腦,Inferior colliculus,下丘
 74,腦幹/小腦,Mammillary body,乳頭體
 74,腦幹/小腦,Medulla oblongata,髓腦/延腦
@@ -2544,7 +2544,7 @@ day,day_title,en,zh
 75,脊髓,Dural sac,硬脊膜囊
 75,脊髓,End of Dural sac,硬脊膜囊末端
 75,脊髓,Epidural space,硬脊膜外腔
-75,脊髓,Gary commissure,灰質連合
+75,脊髓,Gray commissure,灰質連合
 75,脊髓,Gray matter,灰質
 75,脊髓,Intermediate zone,中間帶
 75,脊髓,Internal vertebral venous plexus,椎管內靜脈叢
@@ -2614,7 +2614,7 @@ day,day_title,en,zh
 76,上行性神經路徑,Touch impulse,觸覺衝動
 76,上行性神經路徑,pressure impulse,壓覺衝動
 76,上行性神經路徑,Ventricles,腦室
-77,下行性神經路徑,Alpha motor neuron a,型運動神經元
+77,下行性神經路徑,Alpha motor neuron,α型運動神經元
 77,下行性神經路徑,Anterior corticospinal tract,前側皮質脊髓徑
 77,下行性神經路徑,Anterior funiculus,前索
 77,下行性神經路徑,Caudate nucleus,尾狀核
@@ -2713,7 +2713,7 @@ day,day_title,en,zh
 79,腔室和覆蓋層：腦脊膜,Falx cerebri,大腦鐮
 79,腔室和覆蓋層：腦脊膜,Free edges of tentorium cerebelli,小腦天幕的游離緣
 79,腔室和覆蓋層：腦脊膜,Hair shaft,髮幹
-79,腔室和覆蓋層：腦脊膜,Incisura,切迹
+79,腔室和覆蓋層：腦脊膜,Incisura,切跡
 79,腔室和覆蓋層：腦脊膜,Inferior sagittal sinus,下矢狀竇
 79,腔室和覆蓋層：腦脊膜,Infundibulum,漏斗
 79,腔室和覆蓋層：腦脊膜,Meninge,腦脊膜
@@ -2847,7 +2847,7 @@ day,day_title,en,zh
 82,脊神經與神經根,Spinal nerve,脊神經
 82,脊神經與神經根,Spinous process,棘突
 82,脊神經與神經根,Subarachnoid space,蛛網膜下腔
-82,脊神經與神經根,Transverse process,横突
+82,脊神經與神經根,Transverse process,橫突
 82,脊神經與神經根,Vertebra,脊椎骨
 82,脊神經與神經根,Vertebral body,椎體
 82,脊神經與神經根,Vertebral canal,椎管
@@ -2907,7 +2907,7 @@ day,day_title,en,zh
 84,脊神經的分布,Inferior gluteal nerve,下臀神經
 84,脊神經的分布,Innermost intercostal muscle,最內肋間肌
 84,脊神經的分布,Intercostal nerve,肋間神經
-84,脊神經的分布,Internal intercostal muscle,肋內間肌
+84,脊神經的分布,Internal intercostal muscle,肋間內肌
 84,脊神經的分布,Intervertebral foramen,椎間孔
 84,脊神經的分布,Lateral cutaneous branch,外側皮枝
 84,脊神經的分布,Lateral femoral cutaneous nerve,股外側皮神經
@@ -2934,7 +2934,7 @@ day,day_title,en,zh
 84,脊神經的分布,Superior gluteal nerve,上臀神經
 84,脊神經的分布,Sympathetic ganglion,交感神經節
 84,脊神經的分布,Thoracic spinal nerve,胸脊神經
-84,脊神經的分布,Transversus thoracic muscle,胸橫肌
+84,脊神經的分布,Transversus thoracis muscle,胸橫肌
 85,臂神經叢與支配上肢的神經,1st intercostal nerve,第一肋間神經
 85,臂神經叢與支配上肢的神經,Anterior division,前側部
 85,臂神經叢與支配上肢的神經,Axillary nerve,腋神經
@@ -2983,7 +2983,7 @@ day,day_title,en,zh
 86,腰神經叢與薦神經叢：支配下肢的神經,Fibula,腓骨
 86,腰神經叢與薦神經叢：支配下肢的神經,Genitofemoral nerve,生殖股神經
 86,腰神經叢與薦神經叢：支配下肢的神經,Greater sciatic foramen,坐骨大孔
-86,腰神經叢與薦神經叢：支配下肢的神經,Greater sciatic notch,大坐骨切迹
+86,腰神經叢與薦神經叢：支配下肢的神經,Greater sciatic notch,大坐骨切跡
 86,腰神經叢與薦神經叢：支配下肢的神經,Greater trochanter,大轉子
 86,腰神經叢與薦神經叢：支配下肢的神經,Hamstring muscles,膕旁肌群
 86,腰神經叢與薦神經叢：支配下肢的神經,Iliohypogastric nerve,髂腹下神經
@@ -3199,7 +3199,7 @@ day,day_title,en,zh
 92,視覺系統（1）,Anterior chamber,前房
 92,視覺系統（1）,Aqueous humor,眼房水
 92,視覺系統（1）,Arachnoid,蛛網膜
-92,視覺系統（1）,Axon layer,軸突屬
+92,視覺系統（1）,Axon layer,軸突層
 92,視覺系統（1）,Bipolar cell,雙極細胞
 92,視覺系統（1）,Choroid,脈絡膜
 92,視覺系統（1）,Ciliary body,睫狀體
@@ -3215,7 +3215,7 @@ day,day_title,en,zh
 92,視覺系統（1）,Ganglion cell,神經節細胞
 92,視覺系統（1）,Horizontal cell,水平細胞
 92,視覺系統（1）,Inferior oblique muscle,下斜肌
-92,視覺系統（1）,Interior rectus muscle,下直肌
+92,視覺系統（1）,Inferior rectus muscle,下直肌
 92,視覺系統（1）,Iris,虹膜
 92,視覺系統（1）,Lateral rectus muscle,外直肌
 92,視覺系統（1）,Lens,水晶體
@@ -3255,7 +3255,7 @@ day,day_title,en,zh
 93,視覺系統（2）,Ciliary process,睫狀突
 93,視覺系統（2）,Conjunctiva,結膜
 93,視覺系統（2）,Cornea,角膜
-93,視覺系統（2）,Duct of tarsal gland,臉板腺管
+93,視覺系統（2）,Duct of tarsal gland,瞼板腺管
 93,視覺系統（2）,Duct,腺管
 93,視覺系統（2）,Eyelash,睫毛
 93,視覺系統（2）,Eyelid,眼瞼
@@ -3283,7 +3283,7 @@ day,day_title,en,zh
 93,視覺系統（2）,Smooth muscle,平滑肌
 93,視覺系統（2）,Suspensory ligament,懸韌帶
 93,視覺系統（2）,Tarsal glands,瞼板腺
-93,視覺系統（2）,Tarsal muscle of muller,苗勒氏眼瞼肌
+93,視覺系統（2）,Tarsal muscle of Müller,苗勒氏眼瞼肌
 93,視覺系統（2）,Tarsal plate,瞼板
 93,視覺系統（2）,Vein,靜脈
 93,視覺系統（2）,Vitreous body,玻璃體
@@ -3413,7 +3413,6 @@ day,day_title,en,zh
 97,味覺與嗅覺,Foliate papillae,葉狀乳頭
 97,味覺與嗅覺,Frontal lobe,額葉
 97,味覺與嗅覺,Ant. perforated substance,前穿通質
-97,味覺與嗅覺,Frontal lobe,額葉
 97,味覺與嗅覺,Septal area,中隔區
 97,味覺與嗅覺,Fungiform papillae,蕈狀乳頭
 97,味覺與嗅覺,Inferior frontal lobe,額下葉
@@ -3448,8 +3447,6 @@ day,day_title,en,zh
 97,味覺與嗅覺,Taste bud,味蕾
 97,味覺與嗅覺,Temporal lobe,顳葉
 97,味覺與嗅覺,Pre-pyriform cortex,前梨狀皮質
-97,味覺與嗅覺,Temporal lobe,顳葉
-97,味覺與嗅覺,Ethmoid bone,篩骨
 97,味覺與嗅覺,Vallate papillae,輪廓乳頭
 98,血液與血液的組成,Bands,帶狀白血球
 98,血液與血液的組成,Basophil,嗜鹼性白血球
@@ -3572,9 +3569,9 @@ day,day_title,en,zh
 102,心臟的腔室,Aortic semilunar valve,主動脈半月瓣
 102,心臟的腔室,Ascending aorta,升主動脈
 102,心臟的腔室,Atrioventricular orifice,房室孔
-102,心臟的腔室,A-v bicuspid valve,房室二尖瓣
+102,心臟的腔室,A-V bicuspid valve,房室二尖瓣
 102,心臟的腔室,mitral valve,僧帽瓣
-102,心臟的腔室,A-v tricuspid valve,房室三尖瓣
+102,心臟的腔室,A-V tricuspid valve,房室三尖瓣
 102,心臟的腔室,Brachiocephalic artery,頭臂動脈
 102,心臟的腔室,Chordae tendineae,腱索
 102,心臟的腔室,Coronary sinus,冠狀竇
@@ -3656,52 +3653,52 @@ day,day_title,en,zh
 104,冠狀動脈與靜脈,Small cardiac vein,心小靜脈
 104,冠狀動脈與靜脈,Vasa vasorum,血管滋養管
 104,冠狀動脈與靜脈,Vena cava,腔靜脈
-105,頭頸部的靜脈,Aortic arch,主動脈弓
-105,頭頸部的靜脈,Ascending cervical artery,頸升動脈
-105,頭頸部的靜脈,Ascending part of aortic arch,主動脈弓的升部
-105,頭頸部的靜脈,Axillary artery,腋動脈
-105,頭頸部的靜脈,Bifurcation of common carotid,頸總動脈二分叉
-105,頭頸部的靜脈,Brachiocephalic trunk,頭臂幹
-105,頭頸部的靜脈,Clavicle,鎖骨
-105,頭頸部的靜脈,Costal cartilage,肋軟骨
-105,頭頸部的靜脈,Costocervical trunk,肋頸幹
-105,頭頸部的靜脈,Deep cervical artery,頸深動脈
-105,頭頸部的靜脈,Descending part of aortic arch,主動脈弓的降部
-105,頭頸部的靜脈,Dorsal scapular artery,肩胛背動脈
-105,頭頸部的靜脈,Esophagus,食道
-105,頭頸部的靜脈,External carotid artery,頸外動脈
-105,頭頸部的靜脈,Facial artery,顏面動脈
-105,頭頸部的靜脈,Frontal branch,額支
-105,頭頸部的靜脈,Highest intercostal artery,最上肋間動脈
-105,頭頸部的靜脈,Hyoid bone,舌骨
-105,頭頸部的靜脈,Inferior alveolar artery,下齒槽動脈
-105,頭頸部的靜脈,Inferior thyroid artery,甲狀腺下動脈
-105,頭頸部的靜脈,Internal carotid artery,頸內動脈
-105,頭頸部的靜脈,Internal thoracic artery,胸內動脈
-105,頭頸部的靜脈,Left common carotid artery,左頸總動脈
-105,頭頸部的靜脈,Left subclavian artery,左鎖骨下動脈
-105,頭頸部的靜脈,Lingual artery,舌動脈
-105,頭頸部的靜脈,Maxillary artery,上頷動脈
-105,頭頸部的靜脈,Middle meningeal artery,中腦膜動脈
-105,頭頸部的靜脈,Occipital artery,枕動脈
-105,頭頸部的靜脈,Ophthalmic artery,眼動脈
-105,頭頸部的靜脈,Parietal branch,頂支
-105,頭頸部的靜脈,Posterior auricular artery,耳後動脈
-105,頭頸部的靜脈,Right common carotid artery,右頸總動脈
-105,頭頸部的靜脈,Right subclavian artery,右鎖骨下動脈
-105,頭頸部的靜脈,Spinous processes,棘突
-105,頭頸部的靜脈,Superficial cervical artery,頸淺動脈
-105,頭頸部的靜脈,Superficial temporal artery,淺顳動脈
-105,頭頸部的靜脈,Superior alveolar artery,上齒槽動脈
-105,頭頸部的靜脈,Superior thyroid artery,甲狀腺上動脈
-105,頭頸部的靜脈,Suprascapular artery,肩胛上動脈
-105,頭頸部的靜脈,Thyrocervical trunk,甲狀頸幹
-105,頭頸部的靜脈,Thyroid cartilage,甲狀軟骨
-105,頭頸部的靜脈,Thyroid gland,甲狀腺
-105,頭頸部的靜脈,Trachea,氣管
-105,頭頸部的靜脈,Transverse cervical artery,頸橫動脈
-105,頭頸部的靜脈,Transverse facial artery,橫面動脈
-105,頭頸部的靜脈,Vertebral artery,椎動脈
+105,頭頸部的動脈,Aortic arch,主動脈弓
+105,頭頸部的動脈,Ascending cervical artery,頸升動脈
+105,頭頸部的動脈,Ascending part of aortic arch,主動脈弓的升部
+105,頭頸部的動脈,Axillary artery,腋動脈
+105,頭頸部的動脈,Bifurcation of common carotid,頸總動脈二分叉
+105,頭頸部的動脈,Brachiocephalic trunk,頭臂幹
+105,頭頸部的動脈,Clavicle,鎖骨
+105,頭頸部的動脈,Costal cartilage,肋軟骨
+105,頭頸部的動脈,Costocervical trunk,肋頸幹
+105,頭頸部的動脈,Deep cervical artery,頸深動脈
+105,頭頸部的動脈,Descending part of aortic arch,主動脈弓的降部
+105,頭頸部的動脈,Dorsal scapular artery,肩胛背動脈
+105,頭頸部的動脈,Esophagus,食道
+105,頭頸部的動脈,External carotid artery,頸外動脈
+105,頭頸部的動脈,Facial artery,顏面動脈
+105,頭頸部的動脈,Frontal branch,額支
+105,頭頸部的動脈,Highest intercostal artery,最上肋間動脈
+105,頭頸部的動脈,Hyoid bone,舌骨
+105,頭頸部的動脈,Inferior alveolar artery,下齒槽動脈
+105,頭頸部的動脈,Inferior thyroid artery,甲狀腺下動脈
+105,頭頸部的動脈,Internal carotid artery,頸內動脈
+105,頭頸部的動脈,Internal thoracic artery,胸內動脈
+105,頭頸部的動脈,Left common carotid artery,左頸總動脈
+105,頭頸部的動脈,Left subclavian artery,左鎖骨下動脈
+105,頭頸部的動脈,Lingual artery,舌動脈
+105,頭頸部的動脈,Maxillary artery,上頷動脈
+105,頭頸部的動脈,Middle meningeal artery,中腦膜動脈
+105,頭頸部的動脈,Occipital artery,枕動脈
+105,頭頸部的動脈,Ophthalmic artery,眼動脈
+105,頭頸部的動脈,Parietal branch,頂支
+105,頭頸部的動脈,Posterior auricular artery,耳後動脈
+105,頭頸部的動脈,Right common carotid artery,右頸總動脈
+105,頭頸部的動脈,Right subclavian artery,右鎖骨下動脈
+105,頭頸部的動脈,Spinous processes,棘突
+105,頭頸部的動脈,Superficial cervical artery,頸淺動脈
+105,頭頸部的動脈,Superficial temporal artery,淺顳動脈
+105,頭頸部的動脈,Superior alveolar artery,上齒槽動脈
+105,頭頸部的動脈,Superior thyroid artery,甲狀腺上動脈
+105,頭頸部的動脈,Suprascapular artery,肩胛上動脈
+105,頭頸部的動脈,Thyrocervical trunk,甲狀頸幹
+105,頭頸部的動脈,Thyroid cartilage,甲狀軟骨
+105,頭頸部的動脈,Thyroid gland,甲狀腺
+105,頭頸部的動脈,Trachea,氣管
+105,頭頸部的動脈,Transverse cervical artery,頸橫動脈
+105,頭頸部的動脈,Transverse facial artery,橫面動脈
+105,頭頸部的動脈,Vertebral artery,椎動脈
 106,腦部的動脈,Anterior cerebral artery,前大腦動脈
 106,腦部的動脈,Anterior communicating artery,前交通動脈
 106,腦部的動脈,Anterior inferior cerebellar artery,小腦前下動脈
@@ -3734,7 +3731,7 @@ day,day_title,en,zh
 106,腦部的動脈,Superior cerebellar artery,上小腦動脈
 106,腦部的動脈,Temporal lobe,顳葉
 106,腦部的動脈,Vertebral artery,椎動脈
-106,腦部的動脈,Vth cranial nerve,第五對腦神經
+106,腦部的動脈,5th cranial nerve,第五對腦神經
 107,上肢的動脈與靜脈,Acromial rete,肩峰網
 107,上肢的動脈與靜脈,Acromion,肩峰
 107,上肢的動脈與靜脈,Antecubital fossa,前肘窩
@@ -3787,7 +3784,7 @@ day,day_title,en,zh
 107,上肢的動脈與靜脈,Suprascapular artery,肩胛上動脈
 107,上肢的動脈與靜脈,Thoracoacromial artery,胸肩峰動脈
 107,上肢的動脈與靜脈,Ulna,尺骨
-107,上肢的動脈與靜脈,Venae comitante,伴行靜脈
+107,上肢的動脈與靜脈,Venae comitantes,伴行靜脈
 108,下肢的動脈,Abdominal aorta,腹主動脈
 108,下肢的動脈,Adductor canal,內收肌管
 108,下肢的動脈,Anterior tibial artery,脛前動脈
@@ -3839,7 +3836,7 @@ day,day_title,en,zh
 108,下肢的動脈,Superior epigastric artery,腹壁上動脈
 108,下肢的動脈,Superior gluteal artery,臀上動脈
 108,下肢的動脈,Tibia,脛骨
-109,主動脈、分支與相關血管,1” posterior intercostal artery,第一後肋間動脈
+109,主動脈、分支與相關血管,1st posterior intercostal artery,第一後肋間動脈
 109,主動脈、分支與相關血管,Abdominal aorta,腹主動脈
 109,主動脈、分支與相關血管,Anterior intercostal artery,前肋間動脈
 109,主動脈、分支與相關血管,Aortic arch,主動脈弓
@@ -3855,7 +3852,7 @@ day,day_title,en,zh
 109,主動脈、分支與相關血管,Coronary artery,冠狀動脈
 109,主動脈、分支與相關血管,Costocervical trunk,肋頸幹
 109,主動脈、分支與相關血管,Descending part,降支
-109,主動脈、分支與相關血管,Diaphragm,横膈
+109,主動脈、分支與相關血管,Diaphragm,橫膈
 109,主動脈、分支與相關血管,Esophageal artery,食道動脈
 109,主動脈、分支與相關血管,Esophagus,食道
 109,主動脈、分支與相關血管,External iliac artery,髂外動脈
@@ -3863,10 +3860,10 @@ day,day_title,en,zh
 109,主動脈、分支與相關血管,Highest intercostal artery,最上肋間動脈
 109,主動脈、分支與相關血管,Inferior mesenteric artery,下腸繫膜動脈
 109,主動脈、分支與相關血管,Inferior phrenic artery,膈下動脈
-109,主動脈、分支與相關血管,Inferior vena cava,下腔静脈
+109,主動脈、分支與相關血管,Inferior vena cava,下腔靜脈
 109,主動脈、分支與相關血管,Intercostal space,肋間隙
-109,主動脈、分支與相關血管,Internal iliac artery,髂内動脈
-109,主動脈、分支與相關血管,Internal thoracic artery,胸内動脈
+109,主動脈、分支與相關血管,Internal iliac artery,髂內動脈
+109,主動脈、分支與相關血管,Internal thoracic artery,胸內動脈
 109,主動脈、分支與相關血管,Kidney,腎
 109,主動脈、分支與相關血管,Left common carotid artery,左頸總動脈
 109,主動脈、分支與相關血管,Left gastric artery,胃左動脈
@@ -3902,7 +3899,7 @@ day,day_title,en,zh
 110,胃腸道和相關臟器的動脈,Greater omentum,大網膜
 110,胃腸道和相關臟器的動脈,Head of pancreas,胰頭
 110,胃腸道和相關臟器的動脈,Hepatic artery,肝動脈
-110,胃腸道和相關臟器的動脈,Ileo-colic artery,迴結腸動脈
+110,胃腸道和相關臟器的動脈,Ileocolic artery,迴結腸動脈
 110,胃腸道和相關臟器的動脈,Ileum,迴腸
 110,胃腸道和相關臟器的動脈,Inferior mesenteric artery,下腸繫膜動脈
 110,胃腸道和相關臟器的動脈,Inferior rectal artery,直腸下動脈
@@ -3911,7 +3908,7 @@ day,day_title,en,zh
 110,胃腸道和相關臟器的動脈,Jejunum,空腸
 110,胃腸道和相關臟器的動脈,Left colic artery,左結腸動脈
 110,胃腸道和相關臟器的動脈,right colic artery,右結腸動脈
-110,胃腸道和相關臟器的動脈,Left  gastric artery,左胃動脈
+110,胃腸道和相關臟器的動脈,Left gastric artery,左胃動脈
 110,胃腸道和相關臟器的動脈,right gastric artery,右胃動脈
 110,胃腸道和相關臟器的動脈,Left gastroepiploic artery,左胃網膜動脈
 110,胃腸道和相關臟器的動脈,right gastroepiploic artery,右胃網膜動脈
@@ -3935,7 +3932,7 @@ day,day_title,en,zh
 110,胃腸道和相關臟器的動脈,Stomach,胃
 110,胃腸道和相關臟器的動脈,Superior mesenteric artery,上腸繫膜動脈
 110,胃腸道和相關臟器的動脈,Superior rectal artery,直腸上動脈
-110,胃腸道和相關臟器的動脈,Transverse colon,横結腸
+110,胃腸道和相關臟器的動脈,Transverse colon,橫結腸
 111,骨盆與會陰的動脈,Aorta,主動脈
 111,骨盆與會陰的動脈,Appendix,闌尾
 111,骨盆與會陰的動脈,Ascending colon,升結腸
@@ -3945,7 +3942,7 @@ day,day_title,en,zh
 111,骨盆與會陰的動脈,Common mesentery,總腸繫膜
 111,骨盆與會陰的動脈,Cystic artery,膽囊動脈
 111,骨盆與會陰的動脈,Descending colon,降結腸
-111,骨盆與會陰的動脈,Diaphragm,横膈
+111,骨盆與會陰的動脈,Diaphragm,橫膈
 111,骨盆與會陰的動脈,Duodenum,十二指腸
 111,骨盆與會陰的動脈,Gall bladder,膽囊
 111,骨盆與會陰的動脈,Gastroduodenal artery,胃十二指腸動脈
@@ -3953,7 +3950,7 @@ day,day_title,en,zh
 111,骨盆與會陰的動脈,Greater omentum,大網膜
 111,骨盆與會陰的動脈,Head of pancreas,胰頭
 111,骨盆與會陰的動脈,Hepatic artery,肝動脈
-111,骨盆與會陰的動脈,Ileo-colic artery,迴結腸動脈
+111,骨盆與會陰的動脈,Ileocolic artery,迴結腸動脈
 111,骨盆與會陰的動脈,Ileum,迴腸
 111,骨盆與會陰的動脈,Inferior mesenteric artery,下腸繫膜動脈
 111,骨盆與會陰的動脈,Inferior rectal artery,直腸下動脈
@@ -3962,7 +3959,7 @@ day,day_title,en,zh
 111,骨盆與會陰的動脈,Jejunum,空腸
 111,骨盆與會陰的動脈,Left colic artery,左結腸動脈
 111,骨盆與會陰的動脈,right colic artery,右結腸動脈
-111,骨盆與會陰的動脈,Left  gastric artery,左胃動脈
+111,骨盆與會陰的動脈,Left gastric artery,左胃動脈
 111,骨盆與會陰的動脈,right gastric artery,右胃動脈
 111,骨盆與會陰的動脈,Left gastroepiploic artery,左胃網膜動脈
 111,骨盆與會陰的動脈,right gastroepiploic artery,右胃網膜動脈
@@ -3987,6 +3984,31 @@ day,day_title,en,zh
 111,骨盆與會陰的動脈,Superior mesenteric artery,上腸繫膜動脈
 111,骨盆與會陰的動脈,Superior rectal artery,直腸上動脈
 111,骨盆與會陰的動脈,Transverse colon,橫結腸
+111,骨盆與會陰的動脈,Internal Iliac Artery,髂內動脈
+111,骨盆與會陰的動脈,Posterior Trunk,後分支/後幹
+111,骨盆與會陰的動脈,Iliolumbar Artery,髂腰動脈
+111,骨盆與會陰的動脈,Superior Gluteal Artery,臀上動脈
+111,骨盆與會陰的動脈,Lateral Sacral Artery,薦外側動脈
+111,骨盆與會陰的動脈,Anterior Trunk,前分支/前幹
+111,骨盆與會陰的動脈,Umbilical Artery,臍動脈
+111,骨盆與會陰的動脈,Fetal,胎兒期
+111,骨盆與會陰的動脈,Superior Vesical Artery,膀胱上動脈
+111,骨盆與會陰的動脈,Artery to Vas Deferens,輸精管動脈
+111,骨盆與會陰的動脈,Obturator Artery,閉孔動脈
+111,骨盆與會陰的動脈,Uterine Artery,子宮動脈
+111,骨盆與會陰的動脈,Vaginal Artery,陰道動脈
+111,骨盆與會陰的動脈,Inferior Vesical Artery,膀胱下動脈
+111,骨盆與會陰的動脈,Middle Rectal Artery,直腸中動脈
+111,骨盆與會陰的動脈,Inferior Gluteal Artery,臀下動脈
+111,骨盆與會陰的動脈,Pudendal Artery,陰部動脈
+111,骨盆與會陰的動脈,Artery to Bulb of Penis,尿道球動脈
+111,骨盆與會陰的動脈,Deep Artery of Penis,陰莖深動脈
+111,骨盆與會陰的動脈,Posterior Scrotal Artery,陰囊後動脈
+111,骨盆與會陰的動脈,Artery to Bulb of Vestibule,前庭球動脈
+111,骨盆與會陰的動脈,Pudendal Canal,陰部管
+111,骨盆與會陰的動脈,Deep Artery of Clitoris,陰蒂深動脈
+111,骨盆與會陰的動脈,Posterior Labial Artery,陰唇後動脈
+111,骨盆與會陰的動脈,Inferior Rectal Artery,直腸下動脈
 112,主要動脈複習,Aortic arch,主動脈弓
 112,主要動脈複習,Brachiocephalic,頭臂動脈
 112,主要動脈複習,Subclavian,鎖骨下動脈
@@ -4031,52 +4053,52 @@ day,day_title,en,zh
 112,主要動脈複習,Medial plantar,足底內側動脈
 112,主要動脈複習,Lateral plantar,足底外側動脈
 112,主要動脈複習,Plantar arch,足底動脈弓
-113,頭頸部的靜脈,Angular vein,角靜脈
-113,頭頸部的靜脈,Anterior jugular vein,頸前靜脈
-113,頭頸部的靜脈,Clavicle,鎖骨
-113,頭頸部的靜脈,Calvaria,顱頂
-113,頭頸部的靜脈,Cavernous sinus,海綿竇
-113,頭頸部的靜脈,Confluence of sinuses,竇匯
-113,頭頸部的靜脈,Deep cervical vein,頸深靜脈
-113,頭頸部的靜脈,Deep facial vein,顏面深靜脈
-113,頭頸部的靜脈,Diploic vein,板障靜脈
-113,頭頸部的靜脈,Dura mater,硬腦膜
-113,頭頸部的靜脈,Dural venous sinus,硬腦膜靜脈竇
-113,頭頸部的靜脈,Emissary vein,導靜脈
-113,頭頸部的靜脈,External jugular vein,頸外靜脈
-113,頭頸部的靜脈,Facial vein,顏面靜脈
-113,頭頸部的靜脈,Falx cerebri,大腦鐮
-113,頭頸部的靜脈,Great cerebral vein of Galen,大腦大靜脈
-113,頭頸部的靜脈,Hypophysis,腦下垂體
-113,頭頸部的靜脈,Inferior petrosal sinus,下岩竇
-113,頭頸部的靜脈,Inferior sagittal sinus,下矢狀竇
-113,頭頸部的靜脈,Intercavernous sinus,海綿間竇
-113,頭頸部的靜脈,Internal jugular vein,頸內靜脈
-113,頭頸部的靜脈,Jugular foramen,頸靜脈孔
-113,頭頸部的靜脈,Left hemisphere,左大腦半球
-113,頭頸部的靜脈,Lingual vein,舌靜脈
-113,頭頸部的靜脈,Maxillary vein,上頷靜脈
-113,頭頸部的靜脈,Meningeal,腦膜
-113,頭頸部的靜脈,Middle thyroid vein,甲狀腺中靜脈
-113,頭頸部的靜脈,Occipital sinus,枕竇
-113,頭頸部的靜脈,Periosteal layer,骨膜層
-113,頭頸部的靜脈,Posterior auricular vein,耳後靜脈
-113,頭頸部的靜脈,Pterygoid plexus,翼靜脈叢
-113,頭頸部的靜脈,Retromandibular vein,下頷後靜脈
-113,頭頸部的靜脈,Right brachiocephalic vein,右頭臂靜脈
-113,頭頸部的靜脈,Right subclavian vein,右鎖骨下靜脈
-113,頭頸部的靜脈,Sigmoid sinus,乙狀竇
-113,頭頸部的靜脈,Splenium,壓部
-113,頭頸部的靜脈,Straight sinus,直竇
-113,頭頸部的靜脈,Superficial temporal vein,淺顳靜脈
-113,頭頸部的靜脈,Superior cerebral vein,大腦上靜脈
-113,頭頸部的靜脈,Superior petrosal sinus,上岩竇
-113,頭頸部的靜脈,Superior sagittal sinus,上矢狀竇
-113,頭頸部的靜脈,Superior thyroid vein,甲狀腺上靜脈
-113,頭頸部的靜脈,Tentorium cerebelli,小腦天幕
-113,頭頸部的靜脈,Transverse sinus,橫竇
-113,頭頸部的靜脈,Superior ophthalmic vein,眼上靜脈
-113,頭頸部的靜脈,Vertebral vein,椎靜脈
+113,頭頸部的動脈,Angular vein,角靜脈
+113,頭頸部的動脈,Anterior jugular vein,頸前靜脈
+113,頭頸部的動脈,Clavicle,鎖骨
+113,頭頸部的動脈,Calvaria,顱頂
+113,頭頸部的動脈,Cavernous sinus,海綿竇
+113,頭頸部的動脈,Confluence of sinuses,竇匯
+113,頭頸部的動脈,Deep cervical vein,頸深靜脈
+113,頭頸部的動脈,Deep facial vein,顏面深靜脈
+113,頭頸部的動脈,Diploic vein,板障靜脈
+113,頭頸部的動脈,Dura mater,硬腦膜
+113,頭頸部的動脈,Dural venous sinus,硬腦膜靜脈竇
+113,頭頸部的動脈,Emissary vein,導靜脈
+113,頭頸部的動脈,External jugular vein,頸外靜脈
+113,頭頸部的動脈,Facial vein,顏面靜脈
+113,頭頸部的動脈,Falx cerebri,大腦鐮
+113,頭頸部的動脈,Great cerebral vein of Galen,大腦大靜脈
+113,頭頸部的動脈,Hypophysis,腦下垂體
+113,頭頸部的動脈,Inferior petrosal sinus,下岩竇
+113,頭頸部的動脈,Inferior sagittal sinus,下矢狀竇
+113,頭頸部的動脈,Intercavernous sinus,海綿間竇
+113,頭頸部的動脈,Internal jugular vein,頸內靜脈
+113,頭頸部的動脈,Jugular foramen,頸靜脈孔
+113,頭頸部的動脈,Left hemisphere,左大腦半球
+113,頭頸部的動脈,Lingual vein,舌靜脈
+113,頭頸部的動脈,Maxillary vein,上頷靜脈
+113,頭頸部的動脈,Meningeal,腦膜
+113,頭頸部的動脈,Middle thyroid vein,甲狀腺中靜脈
+113,頭頸部的動脈,Occipital sinus,枕竇
+113,頭頸部的動脈,Periosteal layer,骨膜層
+113,頭頸部的動脈,Posterior auricular vein,耳後靜脈
+113,頭頸部的動脈,Pterygoid plexus,翼靜脈叢
+113,頭頸部的動脈,Retromandibular vein,下頷後靜脈
+113,頭頸部的動脈,Right brachiocephalic vein,右頭臂靜脈
+113,頭頸部的動脈,Right subclavian vein,右鎖骨下靜脈
+113,頭頸部的動脈,Sigmoid sinus,乙狀竇
+113,頭頸部的動脈,Splenium,壓部
+113,頭頸部的動脈,Straight sinus,直竇
+113,頭頸部的動脈,Superficial temporal vein,淺顳靜脈
+113,頭頸部的動脈,Superior cerebral vein,大腦上靜脈
+113,頭頸部的動脈,Superior petrosal sinus,上岩竇
+113,頭頸部的動脈,Superior sagittal sinus,上矢狀竇
+113,頭頸部的動脈,Superior thyroid vein,甲狀腺上靜脈
+113,頭頸部的動脈,Tentorium cerebelli,小腦天幕
+113,頭頸部的動脈,Transverse sinus,橫竇
+113,頭頸部的動脈,Superior ophthalmic vein,眼上靜脈
+113,頭頸部的動脈,Vertebral vein,椎靜脈
 114,腔靜脈與奇靜脈,1st posterior intercostal vein,第一肋間後靜脈
 114,腔靜脈與奇靜脈,Abdominal aorta,腹主動脈
 114,腔靜脈與奇靜脈,Accessory hemiazygos,副半奇靜脈
@@ -4273,7 +4295,7 @@ day,day_title,en,zh
 118,淋巴匯流與淋巴球循環,Right subclavian vein,右鎖骨下靜脈
 118,淋巴匯流與淋巴球循環,Subclavian lymph trunk,鎖骨下淋巴幹
 118,淋巴匯流與淋巴球循環,Superficial lymph vessel,淺層淋巴管
-118,淋巴匯流與淋巴球循環,Superior vena Cava,上腔靜脈
+118,淋巴匯流與淋巴球循環,Superior vena cava,上腔靜脈
 118,淋巴匯流與淋巴球循環,Thoracic duct,胸管
 118,淋巴匯流與淋巴球循環,Thymus,胸腺
 118,淋巴匯流與淋巴球循環,Venous blood,靜脈血
@@ -4287,7 +4309,7 @@ day,day_title,en,zh
 119,免疫（淋巴）系統概論,Bronchi,支氣管
 119,免疫（淋巴）系統概論,Committed lymphocyte,定型淋巴球
 119,免疫（淋巴）系統概論,Cytoplasm,細胞質
-119,免疫（淋巴）系統概論,Diaphragm,横膈
+119,免疫（淋巴）系統概論,Diaphragm,橫膈
 119,免疫（淋巴）系統概論,Fibroblast,纖維母細胞
 119,免疫（淋巴）系統概論,Groups of nodules,小結節群
 119,免疫（淋巴）系統概論,Large intestine,大腸
@@ -4352,7 +4374,7 @@ day,day_title,en,zh
 121,胸腺與紅骨髓,Epithelioreticular cell,上皮網狀細胞
 121,胸腺與紅骨髓,Fibrous septum,纖維性隔膜
 121,胸腺與紅骨髓,Fibrous trabeculae,纖維小樑
-121,胸腺與紅骨髓,Growth factory,生長因子
+121,胸腺與紅骨髓,Growth factor,生長因子
 121,胸腺與紅骨髓,Hassall's corpuscle,哈塞耳氏小體
 121,胸腺與紅骨髓,Heart,心臟
 121,胸腺與紅骨髓,Hematopoietic tissue,造血組織
@@ -4431,7 +4453,8 @@ day,day_title,en,zh
 123,淋巴結,Germinal center,生發中心
 123,淋巴結,High endothelial venule,高內皮小靜脈（HEV）
 123,淋巴結,Hilum,臍
-123,淋巴結,Lymph,（lymphoid） nodule 淋巴小結
+123,淋巴結,Lymph nodule ,淋巴小結
+123,淋巴結,lymphoid nodule ,淋巴小結
 123,淋巴結,Lymph node,淋巴結
 123,淋巴結,Lymph,淋巴
 123,淋巴結,Medulla,髓質
@@ -4795,9 +4818,9 @@ day,day_title,en,zh
 133,口腔暨相關構造,Duct,導管
 133,口腔暨相關構造,Epiglottis,會厭
 133,口腔暨相關構造,Filiform papilla,絲狀乳頭
-133,口腔暨相關構造,Foliate pap,葉狀乳頭
+133,口腔暨相關構造,Foliate papillae,葉狀乳頭
 133,口腔暨相關構造,Frenulum of the lip,唇繫帶
-133,口腔暨相關構造,Fungiform pap,蕈狀乳頭
+133,口腔暨相關構造,Fungiform papillae,蕈狀乳頭
 133,口腔暨相關構造,Gingiva,牙齦
 133,口腔暨相關構造,gum,牙齦
 133,口腔暨相關構造,Hard palate,硬腭
@@ -4918,7 +4941,7 @@ day,day_title,en,zh
 136,腹膜,Bare area,裸區
 136,腹膜,Bladder,膀胱
 136,腹膜,Common mesentery,總腸繫膜
-136,腹膜,Diaphragm,横膈
+136,腹膜,Diaphragm,橫膈
 136,腹膜,Duodenum,十二指腸
 136,腹膜,Epiploic foramen,網膜孔
 136,腹膜,Floor of retroperitoneum,後腹腔的腔底
@@ -4944,14 +4967,14 @@ day,day_title,en,zh
 137,食道與胃,Aorta,主動脈
 137,食道與胃,Body,胃體
 137,食道與胃,Cardia,賁門
-137,食道與胃,Cardiac notch,心切迹
+137,食道與胃,Cardiac notch,心切跡
 137,食道與胃,Carotid sheath,頸動脈鞘
 137,食道與胃,Celiac trunk,腹腔幹
 137,食道與胃,Chief cell,主細胞
 137,食道與胃,Circular muscle,環狀肌
 137,食道與胃,Common hepatic artery,肝總動脈
 137,食道與胃,Duodenum,十二指腸
-137,食道與胃,Endocrine cell,内分泌細胞
+137,食道與胃,Endocrine cell,內分泌細胞
 137,食道與胃,Esophageal branches,食道分支
 137,食道與胃,Esophagus,食道
 137,食道與胃,External sphincter,外括約肌
@@ -4961,7 +4984,7 @@ day,day_title,en,zh
 137,食道與胃,Gastrin,胃泌素
 137,食道與胃,Gastroduodenal artery,胃十二指腸動脈
 137,食道與胃,Gastroesophageal junction,胃食道交界處
-137,食道與胃,HCL,氯化氫
+137,食道與胃,HCl,氯化氫
 137,食道與胃,Inferior vena cava,下腔靜脈
 137,食道與胃,Lamina propria,固有層
 137,食道與胃,Laryngopharynx,喉咽
@@ -5052,7 +5075,7 @@ day,day_title,en,zh
 139,大腸,External sphincter ani,肛門外括約肌
 139,大腸,Flexure,曲
 139,大腸,Haustra,結腸袋
-139,大腸,Hemorrhoidal plexus,痣靜脈叢
+139,大腸,Hemorrhoidal plexus,痔靜脈叢
 139,大腸,Ileocecal junction,迴盲腸交界處
 139,大腸,Ileum,迴腸
 139,大腸,Internal sphincter ani,肛門內括約肌
@@ -5076,7 +5099,7 @@ day,day_title,en,zh
 139,大腸,Spleen,脾臟
 139,大腸,Submucosa,黏膜下層
 139,大腸,Taenia coli,結腸帶
-139,大腸,Transverse colon,横結腸
+139,大腸,Transverse colon,橫結腸
 139,大腸,Vermiform appendix,闌尾
 140,肝臟,Aorta,主動脈
 140,肝臟,Arterial blood,動脈血
@@ -5092,7 +5115,7 @@ day,day_title,en,zh
 140,肝臟,Common bile duct,總膽管
 140,肝臟,Coronary ligament,冠狀韌帶
 140,肝臟,Cystic duct,膽囊管
-140,肝臟,Diaphragm,横膈
+140,肝臟,Diaphragm,橫膈
 140,肝臟,Ductule,小管
 140,肝臟,Duodenal impression,十二指腸壓跡
 140,肝臟,Esophageal impression,食道壓跡
@@ -5133,7 +5156,7 @@ day,day_title,en,zh
 141,膽道系統與胰臟,Bile canaliculi,微膽管
 141,膽道系統與胰臟,Bile duct sphincter,膽管括約肌
 141,膽道系統與胰臟,Bile duct,膽管
-141,膽道系統與胰臟,Bile ductile,膽小管
+141,膽道系統與胰臟,Bile ductule,膽小管
 141,膽道系統與胰臟,Bile,膽汁
 141,膽道系統與胰臟,Biliary system,膽道系統
 141,膽道系統與胰臟,Body,胰臟體
@@ -5174,7 +5197,7 @@ day,day_title,en,zh
 142,泌尿道,Duodenum,十二指腸
 142,泌尿道,Epididymis,副睪
 142,泌尿道,External urethral orifice,尿道外口
-142,泌尿道,Interior vena cava,下腔靜脈
+142,泌尿道,Inferior vena cava,下腔靜脈
 142,泌尿道,Jejunum,空腸
 142,泌尿道,Kidney,腎
 142,泌尿道,Left kidney,左腎
@@ -5259,7 +5282,7 @@ day,day_title,en,zh
 144,腎臟與輸尿管,Inferior vena cava,下腔靜脈
 144,腎臟與輸尿管,Inner longitudinal muscle,內縱肌
 144,腎臟與輸尿管,Kidney,腎臟
-144,腎臟與輸尿管,Lamina propia,固有層
+144,腎臟與輸尿管,Lamina propria,固有層
 144,腎臟與輸尿管,Major calyx,腎大盞
 144,腎臟與輸尿管,Middle circular muscle,中環肌
 144,腎臟與輸尿管,Minor calyx,腎小盞
@@ -5356,7 +5379,7 @@ day,day_title,en,zh
 146,腎小管功能與腎循環,Proximal convoluted tubule,近曲小管
 146,腎小管功能與腎循環,Renal artery,腎動脈
 146,腎小管功能與腎循環,Renal vein,腎靜脈
-146,腎小管功能與腎循環,Rennin,腎素
+146,腎小管功能與腎循環,Renin,腎素
 146,腎小管功能與腎循環,Segmental artery,節段動脈
 146,腎小管功能與腎循環,Ureter,輸尿管
 146,腎小管功能與腎循環,Vasa recta,直血管
@@ -5544,7 +5567,7 @@ day,day_title,en,zh
 151,腎上腺,Zona reticularis,網狀帶
 152,胰島,Abdominal aorta,腹主動脈
 152,胰島,Alpha cell,α細胞
-152,胰島,Anterior pancreatico-duodenal artery,胰十二指腸前動脈
+152,胰島,Anterior pancreaticoduodenal artery,胰十二指腸前動脈
 152,胰島,Beta cell,β細胞
 152,胰島,Blood capillary,微血管
 152,胰島,Celiac trunk,腹腔幹
@@ -5562,7 +5585,7 @@ day,day_title,en,zh
 152,胰島,Glycolysis,糖解作用
 152,胰島,Great pancreatic artery,胰大動脈
 152,胰島,Inferior pancreatic artery,胰下動脈
-152,胰島,Inferior pancreatico-duodenal artery,胰十二指腸下動脈
+152,胰島,Inferior pancreaticoduodenal artery,胰十二指腸下動脈
 152,胰島,Insulin,胰島素
 152,胰島,Langerhans islet,蘭氏小島
 152,胰島,Left gastric artery,胃左動脈
@@ -5571,7 +5594,7 @@ day,day_title,en,zh
 152,胰島,exocrine glands,外分泌腺
 152,胰島,Pancreatic duct,胰管
 152,胰島,Pancreatic islet,胰島
-152,胰島,Posterior pancreatico-duodenal artery,胰十二指腸後動脈
+152,胰島,Posterior pancreaticoduodenal artery,胰十二指腸後動脈
 152,胰島,Receptor,受器/接受器
 152,胰島,Somatostatin,體抑素
 152,胰島,Spleen,脾臟
@@ -5709,7 +5732,7 @@ day,day_title,en,zh
 156,女性生殖系統,Labium minus,小陰唇
 156,女性生殖系統,Mons pubis,陰阜
 156,女性生殖系統,Ovarian ligament,卵巢韌帶
-156,女性生殖系統,Ovary,卵果
+156,女性生殖系統,Ovary,卵巢
 156,女性生殖系統,Parietal peritoneum,壁層腹膜
 156,女性生殖系統,Perineal body,會陰體
 156,女性生殖系統,Posterior abdominal wall,腹腔後壁
@@ -5744,7 +5767,7 @@ day,day_title,en,zh
 157,卵巢,Broad ligament,闊韌帶
 157,卵巢,Connective tissue stroma,結締組織基質
 157,卵巢,Corona radiata,放射冠
-157,卵巢,Corpus albican,白體
+157,卵巢,Corpus albicans,白體
 157,卵巢,Corpus hemorrhagicum,出血體
 157,卵巢,Corpus luteum,黃體
 157,卵巢,Discharged ovum,排出的卵子
@@ -5786,7 +5809,7 @@ day,day_title,en,zh
 158,子宮、輸卵管與陰道,Broad ligament,闊韌帶
 158,子宮、輸卵管與陰道,Cervical canal,子宮頸管
 158,子宮、輸卵管與陰道,Cervix,子宮頸
-158,子宮、輸卵管與陰道,Endometrium,子宫內膜
+158,子宮、輸卵管與陰道,Endometrium,子宮內膜
 158,子宮、輸卵管與陰道,External os,子宮頸外口
 158,子宮、輸卵管與陰道,Fornix of vagina,陰道穹窿
 158,子宮、輸卵管與陰道,Fundus,子宮底
@@ -5804,7 +5827,7 @@ day,day_title,en,zh
 158,子宮、輸卵管與陰道,Retroflexion,子宮後屈
 158,子宮、輸卵管與陰道,Round ligament of uterus,子宮圓韌帶
 158,子宮、輸卵管與陰道,Supravaginal part,陰道上部
-158,子宮、輸卵管與陰道,Suspensory ligament. Of ovary,卵巢懸韌帶
+158,子宮、輸卵管與陰道,Suspensory ligament of ovary,卵巢懸韌帶
 158,子宮、輸卵管與陰道,Tubal branch,輸卵管分支
 158,子宮、輸卵管與陰道,Urinary bladder,膀胱
 158,子宮、輸卵管與陰道,Uterine artery,子宮動脈
@@ -5818,7 +5841,7 @@ day,day_title,en,zh
 158,子宮、輸卵管與陰道,Cervix,子宮頸
 158,子宮、輸卵管與陰道,Uterine cavity,子宮腔
 158,子宮、輸卵管與陰道,endometrium,子宮內膜
-158,子宮、輸卵管與陰道,Myometrium,子宫肌層
+158,子宮、輸卵管與陰道,Myometrium,子宮肌層
 158,子宮、輸卵管與陰道,Vagina,陰道
 159,月經週期,Anterior lobe of pituitary gland,腦下垂體前葉
 159,月經週期,Corpus albicans,白體
