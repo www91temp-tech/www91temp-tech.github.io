@@ -17,6 +17,10 @@
       "folder": "Biochemistry",
       "notes": [
         {
+          "title": "Ch06 Enzymes",
+          "file": "Biochemistry_Ch06_Enzymes.html"
+        },
+        {
           "title": "Ch08 figure notes",
           "file": "Biochemistry_Ch08_figure_notes.html"
         },
@@ -39,6 +43,10 @@
         {
           "title": "Ch12 figure notes",
           "file": "Biochemistry_Ch12_figure_notes.html"
+        },
+        {
+          "title": "Ch13 Introduction to Metabolism",
+          "file": "Biochemistry_Ch13_Introduction to Metabolism.html"
         },
         {
           "title": "Ch22 Nucleotide Biosynthesis",
