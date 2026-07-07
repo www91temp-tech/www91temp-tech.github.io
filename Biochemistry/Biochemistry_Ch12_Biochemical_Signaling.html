@@ -35,6 +35,7 @@ body {
   background: var(--ink);
   color: white;
   padding: 60px 40px 50px;
+  text-align:center;
   position: relative;
   overflow: hidden;
 }
@@ -63,7 +64,7 @@ body {
   margin-bottom: 14px;
 }
 .site-header h1 {
-  font-family: 'Noto Serif TC', serif;
+  font-family: 'Noto Sans TC', sans-serif;
   font-size: clamp(28px, 5vw, 52px);
   font-weight: 900;
   line-height: 1.2;
@@ -74,10 +75,12 @@ body {
   color: rgba(255,255,255,0.65);
   max-width: 560px;
   font-weight: 300;
+  margin: 0 auto;
 }
 .tag-row {
   margin-top: 28px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
 }
@@ -100,6 +103,7 @@ body {
   flex-wrap: wrap;
   gap: 6px;
   position: sticky;
+  justify-content: center;
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 12px var(--shadow);
@@ -118,6 +122,12 @@ body {
 .toc a:hover {
   background: var(--ink);
   color: white;
+}
+.toc a.active {
+  background: var(--ink); /* 改為深色底 */
+  color: white;           /* 文字變白 */
+  border-bottom: 2px solid var(--accent); /* 添加強調色 */
+  transform: scale(1.05); /* 輕微放大效果，更顯眼 */
 }
 
 /* === MAIN LAYOUT === */
@@ -559,7 +569,7 @@ footer {
 <header class="site-header">
   <div class="chapter-label">CHAPTER 12 · BIOCHEMISTRY</div>
   <h1>生化訊號傳遞<br>Biochemical Signaling</h1>
-  <p class="subtitle">從零讀懂細胞如何接收訊號、放大訊號、做出反應——從荷爾蒙到癌症</p>
+  <p class="subtitle">讀懂細胞如何接收訊號、放大訊號、做出反應——從荷爾蒙到癌症</p>
   <div class="tag-row">
     <span class="tag">GPCR</span>
     <span class="tag">第二訊息</span>
@@ -1280,10 +1290,6 @@ footer {
 
 </div><!-- end container -->
 
-<footer>
-  <p>Chapter 12 生化訊號傳遞 · 學習指南</p>
-</footer>
-
 <script>
 function toggleQuiz(el) {
   const ans = el.querySelector('.quiz-a');
@@ -1292,16 +1298,35 @@ function toggleQuiz(el) {
   toggle.textContent = ans.classList.contains('shown') ? '▲ 收起答案' : '▼ 點我看答案';
 }
 
-// Fade-in sections on scroll
+// 合併後的 IntersectionObserver
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.toc a');
+
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
+  entries.forEach(entry => {
+    // 1. 處理淡入效果
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      
+      // 2. 處理導覽列恆亮 (修正了字串語法)
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => link.classList.remove('active'));
+      
+      const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
     }
   });
-}, { threshold: 0.08 });
+}, { 
+  root: null, 
+  rootMargin: '-20% 0px -70% 0px', // 調整觸發範圍，使其更精準
+  threshold: 0 
+});
 
+// 初始化設定
 document.querySelectorAll('.section').forEach(s => {
   s.style.opacity = '0';
   s.style.transform = 'translateY(24px)';
@@ -1309,5 +1334,6 @@ document.querySelectorAll('.section').forEach(s => {
   observer.observe(s);
 });
 </script>
+
 </body>
 </html>
