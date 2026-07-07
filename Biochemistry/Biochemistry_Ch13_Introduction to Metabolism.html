@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第13章｜代謝概論 — 生化核心觀念圖解</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root{
+  --bg:#F5F6F0;
+  --surface:#FFFFFF;
+  --ink:#1E2A26;
+  --ink-soft:#4B5A55;
+  --teal:#0B6E63;
+  --teal-dark:#084F47;
+  --teal-tint:#E4F1EE;
+  --gold:#C98A1F;
+  --gold-tint:#FBF0DA;
+  --brick:#B54834;
+  --brick-tint:#FBEAE5;
+  --slate:#35507A;
+  --slate-tint:#E9EEF6;
+  --line:#DEE3D9;
+  --radius:14px;
+  --font-cjk:'Noto Sans TC', -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-en:'Space Grotesk', var(--font-cjk);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-cjk);
+  line-height:1.75;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- Header ---------- */
+.site-header{
+  background:linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 65%, #0E7A6D 100%);
+  color:#fff;
+  padding:2.6rem 1.5rem 2.2rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.site-header::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    radial-gradient(circle at 12% 30%, rgba(255,255,255,0.08) 0, transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(201,138,31,0.25) 0, transparent 45%);
+  pointer-events:none;
+}
+.site-header .eyebrow{
+  font-family:var(--font-en);
+  letter-spacing:.22em;
+  font-size:.75rem;
+  text-transform:uppercase;
+  opacity:.8;
+  margin:0 0 .6rem;
+}
+.site-header h1{
+  margin:0 0 .4rem;
+  font-size:clamp(1.6rem, 5vw, 2.4rem);
+  font-weight:900;
+  letter-spacing:.02em;
+}
+.site-header p.subtitle{
+  margin:0;
+  font-size:.95rem;
+  opacity:.88;
+  font-family:var(--font-en);
+  font-weight:500;
+}
+
+/* ---------- Sticky Nav ---------- */
+.navbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:none;
+  box-shadow:0 2px 10px rgba(11,110,99,0.06);
+}
+.navbar::-webkit-scrollbar{display:none;}
+.navbar a{
+  flex:0 0 auto;
+  padding:.85rem 1rem;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--ink-soft);
+  text-decoration:none;
+  border-bottom:3px solid transparent;
+  transition:.2s;
+}
+.navbar a:hover{ color:var(--teal); }
+.navbar a.active{
+  color:var(--teal-dark);
+  border-bottom-color:var(--gold);
+  background:var(--teal-tint);
+}
+
+/* ---------- Layout ---------- */
+main{ max-width:840px; margin:0 auto; padding:0 1.1rem 3rem; }
+section{ padding-top:2.6rem; }
+section:first-of-type{ padding-top:2rem; }
+
+h2.section-title{
+  font-size:1.5rem;
+  font-weight:900;
+  color:var(--teal-dark);
+  margin:0 0 .3rem;
+  display:flex;
+  align-items:baseline;
+  gap:.5rem;
+}
+h2.section-title .num{
+  font-family:var(--font-en);
+  color:var(--gold);
+  font-size:1.1rem;
+}
+.section-lede{
+  color:var(--ink-soft);
+  font-size:.95rem;
+  margin:0 0 1.3rem;
+  padding-bottom:1rem;
+  border-bottom:2px dashed var(--line);
+}
+h3.sub-title{
+  font-size:1.12rem;
+  font-weight:700;
+  color:var(--slate);
+  margin:1.8rem 0 .7rem;
+  padding-left:.6rem;
+  border-left:4px solid var(--slate);
+}
+p{ margin:.6rem 0; }
+.term{ color:var(--teal-dark); font-weight:700; }
+.term-en{ font-family:var(--font-en); font-weight:500; color:var(--ink-soft); font-size:.92em; }
+
+/* ---------- Callout / mechanism boxes ---------- */
+.box{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.1rem 1.2rem;
+  margin:1rem 0;
+  box-shadow:0 1px 3px rgba(0,0,0,0.03);
+}
+.box-teal{ border-left:5px solid var(--teal); background:var(--teal-tint); }
+.box-gold{ border-left:5px solid var(--gold); background:var(--gold-tint); }
+.box-brick{ border-left:5px solid var(--brick); background:var(--brick-tint); }
+.box-slate{ border-left:5px solid var(--slate); background:var(--slate-tint); }
+.box h4{
+  margin:0 0 .5rem;
+  font-size:1rem;
+  display:flex; align-items:center; gap:.4rem;
+}
+
+/* Ⓟ phosphoryl badge - signature motif */
+.p-badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:1.5em; height:1.5em; border-radius:50%;
+  background:var(--gold); color:#fff;
+  font-family:var(--font-en); font-weight:700; font-size:.78em;
+  flex:0 0 auto;
+}
+.p-badge.teal{ background:var(--teal); }
+.p-badge.brick{ background:var(--brick); }
+
+/* Numbered mechanism steps */
+ol.steps{ list-style:none; margin:.8rem 0; padding:0; counter-reset:step; }
+ol.steps li{
+  counter-increment:step;
+  position:relative;
+  padding:.5rem .5rem .5rem 2.6rem;
+  margin-bottom:.35rem;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+ol.steps li::before{
+  content: counter(step);
+  position:absolute; left:.65rem; top:50%; transform:translateY(-50%);
+  width:1.6rem; height:1.6rem; border-radius:50%;
+  background:var(--teal); color:#fff;
+  font-family:var(--font-en); font-weight:700; font-size:.85rem;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* Principle cards grid (P1-P6) */
+.principle-grid{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem;
+  margin:1rem 0 1.6rem;
+}
+.p-card{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:12px; padding:.8rem .9rem;
+  font-size:.86rem; color:var(--ink-soft);
+}
+.p-card b{
+  display:block; color:var(--teal-dark); font-family:var(--font-en);
+  font-size:.95rem; margin-bottom:.25rem;
+}
+@media (max-width:520px){ .principle-grid{grid-template-columns:1fr;} }
+
+/* ---------- Comparison tables ---------- */
+.compare-wrap{ overflow-x:auto; margin:1rem 0; }
+table.compare{
+  width:100%; border-collapse:collapse; font-size:.88rem;
+  min-width:460px;
+  background:var(--surface);
+  border-radius:10px; overflow:hidden;
+}
+table.compare th{
+  background:var(--teal-dark); color:#fff;
+  padding:.6rem .7rem; text-align:left; font-weight:700;
+}
+table.compare td{
+  padding:.6rem .7rem; border-bottom:1px solid var(--line); vertical-align:top;
+}
+table.compare tr:nth-child(even) td{ background:#FAFBF8; }
+table.compare td:first-child{ font-weight:700; color:var(--slate); white-space:nowrap; }
+table.data{ width:100%; border-collapse:collapse; font-size:.85rem; min-width:420px; }
+table.data th{ background:var(--slate); color:#fff; padding:.5rem .6rem; text-align:left; }
+table.data td{ padding:.5rem .6rem; border-bottom:1px solid var(--line); }
+table.data tr:nth-child(even) td{ background:#F7F8F5; }
+
+/* ---------- SVG figure captions ---------- */
+figure{ margin:1.2rem 0; text-align:center; }
+figure svg{ max-width:100%; height:auto; }
+figcaption{
+  font-size:.82rem; color:var(--ink-soft); margin-top:.5rem;
+  text-align:left; background:#F0F2ED; padding:.6rem .8rem; border-radius:8px;
+}
+figcaption b{ color:var(--teal-dark); }
+
+/* formula block */
+.formula{
+  font-family:var(--font-en); font-weight:600; font-size:1.05rem;
+  background:var(--ink); color:#fff;
+  padding:.8rem 1rem; border-radius:10px; text-align:center;
+  margin:.8rem 0; letter-spacing:.02em;
+  overflow-x:auto;
+}
+.formula small{ display:block; font-family:var(--font-cjk); font-weight:400; opacity:.75; font-size:.72rem; margin-top:.3rem;}
+
+/* ---------- Key takeaways ---------- */
+.takeaway-section{
+  background:linear-gradient(180deg, var(--teal-dark), #0A5D53);
+  color:#fff; border-radius:20px; padding:1.8rem 1.4rem 2rem; margin-top:2.5rem;
+}
+.takeaway-section h2{
+  margin:0 0 1rem; font-size:1.4rem; font-weight:900;
+  display:flex; align-items:center; gap:.5rem;
+}
+.takeaway-list{ list-style:none; margin:0; padding:0; display:grid; gap:.7rem; }
+.takeaway-list li{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:12px; padding:.8rem 1rem; font-size:.9rem;
+  display:flex; gap:.6rem;
+}
+.takeaway-list li .n{
+  font-family:var(--font-en); font-weight:700; color:var(--gold);
+  flex:0 0 auto;
+}
+
+/* ---------- back to top ---------- */
+.back-to-top-wrap{ text-align:center; margin:2.5rem 0 1rem; }
+#backToTop{
+  font-family:var(--font-en); font-weight:700; font-size:.9rem;
+  background:var(--gold); color:#fff; border:none;
+  padding:.75rem 1.6rem; border-radius:999px; cursor:pointer;
+  box-shadow:0 4px 14px rgba(201,138,31,0.35);
+  transition:transform .15s ease;
+}
+#backToTop:hover{ transform:translateY(-2px); }
+#backToTop:active{ transform:translateY(0); }
+
+ul.plain{ padding-left:1.2rem; }
+ul.plain li{ margin-bottom:.35rem; }
+
+@media (min-width:640px){
+  body{ font-size:16.5px; }
+  main{ padding:0 1.5rem 3.5rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="eyebrow">CHAPTER 13 · BIOCHEMISTRY</p>
+  <h1>代謝概論</h1>
+  <p class="subtitle">Introduction to Metabolism — 生化能量學核心觀念圖解</p>
+</header>
+
+<nav class="navbar" id="navbar">
+  <a href="#intro">導論</a>
+  <a href="#s1">13.1 熱力學</a>
+  <a href="#s2">13.2 反應類型</a>
+  <a href="#s3">13.3 ATP</a>
+  <a href="#s4">13.4 氧化還原</a>
+  <a href="#s5">13.5 代謝調節</a>
+  <a href="#summary">重點複習</a>
+</nav>
+
+<main>
+
+<!-- ============ 導論 ============ -->
+<section id="intro">
+  <h2 class="section-title"><span class="num">Ch.13</span> 細胞如何做「功」？</h2>
+  <p class="section-lede">代謝（metabolism）就是細胞把「吃進來的能量」轉換成各種生命活動的過程。本章先建立六個貫穿全書的核心原則，之後每一節都是把其中一、兩個原則講清楚。</p>
+
+  <p>細胞是<span class="term">開放系統（open system）</span>：不斷與外界交換物質和能量，因此能一邊維持自身高度有序的結構，一邊仍然遵守「宇宙亂度必然增加」的熱力學第二定律——只是把亂度丟給了周遭環境。</p>
+
+  <div class="principle-grid">
+    <div class="p-card"><b>P1</b>生物的能量轉換遵循熱力學定律。</div>
+    <div class="p-card"><b>P2</b>自由能變化可以加成；放能反應可「偶聯」帶動吸能反應。</div>
+    <div class="p-card"><b>P3</b>看似成千上萬的代謝反應，其實只屬於少數幾種化學反應類型。</div>
+    <div class="p-card"><b>P4</b>ATP 是通用的「能量貨幣」，靠轉移磷醯基來供能。</div>
+    <div class="p-card"><b>P5</b>氧化還原反應把燃料的能量存進 NADH，再用來製造 ATP。</div>
+    <div class="p-card"><b>P6</b>細胞靠調節酵素的「數量」與「活性」來應變環境變化。</div>
+  </div>
+</section>
+
+<!-- ============ 13.1 ============ -->
+<section id="s1">
+  <h2 class="section-title"><span class="num">13.1</span> 生物能量學與熱力學</h2>
+  <p class="section-lede">Bioenergetics and Thermodynamics — 用三個物理量（G、H、S）量化反應「能不能自發進行」。</p>
+
+  <h3 class="sub-title">熱力學兩大定律</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th>定律</th><th>內容</th><th>對生物的意義</th></tr>
+      <tr><td>第一定律</td><td>能量守恆，只能轉換形式，不能被創造或消滅</td><td>細胞不能無中生有製造能量，只能轉換能量形式</td></tr>
+      <tr><td>第二定律</td><td>宇宙的亂度（entropy）總是增加</td><td>細胞維持自身秩序，代價是把更多亂度排放到環境中</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-title">三個關鍵物理量</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th>符號</th><th>中英名稱</th><th>白話意思</th></tr>
+      <tr><td>G</td><td>自由能（free energy）</td><td>反應中「可以拿來做功」的能量</td></tr>
+      <tr><td>H</td><td>焓（enthalpy）</td><td>反應系統的「熱含量」，取決於化學鍵</td></tr>
+      <tr><td>S</td><td>熵（entropy）</td><td>系統的混亂 / 隨機程度</td></tr>
+    </table>
+  </div>
+
+  <div class="formula">ΔG = ΔH − TΔS
+    <small>自由能變化 = 焓變化 − (絕對溫度 × 熵變化)</small>
+  </div>
+
+  <div class="box box-teal">
+    <h4><span class="p-badge teal">✓</span>放能 vs 吸能：一次分清楚</h4>
+    <div class="compare-wrap" style="margin:.4rem 0 0;">
+      <table class="compare">
+        <tr><th></th><th>ΔG 符號</th><th>反應性質</th><th>類比</th></tr>
+        <tr><td>放能（exergonic）</td><td>負值</td><td>釋放自由能，可自發進行</td><td>下坡滾球</td></tr>
+        <tr><td>吸能（endergonic）</td><td>正值</td><td>需要輸入自由能</td><td>推球上坡</td></tr>
+        <tr><td>放熱（exothermic）</td><td>ΔH 為負</td><td>釋出熱到環境</td><td>—</td></tr>
+        <tr><td>吸熱（endothermic）</td><td>ΔH 為正</td><td>從環境吸熱</td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="sub-title">標準自由能變化 ΔG′° 與平衡常數 K′eq</h3>
+  <p>ΔG′° 其實只是平衡常數 <span class="term-en">K′eq</span> 的另一種數學表達方式：</p>
+  <div class="formula">ΔG′° = −RT ln K′eq</div>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th>K′eq</th><th>ΔG′°</th><th>標準條件下反應方向</th></tr>
+      <tr><td>大於 1</td><td>負值</td><td>正向進行</td></tr>
+      <tr><td>等於 1</td><td>零</td><td>已達平衡</td></tr>
+      <tr><td>小於 1</td><td>正值</td><td>逆向進行</td></tr>
+    </table>
+  </div>
+
+  <div class="box box-brick">
+    <h4><span class="p-badge brick">!</span>最容易混淆：ΔG 不等於 ΔG′°</h4>
+    <div class="compare-wrap" style="margin:.4rem 0 0;">
+      <table class="compare">
+        <tr><th></th><th>ΔG′°（標準自由能變化）</th><th>ΔG（實際自由能變化）</th></tr>
+        <tr><td>條件</td><td>所有反應物/產物濃度皆為 1 M、pH 7、25℃ 的假設條件</td><td>細胞內「實際」的濃度條件</td></tr>
+        <tr><td>是否會變動</td><td>固定常數，對某反應永遠不變</td><td>隨反應物、產物濃度即時變動</td></tr>
+        <tr><td>誰決定反應方向？</td><td>不能單獨決定</td><td>唯一能判斷反應是否自發的依據</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:.6rem; font-size:.88rem;">
+      關係式：<b>ΔG = ΔG′° + RT ln Q</b>（Q 為質量作用比，即目前 [產物]/[反應物] 的比值）。
+      即使 ΔG′° 是正值，只要細胞不斷把產物移走（Q 很小），ΔG 仍可能是負值而讓反應照樣往前跑。
+    </p>
+  </div>
+
+  <h3 class="sub-title">自由能可以「加總」→ 偶聯反應</h3>
+  <p>如果兩個反應共用一個中間產物，可以把它們相加成一個淨反應，<span class="term">ΔG′° 也直接相加</span>。這正是細胞用 ATP 水解「贊助」原本不利反應的原理：</p>
+  <ol class="steps">
+    <li>葡萄糖 + Pi → 葡萄糖6-磷酸 + H₂O　　ΔG′° = <b>+13.8</b> kJ/mol（不利，不會自發）</li>
+    <li>ATP + H₂O → ADP + Pi　　ΔG′° = <b>−30.5</b> kJ/mol（非常有利）</li>
+    <li>加總：ATP + 葡萄糖 → ADP + 葡萄糖6-磷酸　　ΔG′° = <b>−16.7</b> kJ/mol（整體變成放能反應！）</li>
+  </ol>
+  <p style="font-size:.88rem; color:var(--ink-soft);">這就是「偶聯（coupling）」：用一個超放能反應，去帶動一個原本不利的反應，這是細胞中最基本的供能策略（P2）。</p>
+</section>
+
+<!-- ============ 13.2 ============ -->
+<section id="s2">
+  <h2 class="section-title"><span class="num">13.2</span> 化學邏輯與常見生化反應</h2>
+  <p class="section-lede">Chemical Logic and Common Biochemical Reactions — 細胞裡成千上萬個反應，其實只用了 5 種基本套路（P3）。</p>
+
+  <h3 class="sub-title">先懂兩個化學基本功</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th></th><th>均裂（homolytic cleavage）</th><th>異裂（heterolytic cleavage）</th></tr>
+      <tr><td>電子分配</td><td>兩邊各拿走一顆電子</td><td>一邊拿走整對電子（較常見）</td></tr>
+      <tr><td>產物</td><td>自由基（radical）</td><td>碳陽離子 / 碳陰離子 / 氫陰離子等</td></tr>
+    </table>
+  </div>
+  <p><span class="term">親核基（nucleophile，英）</span>：帶有多餘電子、喜歡「送」電子的官能基（如帶負電的氧、硫）。<br>
+  <span class="term">親電基（electrophile，英）</span>：電子不足、喜歡「搶」電子的官能基（如羰基碳、磷酸基的磷）。反應的本質，就是親核基攻擊親電基。</p>
+
+  <h3 class="sub-title">代謝反應的五大類型</h3>
+  <ol class="steps">
+    <li><b>形成／打斷 C—C 鍵</b>：如醛醇縮合、克來森酯縮合、脫羧反應——通常靠鄰近的羰基穩定不穩定的碳陰離子中間體。</li>
+    <li><b>分子內重排、異構化與脫去反應</b>：原子不變，只是電子或雙鍵位置搬家，整體氧化態不變（如葡萄糖6-磷酸→果糖6-磷酸）。</li>
+    <li><b>自由基反應</b>：涉及維生素 B12 或 SAM 等輔因子引發的均裂反應。</li>
+    <li><b>基團轉移反應</b>：醯基、醣基、磷醯基從一個親核基轉移到另一個，磷醯基轉移在代謝中地位特別重要（見 13.3）。</li>
+    <li><b>氧化還原反應</b>：電子從一個分子轉給另一個分子（見 13.4）。</li>
+  </ol>
+  <p style="font-size:.88rem; color:var(--ink-soft);">這五類並非互斥——例如一個異構化反應內部也可能經過自由基中間體。</p>
+
+  <div class="box box-slate">
+    <h4>小提醒：生化方程式≠平衡的化學方程式</h4>
+    <p style="margin:0; font-size:.9rem;">教科書常寫「ATP + H₂O → ADP + Pi」，這種<span class="term">生化方程式</span>不會刻意平衡 H⁺ 或 Mg²⁺（因為它們的濃度視為不變）；若要嚴謹平衡電荷與原子，需要寫出完整的<span class="term">化學方程式</span>（如 ATP⁴⁻ + H₂O → ADP³⁻ + HPO₄²⁻ + H⁺）。</p>
+  </div>
+</section>
+
+<!-- ============ 13.3 ============ -->
+<section id="s3">
+  <h2 class="section-title"><span class="num">13.3</span> 磷醯基轉移與 ATP</h2>
+  <p class="section-lede">Phosphoryl Group Transfers and ATP — ATP 是連結分解代謝與合成代謝的「共同貨幣」（P4）。</p>
+
+  <h3 class="sub-title">為什麼 ATP 水解會釋放大量自由能？</h3>
+  <ol class="steps">
+    <li><span class="p-badge">Ⓟ</span>電荷排斥被解除：ATP 上 4 個負電荷擠在一起，水解後分開，靜電排斥被釋放。</li>
+    <li><span class="p-badge">Ⓟ</span>產物共振穩定：釋出的 Pi 有多種共振結構可以分散電荷，比 ATP 本身更穩定。</li>
+    <li><span class="p-badge">Ⓟ</span>產物水合程度更高：ADP、Pi 比 ATP 更容易被水分子包圍穩定。</li>
+  </ol>
+  <div class="formula">ATP⁴⁻ + H₂O → ADP³⁻ + HPO₄²⁻ + H⁺　　ΔG′° = −30.5 kJ/mol</div>
+
+  <h3 class="sub-title">高能 vs 低能磷酸化合物：一眼看懂排行</h3>
+  <figure>
+    <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="磷醯基轉移能階圖">
+      <!-- axis -->
+      <line x1="60" y1="20" x2="60" y2="220" stroke="#4B5A55" stroke-width="2"/>
+      <text x="30" y="20" font-size="11" fill="#4B5A55" font-family="Space Grotesk, sans-serif">高能</text>
+      <text x="30" y="225" font-size="11" fill="#4B5A55" font-family="Space Grotesk, sans-serif">低能</text>
+      <!-- bars: length proportional to |ΔG'°| scaled -->
+      <!-- PEP -61.9 -->
+      <rect x="65" y="20" width="500" height="24" fill="#B54834" rx="4"/>
+      <text x="70" y="37" font-size="12" fill="#fff" font-family="Noto Sans TC">磷烯醇丙酮酸 PEP　−61.9 kJ/mol</text>
+      <!-- 1,3-BPG -49.3 -->
+      <rect x="65" y="54" width="399" height="24" fill="#C9622E" rx="4"/>
+      <text x="70" y="71" font-size="12" fill="#fff" font-family="Noto Sans TC">1,3-雙磷酸甘油酸　−49.3</text>
+      <!-- PCr -43.0 -->
+      <rect x="65" y="88" width="348" height="24" fill="#C98A1F" rx="4"/>
+      <text x="70" y="105" font-size="12" fill="#fff" font-family="Noto Sans TC">磷酸肌酸 PCr　−43.0</text>
+      <!-- ATP -30.5 -->
+      <rect x="65" y="122" width="247" height="24" fill="#0B6E63" rx="4"/>
+      <text x="70" y="139" font-size="12" fill="#fff" font-family="Noto Sans TC">ATP → ADP + Pi　−30.5</text>
+      <!-- G6P -13.8 -->
+      <rect x="65" y="156" width="111" height="24" fill="#35507A" rx="4"/>
+      <text x="70" y="173" font-size="11" fill="#fff" font-family="Noto Sans TC">葡萄糖6-磷酸　−13.8</text>
+      <!-- Glycerol-P -9.2 -->
+      <rect x="65" y="190" width="74" height="24" fill="#8B97A6" rx="4"/>
+      <text x="145" y="207" font-size="11" fill="#35507A" font-family="Noto Sans TC">甘油3-磷酸　−9.2</text>
+    </svg>
+    <figcaption><b>圖解重製（原 Fig. 13-19）：</b>條狀長度代表水解標準自由能（ΔG′°）的絕對值。ATP 剛好落在「高能」與「低能」化合物之間——這正是它能當「能量轉運工」的關鍵：從 PEP、PCr 等超高能分子接收磷醯基，再轉交給葡萄糖等低能分子。</figcaption>
+  </figure>
+
+  <div class="box box-gold">
+    <h4><span class="p-badge">!</span>最重要的觀念糾正：ATP 供能≠單純水解</h4>
+    <p style="margin:0 0 .5rem; font-size:.9rem;">課本常畫成一步「ATP→ADP+Pi」，但實際幾乎都是<span class="term">兩步驟的基團轉移</span>：</p>
+    <div class="compare-wrap" style="margin:0;">
+      <table class="compare">
+        <tr><th>常見誤解（一步）</th><th>實際機制（兩步）</th></tr>
+        <tr><td>ATP 直接水解，釋放的熱去推動反應</td><td>① 磷醯基先共價轉移到受質或酵素上（活化受質）<br>② 再由親核基取代，釋出 Pi</td></tr>
+      </table>
+    </div>
+    <p style="margin:.6rem 0 0; font-size:.85rem;">單純水解只會放熱，而熱在等溫系統中無法拿來做功——真正供能的是「磷醯基共價參與反應」。少數例外（如肌肉收縮、Na⁺/K⁺-ATPase）才是靠 ATP 直接水解驅動蛋白質構型改變。</p>
+  </div>
+
+  <h3 class="sub-title">ATP 的三大應用場景</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th>應用</th><th>機制重點</th></tr>
+      <tr><td>巨分子合成</td><td>磷醯基／腺苷醯基轉移，活化前驅物，使其變成更好的親電基</td></tr>
+      <tr><td>主動運輸</td><td>如 Na⁺K⁺-ATPase：磷醯化／去磷酸化循環，驅動蛋白質構型改變幫浦離子</td></tr>
+      <tr><td>肌肉收縮</td><td>肌凝蛋白直接非共價結合並水解 ATP，驅動與肌動蛋白間的構型循環</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-title">維持 ATP 供應的三個酵素</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th>酵素</th><th>反應</th><th>用途</th></tr>
+      <tr><td>核苷二磷酸激酶</td><td>ATP + NDP ⇌ ADP + NTP</td><td>把 ATP 的磷醯基分給 GTP、UTP、CTP 等</td></tr>
+      <tr><td>腺苷酸激酶</td><td>2 ADP ⇌ ATP + AMP</td><td>需求急升時緊急再生 ATP</td></tr>
+      <tr><td>肌酸激酶</td><td>ADP + 磷酸肌酸 ⇌ ATP + 肌酸</td><td>肌肉中快速補充 ATP 的緩衝庫</td></tr>
+    </table>
+  </div>
+  <p style="font-size:.85rem;color:var(--ink-soft);">細胞內實際的 ATP 水解自由能（稱為<span class="term">磷酸化潛能 ΔGp</span>）比標準值 −30.5 kJ/mol 更負（約 −50 kJ/mol），因為細胞會刻意把 [ATP] 維持在遠高於平衡濃度的地方。</p>
+</section>
+
+<!-- ============ 13.4 ============ -->
+<section id="s4">
+  <h2 class="section-title"><span class="num">13.4</span> 生物氧化還原反應</h2>
+  <p class="section-lede">Biological Oxidation-Reduction Reactions — 電子的流動，是所有生物做功的根本動力（P5）。</p>
+
+  <div class="box box-teal">
+    <h4>助記口訣</h4>
+    <p style="margin:0;"><b>OIL RIG</b>：<span class="term-en">O</span>xidation <span class="term-en">I</span>s <span class="term-en">L</span>osing（氧化＝失去電子）／<span class="term-en">R</span>eduction <span class="term-en">I</span>s <span class="term-en">G</span>aining（還原＝得到電子）</p>
+  </div>
+
+  <p>氧化還原反應可拆成兩個<span class="term">半反應（half-reaction）</span>：一個失去電子（氧化），一個得到電子（還原）。生物體內常見的電子轉移方式包括：直接轉移電子、以氫原子形式轉移、以氫陰離子（:H⁻）形式轉移（NAD 家族）、或直接與氧結合。</p>
+
+  <h3 class="sub-title">還原電位：誰比較「想要」電子？</h3>
+  <p><span class="term">標準還原電位 E′°</span>（單位：伏特）衡量一個氧化還原對搶電子的能力。E′° 越正，代表越容易被還原（越想搶電子）；電子會自發地從 E′° 較低流向 E′° 較高的一方。</p>
+  <div class="formula">ΔG′° = −n F ΔE′°
+    <small>n：轉移電子數；F：法拉第常數；ΔE′° = 電子接受者 E′° − 電子提供者 E′°</small>
+  </div>
+  <p style="font-size:.88rem;">兩個半反應在還原電位表上距離越遠，電子流動釋放的自由能就越大——這正是粒線體電子傳遞鏈能一路釋能的原理。</p>
+
+  <h3 class="sub-title">兩大電子載體家族比較</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th></th><th>NAD⁺ / NADH</th><th>NADP⁺ / NADPH</th></tr>
+      <tr><td>主要角色</td><td>分解代謝（catabolism）的氧化反應</td><td>合成代謝（anabolism）的還原反應</td></tr>
+      <tr><td>細胞內常見狀態</td><td>NAD⁺ 濃度高，利於接收氫陰離子</td><td>NADPH 濃度高，利於供出氫陰離子</td></tr>
+      <tr><td>每次接受</td><td>1 個氫陰離子（2 電子＋1 質子）</td><td>同左</td></tr>
+      <tr><td>結合方式</td><td>與酵素鬆散結合，可自由擴散</td><td>同左</td></tr>
+    </table>
+  </div>
+
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th></th><th>NAD(P) 系統</th><th>FAD / FMN 系統</th></tr>
+      <tr><td>來源維生素</td><td>菸鹼酸（niacin）</td><td>核黃素（riboflavin）</td></tr>
+      <tr><td>與酵素的結合</td><td>鬆散、可擴散的輔酶</td><td>緊密結合的<span class="term">輔基（prosthetic group）</span></td></tr>
+      <tr><td>一次可轉移電子數</td><td>固定 2 個（氫陰離子）</td><td>彈性：1 個或 2 個</td></tr>
+    </table>
+  </div>
+
+  <div class="box box-brick">
+    <h4>真實案例：菸鹼酸缺乏症——糙皮病</h4>
+    <p style="margin:0; font-size:.9rem;">NAD⁺／NADP⁺ 皆由菸鹼酸（維生素 B3）合成。飲食中長期缺乏菸鹼酸會讓所有 NAD(P) 依賴的去氫酶失去功能，導致<span class="term">糙皮病（pellagra）</span>，典型症狀是「三D」：皮膚炎（Dermatitis）、腹瀉（Diarrhea）、失智（Dementia）。</p>
+  </div>
+</section>
+
+<!-- ============ 13.5 ============ -->
+<section id="s5">
+  <h2 class="section-title"><span class="num">13.5</span> 代謝路徑的調節</h2>
+  <p class="section-lede">Regulation of Metabolic Pathways — 沒有一個代謝反應能逃過調節（P6）。</p>
+
+  <h3 class="sub-title">動態穩態：濃度不變，流量卻可以很大</h3>
+  <div class="formula">A →(v₁) S →(v₂) P
+    <small>只要 v₁ = v₂，中間產物 [S] 的濃度就會維持恆定，即使反應「流量」很大也一樣</small>
+  </div>
+  <p>這就是<span class="term">恆定狀態（homeostasis）</span>的數學本質——例如血糖濃度能穩定維持在約 5 mM，是因為「葡萄糖進入血液的速率」與「組織攝取葡萄糖的速率」互相配合。</p>
+
+  <h3 class="sub-title">調節酵素活性的兩個層次</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th>層次</th><th>方式</th><th>時間尺度</th></tr>
+      <tr><td rowspan="2">調整「數量」</td><td>轉錄因子調控基因表現，改變 mRNA / 蛋白質合成量</td><td>數分鐘～數小時</td></tr>
+      <tr><td>調整蛋白質降解速率（如泛素化—蛋白酶體）</td><td>數分鐘～數天</td></tr>
+      <tr><td rowspan="4">調整「活性」</td><td>受質濃度變化（[S] 相對於 Km）</td><td>即時</td></tr>
+      <tr><td>異位效應物結合（allosteric effector）</td><td>毫秒級</td></tr>
+      <tr><td>共價修飾（如磷酸化／去磷酸化）</td><td>數秒～數分鐘</td></tr>
+      <tr><td>與調節蛋白結合／解離</td><td>依訊號而定</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-title">名詞辨析：代謝「調節」vs 代謝「控制」</h3>
+  <div class="compare-wrap">
+    <table class="compare">
+      <tr><th></th><th>代謝調節（regulation）</th><th>代謝控制（control）</th></tr>
+      <tr><td>目的</td><td>維持某個參數（如代謝物濃度）長期穩定</td><td>因應外在訊號改變路徑的「輸出量」</td></tr>
+      <tr><td>例子</td><td>血糖濃度維持在 5 mM 附近</td><td>飢餓時啟動糖質新生、抑制糖解</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-title">平衡態 vs 遠離平衡態反應：調節的「熱點」在哪？</h3>
+  <figure>
+    <svg viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平衡態與遠離平衡態反應示意圖">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0B6E63"/></marker>
+      </defs>
+      <circle cx="50" cy="90" r="26" fill="#B54834"/><text x="50" y="95" text-anchor="middle" fill="#fff" font-size="14" font-family="Space Grotesk">A</text>
+      <circle cx="230" cy="90" r="26" fill="#C98A1F"/><text x="230" y="95" text-anchor="middle" fill="#fff" font-size="14" font-family="Space Grotesk">B</text>
+      <circle cx="410" cy="90" r="26" fill="#C98A1F"/><text x="410" y="95" text-anchor="middle" fill="#fff" font-size="14" font-family="Space Grotesk">C</text>
+      <circle cx="560" cy="90" r="26" fill="#0B6E63"/><text x="560" y="95" text-anchor="middle" fill="#fff" font-size="14" font-family="Space Grotesk">D</text>
+      <line x1="78" y1="90" x2="200" y2="90" stroke="#0B6E63" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="258" y1="90" x2="380" y2="90" stroke="#0B6E63" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="438" y1="90" x2="530" y2="90" stroke="#0B6E63" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="140" y="70" text-anchor="middle" font-size="11" fill="#B54834" font-family="Noto Sans TC">遠離平衡・V正≫V逆・受調節</text>
+      <text x="320" y="70" text-anchor="middle" font-size="11" fill="#4B5A55" font-family="Noto Sans TC">接近平衡・V正≈V逆</text>
+      <text x="485" y="70" text-anchor="middle" font-size="11" fill="#4B5A55" font-family="Noto Sans TC">接近平衡・V正≈V逆</text>
+    </svg>
+    <figcaption><b>圖解重製（原 Fig. 13-33）：</b>三步驟路徑中，只有第一步遠離平衡（正逆反應速率差異極大），是主要的調節點；後兩步接近平衡，濃度稍變就能輕易逆轉方向，本身不太適合當作調節閥。</figcaption>
+  </figure>
+
+  <div class="box box-gold">
+    <h4><span class="p-badge">ATP</span>／AMP：細胞的能量儀表板</h4>
+    <p style="margin:0; font-size:.9rem;">[ATP] 下降一點點，經腺苷酸激酶反應（2ADP⇌ATP+AMP）會讓 <span class="term-en">[AMP]</span> 大幅飆升（放大訊號）。<span class="term">AMP 活化蛋白激酶（AMPK）</span> 偵測到 AMP 上升，就會促進葡萄糖攝取、糖解與脂肪酸氧化，同時抑制糖原、脂肪、膽固醇合成等耗能反應，目標是把 [ATP] 拉回來、[AMP] 壓下去。</p>
+  </div>
+</section>
+
+<!-- ============ 重點複習 ============ -->
+<section id="summary">
+  <div class="takeaway-section">
+    <h2>🔑 重點複習 Key Takeaways</h2>
+    <ul class="takeaway-list">
+      <li><span class="n">01</span>細胞是開放系統：靠不斷與環境交換物質與能量，在遵守熱力學第二定律的同時維持自身秩序。</li>
+      <li><span class="n">02</span>判斷反應方向要看<b>實際</b>自由能變化 ΔG（= ΔG′° + RT ln Q），而不是固定不變的標準值 ΔG′°。</li>
+      <li><span class="n">03</span>ΔG′° 具有加成性：放能反應（如 ATP 水解）可以「偶聯」帶動吸能反應，是細胞供能的核心策略。</li>
+      <li><span class="n">04</span>成千上萬的代謝反應可歸納為 5 類：C—C 鍵形成/斷裂、分子內重排、自由基反應、基團轉移、氧化還原。</li>
+      <li><span class="n">05</span>ATP 供能的本質是「磷醯基共價轉移」，幾乎不是單純水解；ATP 在能量位階上剛好介於高能與低能磷酸化合物之間，扮演能量轉運工。</li>
+      <li><span class="n">06</span>氧化還原反應靠電子從低還原電位流向高還原電位，能量大小由 ΔG′° = −nFΔE′° 決定；NAD⁺ 管氧化分解代謝、NADPH 管還原合成代謝。</li>
+      <li><span class="n">07</span>代謝路徑靠調節酵素的「數量」（合成/降解）與「活性」（受質濃度、異位效應、共價修飾、調節蛋白）維持動態穩態；遠離平衡的反應步驟才是主要調節點。</li>
+      <li><span class="n">08</span>[ATP]/[AMP] 比值是細胞能量狀態最敏感的指標，AMPK 是回應這個訊號的關鍵調節器。</li>
+    </ul>
+  </div>
+
+  <div class="back-to-top-wrap">
+    <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑ 回到頂端</button>
+  </div>
+</section>
+
+</main>
+
+<script>
+  // Scroll spy for nav active state
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.navbar a');
+
+  function onScroll(){
+    let current = '';
+    const offset = 90;
+    sections.forEach(sec=>{
+      const top = sec.getBoundingClientRect().top;
+      if(top - offset <= 0) current = sec.id;
+    });
+    navLinks.forEach(link=>{
+      link.classList.toggle('active', link.getAttribute('href') === '#'+current);
+    });
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // keep active nav link visible within horizontal scroll
+  navLinks.forEach(link=>{
+    link.addEventListener('click', ()=>{
+      setTimeout(()=>{
+        link.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+      }, 300);
+    });
+  });
+</script>
+
+</body>
+</html>

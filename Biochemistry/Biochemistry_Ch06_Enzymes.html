@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第六章：酵素 Enzymes｜生化自學教材</title>
+<style>
+:root{
+  --ink:#1c2333;
+  --ink-soft:#4a5268;
+  --bg:#f6f5f1;
+  --paper:#ffffff;
+  --enzyme:#1f4b4f;      /* deep teal - 酶 */
+  --enzyme-soft:#e4eeed;
+  --substrate:#c96a2e;   /* burnt amber - 受質 */
+  --substrate-soft:#fbe9dc;
+  --product:#3d7a5c;     /* green - 產物 */
+  --inhibitor:#a1273f;   /* deep red - 抑制劑 */
+  --inhibitor-soft:#f8e3e7;
+  --regulate:#5b4b8a;    /* violet - 調節 */
+  --regulate-soft:#ece7f6;
+  --gold:#c99a2e;
+  --line:#dedad0;
+  --radius:14px;
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.85;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;height:auto;}
+
+/* ---------- Header ---------- */
+header.masthead{
+  background:linear-gradient(135deg,#132427 0%,var(--enzyme) 55%,#2c6459 100%);
+  color:#fdfaf3;
+  padding:2.6rem 1.5rem 2.2rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header.masthead::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(255,255,255,0.07) 0, transparent 42%),
+    radial-gradient(circle at 88% 75%, rgba(255,255,255,0.06) 0, transparent 38%);
+  pointer-events:none;
+}
+header.masthead .chapter-tag{
+  display:inline-block;
+  font-size:0.8rem;
+  letter-spacing:0.35em;
+  color:var(--gold);
+  border:1px solid rgba(201,154,46,0.55);
+  border-radius:999px;
+  padding:0.3rem 1rem;
+  margin-bottom:1rem;
+}
+header.masthead h1{
+  font-size:clamp(1.8rem,5vw,2.8rem);
+  margin:0 0 0.4rem;
+  font-weight:700;
+  letter-spacing:0.06em;
+}
+header.masthead h1 small{
+  display:block;
+  font-size:0.42em;
+  font-weight:400;
+  letter-spacing:0.3em;
+  color:#cfe4de;
+  margin-top:0.5rem;
+}
+header.masthead p.tagline{
+  max-width:640px;
+  margin:0.8rem auto 0;
+  color:#e3ede8;
+  font-size:0.98rem;
+  position:relative;
+}
+
+/* ---------- Sticky nav ---------- */
+nav.toc{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(28,35,51,0.97);
+  backdrop-filter:blur(6px);
+  display:flex;
+  overflow-x:auto;
+  white-space:nowrap;
+  padding:0 0.5rem;
+  box-shadow:0 3px 10px rgba(0,0,0,0.15);
+}
+nav.toc a{
+  color:#dfe6f0;
+  text-decoration:none;
+  font-size:0.85rem;
+  padding:0.85rem 0.9rem;
+  display:inline-block;
+  border-bottom:3px solid transparent;
+  transition:all .2s;
+  flex-shrink:0;
+}
+nav.toc a:hover, nav.toc a.active{
+  color:#fff;
+  border-bottom-color:var(--gold);
+  background:rgba(255,255,255,0.05);
+}
+nav.toc::-webkit-scrollbar{height:4px;}
+nav.toc::-webkit-scrollbar-thumb{background:#465;}
+
+/* ---------- Layout ---------- */
+main{
+  max-width:880px;
+  margin:0 auto;
+  padding:0 1.1rem 2rem;
+}
+section.chapter{
+  background:var(--paper);
+  margin-top:1.8rem;
+  padding:1.8rem 1.5rem 2.2rem;
+  border-radius:var(--radius);
+  box-shadow:0 1px 3px rgba(20,20,20,0.06);
+  scroll-margin-top:56px;
+}
+section.chapter > h2.sec-title{
+  display:flex;
+  align-items:center;
+  gap:0.7rem;
+  font-size:1.5rem;
+  color:var(--enzyme);
+  margin:0 0 1.4rem;
+  padding-bottom:0.7rem;
+  border-bottom:3px solid var(--enzyme-soft);
+}
+section.chapter > h2.sec-title .num{
+  background:var(--enzyme);
+  color:#fff;
+  font-size:0.95rem;
+  font-weight:700;
+  padding:0.25rem 0.65rem;
+  border-radius:8px;
+  flex-shrink:0;
+}
+h3.sub{
+  font-size:1.15rem;
+  color:var(--ink);
+  margin:2rem 0 0.8rem;
+  padding-left:0.7rem;
+  border-left:5px solid var(--gold);
+}
+h4.minor{
+  font-size:1.02rem;
+  color:var(--enzyme);
+  margin:1.4rem 0 0.6rem;
+}
+p{margin:0 0 1rem;color:var(--ink-soft);}
+p strong, li strong{color:var(--ink);}
+.en{color:#8b8377;font-size:0.92em;}
+.term{
+  color:var(--enzyme);
+  font-weight:700;
+  border-bottom:1.5px dotted var(--enzyme);
+}
+
+/* ---------- Callout boxes ---------- */
+.box{
+  border-radius:12px;
+  padding:1.1rem 1.3rem;
+  margin:1.2rem 0;
+  border:1px solid var(--line);
+}
+.box p:last-child{margin-bottom:0;}
+.box-title{
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  margin-bottom:0.5rem;
+  font-size:1rem;
+}
+.box.principle{background:var(--enzyme-soft);border-color:#c7ded9;}
+.box.principle .box-title{color:var(--enzyme);}
+.box.example{background:var(--substrate-soft);border-color:#efceb0;}
+.box.example .box-title{color:var(--substrate);}
+.box.warn{background:var(--inhibitor-soft);border-color:#eec3cb;}
+.box.warn .box-title{color:var(--inhibitor);}
+.box.regulate{background:var(--regulate-soft);border-color:#d7cdec;}
+.box.regulate .box-title{color:var(--regulate);}
+.box.med{background:#fff7e0;border-color:#f0dfa0;}
+.box.med .box-title{color:#8a6d16;}
+
+/* ---------- Flow / step diagrams ---------- */
+.flow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.6rem;
+  align-items:stretch;
+  margin:1.4rem 0;
+  counter-reset:step;
+}
+.flow-step{
+  flex:1 1 130px;
+  background:var(--enzyme-soft);
+  border:1px solid #c7ded9;
+  border-radius:10px;
+  padding:0.7rem 0.8rem 0.8rem;
+  position:relative;
+  font-size:0.87rem;
+  color:var(--ink);
+}
+.flow-step .step-no{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;height:22px;
+  background:var(--enzyme);
+  color:#fff;
+  border-radius:50%;
+  font-size:0.75rem;
+  font-weight:700;
+  margin-bottom:0.4rem;
+}
+.flow-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--enzyme);
+  font-size:1.3rem;
+  flex:0 0 18px;
+}
+@media (max-width:640px){
+  .flow{flex-direction:column;}
+  .flow-arrow{transform:rotate(90deg);margin:-0.2rem 0;}
+}
+
+/* ---------- Tables ---------- */
+.table-wrap{overflow-x:auto;margin:1.2rem 0;}
+table{
+  border-collapse:collapse;
+  width:100%;
+  font-size:0.92rem;
+  min-width:480px;
+}
+table caption{
+  text-align:left;
+  font-weight:700;
+  color:var(--enzyme);
+  margin-bottom:0.5rem;
+  font-size:0.95rem;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:0.55rem 0.7rem;
+  text-align:left;
+  vertical-align:top;
+}
+th{background:var(--enzyme);color:#fff;font-weight:600;}
+tr:nth-child(even) td{background:#faf9f6;}
+.compare-table th.col-good{background:var(--product);}
+.compare-table th.col-bad{background:var(--inhibitor);}
+
+/* ---------- Misc ---------- */
+.svg-wrap{
+  background:#fbfaf7;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:1rem;
+  margin:1.3rem 0;
+  text-align:center;
+}
+.svg-caption{
+  font-size:0.85rem;
+  color:var(--ink-soft);
+  margin-top:0.5rem;
+  text-align:left;
+}
+.pill-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.8rem 0;}
+.pill{
+  background:var(--enzyme);
+  color:#fff;
+  border-radius:999px;
+  padding:0.3rem 0.85rem;
+  font-size:0.82rem;
+}
+.pill.amber{background:var(--substrate);}
+.pill.violet{background:var(--regulate);}
+.pill.red{background:var(--inhibitor);}
+hr.divider{border:none;border-top:1px dashed var(--line);margin:2rem 0;}
+.summary-box{
+  background:#111c22;
+  color:#e6efe9;
+  border-radius:12px;
+  padding:1.3rem 1.4rem;
+  margin-top:1.8rem;
+}
+.summary-box h4{color:var(--gold);margin-top:0;}
+.summary-box ul{margin:0;padding-left:1.2rem;}
+.summary-box li{margin-bottom:0.5rem;color:#dce7e1;}
+.key-eq{
+  background:#fbfaf7;
+  border:1px solid var(--line);
+  border-left:4px solid var(--enzyme);
+  border-radius:8px;
+  padding:0.9rem 1.1rem;
+  margin:1rem 0;
+  font-size:1.05rem;
+  overflow-x:auto;
+}
+
+/* ---------- Back to top ---------- */
+#backTop{
+  position:fixed;
+  right:1.1rem;
+  bottom:1.4rem;
+  background:var(--enzyme);
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:48px;height:48px;
+  font-size:1.3rem;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .25s, transform .25s;
+  z-index:60;
+}
+#backTop.show{opacity:1;transform:translateY(0);}
+#backTop:active{transform:scale(0.92);}
+
+@media (max-width:600px){
+  section.chapter{padding:1.3rem 1rem 1.6rem;border-radius:10px;}
+  header.masthead{padding:2rem 1rem 1.6rem;}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead" id="top">
+  <span class="chapter-tag">CHAPTER 6</span>
+  <h1>酵素<small>ENZYMES · 生命反應的加速器</small></h1>
+  <p class="tagline">用白話重新講解 Lehninger 生化課本第六章——從活性位點到動力學，從抑制劑到調節機制，陪你打好生化第一課的地基。</p>
+</header>
+
+<nav class="toc" id="tocNav">
+  <a href="#intro">導論・五大原則</a>
+  <a href="#sec1">6.1 認識酵素</a>
+  <a href="#sec2">6.2 酵素如何運作</a>
+  <a href="#sec3">6.3 酵素動力學</a>
+  <a href="#sec4">6.4 反應實例</a>
+  <a href="#sec5">6.5 調節酵素</a>
+</nav>
+
+<main>
+
+<section class="chapter" id="intro">
+  <h2 class="sec-title"><span class="num">導論</span>為什麼生命需要酵素？</h2>
+
+  <p>生命要成立，需要兩個條件：第一，能夠自我複製；第二，能夠有效率且精準地「催化」化學反應。第二點聽起來抽象，但其實很好理解——你每天喝的含糖飲料裡的<span class="term">蔗糖<span class="en">sucrose</span></span>，放在櫃子裡可以擺好幾年都不會自己分解成二氧化碳和水，即使這個反應在熱力學上是「有利」的（會釋放能量）。但同樣的蔗糖一旦被喝下肚，幾秒鐘內就開始被身體分解、釋放能量供你思考、走路、看東西。</p>
+
+  <div class="box example">
+    <div class="box-title">💡 關鍵差異：催化 <span class="en">Catalysis</span></div>
+    <p>糖放在架上「理論上會分解」但「實際上幾乎不會發生」，因為反應速度太慢。人體內有酵素，能把這個反應加速到「有用」的時間尺度。<strong>沒有催化，生命根本無法維持</strong>——因為所有維持生命的化學反應，速度都必須夠快才行。</p>
+  </div>
+
+  <p>本章環繞五個核心原則展開，之後每一節都會不斷回頭呼應這五點，建議先讀過一遍、有印象即可，不用死背：</p>
+
+  <div class="box principle"><div class="box-title">P1　酵素是超強的生物催化劑</div>
+    <p>酵素帶來的反應加速幅度，往往遠超過人工合成或無機催化劑。和所有催化劑一樣，酵素只會加快反應「速率」、降低活化能障礙，<strong>但不會改變反應的平衡點</strong>。</p></div>
+
+  <div class="box principle"><div class="box-title">P2　酵素具有高度專一性</div>
+    <p>每一種酵素通常只催化一種化學反應（或少數幾種相近的反應），也就是說它只會選擇性地降低「特定反應」的活化能。</p></div>
+
+  <div class="box principle"><div class="box-title">P3　反應發生在「活性位點」這個特化口袋裡</div>
+    <p>活性位點<span class="en">active site</span>類似於一般的結合位點，差別在於這裡真的會「發生反應」——把<span class="term">受質<span class="en">substrate</span></span>（被酵素作用的分子）轉變成<span class="term">產物<span class="en">product</span></span>。</p></div>
+
+  <div class="box principle"><div class="box-title">P4　兩個概念解釋酵素的催化威力</div>
+    <p>第一，酵素跟反應的「<span class="term">過渡態<span class="en">transition state</span></span>」結合得最緊，利用這股「結合能」來降低活化能障礙。第二，活性位點在演化中被設計成能同時運用多種化學催化機制。</p></div>
+
+  <div class="box principle"><div class="box-title">P5　許多酵素會受到調節</div>
+    <p>調節機制包括：可逆的共價修飾、與別構調節物結合、蛋白酶切割活化、與調節蛋白非共價結合等等。同一個酵素常常同時受多種機制管控，讓細胞內每個化學反應都能被精細地控制。</p></div>
+
+  <p>酵素研究的實用價值非常大：許多遺傳疾病是因為某個酵素缺失或活性不足；反過來，某些疾病則是因為某個酵素活性「太高」。臨床上常透過測量血漿、紅血球或組織中的酵素活性來輔助診斷；許多藥物也是透過作用在酵素上而發揮療效。可以說，幾乎每一個生化實驗、每一個藥物開發計畫，背後都牽涉到一個或多個酵素。</p>
+</section>
+
+<section class="chapter" id="sec1">
+  <h2 class="sec-title"><span class="num">6.1</span>認識酵素</h2>
+
+  <h3 class="sub">一段簡短的歷史</h3>
+  <p>生物催化最早在 1700 年代末被觀察到，來自對胃液消化肉類的研究。真正的轉捩點是 1897 年，<span class="term">畢希納<span class="en">Eduard Buchner</span></span>證明「無細胞」的酵母萃取液依然能把糖發酵成酒精——這代表發酵不需要「完整活細胞」才能發生，直接終結了「生物催化只能發生在活體內」的舊觀念。後來 <span class="term">屈內<span class="en">Kühne</span></span>把這些促成反應的分子命名為<span class="term">酵素<span class="en">enzyme</span></span>（源自希臘文，意為「發酵之物」）。</p>
+  <p>直到 1920 年代晚期，科學家才確認酵素的本質是<span class="term">蛋白質</span>。1926 年 <span class="term">薩姆納<span class="en">James Sumner</span></span>成功分離並結晶了尿素酶<span class="en">urease</span>，是第一個決定性的證據。</p>
+
+  <div class="box example">
+    <div class="box-title">🚀 酵素的威力有多誇張？</div>
+    <p>乳清酸核苷酸脫羧酶<span class="en">orotidine phosphate decarboxylase</span>能把反應加速 <strong>10<sup>17</sup></strong> 倍——沒有酵素時，這個反應的半衰期是 <strong>7,800 萬年</strong>；有了酵素，只需要幾毫秒。這正是原則 P1 的最佳示範。</p>
+  </div>
+
+  <h3 class="sub">酵素幾乎都是蛋白質</h3>
+  <p>除了少數幾種具催化功能的 RNA（稱作<span class="term">核酶<span class="en">ribozyme</span></span>）之外，所有已知酵素都是蛋白質。它們的催化活性完全仰賴天然摺疊構型是否完整——一旦變性或解離成次單元，活性通常就消失了。</p>
+
+  <p>有些酵素只靠胺基酸殘基就能作用；有些則需要額外的化學夥伴才能發揮功能，這些名詞很容易搞混，整理如下表：</p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>酵素的「化學夥伴」家族</caption>
+    <tr><th style="width:22%">名詞</th><th>白話解釋</th></tr>
+    <tr><td><span class="term">輔因子<span class="en">cofactor</span></span></td><td>酵素活性所需的非蛋白質成分，可能是無機離子（如 Fe²⁺、Mg²⁺、Zn²⁺）或有機小分子。</td></tr>
+    <tr><td><span class="term">輔酶<span class="en">coenzyme</span></span></td><td>結構較複雜的有機（或金屬有機）輔因子，扮演「暫時搬運特定官能基」的角色，多半由維生素轉化而來。</td></tr>
+    <tr><td><span class="term">輔基<span class="en">prosthetic group</span></span></td><td>與酵素蛋白質結合得非常緊密（甚至共價鍵結）的輔酶或金屬離子。</td></tr>
+    <tr><td><span class="term">全酶<span class="en">holoenzyme</span></span></td><td>蛋白質本體 + 輔酶/金屬離子，是「有活性、完整」的酵素狀態。</td></tr>
+    <tr><td><span class="term">脫輔基酶<span class="en">apoenzyme</span></span></td><td>拿掉輔酶/金屬離子後、只剩蛋白質本體的部分，此時通常沒有活性。</td></tr>
+  </table>
+  </div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 620 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="全酶等於脫輔基酶加上輔酶或金屬離子">
+      <rect x="30" y="45" width="150" height="60" rx="10" fill="#e4eeed" stroke="#1f4b4f" stroke-width="2"/>
+      <text x="105" y="80" text-anchor="middle" font-size="15" fill="#1f4b4f" font-weight="700">脫輔基酶</text>
+      <text x="220" y="82" text-anchor="middle" font-size="26" fill="#c99a2e" font-weight="700">+</text>
+      <rect x="255" y="45" width="140" height="60" rx="10" fill="#fbe9dc" stroke="#c96a2e" stroke-width="2"/>
+      <text x="325" y="72" text-anchor="middle" font-size="14" fill="#c96a2e" font-weight="700">輔酶／</text>
+      <text x="325" y="92" text-anchor="middle" font-size="14" fill="#c96a2e" font-weight="700">金屬離子</text>
+      <text x="435" y="82" text-anchor="middle" font-size="26" fill="#c99a2e" font-weight="700">=</text>
+      <rect x="465" y="40" width="150" height="70" rx="10" fill="#1f4b4f"/>
+      <text x="540" y="80" text-anchor="middle" font-size="15" fill="#fff" font-weight="700">全酶</text>
+      <text x="540" y="98" text-anchor="middle" font-size="11" fill="#cfe4de">（有活性）</text>
+    </svg>
+    <div class="svg-caption">全酶＝脫輔基酶＋輔酶（或金屬離子）。少了後者，多數酵素會失去活性。</div>
+  </div>
+
+  <p>此外，許多酵素蛋白還會經歷磷酸化、醣基化等共價修飾，這些修飾常常正是調節酵素活性的手段（將在 6.5 節詳談）。</p>
+
+  <h3 class="sub">酵素依「催化的反應類型」分類</h3>
+  <p>早期的酵素命名很混亂：有的用受質命名（尿素酶處理尿素）、有的用功能命名（胃蛋白酶 pepsin 源自希臘文「消化」）、有的用來源命名（胰蛋白酶 trypsin）。為了統一，生化學界建立了一套系統，把所有酵素依反應類型分成 7 大類，並給每個酵素一組四段式的「EC 編號」。</p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>表 6-3　酵素的國際分類（EC 分類法）</caption>
+    <tr><th>類別</th><th>名稱</th><th>催化的反應類型</th></tr>
+    <tr><td>1</td><td>氧化還原酶 <span class="en">Oxidoreductases</span></td><td>電子（氫化物或氫原子）的轉移</td></tr>
+    <tr><td>2</td><td>轉移酶 <span class="en">Transferases</span></td><td>官能基的轉移</td></tr>
+    <tr><td>3</td><td>水解酶 <span class="en">Hydrolases</span></td><td>水解反應（把官能基轉移給水）</td></tr>
+    <tr><td>4</td><td>裂解酶 <span class="en">Lyases</span></td><td>以消去方式切斷 C–C、C–O、C–N 等鍵結，或反向加成到雙鍵上</td></tr>
+    <tr><td>5</td><td>異構酶 <span class="en">Isomerases</span></td><td>分子內基團轉移，產生異構物</td></tr>
+    <tr><td>6</td><td>連接酶 <span class="en">Ligases</span></td><td>耦合 ATP 水解、形成新的 C–C、C–S、C–O、C–N 鍵</td></tr>
+    <tr><td>7</td><td>轉位酶 <span class="en">Translocases</span></td><td>分子或離子跨膜移動</td></tr>
+  </table>
+  </div>
+
+  <p>例如己糖激酶催化「ATP + 葡萄糖 → ADP + 葡萄糖 6-磷酸」，正式系統名稱說明它把磷醯基從 ATP 轉給葡萄糖，EC 編號是 2.7.1.1（屬於轉移酶）。不過大家日常還是習慣叫它「己糖激酶<span class="en">hexokinase</span>」這個俗名。</p>
+
+  <div class="summary-box">
+    <h4>6.1 重點回顧</h4>
+    <ul>
+      <li>生命仰賴強大且專一的催化劑——酵素。幾乎每一個生化反應都由某個酵素催化。</li>
+      <li>除了少數催化型 RNA，所有已知酵素都是蛋白質；許多需要輔酶或輔因子才能作用。</li>
+      <li>酵素依所催化的反應類型分為 7 大類，每個酵素都有正式 EC 編號與系統名稱，多數也有慣用的俗名。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="sec2">
+  <h2 class="sec-title"><span class="num">6.2</span>酵素如何運作</h2>
+
+  <h3 class="sub">活性位點與受質</h3>
+  <p>酵素催化反應最大的特徵，就是反應必須發生在酵素表面一個特化的口袋——<span class="term">活性位點<span class="en">active site</span></span>裡。這個口袋由胺基酸殘基排列組成，經過演化「量身訂做」，讓特定反應能更快發生。被結合、被作用的分子叫做<span class="term">受質<span class="en">substrate</span></span>；有些活性位點甚至會把受質完全包覆起來，讓它與周圍的水溶液隔絕。</p>
+
+  <p>形成的「酵素—受質複合物」（ES 複合物）是理解一切酵素動力學與機制的起點：</p>
+  <div class="key-eq">E + S ⇌ ES ⇌ EP ⇌ E + P</div>
+
+  <h3 class="sub">酵素只影響反應「速率」，不影響「平衡」</h3>
+  <p>這是初學者最容易搞混的地方，務必記住：</p>
+
+  <div class="box warn">
+    <div class="box-title">⚠️ 常見誤解澄清</div>
+    <p><strong>催化劑不會改變反應的平衡位置</strong>，只會讓反應「更快」到達原本就會到達的平衡。一個反應是否有利（熱力學上 ΔG′° 是負的），跟這個反應「跑得快不快」是兩件完全不同的事。蔗糖分解成 CO₂ 和 H₂O 在熱力學上非常有利，但因為活化能障礙很高，沒有酵素幾乎不會發生。</p>
+  </div>
+
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>兩個容易混淆的概念：平衡 vs 速率</caption>
+    <tr><th>比較項目</th><th>反應平衡 <span class="en">equilibrium</span></th><th>反應速率 <span class="en">rate</span></th></tr>
+    <tr><td>由什麼決定</td><td>反應物與產物「基態」的自由能差（ΔG′°）</td><td>基態與「過渡態」之間的能量差，即<span class="term">活化能<span class="en">ΔG‡</span></span></td></tr>
+    <tr><td>酵素是否影響</td><td>❌ 完全不影響</td><td>✅ 大幅降低活化能，加快反應</td></tr>
+    <tr><td>一句話理解</td><td>決定「終點在哪裡」</td><td>決定「多快到終點」</td></tr>
+  </table>
+  </div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="反應座標圖：比較有無酵素催化時的活化能">
+      <line x1="50" y1="230" x2="620" y2="230" stroke="#999" stroke-width="1.5"/>
+      <line x1="50" y1="20" x2="50" y2="230" stroke="#999" stroke-width="1.5"/>
+      <text x="335" y="252" text-anchor="middle" font-size="13" fill="#4a5268">反應進行方向（S → P）</text>
+      <text x="22" y="125" text-anchor="middle" font-size="13" fill="#4a5268" transform="rotate(-90 22 125)">自由能 G</text>
+      <!-- uncatalyzed curve -->
+      <path d="M90,190 C 180,190 220,40 300,40 C 380,40 420,190 500,190" fill="none" stroke="#a1273f" stroke-width="3"/>
+      <!-- catalyzed curve -->
+      <path d="M90,190 C 160,190 190,120 260,120 C 300,120 320,145 340,145 C 370,145 390,105 430,105 C 470,105 490,175 540,175" fill="none" stroke="#1f4b4f" stroke-width="3"/>
+      <circle cx="90" cy="190" r="4" fill="#333"/>
+      <text x="90" y="212" text-anchor="middle" font-size="12" fill="#333">S</text>
+      <circle cx="540" cy="175" r="4" fill="#333"/>
+      <circle cx="500" cy="190" r="4" fill="#333"/>
+      <text x="520" y="212" text-anchor="middle" font-size="12" fill="#333">P</text>
+      <text x="300" y="32" text-anchor="middle" font-size="12" fill="#a1273f" font-weight="700">未催化的過渡態 ‡</text>
+      <text x="345" y="100" text-anchor="middle" font-size="12" fill="#1f4b4f" font-weight="700">催化後過渡態 ‡</text>
+      <line x1="150" y1="190" x2="150" y2="42" stroke="#a1273f" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="158" y="115" font-size="11.5" fill="#a1273f">ΔG‡ 未催化（高）</text>
+      <line x1="200" y1="190" x2="200" y2="122" stroke="#1f4b4f" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="208" y="165" font-size="11.5" fill="#1f4b4f">ΔG‡ 催化後（低）</text>
+    </svg>
+    <div class="svg-caption">圖 6-2 / 6-3 概念重繪：無論有沒有酵素，S 和 P 的「基態能量」都一樣（平衡不變）；但酵素把「過渡態」的能量山丘壓低了，讓反應能更快發生。</div>
+  </div>
+
+  <h3 class="sub">酵素不是單純的「鎖與鑰匙」</h3>
+  <p>1894 年，費雪<span class="en">Emil Fischer</span>提出著名的<span class="term">鎖鑰模型<span class="en">lock-and-key</span></span>：酵素與受質形狀完全互補，像鎖和鑰匙一樣精準吻合。這個比喻很直覺，但如果照字面理解，其實會誤導我們對催化的理解。</p>
+
+  <div class="box example">
+    <div class="box-title">🔧 思想實驗：磁鐵棒與「斯提克酶」</div>
+    <p>假設有一根磁化金屬棒要被「掰彎」才能斷掉（掰彎的瞬間＝過渡態）。如果設計一個口袋，磁鐵剛好完美貼合「筆直」的棒子（也就是完美互補受質），這個口袋反而會<strong>阻止</strong>棒子被掰彎——因為磁力會把它拉回筆直的狀態，讓反應更難發生！真正有效的做法，是設計一個磁鐵口袋，貼合「掰彎後」的形狀，這樣磁力才會幫忙拉棒子彎曲、幫忙「付出」掰彎所需的能量。</p>
+  </div>
+
+  <p>這正是現代酵素催化理論的核心（<span class="term">Pauling</span>、<span class="term">Haldane</span>、<span class="term">Jencks</span> 等人提出）：<strong>酵素要跟反應的「過渡態」結合得最緊，而不是跟受質本身結合得最緊。</strong>酵素與受質形成 ES 複合物時，只用上部分的弱鍵結；當受質被推向過渡態時，才會形成「全部」的弱鍵結，釋放出的<span class="term">結合能<span class="en">binding energy, ΔG<sub>B</sub></span></span>正好用來「支付」爬上活化能山丘所需的代價。</p>
+
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>三個常被搞混的「契合」概念比較</caption>
+    <tr><th class="col-bad">鎖鑰模型</th><th>誘導契合</th><th class="col-good">過渡態互補</th></tr>
+    <tr><td>酵素形狀與<strong>受質</strong>完全互補，結合最穩定</td><td>酵素結合受質後，<strong>自身構型改變</strong>以配合受質，讓催化基團就位</td><td>酵素形狀與<strong>過渡態</strong>互補，結合能用來降低活化能</td></tr>
+    <tr><td>過度穩定 ES 複合物，可能反而<strong>抑制</strong>反應</td><td>由 <span class="en">Koshland, 1958</span> 提出，是催化力量的重要來源之一</td><td>現代對酵素催化力量最核心的解釋</td></tr>
+  </table>
+  </div>
+  <p>值得注意的是，這三者並不互斥——誘導契合正是酵素邁向「過渡態互補」的其中一種方式：受質結合帶來的多重弱鍵結，驅動酵素構型改變，讓催化基團排列到最佳位置，同時在過渡態形成更多額外的鍵結。</p>
+
+  <h3 class="sub">結合能的三大用途</h3>
+  <p>酵素從哪裡「賺到」這股用來克服活化能障礙的結合能？主要有三個來源：</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="step-no">1</span><strong>降低熵</strong><br><span class="en">entropy reduction</span><br>把原本自由亂飛的兩個受質分子固定在正確的相對位置與角度，大幅提高「有效碰撞」的機率。單是限制分子運動，就能帶來多個數量級的加速。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">2</span><strong>去溶劑化</strong><br><span class="en">desolvation</span><br>水中的受質原本被一層氫鍵水分子包圍。酵素與受質形成的弱鍵結，取代了原本受質與水之間的氫鍵，讓受質「脫水」後更容易反應。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">3</span><strong>誘導契合</strong><br><span class="en">induced fit</span><br>受質結合觸發酵素構型改變，把催化用的官能基精準排列到位，同時在過渡態形成更多額外鍵結，讓催化效率更高。</div>
+  </div>
+
+  <p>順帶一提，結合能不只解釋了「催化力」，也同時解釋了酵素的<span class="term">專一性<span class="en">specificity</span></span>——如果活性位點的官能基是為了跟某個特定受質形成最多弱鍵結而排列的，那麼任何形狀不同的分子自然就無法形成同樣多的鍵結，也就無法被有效催化，這正是 P2 原則的機制基礎。</p>
+
+  <hr class="divider">
+
+  <h3 class="sub">除了結合能，還有哪些催化「加速器」？</h3>
+  <p>結合能是多數酵素催化力量的主要來源，但通常還會搭配以下幾種涉及「共價」交互作用的化學機制，多管齊下：</p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>三種常見的化學催化機制</caption>
+    <tr><th style="width:24%">機制</th><th>白話說明</th></tr>
+    <tr><td><span class="term">一般酸鹼催化<span class="en">general acid-base catalysis</span></span></td><td>活性位點中的胺基酸側鏈（如 His、Asp、Lys）擔任質子的「捐贈者」或「接收者」，穩定反應中間會出現的不穩定帶電中間體。這種機制幾乎出現在所有酵素身上，可帶來 10²–10⁵ 倍的加速。</td></tr>
+    <tr><td><span class="term">共價催化<span class="en">covalent catalysis</span></span></td><td>酵素上的親核基團暫時與受質形成共價鍵，開出一條全新、活化能更低的反應路徑，最後再水解釋放產物、恢復游離酵素。</td></tr>
+    <tr><td><span class="term">金屬離子催化<span class="en">metal ion catalysis</span></span></td><td>結合在酵素上（或隨受質一起進入）的金屬離子，能幫忙定位受質、穩定帶電的過渡態，或直接參與氧化還原反應。約三分之一的已知酵素都需要金屬離子輔助。</td></tr>
+  </table>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <caption>圖 6-9 重製：能參與一般酸鹼催化的胺基酸側鏈</caption>
+    <tr><th>胺基酸殘基</th><th>作為「酸」時（捐出質子）</th><th>作為「鹼」時（接收質子）</th></tr>
+    <tr><td>Glu、Asp</td><td>R—COOH</td><td>R—COO⁻</td></tr>
+    <tr><td>Lys、Arg</td><td>R—NH₃⁺</td><td>R—NH₂</td></tr>
+    <tr><td>Cys</td><td>R—SH</td><td>R—S⁻</td></tr>
+    <tr><td>His</td><td>咪唑環質子化</td><td>咪唑環去質子化</td></tr>
+    <tr><td>Ser</td><td>R—OH</td><td>R—O⁻</td></tr>
+    <tr><td>Tyr</td><td>酚基質子化</td><td>酚基去質子化</td></tr>
+  </table>
+  </div>
+  <p>後面 6.4 節介紹胰凝乳蛋白酶時，你會看到 His、Ser、Asp 三個殘基如何協力運用這些機制——這是把本節原理套用到真實酵素身上最經典的例子。</p>
+
+  <div class="summary-box">
+    <h4>6.2 重點回顧</h4>
+    <ul>
+      <li>酵素催化反應發生在活性位點；反應速率取決於活化能 ΔG‡，酵素會降低它，但<strong>不影響平衡</strong>。</li>
+      <li>比起「鎖鑰模型」，「過渡態互補」更準確：酵素與過渡態結合最緊，用結合能支付活化能的代價。</li>
+      <li>結合能主要來自降低熵、去溶劑化、誘導契合三種效應；同時也解釋了酵素的專一性。</li>
+      <li>一般酸鹼催化、共價催化、金屬離子催化，是結合能之外的三大化學加速機制，常常同時出現在同一個酵素身上。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="sec3">
+  <h2 class="sec-title"><span class="num">6.3</span>用動力學理解酵素機制</h2>
+
+  <p>要研究酵素的作用機制，除了看蛋白質的三維結構，最古老、也最重要的方法就是測量「反應有多快」，並觀察這個速率如何隨著各種條件變化——這門學問叫做<span class="term">酵素動力學<span class="en">enzyme kinetics</span></span>。</p>
+
+  <h3 class="sub">前穩態 vs 穩態</h3>
+  <p>當酵素剛與大量受質混合的瞬間，會先經歷一段極短暫的<span class="term">前穩態<span class="en">pre-steady state</span></span>（常常只有微秒到毫秒），此時 ES 複合物的濃度正在快速累積。接著反應很快進入<span class="term">穩態<span class="en">steady state</span></span>：ES 的濃度在反應的大部分時間裡幾乎維持恆定。我們平常觀察、測量的動力學數據，幾乎都是在穩態下取得的，所以這套方法稱為<span class="term">穩態動力學<span class="en">steady-state kinetics</span></span>。</p>
+
+  <p>由於反應過程中 [S] 會不斷下降，實驗上常用<span class="term">初速率<span class="en">initial velocity, V₀</span></span>——也就是反應剛開始、僅有 2–3% 受質被消耗時的速率——來代表在特定 [S] 下的反應速度，這樣可以合理地把 [S] 當作近似「不變」的常數。</p>
+
+  <h3 class="sub">Michaelis-Menten 方程式</h3>
+  <p>當我們固定酵素濃度、改變 [S]，畫出 V₀ 對 [S] 的關係圖，會得到一條漸趨平緩的曲線（雙曲線的一部分）：低 [S] 時速率幾乎線性增加，高 [S] 時速率趨近一個上限值——<span class="term">最大速率<span class="en">V<sub>max</sub></span></span>。這是因為在高 [S] 下，幾乎所有酵素都已經被受質「佔滿」（飽和），此時再加更多受質也無濟於事。</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Michaelis-Menten 曲線圖">
+      <line x1="55" y1="220" x2="600" y2="220" stroke="#999" stroke-width="1.5"/>
+      <line x1="55" y1="20" x2="55" y2="220" stroke="#999" stroke-width="1.5"/>
+      <text x="330" y="245" text-anchor="middle" font-size="13" fill="#4a5268">受質濃度 [S]</text>
+      <text x="25" y="120" text-anchor="middle" font-size="13" fill="#4a5268" transform="rotate(-90 25 120)">初速率 V₀</text>
+      <path d="M55,220 C 120,215 160,60 300,45 C 420,35 500,32 590,30" fill="none" stroke="#1f4b4f" stroke-width="3"/>
+      <line x1="55" y1="30" x2="590" y2="30" stroke="#c99a2e" stroke-width="1.4" stroke-dasharray="4,3"/>
+      <text x="595" y="26" font-size="12" fill="#c99a2e" text-anchor="end">V_max</text>
+      <line x1="55" y1="125" x2="590" y2="125" stroke="#c96a2e" stroke-width="1.2" stroke-dasharray="4,3"/>
+      <text x="595" y="121" font-size="12" fill="#c96a2e" text-anchor="end">½ V_max</text>
+      <line x1="148" y1="220" x2="148" y2="125" stroke="#a1273f" stroke-width="1.4" stroke-dasharray="3,3"/>
+      <circle cx="148" cy="125" r="4" fill="#a1273f"/>
+      <text x="148" y="238" text-anchor="middle" font-size="12" fill="#a1273f" font-weight="700">K_m</text>
+    </svg>
+    <div class="svg-caption">圖 6-12 概念重繪：曲線在 [S] = K<sub>m</sub> 時，速率剛好等於 V<sub>max</sub> 的一半——這是 K<sub>m</sub> 最實用的定義方式。</div>
+  </div>
+
+  <div class="key-eq">V₀ = (V<sub>max</sub> · [S]) / (K<sub>m</sub> + [S])　　——Michaelis-Menten 方程式</div>
+
+  <div class="box principle">
+    <div class="box-title">📌 K<sub>m</sub> 到底代表什麼？</div>
+    <p>最實用、永遠成立的定義是：<strong>K<sub>m</sub> 就是讓 V₀ 等於 ½V<sub>max</sub> 時的受質濃度</strong>。很多人直覺會把 K<sub>m</sub> 當成「酵素對受質的親和力」指標（K<sub>m</sub> 越小、親和力越高），這在某些簡單的兩步驟機制下成立，但並非所有酵素都適用——實際上 K<sub>m</sub> 是好幾個速率常數的組合，解讀時要小心。</p>
+  </div>
+
+  <h3 class="sub">雙倒數圖 <span class="en">Lineweaver-Burk plot</span></h3>
+  <p>把 Michaelis-Menten 方程式兩邊取倒數，可以把雙曲線「拉直」成一條直線，方便用線性迴歸求出 V<sub>max</sub> 與 K<sub>m</sub>：</p>
+  <div class="key-eq">1/V₀ = (K<sub>m</sub>/V<sub>max</sub>) · (1/[S]) + 1/V<sub>max</sub></div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lineweaver-Burk 雙倒數圖">
+      <line x1="70" y1="220" x2="470" y2="220" stroke="#999" stroke-width="1.5"/>
+      <line x1="70" y1="20" x2="70" y2="220" stroke="#999" stroke-width="1.5"/>
+      <text x="270" y="245" text-anchor="middle" font-size="13" fill="#4a5268">1 / [S]</text>
+      <text x="40" y="120" text-anchor="middle" font-size="13" fill="#4a5268" transform="rotate(-90 40 120)">1 / V₀</text>
+      <line x1="20" y1="205" x2="450" y2="45" stroke="#1f4b4f" stroke-width="3"/>
+      <circle cx="70" cy="163" r="4" fill="#c99a2e"/>
+      <text x="80" y="160" font-size="12" fill="#c99a2e">y 軸截距 ＝ 1 / V_max</text>
+      <circle cx="140" cy="220" r="4" fill="#a1273f"/>
+      <text x="150" y="212" font-size="12" fill="#a1273f">x 軸截距 ＝ −1 / K_m</text>
+    </svg>
+    <div class="svg-caption">圖 6-14 概念重繪：斜率為 K<sub>m</sub>/V<sub>max</sub>，y 截距為 1/V<sub>max</sub>，x 截距為 −1/K<sub>m</sub>。缺點是低 [S] 的數據點誤差會被過度放大，現在多半改用非線性迴歸求值。</div>
+  </div>
+
+  <h3 class="sub">k<sub>cat</sub> 與「催化完美」的酵素</h3>
+  <p><span class="term">k<sub>cat</sub><span class="en">turnover number</span></span>是酵素在受質飽和狀態下，每單位時間能把多少受質轉為產物的「轉換數」，單位是 1/時間。它讓我們能比較不同機制、不同步驟數的酵素效率。</p>
+
+  <p>但單看 k<sub>cat</sub> 還不夠公平——真正能用來比較不同酵素「催化效率」的指標，是 <span class="term">k<sub>cat</sub>/K<sub>m</sub></span>，稱為<span class="term">專一性常數<span class="en">specificity constant</span></span>。它有一個物理上限：受質靠擴散作用「撞見」酵素的速度，也就是 10⁸–10⁹ M⁻¹s⁻¹。少數酵素的 k<sub>cat</sub>/K<sub>m</sub> 已經逼近這個極限，代表它們幾乎每次「相遇」都能成功反應，這樣的酵素被稱為達到<span class="term">催化完美<span class="en">catalytic perfection</span></span>。</p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>表 6-8 節錄：k<sub>cat</sub>/K<sub>m</sub> 逼近擴散極限的「催化完美」酵素</caption>
+    <tr><th>酵素</th><th>受質</th><th>k<sub>cat</sub>/K<sub>m</sub> (M⁻¹s⁻¹)</th></tr>
+    <tr><td>乙醯膽鹼酯酶</td><td>乙醯膽鹼</td><td>1.6 × 10⁸</td></tr>
+    <tr><td>觸酶 <span class="en">catalase</span></td><td>H₂O₂</td><td>4 × 10⁷</td></tr>
+    <tr><td>延胡索酸酶 <span class="en">fumarase</span></td><td>延胡索酸</td><td>1.6 × 10⁸</td></tr>
+    <tr><td>β-內醯胺酶</td><td>青黴素</td><td>1 × 10⁸</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">大多數酵素反應牽涉兩個以上的受質</h3>
+  <p>約三分之二的酵素反應是「雙受質、雙產物」型式，主要有兩種路徑：</p>
+
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>雙受質反應的兩種主要機制</caption>
+    <tr><th>三元複合物機制<span class="en">Ternary complex</span></th><th>乒乓機制<span class="en">Ping-Pong</span></th></tr>
+    <tr><td>兩個受質<strong>同時</strong>結合在酵素上，可能依固定順序（<span class="en">ordered</span>）或隨機順序（<span class="en">random</span>）結合</td><td>受質 1 先結合、把某個基團轉移到酵素上形成暫時改變的酵素形式，然後<strong>先離開</strong>；受質 2 才進來、接收該基團，兩個受質<strong>從未同時</strong>出現在酵素上</td></tr>
+    <tr><td>雙倒數圖：不同 [S₂] 下的直線會「相交」</td><td>雙倒數圖：不同 [S₂] 下的直線會「平行」——這是實驗上區分兩種機制的關鍵判斷依據</td></tr>
+  </table>
+  </div>
+
+  <h3 class="sub">酵素活性受 pH 影響</h3>
+  <p>每個酵素都有一個最適 pH（或 pH 範圍），過高或過低都會讓活性下降。原因通常是活性位點某個胺基酸側鏈的解離狀態改變了（例如某個 His 殘基失去或得到質子），使它無法再擔任質子供體/受體。舉例來說，胃蛋白酶<span class="en">pepsin</span>最適 pH 約 1.6，剛好貼近胃液的酸鹼度；肝細胞的葡萄糖 6-磷酸酶最適 pH 約 7.8，貼近細胞質的中性環境。</p>
+
+  <hr class="divider">
+
+  <h3 class="sub">酵素抑制劑：可逆 vs 不可逆</h3>
+  <p><span class="term">酵素抑制劑<span class="en">enzyme inhibitor</span></span>是能干擾、減慢或完全中止酵素反應的分子——許多重要藥物本質上就是酵素抑制劑（例如阿斯匹靈就是抑制前列腺素合成路徑上的第一個酵素）。抑制劑分成兩大類：可逆與不可逆。</p>
+
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>三種可逆抑制的核心差異一次看懂</caption>
+    <tr><th>類型</th><th>競爭型<span class="en">Competitive</span></th><th>非競爭型<span class="en">Uncompetitive</span></th><th>混合型<span class="en">Mixed</span></th></tr>
+    <tr><td>結合位置</td><td>直接搶佔<strong>活性位點</strong>，與受質互斥</td><td>結合在<strong>別的位置</strong>，且只結合 <strong>ES 複合物</strong></td><td>結合在<strong>別的位置</strong>，可結合 E 或 ES</td></tr>
+    <tr><td>對表觀 V<sub>max</sub> 的影響</td><td>不變</td><td>降低</td><td>降低</td></tr>
+    <tr><td>對表觀 K<sub>m</sub> 的影響</td><td>增加（需要更多受質才能達到半飽和）</td><td>降低</td><td>可能增加或降低</td></tr>
+    <tr><td>如何「解除」抑制</td><td>提高 [S]，讓受質贏過抑制劑的競爭</td><td>提高 [S] 沒有幫助，甚至可能促進更多抑制劑結合</td><td>提高 [S] 效果有限</td></tr>
+    <tr><td>生活實例</td><td>甲醇中毒時，注射乙醇與甲醇「搶」酒精去氫酶</td><td>只在雙受質酵素中觀察到</td><td>只在雙受質酵素中觀察到</td></tr>
+  </table>
+  </div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三種可逆抑制在雙倒數圖上的圖形特徵">
+      <!-- competitive -->
+      <g>
+        <text x="90" y="18" text-anchor="middle" font-size="12" fill="#1f4b4f" font-weight="700">競爭型</text>
+        <line x1="30" y1="170" x2="170" y2="170" stroke="#ccc"/><line x1="30" y1="170" x2="30" y2="30" stroke="#ccc"/>
+        <line x1="10" y1="160" x2="150" y2="40" stroke="#1f4b4f" stroke-width="2.5"/>
+        <line x1="10" y1="160" x2="165" y2="65" stroke="#a1273f" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <text x="95" y="188" text-anchor="middle" font-size="10.5" fill="#4a5268">同一 y 截距，x 截距右移</text>
+      </g>
+      <!-- uncompetitive -->
+      <g transform="translate(215,0)">
+        <text x="90" y="18" text-anchor="middle" font-size="12" fill="#1f4b4f" font-weight="700">非競爭型</text>
+        <line x1="30" y1="170" x2="170" y2="170" stroke="#ccc"/><line x1="30" y1="170" x2="30" y2="30" stroke="#ccc"/>
+        <line x1="10" y1="160" x2="150" y2="40" stroke="#1f4b4f" stroke-width="2.5"/>
+        <line x1="10" y1="130" x2="150" y2="20" stroke="#a1273f" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <text x="95" y="188" text-anchor="middle" font-size="10.5" fill="#4a5268">兩線平行上移</text>
+      </g>
+      <!-- mixed -->
+      <g transform="translate(430,0)">
+        <text x="90" y="18" text-anchor="middle" font-size="12" fill="#1f4b4f" font-weight="700">混合型</text>
+        <line x1="30" y1="170" x2="170" y2="170" stroke="#ccc"/><line x1="30" y1="170" x2="30" y2="30" stroke="#ccc"/>
+        <line x1="10" y1="160" x2="150" y2="40" stroke="#1f4b4f" stroke-width="2.5"/>
+        <line x1="10" y1="120" x2="165" y2="55" stroke="#a1273f" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <text x="95" y="188" text-anchor="middle" font-size="10.5" fill="#4a5268">兩線相交，但不在軸上</text>
+      </g>
+    </svg>
+    <div class="svg-caption">深綠線＝無抑制劑；紅色虛線＝加入抑制劑後。三種抑制模式在雙倒數圖上的「交點位置」是實驗上判斷抑制類型的關鍵指紋。</div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-title">☠️ 不可逆抑制劑</div>
+    <p><span class="term">不可逆抑制劑<span class="en">irreversible inhibitor</span></span>會與酵素形成共價鍵、或非常穩定難以解離的非共價結合，永久破壞活性。其中一種特別的類型叫<span class="term">自殺型抑制劑<span class="en">suicide inactivator</span></span>：這類分子起初並不活潑，但一旦被帶入活性位點、經歷了正常反應的前幾步，就會被酵素自己的機制轉化成高反應性物種，反過來把酵素「做掉」。因為它必須先被目標酵素「加工」才會生效，副作用往往比較小，是理性藥物設計的重要策略——例如治療非洲昏睡病的藥物 DFMO，就是針對鳥胺酸脫羧酶設計的自殺型抑制劑。</p>
+  </div>
+
+  <p>不可逆抑制劑不一定要靠共價鍵——只要結合得夠緊、幾乎不解離也算數。這帶出另一個重要概念：<span class="term">過渡態類似物<span class="en">transition-state analog</span></span>。既然酵素演化成與過渡態結合最緊，那麼只要設計出「長得像過渡態」的穩定分子，就應該能緊緊黏在活性位點上——有些過渡態類似物的結合力比正常受質強上 10²–10⁸ 倍，這也是後面會提到的 HIV 蛋白酶抑制劑藥物的設計原理。</p>
+
+  <div class="summary-box">
+    <h4>6.3 重點回顧</h4>
+    <ul>
+      <li>反應會先經歷極短的前穩態，再進入可觀測的穩態；穩態動力學是研究酵素最常用的語言。</li>
+      <li>Michaelis-Menten 方程式描述 V₀ 隨 [S] 呈雙曲線變化；K<sub>m</sub> 是 V₀ = ½V<sub>max</sub> 時的 [S]。</li>
+      <li>k<sub>cat</sub>（轉換數）與 k<sub>cat</sub>/K<sub>m</sub>（專一性常數）是比較不同酵素效率的關鍵指標。</li>
+      <li>競爭型抑制劑搶佔活性位點（增加表觀 K<sub>m</sub>）；非競爭型只結合 ES（降低表觀 V<sub>max</sub> 與 K<sub>m</sub>）；混合型介於兩者之間；不可逆抑制劑則永久破壞酵素活性。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="sec4">
+  <h2 class="sec-title"><span class="num">6.4</span>三個經典酵素反應實例</h2>
+
+  <p>把前兩節的原理套用到真實酵素上，最能加深理解。本節精選三個研究得最透徹的例子：胰凝乳蛋白酶（示範共價催化＋一般酸鹼催化）、己糖激酶（示範誘導契合）、烯醇酶（示範金屬離子催化）。</p>
+
+  <h3 class="sub">胰凝乳蛋白酶：催化三聯體的接力賽</h3>
+  <p><span class="term">胰凝乳蛋白酶<span class="en">chymotrypsin</span></span>是一種<span class="term">蛋白酶<span class="en">protease</span></span>，專門切斷芳香族胺基酸（Trp、Phe、Tyr）旁邊的胜肽鍵，能把反應加速至少 10⁹ 倍。它的活性位點有三個關鍵殘基緊密協作，稱為<span class="term">催化三聯體<span class="en">catalytic triad</span></span>：<strong>Asp102 – His57 – Ser195</strong>。這三者透過氫鍵網路互相「加持」：Asp102 拉高 His57 的 pKa，讓 His57 能有效地從 Ser195 拉走一個質子，使 Ser195 的氧變成強力的親核基。</p>
+
+  <p>整個反應分成「醯化」與「去醯化」兩個階段，共 7 個步驟：</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="step-no">1</span>受質結合，芳香側鏈嵌入疏水口袋，胜肽鍵被精準定位。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">2</span>His57 拉走 Ser195 的質子，活化的 Ser195 氧攻擊羰基碳，形成四面體中間體，負電荷由「氧陰離子洞」穩定。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">3</span>四面體中間體崩解，胜肽鍵斷裂；His57 把質子送給離去的胺基（第一產物）。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">4</span>第一產物釋出，留下與酵素共價相連的<strong>醯化中間體</strong>；水分子進入活性位點，被 His57 去質子化成強力氫氧根。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">5</span>氫氧根攻擊酯鍵，形成第二個四面體中間體。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">6</span>中間體崩解，釋出第二產物（羧酸），Ser195 被置換出來。</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="step-no">7</span>第二產物解離，酵素恢復游離狀態，可以進行下一輪反應。</div>
+  </div>
+
+  <p>這個機制同時展示了三種催化手法：<strong>共價催化</strong>（Ser195 與受質形成暫時的共價醯基中間體）、<strong>一般酸鹼催化</strong>（His57 先當鹼、後當酸，來回捐/收質子）、以及<strong>過渡態穩定</strong>（氧陰離子洞用氫鍵穩定帶負電的四面體中間體）。這正是原則 P4 的完美示範：多重機制同時運作。</p>
+
+  <div class="box med">
+    <div class="box-title">💊 從機制到藥物：HIV 蛋白酶抑制劑</div>
+    <p>HIV 蛋白酶是一種<span class="term">天門冬胺酸蛋白酶<span class="en">aspartyl protease</span></span>，機制與胰凝乳蛋白酶不同（靠兩個 Asp 殘基直接活化水分子攻擊，而非形成共價中間體），但一樣會經過一個四面體過渡態。愛滋病藥物中的「蛋白酶抑制劑」正是模仿這個過渡態設計出的<span class="term">過渡態類似物</span>，結合得極為緊密，等同於不可逆抑制劑，成功大幅延長了愛滋病患者的壽命。</p>
+  </div>
+
+  <h3 class="sub">己糖激酶：誘導契合的教科書範例</h3>
+  <p>己糖激酶催化「葡萄糖 + ATP → 葡萄糖 6-磷酸 + ADP」。有趣的問題是：水分子和葡萄糖 C-6 的羥基化學性質很類似，為什麼己糖激酶幾乎不會把磷酸基錯誤地轉給水？答案是<span class="term">誘導契合<span class="en">induced fit</span></span>——只有當「正確受質」葡萄糖結合時，才會觸發酵素構型改變（兩個蛋白質葉片像蚌殼一樣闔起來），把催化基團排列到位；水分子單獨存在時無法觸發這個關鵎的構型改變，因此不會被誤當作受質。這個機制讓己糖激酶偏好葡萄糖勝過水高達 10⁶ 倍。</p>
+
+  <h3 class="sub">烯醇酶：金屬離子撐腰的催化</h3>
+  <p>烯醇酶催化 2-磷酸甘油酸脫水形成磷酸烯醇丙酮酸（糖解作用的一步）。反應分兩步：Lys345 先當一般鹼，從受質拉走一個質子；接著 Glu211 當一般酸，把質子送給要離去的 −OH 基。關鍵在於：受質的羧基被<strong>兩個 Mg²⁺ 離子</strong>牢牢固定，大幅增強電子被拉走的效果，讓原本很難被拔除的質子變得容易脫離——這就是金屬離子催化的典型範例，同時也搭配了一般酸鹼催化與過渡態穩定。</p>
+
+  <div class="box example">
+    <div class="box-title">🦠 機制知識如何造福醫學：抗生素的攻防戰</div>
+    <p>青黴素<span class="en">penicillin</span>之所以能殺菌，是因為它模仿細菌細胞壁合成酵素<span class="en">transpeptidase</span>受質的形狀，讓活性位點的 Ser 攻擊青黴素的 β-內醯胺環，形成極穩定的共價加成物，不可逆地讓酵素失去活性——本質上也是一種自殺型抑制劑。然而，細菌演化出 β-內醯胺酶來分解青黴素以求生存；人類則反擊，開發出<span class="term">克拉維酸</span>這類同樣利用自殺型抑制原理的化合物，專門去「毒死」β-內醯胺酶。這場人菌之間的化學軍備競賽，至今仍在持續。</p>
+  </div>
+
+  <div class="summary-box">
+    <h4>6.4 重點回顧</h4>
+    <ul>
+      <li>胰凝乳蛋白酶：Ser195–His57–Asp102 催化三聯體，結合共價催化、一般酸鹼催化與過渡態穩定。</li>
+      <li>己糖激酶：誘導契合確保只有正確受質才能觸發活性構型，避免磷酸基被誤轉給水。</li>
+      <li>烯醇酶：兩個 Mg²⁺ 離子示範金屬離子催化如何降低質子解離的門檻。</li>
+      <li>理解酵素機制，是設計精準藥物（如 HIV 蛋白酶抑制劑、抗生素）的關鍵基礎。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="sec5">
+  <h2 class="sec-title"><span class="num">6.5</span>調節酵素：細胞的節流閥</h2>
+
+  <p>細胞的代謝路徑是一連串酵素接力完成的：前一個酵素的產物，就是下一個酵素的受質。在這條「生產線」裡，通常會有一兩個<span class="term">調節酵素<span class="en">regulatory enzyme</span></span>，它們的活性會依訊號上下調整，等於是整條路徑的「節流閥」，讓細胞能因應能量與物質需求的變化即時調整代謝速度（呼應原則 P5）。</p>
+
+  <p>調節的方式主要有四種，同一個酵素常常同時使用好幾種：</p>
+  <div class="pill-row">
+    <span class="pill violet">別構調節</span>
+    <span class="pill violet">可逆共價修飾（如磷酸化）</span>
+    <span class="pill violet">蛋白酶切割活化（不可逆）</span>
+    <span class="pill violet">調節蛋白結合</span>
+  </div>
+
+  <h3 class="sub">別構酵素：構型轉換的開關</h3>
+  <p><span class="term">別構酵素<span class="en">allosteric enzyme</span></span>透過與<span class="term">別構調節物<span class="en">allosteric modulator</span></span>的可逆、非共價結合，在「較不活躍」的 <strong>T 態</strong>與「較活躍」的 <strong>R 態</strong>之間切換。</p>
+
+  <div class="table-wrap">
+  <table class="compare-table">
+    <caption>同型 vs 異型調節</caption>
+    <tr><th>同型調節<span class="en">homotropic</span></th><th>異型調節<span class="en">heterotropic</span></th></tr>
+    <tr><td>調節物<strong>就是受質本身</strong>——這也是別構酵素常呈現 S 形曲線的原因</td><td>調節物是<strong>受質以外的分子</strong>，結合在獨立的調節位點上</td></tr>
+    <tr><td>活性位點與調節位點是同一個</td><td>活性位點與調節位點通常分開，甚至位於不同次單元上</td></tr>
+  </table>
+  </div>
+
+  <div class="box example">
+    <div class="box-title">🧬 經典範例：天門冬胺酸轉胺甲醯酶 (ATCase)</div>
+    <p>ATCase 由 6 個催化次單元＋6 個調節次單元組成。<strong>ATP</strong>（代表細胞能量充沛、可以繼續合成核苷酸）是正調節物，<strong>CTP</strong>（路徑的最終產物）則是負調節物——這是一個典型的「終產物回饋抑制」設計，同時展現同型（受質本身促進 T→R 轉換）與異型（ATP/CTP 各自調控）兩種調節。</p>
+  </div>
+
+  <p>別構酵素的動力學曲線不是雙曲線，而是 <strong>S 形（乙狀）曲線</strong>，反映次單元之間的協同交互作用——原理與血紅素結合氧氣的協同效應非常類似。因為不再遵循 Michaelis-Menten 關係，此時改用 <span class="term">[S]<sub>0.5</sub></span>（或 K<sub>0.5</sub>）代表達到半飽和速率所需的受質濃度。</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="別構酵素的S形曲線與一般酵素雙曲線比較，以及活化劑抑制劑的影響">
+      <line x1="55" y1="200" x2="580" y2="200" stroke="#999" stroke-width="1.5"/>
+      <line x1="55" y1="15" x2="55" y2="200" stroke="#999" stroke-width="1.5"/>
+      <text x="320" y="222" text-anchor="middle" font-size="13" fill="#4a5268">受質濃度 [S]</text>
+      <text x="26" y="110" text-anchor="middle" font-size="13" fill="#4a5268" transform="rotate(-90 26 110)">V₀</text>
+      <!-- hyperbolic (nonallosteric) -->
+      <path d="M55,195 C 110,150 150,40 300,30 C 420,25 500,22 570,20" fill="none" stroke="#bbb" stroke-width="2" stroke-dasharray="5,3"/>
+      <!-- sigmoid with activator (left-shift) -->
+      <path d="M55,198 C 100,196 150,175 190,120 C 230,70 280,35 340,28 C 420,22 500,20 570,18" fill="none" stroke="#3d7a5c" stroke-width="3"/>
+      <!-- sigmoid normal -->
+      <path d="M55,198 C 150,197 220,190 270,150 C 320,100 370,45 430,32 C 480,26 530,23 570,22" fill="none" stroke="#1f4b4f" stroke-width="3"/>
+      <!-- sigmoid with inhibitor (right-shift) -->
+      <path d="M55,199 C 200,198 320,196 380,180 C 440,150 500,60 570,30" fill="none" stroke="#a1273f" stroke-width="3"/>
+      <text x="120" y="130" font-size="11.5" fill="#3d7a5c" font-weight="700">+ 活化劑（偏雙曲線）</text>
+      <text x="330" y="90" font-size="11.5" fill="#1f4b4f" font-weight="700">未加調節物（S形）</text>
+      <text x="410" y="170" font-size="11.5" fill="#a1273f" font-weight="700">+ 抑制劑（更S形）</text>
+    </svg>
+    <div class="svg-caption">圖 6-37 概念重繪：正調節物讓曲線左移、趨近雙曲線（K<sub>0.5</sub> 下降）；負調節物讓曲線右移、S 形更明顯（K<sub>0.5</sub> 上升）。像 ATCase 這樣的酵素，V<sub>max</sub> 本身通常不太受影響。</div>
+  </div>
+
+  <h3 class="sub">可逆共價修飾：磷酸化開關</h3>
+  <p>已知超過 500 種蛋白質共價修飾方式（磷酸化、乙醯化、腺苷酸化、泛素化……），其中最常見、也最重要的是<span class="term">磷酸化<span class="en">phosphorylation</span></span>——真核細胞裡約三分之一的蛋白質會被磷酸化。<span class="term">蛋白激酶<span class="en">protein kinase</span></span>負責把 ATP 的磷醯基裝到 Ser、Thr 或 Tyr 上；<span class="term">磷蛋白磷酸酶<span class="en">phosphoprotein phosphatase</span></span>則負責把它拆下來——兩邊各自獨立受調控，讓這個開關能被精準地雙向控制。</p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 560 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="醣原磷解酶的磷酸化開關示意">
+      <rect x="20" y="35" width="180" height="65" rx="10" fill="#ece7f6" stroke="#5b4b8a" stroke-width="2"/>
+      <text x="110" y="62" text-anchor="middle" font-size="14" fill="#5b4b8a" font-weight="700">磷解酶 b</text>
+      <text x="110" y="83" text-anchor="middle" font-size="11.5" fill="#5b4b8a">（低活性）</text>
+      <rect x="360" y="35" width="180" height="65" rx="10" fill="#5b4b8a"/>
+      <text x="450" y="62" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">磷解酶 a</text>
+      <text x="450" y="83" text-anchor="middle" font-size="11.5" fill="#ece7f6">（高活性，Ⓟ已接上）</text>
+      <path d="M205,55 L355,55" stroke="#3d7a5c" stroke-width="2.5" marker-end="url(#arrowg)"/>
+      <text x="280" y="45" text-anchor="middle" font-size="11" fill="#3d7a5c">磷解酶激酶＋2ATP</text>
+      <path d="M355,85 L205,85" stroke="#a1273f" stroke-width="2.5" marker-end="url(#arrowr)"/>
+      <text x="280" y="105" text-anchor="middle" font-size="11" fill="#a1273f">磷蛋白磷酸酶 1 ＋2H₂O</text>
+      <defs>
+        <marker id="arrowg" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#3d7a5c"/></marker>
+        <marker id="arrowr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#a1273f"/></marker>
+      </defs>
+    </svg>
+    <div class="svg-caption">圖 6-39 概念重繪：醣原磷解酶（glycogen phosphorylase）是磷酸化調控的經典範例——加磷酸活化，脫磷酸去活化，兩邊由不同酵素獨立催化。</div>
+  </div>
+
+  <p>更精妙的是，很多蛋白質不只一個磷酸化位點——例如醣原合成酶就有至少 9 個位點、受 5 種不同激酶調控，有些磷酸化甚至必須「按順序」發生（某位點磷酸化後，另一個激酶才能辨認下一個位點）。這讓磷酸化不再是單純的「開／關」，而更像一個具有多段刻度的調節旋鈕。</p>
+
+  <h3 class="sub">蛋白酶切割活化：不可逆的「拆保險絲」</h3>
+  <p>許多蛋白酶一開始是以無活性的<span class="term">酵素原<span class="en">zymogen</span></span>形式合成，之後被切除一段胜肽鏈才會露出活性位點、變成有活性的酵素——例如胰蛋白酶原<span class="en">trypsinogen</span>活化成胰蛋白酶<span class="en">trypsin</span>。和磷酸化不同，<strong>這種活化是不可逆的</strong>；如果之後需要「關掉」這個已活化的酵素，細胞必須另外派出專門的抑制蛋白，緊緊卡住活性位點才行。</p>
+
+  <div class="box warn">
+    <div class="box-title">🩸 調節級聯反應：血液凝固</div>
+    <p>血液凝固是<span class="term">調節級聯<span class="en">regulatory cascade</span></span>最經典的例子：一個訊號觸發蛋白 X 活化，X 再去活化蛋白 Y，Y 再活化蛋白 Z……每一步都是酵素催化、能活化「多個」下一步的分子，於是訊號被逐級放大。血液凝固由「外源途徑」與「內源途徑」兩條交織的級聯共同完成，兩者最終匯流、活化<strong>凝血酶<span class="en">thrombin</span></strong>，把可溶的<strong>纖維蛋白原</strong>切成不可溶的<strong>纖維蛋白</strong>，交織成凝血網，同時也少不了負回饋機制（如抗凝血酶 III、蛋白質 C）來煞車，避免血栓全身蔓延。</p>
+  </div>
+
+  <div class="flow">
+    <div class="flow-step" style="background:var(--regulate-soft);border-color:#d7cdec;"><span class="step-no" style="background:var(--regulate);">1</span>組織損傷 → 外源途徑啟動（組織因子 + 因子 VII）</div>
+    <div class="flow-arrow" style="color:var(--regulate);">→</div>
+    <div class="flow-step" style="background:var(--regulate-soft);border-color:#d7cdec;"><span class="step-no" style="background:var(--regulate);">2</span>因子 X 被活化為 Xa，內源途徑同步放大訊號</div>
+    <div class="flow-arrow" style="color:var(--regulate);">→</div>
+    <div class="flow-step" style="background:var(--regulate-soft);border-color:#d7cdec;"><span class="step-no" style="background:var(--regulate);">3</span>凝血酶原 → 凝血酶（thrombin）</div>
+    <div class="flow-arrow" style="color:var(--regulate);">→</div>
+    <div class="flow-step" style="background:var(--regulate-soft);border-color:#d7cdec;"><span class="step-no" style="background:var(--regulate);">4</span>纖維蛋白原 → 纖維蛋白，交織成血塊</div>
+  </div>
+
+  <p>臨床上，抗凝血藥物如<span class="term">華法林</span>（抑制維生素 K 依賴的凝血因子活化）與<span class="term">肝素</span>（增強抗凝血酶 III 的作用）都是針對這條級聯反應的不同節點下手，是「理解調節機制→設計藥物」的又一個範例。</p>
+
+  <p>細胞複雜的調節設計，說到底是為了不要「同時把所有反應都催化」——那樣大分子會被瞬間拆光。透過精準地打開/關閉正確的酵素，細胞才能依當下需求，把有限的化學資源分配到真正需要的地方，維持這場我們稱之為生命的、高度協調的化學交響曲。</p>
+
+  <div class="summary-box">
+    <h4>6.5 重點回顧</h4>
+    <ul>
+      <li>別構酵素透過調節物在 T 態（低活性）與 R 態（高活性）之間切換，動力學曲線呈 S 形而非雙曲線。</li>
+      <li>同型調節：調節物是受質本身；異型調節：調節物是其他分子，通常結合在獨立位點。</li>
+      <li>磷酸化／去磷酸化是最常見的可逆共價調節，由激酶與磷酸酶分別獨立催化，可產生精細的多段調控。</li>
+      <li>蛋白酶切割活化（酵素原→酵素）是不可逆的，常見於消化酵素與血液凝固級聯反應。</li>
+      <li>調節級聯能把微弱訊號逐級放大，同時搭配抑制迴路煞車，是精密生理控制的核心策略。</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<button id="backTop" title="回到上方" aria-label="回到上方">↑</button>
+
+<script>
+// sticky nav active state + back to top
+const sections = document.querySelectorAll('section.chapter, header#top');
+const navLinks = document.querySelectorAll('nav.toc a');
+function onScroll(){
+  let current = '';
+  document.querySelectorAll('section.chapter').forEach(sec=>{
+    const rect = sec.getBoundingClientRect();
+    if(rect.top <= 120) current = sec.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+  });
+  const backBtn = document.getElementById('backTop');
+  if(window.scrollY > 500){ backBtn.classList.add('show'); } else { backBtn.classList.remove('show'); }
+}
+window.addEventListener('scroll', onScroll);
+document.getElementById('backTop').addEventListener('click', ()=>{
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+
+</body>
+</html>
