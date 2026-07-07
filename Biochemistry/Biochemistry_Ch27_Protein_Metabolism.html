@@ -98,7 +98,8 @@
 
   /* ===== NAV ===== */
   .nav {
-    position: sticky; top: 0; z-index: 100;
+    position: sticky; justify-content: center;
+    top: 0; z-index: 100;
     background: rgba(13,17,23,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -116,6 +117,11 @@
     transition: all 0.2s;
   }
   .nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav a.active {
+    color: var(--orange);
+    background: rgba(88,166,255,0.1);
+    border-color: rgba(88,166,255,0.3);
+  }
 
   /* ===== LAYOUT ===== */
   .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
@@ -1327,6 +1333,30 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+// ─── Active section highlight via IntersectionObserver ───
+const secIds = ['overview', 'genetic-code', 'ribosome', 'trna', 'synthesis', 'targeting', 'degradation', 'antibiotics', 'quiz'];
+const navLinks = document.querySelectorAll('.nav a');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(a => a.classList.remove('active'));
+      
+      // 根據 href 屬性找到對應的連結
+      const active = document.querySelector(`.nav a[href="#${id}"]`);
+      if (active) {
+        active.classList.add('active');
+      }
+    }
+  });
+}, { rootMargin: '-80px 0px -50% 0px', threshold: 0 }); // 調整 rootMargin 以更靈敏地觸發
+
+secIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
 </script>
 
 </body>
