@@ -17,6 +17,18 @@
       "folder": "Biochemistry",
       "notes": [
         {
+          "title": "Ch03 Amino Acids, Peptides, and Proteins",
+          "file": "Biochemistry_Ch03_Amino_Acids,_Peptides,_and_Proteins.html"
+        },
+        {
+          "title": "Ch04 Three-Dimensional Structure of Proteins",
+          "file": "Biochemistry_Ch04_Three-Dimensional_Structure_of_Proteins.html"
+        },
+        {
+          "title": "Ch05 Protein Function",
+          "file": "Biochemistry_Ch05_Protein_Function.html"
+        },
+        {
           "title": "Ch06 Enzymes",
           "file": "Biochemistry_Ch06_Enzymes.html"
         },
