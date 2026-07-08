@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第五章 蛋白質功能｜生化教材</title>
+<style>
+  :root{
+    --bg:#faf9f6;
+    --card:#ffffff;
+    --ink:#242424;
+    --sub:#5c5c5c;
+    --primary:#1f5c7a;
+    --primary-dark:#123b4f;
+    --primary-light:#e6f1f6;
+    --accent:#c9622f;
+    --accent-light:#fbe9de;
+    --green:#3f8f5f;
+    --green-light:#e5f4ea;
+    --purple:#7a4f9e;
+    --purple-light:#efe6f7;
+    --red:#c33f3f;
+    --red-light:#fbe6e6;
+    --border:#e2ddd3;
+    --radius:14px;
+    --maxw:880px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",-apple-system,"Segoe UI",sans-serif;
+    line-height:1.85;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  header.page-head{
+    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+    color:#fff;
+    padding:36px 20px 28px;
+    text-align:center;
+  }
+  header.page-head .eyebrow{
+    font-size:.85rem;
+    letter-spacing:.12em;
+    opacity:.85;
+    margin-bottom:6px;
+  }
+  header.page-head h1{
+    margin:0 0 8px;
+    font-size:1.9rem;
+    font-weight:700;
+  }
+  header.page-head p{
+    margin:0;
+    font-size:.95rem;
+    opacity:.9;
+  }
+  nav.navbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  nav.navbar ul{
+    list-style:none;
+    margin:0;
+    padding:0 12px;
+    display:flex;
+    gap:4px;
+    max-width:var(--maxw);
+    margin:0 auto;
+  }
+  nav.navbar a{
+    display:block;
+    padding:14px 12px;
+    color:var(--primary-dark);
+    text-decoration:none;
+    font-size:.88rem;
+    font-weight:600;
+    border-bottom:3px solid transparent;
+    transition:.15s;
+  }
+  nav.navbar a:hover, nav.navbar a:focus{
+    border-bottom-color:var(--accent);
+    background:var(--primary-light);
+  }
+  main{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:24px 18px 60px;
+  }
+  section.chapter{
+    margin-bottom:52px;
+  }
+  section.chapter > h2.section-title{
+    font-size:1.5rem;
+    color:var(--primary-dark);
+    border-left:6px solid var(--primary);
+    padding-left:12px;
+    margin:0 0 6px;
+  }
+  section.chapter > p.section-sub{
+    color:var(--sub);
+    font-size:.92rem;
+    margin:0 0 22px;
+    padding-left:18px;
+  }
+  h3.topic{
+    font-size:1.18rem;
+    color:var(--primary-dark);
+    margin:34px 0 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  h3.topic::before{
+    content:"";
+    width:8px;height:8px;
+    background:var(--accent);
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  p{margin:0 0 14px;}
+  .term-zh{font-weight:700;color:var(--primary-dark);}
+  .term-en{color:var(--sub);font-size:.9em;}
+  ul.plain, ol.plain{padding-left:1.3em;margin:0 0 14px;}
+  ul.plain li, ol.plain li{margin-bottom:6px;}
+
+  /* Principle callout box (P1-P6 style) */
+  .principle-box{
+    background:var(--primary-light);
+    border:1px solid #cfe3ec;
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin:20px 0;
+  }
+  .principle-box h4{
+    margin:0 0 10px;
+    color:var(--primary-dark);
+    font-size:1.02rem;
+  }
+  .principle-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .principle-item{
+    background:#fff;
+    border-radius:10px;
+    padding:10px 14px;
+    border:1px solid #d9e8ee;
+    font-size:.92rem;
+  }
+  .principle-item b{color:var(--accent);margin-right:6px;}
+
+  /* Key mechanism highlight box */
+  .mech-box{
+    background:var(--accent-light);
+    border:1px solid #eecfb8;
+    border-left:6px solid var(--accent);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+  }
+  .mech-box .mech-label{
+    font-weight:700;
+    color:var(--accent);
+    font-size:.85rem;
+    letter-spacing:.06em;
+    margin-bottom:6px;
+    display:block;
+  }
+  .green-box{
+    background:var(--green-light);
+    border:1px solid #c7e6d3;
+    border-left:6px solid var(--green);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+  }
+  .green-box .mech-label{color:var(--green);font-weight:700;font-size:.85rem;letter-spacing:.06em;margin-bottom:6px;display:block;}
+  .purple-box{
+    background:var(--purple-light);
+    border:1px solid #ddc9ec;
+    border-left:6px solid var(--purple);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+  }
+  .purple-box .mech-label{color:var(--purple);font-weight:700;font-size:.85rem;letter-spacing:.06em;margin-bottom:6px;display:block;}
+  .red-box{
+    background:var(--red-light);
+    border:1px solid #f0caca;
+    border-left:6px solid var(--red);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+  }
+  .red-box .mech-label{color:var(--red);font-weight:700;font-size:.85rem;letter-spacing:.06em;margin-bottom:6px;display:block;}
+
+  /* numbered process flow */
+  .flow{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin:18px 0;
+  }
+  .flow-step{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 14px;
+  }
+  .flow-num{
+    flex-shrink:0;
+    width:30px;height:30px;
+    border-radius:50%;
+    background:var(--primary);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    font-size:.95rem;
+  }
+  .flow-step .flow-text b{color:var(--primary-dark);}
+  .flow-step .flow-text{font-size:.94rem;}
+  .flow-arrow{
+    text-align:center;
+    color:var(--sub);
+    font-size:1.1rem;
+    margin:-4px 0;
+  }
+
+  /* comparison table */
+  .table-wrap{overflow-x:auto;margin:18px 0;}
+  table.compare{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.92rem;
+    min-width:420px;
+  }
+  table.compare caption{
+    text-align:left;
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:8px;
+    font-size:.95rem;
+  }
+  table.compare th, table.compare td{
+    border:1px solid var(--border);
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.compare thead th{
+    background:var(--primary);
+    color:#fff;
+    font-weight:600;
+  }
+  table.compare tbody tr:nth-child(even){background:#f6f4ef;}
+  table.compare td:first-child{font-weight:700;color:var(--primary-dark);white-space:nowrap;}
+
+  figure.svg-figure{
+    margin:20px 0;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px;
+    text-align:center;
+  }
+  figure.svg-figure svg{max-width:100%;height:auto;}
+  figure.svg-figure figcaption{
+    margin-top:10px;
+    font-size:.85rem;
+    color:var(--sub);
+    text-align:left;
+  }
+
+  .case-box{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin:20px 0;
+    border-top:5px solid var(--red);
+  }
+  .case-box h4{margin:0 0 8px;color:var(--red);font-size:1.02rem;}
+
+  /* Key takeaways */
+  .takeaways{
+    background:linear-gradient(135deg,#fff,var(--primary-light));
+    border:2px solid var(--primary);
+    border-radius:var(--radius);
+    padding:26px 24px;
+  }
+  .takeaways h2{
+    margin:0 0 6px;
+    color:var(--primary-dark);
+    font-size:1.4rem;
+  }
+  .takeaways p.lead{color:var(--sub);margin:0 0 18px;font-size:.9rem;}
+  .takeaways .tw-group{margin-bottom:20px;}
+  .takeaways .tw-group h4{
+    margin:0 0 8px;
+    color:var(--primary);
+    font-size:1rem;
+    border-bottom:2px solid var(--primary-light);
+    padding-bottom:4px;
+  }
+  .takeaways ul{margin:0;padding-left:1.2em;}
+  .takeaways ul li{margin-bottom:7px;font-size:.94rem;}
+  .takeaways ul li b{color:var(--primary-dark);}
+
+  .top-btn-wrap{
+    text-align:center;
+    padding:10px 20px 40px;
+  }
+  #toTop{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    border-radius:30px;
+    padding:12px 28px;
+    font-size:.95rem;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(31,92,122,.3);
+    transition:.2s;
+  }
+  #toTop:hover{background:var(--primary-dark);transform:translateY(-2px);}
+
+  @media (max-width:600px){
+    header.page-head h1{font-size:1.5rem;}
+    nav.navbar a{padding:12px 9px;font-size:.82rem;}
+    section.chapter > h2.section-title{font-size:1.3rem;}
+    body{font-size:15px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="eyebrow">生物化學・第 5 章</div>
+  <h1>蛋白質功能</h1>
+  <p>Protein Function｜改寫自 Lehninger Principles of Biochemistry, 8e</p>
+</header>
+
+<nav class="navbar">
+  <ul>
+    <li><a href="#intro">六大原則</a></li>
+    <li><a href="#sec1">5.1 氧結合蛋白</a></li>
+    <li><a href="#sec2">5.2 免疫球蛋白</a></li>
+    <li><a href="#sec3">5.3 肌動／肌凝蛋白</a></li>
+    <li><a href="#takeaways">重點複習</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ INTRO ============ -->
+<section class="chapter" id="intro">
+  <h2 class="section-title">蛋白質功能的六大原則</h2>
+  <p class="section-sub">在正式介紹三個具體系統之前，先建立一套通用的思考架構</p>
+
+  <p>前一章討論的蛋白質結構其實是「靜態」的照片，但蛋白質真正的工作方式是<b>動態地與其他分子交互作用</b>。這類交互作用分兩種：會改變被結合分子化學組成的，稱為<span class="term-zh">酵素（enzyme）</span>反應（留待第 6 章）；不改變被結合分子化學組成的，就是本章的主題——<span class="term-zh">可逆結合（reversible binding）</span>。</p>
+
+  <div class="principle-box">
+    <h4>📌 貫穿全章的六個核心概念</h4>
+    <div class="principle-grid">
+      <div class="principle-item"><b>P1</b>蛋白質的功能常涉及對<span class="term-zh">配體（ligand）</span>——任何被蛋白質可逆結合的分子——的可逆結合。</div>
+      <div class="principle-item"><b>P2</b>配體結合在與其形狀、電荷、親疏水性互補的<span class="term-zh">結合位（binding site）</span>上，具有高度專一性。</div>
+      <div class="principle-item"><b>P3</b>蛋白質具有<span class="term-zh">彈性（flexibility）</span>，會有細微或劇烈的構形變動。</div>
+      <div class="principle-item"><b>P4</b>結合常伴隨<span class="term-zh">誘導契合（induced fit）</span>：構形改變使結合位更貼合配體。</div>
+      <div class="principle-item"><b>P5</b>多次單元蛋白質中，一個次單元的構形改變會牽動其他次單元。</div>
+      <div class="principle-item"><b>P6</b>配體與蛋白質的交互作用可以被<span class="term-zh">調節（regulated）</span>。</div>
+    </div>
+  </div>
+  <p style="font-size:.88rem;color:var(--sub);">💡 這六點會在本章各節中反覆出現，讀完每一節可以回頭想想它對應到哪一個原則。</p>
+</section>
+
+<!-- ============ 5.1 ============ -->
+<section class="chapter" id="sec1">
+  <h2 class="section-title">5.1 氧結合蛋白：肌紅蛋白與血紅蛋白</h2>
+  <p class="section-sub">以「可逆結合」的經典範例，說明蛋白質如何抓住又放開配體</p>
+
+  <h3 class="topic">血基質：氧氣的結合位置</h3>
+  <p>胺基酸側鏈本身無法有效結合氧氣，這個任務由過渡金屬<b>鐵</b>負責。但游離的 Fe²⁺ 很不穩定，容易被氧化成沒有結合力的 Fe³⁺，因此細胞把鐵包裹在一種稱為<span class="term-zh">血基質（heme）</span>的輔基（prosthetic group）中，由有機環狀結構<b>紫質（porphyrin）</b>固定住鐵原子。</p>
+
+  <figure class="svg-figure">
+    <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="230" cy="110" r="70" fill="none" stroke="#c9622f" stroke-width="4"/>
+      <circle cx="230" cy="110" r="10" fill="#c33f3f"/>
+      <text x="230" y="115" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">Fe²⁺</text>
+      <text x="230" y="60" text-anchor="middle" font-size="12" fill="#1f5c7a">紫質環 porphyrin</text>
+      <line x1="230" y1="40" x2="230" y2="100" stroke="#7a4f9e" stroke-width="3"/>
+      <text x="270" y="30" text-anchor="middle" font-size="12" fill="#7a4f9e">遠側 His</text>
+      <text x="270" y="15" text-anchor="middle" font-size="10" fill="#7a4f9e">(distal His)</text>
+      <circle cx="230" cy="30" r="14" fill="#efe6f7" stroke="#7a4f9e" stroke-width="2"/>
+      <text x="230" y="34" text-anchor="middle" font-size="9" fill="#7a4f9e">O₂位</text>
+      <line x1="230" y1="120" x2="230" y2="180" stroke="#3f8f5f" stroke-width="3"/>
+      <circle cx="230" cy="192" r="14" fill="#e5f4ea" stroke="#3f8f5f" stroke-width="2"/>
+      <text x="230" y="196" text-anchor="middle" font-size="9" fill="#3f8f5f">His F8</text>
+      <text x="270" y="205" text-anchor="middle" font-size="12" fill="#3f8f5f">近側 His</text>
+      <text x="270" y="218" text-anchor="middle" font-size="10" fill="#3f8f5f">(proximal His)</text>
+      <text x="430" y="70" font-size="12" fill="#242424" text-anchor="middle">鐵有 6 個配位鍵：</text>
+      <text x="430" y="95" font-size="11" fill="#5c5c5c" text-anchor="middle">4 個固定於紫質平面</text>
+      <text x="430" y="115" font-size="11" fill="#5c5c5c" text-anchor="middle">1 個接近側 His（固定用）</text>
+      <text x="430" y="135" font-size="11" fill="#5c5c5c" text-anchor="middle">1 個留給 O₂（可逆結合）</text>
+    </svg>
+    <figcaption>圖 5-1／5-2 重製：血基質中鐵的 6 個配位鍵——4 個固定在紫質平面、1 個接到近側組胺酸（His F8，固定鐵原子）、1 個是氧氣真正結合的位置。遠側 His 則像個「守門員」，幫助穩定並篩選結合的小分子。</figcaption>
+  </figure>
+
+  <div class="mech-box">
+    <span class="mech-label">⚠ 容易搞混的地方</span>
+    近側 His（proximal His）＝直接與鐵配位、把血基質「固定」在蛋白質上；遠側 His（distal His）＝不與鐵直接鍵結，而是在氧氣結合位旁邊用氫鍵「加強、篩選」O₂ 的結合，並幫助阻擋一氧化碳。
+  </div>
+
+  <h3 class="topic">球蛋白家族與肌紅蛋白</h3>
+  <p><span class="term-zh">球蛋白（globins）</span>是一個古老且廣泛存在的蛋白質家族，共同摺疊成「8 條 α 螺旋（A–H）＋血基質口袋」的<span class="term-zh">球蛋白摺疊（globin fold）</span>。人類至少有 4 種球蛋白，其中最重要的兩個：</p>
+  <div class="table-wrap">
+    <table class="compare">
+      <caption>肌紅蛋白 vs 血紅蛋白：先建立基本印象</caption>
+      <thead><tr><th></th><th>肌紅蛋白 Myoglobin (Mb)</th><th>血紅蛋白 Hemoglobin (Hb)</th></tr></thead>
+      <tbody>
+        <tr><td>次單元數</td><td>單一多肽鏈（1 個血基質）</td><td>四聚體：2 個 α 鏈＋2 個 β 鏈（4 個血基質）</td></tr>
+        <tr><td>主要功能</td><td>肌肉中儲存 / 短距離運送氧氣</td><td>血液中長距離運送氧氣</td></tr>
+        <tr><td>結合曲線</td><td>雙曲線（hyperbolic）</td><td>S 型／協同（sigmoid）</td></tr>
+        <tr><td>是否有次單元間溝通</td><td>沒有（只有一個結合位）</td><td>有——這正是協同性的來源</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="topic">用數字描述結合強度：Ka 與 Kd</h3>
+  <p>蛋白質 P 與配體 L 的可逆結合可以寫成平衡式：P + L ⇌ PL。我們最常用<span class="term-zh">解離常數（dissociation constant, Kd）</span>來描述親和力：</p>
+  <div class="green-box">
+    <span class="mech-label">✔ 記住這一句就夠了</span>
+    Y（結合位被佔據的比例）＝ [L] ÷ ([L] + Kd)。當 [L] = Kd 時，剛好一半的結合位被佔滿（Y = 0.5）。<b>Kd 越小，代表親和力越高</b>（低濃度配體就能讓蛋白質「吃飽」）。
+  </div>
+
+  <figure class="svg-figure">
+    <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="220" x2="520" y2="220" stroke="#5c5c5c" stroke-width="1.5"/>
+      <line x1="60" y1="220" x2="60" y2="20" stroke="#5c5c5c" stroke-width="1.5"/>
+      <text x="290" y="248" text-anchor="middle" font-size="12" fill="#5c5c5c">配體濃度 [L] 或 pO₂ →</text>
+      <text x="25" y="120" text-anchor="middle" font-size="12" fill="#5c5c5c" transform="rotate(-90 25 120)">Y (佔據比例) →</text>
+      <path d="M 60 220 Q 130 60 520 40" fill="none" stroke="#1f5c7a" stroke-width="3"/>
+      <text x="330" y="55" font-size="12" fill="#1f5c7a" font-weight="700">肌紅蛋白（雙曲線）</text>
+      <path d="M 60 220 C 150 218, 200 210, 240 160 S 320 40, 500 35" fill="none" stroke="#c9622f" stroke-width="3"/>
+      <text x="330" y="130" font-size="12" fill="#c9622f" font-weight="700">血紅蛋白（S 型・協同）</text>
+      <line x1="60" y1="120" x2="520" y2="120" stroke="#c33f3f" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="500" y="112" font-size="10" fill="#c33f3f">Y = 0.5</text>
+    </svg>
+    <figcaption>圖 5-4／5-12 重製：肌紅蛋白只有一個結合位，曲線是簡單雙曲線，對氧濃度變化不敏感，適合「儲存」。血紅蛋白四個次單元間互相溝通，形成 S 型曲線，在肺（pO₂高）與組織（pO₂低）之間的濃度差範圍內反應特別靈敏，適合「運輸」。</figcaption>
+  </figure>
+
+  <h3 class="topic">結合位的立體效應：為什麼一氧化碳這麼毒</h3>
+  <p>游離血基質對 CO 的親和力是 O₂ 的 20,000 倍，但被包在肌紅蛋白裡之後，這個優勢會被壓低到約 40 倍——關鍵在於遠側 His 只能與極性較強、以「彎角」方式結合的 O₂ 形成氫鍵，卻無法有效穩定以「垂直」方式結合的 CO。這個安排讓球蛋白選擇性地偏好氧氣，也解釋了 CO 中毒的分子機制：CO 一旦搶佔了結合位，O₂ 就完全被排除在外。</p>
+
+  <div class="red-box">
+    <span class="mech-label">🏥 臨床連結：一氧化碳中毒</span>
+    CO 無色無味，與血紅蛋白形成「碳氧血紅蛋白（COHb）」。因為 CO 對血紅蛋白的親和力仍比 O₂ 高約 250 倍，即使環境中濃度不高，長時間暴露（如車庫中怠速的汽車、故障的暖爐）也可能讓 COHb 累積到危險程度，是常見的意外中毒死因之一。
+  </div>
+
+  <h3 class="topic">血紅蛋白的 T 態與 R 態：構形轉換</h3>
+  <p>血紅蛋白有兩個主要構形：沒有結合氧氣時較穩定的<span class="term-zh">T 態（tense，緊張態）</span>，以及結合氧氣後較穩定的<span class="term-zh">R 態（relaxed，鬆弛態）</span>。R 態對氧氣的親和力遠高於 T 態。</p>
+
+  <figure class="svg-figure">
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="50" width="180" height="100" rx="16" fill="#fbe6e6" stroke="#c33f3f" stroke-width="2"/>
+      <text x="120" y="40" text-anchor="middle" font-size="14" fill="#c33f3f" font-weight="700">T 態（去氧血紅蛋白）</text>
+      <circle cx="80" cy="90" r="18" fill="#c33f3f" opacity=".7"/>
+      <circle cx="150" cy="90" r="18" fill="#c33f3f" opacity=".7"/>
+      <circle cx="80" cy="130" r="18" fill="#c33f3f" opacity=".7"/>
+      <circle cx="150" cy="130" r="18" fill="#c33f3f" opacity=".7"/>
+      <text x="120" y="170" text-anchor="middle" font-size="11" fill="#5c5c5c">離子鍵較多・對 O₂ 親和力低</text>
+
+      <path d="M 230 100 L 300 100" stroke="#1f5c7a" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="265" y="90" text-anchor="middle" font-size="11" fill="#1f5c7a">O₂ 結合</text>
+
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#1f5c7a"/>
+        </marker>
+      </defs>
+
+      <rect x="330" y="50" width="200" height="100" rx="16" fill="#e5f4ea" stroke="#3f8f5f" stroke-width="2"/>
+      <text x="430" y="40" text-anchor="middle" font-size="14" fill="#3f8f5f" font-weight="700">R 態（含氧血紅蛋白）</text>
+      <circle cx="390" cy="95" r="18" fill="#3f8f5f" opacity=".7"/>
+      <circle cx="470" cy="95" r="18" fill="#3f8f5f" opacity=".7"/>
+      <circle cx="390" cy="125" r="18" fill="#3f8f5f" opacity=".7"/>
+      <circle cx="470" cy="125" r="18" fill="#3f8f5f" opacity=".7"/>
+      <text x="430" y="170" text-anchor="middle" font-size="11" fill="#5c5c5c">次單元滑動・β 口袋變窄</text>
+    </svg>
+    <figcaption>圖 5-9／5-10 重製：氧氣結合到一個次單元後，觸發該次單元從 T 態轉為 R 態，並透過次單元間的接觸面把這個「訊息」傳給鄰居，讓後續氧分子更容易結合——這就是協同性（cooperativity）的分子基礎。</figcaption>
+  </figure>
+
+  <div class="purple-box">
+    <span class="mech-label">🔑 對應原則 P5</span>
+    <span class="term-zh">變構蛋白（allosteric protein）</span>：一個結合位的配體結合會影響另一個結合位的性質。誘發變構的分子稱為<span class="term-zh">調節物（modulator）</span>。氧氣本身在血紅蛋白身上同時扮演「配體」與「同型調節物（homotropic modulator）」兩種角色。
+  </div>
+
+  <div class="table-wrap">
+    <table class="compare">
+      <caption>同型調節 vs 異型調節（容易混淆的一組名詞）</caption>
+      <thead><tr><th>類型</th><th>定義</th><th>血紅蛋白的例子</th></tr></thead>
+      <tbody>
+        <tr><td>同型 Homotropic</td><td>調節物就是正常配體本身</td><td>O₂ 促進其他次單元結合更多 O₂</td></tr>
+        <tr><td>異型 Heterotropic</td><td>調節物是與正常配體不同的分子</td><td>H⁺、CO₂、BPG 都會降低對 O₂ 的親和力</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="topic">解釋協同性的兩個模型</h3>
+  <div class="table-wrap">
+    <table class="compare">
+      <caption>MWC（協同）模型 vs 循序模型</caption>
+      <thead><tr><th></th><th>MWC 模型 concerted model</th><th>循序模型 sequential model</th></tr></thead>
+      <tbody>
+        <tr><td>提出者</td><td>Monod, Wyman, Changeux (1965)</td><td>Koshland 等人 (1966)</td></tr>
+        <tr><td>核心假設</td><td>所有次單元「同進同出」，同時是 T 態或同時是 R 態，沒有中間混合態</td><td>次單元可各自獨立改變構形，一個變了會提高鄰居轉變的機率</td></tr>
+        <tr><td>中間狀態</td><td>較少（非 T 即 R）</td><td>較多（可以是混合構形）</td></tr>
+        <tr><td>關係</td><td colspan="2">兩者並非互斥；MWC 模型可視為循序模型在「全有全無」情況下的特例，兩者在實驗上很難完全區分。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="topic">波耳效應：血紅蛋白也運送 H⁺ 與 CO₂</h3>
+  <p>組織代謝會產生 CO₂，經<span class="term-zh">碳酸酐酶（carbonic anhydrase）</span>水合成 H⁺ 與 HCO₃⁻。H⁺ 與 CO₂ 都會穩定 T 態、降低血紅蛋白對 O₂ 的親和力，這種「pH／CO₂ 濃度影響 O₂ 結合」的現象稱為<span class="term-zh">波耳效應（Bohr effect）</span>。</p>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><b>組織（周邊）：</b>CO₂、H⁺ 濃度高 → 促進 T 態 → 血紅蛋白釋出 O₂ 給細胞使用。</div></div>
+    <div class="flow-arrow">↓ 血液循環到肺 ↓</div>
+    <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><b>肺部：</b>CO₂ 被呼出、pH 上升 → 促進 R 態 → 血紅蛋白大量結合 O₂，同時釋出 H⁺／CO₂。</div></div>
+  </div>
+
+  <h3 class="topic">2,3-二磷酸甘油酸（BPG）的調節作用</h3>
+  <p><span class="term-zh">2,3-二磷酸甘油酸（2,3-bisphosphoglycerate, BPG）</span>結合在 β 次單元間的中央空腔，只在 T 態才有結合空間，因此會穩定 T 態、降低對 O₂ 的親和力，是異型變構調節的典型例子。這對於<b>高海拔適應</b>很重要：紅血球中 BPG 濃度會隨海拔上升而增加，補償低氧壓造成的攜氧不足；胎兒血紅蛋白（α₂γ₂）則因為對 BPG 親和力低，天生就對 O₂ 有較高親和力，方便從母體血液中「搶」氧氣。</p>
+
+  <h3 class="topic">鐮刀型貧血症：一個胺基酸的代價</h3>
+  <div class="case-box">
+    <h4>🩸 案例：鐮刀型血球疾病（Sickle Cell Anemia）</h4>
+    <p style="margin-bottom:8px;">β 鏈第 6 個胺基酸由帶負電的<b>麩胺酸（Glu）</b>突變成疏水性的<b>纈胺酸（Val）</b>，在血紅蛋白表面製造出一個「黏黏的」疏水補釘。去氧化的鐮刀型血紅蛋白（HbS）分子因此互相聚集，形成僵硬的纖維，把紅血球撐成鐮刀狀。</p>
+    <ul class="plain" style="margin-bottom:0;">
+      <li>鐮刀狀紅血球脆弱易破 → 貧血</li>
+      <li>纖維化的細胞卡住微血管 → 劇痛、器官損傷</li>
+      <li>有趣的演化現象：帶一個突變基因（雜合子）的人只會出現輕微症狀，卻能對瘧疾有一定抵抗力——這是天擇在「疾病嚴重度」與「瘧疾抗性」間取得的平衡。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 5.2 ============ -->
+<section class="chapter" id="sec2">
+  <h2 class="section-title">5.2 免疫系統與免疫球蛋白</h2>
+  <p class="section-sub">結合位不再是輔基口袋，而是由胺基酸側鏈直接構成的專一性凹槽</p>
+
+  <p>免疫系統展示的是另一種結合方式：結合位是蛋白質表面由多個胺基酸殘基排列出來的凹槽，而不是像血基質那樣的輔基，但同樣強調<b>高度專一性</b>（P2）。</p>
+
+  <div class="table-wrap">
+    <table class="compare">
+      <caption>體液免疫 vs 細胞免疫</caption>
+      <thead><tr><th></th><th>體液免疫 Humoral</th><th>細胞免疫 Cellular</th></tr></thead>
+      <tbody>
+        <tr><td>主要對象</td><td>細菌、細胞外病毒</td><td>被病毒感染的宿主細胞、部分寄生蟲</td></tr>
+        <tr><td>主要細胞</td><td>B 淋巴球（B cell）</td><td>胞殺型 T 細胞（T<sub>C</sub> cell）</td></tr>
+        <tr><td>關鍵蛋白</td><td>抗體／免疫球蛋白（Ig）</td><td>T 細胞受體（T-cell receptor）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>另一群<span class="term-zh">輔助型 T 細胞（helper T cell, T<sub>H</sub>）</span>負責分泌細胞激素、刺激 B 細胞與 T<sub>C</sub> 細胞增殖（<span class="term-zh">克隆選擇 clonal selection</span>）。HIV 專門攻擊 T<sub>H</sub> 細胞，這也是愛滋病會使整個免疫系統癱瘓的原因。</p>
+
+  <h3 class="topic">抗體的 Y 字形結構</h3>
+  <p>最常見的抗體<span class="term-zh">IgG</span>由 2 條重鏈＋2 條輕鏈組成 Y 字形，可以用木瓜酶切成兩個相同的<span class="term-zh">Fab 片段（抗原結合區）</span>和一個<span class="term-zh">Fc 片段（恆定基座）</span>。</p>
+
+  <figure class="svg-figure">
+    <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+      <line x1="200" y1="140" x2="120" y2="40" stroke="#1f5c7a" stroke-width="8" stroke-linecap="round"/>
+      <line x1="200" y1="140" x2="280" y2="40" stroke="#1f5c7a" stroke-width="8" stroke-linecap="round"/>
+      <line x1="200" y1="140" x2="200" y2="230" stroke="#7a4f9e" stroke-width="10" stroke-linecap="round"/>
+      <circle cx="115" cy="30" r="14" fill="#c9622f"/>
+      <circle cx="285" cy="30" r="14" fill="#c9622f"/>
+      <text x="115" y="16" text-anchor="middle" font-size="11" fill="#c9622f" font-weight="700">抗原結合位</text>
+      <text x="285" y="16" text-anchor="middle" font-size="11" fill="#c9622f" font-weight="700">抗原結合位</text>
+      <text x="70" y="90" text-anchor="middle" font-size="12" fill="#1f5c7a" font-weight="700">Fab</text>
+      <text x="330" y="90" text-anchor="middle" font-size="12" fill="#1f5c7a" font-weight="700">Fab</text>
+      <text x="200" y="255" text-anchor="middle" font-size="12" fill="#7a4f9e" font-weight="700">Fc（可被巨噬細胞受體辨識）</text>
+      <line x1="150" y1="90" x2="250" y2="90" stroke="#c33f3f" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="200" y="105" text-anchor="middle" font-size="10" fill="#c33f3f">木瓜酶（papain）切位・鉸鏈區</text>
+    </svg>
+    <figcaption>圖 5-20 重製：兩條重鏈與兩條輕鏈的可變區（VH／VL）組合出兩個一模一樣的抗原結合位，恆定區則組成 Fc，負責與免疫細胞表面受體對接（例如觸發巨噬細胞吞噬）。</figcaption>
+  </figure>
+
+  <p>抗體辨識的目標分子稱為<span class="term-zh">抗原（antigen）</span>，抗體實際結合的局部構造稱為<span class="term-zh">抗原決定位（epitope）</span>。結合常伴隨誘導契合：結合位在抗原靠近時發生構形改變，讓凹槽變大、更貼合抗原（對應 P4）。抗體-抗原的親和力極高，Kd 可低到 10⁻¹⁰ M。</p>
+
+  <div class="table-wrap">
+    <table class="compare">
+      <caption>五類免疫球蛋白</caption>
+      <thead><tr><th>類別</th><th>重鏈</th><th>特徵 / 功能</th></tr></thead>
+      <tbody>
+        <tr><td>IgG</td><td>γ</td><td>血中含量最高，次級免疫反應主力</td></tr>
+        <tr><td>IgM</td><td>μ</td><td>初次免疫反應最先產生，分泌型為五聚體</td></tr>
+        <tr><td>IgA</td><td>α</td><td>存在於唾液、淚液、乳汁等分泌物中</td></tr>
+        <tr><td>IgD</td><td>δ</td><td>功能尚不完全清楚</td></tr>
+        <tr><td>IgE</td><td>ε</td><td>與過敏反應有關，結合肥大細胞誘發組織胺釋放</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="topic">應用：用抗體當「偵探」——免疫墨點法</h3>
+  <p>抗體的高專一性讓它成為重要的檢測工具，例如<span class="term-zh">西方墨點法（Western blot）</span>：</p>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">樣品塗覆於表面（抗原固定）</div></div>
+    <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">以非特異性蛋白封閉多餘位點，避免背景干擾</div></div>
+    <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">加入<b>初級抗體</b>，專一結合目標蛋白</div></div>
+    <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">加入連接酵素的<b>次級抗體</b>，結合初級抗體</div></div>
+    <div class="flow-step"><div class="flow-num">5</div><div class="flow-text">加入受質，酵素催化呈色反應</div></div>
+    <div class="flow-step"><div class="flow-num">6</div><div class="flow-text">出現顏色 → 證實並定量目標蛋白存在</div></div>
+  </div>
+</section>
+
+<!-- ============ 5.3 ============ -->
+<section class="chapter" id="sec3">
+  <h2 class="section-title">5.3 肌動蛋白與肌凝蛋白：化學能驅動的分子馬達</h2>
+  <p class="section-sub">當蛋白質結合的目標不是配體本身，而是要「消耗 ATP 產生運動」</p>
+
+  <p>這一節的結合作用多加了一個元素：ATP 水解提供的化學能，讓蛋白質-蛋白質交互作用轉換成有方向性的機械力，也就是肌肉收縮。</p>
+
+  <h3 class="topic">兩大主角：肌凝蛋白與肌動蛋白</h3>
+  <div class="table-wrap">
+    <table class="compare">
+      <caption>肌凝蛋白 vs 肌動蛋白</caption>
+      <thead><tr><th></th><th>肌凝蛋白 Myosin</th><th>肌動蛋白 Actin</th></tr></thead>
+      <tbody>
+        <tr><td>組成</td><td>2 條重鏈＋4 條輕鏈；尾部捲曲螺旋，頭部球狀（含 ATP 水解位）</td><td>單體 G-actin 聚合成纖維狀 F-actin</td></tr>
+        <tr><td>組成的絲</td><td>粗絲 thick filament</td><td>細絲 thin filament（另含原肌凝蛋白、肌鈣蛋白）</td></tr>
+        <tr><td>關鍵活性</td><td>ATPase：結合並水解 ATP，本身也是一種酵素</td><td>提供肌凝蛋白頭部反覆抓握、放開的「軌道」</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>肌肉纖維內部的重複收縮單位稱為<span class="term-zh">肌小節（sarcomere）</span>：兩端由 <b>Z 盤</b>錨定細絲，中央 <b>M 線</b>固定粗絲；收縮時 I 帶變窄、Z 盤互相靠近，但粗絲與細絲本身長度不變——是「滑動」而非「縮短」。</p>
+
+  <h3 class="topic">肌動-肌凝蛋白循環（actomyosin cycle）</h3>
+  <div class="mech-box">
+    <span class="mech-label">🔁 四步驟核心機轉——請記住順序</span>
+    <div class="flow" style="margin-top:8px;">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><b>ATP 結合：</b>ATP 與肌凝蛋白頭部結合，頭部裂隙打開，肌凝蛋白<b>放開</b>肌動蛋白。</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><b>水解 ATP：</b>ATP → ADP + Pi，肌凝蛋白進入「高能」構形，頭部擺動到細絲上更靠近 Z 盤的新位置，並「弱結合」新的肌動蛋白單體。</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><b>釋放磷酸：</b>Pi 釋出，裂隙閉合，肌凝蛋白與肌動蛋白之間形成<b>強結合</b>。</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><b>動力衝程 power stroke：</b>頭部構形回彈到原始角度，把肌動蛋白細絲拉向 Z 盤方向；隨後 ADP 釋出，回到步驟 1。</div></div>
+    </div>
+  </div>
+  <p style="font-size:.9rem;color:var(--sub);">💡 若 ATP 完全耗盡（例如死亡後），肌凝蛋白會永久卡在強結合狀態，肌肉無法放鬆——這正是「屍僵（rigor mortis）」的分子機制，也提醒我們「可逆性」對生命有多重要。</p>
+
+  <h3 class="topic">收縮的開關：肌鈣蛋白與原肌凝蛋白</h3>
+  <p>靜止狀態下，<span class="term-zh">原肌凝蛋白（tropomyosin）</span>覆蓋在細絲表面，擋住肌凝蛋白頭部的結合位；<span class="term-zh">肌鈣蛋白（troponin）</span>複合體（由 I、C、T 三個次單元組成）則負責感應鈣離子訊號：</p>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">神經衝動 → 肌漿網釋放 Ca²⁺</div></div>
+    <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">Ca²⁺ 結合肌鈣蛋白 C，誘發整個肌鈣蛋白-原肌凝蛋白複合體構形改變</div></div>
+    <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">原肌凝蛋白移位，露出肌凝蛋白結合位 → 收縮循環啟動</div></div>
+  </div>
+</section>
+
+<!-- ============ TAKEAWAYS ============ -->
+<section class="chapter takeaways" id="takeaways">
+  <h2>✅ 重點複習 Key Takeaways</h2>
+  <p class="lead">複習時，先問自己：這個概念對應到六大原則的哪一個？</p>
+
+  <div class="tw-group">
+    <h4>氧結合蛋白（5.1）</h4>
+    <ul>
+      <li>血基質中的 <b>Fe²⁺</b> 是真正結合 O₂ 的位置；<b>近側 His</b> 固定鐵，<b>遠側 His</b> 用氫鍵加強並篩選 O₂ 結合，也是防止 CO 中毒的關鍵。</li>
+      <li>肌紅蛋白：單結合位、雙曲線結合曲線，適合「儲存」。血紅蛋白：四個結合位、S 型曲線，靠<b>協同性（cooperativity）</b>適合「運輸」。</li>
+      <li><b>Kd 越小，親和力越高</b>；Y = [L] / ([L] + Kd)。</li>
+      <li>血紅蛋白在 <b>T 態</b>（低親和力）與 <b>R 態</b>（高親和力）之間轉換；一個次單元結合 O₂ 會促使鄰居也轉為 R 態——這是<b>變構（allosteric）</b>行為。</li>
+      <li><b>波耳效應</b>：組織中高 CO₂／低 pH 促進 O₂ 釋放；肺中低 CO₂／高 pH 促進 O₂ 結合。</li>
+      <li><b>BPG</b> 結合並穩定 T 態，降低 O₂ 親和力，是高海拔適應與胎兒獲氧的關鍵調節物。</li>
+      <li><b>鐮刀型貧血症</b>：β 鏈 Glu6→Val6 的單一突變，造成 HbS 去氧化時聚集成纖維，使紅血球變形。</li>
+    </ul>
+  </div>
+
+  <div class="tw-group">
+    <h4>免疫球蛋白（5.2）</h4>
+    <ul>
+      <li>體液免疫靠 <b>B 細胞</b>／抗體；細胞免疫靠 <b>T 細胞</b>／T 細胞受體。</li>
+      <li>IgG 為 Y 字形：兩個 <b>Fab</b>（抗原結合區）＋一個 <b>Fc</b>（效應基座）。</li>
+      <li>抗體與抗原的結合同樣展現<b>誘導契合</b>與極高專一性（Kd 可達 10⁻¹⁰ M）。</li>
+      <li>此特性被廣泛用於西方墨點法等分析技術。</li>
+    </ul>
+  </div>
+
+  <div class="tw-group">
+    <h4>肌動蛋白與肌凝蛋白（5.3）</h4>
+    <ul>
+      <li>肌凝蛋白同時是<b>結合蛋白</b>與<b>ATPase 酵素</b>，靠 ATP 水解驅動構形循環。</li>
+      <li><b>四步驟循環</b>：ATP 結合→放開肌動蛋白／水解 ATP→頭部擺動／釋放 Pi→強結合／動力衝程→拉動細絲，ADP 釋出。</li>
+      <li>Ca²⁺ 結合肌鈣蛋白 C，觸發原肌凝蛋白移位，是肌肉收縮的分子開關。</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<div class="top-btn-wrap">
+  <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ 回到上方</button>
+</div>
+
+</body>
+</html>

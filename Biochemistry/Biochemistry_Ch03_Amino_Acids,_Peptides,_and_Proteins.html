@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3章 胺基酸、胜肽和蛋白質</title>
+<style>
+  :root{
+    --font-main: "Noto Sans TC", "思源黑體", "Source Han Sans TC", sans-serif;
+    --color-bg: #fbfaf7;
+    --color-text: #23282d;
+    --color-header: #1f3b57;
+    --color-accent: #2a6f7f;
+    --color-accent-2: #b5651d;
+    --color-line: #dfe3e6;
+    --color-box-blue: #eaf3f7;
+    --color-box-blue-border: #2a6f7f;
+    --color-box-yellow: #fff8e6;
+    --color-box-yellow-border: #c9971f;
+    --color-box-red: #fdecec;
+    --color-box-red-border: #c0392b;
+    --color-box-green: #eaf6ec;
+    --color-box-green-border: #2e7d4f;
+    --nav-height: 56px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    font-family: var(--font-main);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  header{
+    background: linear-gradient(135deg, var(--color-header), #2f5670);
+    color: #fff;
+    padding: 40px 20px 34px;
+    text-align: center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  header h1{
+    margin:0 0 8px 0;
+    font-size: 1.9rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-align:center;
+  }
+  header p.subtitle{
+    margin:0;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    letter-spacing: 1px;
+  }
+
+  nav{
+    position: sticky;
+    top:0;
+    z-index: 100;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(6px);
+    display:flex;
+    justify-content:center;
+    width:100%;
+  }
+  nav ul{
+    list-style:none;
+    margin:0 auto;
+    padding:0;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items:center;
+    gap: 6px;
+    max-width: 1100px;
+    width:100%;
+  }
+  nav ul li{
+    display:flex;
+  }
+  nav ul li a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height: var(--nav-height);
+    padding: 0 16px;
+    text-decoration:none;
+    color: var(--color-header);
+    font-size: 0.88rem;
+    font-weight:500;
+    white-space:nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    text-align:center;
+  }
+  nav ul li a:hover{
+    background: var(--color-box-blue);
+    color: var(--color-accent);
+  }
+  nav ul li a.active{
+    color: var(--color-accent);
+    font-weight: 700;
+    border-bottom: 3px solid var(--color-accent);
+    background: var(--color-box-blue);
+  }
+
+  main{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 22px 80px;
+  }
+
+  section{
+    margin-bottom: 56px;
+    padding-top: 14px;
+  }
+
+  h2{
+    font-size: 1.5rem;
+    color: var(--color-header);
+    border-left: 7px solid var(--color-accent);
+    padding: 6px 14px;
+    background: linear-gradient(90deg, var(--color-box-blue), transparent);
+    margin: 40px 0 20px;
+  }
+  h3{
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    margin: 30px 0 12px;
+    border-bottom: 2px solid var(--color-line);
+    padding-bottom: 6px;
+  }
+  h4{
+    font-size: 1.02rem;
+    color: var(--color-accent-2);
+    margin: 20px 0 8px;
+  }
+  p{ margin: 12px 0; text-align: justify; }
+  ul, ol{ margin: 10px 0; padding-left: 28px; }
+  li{ margin: 6px 0; }
+  strong{ color: var(--color-header); }
+  code{ background:#eee; padding:1px 5px; border-radius:4px; font-size:0.92em; }
+
+  .box{
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 18px 0;
+    border: 1px solid transparent;
+  }
+  .box-title{
+    font-weight:700;
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:1rem;
+  }
+  .box.concept{ background: var(--color-box-blue); border-color: var(--color-box-blue-border); }
+  .box.concept .box-title{ color: var(--color-box-blue-border); }
+  .box.convention{ background: var(--color-box-yellow); border-color: var(--color-box-yellow-border); }
+  .box.convention .box-title{ color: var(--color-box-yellow-border); }
+  .box.clinical{ background: var(--color-box-red); border-color: var(--color-box-red-border); }
+  .box.clinical .box-title{ color: var(--color-box-red-border); }
+  .box.summary{ background: var(--color-box-green); border-color: var(--color-box-green-border); }
+  .box.summary .box-title{ color: var(--color-box-green-border); }
+
+  table{
+    width:100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 0.92rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  caption{
+    caption-side: top;
+    text-align:left;
+    font-weight:700;
+    color: var(--color-header);
+    margin-bottom:6px;
+    font-size: 0.95rem;
+  }
+  th, td{
+    border: 1px solid var(--color-line);
+    padding: 8px 10px;
+    text-align:left;
+  }
+  th{
+    background: var(--color-header);
+    color:#fff;
+    font-weight:600;
+  }
+  tr:nth-child(even) td{ background: #f4f6f7; }
+
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap: 10px;
+    margin: 20px 0;
+    justify-content:center;
+  }
+  .flow .step{
+    background:#fff;
+    border: 2px solid var(--color-accent);
+    color: var(--color-header);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    text-align:center;
+    min-width: 110px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .flow .arrow{
+    font-size: 1.3rem;
+    color: var(--color-accent-2);
+    font-weight:bold;
+  }
+  .flow-vertical{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 4px;
+    margin: 20px 0;
+  }
+  .flow-vertical .step{
+    background:#fff;
+    border: 2px solid var(--color-accent);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    max-width: 560px;
+    width:100%;
+    text-align:left;
+  }
+  .flow-vertical .down-arrow{
+    font-size:1.3rem;
+    color: var(--color-accent-2);
+  }
+
+  .fig-wrap{
+    background:#fff;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    padding: 18px;
+    margin: 20px 0;
+    text-align:center;
+  }
+  .fig-caption{
+    font-size: 0.85rem;
+    color:#555;
+    margin-top: 10px;
+    text-align:left;
+  }
+  .fig-caption b{ color: var(--color-header); }
+
+  svg text{ font-family: var(--font-main); }
+
+  .tag{
+    display:inline-block;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight:700;
+    margin-left:8px;
+  }
+  .tag.enzyme{ background:#dff0d8; color:#2e7d4f; }
+  .tag.mechanism{ background:#fde3d3; color:#b5651d; }
+  .tag.clinical{ background:#f9d6d5; color:#c0392b; }
+
+  .grid-2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .grid-3{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .r-group-card{
+    background:#fff;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    padding: 10px;
+    text-align:center;
+    font-size: 0.85rem;
+  }
+  .r-group-card .name{ font-weight:700; color: var(--color-header); margin-bottom:2px;}
+  .r-group-card.nonpolar{ border-top: 5px solid #7f8c8d; }
+  .r-group-card.aromatic{ border-top: 5px solid #8e44ad; }
+  .r-group-card.polar{ border-top: 5px solid #27ae60; }
+  .r-group-card.positive{ border-top: 5px solid #2980b9; }
+  .r-group-card.negative{ border-top: 5px solid #c0392b; }
+
+  .keytakeaways-section{
+    background: linear-gradient(135deg, #1f3b57, #2a6f7f);
+    color:#fff;
+    border-radius: 14px;
+    padding: 30px 26px;
+    margin-top: 60px;
+  }
+  .keytakeaways-section h2{
+    color:#fff;
+    background:none;
+    border-left: 7px solid #fff;
+    margin-top:0;
+  }
+  .keytakeaways-section ol{
+    padding-left: 22px;
+  }
+  .keytakeaways-section li{
+    margin: 12px 0;
+    font-size: 1.02rem;
+  }
+  .keytakeaways-section li b{ color: #ffe9b0; }
+
+  #backToTop{
+    display:block;
+    margin: 50px auto 10px;
+    padding: 12px 26px;
+    background: var(--color-header);
+    color:#fff;
+    border:none;
+    border-radius: 30px;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    cursor:pointer;
+    transition: background 0.2s;
+  }
+  #backToTop:hover{ background: var(--color-accent); }
+
+  @media (max-width: 768px){
+    header{ padding: 30px 14px 26px; }
+    header h1{ font-size: 1.4rem; letter-spacing: 1px; }
+    nav ul li a{ padding: 0 10px; font-size: 0.78rem; }
+    main{ padding: 22px 14px 60px; }
+    h2{ font-size: 1.25rem; }
+    h3{ font-size: 1.05rem; }
+    .grid-2{ grid-template-columns: 1fr; }
+    .grid-3{ grid-template-columns: 1fr 1fr; }
+    table{ font-size: 0.8rem; }
+    th, td{ padding: 6px 6px; }
+  }
+  @media (max-width: 480px){
+    .grid-3{ grid-template-columns: 1fr; }
+    body{ font-size: 15.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第3章 胺基酸、胜肽和蛋白質</h1>
+  <p class="subtitle">Amino Acids, Peptides, and Proteins</p>
+</header>
+
+<nav>
+  <ul id="navList">
+    <li><a href="#sec1" data-target="sec1">3.1 胺基酸</a></li>
+    <li><a href="#sec2" data-target="sec2">3.2 胜肽與蛋白質</a></li>
+    <li><a href="#sec3" data-target="sec3">3.3 蛋白質研究方法</a></li>
+    <li><a href="#sec4" data-target="sec4">3.4 一級結構</a></li>
+    <li><a href="#keytakeaways" data-target="keytakeaways">重點整理</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<p style="font-size:0.95rem;color:#555;">
+蛋白質幾乎參與細胞中每一項生命反應，是生物體內功能最多樣的巨分子。本章將從蛋白質最基本的組成單位——<strong>胺基酸（amino acid）</strong>開始，介紹胺基酸如何連結成<strong>胜肽（peptide）</strong>與<strong>蛋白質（protein）</strong>、生化學家如何純化與研究蛋白質，最後說明蛋白質「一級結構」的意義。全書圍繞四個核心概念：(1) 20 種common胺基酸是蛋白質的字母；(2) 胺基酸以胜肽鍵相連形成一級結構；(3) 蛋白質可依化學與功能特性被純化；(4) 胺基酸序列是理解蛋白質功能與演化的重要線索。
+</p>
+
+<!-- ============ 3.1 ============ -->
+<section id="sec1">
+<h2>3.1 胺基酸（Amino Acids）</h2>
+
+<p>蛋白質是胺基酸的聚合物。組成蛋白質後的胺基酸稱為<strong>殘基（residue）</strong>——因為連結時會失去一分子水。天然存在的蛋白質中，最常見的胺基酸有 <strong>20 種</strong>。</p>
+
+<h3>胺基酸的共同結構特徵</h3>
+<p>這 20 種胺基酸都是 <strong>α-胺基酸（α-amino acid）</strong>：胺基（—NH₃⁺）與羧基（—COO⁻）都接在同一個碳原子（α碳）上。不同胺基酸的差異只在於接在 α 碳上的<strong>側鏈（R group，R 基）</strong>——R 基的大小、形狀與電性決定了每個胺基酸獨特的化學性質。</p>
+
+<div class="fig-wrap">
+<svg width="260" height="220" viewBox="0 0 260 220">
+  <circle cx="130" cy="110" r="26" fill="#bdc3c7" stroke="#7f8c8d" stroke-width="2"/>
+  <text x="130" y="116" text-anchor="middle" font-size="15" font-weight="bold">Cα</text>
+
+  <line x1="130" y1="84" x2="130" y2="34" stroke="#2980b9" stroke-width="3"/>
+  <circle cx="130" cy="24" r="20" fill="#3498db"/>
+  <text x="130" y="29" text-anchor="middle" font-size="12" fill="#fff">H₃N⁺</text>
+
+  <line x1="130" y1="136" x2="130" y2="186" stroke="#c0392b" stroke-width="3"/>
+  <circle cx="130" cy="196" r="20" fill="#e74c3c"/>
+  <text x="130" y="201" text-anchor="middle" font-size="11" fill="#fff">COO⁻</text>
+
+  <line x1="107" y1="93" x2="55" y2="55" stroke="#7f8c8d" stroke-width="3"/>
+  <circle cx="40" cy="42" r="17" fill="#fff" stroke="#7f8c8d" stroke-width="2"/>
+  <text x="40" y="47" text-anchor="middle" font-size="13">H</text>
+
+  <line x1="153" y1="93" x2="205" y2="55" stroke="#8e44ad" stroke-width="3"/>
+  <circle cx="222" cy="42" r="20" fill="#9b59b6"/>
+  <text x="222" y="47" text-anchor="middle" font-size="13" fill="#fff">R</text>
+</svg>
+<div class="fig-caption"><b>圖 3-2 概念重現｜胺基酸的一般結構。</b> α碳連接四個不同基團：胺基、羧基、氫，以及決定胺基酸特性的 R 基（脯胺酸 proline 是唯一例外，屬環狀結構）。</div>
+</div>
+
+<div class="box convention">
+<div class="box-title">📘 KEY CONVENTION：一個字母代碼的由來</div>
+<p>三字母縮寫多取自胺基酸英文名稱的前三個字母。一字母代碼由 Margaret Oakley Dayhoff 設計，用意是縮小早期電腦儲存序列資料所需的空間：6 個胺基酸（C, H, I, M, S, V）字首唯一，直接使用；A, G, L, P, T 的字首雖重複，但分配給該字母代表的胺基酸中最常見者；R, F, Y, W 依發音聯想（aRginine、Fenylalanine、tYrosine、tWyptophan）；D, N, E, Q 取自名稱中的字母；最後剩下的離胺酸（lysine）則取字母順序最接近 L 的 K。</p>
+</div>
+
+<h3>立體異構性：L 型與 D 型胺基酸</h3>
+<p>除了甘胺酸（glycine）外，所有胺基酸的 α 碳都接了四個不同基團，形成一個<strong>掌性中心（chiral center）</strong>。這代表每個胺基酸都有兩種互為鏡像、無法疊合的立體異構物，稱為<strong>對映異構物（enantiomers）</strong>：<strong>L 型</strong>與 <strong>D 型</strong>。這套 D、L 命名系統是以三碳糖甘油醛（glyceraldehyde）的絕對組態為參考基準。</p>
+
+<div class="box concept">
+<div class="box-title">🧬 重要事實：蛋白質中的胺基酸幾乎都是 L 型</div>
+<p>雖然一般化學反應會產生 D 型與 L 型各半的<strong>消旋混合物（racemic mixture）</strong>，但生物體中蛋白質的胺基酸殘基幾乎全部（&gt;99%）都是 <strong>L 立體異構物</strong>。這是因為合成胺基酸的酵素活性位具有不對稱性，使反應具有立體專一性（stereospecific）。少數 D-胺基酸殘基則是蛋白質合成後，由酵素催化修飾而成，通常具有特定結構功能。</p>
+</div>
+
+<h3>依 R 基極性分類：五大家族</h3>
+<p>依照 R 基在水中的<strong>極性（polarity）</strong>，20 種常見胺基酸可分為五大類：</p>
+
+<div class="grid-3">
+  <div class="r-group-card nonpolar"><div class="name">非極性、脂肪族</div>Gly · Ala · Val · Leu · Ile · Met · Pro</div>
+  <div class="r-group-card aromatic"><div class="name">芳香族</div>Phe · Tyr · Trp</div>
+  <div class="r-group-card polar"><div class="name">極性、不帶電</div>Ser · Thr · Cys · Asn · Gln</div>
+  <div class="r-group-card positive"><div class="name">帶正電（鹼性）</div>Lys · Arg · His</div>
+  <div class="r-group-card negative"><div class="name">帶負電（酸性）</div>Asp · Glu</div>
+</div>
+
+<table>
+<caption>表 3-1 精簡版｜五大類胺基酸的特色重點</caption>
+<thead><tr><th>分類</th><th>代表胺基酸</th><th>結構 / 化學特色</th></tr></thead>
+<tbody>
+<tr><td>非極性、脂肪族</td><td>Ala, Val, Leu, Ile</td><td>疏水，側鏈互相聚集，穩定蛋白質結構（疏水效應）</td></tr>
+<tr><td></td><td>Gly</td><td>側鏈僅為 H，最簡單、幾乎不參與疏水效應</td></tr>
+<tr><td></td><td>Pro</td><td>環狀亞胺基（imino）結構，使多肽鏈變得僵硬、缺乏彈性</td></tr>
+<tr><td>芳香族</td><td>Phe, Tyr, Trp</td><td>Tyr、Trp 可吸收 UV 光（280 nm），是蛋白質定量的依據之一</td></tr>
+<tr><td>極性、不帶電</td><td>Ser, Thr, Cys, Asn, Gln</td><td>含羥基／醯胺基，可形成氫鍵；Cys 的硫氫基（—SH）可氧化形成雙硫鍵</td></tr>
+<tr><td>帶正電（鹼性）</td><td>Lys, Arg, His</td><td>His 的咪唑基 pKa 接近中性，是唯一在生理 pH 下有效緩衝的胺基酸</td></tr>
+<tr><td>帶負電（酸性）</td><td>Asp, Glu</td><td>各多一個羧基，pH 7 時帶負電</td></tr>
+</tbody>
+</table>
+
+<div class="box concept">
+<div class="box-title">🔗 機制重點：雙硫鍵（Disulfide bond）</div>
+<p>兩個半胱胺酸（Cys）殘基的 —SH 基氧化後可形成共價的<strong>雙硫鍵</strong>，產生「胱胺酸（cystine）」。雙硫鍵能穩定蛋白質的立體結構，可存在於同一條多肽鏈內，也可連接兩條不同的多肽鏈（例如胰島素的 A、B 鏈）。</p>
+</div>
+
+<h3>特殊 / 少見胺基酸</h3>
+<p>除了常見的 20 種，還有些「非典型」胺基酸具有重要功能：</p>
+<ul>
+<li><strong>4-羥脯胺酸（4-hydroxyproline）</strong>：膠原蛋白（collagen）中脯胺酸的修飾產物。</li>
+<li><strong>γ-羧麩胺酸（γ-carboxyglutamate）</strong>：見於凝血酶原，能與 Ca²⁺ 結合。</li>
+<li><strong>硒半胱胺酸（selenocysteine）</strong>與<strong>吡咯離胺酸（pyrrolysine）</strong>：透過特殊的遺傳密碼在蛋白質合成過程中直接被加入，而非合成後修飾。</li>
+<li><strong>鳥胺酸（ornithine）</strong>與<strong>瓜胺酸（citrulline）</strong>：不存在於蛋白質中，但是精胺酸生合成與尿素循環（urea cycle）的重要中間產物。</li>
+</ul>
+<p>此外，磷酸化（phosphorylation）等可逆修飾常用於調控蛋白質活性，是最常見的調控型修飾（regulatory modification）。</p>
+
+<h3>胺基酸的酸鹼性質</h3>
+<p>不含可解離 R 基的胺基酸在中性 pH 下以<strong>兩性離子（zwitterion）</strong>形式存在：胺基帶正電、羧基帶負電，同時具有酸與鹼的性質，稱為<strong>兩性物質（amphoteric / ampholyte）</strong>。</p>
+
+<div class="fig-wrap">
+<svg width="600" height="150" viewBox="0 0 600 150">
+  <polyline points="30,120 130,60 470,60 570,120" fill="none" stroke="#2a6f7f" stroke-width="3"/>
+  <circle cx="130" cy="60" r="4" fill="#c0392b"/>
+  <circle cx="470" cy="60" r="4" fill="#c0392b"/>
+  <text x="30" y="140" font-size="12">+H₃N—CH₂—COOH（完全質子化，pH 極低）</text>
+  <text x="130" y="45" font-size="12" fill="#c0392b" font-weight="bold">pK₁ = 2.34</text>
+  <text x="200" y="45" font-size="12" fill="#1f3b57" font-weight="bold">兩性離子區（zwitterion, pI = 5.97）</text>
+  <text x="470" y="45" font-size="12" fill="#c0392b" font-weight="bold">pK₂ = 9.60</text>
+  <text x="380" y="140" font-size="12">H₂N—CH₂—COO⁻（完全去質子化，pH 極高）</text>
+</svg>
+<div class="fig-caption"><b>圖 3-10 概念重現｜甘胺酸滴定曲線。</b> 兩個解離階段分別對應 —COOH（pK₁ = 2.34）與 —NH₃⁺（pK₂ = 9.60）的解離。兩個 pKa 的中點即為<strong>等電點（isoelectric point, pI）</strong>，此時淨電荷為零。</div>
+</div>
+
+<div class="box concept">
+<div class="box-title">📐 公式：等電點（pI）的計算</div>
+<p>對於不含可解離 R 基的胺基酸：</p>
+<p style="text-align:center;font-size:1.1rem;"><strong>pI = ½ (pK₁ + pK₂)</strong></p>
+<p>對於含可解離 R 基的胺基酸（如麩胺酸、組胺酸），pI 則取<strong>電荷符號相同、相鄰的兩個 pKa 平均值</strong>——不是任意兩個。例如麩胺酸的 pI 取兩個「負電」pKa（pK₁ 與 pKR）的平均，而不是與帶正電的 pK₂ 平均。</p>
+</div>
+
+<table>
+<caption>易混淆比較｜zwitterion vs. isoelectric point (pI)</caption>
+<thead><tr><th>項目</th><th>兩性離子（zwitterion）</th><th>等電點（pI）</th></tr></thead>
+<tbody>
+<tr><td>定義</td><td>一個分子同時帶正、負電荷的狀態</td><td>使胺基酸／胜肽「淨電荷為零」的 pH 值</td></tr>
+<tr><td>本質</td><td>一種<strong>離子形式</strong></td><td>一個<strong>pH 數值</strong></td></tr>
+<tr><td>關係</td><td>在 pI 時，胺基酸主要以兩性離子形式存在（若無 R 基電荷）</td><td>由該分子所有可解離基團的 pKa 計算得出</td></tr>
+</tbody>
+</table>
+
+<p>只有<strong>組胺酸（histidine）</strong>的 R 基 pKa（約 6.0）落在生理 pH（約 7.4）附近，因此是體內唯一在中性環境仍具有效緩衝能力的胺基酸side chain，也常在酵素活性位中擔任質子供給者/接受者的角色。</p>
+
+<div class="box summary">
+<div class="box-title">✅ 3.1 節重點摘要</div>
+<ul>
+<li>所有胺基酸都含 α-胺基、α-羧基與 R 基，甘胺酸以外皆具掌性中心。</li>
+<li>蛋白質中的胺基酸殘基幾乎都是 <strong>L 型</strong>。</li>
+<li>依 R 基極性可分為五大類。</li>
+<li>胺基酸依 pH 呈現不同解離型態，具特徵性滴定曲線與 pI。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ 3.2 ============ -->
+<section id="sec2">
+<h2>3.2 胜肽和蛋白質（Peptides and Proteins）</h2>
+
+<h3>胜肽鍵的形成</h3>
+<p>兩個胺基酸可經由<strong>縮合反應（condensation）</strong>脫去一分子水，形成<strong>胜肽鍵（peptide bond）</strong>，其逆反應則是<strong>水解（hydrolysis）</strong>。在標準生化條件下，平衡其實偏向水解方向——這代表細胞內合成胜肽鍵需要額外的能量活化（詳見第 27 章）。</p>
+
+<div class="flow">
+  <div class="step">胺基酸 1<br>（—COOH）</div>
+  <div class="arrow">+</div>
+  <div class="step">胺基酸 2<br>（—NH₃⁺）</div>
+  <div class="arrow">→</div>
+  <div class="step" style="border-color:#c0392b;">胜肽鍵形成<br>（脫水縮合）</div>
+  <div class="arrow">+</div>
+  <div class="step">H₂O</div>
+</div>
+
+<p>依連接的胺基酸數目命名：2 個為<strong>雙胜肽（dipeptide）</strong>、少數幾個稱<strong>寡胜肽（oligopeptide）</strong>、多個則稱<strong>多肽（polypeptide）</strong>。習慣上分子量低於約 10,000 稱為多肽，更大者稱為蛋白質。每條胜肽鏈都有一個游離胺基端——<strong>N端（amino-terminal）</strong>，以及一個游離羧基端——<strong>C端（carboxyl-terminal）</strong>，命名與書寫時 N 端在左，由左至右閱讀。</p>
+
+<div class="box clinical">
+<div class="box-title">⏳ 小知識：胜肽鍵很穩定</div>
+<p>雖然胜肽鍵水解在熱力學上是有利的（放能反應），但因活化能高，實際反應速率非常慢。蛋白質中胜肽鍵的平均半衰期約 <strong>7 年</strong>，這也是蛋白質能維持穩定結構的原因之一。</p>
+</div>
+
+<table>
+<caption>易混淆比較｜胜肽鍵形成 vs. 水解</caption>
+<thead><tr><th>項目</th><th>縮合（condensation）</th><th>水解（hydrolysis）</th></tr></thead>
+<tbody>
+<tr><td>方向</td><td>兩個胺基酸 → 胜肽鍵 + H₂O</td><td>胜肽鍵 + H₂O → 兩個胺基酸</td></tr>
+<tr><td>熱力學</td><td>不利（需活化羧基）</td><td>有利，但活化能高、反應慢</td></tr>
+<tr><td>生物機制</td><td>核糖體上進行（第27章）</td><td>由蛋白酶（protease）催化</td></tr>
+</tbody>
+</table>
+
+<h3>胜肽的電離行為</h3>
+<p>一條胜肽只有兩端（N端、C端）各保有一個可解離的自由 α-胺基和 α-羧基；鏈內其他胺基酸的 α-胺基與 α-羧基都已形成胜肽鍵，不能再解離。因此胜肽的整體酸鹼行為，取決於<strong>兩端基團 + 側鏈中可解離的 R 基</strong>。</p>
+
+<h3>大小與組成差異極大</h3>
+<p>天然胜肽／蛋白質大小差異懸殊：小至 2～3 個殘基（如甲狀腺促素釋放因子，僅 3 個殘基），大至將近 27,000 個殘基（肌聯蛋白 titin，分子量約 300 萬）。20 種胺基酸在蛋白質中出現的比例也差異很大，不會平均分布。</p>
+
+<table>
+<caption>表 3-2 精選｜蛋白質大小差異示例</caption>
+<thead><tr><th>蛋白質</th><th>殘基數</th><th>多肽鏈數</th></tr></thead>
+<tbody>
+<tr><td>細胞色素 c（人類）</td><td>104</td><td>1</td></tr>
+<tr><td>血紅素（人類）</td><td>574</td><td>4</td></tr>
+<tr><td>肌聯蛋白 Titin（人類）</td><td>≈ 26,926</td><td>1</td></tr>
+</tbody>
+</table>
+
+<div class="box concept">
+<div class="box-title">🧩 概念釐清：多次單元蛋白質相關名詞</div>
+<p>由兩條以上多肽鏈以<strong>非共價</strong>方式組合而成的蛋白質稱為<strong>多次單元蛋白質（multisubunit protein）</strong>；若其中至少兩條鏈相同，稱為<strong>寡聚蛋白質（oligomeric protein）</strong>，其相同的重複單位稱為<strong>原聚體（protomer）</strong>。例如血紅素可視為 4 個次單元組成的四聚體，也可視為 2 個 αβ 原聚體組成的二聚體。若多肽鏈之間是以<strong>共價鍵（雙硫鍵）</strong>相連（如胰島素），則不稱為次單元，而直接稱為「鏈（chain）」。</p>
+</div>
+
+<h3>結合蛋白質（Conjugated Proteins）</h3>
+<p>有些蛋白質只由胺基酸組成（<strong>簡單蛋白質</strong>），但也有些蛋白質永久附帶其他化學成分，稱為<strong>結合蛋白質（conjugated protein）</strong>，其非胺基酸部分稱為<strong>輔基（prosthetic group）</strong>。</p>
+
+<table>
+<caption>表 3-4 精簡｜結合蛋白質分類</caption>
+<thead><tr><th>類別</th><th>輔基</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td>脂蛋白（lipoprotein）</td><td>脂質</td><td>血液中的 β₁-脂蛋白</td></tr>
+<tr><td>醣蛋白（glycoprotein）</td><td>醣類</td><td>免疫球蛋白 IgG</td></tr>
+<tr><td>磷蛋白（phosphoprotein）</td><td>磷酸基</td><td>肝醣磷解酶</td></tr>
+<tr><td>血基質蛋白（hemoprotein）</td><td>血基質（heme）</td><td>血紅素</td></tr>
+<tr><td>黃素蛋白（flavoprotein）</td><td>黃素核苷酸</td><td>琥珀酸去氫酶</td></tr>
+<tr><td>金屬蛋白（metalloprotein）</td><td>特定金屬離子</td><td>肌紅素、鐵蛋白、鈣調素等</td></tr>
+</tbody>
+</table>
+
+<div class="box summary">
+<div class="box-title">✅ 3.2 節重點摘要</div>
+<ul>
+<li>胺基酸經胜肽鍵連結成胜肽、多肽、蛋白質；平均每個殘基分子量約 110。</li>
+<li>胜肽的酸鹼特性取決於兩端游離基 + 側鏈可解離基團。</li>
+<li>蛋白質大小、組成、次單元數目變化極大。</li>
+<li>結合蛋白質含有非胺基酸的輔基，常與其功能密切相關。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ 3.3 ============ -->
+<section id="sec3">
+<h2>3.3 蛋白質研究方法（Working with Proteins）</h2>
+
+<p>要研究單一蛋白質，必須先能將其從細胞中成千上萬種蛋白質中<strong>純化（purify）</strong>出來，並具備定量、定性的分析方法。</p>
+
+<h3>蛋白質的分離與純化流程</h3>
+<div class="flow-vertical">
+  <div class="step">① 破碎細胞 → 取得<strong>粗萃取液（crude extract）</strong></div>
+  <div class="down-arrow">↓</div>
+  <div class="step">② 鹽析（salting out，如硫酸銨沉澱）降低蛋白質溶解度</div>
+  <div class="down-arrow">↓</div>
+  <div class="step">③ 透析（dialysis）：利用半透膜移除小分子鹽類</div>
+  <div class="down-arrow">↓</div>
+  <div class="step">④ 管柱層析（column chromatography）：依電荷、大小、結合特性進一步分離</div>
+</div>
+
+<table>
+<caption>比較表｜三種常見管柱層析法</caption>
+<thead><tr><th>方法</th><th>分離依據</th><th>原理重點</th></tr></thead>
+<tbody>
+<tr><td><strong>離子交換層析</strong><br>ion-exchange</td><td>淨電荷</td><td>陽離子交換樹脂帶負電，吸附帶正電蛋白質；陰離子交換樹脂則相反</td></tr>
+<tr><td><strong>膠體過濾（分子篩）</strong><br>size-exclusion</td><td>分子大小</td><td>大分子無法進入孔洞，反而較快流出；小分子路徑迂迴，較慢流出</td></tr>
+<tr><td><strong>親和層析</strong><br>affinity</td><td>結合特異性</td><td>樹脂上接有特定配體（ligand），只有能與其結合的蛋白質會被留住</td></tr>
+</tbody>
+</table>
+
+<div class="box concept">
+<div class="box-title">💡 範例：陽離子交換層析的洗脫順序判斷</div>
+<p>若胜肽 A 的 pI = 5.1（偏酸，中性 pH 帶負電），胜肽 B 的 pI = 7.8（偏鹼，中性 pH 帶正電）。在<strong>陽離子交換樹脂</strong>（帶負電）上，B 因帶正電被強烈吸附，會較慢洗脫；A 會先洗脫。在<strong>陰離子交換樹脂</strong>上則相反：B 先洗脫，A 較慢洗脫。</p>
+</div>
+
+<p><strong>高效液相層析（HPLC, high-performance liquid chromatography）</strong>則以高壓幫浦加速流動相移動，並使用更精細的填充材料，能大幅提升分離解析度。</p>
+
+<h3>電泳分析</h3>
+<p><strong>電泳（electrophoresis）</strong>本身不能純化蛋白質（甚至可能破壞結構），但可用來快速評估樣品純度與估算分子量。</p>
+
+<div class="box concept">
+<div class="box-title">⚙️ 機制：SDS-PAGE 如何依分子量分離蛋白質</div>
+<ol>
+<li>SDS（十二烷基硫酸鈉）是一種界面活性劑，會以約 1.4 倍蛋白質重量的比例結合上去，帶來大量負電荷。</li>
+<li>SDS 結合後掩蓋了蛋白質原本的電荷差異，並使蛋白質部分展開成相似的棒狀。</li>
+<li>因此電泳遷移速率幾乎只取決於<strong>分子量</strong>：分子越小，遷移越快。</li>
+</ol>
+</div>
+
+<table>
+<caption>易混淆比較｜三種電泳／等電技術</caption>
+<thead><tr><th>技術</th><th>分離依據</th><th>用途</th></tr></thead>
+<tbody>
+<tr><td>SDS-PAGE</td><td>分子量（質量）</td><td>估算蛋白質分子量、檢視純度</td></tr>
+<tr><td>等電聚焦（isoelectric focusing）</td><td>等電點 pI</td><td>測定蛋白質的 pI</td></tr>
+<tr><td>二維電泳（2D electrophoresis）</td><td>pI（第一維）+ 分子量（第二維）</td><td>解析複雜蛋白質混合物，分辨 pI 相近但分子量不同、或分子量相同但 pI 不同的蛋白質</td></tr>
+</tbody>
+</table>
+
+<h3>活性測定：Activity vs. Specific Activity</h3>
+<p>純化過程中必須有方法可以「看見」目標蛋白質，最常見的方式是測定<strong>酵素活性</strong>——即受質轉變為產物的速率。</p>
+
+<div class="box convention">
+<div class="box-title">📘 KEY CONVENTION：活性（activity）與比活性（specific activity）</div>
+<p><strong>活性（activity）</strong>＝溶液中酵素的總單位數（反映有多少目標蛋白質）。</p>
+<p><strong>比活性（specific activity）</strong> = 活性 ÷ 總蛋白質毫克數，是衡量純度的指標——純化過程中應該持續上升，達到最大值且不再變化時，代表蛋白質已接近純態。</p>
+</div>
+
+<table>
+<caption>易混淆比較｜activity vs. specific activity</caption>
+<thead><tr><th>項目</th><th>Activity（總活性）</th><th>Specific Activity（比活性）</th></tr></thead>
+<tbody>
+<tr><td>定義</td><td>樣品中酵素的總單位數</td><td>每毫克總蛋白質所含的酵素單位數</td></tr>
+<tr><td>純化過程中的變化</td><td>通常逐步下降（因損耗）</td><td>逐步上升（雜蛋白被移除）</td></tr>
+<tr><td>代表意義</td><td>「有多少目標蛋白質」</td><td>「樣品有多純」</td></tr>
+</tbody>
+</table>
+
+<h3>質譜分析（Mass Spectrometry）</h3>
+<p>質譜法可精確測定蛋白質分子量、進行序列分析，甚至一次分析整個細胞的<strong>蛋白體（proteome）</strong>。</p>
+
+<table>
+<caption>比較表｜兩種將蛋白質離子化的技術</caption>
+<thead><tr><th>技術</th><th>全名</th><th>原理</th></tr></thead>
+<tbody>
+<tr><td><strong>MALDI MS</strong></td><td>基質輔助雷射脫附游離化</td><td>蛋白質置於光吸收基質中，短脈衝雷射使其脫附並游離</td></tr>
+<tr><td><strong>ESI MS</strong></td><td>電灑游離法</td><td>溶液經帶電針頭噴成微小帶電液滴，溶劑蒸發後留下多電荷離子</td></tr>
+</tbody>
+</table>
+
+<div class="box concept">
+<div class="box-title">🔬 機制流程：MS/MS（tandem MS）胺基酸序列分析</div>
+<div class="flow">
+  <div class="step">蛋白酶（如胰蛋白酶）水解成短胜肽</div>
+  <div class="arrow">→</div>
+  <div class="step">第一質譜（MS-1）篩選出單一胜肽</div>
+  <div class="arrow">→</div>
+  <div class="step">碰撞腔中以氣體撞擊斷裂胜肽鍵</div>
+  <div class="arrow">→</div>
+  <div class="step">第二質譜（MS-2）測定各片段 m/z</div>
+</div>
+<p>相鄰兩個峰值之間的質量差即代表被移除的那個胺基酸種類，藉此逐一推導出序列（白胺酸與異白胺酸質量相同，是唯一無法區分的部分）。</p>
+</div>
+
+<div class="box summary">
+<div class="box-title">✅ 3.3 節重點摘要</div>
+<ul>
+<li>蛋白質純化常依序使用鹽析、透析、多種層析法（離子交換／分子篩／親和層析）。</li>
+<li>電泳（SDS-PAGE、等電聚焦、二維電泳）用於分析、非用於純化。</li>
+<li>比活性是評估純化程度的關鍵指標。</li>
+<li>MS 與 MS/MS 能快速測定分子量與胺基酸序列。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ 3.4 ============ -->
+<section id="sec4">
+<h2>3.4 蛋白質的結構：一級結構（Primary Structure）</h2>
+
+<h3>蛋白質結構的四個層次</h3>
+<div class="flow">
+  <div class="step" style="border-color:#2980b9;">一級結構<br>Primary<br>（胺基酸序列）</div>
+  <div class="arrow">→</div>
+  <div class="step" style="border-color:#27ae60;">二級結構<br>Secondary<br>（如 α 螺旋）</div>
+  <div class="arrow">→</div>
+  <div class="step" style="border-color:#c9971f;">三級結構<br>Tertiary<br>（多肽鏈折疊）</div>
+  <div class="arrow">→</div>
+  <div class="step" style="border-color:#c0392b;">四級結構<br>Quaternary<br>（多次單元排列）</div>
+</div>
+
+<table>
+<caption>比較表｜蛋白質結構四層次</caption>
+<thead><tr><th>層次</th><th>描述內容</th></tr></thead>
+<tbody>
+<tr><td>一級結構</td><td>共價鍵（胜肽鍵、雙硫鍵）連結的胺基酸序列</td></tr>
+<tr><td>二級結構</td><td>局部規律、穩定的重複結構（如 α 螺旋）</td></tr>
+<tr><td>三級結構</td><td>整條多肽鏈的完整三維折疊</td></tr>
+<tr><td>四級結構</td><td>多條多肽次單元在空間中的排列組合</td></tr>
+</tbody>
+</table>
+<p style="font-size:0.88rem;color:#666;">（二～四級結構將於第 4 章詳述，本章聚焦於一級結構。）</p>
+
+<h3>一級結構決定蛋白質功能</h3>
+<div class="box clinical">
+<div class="box-title">🩺 臨床關聯（Clinical Correlation）</div>
+<p>一級結構（胺基酸序列）的改變可直接導致疾病：</p>
+<ul>
+<li><strong>鐮刀型貧血症（sickle cell disease）</strong>：血紅素單一胺基酸改變。</li>
+<li><strong>裘馨氏肌肉萎縮症（Duchenne muscular dystrophy）</strong>：dystrophin 基因大片段缺失，產生截短、失活的蛋白質。</li>
+</ul>
+</div>
+<p>人類蛋白質多具有<strong>多型性（polymorphic）</strong>——同一蛋白質在族群中甚至個體內都可能有序列變異；有些變異幾乎不影響功能，有些則影響顯著。功能相似的蛋白質在不同物種間，序列往往具有高度相似性，顯示序列與功能存在密切關聯。</p>
+
+<h3>序列分析的傳統方法</h3>
+<p>1953 年 Frederick Sanger 首度定出胰島素的完整胺基酸序列，方法基礎是從 N 端開始、逐一移除並鑑定胺基酸的<strong>Edman 降解法（Edman degradation）</strong>。此外常用工具還包括：</p>
+
+<table>
+<caption>表 3-6 精選｜蛋白酶／化學試劑的切割特異性</caption>
+<thead><tr><th>試劑</th><th>切割位點</th></tr></thead>
+<tbody>
+<tr><td>胰蛋白酶（trypsin）</td><td>Lys、Arg 羧基端側</td></tr>
+<tr><td>胰凝乳蛋白酶（chymotrypsin）</td><td>Phe、Trp、Tyr 羧基端側</td></tr>
+<tr><td>溴化氰（cyanogen bromide）</td><td>Met 羧基端側（非酵素性化學試劑）</td></tr>
+</tbody>
+</table>
+
+<div class="box concept">
+<div class="box-title">🔗 機制重點：拆解雙硫鍵的兩種方法</div>
+<div class="flow">
+  <div class="step">雙硫鍵（胱胺酸）</div>
+</div>
+<div class="grid-2">
+  <div class="r-group-card"><b>過甲酸氧化</b><br>→ 兩個磺基丙氨酸（cysteic acid）殘基，不可逆</div>
+  <div class="r-group-card"><b>DTT 還原</b><br>→ 兩個游離 —SH 半胱胺酸<br>→ 再以碘乙酸<strong>羧甲基化</strong>，防止重新形成雙硫鍵</div>
+</div>
+</div>
+
+<h3>胜肽的化學合成：Merrifield 固相合成法</h3>
+<p>1962 年 R. Bruce Merrifield 發展出<strong>固相胜肽合成法（solid-phase peptide synthesis）</strong>，讓胜肽在合成過程中始終附著於不溶性樹脂上，方便逐輪清洗、去除多餘試劑。</p>
+
+<div class="flow-vertical">
+  <div class="step">① 第一個胺基酸的羧基端固定在樹脂上</div>
+  <div class="down-arrow">↓</div>
+  <div class="step">② 移除保護基（暴露 α-胺基）</div>
+  <div class="down-arrow">↓</div>
+  <div class="step">③ 下一個胺基酸的羧基以 DCC 活化</div>
+  <div class="down-arrow">↓</div>
+  <div class="step">④ 新胺基酸的活化羧基與鏈上游離胺基形成胜肽鍵</div>
+  <div class="down-arrow">↓ 重複 ②～④</div>
+  <div class="step" style="border-color:#c0392b;">⑤ 合成完成後，以 TFA 切下胜肽並移除保護基</div>
+</div>
+<p style="font-size:0.88rem;color:#666;">此法合成方向是由 <strong>C 端往 N 端</strong> 進行——恰與細胞內核糖體合成蛋白質的方向（N → C）相反。</p>
+
+<h3>序列比對與分子演化</h3>
+<p>比較不同蛋白質的序列，可推知其結構、功能與演化關係。彼此有共同祖先的蛋白質稱為<strong>同源蛋白（homologous proteins / homologs）</strong>。</p>
+
+<table>
+<caption>易混淆比較｜homolog、paralog、ortholog</caption>
+<thead><tr><th>名詞</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td><strong>同源蛋白 homolog</strong></td><td>來自共同祖先、彼此相關的蛋白質（總稱）</td></tr>
+<tr><td><strong>旁系同源 paralog</strong></td><td><strong>同一物種內</strong>的兩個同源蛋白</td></tr>
+<tr><td><strong>直系同源 ortholog</strong></td><td><strong>不同物種間</strong>執行相同功能的同源蛋白</td></tr>
+</tbody>
+</table>
+
+<div class="box concept">
+<div class="box-title">📊 序列比對的評分邏輯</div>
+<p>序列比對（sequence alignment）時，相同胺基酸給正分，需插入空隙（gap）以對齊序列時給負分。若考慮胺基酸化學性質相似性（如 Glu 取代 Asp，皆帶負電），屬於<strong>保守性置換（conservative substitution）</strong>，評分應高於非保守性置換（如 Asp 換成疏水性的 Phe）。可靠性可透過將其中一條序列「打散重排」，比較原始比對分數是否顯著高於隨機亂數比對分數來驗證。</p>
+</div>
+
+<p>蛋白質序列中的<strong>一致序列（consensus sequence）</strong>反映特定功能區域在演化上高度保守；<strong>簽名序列（signature sequence）</strong>則是特定分類群共有、其他分類群沒有的片段，可作為劃分演化支系的證據（例如古菌與真核生物共有、但細菌沒有的 EF-1α/EF-Tu 插入片段）。累積足夠多蛋白質的序列差異，即可建構<strong>演化樹（evolutionary tree）</strong>，重建生命史。</p>
+
+<div class="box summary">
+<div class="box-title">✅ 3.4 節重點摘要</div>
+<ul>
+<li>蛋白質結構分四級，一級結構（序列）是基礎，決定後續折疊與功能。</li>
+<li>序列突變可導致遺傳疾病（如鐮刀型貧血、DMD）。</li>
+<li>Edman 降解、蛋白酶切割、質譜是傳統與現代定序工具。</li>
+<li>Merrifield 固相合成法可人工化學合成短胜肽／蛋白質。</li>
+<li>序列比對可鑑別 homolog / paralog / ortholog，是分子演化研究的基礎。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ KEY TAKEAWAYS ============ -->
+<section id="keytakeaways" class="keytakeaways-section">
+<h2>Key Takeaways</h2>
+<ol>
+<li><b>20 種常見胺基酸</b>都是 α-胺基酸，差異僅在 R 基；蛋白質中的胺基酸殘基幾乎全為 <b>L 型立體異構物</b>。</li>
+<li>依 R 基極性可將胺基酸分為<b>五大類</b>：非極性脂肪族、芳香族、極性不帶電、帶正電、帶負電。</li>
+<li>胺基酸／胜肽具有特徵性滴定曲線與<b>等電點（pI）</b>——淨電荷為零的 pH 值，是純化技術（離子交換、電泳）的理論基礎。</li>
+<li><b>胜肽鍵</b>由縮合反應形成（脫水），逆反應為水解；胜肽鍵雖熱力學上易水解，但實際上非常穩定（半衰期約 7 年）。</li>
+<li>蛋白質純化常依序結合：<b>鹽析 → 透析 → 離子交換／分子篩／親和層析</b>，並以<b>比活性（specific activity）</b>評估純度。</li>
+<li><b>SDS-PAGE</b>依分子量分離蛋白質；<b>等電聚焦</b>依 pI 分離；<b>二維電泳</b>結合兩者，解析度最高。</li>
+<li><b>質譜法（MS / MS-MS）</b>可快速測定蛋白質分子量並推導胺基酸序列，是現代蛋白質體學的核心工具。</li>
+<li>蛋白質結構分為<b>一級、二級、三級、四級</b>四個層次，一級結構（胺基酸序列）決定其後所有結構層次與功能。</li>
+<li>序列變異可能導致疾病（如鐮刀型貧血症），也是追蹤<b>分子演化</b>的重要線索：務必分清 <b>homolog／paralog／ortholog</b> 的差異。</li>
+<li>Merrifield <b>固相胜肽合成法</b>可由 C 端往 N 端人工組裝短胜肽，方向與細胞內生合成（N→C）相反。</li>
+</ol>
+</section>
+
+<button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ Back to Top</button>
+
+</main>
+
+<script>
+  // Smooth scroll for nav links (fallback for browsers without CSS smooth-scroll on anchor click)
+  document.querySelectorAll('nav a').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      var targetId = this.getAttribute('data-target');
+      var targetEl = document.getElementById(targetId);
+      if(targetEl){
+        var navHeight = document.querySelector('nav').offsetHeight;
+        var top = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 6;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Scroll spy: highlight active nav item based on visible section
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('nav a');
+
+  function onScroll(){
+    var scrollPos = window.pageYOffset;
+    var navHeight = document.querySelector('nav').offsetHeight;
+    var currentId = sections[0] ? sections[0].id : '';
+
+    sections.forEach(function(sec){
+      var top = sec.offsetTop - navHeight - 20;
+      if(scrollPos >= top){
+        currentId = sec.id;
+      }
+    });
+
+    // if near bottom of page, force last section active
+    if((window.innerHeight + scrollPos) >= document.body.offsetHeight - 5){
+      currentId = sections[sections.length - 1].id;
+    }
+
+    navLinks.forEach(function(link){
+      link.classList.remove('active');
+      if(link.getAttribute('data-target') === currentId){
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('resize', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>
