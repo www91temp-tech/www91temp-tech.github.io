@@ -129,7 +129,7 @@
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 0.75rem 2rem;
-    display: flex; gap: 0.4rem; flex-wrap: wrap;
+    display: flex; justify-content: center;gap: 0.4rem; flex-wrap: wrap;
     align-items: center;
   }
 
@@ -141,7 +141,7 @@
     margin-right: 0.5rem;
   }
 
-  .nav-link {
+  .nav-link { /* 補上 nav */
     color: var(--text-dim);
     text-decoration: none;
     font-size: 0.8rem;
@@ -149,6 +149,13 @@
     border-radius: 6px;
     transition: all 0.2s;
   }
+
+  .nav-link.active {
+    color: var(--cyan); /* 改用專案內有的變數 */
+    background: rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.3);
+  }
+ 
   .nav-link:hover { background: var(--bg3); color: var(--cyan); }
 
   /* ── MAIN ── */
@@ -817,8 +824,8 @@
 
   <div class="hero-content">
     <div class="hero-badge">CHAPTER 8 · BIOCHEMISTRY</div>
-    <h1>核苷酸與核酸</h1>
-    <p class="hero-sub">Nucleotides &amp; Nucleic Acids — 從零開始，一步步理解生命的分子語言</p>
+    <h1>核苷酸與核酸<br>Nucleotides &amp; <br>Nucleic Acids</h1>
+    <p class="hero-sub">從零開始，一步步理解生命的分子語言</p>
     <div class="hero-chips">
       <span class="chip">🧬 DNA 結構</span>
       <span class="chip">🔬 核苷酸組成</span>
@@ -1549,7 +1556,7 @@
 </main>
 
 <footer>
-  <p style="margin-top:0.4rem">Chapter 8 · 核苷酸與核酸 · 學習指南</p>
+  <p style="margin-top:0.4rem">第8章：核苷酸與核酸｜學習指南</p>
 </footer>
 
 <script>
@@ -1578,6 +1585,73 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  // 1. 元素淡入動畫的 Observer
+const animationObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .rna-card, .form-card, .principle-card, .tl-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  animationObserver.observe(el);
+});
+
+// 2. 平滑捲動
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// 3. 修正後的導覽列恆亮邏輯 (Scroll Highlight)
+(function () {
+  const sections = document.querySelectorAll('.section');
+  const tabs = document.querySelectorAll('.nav-link');
+
+  // 建立對照表：透過 href 中的 id 找到對應的 a 標籤
+  const idToTab = {};
+  tabs.forEach(tab => {
+    const href = tab.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const id = href.substring(1); // 去掉 # 號，留下 id 名字
+      idToTab[id] = tab;
+    }
+  });
+
+  const navObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        // 當該區塊進入視窗比例超過 0（代表碰到了頂部觸發線）
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          
+          // 如果這個 id 有對應的導覽按鈕，才進行切換
+          if (idToTab[id]) {
+            tabs.forEach(t => t.classList.remove('active'));
+            idToTab[id].classList.add('active');
+          }
+        }
+      });
+    },
+    {
+      // 調整觸發範圍：當區塊捲動到接近 sticky 導覽列下方時觸發切換
+      rootMargin: '-10% 0px -70% 0px', 
+      threshold: 0
+    }
+  );
+
+  sections.forEach(sec => navObserver.observe(sec));
+})();
+  
 </script>
 </body>
 </html>
