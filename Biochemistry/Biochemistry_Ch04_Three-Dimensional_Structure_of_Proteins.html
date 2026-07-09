@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第4章 蛋白質的3D結構</title>
+<title>第4章：蛋白質的3D結構｜學習指南</title>
 <style>
   :root{
     --bg:#fbfaf7;
@@ -35,7 +35,7 @@
     color:var(--accent-dark);
     line-height:1.4;
   }
-  header{
+  header.masthead{
     background:linear-gradient(135deg,var(--accent-dark),var(--accent));
     color:#fff;
     padding:48px 20px 36px;
@@ -45,9 +45,16 @@
     align-items:center;
     justify-content:center;
   }
-  header h1{
+  header.masthead .kicker{
+    letter-spacing:.25em;
+    font-size:.65rem;
+    color:#dff3f1;
+    text-transform:uppercase;
+    margin-bottom:.5rem;
+  }
+  header.masthead h1{
     color:#fff;
-    font-size:1.9rem;
+    font-size:2.2rem;
     margin:0 0 10px;
     letter-spacing:.05em;
   }
@@ -280,8 +287,8 @@
   #backtotop:hover{ background:var(--accent); }
 
   @media (max-width:700px){
-    header{ padding:34px 14px 26px; }
-    header h1{ font-size:1.35rem; }
+    header.masthead{ padding:34px 14px 26px; }
+    header.masthead h1{ font-size:1.35rem; }
     nav a{ font-size:0.78rem; padding:0 9px; height:44px; }
     main{ padding:24px 14px 60px; }
     h2{ font-size:1.25rem; }
@@ -289,14 +296,24 @@
     .flow{ flex-direction:column; }
     .flow-arrow{ transform:rotate(90deg); }
   }
+
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#9a9284;
+    font-size:.8rem;
+  }
+  
 </style>
 </head>
 <body>
 
-<header>
-  <h1>第4章 蛋白質的3D結構</h1>
-  <p class="subtitle">The Three-Dimensional Structure of Proteins — 從二級結構到四級結構，以及蛋白質如何折疊、變性與被解析</p>
+<header class="masthead">
+  <div class="kicker">CHAPTER 4 · BIOCHEMISTRY</div>
+  <h1>蛋白質的3D結構<br>The Three-Dimensional Structure of Proteins</h1>
+  <p class="subtitle">從二級結構到四級結構，以及蛋白質如何折疊、變性與被解析</p>
 </header>
+
 
 <nav>
   <ul id="navlist">
