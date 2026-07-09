@@ -12,8 +12,23 @@
       ]
     },
     {
+      "key": "Biochemistry2",
+      "label": "🧪 生化 2 (Biochemistry)",
+      "folder": "Biochemistry2",
+      "notes": [
+        {
+          "title": "Ch14 Glycolysis, Gluconeogenesis, and Pentose Phosphate Pathway",
+          "file": "Biochemistry2_Ch14_Glycolysis,_Gluconeogenesis,_and_Pentose_Phosphate_Pathway.html"
+        },
+        {
+          "title": "Ch15 Metabolism of Glycogen in Animals",
+          "file": "Biochemistry2_Ch15_Metabolism_of_Glycogen_in_Animals.html"
+        }
+      ]
+    },
+    {
       "key": "Biochemistry",
-      "label": "🧪 生化 (Biochemistry)",
+      "label": "🧪 生化 1 (Biochemistry)",
       "folder": "Biochemistry",
       "notes": [
         {
