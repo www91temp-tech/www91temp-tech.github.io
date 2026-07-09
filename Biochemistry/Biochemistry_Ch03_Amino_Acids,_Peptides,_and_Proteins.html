@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第3章 胺基酸、胜肽和蛋白質</title>
+<title>第3章：胺基酸、胜肽和蛋白質｜學習指南</title>
 <style>
   :root{
     --font-main: "Noto Sans TC", "思源黑體", "Source Han Sans TC", sans-serif;
@@ -37,7 +37,7 @@
     font-size: 17px;
   }
 
-  header{
+  header.masthead{
     background: linear-gradient(135deg, var(--color-header), #2f5670);
     color: #fff;
     padding: 40px 20px 34px;
@@ -47,16 +47,23 @@
     align-items:center;
     justify-content:center;
   }
-  header h1{
+  header.masthead .kicker{
+    letter-spacing:.25em;
+    font-size:.65rem;
+    color:#dff3f1;
+    text-transform:uppercase;
+    margin-bottom:.5rem;
+  }
+  header.masthead h1{
     margin:0 0 8px 0;
-    font-size: 1.9rem;
+    font-size: 2.4rem;
     letter-spacing: 2px;
     font-weight: 700;
     text-align:center;
   }
-  header p.subtitle{
+  header.masthead p.subtitle{
     margin:0;
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     opacity: 0.85;
     letter-spacing: 1px;
   }
@@ -341,8 +348,8 @@
   #backToTop:hover{ background: var(--color-accent); }
 
   @media (max-width: 768px){
-    header{ padding: 30px 14px 26px; }
-    header h1{ font-size: 1.4rem; letter-spacing: 1px; }
+    header.masthead{ padding: 30px 14px 26px; }
+    header.masthead h1{ font-size: 1.4rem; letter-spacing: 1px; }
     nav ul li a{ padding: 0 10px; font-size: 0.78rem; }
     main{ padding: 22px 14px 60px; }
     h2{ font-size: 1.25rem; }
@@ -360,8 +367,9 @@
 </head>
 <body>
 
-<header>
-  <h1>第3章 胺基酸、胜肽和蛋白質</h1>
+<header class="masthead">
+  <div class="kicker">CHAPTER 3 · BIOCHEMISTRY</div>
+  <h1>胺基酸、胜肽和蛋白質</h1>
   <p class="subtitle">Amino Acids, Peptides, and Proteins</p>
 </header>
 
@@ -838,6 +846,10 @@
 <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ Back to Top</button>
 
 </main>
+
+<footer>
+  <p style="margin-top:0.4rem">第3章：胺基酸、胜肽和蛋白質｜學習指南</p>
+</footer>
 
 <script>
   // Smooth scroll for nav links (fallback for browsers without CSS smooth-scroll on anchor click)
