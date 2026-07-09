@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第14章：糖解、糖質新生與五碳糖磷酸途徑｜學習指南</title>
+<style>
+  :root{
+    --hue: 298;
+    --primary: hsl(298, 45%, 35%);
+    --primary-light: hsl(298, 45%, 92%);
+    --text: #1a1a1a;
+    --border-radius: 10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Noto Sans CJK TC",sans-serif;
+    color:var(--text);
+    line-height:1.85;
+    background:#fdfcfe;
+  }
+  header{
+    text-align:center;
+    padding:2.5rem 1.5rem 2rem;
+    background:linear-gradient(180deg, var(--primary-light), #fdfcfe);
+  }
+  header h1{
+    margin:0 0 .5rem;
+    font-size:1.7rem;
+    color:var(--primary);
+    letter-spacing:.02em;
+  }
+  header p{
+    margin:0;
+    color:#555;
+    font-size:.95rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid #eadff0;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.3rem;
+    padding:.6rem .8rem;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-size:.85rem;
+    padding:.45rem .8rem;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:1rem 1.3rem 4rem;
+  }
+  section{ padding-top:1.2rem; margin-top:1rem;}
+  h1.chapter-title{display:none;}
+  h2{
+    color:var(--primary);
+    font-size:1.35rem;
+    border-bottom:3px solid var(--primary-light);
+    padding-bottom:.5rem;
+    margin-top:2.6rem;
+  }
+  h3{
+    color:var(--primary);
+    font-size:1.1rem;
+    margin-top:1.8rem;
+    padding-left:.6rem;
+    border-left:5px solid var(--primary);
+  }
+  h4{
+    font-size:1rem;
+    color:#333;
+    margin-top:1.2rem;
+    margin-bottom:.5rem;
+  }
+  p{margin:.7rem 0;}
+  .lead{
+    background:var(--primary-light);
+    border-radius:var(--border-radius);
+    padding:1rem 1.2rem;
+    font-size:.97rem;
+  }
+  .callout{
+    border-radius:var(--border-radius);
+    padding:.9rem 1.1rem;
+    margin:1rem 0;
+    font-size:.93rem;
+    border-left:5px solid var(--primary);
+    background:var(--primary-light);
+  }
+  .callout.enzyme{ border-left-color:#2b6c4f; background:#e7f3ec; }
+  .callout.reg{ border-left-color:#a15c00; background:#fbeedd; }
+  .callout.clinical{ border-left-color:#b3261e; background:#fbe9e7; }
+  .callout .tag{
+    display:inline-block;
+    font-weight:700;
+    font-size:.75rem;
+    padding:.15rem .55rem;
+    border-radius:999px;
+    background:var(--primary);
+    color:#fff;
+    margin-bottom:.4rem;
+  }
+  .callout.enzyme .tag{ background:#2b6c4f; }
+  .callout.reg .tag{ background:#a15c00; }
+  .callout.clinical .tag{ background:#b3261e; }
+
+  .steps{
+    counter-reset:step;
+    margin:1rem 0;
+    padding:0;
+    list-style:none;
+  }
+  .steps li{
+    counter-increment:step;
+    position:relative;
+    padding:.5rem 0 .5rem 2.6rem;
+    margin-bottom:.35rem;
+    border-bottom:1px dashed #e6d9ee;
+  }
+  .steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:0; top:.35rem;
+    width:1.8rem; height:1.8rem;
+    border-radius:50%;
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.85rem;
+  }
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.4rem;
+    margin:1.1rem 0;
+    font-size:.85rem;
+  }
+  .flow .node{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:8px;
+    padding:.45rem .7rem;
+    color:var(--primary);
+    font-weight:700;
+    text-align:center;
+  }
+  .flow .arrow{
+    color:var(--primary);
+    font-weight:700;
+    font-size:1.1rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-width:2.4rem;
+  }
+  .flow .arrow small{
+    font-weight:400;
+    color:#666;
+    font-size:.68rem;
+    white-space:nowrap;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.1rem 0;
+    font-size:.88rem;
+  }
+  caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:.4rem;
+  }
+  th,td{
+    border:1px solid #e2d4ea;
+    padding:.55rem .6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{ background:#faf6fb; }
+  .compare-table th.colA{ background:hsl(298,45%,35%); }
+  .compare-table th.colB{ background:#2b6c4f; }
+  .compare-table th.colDiff{ background:#555; }
+
+  svg{ width:100%; height:auto; display:block; margin:1rem auto; }
+  .svg-wrap{
+    background:#fff;
+    border:1px solid #e6d9ee;
+    border-radius:var(--border-radius);
+    padding:.6rem;
+  }
+  .fig-caption{
+    font-size:.8rem;
+    color:#666;
+    text-align:center;
+    margin-top:.2rem;
+  }
+
+  .term{ color:var(--primary); font-weight:700; }
+  .eq{
+    background:#f6f1f8;
+    border-radius:6px;
+    padding:.6rem .8rem;
+    font-family:"Consolas","Courier New",monospace;
+    font-size:.85rem;
+    overflow-x:auto;
+    margin:.7rem 0;
+  }
+
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:var(--border-radius);
+    padding:1.2rem 1.4rem;
+  }
+  .takeaways ol{ padding-left:1.3rem; }
+  .takeaways li{ margin-bottom:.55rem; }
+
+  footer{
+    text-align:center;
+    padding:2.2rem 1rem 3rem;
+    color:#666;
+    font-size:.85rem;
+  }
+  #backTop{
+    display:inline-block;
+    margin-top:1rem;
+    background:var(--primary);
+    color:#fff;
+    text-decoration:none;
+    padding:.55rem 1.3rem;
+    border-radius:999px;
+    font-size:.85rem;
+    cursor:pointer;
+    border:none;
+  }
+  #backTop:hover{ opacity:.85; }
+
+  @media (max-width:1024px){
+    main{ max-width:94%; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.25rem; }
+    nav{ gap:.15rem; padding:.4rem; }
+    nav a{ font-size:.78rem; padding:.35rem .6rem; }
+    h2{ font-size:1.15rem; }
+    h3{ font-size:1rem; }
+    .flow{ flex-direction:column; align-items:stretch; }
+    .flow .arrow{ transform:rotate(90deg); margin:0 auto; }
+    table, thead, tbody, th, td, tr{ display:block; }
+    thead{ display:none; }
+    tr{ margin-bottom:.8rem; border:1px solid #e2d4ea; border-radius:8px; overflow:hidden; }
+    td{ border:none; border-bottom:1px solid #f0e8f4; position:relative; padding-left:40%; }
+    td::before{
+      content: attr(data-label);
+      position:absolute; left:.6rem; top:.55rem;
+      width:35%; font-weight:700; color:var(--primary); font-size:.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第14章：糖解、糖質新生與五碳糖磷酸途徑</h1>
+  <p>Glycolysis, Gluconeogenesis, and the Pentose Phosphate Pathway｜生化學習指南</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#intro">總覽</a>
+  <a href="#s14-1">14.1 糖解作用</a>
+  <a href="#s14-2">14.2 前驅路徑</a>
+  <a href="#s14-3">14.3 丙酮酸去向</a>
+  <a href="#s14-4">14.4 糖質新生</a>
+  <a href="#s14-5">14.5 協同調節</a>
+  <a href="#s14-6">14.6 五碳糖磷酸途徑</a>
+  <a href="#takeaways">重點回顧</a>
+</nav>
+
+<main>
+
+<!-- ================= 總覽 ================= -->
+<section id="intro">
+  <h2>總覽：葡萄糖代謝的四大去向</h2>
+  <p class="lead">
+    葡萄糖（<span class="term">glucose</span>）是生物界最重要的燃料兼建構材料。完全氧化葡萄糖成 CO₂ 與 H₂O
+    可釋放大量自由能（ΔG'° ≈ −2,840 kJ/mol）。細胞可將葡萄糖以肝醣（<span class="term">glycogen</span>）或澱粉
+    （<span class="term">starch</span>）等多醣形式儲存，需要能量時再釋出。
+  </p>
+  <p>本章聚焦葡萄糖代謝的四條主要去路：</p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="290" y="10" width="120" height="50" rx="10" fill="hsl(298,45%,35%)"/>
+      <text x="350" y="40" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">葡萄糖</text>
+      <line x1="350" y1="60" x2="90" y2="110" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <line x1="350" y1="60" x2="270" y2="110" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <line x1="350" y1="60" x2="450" y2="110" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <line x1="350" y1="60" x2="620" y2="110" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+
+      <rect x="10" y="110" width="160" height="60" rx="8" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/>
+      <text x="90" y="135" text-anchor="middle" font-size="12">細胞外基質／</text>
+      <text x="90" y="153" text-anchor="middle" font-size="12">細胞壁多醣合成</text>
+
+      <rect x="190" y="110" width="160" height="60" rx="8" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/>
+      <text x="270" y="135" text-anchor="middle" font-size="12">儲存</text>
+      <text x="270" y="153" text-anchor="middle" font-size="12">肝醣／澱粉／蔗糖</text>
+
+      <rect x="370" y="110" width="160" height="60" rx="8" fill="#fbeedd" stroke="#a15c00"/>
+      <text x="450" y="135" text-anchor="middle" font-size="12" font-weight="700">五碳糖磷酸途徑</text>
+      <text x="450" y="153" text-anchor="middle" font-size="12">→ 核糖 5-磷酸</text>
+
+      <rect x="550" y="110" width="140" height="60" rx="8" fill="#e7f3ec" stroke="#2b6c4f"/>
+      <text x="620" y="135" text-anchor="middle" font-size="12" font-weight="700">糖解作用</text>
+      <text x="620" y="153" text-anchor="middle" font-size="12">→ 丙酮酸</text>
+
+      <text x="350" y="215" text-anchor="middle" font-size="12" fill="#555">本章第14.1、14.3、14.4節聚焦糖解／糖質新生；第14.6節聚焦五碳糖磷酸途徑</text>
+    </svg>
+    <p class="fig-caption">圖 14-1（重製）：葡萄糖代謝的四個主要去向</p>
+  </div>
+
+  <div class="callout">
+    <span class="tag">章節導覽</span>
+    本章依序介紹：(1) <b>糖解作用</b>如何把葡萄糖分解為丙酮酸並產生 ATP／NADH；
+    (2) 其他醣類如何「餵入」糖解路徑；(3) 丙酮酸在有氧／無氧環境下的不同去路；
+    (4) <b>糖質新生</b>如何逆向合成葡萄糖；(5) 兩條路徑如何被協同調節以避免無效循環；
+    (6) <b>五碳糖磷酸途徑</b>如何提供 NADPH 與核糖 5-磷酸。
+  </div>
+</section>
+
+<!-- ================= 14.1 ================= -->
+<section id="s14-1">
+  <h2>14.1 糖解作用（Glycolysis）</h2>
+  <p>
+    糖解作用（源自希臘文 <i>glykys</i>「甜」與 <i>lysis</i>「分解」）是幾乎所有生物共通的中央代謝路徑：
+    一分子六碳的葡萄糖經過 10 個酵素催化反應，分解為兩分子三碳的丙酮酸（<span class="term">pyruvate</span>），
+    過程中部分自由能以 ATP 與 NADH 的形式保存下來。糖解作用是史上第一條被完整解析的代謝路徑。
+  </p>
+
+  <h3>兩階段總覽：準備期與獲能期</h3>
+  <p>糖解作用可分為兩個階段：</p>
+  <div class="callout">
+    <span class="tag">Pathway 總覽</span>
+    <b>準備期（preparatory phase，步驟1–5）</b>：投入 2 分子 ATP，將葡萄糖轉化並裂解為兩分子甘油醛 3-磷酸
+    （glyceraldehyde 3-phosphate, G3P）。<br>
+    <b>獲能期（payoff phase，步驟6–10）</b>：兩分子 G3P 氧化為丙酮酸，共產生 4 分子 ATP 與 2 分子 NADH。<br>
+    淨產出：<b>每葡萄糖淨得 2 ATP + 2 NADH + 2 丙酮酸</b>。
+  </div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg">
+      <text x="20" y="24" font-size="14" font-weight="700" fill="hsl(298,45%,35%)">(a) 準備期 Preparatory phase（耗能，投入 2 ATP）</text>
+      <!-- prep phase chain -->
+      <g font-size="11">
+        <rect x="10" y="35" width="95" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+        <text x="57" y="56" text-anchor="middle">葡萄糖</text>
+        <text x="120" y="46" font-size="10" fill="#a15c00">①己糖激酶</text>
+        <text x="120" y="58" font-size="10" fill="#a15c00">ATP→ADP</text>
+        <path d="M108 52 L155 52" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#arr)"/>
+
+        <rect x="160" y="35" width="95" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+        <text x="207" y="56" text-anchor="middle">G6P</text>
+        <text x="270" y="46" font-size="10" fill="#555">②異構酶</text>
+        <path d="M258 52 L305 52" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#arr)"/>
+
+        <rect x="310" y="35" width="95" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+        <text x="357" y="56" text-anchor="middle">F6P</text>
+        <text x="420" y="46" font-size="10" fill="#a15c00">③PFK-1</text>
+        <text x="420" y="58" font-size="10" fill="#a15c00">ATP→ADP</text>
+        <path d="M408 52 L455 52" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#arr)"/>
+
+        <rect x="460" y="35" width="105" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+        <text x="512" y="56" text-anchor="middle">F1,6BP</text>
+        <text x="577" y="46" font-size="10" fill="#555">④醛縮酶</text>
+        <text x="577" y="58" font-size="10" fill="#555">裂解</text>
+        <path d="M568 52 L615 52" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#arr)"/>
+
+        <rect x="620" y="15" width="130" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+        <text x="685" y="36" text-anchor="middle" font-size="10">DHAP</text>
+        <rect x="620" y="65" width="130" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+        <text x="685" y="86" text-anchor="middle" font-size="10">G3P（×1）</text>
+        <path d="M685 49 L685 62" stroke="#555" stroke-width="1"/>
+        <text x="700" y="110" font-size="10" fill="#555">⑤丙糖磷酸異構酶</text>
+        <path d="M683 100 L683 130" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#arr)"/>
+      </g>
+
+      <line x1="10" y1="150" x2="750" y2="150" stroke="#e2d4ea" stroke-width="2" stroke-dasharray="4 4"/>
+
+      <text x="20" y="175" font-size="14" font-weight="700" fill="#2b6c4f">(b) 獲能期 Payoff phase（每步驟×2，因有2分子G3P）</text>
+      <g font-size="11">
+        <rect x="10" y="185" width="120" height="34" rx="6" fill="#fff" stroke="#2b6c4f" stroke-width="2"/>
+        <text x="70" y="206" text-anchor="middle">(2) G3P</text>
+        <text x="150" y="176" font-size="10" fill="#a15c00">⑥G3P脫氫酶</text>
+        <text x="150" y="188" font-size="10" fill="#a15c00">Pi, NAD+→NADH</text>
+        <path d="M132 202 L182 202" stroke="#2b6c4f" stroke-width="2" marker-end="url(#arr2)"/>
+
+        <rect x="187" y="185" width="130" height="34" rx="6" fill="#fff" stroke="#2b6c4f" stroke-width="2"/>
+        <text x="252" y="206" text-anchor="middle">(2) 1,3-BPG</text>
+        <text x="340" y="176" font-size="10" fill="#a15c00">⑦磷酸甘油酸激酶</text>
+        <text x="340" y="188" font-size="10" fill="#a15c00">ADP→ATP</text>
+        <path d="M319 202 L369 202" stroke="#2b6c4f" stroke-width="2" marker-end="url(#arr2)"/>
+
+        <rect x="374" y="185" width="125" height="34" rx="6" fill="#fff" stroke="#2b6c4f" stroke-width="2"/>
+        <text x="437" y="206" text-anchor="middle">(2) 3-PG</text>
+        <text x="527" y="176" font-size="10" fill="#555">⑧變位酶</text>
+        <path d="M501 202 L551 202" stroke="#2b6c4f" stroke-width="2" marker-end="url(#arr2)"/>
+
+        <rect x="556" y="185" width="125" height="34" rx="6" fill="#fff" stroke="#2b6c4f" stroke-width="2"/>
+        <text x="619" y="206" text-anchor="middle">(2) 2-PG</text>
+
+        <text x="70" y="250" font-size="10" fill="#555">⑨烯醇化酶（脫水）</text>
+        <path d="M619 221 L619 240 L70 240 L70 258" stroke="#2b6c4f" stroke-width="2" marker-end="url(#arr2)" fill="none"/>
+
+        <rect x="10" y="263" width="120" height="34" rx="6" fill="#fff" stroke="#2b6c4f" stroke-width="2"/>
+        <text x="70" y="284" text-anchor="middle">(2) PEP</text>
+        <text x="150" y="254" font-size="10" fill="#a15c00">⑩丙酮酸激酶</text>
+        <text x="150" y="266" font-size="10" fill="#a15c00">ADP→ATP</text>
+        <path d="M132 280 L182 280" stroke="#2b6c4f" stroke-width="2" marker-end="url(#arr2)"/>
+
+        <rect x="187" y="263" width="140" height="34" rx="6" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+        <text x="257" y="284" text-anchor="middle" font-weight="700">(2) 丙酮酸</text>
+      </g>
+
+      <rect x="10" y="330" width="740" height="90" rx="8" fill="#faf6fb" stroke="#e2d4ea"/>
+      <text x="30" y="355" font-size="12" font-weight="700" fill="hsl(298,45%,35%)">淨結算（每 1 分子葡萄糖）</text>
+      <text x="30" y="378" font-size="12">投入：2 ATP（步驟①③） + 2 NAD⁺（步驟⑥）</text>
+      <text x="30" y="398" font-size="12">產出：4 ATP（步驟⑦⑩，各×2） + 2 NADH + 2 丙酮酸　→　<tspan font-weight="700" fill="#2b6c4f">淨得 2 ATP + 2 NADH</tspan></text>
+
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(298,45%,35%)"/></marker>
+        <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2b6c4f"/></marker>
+      </defs>
+    </svg>
+    <p class="fig-caption">圖 14-2（重製）：糖解作用的兩個階段與十個反應步驟</p>
+  </div>
+
+  <h4>十步驟反應一覽表</h4>
+  <table>
+    <caption>糖解作用十步驟：酵素、輔因子與化學邏輯</caption>
+    <thead><tr><th>步驟</th><th>反應</th><th>酵素</th><th>輔因子/產物</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td data-label="步驟">1</td><td data-label="反應">葡萄糖 → G6P</td><td data-label="酵素">己糖激酶</td><td data-label="輔因子">ATP→ADP</td><td data-label="備註">磷酸化使醣類「困」在細胞內；不可逆</td></tr>
+      <tr><td data-label="步驟">2</td><td data-label="反應">G6P → F6P</td><td data-label="酵素">磷酸己糖異構酶</td><td data-label="輔因子">—</td><td data-label="備註">羰基由C-1移至C-2</td></tr>
+      <tr><td data-label="步驟">3</td><td data-label="反應">F6P → F1,6BP</td><td data-label="酵素">磷酸果糖激酶-1 (PFK-1)</td><td data-label="輔因子">ATP→ADP</td><td data-label="備註"><b>糖解作用的第一個「承諾」步驟</b>，不可逆，主要調控點</td></tr>
+      <tr><td data-label="步驟">4</td><td data-label="反應">F1,6BP → DHAP + G3P</td><td data-label="酵素">醛縮酶（aldolase）</td><td data-label="輔因子">—</td><td data-label="備註">逆向醛醇縮合；此即「lysis」裂解步驟</td></tr>
+      <tr><td data-label="步驟">5</td><td data-label="反應">DHAP → G3P</td><td data-label="酵素">丙糖磷酸異構酶</td><td data-label="輔因子">—</td><td data-label="備註">兩分子G3P匯入獲能期</td></tr>
+      <tr><td data-label="步驟">6</td><td data-label="反應">G3P → 1,3-BPG</td><td data-label="酵素">G3P脫氫酶</td><td data-label="輔因子">Pi, NAD⁺→NADH</td><td data-label="備註">氧化＋磷酸化，形成高能醯基磷酸</td></tr>
+      <tr><td data-label="步驟">7</td><td data-label="反應">1,3-BPG → 3-PG</td><td data-label="酵素">磷酸甘油酸激酶</td><td data-label="輔因子">ADP→ATP</td><td data-label="備註">第一次<b>受質層次磷酸化</b>（substrate-level phosphorylation）</td></tr>
+      <tr><td data-label="步驟">8</td><td data-label="反應">3-PG → 2-PG</td><td data-label="酵素">磷酸甘油酸變位酶</td><td data-label="輔因子">Mg²⁺</td><td data-label="備註">磷酸基團在C-2/C-3間轉移</td></tr>
+      <tr><td data-label="步驟">9</td><td data-label="反應">2-PG → PEP</td><td data-label="酵素">烯醇化酶</td><td data-label="輔因子">脫水（−H₂O）</td><td data-label="備註">產生高磷酸基轉移潛能的PEP</td></tr>
+      <tr><td data-label="步驟">10</td><td data-label="反應">PEP → 丙酮酸</td><td data-label="酵素">丙酮酸激酶</td><td data-label="輔因子">ADP→ATP，K⁺, Mg²⁺</td><td data-label="備註">第二次受質層次磷酸化；不可逆，主要調控點</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout enzyme">
+    <span class="tag">Enzyme／Cofactor 重點</span>
+    <b>受質層次磷酸化</b>：步驟⑦與⑩直接由高能中間產物將磷酸基轉給ADP生成ATP，不需氧化磷酸化的呼吸鏈與膜電位，這與粒線體中的「呼吸鏈連結磷酸化」不同。<br>
+    <b>三個不可逆步驟</b>（① 己糖激酶、③ PFK-1、⑩ 丙酮酸激酶）ΔG'° 為大負值，是糖解作用主要的調控位置，也是糖質新生必須繞道之處（詳見14.4、14.5節）。
+  </div>
+
+  <h3>能量平衡總結</h3>
+  <div class="eq">葡萄糖 + 2 NAD⁺ + 2 ADP + 2 Pi → 2 丙酮酸 + 2 NADH + 2 H⁺ + 2 ATP + 2 H₂O</div>
+  <p>
+    糖解作用整體達成三件事：(1) 碳骨架的降解（葡萄糖→丙酮酸）；(2) 磷酸基團的傳遞（2 ADP→2 ATP）；
+    (3) 電子的傳遞（2 NAD⁺→2 NADH）。由於 NAD⁺ 在細胞中含量極低，若無法持續再生，糖解作用將無法繼續，
+    此議題於 14.3 節詳述。
+  </p>
+</section>
+
+<!-- ================= 14.2 ================= -->
+<section id="s14-2">
+  <h2>14.2 糖解的前驅路徑（Feeder Pathways）</h2>
+  <p>
+    除了游離葡萄糖，肝醣、澱粉、雙醣（麥芽糖、乳糖、蔗糖）及己醣（果糖、甘露糖、半乳糖）
+    也能經轉化後進入糖解路徑的不同位置。
+  </p>
+
+  <h3>內源性肝醣／澱粉：磷酸解作用</h3>
+  <div class="flow">
+    <div class="node">肝醣/澱粉</div>
+    <div class="arrow">→<small>肝醣磷酸酶 (Pi)</small></div>
+    <div class="node">葡萄糖1-磷酸</div>
+    <div class="arrow">→<small>磷酸葡萄糖變位酶</small></div>
+    <div class="node">葡萄糖6-磷酸</div>
+    <div class="arrow">→<small>進入糖解</small></div>
+    <div class="node">糖解作用</div>
+  </div>
+  <p>
+    此反應為<span class="term">磷酸解（phosphorolysis）</span>，直接產生已磷酸化的糖，
+    比起飲食性澱粉需先水解成游離葡萄糖、再由己糖激酶耗 1 ATP 磷酸化，可<b>節省 1 分子 ATP</b>
+    （每葡萄糖單體：磷酸解僅耗1 ATP，游離葡萄糖需耗2 ATP，淨獲能分別為3與2 ATP）。
+  </p>
+
+  <h3>飲食性多醣與雙醣：水解作用</h3>
+  <p>
+    唾液與胰臟的 α-澱粉酶水解澱粉為麥芽糖與寡糖；腸道刷狀緣的雙醣酶（麥芽糖酶、乳糖酶、蔗糖酶）
+    再將雙醣水解為單醣，由腸道細胞吸收進入血液。
+  </p>
+
+  <table class="compare-table">
+    <caption>易混淆概念比較①：磷酸解（Phosphorolysis） vs 水解（Hydrolysis）</caption>
+    <thead><tr><th class="colA">A：磷酸解 Phosphorolysis</th><th class="colB">B：水解 Hydrolysis</th><th class="colDiff">關鍵差異</th></tr></thead>
+    <tbody>
+      <tr>
+        <td data-label="A">攻擊分子為無機磷酸 Pi</td>
+        <td data-label="B">攻擊分子為水 H₂O</td>
+        <td data-label="差異">產物是否帶有磷酸基</td>
+      </tr>
+      <tr>
+        <td data-label="A">產物：糖1-磷酸（已活化）</td>
+        <td data-label="B">產物：游離單醣（未活化）</td>
+        <td data-label="差異">後續進入糖解是否需再耗ATP磷酸化</td>
+      </tr>
+      <tr>
+        <td data-label="A">用於細胞內肝醣／澱粉分解（肝醣磷酸酶）</td>
+        <td data-label="B">用於消化道分解飲食多醣／雙醣（澱粉酶、雙醣酶）</td>
+        <td data-label="差異">發生場所（細胞內 vs 消化道）</td>
+      </tr>
+      <tr>
+        <td data-label="A">淨得 3 ATP／葡萄糖單體</td>
+        <td data-label="B">淨得 2 ATP／葡萄糖單體</td>
+        <td data-label="差異">能量效率：磷酸解多省1 ATP</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>其他己醣進入糖解的路徑</h3>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="150" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="85" y="31" text-anchor="middle" font-size="12">半乳糖 Galactose</text>
+      <path d="M85 44 L85 70" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a3)"/>
+      <text x="95" y="60" font-size="10">UDP-葡萄糖途徑</text>
+      <rect x="10" y="75" width="150" height="34" rx="6" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="85" y="96" text-anchor="middle" font-size="12">葡萄糖1-磷酸</text>
+
+      <rect x="200" y="10" width="150" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="275" y="31" text-anchor="middle" font-size="12">果糖（肌肉/腎）</text>
+      <path d="M275 44 L275 70" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a3)"/>
+      <text x="288" y="60" font-size="10">己糖激酶</text>
+      <rect x="200" y="75" width="150" height="34" rx="6" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="275" y="96" text-anchor="middle" font-size="12">果糖6-磷酸</text>
+
+      <rect x="390" y="10" width="150" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="465" y="31" text-anchor="middle" font-size="12">果糖（肝臟）</text>
+      <path d="M465 44 L465 70" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a3)"/>
+      <text x="478" y="60" font-size="10">果糖激酶</text>
+      <rect x="390" y="75" width="150" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="465" y="96" text-anchor="middle" font-size="12">果糖1-磷酸</text>
+      <path d="M465 109 L465 135" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a3)"/>
+      <text x="478" y="125" font-size="10">果糖1-磷酸醛縮酶</text>
+      <rect x="390" y="140" width="150" height="34" rx="6" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="465" y="161" text-anchor="middle" font-size="11">DHAP ＋ 甘油醛</text>
+
+      <rect x="560" y="10" width="130" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="625" y="31" text-anchor="middle" font-size="12">甘露糖</text>
+      <path d="M625 44 L625 70" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a3)"/>
+      <text x="635" y="60" font-size="10">己糖激酶</text>
+      <rect x="560" y="75" width="130" height="34" rx="6" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="625" y="96" text-anchor="middle" font-size="11">甘露糖6-磷酸</text>
+      <path d="M625 109 L625 135" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a3)"/>
+      <text x="635" y="125" font-size="10">磷酸甘露糖異構酶</text>
+
+      <text x="20" y="200" font-size="11" fill="#555">→ 三者最終都匯入糖解作用中間產物（G6P / F6P / G3P）</text>
+      <defs><marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(298,45%,35%)"/></marker></defs>
+    </svg>
+    <p class="fig-caption">圖 14-9（重製，簡化）：己醣進入糖解作用的匯入點</p>
+  </div>
+
+  <div class="callout clinical">
+    <span class="tag">Clinical Correlation</span>
+    <b>乳糖不耐症（lactose intolerance）</b>：成人乳糖酶活性下降，未消化乳糖進入大腸，經細菌代謝產生氣體與滲透性物質，
+    造成腹脹、腹瀉。<br>
+    <b>半乳糖血症（galactosemia）</b>：半乳糖進入 G1P 的路徑上有三個酵素——半乳糖激酶、
+    UDP-葡萄糖：半乳糖1-磷酸尿苷醯轉移酶、UDP-葡萄糖4-差向異構酶，任一缺陷皆會造成不同嚴重程度的半乳糖血症
+    （轉移酶缺乏型最嚴重，可能造成肝損傷與智能障礙）。
+  </div>
+</section>
+
+<!-- ================= 14.3 ================= -->
+<section id="s14-3">
+  <h2>14.3 丙酮酸的去向（Fates of Pyruvate）</h2>
+  <p>
+    糖解作用產生的丙酮酸依細胞的氧氣供應狀態，走向三種不同代謝命運：
+  </p>
+  <div class="flow">
+    <div class="node">丙酮酸</div>
+    <div class="arrow">↗<small>有氧</small></div>
+    <div class="node">乙醯輔酶A → 檸檬酸循環</div>
+  </div>
+  <div class="flow">
+    <div class="node">丙酮酸</div>
+    <div class="arrow">→<small>缺氧／動物</small></div>
+    <div class="node">乳酸（乳酸發酵）</div>
+  </div>
+  <div class="flow">
+    <div class="node">丙酮酸</div>
+    <div class="arrow">→<small>缺氧／酵母菌</small></div>
+    <div class="node">乙醇 + CO₂（酒精發酵）</div>
+  </div>
+
+  <div class="callout">
+    <span class="tag">機制核心</span>
+    無論走向哪條路，其共同目的都是<b>再生 NAD⁺</b>，使 G3P 脫氫酶反應（步驟⑥）得以持續，讓糖解作用不因 NAD⁺ 耗竭而停擺。
+  </div>
+
+  <table class="compare-table">
+    <caption>易混淆概念比較②：乳酸發酵 vs 酒精發酵</caption>
+    <thead><tr><th class="colA">A：乳酸發酵 Lactic acid fermentation</th><th class="colB">B：酒精發酵 Ethanol fermentation</th><th class="colDiff">關鍵差異</th></tr></thead>
+    <tbody>
+      <tr><td data-label="A">丙酮酸直接被NADH還原為乳酸</td><td data-label="B">丙酮酸先脫羧成乙醛，乙醛再被NADH還原為乙醇</td><td data-label="差異">反應步驟數（1 步 vs 2 步）</td></tr>
+      <tr><td data-label="A">酵素：乳酸脫氫酶（LDH）</td><td data-label="B">酵素：丙酮酸脫羧酶＋醇脫氫酶</td><td data-label="差異">所需酵素不同</td></tr>
+      <tr><td data-label="A">不釋放CO₂</td><td data-label="B">釋放CO₂（脫羧反應）</td><td data-label="差異">是否產生氣體（可用於發酵麵團、啤酒起泡）</td></tr>
+      <tr><td data-label="A">典型生物：動物骨骼肌（缺氧）、乳酸菌</td><td data-label="B">典型生物：酵母菌及部分植物</td><td data-label="差異">代表生物不同</td></tr>
+      <tr><td data-label="A">需輔因子：無特殊輔酶</td><td data-label="B">丙酮酸脫羧酶需硫胺素焦磷酸（TPP，維生素B1衍生物）</td><td data-label="差異">是否需要TPP輔酶</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout enzyme">
+    <span class="tag">Cofactor</span>
+    <b>硫胺素焦磷酸（TPP）</b>：來自維生素B1，其噻唑環上C-2質子酸性高，脫質子後形成碳負離子（carbanion），
+    可作為「電子槽」，促進α-酮酸脫羧（如丙酮酸脫羧酶、丙酮酸脫氫酶）及酮醇基團轉移（如轉酮醇酶，見14.6節）反應。
+    飲食中缺乏硫胺素會導致<b>腳氣病（beriberi）</b>與<b>Wernicke-Korsakoff症候群</b>。
+  </div>
+
+  <h3>Pasteur效應與Warburg效應</h3>
+  <div class="callout clinical">
+    <span class="tag">Clinical Correlation</span>
+    <b>Pasteur效應</b>：無氧狀態下葡萄糖消耗速率遠高於有氧狀態，因為糖解單獨只能淨得2 ATP，
+    遠低於完全有氧氧化（約30 ATP），須消耗約15倍葡萄糖才能取得相同ATP量。<br>
+    <b>Warburg效應</b>：多數腫瘤細胞即使在有氧環境下，仍高度依賴糖解作用（而非粒線體氧化）產生ATP，
+    此現象是 PET 造影（利用 <sup>18</sup>F 標記去氧葡萄糖 FDG）偵測腫瘤的生化基礎，也是開發抑制己糖激酶等
+    抗癌藥物（如2-deoxyglucose）的理論依據。
+  </div>
+</section>
+
+<!-- ================= 14.4 ================= -->
+<section id="s14-4">
+  <h2>14.4 糖質新生（Gluconeogenesis）</h2>
+  <p>
+    大腦、紅血球、腎髓質等組織高度依賴血糖供能。在飢餓、劇烈運動後或肝醣耗竭時，
+    肝臟（及部分腎皮質、小腸上皮）可利用丙酮酸、乳酸、甘油及部分生糖胺基酸，
+    透過<span class="term">糖質新生</span>合成新的葡萄糖並釋入血液。
+  </p>
+
+  <h3>三個「繞道」反應：糖解與糖質新生並非簡單互逆</h3>
+  <p>
+    糖質新生的10個反應中有7個直接逆用糖解酵素，但糖解作用中有3個高度放能、不可逆的步驟
+    （① 己糖激酶、③ PFK-1、⑩ 丙酮酸激酶），糖質新生必須用不同的酵素「繞道」完成。
+  </p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+      <text x="10" y="20" font-size="13" font-weight="700" fill="#2b6c4f">糖解（紅／綠系）→</text>
+      <text x="600" y="20" font-size="13" font-weight="700" fill="hsl(298,45%,35%)">← 糖質新生（紫系）</text>
+
+      <!-- glycolysis top row -->
+      <rect x="10" y="35" width="90" height="30" rx="5" fill="#e7f3ec" stroke="#2b6c4f"/><text x="55" y="55" text-anchor="middle" font-size="10">葡萄糖</text>
+      <path d="M100 50 L145 50" stroke="#2b6c4f" stroke-width="2" marker-end="url(#a4)"/>
+      <rect x="150" y="35" width="90" height="30" rx="5" fill="#e7f3ec" stroke="#2b6c4f"/><text x="195" y="55" text-anchor="middle" font-size="10">G6P</text>
+      <path d="M240 50 L285 50" stroke="#2b6c4f" stroke-width="2" marker-end="url(#a4)"/>
+      <rect x="290" y="35" width="90" height="30" rx="5" fill="#e7f3ec" stroke="#2b6c4f"/><text x="335" y="55" text-anchor="middle" font-size="10">F6P</text>
+      <path d="M380 50 L425 50" stroke="#2b6c4f" stroke-width="2" marker-end="url(#a4)"/>
+      <rect x="430" y="35" width="100" height="30" rx="5" fill="#e7f3ec" stroke="#2b6c4f"/><text x="480" y="55" text-anchor="middle" font-size="10">F1,6BP</text>
+      <path d="M530 50 L575 50" stroke="#2b6c4f" stroke-width="2" marker-end="url(#a4)"/>
+      <rect x="580" y="35" width="90" height="30" rx="5" fill="#e7f3ec" stroke="#2b6c4f"/><text x="625" y="55" text-anchor="middle" font-size="10">…→丙酮酸</text>
+
+      <!-- bypass boxes below with double arrows -->
+      <path d="M55 65 L55 100" stroke="#b3261e" stroke-width="2.5" marker-end="url(#a5)"/>
+      <text x="60" y="85" font-size="9" fill="#b3261e">glucose 6-phosphatase</text>
+      <text x="60" y="96" font-size="9" fill="#b3261e">（H2O → Pi）</text>
+
+      <path d="M480 65 L480 100" stroke="#b3261e" stroke-width="2.5" marker-end="url(#a5)"/>
+      <text x="486" y="85" font-size="9" fill="#b3261e">FBPase-1</text>
+      <text x="486" y="96" font-size="9" fill="#b3261e">（H2O → Pi）</text>
+
+      <rect x="10" y="105" width="90" height="30" rx="5" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/><text x="55" y="125" text-anchor="middle" font-size="10">葡萄糖</text>
+      <rect x="430" y="105" width="100" height="30" rx="5" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/><text x="480" y="125" text-anchor="middle" font-size="10">F6P（繞道）</text>
+
+      <!-- bottom: pyruvate to PEP bypass -->
+      <rect x="580" y="150" width="90" height="30" rx="5" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/>
+      <text x="625" y="170" text-anchor="middle" font-size="10">丙酮酸</text>
+      <path d="M625 150 L625 115" stroke="#b3261e" stroke-width="2.5" marker-end="url(#a5)"/>
+
+      <path d="M580 165 L440 165" stroke="hsl(298,45%,35%)" stroke-width="2.5" marker-end="url(#a6)"/>
+      <text x="450" y="160" font-size="9" fill="hsl(298,45%,35%)">丙酮酸羧化酶（ATP，+CO2）</text>
+      <rect x="330" y="150" width="100" height="30" rx="5" fill="#fff" stroke="hsl(298,45%,35%)"/>
+      <text x="380" y="170" text-anchor="middle" font-size="10">草醯乙酸 OAA</text>
+
+      <path d="M330 165 L200 165" stroke="hsl(298,45%,35%)" stroke-width="2.5" marker-end="url(#a6)"/>
+      <text x="205" y="160" font-size="9" fill="hsl(298,45%,35%)">PEP羧激酶（GTP，−CO2）</text>
+      <rect x="90" y="150" width="100" height="30" rx="5" fill="#fff" stroke="hsl(298,45%,35%)"/>
+      <text x="140" y="170" text-anchor="middle" font-size="10">PEP</text>
+      <path d="M140 150 L140 115" stroke="hsl(298,45%,35%)" stroke-width="2.5" stroke-dasharray="3 3" marker-end="url(#a6)"/>
+      <text x="145" y="140" font-size="8" fill="#555">（經3-PG,2-PG,1,3-BPG,G3P等7個共用步驟回到F1,6BP）</text>
+
+      <rect x="10" y="220" width="740" height="60" rx="8" fill="#faf6fb" stroke="#e2d4ea"/>
+      <text x="25" y="242" font-size="11" font-weight="700" fill="hsl(298,45%,35%)">三個繞道反應（紫色路徑）：</text>
+      <text x="25" y="260" font-size="11">① 丙酮酸→OAA→PEP（丙酮酸羧化酶+PEP羧激酶，耗1 ATP+1 GTP）　② F1,6BP→F6P（FBPase-1，水解）　③ G6P→葡萄糖（glucose 6-phosphatase，水解）</text>
+      <text x="25" y="274" font-size="10" fill="#555">合成1分子葡萄糖需消耗4 ATP + 2 GTP + 2 NADH（遠高於糖解淨產出的2 ATP）</text>
+
+      <defs>
+        <marker id="a4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2b6c4f"/></marker>
+        <marker id="a5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b3261e"/></marker>
+        <marker id="a6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(298,45%,35%)"/></marker>
+      </defs>
+    </svg>
+    <p class="fig-caption">圖 14-16（重製、簡化）：糖解作用（綠）與糖質新生（紫）在三個繞道點的相對反應</p>
+  </div>
+
+  <table>
+    <caption>糖解 vs 糖質新生：三個繞道點的酵素對照</caption>
+    <thead><tr><th>繞道位置</th><th>糖解酵素（不可逆方向）</th><th>糖質新生繞道酵素</th></tr></thead>
+    <tbody>
+      <tr><td data-label="位置">葡萄糖 ⇌ G6P</td><td data-label="糖解">己糖激酶（ATP→ADP）</td><td data-label="糖質新生">glucose 6-phosphatase（水解，H₂O→Pi）</td></tr>
+      <tr><td data-label="位置">F6P ⇌ F1,6BP</td><td data-label="糖解">PFK-1（ATP→ADP）</td><td data-label="糖質新生">FBPase-1（水解，H₂O→Pi）</td></tr>
+      <tr><td data-label="位置">PEP ⇌ 丙酮酸</td><td data-label="糖解">丙酮酸激酶（ADP→ATP）</td><td data-label="糖質新生">丙酮酸羧化酶（+ATP）＋ PEP羧激酶（+GTP，經草醯乙酸中介）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="tag">機制重點</span>
+    丙酮酸→PEP的繞道發生於<b>粒線體</b>：丙酮酸羧化酶先在粒線體內把丙酮酸羧化為草醯乙酸（OAA，消耗ATP、加CO₂），
+    OAA 再被 PEP 羧激酶轉為PEP（消耗GTP、去CO₂）。此路徑亦可經蘋果酸穿梭將還原力（NADH）由粒線體送至細胞質，
+    供糖質新生後續步驟使用。當以<b>乳酸</b>為原料時，乳酸脫氫酶反應本身即在細胞質產生NADH，
+    此時可改用粒線體同功異構酶直接生成PEP，不需經蘋果酸穿梭。
+  </div>
+
+  <h3>糖質新生的原料：生糖性胺基酸</h3>
+  <p>
+    多數胺基酸的碳骨架最終可轉化為丙酮酸或檸檬酸循環中間產物，因此可作為葡萄糖合成原料，稱為
+    <span class="term">生糖胺基酸（glucogenic amino acids）</span>。20種常見胺基酸中，僅白胺酸與離胺酸完全無法貢獻碳骨架合成葡萄糖。
+    脂肪酸的甘油部分可經磷酸化與氧化轉為 DHAP 進入此途徑，但哺乳動物<b>無法</b>將脂肪酸的乙醯輔酶A淨轉化為葡萄糖
+    （因丙酮酸脫氫酶反應不可逆），植物與微生物則可透過乙醛酸循環達成。
+  </p>
+</section>
+
+<!-- ================= 14.5 ================= -->
+<section id="s14-5">
+  <h2>14.5 糖解與糖質新生的協同調節</h2>
+  <p>
+    若糖解與糖質新生同時全速運轉，將形成「無效循環」（futile cycle），僅消耗ATP產熱而無淨效益。
+    因此細胞在三個繞道點上，對相對的兩個酵素施以<b>互逆的變構調節</b>。
+  </p>
+
+  <h3>己糖激酶同功酶：組織特異性調節</h3>
+  <table class="compare-table">
+    <caption>易混淆概念比較③：己糖激酶I–III vs 己糖激酶IV（葡萄糖激酶）</caption>
+    <thead><tr><th class="colA">A：己糖激酶 I–III（肌肉等組織）</th><th class="colB">B：己糖激酶 IV／葡萄糖激酶（肝臟）</th><th class="colDiff">關鍵差異</th></tr></thead>
+    <tbody>
+      <tr><td data-label="A">Km低（約0.1 mM），對葡萄糖親和力高</td><td data-label="B">Km高（約10 mM），對葡萄糖親和力低</td><td data-label="差異">受質飽和濃度不同</td></tr>
+      <tr><td data-label="A">在正常血糖濃度下已接近Vmax（近飽和）</td><td data-label="B">活性隨血糖濃度（10 mM以上）持續上升</td><td data-label="差異">是否可反映血糖濃度變化</td></tr>
+      <tr><td data-label="A">被產物G6P變構抑制</td><td data-label="B">不易被G6P抑制</td><td data-label="差異">產物回饋抑制的強弱</td></tr>
+      <tr><td data-label="A">功能：持續供應肌肉能量所需</td><td data-label="B">功能：依血糖濃度調節肝臟攝取/釋出葡萄糖，維持血糖恆定</td><td data-label="差異">生理角色不同</td></tr>
+    </tbody>
+  </table>
+
+  <h3>PFK-1 與 FBPase-1：互逆變構調節</h3>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg">
+      <rect x="60" y="90" width="140" height="40" rx="8" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="130" y="115" text-anchor="middle" font-size="12">果糖6-磷酸</text>
+      <rect x="500" y="90" width="150" height="40" rx="8" fill="#fff" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="575" y="115" text-anchor="middle" font-size="12">果糖1,6-二磷酸</text>
+
+      <path d="M205 100 L495 100" stroke="#2b6c4f" stroke-width="2.5" marker-end="url(#a7)"/>
+      <text x="260" y="92" font-size="11" fill="#2b6c4f" font-weight="700">PFK-1（ATP→ADP）</text>
+
+      <path d="M495 122 L205 122" stroke="hsl(298,45%,35%)" stroke-width="2.5" marker-end="url(#a8)"/>
+      <text x="270" y="140" font-size="11" fill="hsl(298,45%,35%)" font-weight="700">FBPase-1（H2O→Pi）</text>
+
+      <rect x="130" y="10" width="200" height="60" rx="6" fill="#e7f3ec" stroke="#2b6c4f"/>
+      <text x="230" y="30" text-anchor="middle" font-size="10" font-weight="700">促進 PFK-1</text>
+      <text x="230" y="46" text-anchor="middle" font-size="10">AMP、ADP、果糖2,6-BP</text>
+      <text x="230" y="60" text-anchor="middle" font-size="10">抑制 PFK-1：ATP、檸檬酸</text>
+      <path d="M230 70 L230 92" stroke="#2b6c4f" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+      <rect x="400" y="150" width="220" height="60" rx="6" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/>
+      <text x="510" y="170" text-anchor="middle" font-size="10" font-weight="700">抑制 FBPase-1</text>
+      <text x="510" y="186" text-anchor="middle" font-size="10">AMP、果糖2,6-BP</text>
+      <text x="510" y="200" text-anchor="middle" font-size="10">→ 高[ATP]時有利糖質新生</text>
+      <path d="M510 150 L510 132" stroke="hsl(298,45%,35%)" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+      <defs>
+        <marker id="a7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2b6c4f"/></marker>
+        <marker id="a8" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(298,45%,35%)"/></marker>
+      </defs>
+    </svg>
+    <p class="fig-caption">圖 14-23（重製）：PFK-1／FBPase-1 的互逆變構調節</p>
+  </div>
+
+  <div class="callout reg">
+    <span class="tag">Regulatory Step</span>
+    <b>果糖2,6-二磷酸（F26BP）</b>是最強效的變構調節物：<b>活化PFK-1</b>（提高其對F6P的親和力，降低ATP/檸檬酸抑制敏感度），
+    同時<b>抑制FBPase-1</b>。F26BP濃度由雙功能酶 PFK-2/FBPase-2 決定：
+    <br>• <b>升糖素（glucagon）</b>→ cAMP↑ → PKA磷酸化雙功能酶 → FBPase-2活性↑，PFK-2活性↓ → F26BP↓ → 抑制糖解、促進糖質新生
+    <br>• <b>胰島素（insulin）</b>→ 活化磷蛋白磷酸酶去磷酸化雙功能酶 → PFK-2活性↑ → F26BP↑ → 促進糖解、抑制糖質新生
+  </div>
+
+  <h3>丙酮酸激酶與丙酮酸羧化酶的調節</h3>
+  <div class="callout">
+    <span class="tag">Regulatory Step</span>
+    <b>丙酮酸激酶</b>被高濃度ATP、乙醯輔酶A、長鏈脂肪酸變構抑制（能量充足訊號）；肝臟同功酶（L型）
+    另外會被升糖素透過PKA磷酸化而失活，使肝臟優先輸出葡萄糖而非自行消耗。<br>
+    <b>丙酮酸羧化酶</b>則被<b>乙醯輔酶A正向活化</b>——當脂肪酸氧化旺盛、乙醯輔酶A堆積時，訊號提示「不需再氧化葡萄糖」，
+    於是促進丙酮酸轉向糖質新生；同時乙醯輔酶A也抑制丙酮酸脫氫酶複合體，減少丙酮酸流向檸檬酸循環。
+  </div>
+
+  <h3>轉錄調節：長時效的酵素數量控制</h3>
+  <p>
+    除了快速的變構與磷酸化調節，胰島素還能透過轉錄因子（如 <span class="term">ChREBP</span>，碳水化合物反應元件結合蛋白）
+    調控上百個基因的表現，長時間改變糖解／糖質新生／脂肪合成相關酵素的數量。
+    五碳糖磷酸途徑的中間產物<b>木酮糖5-磷酸（xylulose 5-phosphate）</b>可活化磷蛋白磷酸酶PP2A，
+    使ChREBP去磷酸化進入細胞核，啟動糖解與脂肪合成酵素基因表現——這也是連結14.5節與14.6節的重要橋樑。
+  </p>
+</section>
+
+<!-- ================= 14.6 ================= -->
+<section id="s14-6">
+  <h2>14.6 五碳糖磷酸途徑（Pentose Phosphate Pathway）</h2>
+  <p>
+    又稱磷酸葡萄糖酸途徑（phosphogluconate pathway）或己糖單磷酸途徑（hexose monophosphate pathway）。
+    此途徑以 G6P 為起點，產生兩項重要產物：<b>NADPH</b>（還原性生物合成所需）與<b>核糖5-磷酸</b>（核酸合成前驅物）。
+  </p>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="140" height="40" rx="8" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="90" y="45" text-anchor="middle" font-size="12" font-weight="700">葡萄糖6-磷酸</text>
+
+      <path d="M160 40 L280 40" stroke="#a15c00" stroke-width="2.5" marker-end="url(#a9)"/>
+      <text x="170" y="30" font-size="10" fill="#a15c00">氧化期（2×NADP⁺→NADPH）</text>
+
+      <rect x="285" y="20" width="140" height="40" rx="8" fill="#fbeedd" stroke="#a15c00" stroke-width="2"/>
+      <text x="355" y="40" text-anchor="middle" font-size="11">6-磷酸葡萄糖酸</text>
+      <text x="355" y="54" text-anchor="middle" font-size="9">(6-phosphogluconate)</text>
+
+      <path d="M425 40 L545 40" stroke="#a15c00" stroke-width="2.5" marker-end="url(#a9)"/>
+      <text x="440" y="30" font-size="10" fill="#a15c00">−CO2, NADP⁺→NADPH</text>
+
+      <rect x="550" y="20" width="130" height="40" rx="8" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)" stroke-width="2"/>
+      <text x="615" y="40" text-anchor="middle" font-size="11">核酮糖5-磷酸</text>
+      <text x="615" y="54" text-anchor="middle" font-size="9">(ribulose 5-P)</text>
+
+      <path d="M615 60 L615 90" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a10)"/>
+      <text x="480" y="85" font-size="10">異構酶</text>
+      <rect x="550" y="95" width="130" height="34" rx="6" fill="#fff" stroke="hsl(298,45%,35%)"/>
+      <text x="615" y="116" text-anchor="middle" font-size="11">核糖5-磷酸</text>
+      <text x="615" y="150" font-size="10">→ 核苷酸／DNA／RNA合成</text>
+
+      <text x="20" y="200" font-size="12" font-weight="700" fill="hsl(298,45%,35%)">若需求以NADPH為主：</text>
+      <path d="M20 210 L680 210" stroke="hsl(298,45%,35%)" stroke-width="2" stroke-dasharray="3 3"/>
+      <text x="20" y="230" font-size="11">非氧化期（轉酮醇酶、轉醛醇酶）將 6 分子核糖5-磷酸重排回 5 分子G6P，循環再氧化，持續產生NADPH</text>
+
+      <defs>
+        <marker id="a9" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a15c00"/></marker>
+        <marker id="a10" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(298,45%,35%)"/></marker>
+      </defs>
+    </svg>
+    <p class="fig-caption">圖 14-29／14-30（重製、簡化）：五碳糖磷酸途徑的氧化期</p>
+  </div>
+
+  <h3>氧化期（Oxidative phase）：三步驟</h3>
+  <ol class="steps">
+    <li><b>葡萄糖6-磷酸脫氫酶（G6PD）</b>：G6P氧化為6-磷酸葡萄糖酸內酯，NADP⁺→NADPH（第一次）。此為速率決定步驟，受NADP⁺濃度變構調控。</li>
+    <li><b>內酯酶（lactonase）</b>：水解內酯為6-磷酸葡萄糖酸。</li>
+    <li><b>6-磷酸葡萄糖酸脫氫酶</b>：氧化脫羧，釋放CO₂，生成核酮糖5-磷酸，NADP⁺→NADPH（第二次）。</li>
+  </ol>
+  <div class="eq">葡萄糖6-磷酸 + 2 NADP⁺ + H₂O → 核糖5-磷酸 + CO₂ + 2 NADPH + 2 H⁺</div>
+
+  <h3>非氧化期（Nonoxidative phase）：碳骨架重排</h3>
+  <p>
+    當細胞主要需求是NADPH而非核糖時，非氧化期利用<span class="term">轉酮醇酶（transketolase，需TPP輔酶）</span>與
+    <span class="term">轉醛醇酶（transaldolase）</span>，將6分子五碳糖重新排列為5分子六碳糖（G6P），使G6P能持續進入氧化期循環產生NADPH。
+  </p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg">
+      <text x="20" y="20" font-size="11" font-weight="700" fill="hsl(298,45%,35%)">碳骨架重排總覽（6個5C → 5個6C）</text>
+      <g font-size="10">
+        <rect x="10" y="35" width="70" height="28" rx="5" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/><text x="45" y="53" text-anchor="middle">5C+5C</text>
+        <path d="M85 49 L120 49" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a12)"/>
+        <text x="90" y="40" font-size="9">轉酮醇酶</text>
+        <rect x="125" y="35" width="80" height="28" rx="5" fill="#fff" stroke="hsl(298,45%,35%)"/><text x="165" y="53" text-anchor="middle">7C + 3C</text>
+        <path d="M210 49 L245 49" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a12)"/>
+        <text x="212" y="40" font-size="9">轉醛醇酶</text>
+        <rect x="250" y="35" width="80" height="28" rx="5" fill="#fff" stroke="hsl(298,45%,35%)"/><text x="290" y="53" text-anchor="middle">6C + 4C</text>
+        <path d="M335 49 L370 49" stroke="hsl(298,45%,35%)" stroke-width="2" marker-end="url(#a12)"/>
+        <text x="337" y="40" font-size="9">+5C，轉酮醇酶</text>
+        <rect x="375" y="35" width="90" height="28" rx="5" fill="hsl(298,45%,92%)" stroke="hsl(298,45%,35%)"/><text x="420" y="53" text-anchor="middle">6C + 3C</text>
+        <text x="470" y="53" font-size="10" font-weight="700">→ 共5個6C（F6P/G6P）</text>
+      </g>
+      <text x="20" y="90" font-size="10" fill="#555">關鍵酵素：轉酮醇酶（轉移2碳片段，需TPP）／轉醛醇酶（轉移3碳片段，Schiff base機制，類似醛縮酶）</text>
+      <text x="20" y="110" font-size="10" fill="#555">此二酵素為五碳糖磷酸途徑「非氧化期」獨有，其餘酵素（異構酶、醛縮酶、FBPase-1等）與糖解/糖質新生共用</text>
+      <defs><marker id="a12" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(298,45%,35%)"/></marker></defs>
+    </svg>
+    <p class="fig-caption">圖 14-31（重製、簡化）：非氧化期的碳骨架重排順序</p>
+  </div>
+
+  <table class="compare-table">
+    <caption>易混淆概念比較④：五碳糖磷酸途徑之氧化期 vs 非氧化期</caption>
+    <thead><tr><th class="colA">A：氧化期 Oxidative phase</th><th class="colB">B：非氧化期 Nonoxidative phase</th><th class="colDiff">關鍵差異</th></tr></thead>
+    <tbody>
+      <tr><td data-label="A">產生NADPH（2分子/每G6P）</td><td data-label="B">不產生NADPH，僅碳骨架重排</td><td data-label="差異">是否產生還原力</td></tr>
+      <tr><td data-label="A">不可逆（ΔG'°大負值）</td><td data-label="B">可逆，反應方向依細胞需求而定</td><td data-label="差異">反應方向性</td></tr>
+      <tr><td data-label="A">酵素：G6PD、內酯酶、6-磷酸葡萄糖酸脫氫酶</td><td data-label="B">酵素：異構酶／差向異構酶、轉酮醇酶、轉醛醇酶</td><td data-label="差異">所用酵素不同</td></tr>
+      <tr><td data-label="A">主產物：核糖5-磷酸、CO₂、NADPH</td><td data-label="B">主產物：G6P（可再進入氧化期或糖解）</td><td data-label="差異">路徑終點不同</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="tag">分配調控</span>
+    G6P究竟流向糖解或五碳糖磷酸途徑，主要取決於<b>細胞質[NADP⁺]濃度</b>：NADPH被大量消耗於還原性生合成時，
+    [NADP⁺]上升，變構活化G6PD，增加五碳糖磷酸途徑通量；反之[NADPH]累積則抑制G6PD，G6P轉而流向糖解。
+  </div>
+
+  <div class="callout clinical">
+    <span class="tag">Clinical Correlation</span>
+    <b>葡萄糖6-磷酸脫氫酶缺乏症（G6PD deficiency）</b>：紅血球內NADPH不足，無法有效清除H₂O₂等活性氧，
+    在食用蠶豆（favism）或服用抗瘧藥（如primaquine）、磺胺類藥物後，可能導致溶血性貧血。
+    此基因缺陷在瘧疾盛行地區（如地中海、非洲、東南亞）頻率較高，因缺陷型紅血球對瘧原蟲之氧化壓力更敏感，
+    形成天擇上的平衡多型性。<br>
+    <b>硫胺素缺乏</b>：轉酮醇酶需TPP輔酶，維生素B1缺乏會拖慢非氧化期反應，導致腳氣病與Wernicke-Korsakoff症候群
+    （尤其常見於慢性酒精濫用者）。
+  </div>
+</section>
+
+<!-- ================= Key Takeaways ================= -->
+<section id="takeaways">
+  <h2># Key Takeaways</h2>
+  <div class="takeaways">
+    <ol>
+      <li><b>糖解作用</b>將1分子葡萄糖經10步驟分解為2分子丙酮酸，分兩階段：準備期（耗2 ATP）與獲能期（產4 ATP + 2 NADH），淨得<b>2 ATP + 2 NADH</b>。</li>
+      <li>糖解的三個不可逆步驟——<b>己糖激酶、PFK-1、丙酮酸激酶</b>——是主要調控點，也是糖質新生必須繞道之處。</li>
+      <li><b>受質層次磷酸化</b>（步驟⑦、⑩）不同於粒線體的呼吸鏈連結磷酸化，是糖解作用ATP的直接來源。</li>
+      <li>肝醣經<b>磷酸解</b>（節省1 ATP）、飲食多醣經<b>水解</b>，皆可轉為G6P或其他中間產物餵入糖解路徑；半乳糖、果糖、甘露糖各有專屬進入點。</li>
+      <li>丙酮酸依氧氣供應走向三條路：有氧氧化（進檸檬酸循環）、乳酸發酵、酒精發酵；三者共同目的都是<b>再生NAD⁺</b>。</li>
+      <li><b>Warburg效應</b>（腫瘤細胞即使有氧仍優先糖解）是PET造影與部分標靶抗癌藥物設計的理論基礎。</li>
+      <li><b>糖質新生</b>由丙酮酸／乳酸／甘油／生糖胺基酸合成葡萄糖，需消耗4 ATP + 2 GTP + 2 NADH／每分子葡萄糖，能量成本遠高於糖解逆行。</li>
+      <li>糖解與糖質新生透過<b>互逆變構調節</b>（ATP/AMP、F26BP）與<b>荷爾蒙訊號</b>（升糖素↑F26BP↓、胰島素↑F26BP↑）避免無效循環同時運作。</li>
+      <li><b>五碳糖磷酸途徑</b>氧化期產生NADPH與核糖5-磷酸；非氧化期（轉酮醇酶、轉醛醇酶，需TPP）可將五碳糖重排回G6P，依細胞對NADPH／核糖的相對需求彈性調控。</li>
+      <li><b>G6PD缺乏症</b>與<b>硫胺素（TPP）缺乏</b>是本章兩個重要臨床相關考點，分別對應五碳糖磷酸途徑氧化期與非氧化期的酵素缺陷。</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>第14章：糖解、糖質新生與五碳糖磷酸途徑｜學習指南</div>
+  <button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">回到頂端 ↑</button>
+</footer>
+
+<script>
+  // Scroll-spy: highlight current section's nav link
+  (function(){
+    var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+    var navHeight = document.querySelector('nav').offsetHeight;
+
+    function onScroll(){
+      var scrollPos = window.scrollY + navHeight + 20;
+      var currentId = sections[0] ? sections[0].id : null;
+      for (var i=0; i<sections.length; i++){
+        if (sections[i].offsetTop <= scrollPos){
+          currentId = sections[i].id;
+        }
+      }
+      navLinks.forEach(function(link){
+        var isActive = link.getAttribute('href') === '#' + currentId;
+        link.classList.toggle('active', isActive);
+      });
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

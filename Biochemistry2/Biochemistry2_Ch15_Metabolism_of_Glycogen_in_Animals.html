@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第15章：動物體內肝醣的代謝｜學習指南</title>
+<style>
+  :root{
+    --hue: 345;
+    --primary: hsl(345,45%,35%);
+    --primary-light: hsl(345,45%,92%);
+    --primary-dark: hsl(345,45%,25%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(345,25%,80%);
+    --warn-bg: #fff8e6;
+    --warn-border: #e8b93c;
+    --clinical-bg: #f2f6ff;
+    --clinical-border: #7c96d6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Noto Sans CJK TC",sans-serif;
+    color:var(--text);
+    line-height:1.85;
+    background:#fdfcfb;
+  }
+  header{
+    text-align:center;
+    padding:2.6rem 1rem 1.6rem;
+    background:linear-gradient(180deg,var(--primary-light),#fdfcfb);
+  }
+  header h1{
+    margin:0 0 .4rem;
+    color:var(--primary-dark);
+    font-size:1.9rem;
+    letter-spacing:.03em;
+  }
+  header p.subtitle{
+    margin:0;
+    color:#555;
+    font-size:1rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,0.96);
+    backdrop-filter:blur(4px);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.3rem;
+    padding:.6rem .8rem;
+  }
+  nav a{
+    color:var(--primary-dark);
+    text-decoration:none;
+    font-size:.9rem;
+    padding:.45rem .85rem;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:860px;
+    margin:0 auto;
+    padding:1.5rem 1.2rem 3rem;
+  }
+  section{ padding-top:1.4rem; scroll-margin-top:70px; }
+  h1.chapter-title{ display:none; }
+  h2{
+    color:var(--primary-dark);
+    border-bottom:3px solid var(--primary);
+    padding-bottom:.4rem;
+    margin-top:2.6rem;
+    font-size:1.5rem;
+  }
+  h3{
+    color:var(--primary);
+    margin-top:2rem;
+    font-size:1.2rem;
+    border-left:6px solid var(--primary);
+    padding-left:.6rem;
+  }
+  h4{
+    color:var(--primary-dark);
+    margin-top:1.3rem;
+    font-size:1.02rem;
+  }
+  p{ margin:.85rem 0; }
+  .lead{
+    font-size:1.02rem;
+    color:#333;
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:1rem 1.2rem;
+    margin:1.2rem 0 1.8rem;
+  }
+  ul, ol{ padding-left:1.4rem; }
+  li{ margin:.4rem 0; }
+  strong.term{ color:var(--primary-dark); }
+  .box{
+    border-radius:10px;
+    padding:1rem 1.2rem;
+    margin:1.3rem 0;
+    border:1px solid var(--border);
+  }
+  .box.concept{
+    background:var(--primary-light);
+    border-left:6px solid var(--primary);
+  }
+  .box.warn{
+    background:var(--warn-bg);
+    border-left:6px solid var(--warn-border);
+  }
+  .box.clinical{
+    background:var(--clinical-bg);
+    border-left:6px solid var(--clinical-border);
+  }
+  .box .box-title{
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:.4rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .box.warn .box-title{ color:#8a6d1a; }
+  .box.clinical .box-title{ color:#3a4f9c; }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.2rem 0;
+    font-size:.92rem;
+    overflow-x:auto;
+    display:block;
+  }
+  table thead{ display:table-header-group; }
+  table tbody{ display:table-row-group; }
+  table, tr{ display:table-row; }
+  table{ display:table; }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{ background:#faf8f7; }
+  .compare-table th.colA{ background:hsl(345,45%,45%); }
+  .compare-table th.colB{ background:hsl(200,45%,40%); }
+  .compare-table th.colDiff{ background:#555; }
+
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    margin:1.4rem 0;
+    padding:1rem;
+    background:#fbfaf9;
+    border-radius:10px;
+    border:1px dashed var(--border);
+  }
+  .flow .node{
+    background:#fff;
+    border:2px solid var(--primary);
+    color:var(--primary-dark);
+    border-radius:8px;
+    padding:.5rem .8rem;
+    font-size:.88rem;
+    text-align:center;
+    min-width:110px;
+  }
+  .flow .node.alt{ border-color:hsl(200,45%,40%); color:hsl(200,45%,30%); }
+  .flow .node.inactive{ background:#f1f1f1; border-color:#aaa; color:#666; }
+  .flow .arrow{
+    font-size:.78rem;
+    color:#666;
+    text-align:center;
+    min-width:70px;
+  }
+  .flow .arrow .label{ display:block; font-size:.72rem; color:#8a2f4b; margin-bottom:2px;}
+  .flow-vert{ flex-direction:column; }
+  .flow-vert .arrow{ min-width:auto; }
+
+  figure{ margin:1.4rem 0; text-align:center; }
+  figcaption{
+    font-size:.85rem;
+    color:#555;
+    margin-top:.5rem;
+    text-align:left;
+    background:#f6f4f2;
+    padding:.6rem .8rem;
+    border-radius:6px;
+  }
+  figcaption b{ color:var(--primary-dark); }
+  svg{ max-width:100%; height:auto; background:#fff; border-radius:8px; }
+
+  .cascade-box{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1rem;
+  }
+  .cascade-step{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:.5rem 0;
+    border-bottom:1px dashed var(--border);
+  }
+  .cascade-step:last-child{ border-bottom:none; }
+  .cascade-step .amp{
+    background:var(--primary);
+    color:#fff;
+    border-radius:999px;
+    padding:.2rem .7rem;
+    font-size:.78rem;
+    white-space:nowrap;
+  }
+  .cascade-step .desc{ font-size:.92rem; }
+
+  .summary-box{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:10px;
+    padding:1.1rem 1.3rem;
+    margin:1.6rem 0;
+  }
+  .summary-box .box-title{
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:.5rem;
+  }
+
+  .key-takeaways{
+    background:var(--primary-dark);
+    color:#fff;
+    border-radius:14px;
+    padding:1.6rem 1.6rem 1.4rem;
+    margin-top:3rem;
+  }
+  .key-takeaways h2{
+    color:#fff;
+    border-bottom:3px solid rgba(255,255,255,.4);
+  }
+  .key-takeaways ol{ padding-left:1.3rem; }
+  .key-takeaways li{ margin:.6rem 0; }
+  .key-takeaways li b{ color:#ffe1ea; }
+
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#666;
+    font-size:.9rem;
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top:.8rem;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    border-radius:999px;
+    padding:.6rem 1.4rem;
+    font-size:.9rem;
+    cursor:pointer;
+    text-decoration:none;
+    transition:background .2s;
+  }
+  #backToTop:hover{ background:var(--primary-dark); }
+
+  @media (max-width:1024px){
+    main{ max-width:94%; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.4rem; }
+    nav{ gap:.2rem; padding:.5rem; }
+    nav a{ font-size:.8rem; padding:.35rem .6rem; }
+    h2{ font-size:1.25rem; }
+    h3{ font-size:1.05rem; }
+    .flow{ flex-direction:column; }
+    .flow .arrow{ transform:rotate(90deg); min-width:auto; margin:.2rem 0; }
+    table{ font-size:.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第15章：動物體內肝醣的代謝</h1>
+  <p class="subtitle">The Metabolism of Glycogen in Animals｜生化學習指南</p>
+</header>
+
+<nav id="navbar">
+  <a href="#intro">導論</a>
+  <a href="#sec15-1">15.1 結構與功能</a>
+  <a href="#sec15-2">15.2 分解與合成</a>
+  <a href="#sec15-3">15.3 協同調控</a>
+  <a href="#takeaways">重點回顧</a>
+</nav>
+
+<main>
+
+<section id="intro">
+<p class="lead">
+在第14章中，我們認識了己糖（hexose）如何透過糖解作用（glycolysis）、發酵、糖質新生（gluconeogenesis）與五碳糖磷酸路徑（pentose phosphate pathway）被代謝。本章聚焦於<strong class="term">肝醣（glycogen）</strong>——動物體內葡萄糖的聚合儲存形式。肝醣讓脊椎動物能快速取得葡萄糖以供應腦部與骨骼肌能量需求。雖然動物儲存的脂肪能量約為肝醣的100倍，但脂肪無法轉換成葡萄糖，因此肝醣仍是不可取代的「快速葡萄糖庫」。
+</p>
+<div class="box concept">
+<div class="box-title">🧭 本章四大核心原則</div>
+<ol>
+<li>肝醣的高度分支結構讓細胞能快速釋出大量葡萄糖，且不會因單體形式儲存而提高細胞滲透壓。</li>
+<li>肝醣單體以<strong class="term">磷酸解（phosphorolysis）</strong>方式釋出，產生已磷酸化的葡萄糖，可直接進入糖解作用。</li>
+<li>肝醣合成需要蛋白質引子（primer）與活化的葡萄糖前驅物（糖核苷酸）。</li>
+<li>合成與分解之間的平衡由腎上腺素、升糖素、胰島素透過異位調控與磷酸化共同精密控制。</li>
+</ol>
+</div>
+<p>本章將依序介紹：(1) 肝醣的結構與功能、(2) 肝醣分解與合成的酵素反應、(3) 兩條路徑如何被激素與異位訊號協同調控。</p>
+</section>
+
+<!-- ========================= 15.1 ========================= -->
+<section id="sec15-1">
+<h2>15.1 肝醣的結構與功能</h2>
+<p>結構決定功能，這在肝醣身上表現得淋漓盡致。肝醣顆粒的緊密構造，讓細胞能在葡萄糖過剩時快速儲存，也能在需要時迅速釋出。肝臟與肌肉中作用於肝醣的酵素（同工酶，isozymes）略有不同，反映出兩種組織對肝醣代謝動態的不同需求。</p>
+
+<h3>15.1.1 脊椎動物需要穩定燃料供應腦與肌肉</h3>
+<p>維持腦部與肌肉隨時可用的葡萄糖供應，是脊椎動物代謝上的首要任務。挑戰在於：細胞必須能在血糖高時（如飯後）快速吸收葡萄糖並儲存，又要能在需要時（尤其是腦部與骨骼肌使用時）迅速釋出。</p>
+<div class="box warn">
+<div class="box-title">⚠️ 為什麼不能把葡萄糖以「游離單體」形式儲存？</div>
+<p>典型的肝細胞（hepatocyte）在飽食狀態下，若把儲存的肝醣換算成游離葡萄糖濃度，約相當於 0.4 M。這樣的濃度會讓細胞內滲透壓遠高於周圍體液，導致水分大量進入細胞，可能使細胞破裂。肝醣以「聚合物」形式儲存，正是為了避免此一滲透壓危機。</p>
+</div>
+<p>肝醣主要儲存在肝臟（佔濕重 5–10%）與肌肉（佔濕重 1–2%）。以 70 kg 成人為例，肝臟約儲存 100 g 肝醣，骨骼肌可高達 400 g。雖然肝醣總能量僅約體內脂肪儲存的 1%，但脂肪在脊椎動物中無法轉換為葡萄糖，也無法在無氧狀態下經糖解作用被利用——而這正是骨骼肌劇烈運動時的關鍵需求。</p>
+<div class="flow">
+  <div class="node">肌肉肝醣分解</div>
+  <div class="arrow">數秒內→</div>
+  <div class="node alt">供應糖解作用<br>（爆發性運動）</div>
+</div>
+<div class="flow">
+  <div class="node">肝臟肝醣分解</div>
+  <div class="arrow">兩餐之間／禁食→</div>
+  <div class="node alt">釋放葡萄糖入血<br>（供應腦部）</div>
+</div>
+<p>腦部是代謝能量的大宗消耗者，且不同於肌肉，腦部無法使用脂肪酸作為燃料（長鏈脂肪酸無法通過血腦障壁），因此腦部必須仰賴飲食或肝臟持續供應葡萄糖。</p>
+
+<h3>15.1.2 肝醣顆粒具有多層分支的葡萄糖鏈結構</h3>
+<p>肝醣以胞質內的顆粒形式儲存，稱為 <strong class="term">β-顆粒（β-granule）</strong>。肌肉中的 β-顆粒直徑約 20–30 nm，含多達 55,000 個葡萄糖殘基、約 2,000 個非還原端可供分解酵素作用。肝臟中，20–40 個 β-顆粒會聚集成蛋白質豐富的 <strong class="term">α-顆粒（α-granule）</strong>，直徑可達 300 nm。肌肉的 β-顆粒釋放葡萄糖的速度較肝臟的 α-顆粒快，恰好符合兩組織對葡萄糖需求速度的不同。</p>
+
+<figure>
+<svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="260" cy="180" r="14" fill="hsl(345,45%,35%)"/>
+  <circle cx="248" cy="180" r="10" fill="hsl(345,45%,55%)"/>
+  <text x="260" y="184" font-size="9" fill="#fff" text-anchor="middle">G</text>
+  <!-- tiers as concentric partial rings represented by lines fanning out -->
+  <g stroke="hsl(345,45%,45%)" stroke-width="2" fill="none">
+    <line x1="260" y1="180" x2="260" y2="120"/>
+    <line x1="260" y1="180" x2="210" y2="140"/>
+    <line x1="260" y1="180" x2="310" y2="140"/>
+    <line x1="260" y1="180" x2="200" y2="210"/>
+    <line x1="260" y1="180" x2="320" y2="210"/>
+    <line x1="260" y1="180" x2="260" y2="240"/>
+  </g>
+  <g stroke="hsl(30,55%,50%)" stroke-width="2" fill="none">
+    <line x1="260" y1="120" x2="235" y2="70"/>
+    <line x1="260" y1="120" x2="285" y2="70"/>
+    <line x1="210" y1="140" x2="170" y2="110"/>
+    <line x1="210" y1="140" x2="185" y2="170"/>
+    <line x1="310" y1="140" x2="350" y2="110"/>
+    <line x1="310" y1="140" x2="335" y2="170"/>
+    <line x1="200" y1="210" x2="150" y2="200"/>
+    <line x1="200" y1="210" x2="170" y2="250"/>
+    <line x1="320" y1="210" x2="370" y2="200"/>
+    <line x1="320" y1="210" x2="350" y2="250"/>
+    <line x1="260" y1="240" x2="235" y2="290"/>
+    <line x1="260" y1="240" x2="285" y2="290"/>
+  </g>
+  <g stroke="hsl(200,45%,45%)" stroke-width="2" fill="none">
+    <line x1="235" y1="70" x2="215" y2="35"/>
+    <line x1="235" y1="70" x2="240" y2="30"/>
+    <line x1="285" y1="70" x2="280" y2="30"/>
+    <line x1="285" y1="70" x2="305" y2="35"/>
+    <line x1="170" y1="110" x2="130" y2="95"/>
+    <line x1="185" y1="170" x2="140" y2="175"/>
+    <line x1="350" y1="110" x2="390" y2="95"/>
+    <line x1="335" y1="170" x2="380" y2="175"/>
+    <line x1="150" y1="200" x2="110" y2="200"/>
+    <line x1="170" y1="250" x2="140" y2="285"/>
+    <line x1="370" y1="200" x2="410" y2="200"/>
+    <line x1="350" y1="250" x2="380" y2="285"/>
+    <line x1="235" y1="290" x2="215" y2="325"/>
+    <line x1="285" y1="290" x2="305" y2="325"/>
+  </g>
+  <!-- unbranched A-chain ends marked as dots -->
+  <g fill="hsl(200,45%,45%)">
+    <circle cx="215" cy="35" r="4"/><circle cx="240" cy="30" r="4"/>
+    <circle cx="280" cy="30" r="4"/><circle cx="305" cy="35" r="4"/>
+    <circle cx="130" cy="95" r="4"/><circle cx="140" cy="175" r="4"/>
+    <circle cx="390" cy="95" r="4"/><circle cx="380" cy="175" r="4"/>
+    <circle cx="110" cy="200" r="4"/><circle cx="140" cy="285" r="4"/>
+    <circle cx="410" cy="200" r="4"/><circle cx="380" cy="285" r="4"/>
+    <circle cx="215" cy="325" r="4"/><circle cx="305" cy="325" r="4"/>
+  </g>
+  <text x="260" y="345" font-size="12" fill="#333" text-anchor="middle">中心：glycogenin 雙聚體｜內層：B-鏈（分支）｜外層：A-鏈（不分支，非還原端●）</text>
+</svg>
+<figcaption><b>圖 15-1／15-2 概念重現：肝醣 β-顆粒的分層分支結構。</b>顆粒中心為 glycogenin 同源雙聚體，作為合成引子；由此向外延伸多層以 (α1→4) 鍵結的葡萄糖鏈，鏈間以 (α1→6) 鍵結分支。內層 B-鏈各有兩個分支點，最外層 A-鏈不分支。成熟顆粒理論上可達約12層，含約55,000個葡萄糖殘基，直徑約21 nm。分支結構大幅增加非還原端數量，讓多個酵素可同時作用，加速反應速率。</figcaption>
+</figure>
+
+<div class="box clinical">
+<div class="box-title">🔬 小知識</div>
+<p>肝醣於1850年代由法國生理學家 Claude Bernard 發現。他也發現肝臟中的一種「酵素」（ferment）能從肝組織釋出還原糖，並命名為 <em>matière glycogène</em>（成糖物質）。20世紀初，各國科學家陸續純化出合成與分解肝醣的酵素，並發現其受胰島素與腎上腺素調控——這些研究也開啟了對第二訊息傳遞者（如cAMP）、蛋白激酶級聯反應、蛋白磷酸化等普遍調控機制的認識。</p>
+</div>
+
+<div class="summary-box">
+<div class="box-title">📌 15.1 重點摘要</div>
+<ul>
+<li>所有細胞都需要隨時可取得的葡萄糖，來源可為飲食或胞內儲存；肝醣是動物體內葡萄糖的聚合儲存形式，主要見於肌肉與肝臟。</li>
+<li>肝醣 β-顆粒具有多層 (α1→4) 鍵結的葡萄糖鏈與 (α1→6) 分支，提供大量非還原端供合成與分解酵素作用。</li>
+<li>肝臟中 β-顆粒聚集為較大的 α-顆粒，釋放葡萄糖速度較慢。</li>
+</ul>
+</div>
+</section>
+
+<!-- ========================= 15.2 ========================= -->
+<section id="sec15-2">
+<h2>15.2 肝醣的分解與合成</h2>
+<p>飲食中攝取的肝醣由 α-澱粉酶（α-amylase）以水解方式分解為游離葡萄糖；但細胞內原有的肝醣（endogenous glycogen）則以完全不同的途徑代謝。我們先介紹肝醣分解為葡萄糖1-磷酸的<strong class="term">肝醣分解作用（glycogenolysis）</strong>，再介紹<strong class="term">肝醣合成作用（glycogenesis）</strong>。</p>
+
+<h3>15.2.1 肝醣分解由肝醣磷酸化酶催化</h3>
+<p>骨骼肌與肝臟中，肝醣外層分支的葡萄糖單位透過三種酵素進入糖解路徑：<strong class="term">肝醣磷酸化酶（glycogen phosphorylase）</strong>、<strong class="term">去分支酶（debranching enzyme）</strong>與<strong class="term">磷酸葡萄糖變位酶（phosphoglucomutase）</strong>。</p>
+
+<div class="box concept">
+<div class="box-title">⚙️ 反應機制：磷酸解（phosphorolysis）</div>
+<p>肝醣磷酸化酶攻擊肝醣非還原端的 (α1→4) 醣苷鍵，以無機磷酸（P<sub>i</sub>）取代水作為攻擊者，將末端葡萄糖殘基移除為 <b>α-D-葡萄糖1-磷酸</b>。此反應保留部分醣苷鍵能量於磷酸酯鍵中，與腸道中澱粉酶的水解反應機制不同。</p>
+<div class="flow">
+  <div class="node">肝醣鏈 (glucose)<sub>n</sub></div>
+  <div class="arrow">＋P<sub>i</sub><br>肝醣磷酸化酶</div>
+  <div class="node alt">葡萄糖1-磷酸＋<br>(glucose)<sub>n-1</sub></div>
+</div>
+<p style="font-size:.9rem;color:#555;">輔因子：<strong class="term">吡哆醛磷酸（pyridoxal phosphate, PLP）</strong>共價鍵結於酵素活性中心附近，其磷酸基作為一般酸催化劑，促進 P<sub>i</sub> 攻擊醣苷鍵——這是 PLP 在胺基酸代謝以外少見的功能角色。</p>
+</div>
+
+<p>肝醣磷酸化酶會反覆作用於非還原端，直到距離 (α1→6) 分支點僅剩4個葡萄糖殘基時停止。此後須由<strong class="term">去分支酶</strong>（正式名稱：寡聚 (α1→6) 轉 (α1→4) 葡聚糖轉移酶）進行兩步驟反應，才能讓磷酸化酶繼續作用。</p>
+
+<figure>
+<div class="flow flow-vert">
+  <div class="node">分支肝醣鏈<br>（距分支點4個殘基處停止）</div>
+  <div class="arrow"><span class="label">去分支酶：轉移酶活性</span>將3個葡萄糖殘基由分支轉移至鄰近非還原端，形成新 (α1→4) 鍵</div>
+  <div class="node">拉直的肝醣鏈<br>＋分支點僅剩1個葡萄糖（α1→6鍵結）</div>
+  <div class="arrow"><span class="label">去分支酶：(α1→6) 葡萄糖苷酶活性</span>水解單一殘基</div>
+  <div class="node alt">游離葡萄糖釋出<br>＋可再被磷酸化酶作用的直鏈</div>
+</div>
+</figure>
+<figcaption><b>圖 15-3／15-4 概念重現：肝醣磷酸化酶與去分支酶協同作用。</b>磷酸化酶反覆移除非還原端葡萄糖直到距分支點4個殘基；去分支酶先以轉移酶活性把3個殘基搬到鄰近鏈上，再以糖苷酶活性水解分支點上剩下的單一葡萄糖殘基（以游離葡萄糖形式釋出，非磷酸化）。</figcaption>
+
+<h3>15.2.2 葡萄糖1-磷酸的去向：進入糖解或補充血糖</h3>
+<p>葡萄糖1-磷酸經<strong class="term">磷酸葡萄糖變位酶（phosphoglucomutase）</strong>轉為葡萄糖6-磷酸：</p>
+<div class="flow">
+  <div class="node">葡萄糖1-磷酸<br>（磷酸化酵素-Ser）</div>
+  <div class="arrow">步驟1：酵素轉移磷酸基→</div>
+  <div class="node">葡萄糖1,6-雙磷酸<br>（去磷酸化酵素）</div>
+  <div class="arrow">步驟2：C-1磷酸基轉回酵素→</div>
+  <div class="node alt">葡萄糖6-磷酸<br>（酵素重新磷酸化）</div>
+</div>
+
+<div class="box warn">
+<div class="box-title">⚠️ 肝臟與肌肉的關鍵分野：glucose 6-phosphatase</div>
+<p>肌肉細胞的葡萄糖6-磷酸只能進入糖解作用供自身使用；<b>肝臟與腎臟</b>因具有<strong class="term">葡萄糖6-磷酸酶（glucose 6-phosphatase）</strong>，可將葡萄糖6-磷酸水解為游離葡萄糖釋出至血液。此酵素為內質網（ER）膜蛋白，活性位點朝向 ER 腔面：葡萄糖6-磷酸由轉運蛋白 T1 送入 ER 腔內水解，產物葡萄糖與 P<sub>i</sub> 再分別經 T2、T3 送回細胞質，葡萄糖最終經 GLUT2 離開細胞進入血液。此空間分隔設計可避免此反應干擾發生於細胞質的糖解作用。此酵素或 T1 缺陷會導致第 Ia 型肝醣儲積症。</p>
+</div>
+
+<table class="compare-table">
+<thead><tr><th class="colA">比較項目</th><th class="colA">肌肉（無 G6Pase）</th><th class="colB">肝臟／腎臟（有 G6Pase）</th></tr></thead>
+<tbody>
+<tr><td>葡萄糖6-磷酸的去向</td><td>只能進入糖解作用，供肌肉自身使用</td><td>可水解為游離葡萄糖，釋出至血液</td></tr>
+<tr><td>對血糖的貢獻</td><td>不貢獻血糖</td><td>是維持空腹血糖的主要來源</td></tr>
+<tr><td>生理意義</td><td>「自私」利用肝醣供自身收縮所需</td><td>「利他」供應全身（尤其腦部）葡萄糖</td></tr>
+</tbody>
+</table>
+
+<div class="box clinical">
+<div class="box-title">🩺 臨床連結：Carl 與 Gerty Cori 與肝醣儲積症</div>
+<p>Carl 與 Gerty Cori 夫婦於1925–1950年間闡明了肝醣代謝的多數基礎機制，發現肝醣磷酸化酶並解出其產物「Cori 酯」即葡萄糖1-磷酸；兩人與 Bernardo Houssay 共獲1947年諾貝爾生理醫學獎。Gerty Cori 進一步鑑定出多種因肝醣代謝酵素缺陷造成的<strong class="term">肝醣儲積症（glycogen storage disease）</strong>。</p>
+<table>
+<thead><tr><th>類型（俗名）</th><th>缺陷酵素</th><th>主要受影響組織</th><th>症狀</th></tr></thead>
+<tbody>
+<tr><td>0型</td><td>肝醣合酶</td><td>肝臟</td><td>低血糖、高酮體、早夭</td></tr>
+<tr><td>Ia型（von Gierke）</td><td>葡萄糖6-磷酸酶</td><td>肝臟</td><td>肝腫大、腎衰竭</td></tr>
+<tr><td>Ib型</td><td>微粒體 G6P 轉運蛋白</td><td>肝臟</td><td>同Ia型；易感染細菌</td></tr>
+<tr><td>II型（Pompe）</td><td>溶小體葡萄糖苷酶</td><td>骨骼肌與心肌</td><td>嬰兒型：2歲前死亡；成人型：類似肌肉萎縮症</td></tr>
+<tr><td>IIIa型（Cori/Forbes）</td><td>去分支酶</td><td>肝臟、骨骼肌與心肌</td><td>嬰兒肝腫大；肌病變</td></tr>
+<tr><td>IV型（Andersen）</td><td>分支酶</td><td>肝臟、骨骼肌</td><td>肝脾腫大、肌紅蛋白尿</td></tr>
+<tr><td>V型（McArdle）</td><td>肌肉磷酸化酶</td><td>骨骼肌</td><td>運動誘發抽筋疼痛、肌紅蛋白尿</td></tr>
+<tr><td>VI型（Hers）</td><td>肝臟磷酸化酶</td><td>肝臟</td><td>肝腫大</td></tr>
+<tr><td>VII型（Tarui）</td><td>肌肉 PFK-1</td><td>肌肉、紅血球</td><td>同V型；併溶血性貧血</td></tr>
+</tbody>
+</table>
+<p style="font-size:.88rem;">此表格說明酵素缺陷位置與臨床表徵息息相關：影響肝臟的缺陷多導致肝腫大與低血糖；影響肌肉的缺陷則多表現為運動不耐與肌肉痛。</p>
+</div>
+
+<h3>15.2.3 UDP-葡萄糖是肝醣合成的葡萄糖供應者</h3>
+<p>許多己糖轉化或聚合反應涉及<strong class="term">糖核苷酸（sugar nucleotide）</strong>——即糖的異頭碳（anomeric carbon）以磷酸酯鍵連接至核苷酸而被活化的化合物。此機制由阿根廷生化學家 Luis Leloir 於1953年發現。</p>
+<div class="box concept">
+<div class="box-title">⚙️ 糖核苷酸適合作為生合成前驅物的4個原因</div>
+<ol>
+<li>其形成反應在代謝上不可逆：反應釋出的 PP<sub>i</sub> 會立即被無機焦磷酸酶水解（ΔG'° = −19.2 kJ/mol），將反應拉向產物方向。</li>
+<li>核苷酸部分雖不參與化學變化，卻能與酵素形成多種非共價作用，增加結合自由能、提升催化效率。</li>
+<li>核苷酸基團（如 UDP）是極佳的離去基，利於親核攻擊。</li>
+<li>以核苷酸「標記」特定己糖，可讓細胞把它們與其他用途（如糖解）的己糖磷酸分開存放。</li>
+</ol>
+</div>
+<div class="flow">
+  <div class="node">糖磷酸 ＋ NTP</div>
+  <div class="arrow">NDP-糖焦磷酸化酶→</div>
+  <div class="node">NDP-糖 ＋ PP<sub>i</sub></div>
+  <div class="arrow">無機焦磷酸酶（強放能）→</div>
+  <div class="node alt">2 P<sub>i</sub>（拉動反應正向進行）</div>
+</div>
+<figcaption><b>圖 15-7 概念重現：糖核苷酸的形成。</b>淨反應：糖磷酸 ＋ NTP → NDP-糖 ＋ 2P<sub>i</sub>。</figcaption>
+
+<p>肝醣合成的起點是葡萄糖6-磷酸，可由游離葡萄糖經己糖激酶（肌肉：hexokinase I/II；肝臟：hexokinase IV／glucokinase）產生，也可經糖質新生產生。接著轉為葡萄糖1-磷酸，再由 <strong class="term">UDP-葡萄糖焦磷酸化酶（UDP-glucose pyrophosphorylase）</strong>催化生成 UDP-葡萄糖：</p>
+<div class="flow">
+  <div class="node">葡萄糖1-磷酸 ＋ UTP</div>
+  <div class="arrow">UDP-葡萄糖焦磷酸化酶→</div>
+  <div class="node alt">UDP-葡萄糖 ＋ PP<sub>i</sub></div>
+</div>
+<p style="font-size:.9rem;color:#555;">此酵素命名依逆反應方向，但細胞內因 PP<sub>i</sub> 被迅速水解而移除，反應實際上朝 UDP-葡萄糖生成方向進行。</p>
+
+<p>UDP-葡萄糖即是<strong class="term">肝醣合酶（glycogen synthase）</strong>反應中葡萄糖殘基的直接供應者，將葡萄糖轉移至肝醣分支的非還原端，形成新的 (α1→4) 鍵。</p>
+<div class="flow">
+  <div class="node">UDP-葡萄糖</div>
+  <div class="arrow">肝醣合酶<br>(α1→4)鍵形成→</div>
+  <div class="node alt">肝醣鏈延長一個<br>葡萄糖單位 ＋ UDP</div>
+</div>
+<figcaption><b>圖 15-8 概念重現：肝醣合成反應。</b>肝醣合酶將 UDP-葡萄糖的葡萄糖殘基轉移到肝醣分支的非還原端。</figcaption>
+
+<h3>15.2.4 分支酶與 glycogenin：建立分支與起始新鏈</h3>
+<p>肝醣合酶無法形成 (α1→6) 分支鍵，此工作由<strong class="term">肝醣分支酶（glycogen-branching enzyme）</strong>負責：將至少11個殘基長的非還原端片段中的6–7個葡萄糖殘基轉移至同鏈或另一鏈內部某葡萄糖的 C-6 羥基上，形成新分支。分支的生物意義在於<b>增加非還原端數目</b>，讓磷酸化酶與合酶都能同時作用，加速反應。</p>
+
+<div class="box concept">
+<div class="box-title">⚙️ Glycogenin：既是引子也是酵素</div>
+<p>肝醣合酶無法從零開始合成新鏈，需要既有的 (α1→4) 聚葡萄糖鏈作引子。<strong class="term">Glycogenin</strong> 蛋白同時扮演「引子」與「酵素」兩種角色：</p>
+<div class="flow flow-vert">
+  <div class="node">UDP-葡萄糖 ＋<br>Glycogenin Tyr¹⁹⁴</div>
+  <div class="arrow">步驟1：糖基轉移酶活性（Asp¹⁶²輔助）</div>
+  <div class="node">葡萄糖基化的 Tyr¹⁹⁴</div>
+  <div class="arrow">步驟2：鏈延伸活性（重複7次，皆消耗 UDP-葡萄糖）</div>
+  <div class="node alt">8個葡萄糖殘基之引子鏈<br>（(α1→4) 鍵結）</div>
+</div>
+<p style="font-size:.9rem;color:#555;">輔因子：反應需要 <b>Mn²⁺</b> 穩定 UDP 離去基。引子鏈完成後，肝醣合酶接手繼續延長；glycogenin 最終仍埋藏於 β-顆粒核心，共價連接於肝醣分子的兩個還原端。</p>
+</div>
+
+<div class="box warn">
+<div class="box-title">❓ 容易混淆：磷酸解 vs 水解</div>
+<table class="compare-table">
+<thead><tr><th class="colA">A：磷酸解 (phosphorolysis)</th><th class="colB">B：水解 (hydrolysis)</th><th class="colDiff">差異</th></tr></thead>
+<tbody>
+<tr><td>攻擊者為無機磷酸 P<sub>i</sub></td><td>攻擊者為水分子 H₂O</td><td>親核攻擊物種不同</td></tr>
+<tr><td>由肝醣磷酸化酶催化，作用於<b>細胞內</b>肝醣</td><td>由 α-澱粉酶催化，作用於<b>飲食中</b>肝醣／澱粉</td><td>發生場域與受質來源不同</td></tr>
+<tr><td>產物為葡萄糖1-磷酸（已活化，可直接進糖解）</td><td>產物為游離葡萄糖（需再磷酸化才能進糖解）</td><td>能量效率不同：磷酸解保留部分醣苷鍵能量於磷酸酯鍵</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="summary-box">
+<div class="box-title">📌 15.2 重點摘要</div>
+<ul>
+<li>肝醣磷酸化酶以磷酸解方式從非還原端切下葡萄糖1-磷酸；去分支酶負責轉移分支並釋出游離葡萄糖。</li>
+<li>磷酸葡萄糖變位酶使葡萄糖1-磷酸與葡萄糖6-磷酸互換；後者可進糖解，或在肝臟經葡萄糖6-磷酸酶轉為游離葡萄糖補充血糖。</li>
+<li>UDP-葡萄糖是肝醣合酶反應的葡萄糖供應者，形成 (α1→4) 短鏈；分支酶另外形成 (α1→6) 分支鍵。</li>
+<li>新肝醣顆粒的起始，源自 UDP-葡萄糖的葡萄糖與 glycogenin 蛋白 Tyr 殘基的自我催化醣苷鍵形成，延伸出可供肝醣合酶接續作用的引子。</li>
+</ul>
+</div>
+</section>
+
+<!-- ========================= 15.3 ========================= -->
+<section id="sec15-3">
+<h2>15.3 肝醣分解與合成的協同調控</h2>
+<p>肝醣磷酸化酶是酵素調控研究史上極具代表性的案例——它是最早被發現受異位調控的酵素之一，也是第一個被證實由可逆磷酸化調控的酵素，其活性態與非活性態的三維結構也是最早被解出的異位酵素結構之一。</p>
+
+<h3>15.3.1 肝醣磷酸化酶受激素刺激的磷酸化與異位效應共同調控</h3>
+<p>1930年代末，Carl 與 Gerty Cori 發現肌肉肝醣磷酸化酶存在兩種可互換形式：<strong class="term">磷酸化酶 a（glycogen phosphorylase a，具催化活性）</strong>與<strong class="term">磷酸化酶 b（glycogen phosphorylase b，活性甚低）</strong>。</p>
+<div class="flow">
+  <div class="node inactive">磷酸化酶 b<br>（Ser¹⁴ 未磷酸化，活性低）</div>
+  <div class="arrow"><span class="label">磷酸化酶b激酶</span>腎上腺素／升糖素↑Ca²⁺／↑AMP，2ATP→2ADP →</div>
+  <div class="node">磷酸化酶 a<br>（Ser¹⁴磷酸化，活性高）</div>
+</div>
+<div class="flow">
+  <div class="node">磷酸化酶 a（活性）</div>
+  <div class="arrow">PP1<br>（2H₂O→2P<sub>i</sub>）→</div>
+  <div class="node inactive">磷酸化酶 b（低活性）</div>
+</div>
+<figcaption><b>圖 15-11 概念重現：磷酸化酶的共價修飾調控。</b>磷酸化酶b激酶使兩個次單元的 Ser¹⁴ 磷酸化，形成高活性的a型；PP1 去磷酸化則使其回復為低活性的b型。</figcaption>
+
+<div class="box concept">
+<div class="box-title">⚙️ 級聯反應：訊號放大機制（Fig. 15-12）</div>
+<p>Sutherland 發現的第二訊使 <strong class="term">cAMP</strong>，在腎上腺素（肌肉）或升糖素（肝臟）刺激下濃度上升，啟動一連串「催化劑活化催化劑」的級聯反應，達成訊號的指數放大：</p>
+<div class="cascade-box">
+<div class="cascade-step"><span class="amp">×1</span><span class="desc">腎上腺素／升糖素與受體結合 → 活化 G<sub>s</sub>α</span></div>
+<div class="cascade-step"><span class="amp">×20</span><span class="desc">G<sub>s</sub>α 活化腺苷酸環化酶 → 生成 cAMP</span></div>
+<div class="cascade-step"><span class="amp">×10</span><span class="desc">cAMP 活化蛋白激酶 A（PKA）</span></div>
+<div class="cascade-step"><span class="amp">×100</span><span class="desc">PKA 磷酸化並活化磷酸化酶b激酶</span></div>
+<div class="cascade-step"><span class="amp">×1,000</span><span class="desc">磷酸化酶b激酶活化肝醣磷酸化酶 a</span></div>
+<div class="cascade-step"><span class="amp">×10,000</span><span class="desc">肝醣分解產生葡萄糖1-磷酸 → 供糖解或補充血糖</span></div>
+</div>
+<p style="font-size:.88rem;color:#555;">此為級聯放大機制的最小估計值；異位效應同時疊加在此路徑上——肌肉中 <b>Ca²⁺</b>（經 calmodulin δ次單元）與 <b>AMP</b> 皆可直接活化磷酸化酶b激酶／磷酸化酶，而充足的 ATP 則會抑制 AMP 的結合位點。</p>
+</div>
+
+<div class="box clinical">
+<div class="box-title">🩺 肝臟磷酸化酶作為葡萄糖感測器（Fig. 15-13）</div>
+<p>當血糖恢復正常，葡萄糖進入肝細胞後可結合於磷酸化酶a的異位抑制位點，誘發構型改變，暴露其磷酸化 Ser 殘基供 PP1 作用，使其去磷酸化而轉為低活性的 b型，減緩肝醣分解。胰島素也間接刺激 PP1，加強此效果。</p>
+</div>
+
+<h3>15.3.2 肝醣合酶也受多重層次調控</h3>
+<p>肝醣合酶的活性形式<strong class="term">合酶 a（glycogen synthase a）</strong>為未磷酸化態；<strong class="term">合酶 b（glycogen synthase b）</strong>則為磷酸化的非活性態（除非有其異位活化劑葡萄糖6-磷酸存在）。</p>
+<div class="flow">
+  <div class="node">合酶 a（活性，未磷酸化）</div>
+  <div class="arrow">CKII引子磷酸化<br>→GSK3磷酸化3個Ser</div>
+  <div class="node inactive">合酶 b（非活性，需G6P才能作用）</div>
+</div>
+<div class="flow">
+  <div class="node inactive">合酶 b</div>
+  <div class="arrow">PP1去磷酸化<br>（釋出3個P<sub>i</sub>）→</div>
+  <div class="node">合酶 a</div>
+</div>
+<p><strong class="term">GSK3（glycogen synthase kinase 3）</strong>需等 <strong class="term">CKII（casein kinase II）</strong>先在鄰近位置完成「<strong class="term">引子磷酸化（priming）</strong>」後才能作用，此為階層式（hierarchical）調控機制。此外，<strong class="term">AMPK</strong>在代謝壓力（高AMP、低ATP）下也會磷酸化並抑制肝醣合酶。</p>
+<p>胰島素透過抑制 GSK3、活化 PP1 兩種途徑，共同促使肝醣合酶維持活性態。肝醣磷酸化酶（活性態）也會直接抑制 PP1，阻止其活化肝醣合酶——形成兩條路徑之間的交互制衡。</p>
+
+<h3>15.3.3 PP1 與肝醣標靶蛋白：整合三種酵素的開關</h3>
+<p><strong class="term">磷蛋白磷酸酶1（PP1）</strong>可同時去磷酸化磷酸化酶激酶、肝醣磷酸化酶、肝醣合酶三種酵素。PP1 並非游離存在，而是透過組織專一的<strong class="term">肝醣標靶蛋白（glycogen-targeting protein，如肌肉的 G<sub>M</sub>、肝臟的 G<sub>L</sub>）</strong>緊密結合於肝醣顆粒上。</p>
+<div class="flow flow-vert">
+  <div class="node">胰島素 → 胰島素敏感激酶</div>
+  <div class="arrow">磷酸化 G<sub>M</sub> 位點1</div>
+  <div class="node alt">PP1 活化，作用於肝醣顆粒</div>
+  <div class="arrow">↓ 去磷酸化磷酸化酶激酶／磷酸化酶／合酶</div>
+  <div class="node alt">↑肝醣合成　↓肝醣分解</div>
+</div>
+<div class="flow flow-vert">
+  <div class="node">腎上腺素 → PKA</div>
+  <div class="arrow">磷酸化 G<sub>M</sub> 位點2 ＋ 磷酸化抑制蛋白1</div>
+  <div class="node inactive">PP1 脫離顆粒／被抑制蛋白1抑制</div>
+  <div class="arrow">↓ 無法去磷酸化磷酸化酶／合酶</div>
+  <div class="node inactive">↓肝醣合成　↑肝醣分解</div>
+</div>
+<figcaption><b>圖 15-16 概念重現：肝醣標靶蛋白 G<sub>M</sub> 的雙向調控開關。</b>胰島素經位點1活化PP1並促進去磷酸化；腎上腺素經PKA磷酸化位點2，使PP1脫離顆粒並經抑制蛋白1被抑制，兩者作用方向相反。</figcaption>
+
+<h3>15.3.4 全身性協調：肝臟供應血糖 vs 肌肉自用能量</h3>
+<p>飯後血糖上升觸發胰島素釋放：胰島素抑制 GSK3、活化 PP1，全面活化肝醣合酶，同時抑制磷酸化酶與磷酸化酶激酶，肝細胞轉為儲存肝醣（可達肝重約10%）。空腹或兩餐之間，血糖下降觸發升糖素，經 cAMP／PKA 級聯活化肝醣分解，同時抑制糖解酵素（PFK-1、丙酮酸激酶）、促進糖質新生，使肝臟最大化葡萄糖釋出。</p>
+
+<table class="compare-table">
+<thead><tr><th class="colA">比較項目</th><th class="colA">肝臟（Liver）</th><th class="colB">骨骼肌（Muscle）</th></tr></thead>
+<tbody>
+<tr><td>升糖素受體</td><td>有</td><td>無（肌細胞缺乏升糖素受體）</td></tr>
+<tr><td>cAMP 對糖解的影響</td><td>抑制糖解（丙酮酸激酶被PKA磷酸化失活）</td><td>不抑制，甚至促進糖解（肌肉型丙酮酸激酶不受PKA磷酸化）</td></tr>
+<tr><td>肝醣分解的目的</td><td>釋放葡萄糖入血，供應全身（尤其腦部）</td><td>供應自身糖解，產生ATP以收縮</td></tr>
+<tr><td>糖質新生能力</td><td>有</td><td>無</td></tr>
+<tr><td>胰島素反應</td><td>促進肝醣合成，抑制分解</td><td>促進肝醣合成，並經GLUT4轉位增加葡萄糖攝取</td></tr>
+</tbody>
+</table>
+<figcaption><b>圖 15-17／15-18 概念重現：肝臟與肌肉在激素調控下的不同代謝走向。</b>兩者雖共用相似的酵素調控邏輯（PKA、PP1、GSK3），但因組織任務不同（供血糖 vs 自用能量），最終代謝流向截然不同。</figcaption>
+
+<div class="box warn">
+<div class="box-title">❓ 容易混淆：磷酸化酶 a/b 與合酶 a/b 的「活性態」方向相反！</div>
+<table class="compare-table">
+<thead><tr><th class="colA">A：肝醣磷酸化酶</th><th class="colB">B：肝醣合酶</th><th class="colDiff">差異重點</th></tr></thead>
+<tbody>
+<tr><td><b>a 型 = 磷酸化 = 活性態</b></td><td><b>a 型 = 未磷酸化 = 活性態</b></td><td>「a型是否活性」的判斷不能套用同一邏輯，必須分開記憶</td></tr>
+<tr><td>b 型 = 未磷酸化 = 低活性</td><td>b 型 = 磷酸化 = 非活性（除非有G6P）</td><td>磷酸化對兩者活性的效果相反：磷酸化「活化」磷酸化酶，卻「去活化」合酶</td></tr>
+<tr><td>PKA／磷酸化酶b激酶 → 磷酸化 → 活化</td><td>GSK3（經CKII引子化）→ 磷酸化 → 去活化</td><td>促進分解與促進合成的磷酸化路徑，作用方向剛好相反，正是分解／合成不會同時全速進行的分子基礎</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="summary-box">
+<div class="box-title">📌 15.3 重點摘要</div>
+<ul>
+<li>肝醣磷酸化酶因腎上腺素（肌肉）或升糖素（肝臟）而活化：兩者提升cAMP、活化PKA，經磷酸化酶激酶轉換磷酸化酶b為活性a型。肌肉中Ca²⁺與AMP可異位放大此效應；肝臟中葡萄糖則異位促進磷酸化酶a被PP1去活化。</li>
+<li>肝醣合酶a因GSK3磷酸化（需CKII引子化）而失活；胰島素經抑制GSK3、活化PP1使合酶維持活性态。葡萄糖6-磷酸異位促進合酶b被PP1活化。</li>
+<li>肝臟中升糖素促進肝醣分解與糖質新生、抑制糖解，優先釋出葡萄糖供應全身；肌肉中腎上腺素促進肝醣分解與糖解，優先供應自身收縮所需ATP。</li>
+<li>PP1透過肝醣標靶蛋白（如G<sub>M</sub>）整合對三種酵素（磷酸化酶激酶、磷酸化酶、合酶）的去磷酸化調控，是分解／合成開關的樞紐。</li>
+</ul>
+</div>
+</section>
+
+<!-- ========================= Key Takeaways ========================= -->
+<section id="takeaways" class="key-takeaways">
+<h2>Key Takeaways 本章重點回顧</h2>
+<ol>
+<li><b>肝醣</b>是動物體內葡萄糖的高度分支聚合儲存形式，主要存於肝臟（供全身血糖）與肌肉（供自身收縮），其分支結構避免了游離葡萄糖造成的滲透壓危機。</li>
+<li>肝醣分解的關鍵反應是<b>磷酸解</b>（不是水解），由<b>肝醣磷酸化酶</b>催化，產物為<b>葡萄糖1-磷酸</b>；輔因子為<b>吡哆醛磷酸（PLP）</b>。</li>
+<li><b>去分支酶</b>具雙重活性（轉移酶＋α1→6葡萄糖苷酶），負責處理分支點，釋放少量游離葡萄糖。</li>
+<li>只有<b>肝臟與腎臟</b>具有<b>葡萄糖6-磷酸酶</b>，能將G6P轉為游離葡萄糖釋放入血；<b>肌肉沒有此酵素</b>，肝醣分解產物只能自用於糖解。</li>
+<li>肝醣合成的直接葡萄糖供應者是<b>UDP-葡萄糖</b>（由UDP-葡萄糖焦磷酸化酶生成），由<b>肝醣合酶</b>負責延長(α1→4)鏈，<b>分支酶</b>另外負責形成(α1→6)分支。</li>
+<li>新肝醣鏈的起始需要蛋白質引子 <b>glycogenin</b>，其本身兼具引子與醣基轉移酶功能，需 <b>Mn²⁺</b> 輔因子。</li>
+<li>務必分清：<b>磷酸化酶 a＝磷酸化＝活性</b>；<b>合酶 a＝未磷酸化＝活性</b>——兩者磷酸化對活性的效果方向相反。</li>
+<li>激素調控核心路徑：腎上腺素／升糖素 → ↑cAMP → PKA → 磷酸化酶b激酶 → 肝醣磷酸化酶活化（級聯放大訊號）；胰島素則透過抑制GSK3、活化PP1促進肝醣合成。</li>
+<li><b>PP1</b>經<b>肝醣標靶蛋白</b>（如肌肉G<sub>M</sub>、肝臟G<sub>L</sub>）錨定於顆粒上，同時去磷酸化三種調控酵素，是分解／合成開關的整合樞紐。</li>
+<li>肝臟與肌肉的調控邏輯相似但目的不同：肝臟優先釋放葡萄糖入血（缺乏胰島素抑制糖解時仍受升糖素抑制），肌肉優先自用（缺乏升糖素受體，cAMP反而促進糖解）；<b>肝醣儲積症</b>依缺陷酵素定位（肝臟型 vs 肌肉型）呈現不同臨床表現。</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+  <p>第15章：動物體內肝醣的代謝｜學習指南</p>
+  <a href="#top" id="backToTop">⬆ Back to Top</a>
+</footer>
+
+<script>
+(function(){
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('#navbar a');
+  function onScroll(){
+    var scrollPos = window.scrollY + 100;
+    var currentId = sections[0] ? sections[0].id : null;
+    sections.forEach(function(sec){
+      if (sec.offsetTop <= scrollPos) currentId = sec.id;
+    });
+    navLinks.forEach(function(link){
+      var target = link.getAttribute('href').replace('#','');
+      if (target === currentId) link.classList.add('active');
+      else link.classList.remove('active');
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  var backBtn = document.getElementById('backToTop');
+  backBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>
