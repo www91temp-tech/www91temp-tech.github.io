@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第19章：氧化磷酸化｜學習指南</title>
+<style>
+  :root{
+    --hue: 173;
+    --primary: hsl(173, 45%, 35%);
+    --primary-light: hsl(173, 45%, 92%);
+    --primary-dark: hsl(173, 45%, 24%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(173, 25%, 80%);
+    --warn-bg: #fff4e5;
+    --warn-border: #e0a83a;
+    --clinical-bg: #fdeaea;
+    --clinical-border: #d9534f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Noto Sans CJK TC",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    text-align:center;
+    padding:2.4rem 1rem 1.6rem;
+    background:linear-gradient(180deg, var(--primary-light), #ffffff);
+  }
+  header h1{
+    margin:0;
+    font-size:1.9rem;
+    color:var(--primary-dark);
+    letter-spacing:.05em;
+  }
+  header p.sub{
+    margin:.6rem 0 0;
+    color:#555;
+    font-size:.95rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.3rem;
+    padding:.6rem .8rem;
+    box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--primary-dark);
+    font-size:.88rem;
+    padding:.45rem .8rem;
+    border-radius:999px;
+    transition:background .2s, color .2s;
+    white-space:nowrap;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:1.5rem 1.2rem 4rem;
+  }
+  section{
+    padding-top:1.2rem;
+    margin-bottom:2.6rem;
+    scroll-margin-top:70px;
+  }
+  h1.chapter-title{display:none;}
+  h2{
+    color:var(--primary-dark);
+    font-size:1.4rem;
+    border-left:6px solid var(--primary);
+    padding-left:.6rem;
+    margin-top:2.2rem;
+  }
+  h3{
+    color:var(--primary);
+    font-size:1.15rem;
+    margin-top:1.8rem;
+    padding-bottom:.25rem;
+    border-bottom:2px solid var(--primary-light);
+  }
+  h4{
+    color:var(--primary-dark);
+    font-size:1.02rem;
+    margin-top:1.2rem;
+  }
+  p{ margin:.7rem 0; }
+  .lead{
+    font-size:1rem;
+    color:#333;
+    background:var(--primary-light);
+    padding:1rem 1.2rem;
+    border-radius:10px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1rem 0;
+    font-size:.92rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{ background:#fafcfc; }
+  .compare-table th{ background:var(--primary-dark); }
+  .compare-table td:first-child, .compare-table td:nth-child(2){ font-weight:600; }
+
+  .box{
+    border-radius:10px;
+    padding:1rem 1.2rem;
+    margin:1.1rem 0;
+    border:1px solid var(--border);
+  }
+  .box-concept{ background:var(--primary-light); border-color:var(--primary); }
+  .box-pathway{ background:#f2f7fb; border-color:#7ea9c9; }
+  .box-enzyme{ background:#f6f2fb; border-color:#a688c9; }
+  .box-clinical{ background:var(--clinical-bg); border-color:var(--clinical-border); }
+  .box-regulate{ background:var(--warn-bg); border-color:var(--warn-border); }
+  .box h4{ margin-top:0; }
+  .tag{
+    display:inline-block;
+    font-size:.72rem;
+    font-weight:700;
+    color:#fff;
+    background:var(--primary);
+    padding:.12rem .6rem;
+    border-radius:999px;
+    margin-bottom:.5rem;
+  }
+  .tag.clinical{ background:var(--clinical-border); }
+  .tag.regulate{ background:var(--warn-border); }
+  .tag.enzyme{ background:#8a63b0; }
+
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.4rem;
+    margin:1rem 0;
+    padding:1rem;
+    background:#fafafa;
+    border-radius:10px;
+    border:1px dashed var(--border);
+  }
+  .flow-step{
+    background:#fff;
+    border:2px solid var(--primary);
+    color:var(--primary-dark);
+    border-radius:8px;
+    padding:.5rem .8rem;
+    font-size:.85rem;
+    font-weight:700;
+    text-align:center;
+    min-width:70px;
+  }
+  .flow-step.alt{ border-color:#a688c9; color:#6b4a91; }
+  .flow-step.big{ background:var(--primary); color:#fff; }
+  .flow-arrow{
+    font-size:1.2rem;
+    color:var(--primary);
+    font-weight:700;
+  }
+  .flow-vert{ flex-direction:column; align-items:stretch; }
+  .flow-vert .flow-step{ width:100%; }
+
+  .stepnum{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:1.6em;
+    height:1.6em;
+    background:var(--primary);
+    color:#fff;
+    border-radius:50%;
+    font-size:.85rem;
+    font-weight:700;
+    margin-right:.5rem;
+    flex-shrink:0;
+  }
+  ol.steps{ list-style:none; padding-left:0; }
+  ol.steps li{
+    display:flex;
+    align-items:flex-start;
+    margin:.6rem 0;
+  }
+
+  .keyword{ color:var(--primary-dark); font-weight:700; }
+
+  figure.diagram{
+    margin:1.2rem 0;
+    padding:1rem;
+    background:#fbfdfd;
+    border:1px solid var(--border);
+    border-radius:10px;
+    text-align:center;
+  }
+  figure.diagram svg{ max-width:100%; height:auto; }
+  figcaption{
+    font-size:.82rem;
+    color:#555;
+    margin-top:.5rem;
+    text-align:left;
+  }
+
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:12px;
+    padding:1.3rem 1.5rem;
+  }
+  .takeaways h2{ border-left:none; padding-left:0; }
+  .takeaways ol{ padding-left:1.2rem; }
+  .takeaways li{ margin:.6rem 0; }
+
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#666;
+    font-size:.85rem;
+    border-top:1px solid var(--border);
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top:.8rem;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:.55rem 1.3rem;
+    border-radius:999px;
+    font-size:.85rem;
+    cursor:pointer;
+    text-decoration:none;
+    transition:background .2s;
+  }
+  #backToTop:hover{ background:var(--primary-dark); }
+
+  html{ scroll-behavior:smooth; }
+
+  @media (max-width:1024px){
+    main{ max-width:96%; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.4rem; }
+    nav{ gap:.15rem; padding:.5rem; }
+    nav a{ font-size:.78rem; padding:.35rem .55rem; }
+    h2{ font-size:1.2rem; }
+    h3{ font-size:1.05rem; }
+    table{ font-size:.8rem; }
+    .flow{ flex-direction:column; }
+    .flow-arrow{ transform:rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第19章：氧化磷酸化</h1>
+  <p class="sub">Oxidative Phosphorylation｜生物化學學習指南</p>
+</header>
+
+<nav id="navbar">
+  <a href="#s19-1" class="nav-link">19.1 呼吸鏈</a>
+  <a href="#s19-2" class="nav-link">19.2 ATP合成</a>
+  <a href="#s19-3" class="nav-link">19.3 調控</a>
+  <a href="#s19-4" class="nav-link">19.4 其他功能</a>
+  <a href="#s19-5" class="nav-link">19.5 粒線體基因</a>
+  <a href="#takeaways" class="nav-link">重點回顧</a>
+</nav>
+
+<main>
+
+<!-- ============ 導論 ============ -->
+<section id="intro">
+  <p class="lead">
+    氧化磷酸化（oxidative phosphorylation）是需氧生物產能代謝（catabolism）的最終階段。醣類、脂肪、胺基酸的所有氧化步驟，最終都匯聚到這一步：氧化所釋放的能量被用來驅動 ATP 的合成。在真核生物中，氧化磷酸化發生於<span class="keyword">粒線體（mitochondrion）</span>內膜上龐大的蛋白質複合體中，是絕大部分 ATP 的來源。
+  </p>
+  <div class="box box-concept">
+    <span class="tag">核心觀念</span>
+    <h4>貫穿全章的五個原則</h4>
+    <ol class="steps">
+      <li><span class="stepnum">1</span>粒線體是需氧代謝的中樞，除了產生 ATP，也進行檸檬酸循環、脂肪酸 β 氧化、胺基酸氧化，並參與產熱、類固醇合成與細胞凋亡（apoptosis）。</li>
+      <li><span class="stepnum">2</span>粒線體起源於細菌，與原始真核細胞形成內共生（endosymbiosis）關係演化而來。</li>
+      <li><span class="stepnum">3</span>電子由電子供體經一連串膜上載體傳遞，最終交給還原電位最高的氧分子（O₂）。</li>
+      <li><span class="stepnum">4</span>電子「下坡流動」釋放的自由能，被用來把質子（H⁺）「逆坡」推出膜外，能量因此被保存為跨膜電化學位能。</li>
+      <li><span class="stepnum">5</span>質子順著電化學梯度流回基質時，驅動 ATP 合成酶（ATP synthase）合成 ATP。</li>
+    </ol>
+  </div>
+  <p>
+    原則 3–5 就是 1961 年 Peter Mitchell 提出的<span class="keyword">化學滲透理論（chemiosmotic theory）</span>：粒線體膜兩側的質子濃度差，就是儲存生物氧化能量的「電池」。這個理論不僅解釋氧化磷酸化，也同樣適用於葉綠體的光合磷酸化、主動運輸與細菌鞭毛轉動。
+  </p>
+  <div class="box box-clinical">
+    <span class="tag clinical">臨床連結</span>
+    粒線體功能異常與神經退化性疾病、癌症、糖尿病、肥胖症密切相關；粒線體完整性逐漸喪失，也是老化的假說之一。
+  </div>
+</section>
+
+<!-- ============ 19.1 ============ -->
+<section id="s19-1">
+  <h2>19.1 粒線體呼吸鏈（The Mitochondrial Respiratory Chain）</h2>
+
+  <h3>粒線體的構造</h3>
+  <p>
+    粒線體如同革蘭氏陰性菌，具有雙層膜構造。<span class="keyword">外膜（outer membrane）</span>上有大量稱為<span class="keyword">孔蛋白（porin）</span>的通道蛋白，可自由通透小分子與離子。<span class="keyword">內膜（inner membrane）</span>則幾乎不通透任何小分子與離子（包括 H⁺），只有透過特定的運輸蛋白才能穿越；內膜上分布著呼吸鏈與 ATP 合成酶，並向內摺疊形成大量表面積稱為<span class="keyword">脊（cristae）</span>。內膜所包圍的空間稱為<span class="keyword">基質（matrix）</span>，內含檸檬酸循環、脂肪酸 β 氧化、胺基酸氧化的酵素及粒線體自身的 DNA、核糖體。
+  </p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="320" cy="130" rx="300" ry="110" fill="none" stroke="hsl(173,45%,60%)" stroke-width="10"/>
+      <ellipse cx="320" cy="130" rx="255" ry="85" fill="hsl(173,45%,96%)" stroke="hsl(173,45%,35%)" stroke-width="7"/>
+      <path d="M 120 100 Q 160 70 200 100 Q 230 120 200 150 Q 165 175 130 150 Q 105 130 120 100 Z" fill="none" stroke="hsl(173,45%,35%)" stroke-width="6"/>
+      <path d="M 420 90 Q 460 65 500 95 Q 525 115 495 145 Q 460 168 430 145 Q 405 122 420 90 Z" fill="none" stroke="hsl(173,45%,35%)" stroke-width="6"/>
+      <text x="320" y="30" text-anchor="middle" font-size="15" fill="#1a1a1a" font-weight="700">外膜（Outer membrane）：可自由通透小分子、離子</text>
+      <text x="320" y="60" text-anchor="middle" font-size="14" fill="hsl(173,45%,30%)" font-weight="700">內膜（Inner membrane）：不通透，含複合體 I–IV、ATP synthase</text>
+      <text x="320" y="135" text-anchor="middle" font-size="14" fill="#333" font-weight="700">基質（Matrix）</text>
+      <text x="320" y="158" text-anchor="middle" font-size="12" fill="#555">檸檬酸循環／β氧化／胺基酸氧化／mtDNA</text>
+      <text x="165" y="200" text-anchor="middle" font-size="12" fill="hsl(173,45%,30%)">脊（cristae）</text>
+      <text x="465" y="200" text-anchor="middle" font-size="12" fill="hsl(173,45%,30%)">脊（cristae）</text>
+    </svg>
+    <figcaption>圖 19-2 概念重現：粒線體雙層膜構造。外膜可自由通透，內膜高度選擇性，向內摺疊形成脊以增加表面積，容納大量呼吸鏈複合體。</figcaption>
+  </figure>
+
+  <h3>電子被送入通用電子接受者</h3>
+  <p>
+    氧化磷酸化始於電子進入<span class="keyword">呼吸鏈（respiratory chain）</span>。大多數電子來自去氫酶（dehydrogenase）從代謝路徑收集電子，並交給通用電子接受者：<span class="keyword">菸鹼醯胺核苷酸（NAD⁺／NADP⁺）</span>或<span class="keyword">黃素核苷酸（FMN／FAD）</span>。NADH 主要負責把電子送進呼吸鏈；NADPH 則主要用於合成代謝，兩者的還原態／氧化態比例被細胞分別調控，彼此不互通。
+  </p>
+
+  <h3>電子傳遞鏈的五類載體</h3>
+  <div class="box box-pathway">
+    <span class="tag">機制</span>
+    <h4>呼吸鏈的電子載體</h4>
+    <ul>
+      <li><b>菸鹼醯胺核苷酸（NAD/NADP）</b>：以氫化物離子（hydride, :H⁻）形式傳遞兩個電子。</li>
+      <li><b>黃素蛋白（flavoprotein）</b>：含 FMN 或 FAD，可接受 1 個或 2 個電子，是連接「兩電子供體」與「一電子受體」的橋樑。</li>
+      <li><b>泛醌（ubiquinone, Q，又稱 coenzyme Q）</b>：脂溶性苯醌，可在膜脂雙層中自由擴散，攜帶電子也攜帶質子，在氧化型 Q、半醌自由基（•QH）、還原型泛醇（QH₂）三態間轉換。</li>
+      <li><b>細胞色素（cytochrome）</b>：含鐵血基質（heme）輔基，依吸收光譜分為 a、b、c 三型，各型還原電位不同。</li>
+      <li><b>鐵硫蛋白（iron-sulfur protein, Fe-S）</b>：鐵不在血基質而是與無機硫或半胱胺酸的硫配位，進行單電子傳遞。</li>
+    </ul>
+  </div>
+  <p>
+    利用標準還原電位測定、電子載體氧化態的動力學追蹤，以及各種抑制劑（見下方表 19-4）三種方法交叉驗證，可確立電子傳遞的順序：
+  </p>
+  <div class="flow">
+    <div class="flow-step">NADH</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Q</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Cyt b</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Cyt c₁</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Cyt c</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Cyt a</div><div class="flow-arrow">→</div>
+    <div class="flow-step">Cyt a₃</div><div class="flow-arrow">→</div>
+    <div class="flow-step big">O₂</div>
+  </div>
+
+  <h3>四大電子傳遞複合體</h3>
+  <p>用溫和的清潔劑處理內膜，可將呼吸鏈分離成四個獨立的功能複合體，再加上 ATP 合成酶（有時稱為複合體 V）：</p>
+  <table>
+    <tr><th>複合體</th><th>別名</th><th>催化反應</th><th>是否幫浦質子</th></tr>
+    <tr><td>複合體 I</td><td>NADH:泛醌氧化還原酶</td><td>NADH → Q</td><td>是（4 H⁺）</td></tr>
+    <tr><td>複合體 II</td><td>琥珀酸去氫酶</td><td>琥珀酸 → Q</td><td>否</td></tr>
+    <tr><td>複合體 III</td><td>細胞色素 bc₁ 複合體</td><td>QH₂ → Cyt c</td><td>是（淨 4 H⁺）</td></tr>
+    <tr><td>複合體 IV</td><td>細胞色素氧化酶</td><td>Cyt c → O₂</td><td>是（4 H⁺）</td></tr>
+  </table>
+
+  <div class="box box-enzyme">
+    <span class="tag enzyme">酵素焦點：複合體 I</span>
+    <h4>Complex I：NADH → 泛醌</h4>
+    <p>
+      L 形巨大酵素，一臂嵌於膜中，一臂伸入基質，含 FMN 與至少 8 個 Fe-S 中心。同時催化兩個偶聯反應：（1）將氫化物由 NADH 經 FMN、Fe-S 中心傳給 Q，生成 QH₂；（2）把 4 個質子從基質幫浦到膜間隙。反應具方向性（vectorial），可寫成：
+    </p>
+    <div class="flow">
+      <div class="flow-step">NADH + 5H⁺(基質)+ Q</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">NAD⁺ + QH₂ + 4H⁺(膜間隙)</div>
+    </div>
+    <p>抑制劑：安眠酮（amytal）、魚藤酮（rotenone）、殺蟲菌素 A（piericidin A）會阻斷 Fe-S 中心到 Q 的電子傳遞。</p>
+  </div>
+
+  <div class="box box-enzyme">
+    <span class="tag enzyme">酵素焦點：複合體 II</span>
+    <h4>Complex II：琥珀酸 → 泛醌</h4>
+    <p>
+      即檸檬酸循環中唯一嵌膜的酵素——<span class="keyword">琥珀酸去氫酶（succinate dehydrogenase）</span>。含 FAD、三個 Fe-S 中心及一個 heme b（不在主電子路徑上，功能是降低活性氧洩漏）。電子傳遞<b>不伴隨質子幫浦</b>，因此由琥珀酸氧化進入呼吸鏈所產生的 ATP 較少。
+    </p>
+  </div>
+
+  <h3>複合體 III：泛醌 → 細胞色素 c 與 Q 循環</h3>
+  <p>
+    <span class="keyword">複合體 III</span>（細胞色素 bc₁ 複合體）以二聚體形式運作，將電子由 QH₂ 傳給 cyt c，同時把質子由基質側送往膜間隙側。這個過程透過 Mitchell 提出的 <span class="keyword">Q 循環（Q cycle）</span> 完成：QH₂ 在 Q<sub>P</sub> 位點被氧化，釋出 2 個 H⁺ 到膜間隙、把 1 個電子交給 cyt c、另 1 個電子則經 cytochrome b 傳到 Q<sub>N</sub> 位點還原另一個 Q；如此循環兩次，淨反應為：
+  </p>
+  <div class="flow flow-vert">
+    <div class="flow-step">QH₂ + 2 cyt c(氧化型) + 2H⁺(基質)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step big">Q + 2 cyt c(還原型) + 4H⁺(膜間隙)</div>
+  </div>
+  <p>Q 循環的巧妙之處在於：它讓「兩電子載體」QH₂ 與「單電子載體」cyt b／cyt c 之間順利轉換，同時把質子淨移動效率放大一倍。</p>
+
+  <h3>複合體 IV：細胞色素 c → O₂</h3>
+  <p>
+    <span class="keyword">複合體 IV（細胞色素氧化酶）</span>將電子由 cyt c 經 Cu<sub>A</sub> 中心、heme a，傳到 heme a₃–Cu<sub>B</sub> 雙核中心，最終交給 O₂ 生成 H₂O。每傳遞 4 個電子，消耗基質中 4 個「受質」H⁺ 把 O₂ 還原成 2 個 H₂O，同時再幫浦 4 個質子到膜間隙：
+  </p>
+  <div class="flow">
+    <div class="flow-step">4 cyt c(還原型)+ 8H⁺(基質)+ O₂</div><div class="flow-arrow">→</div>
+    <div class="flow-step big">4 cyt c(氧化型)+ 4H⁺(膜間隙)+ 2H₂O</div>
+  </div>
+  <p>氰化物（CN⁻）、一氧化碳（CO）會結合此複合體的鐵銅中心，阻斷電子傳遞，這也是氰化物致命的原因。</p>
+
+  <h3>呼吸體（Respirasome）與其他電子入口</h3>
+  <p>
+    在完整粒線體中，複合體 I、III、IV 常聚集成超複合體，稱為<span class="keyword">呼吸體（respirasome）</span>，可能有助於提升電子傳遞效率、減少電子外洩。複合體 II 通常不參與此聚合體。
+  </p>
+  <p>
+    除複合體 I、II 外，還有幾條路徑可將電子送入 Q 池：脂肪酸 β 氧化第一步的醯基輔酶A去氫酶（經由電子傳遞黃素蛋白 ETF）、甘油 3-磷酸去氫酶（連結醣解與呼吸鏈的橋樑，也是穿梭系統之一）、雙氫乳清酸去氫酶（嘧啶合成的一步）。這些路徑都在 Q 的層級進入呼吸鏈，因此比從複合體 I 進入少幫浦一批質子。
+  </p>
+
+  <h3>能量守恆與質子梯度</h3>
+  <p>
+    一對電子由 NADH 傳到 O₂，標準自由能變化約為 −220 kJ/mol；由琥珀酸傳遞則約 −150 kJ/mol。這些能量大部分被保存為跨膜的<span class="keyword">質子驅動力（proton-motive force）</span>，由「化學位能差（ΔpH，基質偏鹼）」與「電位能差（Δψ，基質為負）」共同組成。在活躍呼吸的粒線體中，每莫耳質子跨膜移動可保留約 19 kJ 的自由能；NADH 傳給 O₂ 幫浦約 10 個質子，等於保存約 190 kJ（佔氧化 NADH 所釋放 220 kJ 的大部分）。
+  </p>
+
+  <h3>活性氧物種（ROS）的生成與防禦</h3>
+  <div class="box box-clinical">
+    <span class="tag clinical">臨床連結</span>
+    <p>
+      複合體 I、III 的半醌中間物可能將電子直接漏給 O₂，形成<span class="keyword">超氧自由基（superoxide, •O₂⁻）</span>，屬於<span class="keyword">活性氧物種（reactive oxygen species, ROS）</span>之一。細胞以<span class="keyword">超氧歧化酶（superoxide dismutase）</span>將 •O₂⁻ 轉為 H₂O₂，再由<span class="keyword">麩胱甘肽過氧化酶（glutathione peroxidase）</span>將 H₂O₂ 轉為無害的水。當電子供給（高 NADH/NAD⁺）與電子接受（缺 ADP 或 O₂）不匹配時，ROS 生成量會大增，可能導致老化、心臟衰竭、糖尿病及多種神經退化性疾病。
+    </p>
+  </div>
+
+  <h4>本節容易混淆的概念比較</h4>
+  <table class="compare-table">
+    <tr><th>A：複合體 I（NADH 進入）</th><th>B：複合體 II（琥珀酸進入）</th><th>差異重點</th></tr>
+    <tr>
+      <td>NADH → Q，同時幫浦 4 個 H⁺</td>
+      <td>琥珀酸 → Q，<b>不</b>幫浦質子</td>
+      <td>兩者都把電子送進 Q，但只有複合體 I 直接對質子梯度有貢獻；因此經複合體 I 進入的電子最終 ATP 產率較高（P/O ≈ 2.5），經複合體 II／Q 進入的較低（P/O ≈ 1.5）。</td>
+    </tr>
+    <tr>
+      <td>是獨立的呼吸鏈複合體，含 FMN</td>
+      <td>本身也是檸檬酸循環的一員（琥珀酸去氫酶）</td>
+      <td>複合體 II 是唯一同時參與檸檬酸循環與呼吸鏈的酵素，因此其活性可協調兩條路徑。</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ============ 19.2 ============ -->
+<section id="s19-2">
+  <h2>19.2 ATP合成（ATP Synthesis）</h2>
+
+  <h3>化學滲透模型：氧化與磷酸化是強制偶聯的</h3>
+  <p>
+    根據<span class="keyword">化學滲透模型（chemiosmotic model）</span>，質子驅動力驅使質子經由 ATP 合成酶的質子通道被動流回基質，驅動 ADP + Pi → ATP：
+  </p>
+  <div class="flow">
+    <div class="flow-step">ADP + Pi + nH⁺(膜間隙)</div><div class="flow-arrow">→</div>
+    <div class="flow-step big">ATP + H₂O + nH⁺(基質)</div>
+  </div>
+  <p>
+    「偶聯（coupling）」意指電子傳遞與 ATP 合成互相依存，缺一不可。實驗證據：加入寡黴素（oligomycin）等 ATP 合成酶抑制劑會同時阻斷 ATP 合成與電子傳遞，因為質子無路可回，質子驅動力累積到與電子傳遞釋放能量相等時，電子傳遞就會停止。
+  </p>
+  <p>
+    某些藥劑則會使兩者「解偶聯（uncoupling）」：2,4-二硝基酚（DNP）、FCCP 是疏水性弱酸，可攜帶質子穿越膜、消散質子梯度；纈氨黴素（valinomycin）等離子載體則讓 K⁺ 自由通透，消散電位差。解偶聯劑存在時，電子傳遞持續進行，但 ATP 不再合成——能量以熱的形式釋放。
+  </p>
+
+  <div class="box box-clinical">
+    <span class="tag clinical">干擾氧化磷酸化的藥劑（表 19-4 重點整理）</span>
+    <table>
+      <tr><th>作用類型</th><th>代表藥劑</th><th>機制</th></tr>
+      <tr><td>抑制電子傳遞</td><td>氰化物、CO、抗黴素A、魚藤酮</td><td>阻斷特定複合體間的電子傳遞</td></tr>
+      <tr><td>抑制 ATP 合成酶</td><td>寡黴素、DCCD</td><td>阻斷 Fo 質子通道或 F1 活性</td></tr>
+      <tr><td>解偶聯劑</td><td>DNP、FCCP、UCP1</td><td>提供質子繞道回基質的路徑，不經 ATP 合成酶</td></tr>
+      <tr><td>抑制腺嘌呤核苷酸交換</td><td>Atractyloside</td><td>阻斷 ADP-ATP 轉位酶</td></tr>
+    </table>
+  </div>
+
+  <h3>ATP 合成酶的兩大功能域：F<sub>o</sub> 與 F<sub>1</sub></h3>
+  <p>
+    <span class="keyword">ATP 合成酶（ATP synthase）</span>由膜整合的 <b>F<sub>o</sub></b>（質子通道，因對寡黴素敏感而得名）與周邊膜蛋白 <b>F<sub>1</sub></b>（催化 ATP 合成／水解）組成。F<sub>1</sub> 組成為 α₃β₃γδε：三對 α、β 亞基像橘子瓣一樣排列，中央貫穿一根 γ 軸。F<sub>o</sub> 包含 a、b、c 三種次單元，其中多個 c 次單元排成 <span class="keyword">c 環（c ring）</span>，數目依物種而異（8–17 個）。
+  </p>
+
+  <h3>結合改變機制與旋轉催化</h3>
+  <div class="box box-pathway">
+    <span class="tag">機制：Binding-Change Mechanism</span>
+    <p>三個 β 次單元胺基酸序列相同，但因與 γ 軸的相對位置不同，同時呈現三種不同構型：</p>
+    <ol class="steps">
+      <li><span class="stepnum">1</span><b>β-ATP</b>（緊密結合態）：牢牢抓住已合成的 ATP。</li>
+      <li><span class="stepnum">2</span><b>β-ADP</b>（鬆散結合態）：正在結合 ADP + Pi。</li>
+      <li><span class="stepnum">3</span><b>β-empty</b>（極鬆散態）：釋放 ATP，準備進入下一輪。</li>
+    </ol>
+    <p>
+      質子經 F<sub>o</sub> 流動，驅使 c 環與附著的 γ 軸旋轉；γ 軸每轉 120°，就迫使接觸到的 β 次單元切換到下一種構型，三個 β 次單元因此輪流循環三態。轉一整圈（360°）可合成並釋放 3 個 ATP。這個過程稱為<span class="keyword">旋轉催化（rotational catalysis）</span>，已被螢光顯微鏡直接觀察到 γ 軸與 c 環確實會旋轉。
+    </p>
+  </div>
+  <p>
+    有趣的是，同位素交換實驗顯示：在酵素表面，ADP + Pi ⇌ ATP + H₂O 的自由能變化接近零——真正耗能的步驟不是「合成 ATP」，而是「把緊密結合的 ATP 從酵素表面釋放出來」。質子驅動力提供的正是這一步所需的能量。
+
+  </p>
+
+  <h4>P/O 比值：並非固定整數</h4>
+  <p>
+    由於化學滲透偶聯本質上是「質子流量」而非「化學計量固定」的機制，P/O 比值（每消耗 ½O₂ 所合成的 ATP 數）不必為整數。實驗共識值：NADH 經複合體 I 進入約幫浦 10 個質子／每對電子；琥珀酸／Q 進入約幫浦 6 個；合成 1 個 ATP 約需 4 個質子（其中 1 個用於 Pi、ADP、ATP 的跨膜運輸）。因此：
+  </p>
+  <div class="flow">
+    <div class="flow-step">NADH 途徑：P/O ≈ 2.5</div>
+    <div class="flow-step alt">琥珀酸／FADH₂ 途徑：P/O ≈ 1.5</div>
+  </div>
+
+  <h3>質子驅動力也驅動物質運輸</h3>
+  <p>
+    內膜上的<span class="keyword">腺嘌呤核苷酸轉位酶（adenine nucleotide translocase）</span>以反向運輸（antiport）方式，將 ADP³⁻ 送入基質、同時把 ATP⁴⁻ 送出，因淨移出一個負電荷，受質子驅動力（基質帶負電）驅動而有利；<span class="keyword">磷酸轉位酶（phosphate translocase）</span>則以同向運輸（symport）方式，將 H₂PO₄⁻ 與 H⁺ 一起送入基質。三者可合稱 <span class="keyword">ATP 合成體（ATP synthasome）</span>。
+  </p>
+
+  <h3>穿梭系統：把細胞質 NADH 的還原力送進粒線體</h3>
+  <p>
+    NADH 本身無法穿越內膜，細胞質中醣解產生的 NADH 需靠「穿梭系統」間接把還原力送入基質：
+  </p>
+  <div class="box box-pathway">
+    <span class="tag">Pathway</span>
+    <h4>蘋果酸-天門冬胺酸穿梭（Malate-Aspartate Shuttle）</h4>
+    <p>主要用於肝、腎、心臟。細胞質 NADH 先把電子交給草醯乙酸生成蘋果酸，蘋果酸經轉位子進入基質後，被氧化回草醯乙酸並生成基質內的 NADH（可直接進複合體 I）；草醯乙酸再經轉胺作用變成天門冬胺酸離開基質，完成循環。</p>
+  </div>
+  <div class="box box-pathway">
+    <span class="tag">Pathway</span>
+    <h4>甘油 3-磷酸穿梭（Glycerol 3-Phosphate Shuttle）</h4>
+    <p>主要用於骨骼肌、腦。細胞質 NADH 將電子交給雙羥丙酮磷酸生成甘油 3-磷酸；甘油 3-磷酸去氫酶（位於內膜外側，含 FAD）再把電子直接交給 Q，不經複合體 I。</p>
+  </div>
+
+  <h4>本節容易混淆的概念比較</h4>
+  <table class="compare-table">
+    <tr><th>A：蘋果酸-天門冬胺酸穿梭</th><th>B：甘油 3-磷酸穿梭</th><th>差異重點</th></tr>
+    <tr>
+      <td>電子進入複合體 I</td>
+      <td>電子直接進入 Q（繞過複合體 I）</td>
+      <td>進入點不同，導致幫浦的質子數不同</td>
+    </tr>
+    <tr>
+      <td>P/O ≈ 2.5</td>
+      <td>P/O ≈ 1.5</td>
+      <td>甘油 3-磷酸穿梭少了複合體 I 的 4 個質子幫浦，ATP 產率較低</td>
+    </tr>
+    <tr>
+      <td>主要見於肝、腎、心</td>
+      <td>主要見於骨骼肌、腦</td>
+      <td>組織分布不同，反映不同組織對速度／效率的權衡（此穿梭不涉及膜運輸子，反應更快）</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ============ 19.3 ============ -->
+<section id="s19-3">
+  <h2>19.3 氧化磷酸化的調控（Regulation）</h2>
+
+  <h3>葡萄糖完全氧化的 ATP 產率</h3>
+  <table>
+    <tr><th>階段</th><th>直接產物</th><th>最終 ATP</th></tr>
+    <tr><td>醣解</td><td>2 NADH（細胞質）+ 2 ATP</td><td>3–5 + 2</td></tr>
+    <tr><td>丙酮酸氧化（×2）</td><td>2 NADH（基質）</td><td>5</td></tr>
+    <tr><td>檸檬酸循環（×2）</td><td>6 NADH + 2 FADH₂ + 2 ATP/GTP</td><td>15 + 3 + 2</td></tr>
+    <tr><td><b>總計</b></td><td></td><td><b>30 或 32 ATP／glucose</b></td></tr>
+  </table>
+  <p>相較之下，無氧醣解（乳酸發酵）每分子葡萄糖僅產生 2 個 ATP，凸顯氧化磷酸化在能量效率上的巨大優勢。</p>
+
+  <h3>受體控制（Acceptor Control）</h3>
+  <p>
+    呼吸速率主要受 <span class="keyword">ADP 供應量</span>限制，稱為<span class="keyword">受體控制（acceptor control）</span>：ADP 越多、呼吸與 ATP 合成越快，直到 [ATP]/([ADP][Pi]) 這個「質量作用比（mass-action ratio）」回到高檔，呼吸再度減速。這個回饋機制讓 ATP 只在被使用時才會被重新合成，維持體內 ATP 濃度的高度穩定。
+  </p>
+
+  <div class="box box-regulate">
+    <span class="tag regulate">調控機制</span>
+    <h4>缺氧時的保護機制：IF₁ 蛋白</h4>
+    <p>
+      缺氧（hypoxia）時電子傳遞減緩、質子驅動力崩潰，ATP 合成酶可能反向運轉、消耗醣解產生的 ATP 來幫浦質子。小分子抑制蛋白 <span class="keyword">IF₁</span> 在低 pH（缺氧導致乳酸堆積）下形成二聚體，同時鎖住兩個 ATP 合成酶分子，阻止其雙向活性，避免 ATP 被浪費性水解。許多腫瘤細胞（依賴醣解）會過度表現 IF₁。
+    </p>
+  </div>
+
+  <div class="box box-regulate">
+    <span class="tag regulate">調控機制</span>
+    <h4>缺氧誘導因子 HIF-1 的適應性反應</h4>
+    <p>
+      缺氧時，<span class="keyword">HIF-1（hypoxia-inducible factor-1）</span>作為轉錄因子大量累積，促使：（1）葡萄糖轉運蛋白與醣解酵素增加，加強醣解產能；（2）活化 PDH 激酶，抑制丙酮酸去氫酶，減少電子進入呼吸鏈；（3）以 COX4-2 次單元取代 COX4-1，讓複合體 IV 更適應低氧環境。三者共同降低 ROS 生成。這也是癌細胞中常見的 <span class="keyword">Warburg 效應</span>（即使有氧仍偏好醣解）的部分機制。
+    </p>
+  </div>
+
+  <h3>各代謝路徑的協同調控</h3>
+  <p>
+    ATP／ADP 的相對濃度不僅控制電子傳遞與氧化磷酸化速率，也同步調控檸檬酸循環、丙酮酸氧化與醣解：ATP 是磷酸果糖激酶-1（phosphofructokinase-1）與丙酮酸去氫酶的別構抑制劑；ADP 則活化檸檬酸合成酶與異檸檬酸去氫酶。檸檬酸則同時抑制醣解（PFK-1）與（累積時）反映檸檬酸循環的「怠速」狀態。整體效果：能量需求越高，四條路徑同步加速；能量充足時同步減速。
+  </p>
+</section>
+
+<!-- ============ 19.4 ============ -->
+<section id="s19-4">
+  <h2>19.4 粒線體在產熱、類固醇合成與細胞凋亡中的角色</h2>
+
+  <h3>棕色脂肪組織的產熱（Thermogenesis）</h3>
+  <p>
+    新生哺乳動物的<span class="keyword">棕色脂肪組織（brown adipose tissue, BAT）</span>中，燃料氧化的目的不是產生 ATP，而是產熱保暖。其粒線體內膜含有 <span class="keyword">解偶聯蛋白 1（uncoupling protein 1, UCP1）</span>，讓質子繞過 ATP 合成酶直接流回基質，能量以熱釋放而非儲存為 ATP。此外還有肌酸／磷酸肌酸的「無效循環」輔助產熱。
+  </p>
+  <div class="flow flow-vert">
+    <div class="flow-step">複合體 I–IV 幫浦質子（正常）</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step alt">UCP1：質子繞道流回基質（不經 ATP 合成酶）</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step big">能量以熱釋放，而非合成 ATP</div>
+  </div>
+
+  <h3>類固醇激素合成：粒線體 P-450 單氧化酶</h3>
+  <p>
+    腎上腺、性腺等類固醇合成組織的粒線體，內膜富含<span class="keyword">細胞色素 P-450（cytochrome P-450）</span>家族單氧化酶，催化膽固醇的多步驟羥化反應以合成性激素、糖皮質素、礦皮質素、維生素 D 荷爾蒙。電子由 NADPH 經黃素蛋白（adrenodoxin reductase）、鐵硫蛋白（adrenodoxin），傳給 P-450 血基質，將一個氧原子接到受質、另一個還原成水。
+  </p>
+
+  <h3>細胞凋亡（Apoptosis）：粒線體是啟動中樞</h3>
+  <p>
+    <span class="keyword">細胞凋亡（apoptosis，程式性細胞死亡）</span>可由外部訊號或內部壓力（DNA 損傷、ROS 累積等）觸發。粒線體在此過程扮演關鍵角色：
+  </p>
+  <ol class="steps">
+    <li><span class="stepnum">1</span>壓力訊號使外膜上的<span class="keyword">通透性轉換孔複合體（PTPC）</span>開啟，通透性增加。</li>
+    <li><span class="stepnum">2</span>膜間隙中的 <span class="keyword">細胞色素 c</span>（原本負責電子傳遞）外洩到細胞質——這是它的「兼職（moonlighting）」角色。</li>
+    <li><span class="stepnum">3</span>細胞質中的細胞色素 c 與 Apaf-1 結合，形成 <span class="keyword">凋亡體（apoptosome）</span>。</li>
+    <li><span class="stepnum">4</span>凋亡體活化 procaspase-9 為 caspase-9。</li>
+    <li><span class="stepnum">5</span>caspase-9 進一步活化 caspase-3、caspase-7，啟動蛋白酶級聯反應，導致細胞死亡與分解。</li>
+  </ol>
+</section>
+
+<!-- ============ 19.5 ============ -->
+<section id="s19-5">
+  <h2>19.5 粒線體基因：起源與突變的影響</h2>
+
+  <h3>粒線體基因體</h3>
+  <p>
+    人類粒線體 DNA（mtDNA）是一個環狀雙股 DNA，長 16,569 鹼基對，含 37 個基因：13 個編碼呼吸鏈蛋白次單元（複合體 I、III、IV、ATP 合成酶），其餘編碼 rRNA 與 tRNA。粒線體本身有一套獨立的核糖體。絕大多數（約 1,200 種）粒線體蛋白其實是由<b>核基因</b>編碼、在細胞質核糖體合成後再輸入粒線體。
+  </p>
+
+  <h3>內共生起源（Endosymbiotic Origin）</h3>
+  <p>
+    粒線體 DNA、核糖體、tRNA 的存在支持<span class="keyword">內共生理論</span>：早期能行需氧代謝的細菌，與行發酵作用的原始真核細胞形成共生關係；經長期演化，許多細菌基因遷移進入宿主細胞核，共生菌最終演變為粒線體。現代需氧細菌（如大腸桿菌）的呼吸鏈與 F<sub>o</sub>F<sub>1</sub> 構造，確實與粒線體高度相似，支持此假說。
+  </p>
+
+  <h3>mtDNA 突變的累積與異質性（Heteroplasmy）</h3>
+  <p>
+    呼吸鏈是細胞內 ROS 的主要來源，mtDNA 修復機制又不如核 DNA 精確，因此突變會隨年齡累積——這正是老化假說之一。由於卵細胞含有大量粒線體、精子的粒線體在受精後會被主動降解，粒線體遺傳<b>只來自母系</b>。若母系生殖細胞中同時存在野生型與突變型 mtDNA，經細胞分裂隨機分配後，不同體細胞、不同組織會含有不同比例的突變粒線體，此現象稱為<span class="keyword">異質性（heteroplasmy）</span>（相對於「同質性 homoplasmy」）。異質性程度不同，會造成同一疾病基因型卻表現出輕重不一的臨床症狀。
+  </p>
+
+  <div class="box box-clinical">
+    <span class="tag clinical">臨床連結：粒線體疾病</span>
+    <table>
+      <tr><th>疾病</th><th>受損基因／機制</th><th>主要表現</th></tr>
+      <tr><td>Leber 遺傳性視神經病變（LHON）</td><td><i>ND4</i>（複合體 I）或 cyt b（複合體 III）點突變</td><td>成年早期雙側視力喪失</td></tr>
+      <tr><td>MERRF 症候群</td><td>tRNA<sup>Lys</sup> 基因突變</td><td>肌陣攣性癲癇、破碎紅纖維</td></tr>
+      <tr><td>粒線體腦肌病</td><td>多種呼吸鏈／tRNA 基因突變</td><td>影響腦部與骨骼肌</td></tr>
+      <tr><td>粒線體型糖尿病（含 MODY2）</td><td>葡萄糖激酶或 mtDNA 缺陷，使 β 細胞 ATP 不足，無法觸發胰島素分泌</td><td>血糖調節異常</td></tr>
+    </table>
+    <p>此外，「三親嬰兒（mitochondrial donation）」技術可將攜帶致病 mtDNA 突變的母親之細胞核，移植入健康捐贈者去核的卵子中，以避免疾病遺傳給下一代，但涉及倫理爭議。</p>
+  </div>
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="takeaways" class="takeaways">
+  <h2># Key Takeaways</h2>
+  <ol>
+    <li><b>化學滲透理論（chemiosmotic theory）</b>是全章核心：電子傳遞釋放的能量，先轉換成跨膜質子梯度（質子驅動力），再驅動 ATP 合成——氧化與磷酸化透過質子梯度強制偶聯。</li>
+    <li>呼吸鏈由四個複合體組成：<b>複合體 I（NADH→Q，幫浦質子）</b>、<b>複合體 II（琥珀酸→Q，不幫浦質子）</b>、<b>複合體 III（QH₂→cyt c，經 Q 循環幫浦質子）</b>、<b>複合體 IV（cyt c→O₂，幫浦質子並消耗基質 H⁺）</b>，其中複合體 I、III、IV 可聚成「呼吸體」。</li>
+    <li>電子傳遞過程中少量電子外洩會生成<b>活性氧物種（ROS）</b>，需靠超氧歧化酶與麩胱甘肽過氧化酶系統清除。</li>
+    <li><b>ATP 合成酶（F<sub>o</sub>F<sub>1</sub>）</b>以「旋轉催化」運作：質子流經 F<sub>o</sub> 帶動 c 環與 γ 軸旋轉，使 F<sub>1</sub> 的三個 β 次單元依序在 β-ATP、β-ADP、β-empty 三態間切換，合成並釋放 ATP。</li>
+    <li><b>P/O 比值</b>並非固定整數：電子由複合體 I 進入約產生 2.5 個 ATP／NADH，由 Q 層級進入（複合體 II 或穿梭系統）約產生 1.5 個 ATP。</li>
+    <li>細胞質 NADH 需靠<b>蘋果酸-天門冬胺酸穿梭</b>（進複合體 I，P/O≈2.5）或<b>甘油 3-磷酸穿梭</b>（進 Q，P/O≈1.5）才能進入粒線體氧化。</li>
+    <li>氧化磷酸化受<b>受體控制（ADP 濃度）</b>精細調節；缺氧時 <b>IF₁</b> 防止 ATP 被浪費性水解，<b>HIF-1</b> 啟動一系列適應反應以減少 ROS。</li>
+    <li>粒線體除了產能，也負責<b>棕色脂肪產熱（UCP1）</b>、<b>類固醇合成（P-450 酵素）</b>與<b>細胞凋亡起始（釋放細胞色素 c 形成凋亡體）</b>。</li>
+    <li>粒線體帶有獨立的環狀 <b>mtDNA</b>（僅編碼 13 個呼吸鏈蛋白），源自細菌的<b>內共生演化</b>，且僅由母系遺傳；突變累積可造成<b>異質性（heteroplasmy）</b>，導致同一突變在不同個體或組織中表現輕重不一。</li>
+    <li>常考重點：解偶聯劑（DNP、FCCP）vs. ATP 合成酶抑制劑（寡黴素）對電子傳遞／ATP 合成的不同影響；LHON、MERRF 等 mtDNA 疾病的基因與表現型對應。</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  第19章：氧化磷酸化｜學習指南
+  <br>
+  <a href="#top" id="backToTop">回到頂端 ↑</a>
+</footer>
+
+<script>
+  // Back to top
+  document.getElementById('backToTop').addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // Scroll-spy for nav active state
+  const sections = document.querySelectorAll('main section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function onScroll(){
+    let currentId = '';
+    const scrollPos = window.scrollY + 90;
+    sections.forEach(sec => {
+      if(sec.offsetTop <= scrollPos){
+        currentId = sec.id;
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if(link.getAttribute('href') === '#' + currentId){
+        link.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>

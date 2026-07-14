@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第18章：胺基酸氧化與尿素的產生｜學習指南</title>
+<style>
+  :root{
+    --hue: 126;
+    --primary: hsl(126, 45%, 35%);
+    --primary-light: hsl(126, 45%, 92%);
+    --primary-dark: hsl(126, 45%, 25%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(126, 30%, 80%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Noto Sans CJK TC",sans-serif;
+    color:var(--text);
+    background:#fbfbfb;
+    line-height:1.85;
+    font-size:16px;
+  }
+  header{
+    background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color:#fff;
+    padding:2.6rem 1.5rem 2rem;
+    text-align:center;
+  }
+  header h1{
+    margin:0;
+    font-size:1.8rem;
+    font-weight:700;
+    letter-spacing:.05em;
+  }
+  header p.sub{
+    margin:.6rem 0 0;
+    font-size:.95rem;
+    opacity:.9;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+  }
+  nav ul{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    list-style:none;
+    margin:0;
+    padding:.6rem 1rem;
+    gap:.4rem 1.4rem;
+    max-width:1100px;
+    margin-inline:auto;
+  }
+  nav a{
+    display:inline-block;
+    text-decoration:none;
+    color:var(--text);
+    font-size:.92rem;
+    padding:.45rem .8rem;
+    border-radius:999px;
+    transition:background .2s,color .2s;
+    white-space:nowrap;
+  }
+  nav a:hover{background:var(--primary-light);}
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:2.2rem 1.4rem 4rem;
+  }
+  section{padding-top:1.4rem;}
+  h2{
+    color:var(--primary-dark);
+    font-size:1.5rem;
+    border-bottom:3px solid var(--primary);
+    padding-bottom:.4rem;
+    margin-top:3rem;
+  }
+  h3{
+    color:var(--primary-dark);
+    font-size:1.2rem;
+    margin-top:2.2rem;
+    border-left:6px solid var(--primary);
+    padding-left:.6rem;
+  }
+  h4{
+    color:var(--primary-dark);
+    font-size:1.02rem;
+    margin-top:1.4rem;
+  }
+  p{margin:.8rem 0;}
+  .lead{
+    background:var(--primary-light);
+    border-radius:12px;
+    padding:1.1rem 1.3rem;
+    margin:1.2rem 0;
+  }
+  .box{
+    border:1px solid var(--border);
+    border-left:6px solid var(--primary);
+    border-radius:10px;
+    padding:1rem 1.2rem;
+    margin:1.2rem 0;
+    background:#fff;
+  }
+  .box.principle{background:var(--primary-light);border-left-color:var(--primary-dark);}
+  .box-title{
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:.4rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .tag{
+    display:inline-block;
+    font-size:.72rem;
+    font-weight:700;
+    color:#fff;
+    background:var(--primary);
+    border-radius:999px;
+    padding:.15rem .6rem;
+    margin-right:.3rem;
+  }
+  .clinical{border-left-color:#b23a3a;}
+  .clinical .box-title{color:#b23a3a;}
+  .clinical .tag{background:#b23a3a;}
+  .enzyme-tag{
+    background:hsl(126,45%,90%);
+    color:var(--primary-dark);
+    border:1px solid var(--primary);
+    border-radius:6px;
+    padding:.05rem .5rem;
+    font-size:.88rem;
+    font-weight:700;
+  }
+  .cofactor-tag{
+    background:#fff3d6;
+    color:#8a5a00;
+    border:1px solid #e0b559;
+    border-radius:6px;
+    padding:.05rem .5rem;
+    font-size:.88rem;
+    font-weight:700;
+  }
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.5rem;
+    margin:1rem 0;
+    padding:1rem;
+    background:#fafafa;
+    border-radius:10px;
+    border:1px dashed var(--border);
+  }
+  .flow .node{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:8px;
+    padding:.5rem .8rem;
+    font-size:.92rem;
+    text-align:center;
+    min-width:fit-content;
+  }
+  .flow .arrow{
+    color:var(--primary-dark);
+    font-weight:700;
+    font-size:1.1rem;
+  }
+  .flow .label{
+    font-size:.75rem;
+    color:#555;
+    text-align:center;
+    max-width:110px;
+  }
+  ol.steps{
+    counter-reset:step;
+    list-style:none;
+    padding-left:0;
+  }
+  ol.steps li{
+    counter-increment:step;
+    position:relative;
+    padding:.5rem 0 .5rem 2.6rem;
+    margin-bottom:.4rem;
+    border-bottom:1px dashed var(--border);
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:0;
+    top:.4rem;
+    width:1.8rem;
+    height:1.8rem;
+    background:var(--primary);
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:.9rem;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.2rem 0;
+    font-size:.92rem;
+  }
+  table caption{
+    caption-side:top;
+    font-weight:700;
+    color:var(--primary-dark);
+    text-align:left;
+    margin-bottom:.4rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{background:#f7faf7;}
+  .compare-table th.colA{background:hsl(126,45%,35%);}
+  .compare-table th.colB{background:hsl(126,45%,50%);}
+  svg{max-width:100%;height:auto;display:block;margin:0 auto;}
+  figure{
+    margin:1.4rem 0;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1rem;
+  }
+  figcaption{
+    font-size:.85rem;
+    color:#444;
+    margin-top:.6rem;
+    text-align:center;
+  }
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:14px;
+    padding:1.4rem 1.6rem;
+  }
+  .takeaways ul{padding-left:1.2rem;}
+  .takeaways li{margin-bottom:.6rem;}
+  footer{
+    text-align:center;
+    padding:2.4rem 1rem 3rem;
+    background:var(--primary-dark);
+    color:#fff;
+  }
+  footer p{margin:.3rem 0;font-size:.9rem;}
+  #backToTop{
+    margin-top:1rem;
+    background:#fff;
+    color:var(--primary-dark);
+    border:none;
+    padding:.6rem 1.4rem;
+    border-radius:999px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:.9rem;
+    font-family:inherit;
+  }
+  #backToTop:hover{background:var(--primary-light);}
+  mark{background:#fff3a3;padding:0 .15rem;}
+  code{
+    background:#f0f0f0;
+    padding:.1rem .35rem;
+    border-radius:4px;
+    font-size:.9em;
+  }
+
+  @media (max-width:1024px){
+    main{padding:1.8rem 1.1rem 3rem;}
+    header h1{font-size:1.5rem;}
+  }
+  @media (max-width:768px){
+    header{padding:1.8rem 1rem 1.4rem;}
+    header h1{font-size:1.25rem;}
+    nav ul{gap:.3rem .6rem;padding:.5rem .6rem;}
+    nav a{font-size:.82rem;padding:.35rem .6rem;}
+    h2{font-size:1.25rem;}
+    h3{font-size:1.05rem;}
+    .flow{flex-direction:column;align-items:stretch;}
+    .flow .arrow{transform:rotate(90deg);align-self:center;}
+    table{font-size:.82rem;}
+    th,td{padding:.4rem .45rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第18章：胺基酸氧化與尿素的產生</h1>
+  <p class="sub">學習指南｜生物化學初學者版</p>
+</header>
+
+<nav id="mainNav">
+  <ul>
+    <li><a href="#intro" class="nav-link">導論與五大原則</a></li>
+    <li><a href="#s18-1" class="nav-link">18.1 胺基氮的代謝去向</a></li>
+    <li><a href="#s18-2" class="nav-link">18.2 氮排泄與尿素循環</a></li>
+    <li><a href="#s18-3" class="nav-link">18.3 胺基酸降解路徑</a></li>
+    <li><a href="#takeaways" class="nav-link">重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ 導論 ============ -->
+<section id="intro">
+<h2>導論：胺基酸氧化的五大原則</h2>
+
+<p class="lead">
+胺基酸（amino acid）是生物體內第三類可產生代謝能量的生物分子（前兩類為醣類與脂質）。不同生物依賴胺基酸供能的程度差異很大：肉食動物大量依賴胺基酸產能；草食動物較少；大多數微生物視環境彈性利用；植物則幾乎不氧化胺基酸來產能，而是以光合作用產生的醣類作為主要能量來源。
+</p>
+
+<p>胺基酸的氧化分解會在三種代謝情境下發生：</p>
+<ol class="steps">
+  <li>正常的蛋白質更新（turnover）釋出、暫時不需要用於合成新蛋白質的胺基酸。</li>
+  <li>攝食的蛋白質超過身體合成蛋白質所需的量。</li>
+  <li>飢餓或未受控制的糖尿病導致醣類無法利用時，細胞蛋白質被當作燃料使用。</li>
+</ol>
+
+<p>胺基酸氧化路徑看似複雜，但可以用以下五個核心原則來理解，本教材會用 <span class="tag">P1</span>～<span class="tag">P5</span> 標記對應內容：</p>
+
+<div class="box principle">
+<div class="box-title"><span class="tag">P1</span> 胺基與碳骨架分道而行</div>
+胺基酸分解分成兩大部分：<strong>胺基（amino group）</strong>的代謝與<strong>碳骨架（carbon skeleton）</strong>的代謝。幾乎所有路徑的第一步，都需要<span class="cofactor-tag">吡哆醛磷酸（pyridoxal phosphate, PLP）</span>輔酶，將α-胺基從碳骨架上分離；碳骨架則被分解進入檸檬酸循環（citric acid cycle）。
+</div>
+
+<div class="box principle">
+<div class="box-title"><span class="tag">P2</span> 四種胺基酸是胺基運輸的關鍵角色</div>
+丙胺酸（alanine）、麩胺酸（glutamate）、麩醯胺酸（glutamine）、天門冬胺酸（aspartate）在多數組織中濃度較高，且都能輕易轉換為檸檬酸循環中間產物，因此在胺基的收集與運送上扮演樞紐角色。
+</div>
+
+<div class="box principle">
+<div class="box-title"><span class="tag">P3</span> 代謝路徑彼此交織</div>
+胺基酸分解路徑與其他分解代謝、合成代謝路徑緊密相連，並非獨立運作。
+</div>
+
+<div class="box principle">
+<div class="box-title"><span class="tag">P4</span> 游離氨具有毒性</div>
+過多的胺基必須安全排出體外；哺乳動物利用<strong>尿素循環（urea cycle）</strong>達成此目的。
+</div>
+
+<div class="box principle">
+<div class="box-title"><span class="tag">P5</span> 每種胺基酸各有其分解命運</div>
+20種胺基酸的碳骨架經由不同路徑分解，全部都能產生ATP；除了白胺酸（leucine）與離胺酸（lysine）外，其餘胺基酸皆可在需要時貢獻於糖質新生（gluconeogenesis）。
+</div>
+
+<figure>
+<figcaption>圖 18-1 重製：哺乳動物胺基酸分解代謝總覽——胺基去路與碳骨架去路彼此獨立又互相連結</figcaption>
+<div class="flow">
+  <div class="node">胺基酸<br><span style="font-size:.75rem;color:#666">（來自蛋白質更新／飲食）</span></div>
+  <div class="arrow">→</div>
+  <div style="display:flex;flex-direction:column;gap:.6rem;">
+    <div class="flow" style="margin:0;">
+      <div class="node" style="border-color:#b23a3a;">NH₄⁺<br><span style="font-size:.7rem">胺基去路</span></div>
+      <div class="arrow">→</div>
+      <div class="node" style="border-color:#b23a3a;">胺基甲醯磷酸</div>
+      <div class="arrow">→</div>
+      <div class="node" style="border-color:#b23a3a;">尿素循環</div>
+      <div class="arrow">→</div>
+      <div class="node" style="border-color:#b23a3a;">尿素（排泄）</div>
+    </div>
+    <div class="flow" style="margin:0;">
+      <div class="node" style="border-color:var(--primary);">碳骨架<br><span style="font-size:.7rem">碳骨架去路</span></div>
+      <div class="arrow">→</div>
+      <div class="node" style="border-color:var(--primary);">α-酮酸</div>
+      <div class="arrow">→</div>
+      <div class="node" style="border-color:var(--primary);">檸檬酸循環</div>
+      <div class="arrow">→</div>
+      <div class="node" style="border-color:var(--primary);">CO₂+H₂O+ATP／糖質新生</div>
+    </div>
+  </div>
+</div>
+</figure>
+
+</section>
+
+<!-- ============ 18.1 ============ -->
+<section id="s18-1">
+<h2>18.1 胺基氮的代謝去向</h2>
+
+<p>大氣中的氮氣（N₂）雖然豐富，但反應性太低，無法直接用於大多數生化反應，因此還原態的氮對生命而言十分珍貴且「昂貴」。<span class="tag">P4</span> 若胺基不能被再利用來合成新的胺基酸或含氮分子，就必須被送入單一的排泄終產物：</p>
+
+<div class="box">
+<div class="box-title">三種排氮方式（依生物種類而異）</div>
+<ul>
+  <li><strong>排氨動物（ammonotelic）</strong>：如硬骨魚，直接將氨排入周圍水中稀釋，例如魚類。</li>
+  <li><strong>排尿素動物（ureotelic）</strong>：多數陸生動物（包含人類）與鯊魚，以尿素形式排氮，可減少毒性及水分流失。</li>
+  <li><strong>排尿酸動物（uricotelic）</strong>：鳥類與爬蟲類，以尿酸形式排氮，進一步節省水分。</li>
+</ul>
+<p style="margin-top:.6rem;">值得注意：尿素與尿酸的碳原子都是高度氧化態——生物體會先盡量榨取碳骨架的氧化能量，才將碳原子當作廢物排出。</p>
+</div>
+
+<h3>蛋白質的消化：從食物到胺基酸</h3>
+<p>攝入的蛋白質須先在腸胃道中被水解為胺基酸：</p>
+<ol class="steps">
+  <li>食物進入胃部刺激胃黏膜分泌激素<strong>胃泌素（gastrin）</strong>，促使壁細胞分泌鹽酸、主細胞分泌<strong>胃蛋白酶原（pepsinogen）</strong>。</li>
+  <li>低pH環境（pH 1.0–2.5）使蛋白質變性，胃蛋白酶原經自我催化裂解活化為<span class="enzyme-tag">胃蛋白酶（pepsin）</span>，切割長多肽鏈。</li>
+  <li>酸性內容物進入小腸後，觸發<strong>促胰液素（secretin）</strong>分泌，刺激胰臟分泌碳酸氫鹽中和胃酸，pH升至約7。</li>
+  <li>十二指腸中的胜肽刺激<strong>膽囊收縮素（cholecystokinin）</strong>釋放，促使胰臟分泌多種蛋白酶原（胰蛋白酶原、胰凝乳蛋白酶原、羧肽酶原A/B）。</li>
+  <li>腸激酶（enteropeptidase）將胰蛋白酶原活化為<span class="enzyme-tag">胰蛋白酶（trypsin）</span>；胰蛋白酶再活化其他酶原，形成連鎖活化反應。</li>
+  <li>各酶因切割特異性不同、互補作用，將蛋白質完全水解為游離胺基酸，經小腸上皮細胞吸收進入血液，運送至肝臟。</li>
+</ol>
+
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 急性胰臟炎（Acute pancreatitis）</div>
+若胰臟分泌物排入腸道的通路受阻，蛋白酶原會提早在胰臟細胞<em>內部</em>被活化，反過來攻擊胰臟組織本身，造成劇痛甚至致命的器官損傷。
+</div>
+
+<h3>吡哆醛磷酸與轉胺作用：α-胺基如何轉移到α-酮戊二酸</h3>
+<p><span class="tag">P1</span> 大多數 L-胺基酸抵達肝臟後的第一步，是由<span class="enzyme-tag">轉胺酶（aminotransferase／transaminase）</span>移除α-胺基。在<strong>轉胺作用（transamination）</strong>中，α-胺基會被轉移到α-酮戊二酸（α-ketoglutarate）上，原本的胺基酸則變成對應的α-酮酸。這個反應不會造成淨脫胺（因為α-酮戊二酸同時被胺化），<span class="tag">P2</span> 其效果是把許多不同胺基酸上的胺基「收集」成統一形式的 L-麩胺酸。</p>
+
+<figure>
+<figcaption>圖 18-4 重製：轉胺酶反應機制——PLP作為胺基的中間載體</figcaption>
+<div class="flow">
+  <div class="node">L-胺基酸<br>(R-CH(NH₃⁺)-COO⁻)</div>
+  <div class="arrow">⇌</div>
+  <div class="node" style="border-color:#8a5a00;background:#fff8e6;">PLP<br>轉胺酶</div>
+  <div class="arrow">⇌</div>
+  <div class="node">α-酮酸<br>(R-CO-COO⁻)</div>
+</div>
+<div class="flow">
+  <div class="node">α-酮戊二酸</div>
+  <div class="arrow">⇌</div>
+  <div class="node" style="border-color:#8a5a00;background:#fff8e6;">同一 PLP 活性位</div>
+  <div class="arrow">⇌</div>
+  <div class="node">L-麩胺酸</div>
+</div>
+</figure>
+
+<div class="box">
+<div class="box-title">關於 <span class="cofactor-tag">PLP（維生素B₆的輔酶形式）</span></div>
+<ul>
+  <li>所有轉胺酶都以PLP作為輔基，反應可逆，平衡常數約為1（ΔG′≈0）。</li>
+  <li>PLP在醛式（可接受胺基）與胺式（吡哆胺磷酸，可提供胺基）之間可逆轉換。</li>
+  <li>PLP通常經由與活性中心離胺酸（Lys）殘基形成<strong>希夫鹼（Schiff base／aldimine）</strong>鍵結固定於酶上。</li>
+  <li>除了轉胺作用，PLP也參與α碳上的<strong>消旋化（racemization）</strong>與<strong>脫羧作用（decarboxylation）</strong>；共同機制是穩定α碳上不穩定的碳陰離子中間體（電子槽效應）。</li>
+</ul>
+</div>
+
+<h3>麩胺酸在肝臟中以氨的形式釋出胺基</h3>
+<p>麩胺酸被運送進入肝細胞粒線體後，由<span class="enzyme-tag">麩胺酸脫氫酶（glutamate dehydrogenase）</span>催化<strong>氧化脫胺作用（oxidative deamination）</strong>，產生 NH₄⁺ 與 α-酮戊二酸。此酶的特殊之處在於可同時使用 NAD⁺ 或 NADP⁺ 作為受質；並受 <strong>ADP（正向調節）</strong>與 <strong>GTP（負向調節）</strong>異位調控——轉胺酶+麩胺酸脫氫酶的組合反應稱為<strong>轉脫胺作用（transdeamination）</strong>。</p>
+
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 高胰島素血症－高血氨症候群</div>
+麩胺酸脫氫酶GTP結合位突變導致酶恆定活化，會造成蛋白質餐後胰島素過度分泌，導致血氨升高與低血糖。
+</div>
+
+<h3>麩醯胺酸：血液中運輸氨的主要形式</h3>
+<p>游離氨對組織具毒性，多數組織（包含腦）會先將氨與麩胺酸結合，由<span class="enzyme-tag">麩醯胺酸合成酶（glutamine synthetase）</span>消耗ATP生成<strong>麩醯胺酸（glutamine）</strong>，經血液運送到肝臟或腎臟後，再由粒線體中的<span class="enzyme-tag">麩醯胺酸酶（glutaminase）</span>釋出 NH₄⁺ 與麩胺酸。</p>
+
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 代謝性酸中毒</div>
+酸中毒時腎臟會加速麩醯胺酸的分解，產生的NH₄⁺大部分不進入血液，而是直接排入尿液與代謝酸形成鹽類，協助排除多餘酸性物質，緩解酸中毒。
+</div>
+
+<h3>丙胺酸：從骨骼肌到肝臟的胺基「接駁車」——葡萄糖-丙胺酸循環</h3>
+<p>劇烈收縮的骨骼肌以無氧方式產生大量丙酮酸與氨。<span class="enzyme-tag">丙胺酸轉胺酶（alanine aminotransferase）</span>使丙酮酸與麩胺酸互換為丙胺酸，將胺基以非毒性形式送往肝臟。</p>
+
+<figure>
+<figcaption>圖 18-9 重製：葡萄糖-丙胺酸循環（Glucose-Alanine Cycle）</figcaption>
+<div class="flow">
+  <div class="node">肌肉：葡萄糖<br>→醣解→丙酮酸</div>
+  <div class="arrow">→</div>
+  <div class="node">丙酮酸 + 麩胺酸<br>→丙胺酸 + α-酮戊二酸</div>
+  <div class="arrow">→</div>
+  <div class="node">丙胺酸<br>（經血液）</div>
+  <div class="arrow">→</div>
+  <div class="node">肝臟：丙胺酸<br>→丙酮酸 + 麩胺酸</div>
+</div>
+<div class="flow">
+  <div class="node">肝：丙酮酸</div>
+  <div class="arrow">→</div>
+  <div class="node">糖質新生</div>
+  <div class="arrow">→</div>
+  <div class="node">葡萄糖</div>
+  <div class="arrow">→</div>
+  <div class="node">回到肌肉</div>
+</div>
+<div class="flow">
+  <div class="node">肝：麩胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">NH₄⁺</div>
+  <div class="arrow">→</div>
+  <div class="node" style="border-color:#b23a3a;">尿素循環→尿素</div>
+</div>
+</figure>
+
+<p>這樣的分工讓糖質新生的能量負擔落在肝臟身上，肌肉的ATP則能專注用於收縮——這與科里循環（Cori cycle）的原理類似。</p>
+
+<h3>氨對動物具有毒性</h3>
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 氨中毒與腦部影響</div>
+<ul>
+<li>血液中約98%的氨以NH₄⁺形式存在，不能穿越細胞膜；少量的NH₃可自由穿越（包括血腦障壁）。</li>
+<li>腦部只有<strong>星狀膠質細胞（astrocytes）</strong>表現麩醯胺酸合成酶，用以清除氨，但能力有限。</li>
+<li>過多的 NH₄⁺ 會與 K⁺ 競爭 Na⁺K⁺ATPase 的轉運，擾亂離子恆定，最終導致異常去極化、癲癇，甚至腦水腫致死。</li>
+</ul>
+</div>
+
+</section>
+
+<!-- ============ 18.2 ============ -->
+<section id="s18-2">
+<h2>18.2 氮排泄與尿素循環</h2>
+
+<p>在排尿素動物中，肝細胞粒線體內堆積的氨會經由<strong>尿素循環（urea cycle）</strong>轉為尿素。此路徑由 Hans Krebs（也發現了檸檬酸循環）與醫學生 Kurt Henseleit 於1932年發現。尿素生成幾乎只發生在肝臟，之後經血液送到腎臟排出。</p>
+
+<h3>尿素由氨經五個酵素步驟合成</h3>
+<p>尿素循環橫跨兩個細胞區室：反應始於粒線體基質，隨後三步在細胞質完成。</p>
+
+<figure>
+<figcaption>圖 18-10 重製：尿素循環四步驟（簡化版節點圖）</figcaption>
+<div class="flow">
+  <div class="node" style="border-color:#8a5a00;background:#fff8e6;">NH₄⁺ + HCO₃⁻ + 2ATP</div>
+  <div class="arrow">→</div>
+  <div class="node" style="border-color:#8a5a00;background:#fff8e6;"><span class="enzyme-tag" style="font-size:.75rem;">胺基甲醯磷酸合成酶I</span><br>胺基甲醯磷酸</div>
+</div>
+<div class="flow">
+  <div class="node">鳥胺酸<br>(ornithine)</div>
+  <div class="arrow">①→</div>
+  <div class="node">瓜胺酸<br>(citrulline)<br><span class="enzyme-tag" style="font-size:.72rem">鳥胺酸胺甲醯基轉移酶</span></div>
+  <div class="arrow">→運至細胞質</div>
+</div>
+<div class="flow">
+  <div class="node">瓜胺酸 + 天門冬胺酸 + ATP</div>
+  <div class="arrow">②→</div>
+  <div class="node">精胺基琥珀酸<br>(argininosuccinate)<br><span class="enzyme-tag" style="font-size:.72rem">精胺基琥珀酸合成酶</span></div>
+</div>
+<div class="flow">
+  <div class="node">精胺基琥珀酸</div>
+  <div class="arrow">③→</div>
+  <div class="node">精胺酸<br>(arginine)<br><span class="enzyme-tag" style="font-size:.72rem">精胺基琥珀酸酶</span></div>
+  <div class="arrow">+</div>
+  <div class="node" style="border-color:var(--primary);">延胡索酸<br>（進入檸檬酸循環）</div>
+</div>
+<div class="flow">
+  <div class="node">精胺酸 + H₂O</div>
+  <div class="arrow">④→</div>
+  <div class="node" style="border-color:#b23a3a;">尿素<br><span class="enzyme-tag" style="font-size:.72rem">精胺酸酶</span></div>
+  <div class="arrow">+</div>
+  <div class="node">鳥胺酸（再生，回到步驟①）</div>
+</div>
+</figure>
+
+<ol class="steps">
+  <li><strong>形成瓜胺酸</strong>：胺基甲醯磷酸把胺基甲醯基交給鳥胺酸，由<span class="enzyme-tag">鳥胺酸胺甲醯基轉移酶（ornithine transcarbamoylase）</span>催化，釋放Pi；瓜胺酸從粒線體運至細胞質。（此為第一個胺基進入循環）</li>
+  <li><strong>形成精胺基琥珀酸</strong>：天門冬胺酸（在粒線體中由草醯乙酸與麩胺酸轉胺產生後運出）的胺基與瓜胺酸的尿素基縮合，由<span class="enzyme-tag">精胺基琥珀酸合成酶</span>催化，消耗ATP並經由瓜胺醯-AMP中間體。（第二個胺基進入循環）</li>
+  <li><strong>形成精胺酸</strong>：<span class="enzyme-tag">精胺基琥珀酸酶（argininosuccinase）</span>將精胺基琥珀酸裂解為精胺酸與延胡索酸——此為尿素循環中唯一可逆的步驟。</li>
+  <li><strong>形成尿素</strong>：細胞質中的<span class="enzyme-tag">精胺酸酶（arginase）</span>將精胺酸水解為尿素與鳥胺酸，鳥胺酸再運回粒線體，開始下一輪循環。</li>
+</ol>
+
+<h3>檸檬酸循環與尿素循環的連結：「Krebs 雙循環」</h3>
+<p>精胺基琥珀酸酶反應所產生的<strong>延胡索酸</strong>同時也是檸檬酸循環的中間產物，因此兩循環透過粒線體內膜的多種轉運蛋白（如蘋果酸-α-酮戊二酸轉運蛋白、麩胺酸-天門冬胺酸轉運蛋白）互相連結，這條連結路徑稱為<strong>天門冬胺酸-精胺基琥珀酸分流（aspartate-argininosuccinate shunt）</strong>。這樣的連結同時也支援<strong>蘋果酸-天門冬胺酸穿梭（malate-aspartate shuttle）</strong>，把細胞質的NADH還原力帶入粒線體。</p>
+
+<figure>
+<figcaption>圖 18-12 重製：尿素循環與檸檬酸循環的交會（Krebs bicycle，簡化）</figcaption>
+<div class="flow">
+  <div class="node">細胞質：延胡索酸</div>
+  <div class="arrow">→</div>
+  <div class="node">蘋果酸</div>
+  <div class="arrow">→運至粒線體→</div>
+  <div class="node" style="border-color:var(--primary);">檸檬酸循環（粒線體）</div>
+</div>
+<div class="flow">
+  <div class="node">粒線體：草醯乙酸 + 麩胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">天門冬胺酸</div>
+  <div class="arrow">→運至細胞質→</div>
+  <div class="node" style="border-color:#8a5a00;background:#fff8e6;">尿素循環（供應第2個胺基）</div>
+</div>
+</figure>
+
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 肝損傷血清酵素檢測（Box 18-1）</div>
+血清中<strong>丙胺酸轉胺酶（ALT／SGPT）</strong>與<strong>天門冬胺酸轉胺酶（AAT／SGOT）</strong>的濃度是診斷肝損傷、藥物毒性或感染的重要指標——當肝細胞受損，這些酶會外洩進入血液。
+</div>
+
+<h3>尿素循環的兩層調控</h3>
+<div class="box">
+<div class="box-title">長期調控：酵素合成量</div>
+高蛋白飲食或飢餓時，肝臟會提高五個尿素循環酵素（含胺基甲醯磷酸合成酶I）的合成量；無蛋白飲食則降低。
+</div>
+<div class="box">
+<div class="box-title">短期調控：異位調節</div>
+<span class="enzyme-tag">胺基甲醯磷酸合成酶I</span>是尿素循環第一個酵素，受<strong>N-乙醯麩胺酸（N-acetylglutamate）</strong>異位活化。N-乙醯麩胺酸由乙醯輔酶A與麩胺酸經<span class="enzyme-tag">N-乙醯麩胺酸合成酶</span>合成，其濃度受麩胺酸、乙醯輔酶A（受質）與精胺酸（活化劑）的濃度共同決定。
+</div>
+
+<h3>路徑互連降低尿素合成的能量成本</h3>
+<p>單獨看尿素循環，合成一分子尿素需消耗4個高能磷酸鍵（2 ATP形成胺基甲醯磷酸，1 ATP形成精胺基琥珀酸並裂解為AMP+2Pi）：</p>
+<p style="text-align:center;font-weight:600;">2NH₄⁺ + HCO₃⁻ + 3ATP + H₂O → 尿素 + 2ADP + 4Pi + AMP</p>
+<p>但延胡索酸→蘋果酸的轉換在粒線體中會產生NADH（每分子NADH可再生高達2.5個ATP），大幅補償了這項能量成本。</p>
+
+<h3>尿素循環的遺傳缺陷可能致命</h3>
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 尿素循環障礙（Urea Cycle Disorders）</div>
+患有尿素循環酵素缺陷的嬰兒出生時通常表現正常，但很快出現高血氨症狀：腦水腫、嗜睡、換氣過度，若未治療常導致早夭。因大多數步驟不可逆，可藉由血液／尿液中堆積的中間產物判斷缺陷位置。治療方式包括：
+<ul>
+<li>投予苯甲酸（benzoate）與苯丁酸（phenylbutyrate），分別與甘胺酸、麩醯胺酸結合形成馬尿酸、苯乙醯麩醯胺酸排出，藉此消耗氨用於再合成甘胺酸／麩醯胺酸。</li>
+<li>N-乙醯麩胺酸合成酶缺陷可補充胺甲醯麩胺酸（carbamoyl glutamate）作為替代活化劑。</li>
+<li>鳥胺酸胺甲醯基轉移酶、精胺基琥珀酸合成酶、精胺基琥珀酸酶缺陷可補充精胺酸；但精胺酸酶缺陷則需<strong>限制</strong>精胺酸攝取。</li>
+</ul>
+</div>
+
+<table>
+<caption>表 18-1：人類（與大鼠）非必需、條件性必需與必需胺基酸</caption>
+<tr><th>非必需胺基酸</th><th>條件性必需胺基酸</th><th>必需胺基酸</th></tr>
+<tr><td>丙胺酸、天門冬醯胺酸、天門冬胺酸、麩胺酸、絲胺酸、酪胺酸</td><td>精胺酸、半胱胺酸、麩醯胺酸、甘胺酸、脯胺酸</td><td>組胺酸、異白胺酸、白胺酸、離胺酸、甲硫胺酸、苯丙胺酸、羥丁胺酸(threonine)、色胺酸、纈胺酸</td></tr>
+</table>
+
+</section>
+
+<!-- ============ 18.3 ============ -->
+<section id="s18-3">
+<h2>18.3 胺基酸降解路徑</h2>
+
+<p>胺基酸分解僅佔人體能量產生的10%～15%，遠不如醣解與脂肪酸氧化活躍。20種胺基酸的碳骨架最終匯聚為<strong>六種</strong>可進入檸檬酸循環的產物：丙酮酸（pyruvate）、乙醯輔酶A（acetyl-CoA）、α-酮戊二酸、琥珀醯輔酶A（succinyl-CoA）、延胡索酸（fumarate）、草醯乙酸（oxaloacetate）。</p>
+
+<h3>生糖胺基酸 vs. 生酮胺基酸</h3>
+<p>依碳骨架最終去向，胺基酸可分為兩大類：能貢獻於糖質新生的<strong>生糖胺基酸（glucogenic）</strong>，以及能轉為酮體的<strong>生酮胺基酸（ketogenic）</strong>；有5種胺基酸兩者兼具。<strong>只有白胺酸與離胺酸是純生酮胺基酸</strong>，其餘所有胺基酸都能對糖質新生有所貢獻。</p>
+
+<table class="compare-table">
+<caption>本章容易混淆的概念①：生糖胺基酸 vs. 生酮胺基酸</caption>
+<tr><th class="colA">A：生糖胺基酸（Glucogenic）</th><th class="colB">B：生酮胺基酸（Ketogenic）</th><th>差異</th></tr>
+<tr>
+<td>分解終產物為丙酮酸、α-酮戊二酸、琥珀醯輔酶A、延胡索酸或草醯乙酸</td>
+<td>分解終產物為乙醯輔酶A或乙醯乙醯輔酶A（acetoacetyl-CoA）</td>
+<td>進入檸檬酸循環的「入口」不同</td>
+</tr>
+<tr>
+<td>可經糖質新生轉為葡萄糖／肝醣</td>
+<td>只能轉為酮體（乙醯乙酸、丙酮、β-羥丁酸），無法淨轉為葡萄糖</td>
+<td>能否逆向生成葡萄糖是關鍵區別</td>
+</tr>
+<tr>
+<td>代表：丙胺酸、天門冬胺酸、麩胺酸等大多數胺基酸</td>
+<td>僅白胺酸、離胺酸為<strong>純</strong>生酮；苯丙胺酸、酪胺酸、色胺酸、羥丁胺酸、異白胺酸則兩者兼具</td>
+<td>多數胺基酸「身兼二職」，純生酮者極少</td>
+</tr>
+</table>
+
+<figure>
+<figcaption>圖 18-15 重製：20種胺基酸依降解終產物分類，匯入檸檬酸循環的六個入口</figcaption>
+<div class="flow">
+  <div class="node" style="border-color:var(--primary);">生糖：丙胺酸、半胱胺酸、甘胺酸、絲胺酸、羥丁胺酸、色胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">丙酮酸</div>
+</div>
+<div class="flow">
+  <div class="node" style="border-color:#3a6ab2;">生酮：白胺酸、離胺酸、苯丙胺酸、酪胺酸、色胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">乙醯輔酶A／乙醯乙醯輔酶A</div>
+</div>
+<div class="flow">
+  <div class="node" style="border-color:var(--primary);">生糖：精胺酸、麩醯胺酸、組胺酸、脯胺酸、麩胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">α-酮戊二酸</div>
+</div>
+<div class="flow">
+  <div class="node" style="border-color:var(--primary);">生糖：異白胺酸、甲硫胺酸、羥丁胺酸、纈胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">琥珀醯輔酶A</div>
+</div>
+<div class="flow">
+  <div class="node" style="border-color:var(--primary);">生糖：苯丙胺酸、酪胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">延胡索酸</div>
+</div>
+<div class="flow">
+  <div class="node" style="border-color:var(--primary);">生糖：天門冬醯胺酸、天門冬胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node">草醯乙酸</div>
+</div>
+<div class="flow">
+  <div class="node" style="border-color:#555;background:#eee;">六個入口全部匯入</div>
+  <div class="arrow">→</div>
+  <div class="node">檸檬酸循環</div>
+  <div class="arrow">→</div>
+  <div class="node">CO₂+H₂O+ATP　或　糖質新生／生酮</div>
+</div>
+</figure>
+
+<h3>重要輔酶：一碳單位的搬運工</h3>
+<p>胺基酸分解涉及多種輔酶，除PLP外，還有三種負責<strong>一碳單位（one-carbon unit）</strong>轉移的輔酶，各自搬運不同氧化態的碳：</p>
+<div class="box">
+<ul>
+<li><span class="cofactor-tag">生物素（biotin）</span>：轉移最氧化態的碳——CO₂。</li>
+<li><span class="cofactor-tag">四氫葉酸（tetrahydrofolate, THF）</span>：轉移中間氧化態的一碳單位（如甲烯基、甲醯基），主要來源是絲胺酸轉為甘胺酸的反應。</li>
+<li><span class="cofactor-tag">S-腺苷甲硫胺酸（SAM／adoMet）</span>：轉移最還原態的碳——甲基（methyl），是生物體內最強力的甲基化試劑，反應性約為N⁵-甲基THF的1000倍。</li>
+<li><span class="cofactor-tag">四氫聯蝶呤（tetrahydrobiopterin, BH₄）</span>：不參與一碳轉移，而是苯丙胺酸羥化酶等氧化反應的輔酶。</li>
+</ul>
+</div>
+
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 維生素B₁₂與葉酸缺乏症</div>
+甲硫胺酸合成酶反應同時需要N⁵-甲基THF與鈷胺素（B₁₂衍生物）。B₁₂缺乏會使葉酸「卡」在N⁵-甲基形式（此步驟不可逆），造成<strong>惡性貧血（pernicious anemia）</strong>／<strong>巨母紅血球貧血（megaloblastic anemia）</strong>；但單獨補充葉酸雖可緩解貧血，卻無法阻止B₁₂缺乏引起的神經症狀（源自甲基丙二醯輔酶A變位酶功能受損），因此需同時補充兩者。
+</div>
+
+<h3>六個胺基酸分解為丙酮酸</h3>
+<p>丙胺酸、色胺酸、半胱胺酸、絲胺酸、甘胺酸、羥丁胺酸的碳骨架部分或全部轉為丙酮酸。</p>
+<div class="box">
+<ul>
+<li><strong>丙胺酸</strong>：與α-酮戊二酸轉胺，直接生成丙酮酸。</li>
+<li><strong>色胺酸</strong>：側鏈經裂解產生丙胺酸，再轉為丙酮酸。</li>
+<li><strong>半胱胺酸</strong>：兩步驟（去硫、轉胺）生成丙酮酸。</li>
+<li><strong>絲胺酸</strong>：由<span class="enzyme-tag">絲胺酸脫水酶（serine dehydratase）</span>，同一個PLP依賴反應同時移除β-羥基與α-胺基，直接生成丙酮酸。</li>
+<li><strong>甘胺酸</strong>：有三條路徑——① 經絲胺酸羥甲基轉移酶轉為絲胺酸再變丙酮酸；② 由<span class="enzyme-tag">甘胺酸裂解酶</span>氧化裂解為CO₂、NH₄⁺與甲烯基（供給THF，不進檸檬酸循環）；③ 經D-胺基酸氧化酶轉為乙醛酸再氧化為草酸。</li>
+<li><strong>羥丁胺酸（threonine）</strong>：少部分（10–30%）經甘胺酸路徑轉為丙酮酸；主要路徑則進入琥珀醯輔酶A（見下）。</li>
+</ul>
+</div>
+
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 非酮性高甘胺酸血症與草酸鈣腎結石</div>
+甘胺酸裂解酶嚴重缺陷會造成甘胺酸堆積，引發嚴重智能障礙與早夭；甘胺酸氧化生成的草酸則是高達75%腎結石（草酸鈣結石）的成因之一。
+</div>
+
+<h3>七個胺基酸分解為乙醯輔酶A（或經乙醯乙醯輔酶A）</h3>
+<p>色胺酸、離胺酸、苯丙胺酸、酪胺酸、白胺酸、異白胺酸與部分羥丁胺酸的碳骨架分解產生乙醯輔酶A或乙醯乙醯輔酶A。其中<strong>苯丙胺酸與酪胺酸的分解路徑</strong>因牽涉多種遺傳疾病而特別重要。</p>
+
+<figure>
+<figcaption>圖 18-23 重製：苯丙胺酸／酪胺酸分解路徑與相關遺傳疾病阻斷點</figcaption>
+<div class="flow">
+  <div class="node">苯丙胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node" style="border-color:#ffb300;background:#fff8e0;">⚠ PKU 苯酮尿症</div>
+</div>
+<div class="flow">
+  <div class="node" style="margin-left:1.5rem;">↓ <span class="enzyme-tag" style="font-size:.75rem">苯丙胺酸羥化酶</span>（需BH₄）</div>
+</div>
+<div class="flow">
+  <div class="node">酪胺酸</div>
+  <div class="arrow">→</div>
+  <div class="node" style="border-color:#ffb300;background:#fff8e0;">⚠ 酪胺酸血症II型</div>
+  <div class="arrow">→</div>
+  <div class="node">對羥苯丙酮酸</div>
+  <div class="arrow">→</div>
+  <div class="node" style="border-color:#ffb300;background:#fff8e0;">⚠ 酪胺酸血症III型</div>
+</div>
+<div class="flow">
+  <div class="node">→ 高龍膽酸（homogentisate）</div>
+  <div class="arrow">→</div>
+  <div class="node" style="border-color:#ffb300;background:#fff8e0;">⚠ 黑尿症 Alkaptonuria</div>
+  <div class="arrow">→</div>
+  <div class="node">馬來醯乙醯乙酸</div>
+  <div class="arrow">→</div>
+  <div class="node">延胡索醯乙醯乙酸</div>
+</div>
+<div class="flow">
+  <div class="node" style="border-color:#ffb300;background:#fff8e0;">⚠ 酪胺酸血症I型</div>
+  <div class="arrow">→</div>
+  <div class="node" style="border-color:var(--primary);">延胡索酸（生糖）</div>
+  <div class="arrow">+</div>
+  <div class="node" style="border-color:#3a6ab2;">乙醯乙酸→乙醯乙醯輔酶A（生酮）</div>
+</div>
+</figure>
+
+<table class="compare-table">
+<caption>本章容易混淆的概念②：苯酮尿症（PKU）vs. 黑尿症（Alkaptonuria）</caption>
+<tr><th class="colA">A：苯酮尿症（PKU）</th><th class="colB">B：黑尿症（Alkaptonuria）</th><th>差異</th></tr>
+<tr>
+<td>缺陷酵素：<strong>苯丙胺酸羥化酶</strong>（或BH₄再生酵素缺陷）</td>
+<td>缺陷酵素：<strong>高龍膽酸雙加氧酶</strong></td>
+<td>阻斷位置在苯丙胺酸→酪胺酸分解路徑的不同階段</td>
+</tr>
+<tr>
+<td>苯丙胺酸與苯丙酮酸堆積，血中濃度大幅升高，尿液有蜂蜜味</td>
+<td>高龍膽酸堆積並氧化，使尿液變黑</td>
+<td>堆積物質不同，臨床表現也不同</td>
+</tr>
+<tr>
+<td>若未及早診斷治療，會嚴重影響腦部發育導致智能障礙——後果<strong>嚴重</strong></td>
+<td>症狀相對輕微，主要造成關節炎——後果<strong>較輕</strong></td>
+<td>疾病嚴重度差異極大，PKU需嚴格飲食控制，黑尿症通常不需</td>
+</tr>
+</table>
+
+<h3>五個胺基酸分解為α-酮戊二酸</h3>
+<p>脯胺酸、麩胺酸、麩醯胺酸、精胺酸、組胺酸的碳骨架最終進入α-酮戊二酸。麩醯胺酸經麩醯胺酸酶轉為麩胺酸；脯胺酸經開環氧化生成麩胺酸半醛，再氧化為麩胺酸；精胺酸先在尿素循環中轉為鳥胺酸，再轉胺為麩胺酸半醛；組胺酸則經四步驟（需THF）轉為麩胺酸。麩胺酸最後經麩胺酸脫氫酶轉為α-酮戊二酸。</p>
+
+<h3>四個胺基酸分解為琥珀醯輔酶A</h3>
+<p>甲硫胺酸、異白胺酸、羥丁胺酸、纈胺酸的碳骨架經丙醯輔酶A（propionyl-CoA）→甲基丙二醯輔酶A（methylmalonyl-CoA）→琥珀醯輔酶A的路徑，最後一步需要<span class="cofactor-tag">輔酶B₁₂</span>依賴的甲基丙二醯輔酶A變位酶。</p>
+
+<div class="box clinical">
+<div class="box-title"><span class="tag">臨床連結</span> 支鏈胺基酸與楓糖尿症（Maple Syrup Urine Disease）</div>
+白胺酸、異白胺酸、纈胺酸統稱<strong>支鏈胺基酸（branched-chain amino acids）</strong>，特別之處在於<strong>不在肝臟分解</strong>，而是主要於肌肉、脂肪、腎臟、腦部組織進行。三者共用同一組酵素：
+<ol class="steps">
+<li>支鏈胺基酸轉胺酶（肝臟中缺乏）催化轉胺，生成α-酮酸。</li>
+<li><strong>支鏈α-酮酸脫氫酶複合體</strong>（結構與機制類似丙酮酸脫氫酶複合體，需TPP、FAD、NAD、硫辛酸、輔酶A五種輔酶）催化氧化脫羧，生成醯基輔酶A衍生物。</li>
+</ol>
+若此複合體缺陷，三種α-酮酸堆積並使尿液散發楓糖漿氣味，稱為<strong>楓糖尿症</strong>，可導致腦部發育異常甚至早夭，需嚴格限制三種支鏈胺基酸攝取。
+</div>
+
+<h3>天門冬醯胺酸與天門冬胺酸分解為草醯乙酸</h3>
+<p>這是最簡單的路徑：<span class="enzyme-tag">天門冬醯胺酸酶（asparaginase）</span>將天門冬醯胺酸水解為天門冬胺酸；天門冬胺酸再與α-酮戊二酸轉胺，生成麩胺酸與草醯乙酸——在哺乳動物中，草醯乙酸會先轉為蘋果酸，再運入粒線體基質。</p>
+
+<table class="compare-table">
+<caption>常見胺基酸降解終產物與生糖/生酮性一覽</caption>
+<tr><th class="colA">終產物 A</th><th class="colB">代表胺基酸 B</th><th>屬性</th></tr>
+<tr><td>丙酮酸</td><td>丙胺酸、色胺酸、半胱胺酸、絲胺酸、甘胺酸、羥丁胺酸</td><td>生糖（部分兼生酮）</td></tr>
+<tr><td>乙醯輔酶A／乙醯乙醯輔酶A</td><td>白胺酸、離胺酸、苯丙胺酸、酪胺酸、色胺酸、異白胺酸、羥丁胺酸</td><td>生酮（部分兼生糖）</td></tr>
+<tr><td>α-酮戊二酸</td><td>脯胺酸、麩胺酸、麩醯胺酸、精胺酸、組胺酸</td><td>生糖</td></tr>
+<tr><td>琥珀醯輔酶A</td><td>甲硫胺酸、異白胺酸、羥丁胺酸、纈胺酸</td><td>生糖</td></tr>
+<tr><td>延胡索酸</td><td>苯丙胺酸、酪胺酸</td><td>生糖</td></tr>
+<tr><td>草醯乙酸</td><td>天門冬醯胺酸、天門冬胺酸</td><td>生糖</td></tr>
+</table>
+
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="takeaways">
+<h2>Key Takeaways</h2>
+<div class="takeaways">
+<ul>
+<li><strong>兩大去路：</strong>胺基酸分解分成「胺基去路」（→氨→尿素排出）與「碳骨架去路」（→α-酮酸→檸檬酸循環）兩個彼此獨立又互連的部分。</li>
+<li><strong>轉胺作用（transamination）：</strong>幾乎所有胺基酸分解的第一步，由PLP依賴的轉胺酶催化，將α-胺基收集到α-酮戊二酸上形成麩胺酸；反應可逆、無淨脫胺。</li>
+<li><strong>氧化脫胺作用：</strong>麩胺酸在肝臟粒線體中由麩胺酸脫氫酶催化，真正釋出NH₄⁺，並受ADP（活化）與GTP（抑制）調控。</li>
+<li><strong>胺基運輸雙主角：</strong>麩醯胺酸（多數組織→肝／腎）與丙胺酸（肌肉→肝，葡萄糖-丙胺酸循環）是血液中運送胺基的主要形式，均為無毒。</li>
+<li><strong>尿素循環四步驟：</strong>鳥胺酸→瓜胺酸→精胺基琥珀酸→精胺酸→尿素+鳥胺酸再生；橫跨粒線體與細胞質；第一個胺基來自胺基甲醯磷酸，第二個來自天門冬胺酸。</li>
+<li><strong>Krebs雙循環：</strong>尿素循環產生的延胡索酸是檸檬酸循環的中間產物，兩循環透過天門冬胺酸-精胺基琥珀酸分流相連，並降低尿素合成的淨能量成本。</li>
+<li><strong>調控機制：</strong>長期靠酵素合成量（高蛋白飲食↑）；短期靠N-乙醯麩胺酸異位活化胺基甲醯磷酸合成酶I。</li>
+<li><strong>六個共同終產物：</strong>20種胺基酸碳骨架最終匯入丙酮酸、乙醯輔酶A、α-酮戊二酸、琥珀醯輔酶A、延胡索酸、草醯乙酸——只有白胺酸與離胺酸是純生酮胺基酸。</li>
+<li><strong>常考輔酶：</strong>PLP（轉胺／消旋／脫羧）、生物素（CO₂）、四氫葉酸（一碳單位）、SAM（甲基）、四氫聯蝶呤BH₄（苯丙胺酸羥化）。</li>
+<li><strong>常見遺傳疾病：</strong>PKU（苯丙胺酸羥化酶缺陷）、黑尿症（高龍膽酸雙加氧酶缺陷）、楓糖尿症（支鏈α-酮酸脫氫酶複合體缺陷）、甲基丙二酸血症（甲基丙二醯輔酶A變位酶缺陷）、尿素循環各酵素缺陷（高血氨症）。</li>
+</ul>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>第18章：胺基酸氧化與尿素的產生｜學習指南</p>
+  <p>內容整理自 Lehninger Principles of Biochemistry, 8e — 僅供課堂學習使用</p>
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ Back to Top</button>
+</footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+  var sections = links.map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  });
+  var nav = document.getElementById('mainNav');
+
+  function onScroll(){
+    var navHeight = nav.offsetHeight;
+    var scrollPos = window.scrollY + navHeight + 20;
+    var currentIndex = 0;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i] && sections[i].offsetTop <= scrollPos){
+        currentIndex = i;
+      }
+    }
+    links.forEach(function(a){a.classList.remove('active');});
+    if(links[currentIndex]) links[currentIndex].classList.add('active');
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

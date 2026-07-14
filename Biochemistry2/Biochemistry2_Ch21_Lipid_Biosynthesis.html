@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第21章：脂質生合成｜學習指南</title>
+<style>
+:root{
+  --hue: 267;
+  --primary: hsl(267, 45%, 35%);
+  --primary-dark: hsl(267, 45%, 25%);
+  --primary-light: hsl(267, 45%, 92%);
+  --primary-light2: hsl(267, 45%, 96%);
+  --text: #1a1a1a;
+  --green: #2e7d32;
+  --green-light: #e8f5e9;
+  --red: #c62828;
+  --red-light: #fdecea;
+  --amber: #b8860b;
+  --amber-light: #fff8e1;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:"Noto Sans TC","思源黑體","Microsoft JhengHei",sans-serif;
+  color:var(--text);
+  line-height:1.8;
+  background:#fdfcfe;
+  scroll-behavior:smooth;
+}
+
+header{
+  text-align:center;
+  padding:2.5rem 1rem 1.5rem;
+  background:linear-gradient(180deg, var(--primary-light2), #fdfcfe);
+}
+header h1{
+  color:var(--primary);
+  font-size:1.9rem;
+  margin:0 0 .5rem;
+  letter-spacing:.05em;
+}
+header p{
+  color:#555;
+  font-size:.95rem;
+  margin:0;
+}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#ffffffee;
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--primary-light);
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:.3rem 1.2rem;
+  padding:.7rem 1rem;
+}
+nav a{
+  color:var(--primary-dark);
+  text-decoration:none;
+  font-size:.92rem;
+  padding:.35rem .7rem;
+  border-radius:6px;
+  white-space:nowrap;
+  transition:background .2s, color .2s;
+}
+nav a:hover{ background:var(--primary-light); }
+nav a.active{
+  background:var(--primary);
+  color:#fff;
+  font-weight:700;
+}
+
+main{
+  max-width:920px;
+  margin:0 auto;
+  padding:1rem 1.3rem 4rem;
+}
+
+section{ padding-top:1.6rem; margin-top:1rem; }
+
+h2{
+  color:var(--primary);
+  border-bottom:3px solid var(--primary-light);
+  padding-bottom:.5rem;
+  margin-top:3rem;
+  font-size:1.5rem;
+}
+h3{
+  color:var(--primary-dark);
+  margin-top:2.2rem;
+  font-size:1.18rem;
+  border-left:5px solid var(--primary);
+  padding-left:.6rem;
+}
+h4{
+  color:var(--primary-dark);
+  font-size:1.02rem;
+  margin-top:1.4rem;
+}
+
+p{ margin:.7rem 0; }
+ul,ol{ padding-left:1.4rem; }
+li{ margin:.3rem 0; }
+
+strong{ color:var(--primary-dark); }
+
+/* ---------- Boxes ---------- */
+.box{
+  border-radius:10px;
+  padding:1rem 1.2rem;
+  margin:1.1rem 0;
+  border:1px solid transparent;
+}
+.box-title{
+  font-weight:700;
+  margin-bottom:.4rem;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+.box-concept{ background:var(--primary-light2); border-color:var(--primary-light); }
+.box-concept .box-title{ color:var(--primary-dark); }
+
+.box-enzyme{ background:var(--green-light); border-color:#c8e6c9; }
+.box-enzyme .box-title{ color:var(--green); }
+
+.box-regulation{ background:var(--amber-light); border-color:#ffe4a1; }
+.box-regulation .box-title{ color:var(--amber); }
+
+.box-clinical{ background:var(--red-light); border-color:#f5c6c2; }
+.box-clinical .box-title{ color:var(--red); }
+
+/* ---------- Flow diagrams ---------- */
+.flow{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.3rem;
+  margin:1.2rem 0;
+  padding:1rem;
+  background:#fff;
+  border:1px dashed var(--primary-light);
+  border-radius:10px;
+  overflow-x:auto;
+}
+.flow-node{
+  background:var(--primary-light2);
+  border:2px solid var(--primary);
+  border-radius:9px;
+  padding:.5rem .8rem;
+  font-size:.86rem;
+  text-align:center;
+  color:var(--text);
+  min-width:fit-content;
+  flex-shrink:0;
+}
+.flow-node.accent{
+  background:var(--primary);
+  color:#fff;
+  font-weight:700;
+}
+.flow-node.enzyme-tag{
+  background:var(--green-light);
+  border-color:var(--green);
+}
+.flow-arrow{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-size:.75rem;
+  color:#555;
+  min-width:2.4rem;
+  flex-shrink:0;
+}
+.flow-arrow .label{
+  font-size:.72rem;
+  color:var(--primary-dark);
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+.flow-arrow .arrow-h{
+  font-size:1.3rem;
+  color:var(--primary);
+  line-height:1;
+}
+.flow-vert{ flex-direction:column; align-items:stretch; }
+.flow-vert .flow-arrow{ flex-direction:row; justify-content:center; min-width:auto; }
+.flow-vert .flow-arrow .arrow-h::before{ content:"↓"; }
+.flow-vert .flow-arrow .arrow-h{ visibility:visible; }
+
+/* step numbered cycle */
+.cycle-steps{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.8rem;
+  margin:1rem 0;
+}
+.cycle-step{
+  flex:1 1 200px;
+  background:#fff;
+  border:2px solid var(--primary-light);
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+  padding:.7rem .9rem;
+  font-size:.88rem;
+}
+.cycle-step .num{
+  display:inline-block;
+  background:var(--primary);
+  color:#fff;
+  width:1.5rem;
+  height:1.5rem;
+  border-radius:50%;
+  text-align:center;
+  line-height:1.5rem;
+  font-size:.8rem;
+  margin-right:.4rem;
+  font-weight:700;
+}
+
+/* ---------- Comparison tables ---------- */
+.compare-wrap{ overflow-x:auto; margin:1.2rem 0; }
+table.compare{
+  border-collapse:collapse;
+  width:100%;
+  font-size:.9rem;
+  min-width:480px;
+}
+table.compare caption{
+  text-align:left;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:.5rem;
+  font-size:1rem;
+}
+table.compare th{
+  background:var(--primary);
+  color:#fff;
+  padding:.6rem .8rem;
+  text-align:left;
+}
+table.compare td{
+  padding:.6rem .8rem;
+  border-bottom:1px solid #eee;
+  vertical-align:top;
+}
+table.compare tr:nth-child(even) td{ background:var(--primary-light2); }
+
+/* generic data table */
+table.data{
+  border-collapse:collapse;
+  width:100%;
+  font-size:.85rem;
+  margin:1rem 0;
+}
+table.data th{
+  background:var(--primary-light);
+  color:var(--primary-dark);
+  padding:.5rem .6rem;
+  text-align:left;
+}
+table.data td{
+  padding:.5rem .6rem;
+  border-bottom:1px solid #eee;
+}
+
+/* ---------- SVG diagram wrapper ---------- */
+.svg-wrap{
+  text-align:center;
+  margin:1.2rem 0;
+  overflow-x:auto;
+}
+.svg-wrap svg{ max-width:100%; height:auto; }
+.svg-caption{
+  font-size:.82rem;
+  color:#666;
+  text-align:center;
+  margin-top:.3rem;
+}
+
+/* term highlight */
+.term{ color:var(--primary-dark); font-weight:700; }
+mark.hi{
+  background:var(--primary-light);
+  padding:0 .2em;
+  border-radius:3px;
+}
+
+/* Key takeaways */
+.takeaway-list{
+  list-style:none;
+  padding:0;
+  counter-reset:tk;
+}
+.takeaway-list li{
+  counter-increment:tk;
+  background:#fff;
+  border:1px solid var(--primary-light);
+  border-radius:10px;
+  padding:.8rem 1rem .8rem 3rem;
+  margin-bottom:.7rem;
+  position:relative;
+  font-size:.95rem;
+}
+.takeaway-list li::before{
+  content:counter(tk);
+  position:absolute;
+  left:.8rem;
+  top:50%;
+  transform:translateY(-50%);
+  background:var(--primary);
+  color:#fff;
+  width:1.7rem;
+  height:1.7rem;
+  border-radius:50%;
+  text-align:center;
+  line-height:1.7rem;
+  font-weight:700;
+  font-size:.9rem;
+}
+
+footer{
+  text-align:center;
+  padding:2rem 1rem 3rem;
+  color:#666;
+  font-size:.9rem;
+  border-top:1px solid var(--primary-light);
+  margin-top:3rem;
+}
+#backToTop{
+  display:inline-block;
+  margin-top:1rem;
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:.6rem 1.4rem;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:.9rem;
+  font-family:inherit;
+  transition:background .2s;
+}
+#backToTop:hover{ background:var(--primary-dark); }
+
+/* Responsive */
+@media (max-width:1024px){
+  main{ padding:1rem 1rem 3rem; }
+}
+@media (max-width:768px){
+  header h1{ font-size:1.5rem; }
+  nav{ gap:.2rem .6rem; padding:.5rem .5rem; }
+  nav a{ font-size:.82rem; padding:.3rem .5rem; }
+  h2{ font-size:1.25rem; }
+  h3{ font-size:1.05rem; }
+  .flow{ flex-direction:column; align-items:stretch; }
+  .flow .flow-arrow{ flex-direction:row; min-width:auto; padding:.2rem 0; }
+  .flow .flow-arrow .arrow-h{ transform:rotate(90deg); }
+  .cycle-steps{ flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第21章：脂質生合成</h1>
+  <p>學習指南 ｜ Lipid Biosynthesis</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#intro">導論</a>
+  <a href="#s1">21.1 脂肪酸與類花生酸</a>
+  <a href="#s2">21.2 三酸甘油酯</a>
+  <a href="#s3">21.3 膜磷脂</a>
+  <a href="#s4">21.4 膽固醇與類固醇</a>
+  <a href="#takeaways">重點回顧</a>
+</nav>
+
+<main>
+
+<section id="intro">
+<p>脂質在細胞中扮演多種角色：能量儲存（三酸甘油酯，triacylglycerol）、膜的組成（磷脂與膽固醇）、訊息傳遞分子（類花生酸、磷脂醯肌醇衍生物）、輔因子（維生素K）與膜蛋白的錨定物（醯基、異戊二烯基）。本章依序介紹：</p>
+<div class="cycle-steps">
+  <div class="cycle-step"><span class="num">21.1</span><strong>脂肪酸與類花生酸</strong>的生合成——三酸甘油酯與磷脂的共同原料</div>
+  <div class="cycle-step"><span class="num">21.2</span><strong>三酸甘油酯</strong>的組裝與荷爾蒙調控</div>
+  <div class="cycle-step"><span class="num">21.3</span><strong>膜磷脂</strong>（甘油磷脂、鞘脂）的組裝</div>
+  <div class="cycle-step"><span class="num">21.4</span><strong>膽固醇</strong>的生合成、調控、運輸及其衍生物（類固醇激素、膽酸、類異戊二烯）</div>
+</div>
+
+<div class="box box-concept">
+<div class="box-title">🧭 貫穿全章的核心原則</div>
+<ul>
+<li><strong>P1</strong> 脂質是儲存能量的主要形式，也是膜的主要成分。</li>
+<li><strong>P2</strong> 合成代謝（anabolism）不是分解代謝（catabolism）的簡單逆反應——生合成路徑會繞過分解路徑中不可逆的步驟，走「不同的路」。</li>
+<li><strong>P3</strong> 生合成反應是<mark class="hi">耗能且還原性</mark>的：消耗 ATP，並以 <strong>NADPH</strong>（而非 NADH）作為還原力來源。</li>
+<li><strong>P4</strong> 生合成路徑與分解路徑在分岔點上受到嚴格調控，避免無效循環（futile cycle）浪費能量。</li>
+<li><strong>P5</strong> 脂質功能多樣：色素、輔因子、清潔劑（膽鹽）、荷爾蒙、訊息分子、膜蛋白錨定物等。</li>
+</ul>
+</div>
+</section>
+
+<!-- ========================= 21.1 ========================= -->
+<section id="s1">
+<h2>21.1 脂肪酸與類花生酸的生合成（Biosynthesis of Fatty Acids and Eicosanoids）</h2>
+
+<p>脂肪酸的「合成」與「分解（β氧化）」雖然化學上像是互為逆反應，但實際上是<strong>兩套完全不同的路徑</strong>：不同的酵素、不同的胞器區室、不同的活化基團與電子載體。這是本章最容易混淆的概念之一，請見下表：</p>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>📊 容易混淆的概念① 脂肪酸「生合成」 vs. 「β氧化分解」</caption>
+<tr><th>比較項目</th><th>A：脂肪酸生合成</th><th>B：脂肪酸 β 氧化</th></tr>
+<tr><td>發生位置（動物細胞）</td><td>細胞質（cytosol）</td><td>粒線體基質</td></tr>
+<tr><td>關鍵三碳中間體</td><td>丙二醯輔酶A（malonyl-CoA）</td><td>不存在此中間體</td></tr>
+<tr><td>電子載體</td><td>NADPH（還原用）</td><td>NAD⁺、FAD（氧化用）</td></tr>
+<tr><td>醯基活化基團</td><td>ACP 的磷酸泛醯巰基乙胺（—SH）</td><td>輔酶A（CoA-SH）</td></tr>
+<tr><td>方向與步驟</td><td>縮合 → 還原 → 脫水 → 還原（四步驟延長鏈）</td><td>氧化 → 水合 → 氧化 → 硫解（四步驟縮短鏈）</td></tr>
+<tr><td>主要調控酶</td><td>乙醯輔酶A羧化酶（rate-limiting）</td><td>肉鹼醯基轉移酶I（CPT-I）</td></tr>
+</table>
+</div>
+
+<h3>丙二醯輔酶A由乙醯輔酶A與碳酸氫根形成</h3>
+<p>脂肪酸生合成的起始原料是<strong>丙二醯輔酶A（malonyl-CoA）</strong>，由<strong>乙醯輔酶A羧化酶（acetyl-CoA carboxylase）</strong>催化，這是一個不可逆的三步驟反應，需要<strong>生物素（biotin）</strong>作為輔基。</p>
+
+<div class="flow">
+  <div class="flow-node accent">HCO₃⁻ + ATP</div>
+  <div class="flow-arrow"><span class="label">生物素羧化酶區域<br>把CO₂固定到生物素上</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">活化的 CO₂-生物素</div>
+  <div class="flow-arrow"><span class="label">生物素臂旋轉180°<br>攜帶CO₂移動</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">轉羧化酶活性中心</div>
+  <div class="flow-arrow"><span class="label">CO₂轉移至<br>乙醯輔酶A</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">丙二醯輔酶A（Malonyl-CoA）</div>
+</div>
+
+<div class="box box-enzyme">
+<div class="box-title">🧬 關鍵酵素：乙醯輔酶A羧化酶</div>
+<p>動物細胞中，三個步驟都由<strong>單一多功能多肽</strong>完成（含生物素羧化酶、生物素載體蛋白、轉羧化酶三個結構域）；細菌則是三個獨立次單元。此羧化反應的作用與丙酮酸羧化酶類似——讓下一步反應在熱力學上更有利。</p>
+</div>
+
+<h3>脂肪酸合成以重複的四步驟反應循環進行</h3>
+<p>脂肪酸的碳鏈在細胞質中，由統稱<strong>脂肪酸合成酶（fatty acid synthase, FAS）</strong>的系統，以「重複四步驟」的方式延長，每次循環增加<strong>兩個碳原子</strong>。</p>
+
+<div class="cycle-steps">
+  <div class="cycle-step"><span class="num">1</span><strong>縮合（Condensation）</strong>：活化的醯基與丙二醯基進行Claisen縮合，釋出CO₂，形成 β-酮醯基-ACP。由 <strong>β-酮醯基-ACP合成酶（KS）</strong>催化。</div>
+  <div class="cycle-step"><span class="num">2</span><strong>還原（Reduction）</strong>：β-酮基被 NADPH 還原為羥基，形成 D-β-羥醯基-ACP。由 <strong>β-酮醯基-ACP還原酶（KR）</strong>催化。</div>
+  <div class="cycle-step"><span class="num">3</span><strong>脫水（Dehydration）</strong>：去除一分子水，形成 trans-Δ²雙鍵。由 <strong>β-羥醯基-ACP脫水酶（DH）</strong>催化。</div>
+  <div class="cycle-step"><span class="num">4</span><strong>還原（Reduction）</strong>：雙鍵被 NADPH 還原為飽和鍵。由 <strong>烯醯基-ACP還原酶（ER）</strong>催化，產物延長兩個碳。</div>
+</div>
+
+<div class="box box-concept">
+<div class="box-title">💡 為什麼要多此一舉：先做成丙二醯基，再丟掉CO₂？</div>
+<p>因為丙二醯基上被夾在羰基與羧基之間的甲烯碳（C-2）是良好的親核基。縮合步驟中，丙二醯基脫羧會驅動親核攻擊，使整個縮合反應在熱力學上變得非常有利（exergonic）。這股「額外能量」來自合成丙二醯輔酶A時所消耗的 ATP。</p>
+</div>
+
+<h3>哺乳類脂肪酸合成酶（FAS I）具有多個活性位點</h3>
+<p>哺乳類的 FAS I 是<strong>單一多功能多肽</strong>（含七個活性位點），以二聚體形式作用；兩個 —SH 基團作為醯基載體：一個在 <strong>β-酮醯基-ACP合成酶（KS）</strong>的Cys殘基上，另一個在<strong>醯基載體蛋白（acyl carrier protein, ACP）</strong>的磷酸泛醯巰基乙胺臂上。ACP 的輔基與輔酶A共用同一結構單元——4′-磷酸泛醯巰基乙胺。</p>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>📊 容易混淆的概念② FAS I vs. FAS II</caption>
+<tr><th>比較項目</th><th>A：FAS I（脂肪酸合成酶 I 型）</th><th>B：FAS II（脂肪酸合成酶 II 型）</th></tr>
+<tr><td>結構</td><td>單一多功能多肽（哺乳類、真菌）</td><td>各步驟由獨立的酵素分別催化（解離系統）</td></tr>
+<tr><td>分布</td><td>哺乳類、真菌細胞質</td><td>植物、多數細菌，也存在於脊椎動物粒線體</td></tr>
+<tr><td>產物</td><td>單一產物：軟脂酸（palmitate, 16:0）</td><td>多樣產物：不同鏈長、不飽和、支鏈、羥基脂肪酸</td></tr>
+</table>
+</div>
+
+<h3>軟脂酸合成的完整歷程</h3>
+<p>七輪縮合／還原循環後，產生16碳的軟脂醯基（palmitoyl group），最後由<strong>硫酯酶（thioesterase, TE）</strong>水解釋出游離的<strong>軟脂酸（palmitate, 16:0）</strong>，反應即終止。</p>
+
+<div class="flow">
+  <div class="flow-node accent">1 乙醯-CoA<br>+ 7 丙二醯-CoA</div>
+  <div class="flow-arrow"><span class="label">7輪循環<br>14 NADPH</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">軟脂醯-ACP（16碳，飽和）</div>
+  <div class="flow-arrow"><span class="label">硫酯酶（TE）<br>水解</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">軟脂酸（Palmitate, 16:0）</div>
+</div>
+
+<h3>細胞區室化：NADPH 的來源與乙醯基的穿梭</h3>
+<p>脂肪酸合成需要在<strong>高 [NADPH]/[NADP⁺] 比值</strong>的區室進行——動物與酵母是<strong>細胞質</strong>，植物是<strong>葉綠體基質</strong>（因為光反應直接產生NADPH）。細胞質中的NADPH主要來自<strong>五碳糖磷酸路徑</strong>與<strong>蘋果酸酶（malic enzyme）</strong>。</p>
+
+<p>由於粒線體內膜對乙醯輔酶A不通透，乙醯基須以<strong>檸檬酸（citrate）</strong>形式「搭便車」穿梭出粒線體：</p>
+
+<div class="flow">
+  <div class="flow-node">粒線體內：乙醯-CoA + 草醯乙酸</div>
+  <div class="flow-arrow"><span class="label">檸檬酸合成酶</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">檸檬酸</div>
+  <div class="flow-arrow"><span class="label">檸檬酸轉運蛋白<br>穿越內膜</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">細胞質：檸檬酸</div>
+  <div class="flow-arrow"><span class="label">檸檬酸裂解酶<br>（耗ATP）</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">乙醯-CoA + 草醯乙酸</div>
+</div>
+<p style="font-size:.88rem;color:#555;">細胞質中的草醯乙酸多數轉為蘋果酸，再由<strong>蘋果酸酶</strong>氧化為丙酮酸並釋出 NADPH，丙酮酸則回到粒線體重新羧化為草醯乙酸，完成循環（每輸出一個乙醯-CoA，消耗2個ATP）。</p>
+
+<h3>脂肪酸生合成受到嚴格調控</h3>
+<div class="box box-regulation">
+<div class="box-title">⚙️ Rate-limiting Step：乙醯輔酶A羧化酶</div>
+<ul>
+<li><strong>異位調控</strong>：<span class="term">檸檬酸</span>是異位活化劑（提升 V<sub>max</sub>）；<span class="term">軟脂醯輔酶A</span>（終產物）是回饋抑制劑。</li>
+<li><strong>共價修飾</strong>：升糖素、腎上腺素或高[AMP]經由 <strong>AMP依賴性蛋白激酶（AMPK）</strong>磷酸化該酶而使其失活（去磷酸化的活性型會聚合成長絲狀）。</li>
+<li><strong>基因表現</strong>：多元不飽和脂肪酸攝取過多時，會經由 <strong>PPAR</strong> 核受體家族抑制脂肪生成酶基因的表現。</li>
+<li><strong>避免無效循環</strong>：丙二醯輔酶A會抑制肉鹼醯基轉移酶I，因此脂肪酸合成啟動時會同步關閉 β 氧化。</li>
+</ul>
+</div>
+
+<h3>長鏈飽和脂肪酸由軟脂酸延長；去飽和作用形成單元不飽和脂肪酸</h3>
+<p>軟脂酸可經<strong>脂肪酸延長系統</strong>（滑面內質網、粒線體）延長為硬脂酸（18:0）等；也可經<strong>脂醯輔酶A去飽和酶（fatty acyl-CoA desaturase）</strong>——一種<strong>混合功能氧化酶（mixed-function oxidase）</strong>——導入雙鍵，形成軟脂烯酸、油酸等單元不飽和脂肪酸。</p>
+
+<div class="box box-concept">
+<div class="box-title">🔬 氧化酶家族命名辨析</div>
+<ul>
+<li><strong>氧化酶（Oxidase）</strong>：O₂作為電子接受者，但氧原子不進入產物。</li>
+<li><strong>混合功能氧化酶（Mixed-function oxidase）</strong>：同時氧化兩種不同受質（如脂肪酸與NADPH）。</li>
+<li><strong>氧化酶（Oxygenase）</strong>：氧原子直接併入產物，形成新的羥基或羧基。</li>
+<li><strong>雙氧化酶（Dioxygenase）</strong>：O₂的兩個氧原子都併入產物。</li>
+</ul>
+</div>
+
+<h3>亞麻油酸與 α-次亞麻油酸：必需脂肪酸與omega家族</h3>
+<p>哺乳類無法將油酸轉化為<strong>亞麻油酸（linoleate，omega-6）</strong>或 <strong>α-次亞麻油酸（α-linolenate，omega-3）</strong>，必須由飲食攝取，稱為<strong>必需脂肪酸</strong>。這兩者是眾多訊息分子（類花生酸）的前驅物。</p>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg">
+<style>
+  .n{fill:hsl(267,45%,96%);stroke:hsl(267,45%,35%);stroke-width:2;}
+  .na{fill:hsl(267,45%,35%);stroke:hsl(267,45%,25%);stroke-width:2;}
+  .t{font-family:"Noto Sans TC",sans-serif;font-size:12px;fill:#1a1a1a;text-anchor:middle;}
+  .tw{font-family:"Noto Sans TC",sans-serif;font-size:12px;fill:#fff;text-anchor:middle;font-weight:700;}
+  .lbl{font-family:"Noto Sans TC",sans-serif;font-size:10px;fill:#555;text-anchor:middle;}
+  .arr{stroke:hsl(267,45%,35%);stroke-width:1.6;marker-end:url(#ah);fill:none;}
+</style>
+<defs>
+<marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="hsl(267,45%,35%)"/></marker>
+</defs>
+<rect x="10" y="130" width="100" height="40" rx="8" class="na"/><text x="60" y="154" class="tw">軟脂酸16:0</text>
+<line x1="110" y1="150" x2="180" y2="150" class="arr"/><text x="145" y="140" class="lbl">延長</text>
+<rect x="180" y="130" width="90" height="40" rx="8" class="n"/><text x="225" y="154" class="t">硬脂酸18:0</text>
+<line x1="270" y1="150" x2="340" y2="150" class="arr"/><text x="305" y="140" class="lbl">去飽和</text>
+<rect x="340" y="130" width="90" height="40" rx="8" class="n"/><text x="385" y="154" class="t">油酸18:1</text>
+<line x1="430" y1="150" x2="500" y2="150" class="arr"/><text x="465" y="140" class="lbl">去飽和(僅植物)</text>
+<rect x="500" y="130" width="110" height="40" rx="8" class="n"/><text x="555" y="154" class="t">亞麻油酸18:2</text>
+
+<line x1="555" y1="130" x2="555" y2="60" class="arr"/><text x="600" y="90" class="lbl">omega-6</text>
+<rect x="500" y="20" width="130" height="40" rx="8" class="na"/><text x="565" y="44" class="tw">花生四烯酸20:4</text>
+
+<line x1="500" y1="150" x2="500" y2="240" class="arr" transform="translate(0,0)"/>
+<rect x="500" y="240" width="130" height="40" rx="8" class="na"/><text x="565" y="264" class="tw">EPA / DHA (omega-3)</text>
+
+<rect x="660" y="10" width="90" height="35" rx="8" class="n"/><text x="705" y="32" class="t" font-size="10">PG / TX</text>
+<rect x="660" y="50" width="90" height="35" rx="8" class="n"/><text x="705" y="72" class="t" font-size="10">白三烯 LT</text>
+<line x1="630" y1="30" x2="660" y2="28" class="arr"/>
+<line x1="630" y1="40" x2="660" y2="65" class="arr"/>
+
+<rect x="660" y="220" width="90" height="35" rx="8" class="n"/><text x="705" y="242" class="t" font-size="10">Resolvin</text>
+<rect x="660" y="260" width="90" height="35" rx="8" class="n"/><text x="705" y="282" class="t" font-size="10">Protectin</text>
+<line x1="630" y1="250" x2="660" y2="238" class="arr"/>
+<line x1="630" y1="260" x2="660" y2="275" class="arr"/>
+</svg>
+</div>
+<p class="svg-caption">圖：軟脂酸→硬脂酸→油酸→亞麻油酸的延長／去飽和路徑，再分支為omega-6（花生四烯酸→前列腺素/血栓素/白三烯）與omega-3（EPA/DHA→消退素/保護素）家族（重繪自Fig. 21-12，僅保留關鍵節點）。</p>
+
+<h3>類花生酸（Eicosanoids）：由花生四烯酸衍生的短程訊息分子</h3>
+<p>荷爾蒙或其他刺激促使<strong>磷脂酶A₂</strong>從膜磷脂釋出花生四烯酸。滑面內質網上的酵素將其轉化為前列腺素、血栓素（「環狀路徑」）或白三烯（「線性路徑」）。</p>
+
+<div class="flow">
+  <div class="flow-node">膜磷脂上的花生四烯酸</div>
+  <div class="flow-arrow"><span class="label">磷脂酶A₂</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">游離花生四烯酸</div>
+  <div class="flow-arrow"><span class="label">環氧化酶(COX)活性</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">PGG₂</div>
+  <div class="flow-arrow"><span class="label">過氧化酶活性</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">PGH₂</div>
+</div>
+<p>PGH₂ 再分支為其他<strong>前列腺素（PG）</strong>與<strong>血栓素（TX，如TXA₂促血管收縮與血小板凝集）</strong>。此「環狀路徑」由<strong>環氧化酶（cyclooxygenase, COX，即前列腺素H₂合成酶）</strong>催化，可被阿斯匹靈、布洛芬等NSAID抑制。另一「線性路徑」由<strong>脂氧合酶</strong>催化，將花生四烯酸轉為<strong>白三烯（LT）</strong>，不受阿斯匹靈抑制。</p>
+
+<div class="box box-clinical">
+<div class="box-title">⚕️ 臨床連結：COX 抑制劑</div>
+<ul>
+<li><strong>COX-1</strong>：合成調節胃黏液分泌的前列腺素。</li>
+<li><strong>COX-2</strong>：合成介導發炎、疼痛、發燒的前列腺素。</li>
+<li><strong>阿斯匹靈</strong>：使COX的Ser殘基乙醯化而<strong>不可逆</strong>抑制兩種同功酶；低劑量長期服用可降低心臟病與中風風險。</li>
+<li>選擇性COX-2抑制劑（如Vioxx、Bextra）因增加心臟病風險而下市；Celebrex仍在市面但需謹慎使用。</li>
+</ul>
+</div>
+
+<p>發炎反應包含「啟動」與「消退（catabasis）」兩階段：omega-6類花生酸多主導啟動；<strong>特化促消退介質（SPMs）</strong>——脂氧素、消退素、保護素、maresin——則促進發炎消退。</p>
+
+<h3>本節重點回顧（Summary 21.1）</h3>
+<ul>
+<li>丙二醯輔酶A由乙醯輔酶A羧化酶（rate-limiting酶）合成，是脂肪酸鏈延長的碳源。</li>
+<li>脂肪酸以四步驟（縮合-還原-脫水-還原）重複循環延長，NADPH是還原力來源。</li>
+<li>FAS I（哺乳類/真菌，單一多肽）vs. FAS II（植物/細菌，多酵素解離系統）。</li>
+<li>軟脂酸（16:0）是終產物；再經延長、去飽和形成各式脂肪酸與類花生酸。</li>
+</ul>
+</section>
+
+<!-- ========================= 21.2 ========================= -->
+<section id="s2">
+<h2>21.2 三酸甘油酯的生合成（Biosynthesis of Triacylglycerols）</h2>
+
+<p>脂肪酸的兩大去路：組裝成<strong>三酸甘油酯</strong>（能量儲存）或<strong>膜磷脂</strong>（膜組成）。兩條路徑<strong>共用起點</strong>——甘油的脂肪醯酯化。</p>
+
+<h3>三酸甘油酯與甘油磷脂共用相同前驅物</h3>
+<p>共同前驅物：<strong>脂肪醯輔酶A</strong>與 <strong>L-甘油3-磷酸</strong>（多數由糖解中間產物DHAP經<strong>甘油3-磷酸去氫酶</strong>形成，少量由甘油經<strong>甘油激酶</strong>形成）。</p>
+
+<div class="flow">
+  <div class="flow-node">L-甘油3-磷酸</div>
+  <div class="flow-arrow"><span class="label">醯基轉移酶<br>+ 脂肪醯-CoA①</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">溶血磷脂酸</div>
+  <div class="flow-arrow"><span class="label">醯基轉移酶<br>+ 脂肪醯-CoA②</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">磷脂酸（Phosphatidic acid）</div>
+</div>
+
+<p><strong>磷脂酸</strong>是脂質生合成的核心中間體，在細胞中含量極少但是分岔點：</p>
+<div class="flow flow-vert">
+  <div class="flow-node accent">磷脂酸</div>
+  <div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;width:100%;">
+    <div style="text-align:center;">
+      <div class="flow-arrow" style="display:inline-flex;"><span class="label">磷脂酸磷酸酶（lipin）<br>水解磷酸根</span><span class="arrow-h">↓</span></div><br>
+      <div class="flow-node">1,2-二醯基甘油</div><br>
+      <div class="flow-arrow" style="display:inline-flex;"><span class="label">+第三個脂肪醯-CoA</span><span class="arrow-h">↓</span></div><br>
+      <div class="flow-node accent">三酸甘油酯</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="flow-arrow" style="display:inline-flex;"><span class="label">附加頭基</span><span class="arrow-h">↓</span></div><br>
+      <div class="flow-node accent">甘油磷脂（見21.3）</div>
+    </div>
+  </div>
+</div>
+
+<h3>動物體內三酸甘油酯生合成受荷爾蒙調控</h3>
+<div class="box box-regulation">
+<div class="box-title">⚙️ 胰島素的角色</div>
+<p><strong>胰島素</strong>促進醣類轉化為三酸甘油酯。糖尿病患者因胰島素缺乏或作用失效，無法有效地把乙醯-CoA導向脂肪酸合成，反而轉向<strong>酮體</strong>（乙醯乙酸、D-β-羥基丁酸、丙酮）生成，導致體重下降與酮酸中毒。</p>
+</div>
+<p>約75%由三酸甘油酯分解釋出的脂肪酸會被<strong>再酯化</strong>回三酸甘油酯，而非直接作為燃料——即使在飢餓狀態下此比例仍大致維持在75%，形成「<strong>三酸甘油酯循環（triacylglycerol cycle）</strong>」，涉及脂肪組織與肝臟之間的循環運輸（脂蛋白脂解酶協助脂肪酸釋放）。</p>
+
+<h3>脂肪組織透過甘油新生（Glyceroneogenesis）產生甘油3-磷酸</h3>
+<p>脂肪細胞缺乏甘油激酶，無法直接利用游離甘油，因此需經<strong>甘油新生</strong>——由丙酮酸經簡化版的糖質新生路徑（關鍵酶：<strong>PEP羧激酶，PEPCK</strong>）產生二羥丙酮磷酸，再轉為甘油3-磷酸。</p>
+
+<div class="box box-regulation">
+<div class="box-title">⚙️ 糖皮質激素的相反調控</div>
+<ul>
+<li>在<strong>肝臟</strong>：糖皮質激素<strong>刺激</strong> PEPCK 基因表現 → 甘油新生增加 → 三酸甘油酯合成、輸出增加。</li>
+<li>在<strong>脂肪組織</strong>：糖皮質激素<strong>抑制</strong> PEPCK 基因表現 → 甘油新生減少 → 脂肪酸再酯化減少 → 血中游離脂肪酸增加。</li>
+<li>淨效果：提高三酸甘油酯循環的通量。</li>
+</ul>
+</div>
+
+<h3>Thiazolidinediones：藉由增加甘油新生治療第2型糖尿病</h3>
+<div class="box box-clinical">
+<div class="box-title">⚕️ 臨床連結</div>
+<p>血中游離脂肪酸過高會干擾肌肉葡萄糖利用並促進胰島素阻抗。<strong>Thiazolidinediones</strong>（如rosiglitazone、pioglitazone）活化核受體<strong>PPARγ</strong>，誘導脂肪組織中PEPCK表現，增加甘油新生與脂肪酸再酯化，降低血中游離脂肪酸、改善胰島素敏感性。（Rosiglitazone因心臟病風險已在多國下市。）</p>
+</div>
+
+<h3>本節重點回顧（Summary 21.2）</h3>
+<ul>
+<li>兩分子脂肪醯-CoA + 甘油3-磷酸 → 磷脂酸 → 去磷酸化為二醯基甘油 → 加上第三分子脂肪醯-CoA → 三酸甘油酯。</li>
+<li>三酸甘油酯的合成與分解受荷爾蒙（胰島素、糖皮質激素）調控，形成三酸甘油酯循環。</li>
+<li>甘油新生（由丙酮酸經PEPCK）提供脂肪組織甘油3-磷酸的來源。</li>
+</ul>
+</section>
+
+<!-- ========================= 21.3 ========================= -->
+<section id="s3">
+<h2>21.3 膜磷脂的生合成（Biosynthesis of Membrane Phospholipids）</h2>
+
+<p>膜磷脂的組裝遵循共同模式：⑴合成骨架分子（甘油或鞘胺醇）；⑵以酯鍵或醯胺鍵接上脂肪酸；⑶以磷酸二酯鍵接上親水頭基；⑷（部分情況）重塑頭基或脂肪酸。主要發生於<strong>滑面內質網</strong>與<strong>粒線體內膜</strong>表面。</p>
+
+<h3>細胞以兩種策略連接磷脂頭基（Kennedy Pathway）</h3>
+<p>頭基連接需先以<strong>CDP（胞苷雙磷酸）</strong>活化其中一個羥基，此為<strong>Eugene Kennedy</strong>於1950年代發現的路徑，統稱 <strong>Kennedy pathway</strong>。</p>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>📊 容易混淆的概念③ 頭基連接的兩種策略</caption>
+<tr><th>比較項目</th><th>A：策略1（CDP-二醯基甘油）</th><th>B：策略2（CDP-頭基）</th></tr>
+<tr><td>被CDP活化的分子</td><td>二醯基甘油 → CDP-diacylglycerol</td><td>頭基（如膽鹼、乙醇胺）</td></tr>
+<tr><td>反應方式</td><td>CDP-diacylglycerol 與頭基醇反應，放出CMP</td><td>CDP-頭基 與二醯基甘油反應，放出CMP</td></tr>
+<tr><td>細菌</td><td>唯一使用的策略</td><td>不使用</td></tr>
+<tr><td>哺乳類代表產物</td><td>磷脂醯甘油、心磷脂、磷脂醯肌醇（於粒線體：PE、PC）</td><td>PE、PC（於內質網、細胞核，屬「補救合成」路徑）</td></tr>
+</table>
+</div>
+
+<h3>磷脂生合成路徑彼此相關</h3>
+<p>真核生物多數磷脂由 <strong>CDP-diacylglycerol</strong> 出發（策略1）：</p>
+<div class="flow flow-vert">
+  <div class="flow-node accent">CDP-diacylglycerol</div>
+  <div style="display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;width:100%;">
+    <div class="flow-node">+甘油3-磷酸 → 磷脂醯甘油3-磷酸 → (去磷酸) → 磷脂醯甘油 → (+CDP-DAG) → 心磷脂</div>
+    <div class="flow-node">+肌醇 → 磷脂醯肌醇</div>
+    <div class="flow-node">+絲胺酸（僅酵母）→ 磷脂醯絲胺酸 → (脫羧) → 磷脂醯乙醇胺</div>
+  </div>
+</div>
+<p>磷脂醯乙醇胺可經<strong>三次甲基化</strong>（S-腺苷甲硫胺酸為甲基供給者）轉為<strong>磷脂醯膽鹼（卵磷脂）</strong>。哺乳類中，PE 與 PC 主要以<strong>策略2</strong>在內質網／細胞核合成（補救利用游離乙醇胺／膽鹼）；哺乳類的<strong>磷脂醯絲胺酸</strong>則不經上述任一策略，而是由 PE 或 PC 經<strong>頭基交換反應</strong>（PSS1、PSS2）產生。</p>
+
+<div class="box box-concept">
+<div class="box-title">🧭 細菌的磷脂合成</div>
+<p>細菌主要磷脂為磷脂醯甘油、磷脂醯乙醇胺與心磷脂，皆經策略1（CDP-diacylglycerol）合成，途徑與真核生物中粒線體的合成方式相似——反映粒線體的細菌起源。</p>
+</div>
+
+<h3>真核細胞膜磷脂會經歷重塑（Lands Cycle）</h3>
+<p>C-2位置的脂肪醯基常被替換，以調整膜的物理性質。此過程稱為 <strong>Lands cycle</strong>：磷脂酶A₂先水解出C-2脂肪酸形成溶血磷脂，再由<strong>溶血磷脂醯膽鹼醯基轉移酶（LPCAT）</strong>接上新的脂肪酸。</p>
+<div class="flow">
+  <div class="flow-node accent">磷脂醯膽鹼</div>
+  <div class="flow-arrow"><span class="label">磷脂酶A₂</span><span class="arrow-h">⇌</span></div>
+  <div class="flow-node">溶血磷脂醯膽鹼</div>
+  <div class="flow-arrow"><span class="label">LPCAT</span><span class="arrow-h">⇌</span></div>
+  <div class="flow-node accent">磷脂醯膽鹼（新脂肪酸）</div>
+</div>
+
+<h3>縮醛磷脂（Plasmalogen）的合成需要形成醚鍵脂肪醇</h3>
+<p>縮醛磷脂（含<strong>血小板活化因子</strong>）的合成需以長鏈醇取代酯化脂肪醯基而形成<strong>醚鍵</strong>，主要在<strong>過氧化體</strong>進行；其特徵雙鍵最後由類似脂肪酸去飽和酶的混合功能氧化酶引入。</p>
+
+<h3>鞘脂與甘油磷脂共享前驅物與部分機制</h3>
+<p>鞘脂生合成分四階段：</p>
+<div class="cycle-steps">
+  <div class="cycle-step"><span class="num">1</span>軟脂醯-CoA + 絲胺酸 → β-酮鞘胺醇 →（NADPH還原）→ <strong>鞘胺醇（sphinganine）</strong></div>
+  <div class="cycle-step"><span class="num">2</span>鞘胺醇經醯胺化 → <strong>N-醯基鞘胺醇</strong></div>
+  <div class="cycle-step"><span class="num">3</span>混合功能氧化酶去飽和 → <strong>神經醯胺（ceramide，含鞘胺醇）</strong></div>
+  <div class="cycle-step"><span class="num">4</span>加上頭基：UDP-葡萄糖 → <strong>腦苷脂</strong>；磷脂醯膽鹼供應磷酸膽鹼 → <strong>鞘磷脂</strong></div>
+</div>
+<p>糖脂（腦苷脂、神經節苷脂）的頭基糖是以<strong>醣苷鍵</strong>而非磷酸二酯鍵，直接接在鞘胺醇C-1羥基上。</p>
+
+<h3>極性脂質被運送至特定的細胞膜</h3>
+<p>脂質不溶於水，無法自由擴散，需經由<strong>膜泡運輸</strong>（內質網→高基氏體→標的膜）或<strong>胞質蛋白</strong>（鞘脂轉運蛋白等）攜帶，以建立各胞器膜特有的脂質組成。</p>
+
+<h3>本節重點回顧（Summary 21.3）</h3>
+<ul>
+<li>頭基連接有兩策略：CDP活化二醯基甘油（策略1）或CDP活化頭基（策略2）。</li>
+<li>哺乳類PE、PC於粒線體用策略1，於ER/細胞核用策略2；PS則來自頭基交換。</li>
+<li>Lands cycle 負責磷脂的脂肪酸重塑（LPCAT）。</li>
+<li>鞘脂合成分四階段，與甘油磷脂共用NADPH與脂肪醯-CoA。</li>
+</ul>
+</section>
+
+<!-- ========================= 21.4 ========================= -->
+<section id="s4">
+<h2>21.4 膽固醇、類固醇與類異戊二烯：生合成、調控與運輸</h2>
+
+<p>膽固醇（27個碳）的所有碳原子皆來自<strong>乙酸鹽（acetate）</strong>，經由<strong>異戊二烯（isoprene）</strong>中間體聚合而成。此路徑分為四個階段：</p>
+
+<div class="flow">
+  <div class="flow-node accent">❶ 乙酸 → 甲羥戊酸</div>
+  <div class="flow-arrow"><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">❷ 甲羥戊酸 → 活化異戊二烯</div>
+  <div class="flow-arrow"><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">❸ 六個異戊二烯 → 角鯊烯</div>
+  <div class="flow-arrow"><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">❹ 角鯊烯 → 固醇核 → 膽固醇</div>
+</div>
+
+<h3>階段❶：由乙酸合成甲羥戊酸（Mevalonate）</h3>
+<div class="flow">
+  <div class="flow-node">2 乙醯-CoA</div>
+  <div class="flow-arrow"><span class="label">乙醯CoA乙醯轉移酶</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">乙醯乙醯-CoA</div>
+  <div class="flow-arrow"><span class="label">+乙醯-CoA<br>HMG-CoA合成酶</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">HMG-CoA</div>
+  <div class="flow-arrow"><span class="label">2 NADPH<br><strong>HMG-CoA還原酶</strong></span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">甲羥戊酸（Mevalonate）</div>
+</div>
+<div class="box box-enzyme">
+<div class="box-title">🧬 Rate-limiting Step：HMG-CoA還原酶</div>
+<p>HMG-CoA還原酶催化的還原反應是<strong>不可逆的委任步驟（committed step）</strong>，也是膽固醇合成路徑最主要的調控點——是他汀類藥物的作用標的。此細胞質HMG-CoA合成酶與粒線體內合成酮體的HMG-CoA合成酶是不同的同功酶。</p>
+</div>
+
+<h3>階段❷：甲羥戊酸轉為兩個活化異戊二烯</h3>
+<p>甲羥戊酸經三次ATP磷酸化與脫羧、脫水，形成<strong>Δ³-異戊烯焦磷酸（IPP）</strong>；異構化後產生<strong>二甲丙烯焦磷酸（DMAPP）</strong>——兩者互為活化異戊二烯。（植物葉綠體與多數細菌使用不依賴甲羥戊酸的替代路徑，是抗生素開發的標的。）</p>
+
+<h3>階段❸：六個活化異戊二烯縮合形成角鯊烯</h3>
+<div class="flow">
+  <div class="flow-node">IPP + DMAPP</div>
+  <div class="flow-arrow"><span class="label">頭尾縮合</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">香葉基焦磷酸（C10）</div>
+  <div class="flow-arrow"><span class="label">+IPP</span><span class="arrow-h">→</span></div>
+  <div class="flow-node">法尼基焦磷酸（C15）</div>
+  <div class="flow-arrow"><span class="label">兩分子頭對頭縮合</span><span class="arrow-h">→</span></div>
+  <div class="flow-node accent">角鯊烯（Squalene, C30）</div>
+</div>
+
+<h3>階段❹：角鯊烯環化為四環固醇核</h3>
+<p><strong>角鯊烯單加氧酶</strong>（另一混合功能氧化酶）先形成<strong>角鯊烯2,3-環氧化物</strong>，再經協同環化反應，在動物細胞中形成<strong>羊毛固醇（lanosterol）</strong>，最後經約20步反應（甲基遷移、去除）轉為<strong>膽固醇</strong>。</p>
+
+<div class="box box-concept">
+<div class="box-title">📌 工作範例：角鯊烯合成的能量成本</div>
+<p>由乙醯-CoA合成一分子角鯊烯需消耗大量ATP與NADPH，反映出膽固醇生合成是高耗能過程——這也是為什麼身體會嚴格調控此路徑，並優先利用飲食中的膽固醇。</p>
+</div>
+
+<h3>膽固醇有多種去向</h3>
+<p>膽固醇可：⑴併入細胞膜；⑵經<strong>ACAT（acyl-CoA-cholesterol acyltransferase）</strong>酯化為<strong>膽固醇酯</strong>儲存或運輸；⑶轉為<strong>膽酸</strong>；⑷轉為<strong>類固醇激素</strong>。</p>
+
+<h3>膽固醇與其他脂質由血漿脂蛋白攜帶</h3>
+<p>脂蛋白是<strong>脂蛋白質（apolipoprotein）</strong>與磷脂、膽固醇、膽固醇酯、三酸甘油酯組成的球形複合體，依密度分為四類：</p>
+
+<div class="compare-wrap">
+<table class="data">
+<tr><th>脂蛋白</th><th>密度</th><th>主要三酸甘油酯%</th><th>主要功能</th></tr>
+<tr><td>乳糜微粒 Chylomicron</td><td>&lt;1.006</td><td>85%</td><td>運送飲食脂肪（腸→組織），外源路徑</td></tr>
+<tr><td>VLDL</td><td>0.95–1.006</td><td>50%</td><td>運送肝臟合成的脂質至周邊組織，內源路徑起點</td></tr>
+<tr><td>LDL</td><td>1.006–1.063</td><td>10%</td><td>將膽固醇送至周邊組織（“壞膽固醇”）</td></tr>
+<tr><td>HDL</td><td>1.063–1.210</td><td>4%</td><td>逆向膽固醇運輸，送回肝臟（“好膽固醇”）</td></tr>
+</table>
+</div>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>📊 容易混淆的概念④ LDL vs. HDL</caption>
+<tr><th>比較項目</th><th>A：LDL（低密度脂蛋白）</th><th>B：HDL（高密度脂蛋白）</th></tr>
+<tr><td>來源</td><td>VLDL經脂蛋白脂酶作用逐步喪失三酸甘油酯而成</td><td>肝臟與小腸分泌的蛋白質豐富小顆粒（nascent HDL）</td></tr>
+<tr><td>主要脂蛋白質</td><td>ApoB-100</td><td>ApoA-I（活化LCAT）</td></tr>
+<tr><td>膽固醇流向</td><td>肝臟 → 周邊組織（含巨噬細胞）</td><td>周邊組織（含泡沫細胞）→ 肝臟</td></tr>
+<tr><td>攝取機制</td><td>受體介導胞吞（LDL受體識別ApoB-100）</td><td>SR-BI受體介導的選擇性脂質轉移（非胞吞）</td></tr>
+<tr><td>與動脈粥狀硬化的關係</td><td>正相關（“壞膽固醇”）</td><td>負相關（“好膽固醇”，具保護作用）</td></tr>
+</table>
+</div>
+
+<h3>LDL 經受體介導胞吞作用進入細胞</h3>
+<div class="cycle-steps">
+  <div class="cycle-step"><span class="num">1</span>LDL受體合成後運至細胞膜，可結合ApoB-100</div>
+  <div class="cycle-step"><span class="num">2</span>LDL與受體結合，誘發胞吞作用</div>
+  <div class="cycle-step"><span class="num">3</span>形成含LDL的內體（endosome）</div>
+  <div class="cycle-step"><span class="num">4</span>受體回收至細胞膜再利用</div>
+  <div class="cycle-step"><span class="num">5</span>內體與溶體融合</div>
+  <div class="cycle-step"><span class="num">6</span>溶體酵素水解膽固醇酯與ApoB-100，釋出膽固醇、脂肪酸、胺基酸</div>
+</div>
+<div class="box box-clinical">
+<div class="box-title">⚕️ 家族性高膽固醇血症（FH）</div>
+<p>Michael Brown與Joseph Goldstein發現FH患者LDL受體基因突變，導致LDL無法被正常攝取，血中LDL-膽固醇異常升高，大幅增加動脈粥狀硬化風險。另一疾病<strong>Niemann-Pick type-C</strong>則是溶體內膽固醇轉運蛋白（NPC1/NPC2）缺陷，導致膽固醇滯留於溶體。</p>
+</div>
+
+<h3>HDL 執行逆向膽固醇運輸</h3>
+<p>HDL表面的<strong>卵磷脂-膽固醇醯基轉移酶（LCAT）</strong>將卵磷脂與膽固醇轉為膽固醇酯，使nascent HDL膨脹成熟；成熟HDL經<strong>ABCA1、ABCG1</strong>轉運蛋白自周邊細胞（含泡沫細胞）攝入膽固醇，最終經<strong>SR-BI受體</strong>將膽固醇卸載回肝臟，部分轉為膽鹽並經<strong>腸肝循環</strong>再利用。</p>
+<div class="box box-clinical">
+<div class="box-title">⚕️ Tangier disease 與家族性HDL缺乏症</div>
+<p>兩者皆源於<strong>ABCA1</strong>基因突變，使ApoA-I無法自細胞攝取膽固醇，導致HDL濃度極低，早發心血管疾病風險大增。</p>
+</div>
+
+<h3>膽固醇合成與運輸受多層次調控</h3>
+<div class="box box-regulation">
+<div class="box-title">⚙️ HMG-CoA還原酶的短期與長期調控</div>
+<ul>
+<li><strong>短期（分鐘級）</strong>：AMPK（受低ATP／高AMP活化）磷酸化並抑制此酶；升糖素促進磷酸化（抑制），胰島素促進去磷酸化（活化）。</li>
+<li><strong>長期（基因表現）</strong>：由 <strong>SREBP（sterol regulatory element-binding protein）</strong>調控——當細胞內固醇濃度低時，SREBP-SCAP複合體自內質網轉移至高基氏體被蛋白酶切割，釋出的調控結構域進入細胞核，活化HMG-CoA還原酶與LDL受體等基因的轉錄。</li>
+<li><strong>蛋白降解</strong>：高膽固醇濃度經由Insig促進HMG-CoA還原酶被泛素化並經蛋白酶體降解。</li>
+<li><strong>LXR／RXR 異二聚體</strong>：受氧固醇活化，促進膽固醇逆向運輸、脂肪酸合成基因表現；<strong>FXR</strong>則主要感應膽酸濃度，作用常與LXR相反。</li>
+</ul>
+</div>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>📊 容易混淆的概念⑤ SREBP vs. LXR 兩套調控系統</caption>
+<tr><th>比較項目</th><th>A：SREBP系統</th><th>B：LXR系統</th></tr>
+<tr><td>感應對象</td><td>低細胞內固醇濃度</td><td>高氧固醇（oxysterol）濃度</td></tr>
+<tr><td>作用結果</td><td>促進HMG-CoA還原酶、LDL受體等基因轉錄，<strong>增加</strong>膽固醇合成與攝取</td><td>促進脂肪酸合成酶、ABCA1/G1、CYP7A1等基因轉錄，<strong>促進</strong>膽固醇逆向運輸與代謝清除</td></tr>
+<tr><td>搭檔蛋白</td><td>SCAP、Insig</td><td>RXR（形成LXR-RXR異二聚體）</td></tr>
+</table>
+</div>
+
+<h3>膽固醇代謝失調可導致心血管疾病</h3>
+<div class="box box-clinical">
+<div class="box-title">⚕️ 動脈粥狀硬化（Atherosclerosis）</div>
+<p>氧化的LDL沉積於動脈內壁 → 單核球被吸引並分化為巨噬細胞 → 吞噬氧化LDL形成<strong>泡沫細胞</strong> → 細胞凋亡、組織損傷 → 斑塊持續增大、膽固醇結晶化 → 斑塊破裂可引發中風或心肌梗塞。HDL的逆向膽固醇運輸可部分抵銷此過程。</p>
+</div>
+<div class="box box-clinical">
+<div class="box-title">⚕️ 他汀類藥物（Statins）</div>
+<p>結構類似甲羥戊酸，為<strong>HMG-CoA還原酶的競爭性抑制劑</strong>，可降低血中膽固醇達30%。發展史源自Akira Endo自真菌篩選出的compactin，經Brown、Goldstein與Merck團隊（Alberts、Vagelos）推動，最終開發出lovastatin等藥物；Framingham心臟研究等大型流行病學研究確立了「血膽固醇—動脈粥狀硬化」的脂質假說。</p>
+</div>
+
+<h3>類固醇激素由膽固醇經側鏈裂解與氧化而成</h3>
+<p>膽固醇是所有類固醇激素的前驅物，主要在腎上腺皮質、性腺與胎盤合成：</p>
+<div class="flow flow-vert">
+  <div class="flow-node accent">膽固醇 → 孕烯醇酮（前驅物）</div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;width:100%;">
+    <div class="flow-node">孕烯醇酮→黃體酮（progesterone，調節女性生殖週期）</div>
+    <div class="flow-node">黃體酮→皮質醇（cortisol，糖皮質激素：調節糖質新生、抑制發炎）</div>
+    <div class="flow-node">黃體酮→醛固酮（aldosterone，礦物皮質激素：調節Na⁺/Cl⁻/HCO₃⁻再吸收）</div>
+    <div class="flow-node">黃體酮→睪固酮→雌二醇（性激素：第二性徵發育）</div>
+  </div>
+</div>
+<p>側鏈裂解發生於粒線體，需<strong>細胞色素P-450</strong>單加氧酶系統（搭配腎上腺鐵氧還蛋白、腎上腺鐵氧還蛋白還原酶），利用NADPH與O₂在C-20、C-22進行連續羥基化，再裂解形成孕烯醇酮。</p>
+
+<h3>甲羥戊酸路徑的中間體有多種其他去路：類異戊二烯</h3>
+<p>異戊烯焦磷酸（IPP）不只是膽固醇前驅物，也是<strong>類異戊二烯（isoprenoids）</strong>大家族的活化前驅單元——包括維生素A、E、K、類胡蘿蔔素、葉綠素植醇鏈、天然橡膠、泛醌／質體醌（電子載體）、多可醇（dolichol）以及昆蟲保幼激素等，全世界已發現超過20,000種類異戊二烯分子。</p>
+<p>此外，<strong>蛋白質異戊二烯化（prenylation）</strong>——共價接上法尼基或牛龍牛兒基（geranylgeranyl）——是蛋白質錨定於細胞膜內側的重要機制。</p>
+
+<h3>本節重點回顧（Summary 21.4）</h3>
+<ul>
+<li>膽固醇合成四階段：乙酸→甲羥戊酸→活化異戊二烯→角鯊烯→固醇核。HMG-CoA還原酶是rate-limiting酶。</li>
+<li>脂蛋白依密度分四類（乳糜微粒、VLDL、LDL、HDL），各有專屬apolipoprotein與功能。</li>
+<li>LDL經受體介導胞吞進入細胞；HDL執行逆向膽固醇運輸。</li>
+<li>SREBP（低固醇時活化）與LXR/RXR（高固醇時活化）是兩套互補的轉錄調控系統。</li>
+<li>他汀類藥物競爭性抑制HMG-CoA還原酶，用於治療高膽固醇血症。</li>
+<li>膽固醇是類固醇激素（礦物皮質激素、糖皮質激素、性激素）與膽酸的前驅物。</li>
+</ul>
+</section>
+
+<!-- ========================= Key Takeaways ========================= -->
+<section id="takeaways">
+<h2># Key Takeaways</h2>
+<ol class="takeaway-list">
+<li><strong>脂肪酸合成 ≠ β氧化的逆反應</strong>：不同區室（細胞質 vs. 粒線體）、不同電子載體（NADPH vs. NAD⁺/FAD）、不同活化基團（ACP-SH vs. CoA-SH）。</li>
+<li><strong>丙二醯輔酶A</strong>（由乙醯輔酶A羧化酶合成）是脂肪酸鏈延長的碳供給者，該酶是脂肪酸合成的rate-limiting step，受檸檬酸活化、軟脂醯-CoA回饋抑制、AMPK磷酸化抑制。</li>
+<li>脂肪酸合成的四步驟循環：<strong>縮合→還原→脫水→還原</strong>，每輪延長兩個碳，NADPH是還原力來源。</li>
+<li>乙醯基以<strong>檸檬酸</strong>形式由粒線體穿梭至細胞質，供應脂肪酸合成的原料與部分NADPH（經蘋果酸酶）。</li>
+<li>亞麻油酸與α-次亞麻油酸是<strong>必需脂肪酸</strong>，為omega-6／omega-3類花生酸（前列腺素、血栓素、白三烯、SPM）的前驅物；<strong>阿斯匹靈</strong>經乙醯化不可逆抑制COX，阻斷前列腺素／血栓素生成。</li>
+<li>三酸甘油酯與甘油磷脂共用前驅物（脂肪醯-CoA、甘油3-磷酸），皆經<strong>磷脂酸</strong>此關鍵分岔中間體。</li>
+<li>磷脂頭基連接有<strong>策略1（CDP-diacylglycerol）</strong>與<strong>策略2（CDP-頭基）</strong>兩種模式；哺乳類PS由頭基交換反應產生，不用CDP路徑。</li>
+<li>膽固醇合成分四階段（乙酸→甲羥戊酸→異戊二烯→角鯊烯→固醇核），<strong>HMG-CoA還原酶</strong>是committed step與他汀類藥物的標的。</li>
+<li>脂蛋白依密度區分（乳糜微粒＜VLDL＜LDL＜HDL），LDL將膽固醇送往周邊組織（經受體介導胞吞），HDL負責逆向膽固醇運輸回肝臟。</li>
+<li><strong>SREBP</strong>（低固醇活化，促進合成/攝取基因）與<strong>LXR-RXR</strong>（高固醇活化，促進代謝清除基因）是調控膽固醇恆定的兩套互補轉錄系統；膽固醇是類固醇激素與膽酸的共同前驅物。</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+  第21章：脂質生合成｜學習指南
+  <br>
+  <button id="backToTop">⬆ Back to Top</button>
+</footer>
+
+<script>
+// Smooth active-nav highlighting on scroll
+const navLinks = Array.from(document.querySelectorAll('#mainNav a'));
+const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+function onScroll(){
+  let currentIndex = 0;
+  const scrollPos = window.scrollY + 120; // offset for sticky nav
+  sections.forEach((sec, i) => {
+    if (sec.offsetTop <= scrollPos) currentIndex = i;
+  });
+  navLinks.forEach(a => a.classList.remove('active'));
+  navLinks[currentIndex].classList.add('active');
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+// Smooth scroll for nav links
+navLinks.forEach(a => {
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target){
+      window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+    }
+  });
+});
+
+// Back to top
+document.getElementById('backToTop').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>

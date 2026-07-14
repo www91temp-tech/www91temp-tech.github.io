@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第16章：檸檬酸循環｜學習指南</title>
+<style>
+  :root{
+    --primary: hsl(32, 45%, 35%);
+    --primary-light: hsl(32, 45%, 92%);
+    --text: #1a1a1a;
+    --white: #ffffff;
+    --border: hsl(32, 30%, 80%);
+    --irrev: hsl(4, 55%, 45%);
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    font-family: "Noto Sans TC", "思源黑體", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    background: #fffdfa;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+  header{
+    text-align: center;
+    padding: 40px 20px 28px;
+    background: linear-gradient(180deg, var(--primary-light), #fffdfa);
+  }
+  header h1{
+    color: var(--primary);
+    font-size: 1.9rem;
+    letter-spacing: 0.05em;
+  }
+  header p{
+    margin-top: 8px;
+    color: hsl(32,20%,40%);
+    font-size: 1rem;
+  }
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  nav a{
+    text-decoration: none;
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.92rem;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  nav a:hover{ background: var(--primary-light); }
+  nav a.active{
+    background: var(--primary);
+    color: var(--white);
+    font-weight: 700;
+  }
+  main{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+  section{ margin-bottom: 56px; scroll-margin-top: 70px; }
+  h2{
+    color: var(--primary);
+    font-size: 1.5rem;
+    border-bottom: 3px solid var(--primary-light);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  h3{
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin: 28px 0 12px;
+  }
+  h4{
+    color: hsl(32,45%,30%);
+    font-size: 1.02rem;
+    margin: 18px 0 8px;
+  }
+  p{ margin-bottom: 14px; text-align: justify; }
+  ul, ol{ margin: 10px 0 16px 22px; }
+  li{ margin-bottom: 6px; }
+  strong{ color: var(--primary); }
+
+  .box{
+    background: var(--primary-light);
+    border-left: 5px solid var(--primary);
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .box-title{
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .box.clinical{ border-left-color: var(--irrev); background: hsl(4,55%,96%); }
+  .box.clinical .box-title{ color: var(--irrev); }
+  .box.enzyme{ border-left-color: hsl(150,35%,35%); background: hsl(150,35%,95%); }
+  .box.enzyme .box-title{ color: hsl(150,40%,28%); }
+  .box.mech{ border-left-color: hsl(220,45%,45%); background: hsl(220,45%,96%); }
+  .box.mech .box-title{ color: hsl(220,45%,35%); }
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 22px;
+    font-size: 0.93rem;
+  }
+  caption{
+    caption-side: top;
+    text-align: left;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  th, td{
+    border: 1px solid var(--border);
+    padding: 9px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th{
+    background: var(--primary);
+    color: var(--white);
+    font-weight: 700;
+  }
+  tr:nth-child(even) td{ background: var(--primary-light); }
+  .irrev-row td{ font-weight: 700; }
+  .tag{
+    display:inline-block;
+    font-size: 0.78rem;
+    padding: 1px 7px;
+    border-radius: 10px;
+    color: var(--white);
+    background: var(--irrev);
+    margin-left: 4px;
+  }
+  .compare-table th:first-child{ background: hsl(210,45%,42%); }
+  .compare-table th:nth-child(2){ background: hsl(150,40%,35%); }
+
+  .flow-steps{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch;
+    margin: 18px 0;
+  }
+  .flow-step{
+    background: var(--white);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: 10px 14px;
+    flex: 1 1 140px;
+    min-width: 130px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  .flow-step .num{
+    display:inline-block;
+    width: 22px; height:22px;
+    line-height: 22px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  .flow-arrow{
+    align-self: center;
+    color: var(--primary);
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  .stage-flow{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .stage-box{
+    flex: 1 1 200px;
+    background: var(--white);
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .stage-box h4{ margin-top:0; color: var(--primary); }
+  .stage-box small{ color: hsl(32,20%,40%); }
+
+  .hub-diagram{
+    display:grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 14px;
+    align-items: center;
+    margin: 20px 0;
+  }
+  .hub-center{
+    background: var(--primary);
+    color: var(--white);
+    text-align:center;
+    border-radius: 12px;
+    padding: 20px 10px;
+    font-weight: 700;
+  }
+  .hub-col{ display:flex; flex-direction:column; gap:8px; }
+  .hub-item{
+    background: var(--primary-light);
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    text-align:center;
+  }
+  .hub-item.in{ border-style: dashed; }
+
+  svg{ width: 100%; height: auto; display:block; margin: 10px auto; }
+  .svg-caption{
+    text-align:center;
+    font-size: 0.85rem;
+    color: hsl(32,20%,40%);
+    margin-bottom: 20px;
+  }
+
+  .kt-list{ list-style: none; margin-left:0; counter-reset: kt; }
+  .kt-list li{
+    counter-increment: kt;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    border-radius: 6px;
+    padding: 12px 14px 12px 44px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .kt-list li::before{
+    content: counter(kt);
+    position:absolute;
+    left: 10px; top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary);
+    color: var(--white);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 0.85rem;
+    font-weight:700;
+  }
+
+  footer{
+    text-align:center;
+    padding: 30px 20px 50px;
+    background: var(--primary-light);
+    color: hsl(32,20%,30%);
+  }
+  #backToTop{
+    background: var(--primary);
+    color: var(--white);
+    border:none;
+    padding: 10px 22px;
+    border-radius: 24px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 14px;
+    transition: transform 0.15s ease;
+  }
+  #backToTop:hover{ transform: translateY(-2px); }
+
+  @media (max-width: 1024px){
+    main{ padding: 24px 18px 50px; }
+    .hub-diagram{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px){
+    header h1{ font-size: 1.4rem; }
+    nav{ gap: 3px; padding: 8px 6px; }
+    nav a{ padding: 6px 10px; font-size: 0.82rem; }
+    h2{ font-size: 1.25rem; }
+    h3{ font-size: 1.05rem; }
+    table{ font-size: 0.8rem; }
+    th, td{ padding: 6px 6px; }
+    .flow-step{ flex: 1 1 100%; }
+    .flow-arrow{ transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第16章：檸檬酸循環</h1>
+  <p>The Citric Acid Cycle｜生物化學學習指南</p>
+</header>
+
+<nav id="navbar">
+  <a href="#s1">16.1 乙醯輔酶A的生成</a>
+  <a href="#s2">16.2 循環的反應</a>
+  <a href="#s3">16.3 代謝樞紐</a>
+  <a href="#s4">16.4 循環的調節</a>
+  <a href="#s5">重點回顧</a>
+</nav>
+
+<main>
+
+<!-- ============ 16.1 ============ -->
+<section id="s1">
+  <h2>16.1 乙醯輔酶A（活化乙酸）的生成</h2>
+
+  <p>細胞呼吸（<strong>cellular respiration</strong>）是好氧生物將燃料分子完全氧化成CO₂與H₂O的過程，可分為三個階段。檸檬酸循環（<strong>citric acid cycle</strong>，又稱三羧酸循環 <strong>tricarboxylic acid cycle, TCA cycle</strong>，或克氏循環 <strong>Krebs cycle</strong>）負責其中的第二階段。</p>
+
+  <div class="stage-flow">
+    <div class="stage-box">
+      <h4>階段一</h4>
+      <p style="margin:0">葡萄糖、脂肪酸、部分胺基酸氧化，產生二碳的乙醯基（乙醯輔酶A）</p>
+      <small>本章 16.1 節內容</small>
+    </div>
+    <div class="flow-arrow" style="align-self:center">→</div>
+    <div class="stage-box">
+      <h4>階段二</h4>
+      <p style="margin:0">乙醯基在檸檬酸循環中氧化成CO₂，能量保存在NADH、FADH₂中</p>
+      <small>本章 16.2–16.4 節內容</small>
+    </div>
+    <div class="flow-arrow" style="align-self:center">→</div>
+    <div class="stage-box">
+      <h4>階段三</h4>
+      <p style="margin:0">NADH、FADH₂經呼吸鏈氧化，電子傳給O₂生成H₂O，並驅動氧化磷酸化產生ATP</p>
+      <small>詳見第19章</small>
+    </div>
+  </div>
+  <p class="svg-caption">圖：細胞呼吸三階段（改繪自 Fig. 16-1）</p>
+
+  <h3>輔酶A與硫酯鍵</h3>
+  <p>輔酶A（coenzyme A, <strong>CoA</strong>）帶有一個活性的硫氫基（—SH），可與醯基（acyl group）形成<strong>硫酯鍵（thioester）</strong>。硫酯鍵水解的標準自由能變化很大，代表其醯基轉移潛能高——換句話說，接在CoA上的醯基是被「活化」了，容易轉移給其他分子。</p>
+
+  <h3>丙酮酸如何進入粒線體</h3>
+  <p>醣解作用（glycolysis）產生的丙酮酸（pyruvate）位於細胞質中，可經由<strong>粒線體丙酮酸載體（mitochondrial pyruvate carrier, MPC）</strong>進入粒線體基質（matrix）。進入基質後的丙酮酸可能：</p>
+  <ul>
+    <li>被檸檬酸循環氧化以產生能量；</li>
+    <li>轉為乙醯輔酶A後，作為脂肪酸與固醇合成的原料。</li>
+  </ul>
+
+  <h3>丙酮酸去氫酶複合體：三種酵素、五種輔因子</h3>
+  <p>丙酮酸在粒線體基質中，由<strong>丙酮酸去氫酶複合體（pyruvate dehydrogenase complex, PDH complex）</strong>催化，進行<strong>氧化去羧化（oxidative decarboxylation）</strong>反應，生成乙醯輔酶A、CO₂與NADH。此反應<strong>不可逆</strong>（ΔG′° ≈ −33.4 kJ/mol）。</p>
+
+  <table>
+    <caption>PDH複合體的三種酵素與五種輔因子</caption>
+    <thead><tr><th>酵素</th><th>簡稱</th><th>所需輔因子</th></tr></thead>
+    <tbody>
+      <tr><td>丙酮酸去氫酶</td><td>E₁</td><td>硫胺素焦磷酸 (TPP)</td></tr>
+      <tr><td>二氫硫辛醯轉乙醯酶</td><td>E₂</td><td>硫辛酸 (lipoate)、輔酶A (CoA)</td></tr>
+      <tr><td>二氫硫辛醯去氫酶</td><td>E₃</td><td>黃素腺嘌呤二核苷酸 (FAD)、菸鹼醯胺腺嘌呤二核苷酸 (NAD⁺)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box enzyme">
+    <div class="box-title">🔄 反應流程：受質通道化（substrate channeling）</div>
+    <div class="flow-steps">
+      <div class="flow-step"><span class="num">1</span><br>丙酮酸與E₁上的TPP作用，去羧生成羥乙基-TPP，釋出CO₂</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="num">2</span><br>羥乙基氧化為乙醯基，電子傳給E₂上硫辛醯基（形成還原態硫酯）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="num">3</span><br>轉酯化：CoA-SH取代硫辛酸的—SH，生成乙醯輔酶A</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="num">4</span><br>E₃將還原態硫辛醯基的氫轉移至FAD</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="num">5</span><br>FADH₂將氫化物轉給NAD⁺，生成NADH，複合體恢復原狀</div>
+    </div>
+    <p style="margin-top:8px">此五步驟反應中，中間產物始終不離開E₂上柔軟的<strong>硫辛醯離胺酸臂（lipoyllysyl arm）</strong>，直接在三個酵素活性位點間傳遞，稱為<strong>受質通道化（substrate channeling）</strong>，可避免中間產物被其他酵素搶走，並提高反應效率。</p>
+  </div>
+
+  <div class="box clinical">
+    <div class="box-title">🩺 臨床相關：維生素與腳氣病</div>
+    <p style="margin:0">PDH複合體需要四種源自維生素的輔因子：硫胺素（thiamine→TPP）、泛酸（pantothenate→CoA）、核黃素（riboflavin→FAD）、菸鹼酸（niacin→NAD）。腦部高度依賴丙酮酸氧化供能，因此<strong>硫胺素缺乏</strong>會導致<strong>腳氣病（beriberi）</strong>，出現神經功能喪失，常見於長期食用精白米或酗酒者。</p>
+  </div>
+</section>
+
+<!-- ============ 16.2 ============ -->
+<section id="s2">
+  <h2>16.2 檸檬酸循環的反應</h2>
+
+  <h3>為何不能直接氧化乙酸？</h3>
+  <p>若直接將乙酸去羧化，會產生CO₂與甲烷（CH₄），但大多數生物缺乏氧化甲烷所需的酵素。相對地，亞甲基（—CH₂—）鄰接羰基（carbonyl）時很容易被代謝氧化。因此，循環的第一步——乙醯輔酶A與草醯乙酸（oxaloacetate）縮合成檸檬酸（citrate）——巧妙地把不易處理的甲基，轉變為容易氧化的亞甲基，這正是整個循環化學邏輯的起點。</p>
+
+  <h3>循環總覽：八個步驟</h3>
+  <p>檸檬酸循環每轉一圈，消耗一分子乙醯輔酶A，經過八個連續反應，最終再生出草醯乙酸，使循環得以持續進行。</p>
+
+  <div class="box">
+    <div class="box-title">🔁 檸檬酸循環總覽圖</div>
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="hsl(32,45%,35%)"/>
+        </marker>
+        <marker id="arrowIrrev" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="hsl(4,55%,45%)"/>
+        </marker>
+      </defs>
+
+      <!-- connecting edges -->
+      <line x1="300" y1="80" x2="456" y2="144" stroke="hsl(32,45%,35%)" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="456" y1="144" x2="520" y2="300" stroke="hsl(4,55%,45%)" stroke-width="3" marker-end="url(#arrowIrrev)"/>
+      <line x1="520" y1="300" x2="456" y2="456" stroke="hsl(4,55%,45%)" stroke-width="3" marker-end="url(#arrowIrrev)"/>
+      <line x1="456" y1="456" x2="300" y2="520" stroke="hsl(32,45%,35%)" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="300" y1="520" x2="144" y2="456" stroke="hsl(32,45%,35%)" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="144" y1="456" x2="80" y2="300" stroke="hsl(32,45%,35%)" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="80" y1="300" x2="144" y2="144" stroke="hsl(32,45%,35%)" stroke-width="3" marker-end="url(#arrow)"/>
+      <line x1="144" y1="144" x2="300" y2="80" stroke="hsl(4,55%,45%)" stroke-width="3" marker-end="url(#arrowIrrev)"/>
+
+      <!-- step number badges -->
+      <g font-size="15" font-weight="700" fill="#fff" text-anchor="middle">
+        <circle cx="378" cy="112" r="14" fill="hsl(32,45%,35%)"/><text x="378" y="117">2</text>
+        <circle cx="487" cy="222" r="14" fill="hsl(4,55%,45%)"/><text x="487" y="227">3</text>
+        <circle cx="487" cy="378" r="14" fill="hsl(4,55%,45%)"/><text x="487" y="383">4</text>
+        <circle cx="378" cy="487" r="14" fill="hsl(32,45%,35%)"/><text x="378" y="492">5</text>
+        <circle cx="222" cy="487" r="14" fill="hsl(32,45%,35%)"/><text x="222" y="492">6</text>
+        <circle cx="112" cy="378" r="14" fill="hsl(32,45%,35%)"/><text x="112" y="383">7</text>
+        <circle cx="112" cy="222" r="14" fill="hsl(32,45%,35%)"/><text x="112" y="227">8</text>
+        <circle cx="222" cy="112" r="14" fill="hsl(4,55%,45%)"/><text x="222" y="117">1</text>
+      </g>
+
+      <!-- nodes -->
+      <g text-anchor="middle" font-size="13">
+        <circle cx="300" cy="80" r="40" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="300" y="76" fill="#1a1a1a" font-weight="700">檸檬酸</text>
+        <text x="300" y="92" fill="#1a1a1a" font-size="11">Citrate</text>
+
+        <circle cx="456" cy="144" r="40" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="456" y="140" fill="#1a1a1a" font-weight="700">異檸檬酸</text>
+        <text x="456" y="156" fill="#1a1a1a" font-size="11">Isocitrate</text>
+
+        <circle cx="520" cy="300" r="42" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="520" y="292" fill="#1a1a1a" font-weight="700">α-酮戊二酸</text>
+        <text x="520" y="308" fill="#1a1a1a" font-size="10">α-Ketoglutarate</text>
+
+        <circle cx="456" cy="456" r="44" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="456" y="450" fill="#1a1a1a" font-weight="700" font-size="12">琥珀醯輔酶A</text>
+        <text x="456" y="466" fill="#1a1a1a" font-size="10">Succinyl-CoA</text>
+
+        <circle cx="300" cy="520" r="40" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="300" y="516" fill="#1a1a1a" font-weight="700">琥珀酸</text>
+        <text x="300" y="532" fill="#1a1a1a" font-size="11">Succinate</text>
+
+        <circle cx="144" cy="456" r="40" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="144" y="452" fill="#1a1a1a" font-weight="700">延胡索酸</text>
+        <text x="144" y="468" fill="#1a1a1a" font-size="11">Fumarate</text>
+
+        <circle cx="80" cy="300" r="40" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="80" y="296" fill="#1a1a1a" font-weight="700">蘋果酸</text>
+        <text x="80" y="312" fill="#1a1a1a" font-size="11">Malate</text>
+
+        <circle cx="144" cy="144" r="42" fill="hsl(32,45%,92%)" stroke="hsl(32,45%,35%)" stroke-width="2"/>
+        <text x="144" y="138" fill="#1a1a1a" font-weight="700" font-size="12">草醯乙酸</text>
+        <text x="144" y="154" fill="#1a1a1a" font-size="10">Oxaloacetate</text>
+      </g>
+
+      <!-- center label -->
+      <text x="300" y="295" text-anchor="middle" font-size="16" font-weight="700" fill="hsl(32,45%,35%)">檸檬酸循環</text>
+      <text x="300" y="315" text-anchor="middle" font-size="11" fill="hsl(32,20%,40%)">Citric Acid Cycle</text>
+
+      <!-- input arrow: acetyl-CoA into citrate -->
+      <line x1="300" y1="20" x2="300" y2="42" stroke="hsl(150,40%,30%)" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="300" y="14" text-anchor="middle" font-size="12" fill="hsl(150,40%,25%)" font-weight="700">乙醯輔酶A進入</text>
+    </svg>
+    <p class="svg-caption">紅色編號（①③④）為循環中<strong>不可逆</strong>步驟；圖中僅標示反應順序與關鍵節點，完整反應細節請見下表（改繪自 Fig. 16-7）。</p>
+  </div>
+
+  <table>
+    <caption>檸檬酸循環八步驟總表</caption>
+    <thead>
+      <tr><th>步驟</th><th>反應類型</th><th>酵素</th><th>輔因子變化</th><th>可逆性</th></tr>
+    </thead>
+    <tbody>
+      <tr class="irrev-row"><td>① 縮合</td><td>乙醯輔酶A + 草醯乙酸 + H₂O → 檸檬酸 + CoA-SH</td><td>檸檬酸合成酶 citrate synthase</td><td>—</td><td><span class="tag">不可逆</span></td></tr>
+      <tr><td>② 異構化</td><td>檸檬酸 ⇌ 異檸檬酸（經cis-烏頭酸中間體）</td><td>烏頭酸酶 aconitase</td><td>—</td><td>可逆</td></tr>
+      <tr class="irrev-row"><td>③ 氧化去羧化</td><td>異檸檬酸 → α-酮戊二酸 + CO₂</td><td>異檸檬酸去氫酶 isocitrate dehydrogenase</td><td>NAD⁺→NADH</td><td><span class="tag">不可逆</span></td></tr>
+      <tr class="irrev-row"><td>④ 氧化去羧化</td><td>α-酮戊二酸 → 琥珀醯輔酶A + CO₂</td><td>α-酮戊二酸去氫酶複合體</td><td>CoA-SH, NAD⁺→NADH</td><td><span class="tag">不可逆</span></td></tr>
+      <tr><td>⑤ 受質層次磷酸化</td><td>琥珀醯輔酶A → 琥珀酸</td><td>琥珀醯輔酶A合成酶</td><td>GDP+Pi→GTP（或ADP→ATP）</td><td>可逆</td></tr>
+      <tr><td>⑥ 去氫</td><td>琥珀酸 → 延胡索酸</td><td>琥珀酸去氫酶 succinate dehydrogenase</td><td>FAD→FADH₂</td><td>可逆</td></tr>
+      <tr><td>⑦ 水合</td><td>延胡索酸 → 蘋果酸</td><td>延胡索酸酶 fumarase</td><td>+H₂O</td><td>可逆</td></tr>
+      <tr><td>⑧ 去氫</td><td>蘋果酸 → 草醯乙酸</td><td>蘋果酸去氫酶 malate dehydrogenase</td><td>NAD⁺→NADH</td><td>可逆（細胞內被拉向正向）</td></tr>
+    </tbody>
+  </table>
+
+  <h4>各步驟補充重點</h4>
+  <div class="box mech">
+    <div class="box-title">🧪 步驟①：檸檬酸合成酶的機制</div>
+    <p style="margin:0">此反應本質是<strong>醛醇縮合（aldol condensation）</strong>，分三個微步驟：(1) 乙醯輔酶A的甲基被去質子，形成烯醇中間體；(2) 烯醇進攻草醯乙酸的羰基碳，形成檸檬醯輔酶A（citroyl-CoA）；(3) 高能硫酯水解，釋出CoA-SH與檸檬酸。此步驟ΔG′° = −32.2 kJ/mol，強烈放能，是循環得以持續向前的重要驅動力。</p>
+  </div>
+
+  <p><strong>步驟②：</strong>烏頭酸酶（aconitase）含有<strong>鐵硫中心（iron-sulfur center）</strong>，用於結合受質並催化脫水/再水合。此酵素在細胞質中還有「兼職（moonlighting）」的第二身分——鐵調節蛋白1（IRP1），在細胞缺鐵時失去鐵硫簇，轉而調控儲鐵蛋白（ferritin）與運鐵蛋白受體（transferrin receptor）mRNA的表現，參與鐵恆定調節。</p>
+
+  <p><strong>步驟③：</strong>異檸檬酸去氫酶有兩種同功異型酶：粒線體基質中<strong>NAD⁺依賴型</strong>參與檸檬酸循環；另一種<strong>NADP⁺依賴型</strong>（存在於基質與細胞質）主要功能是產生NADPH，供脂肪酸與固醇合成等還原性生合成使用。</p>
+
+  <p><strong>步驟④：</strong>α-酮戊二酸去氫酶複合體在結構、輔因子與反應機制上都與PDH複合體高度相似（詳見下方比較表），兩者是同源演化而來的旁系同源酵素（paralog）。</p>
+
+  <p><strong>步驟⑤：</strong>琥珀醯輔酶A的硫酯鍵水解能量，經由酵素本身His殘基暫時磷酸化的中間態，轉移到GDP（或ADP）形成GTP（或ATP），這是循環中唯一直接產生高能磷酸鍵的步驟，稱為<strong>受質層次磷酸化（substrate-level phosphorylation）</strong>。</p>
+
+  <p><strong>步驟⑥：</strong>琥珀酸去氫酶是唯一嵌在粒線體內膜上的循環酵素，同時也是呼吸鏈複合體II。丙二酸（malonate）是其強力競爭性抑制劑，常用於實驗室阻斷循環活性。</p>
+
+  <p><strong>步驟⑦與⑧：</strong>延胡索酸酶具高度立體專一性，只作用於反式雙鍵；蘋果酸去氫酶反應本身ΔG′°為正值（不利），但因產物草醯乙酸不斷被步驟①消耗、濃度極低，反應被拉向正向進行。</p>
+
+  <h3>本章容易混淆的概念比較①</h3>
+  <table class="compare-table">
+    <caption>PDH複合體 vs. α-酮戊二酸去氫酶複合體</caption>
+    <thead><tr><th>A：PDH複合體</th><th>B：α-酮戊二酸去氫酶複合體</th><th>差異</th></tr></thead>
+    <tbody>
+      <tr><td>受質為丙酮酸（pyruvate）</td><td>受質為α-酮戊二酸</td><td>受質不同，但反應機制幾乎相同（皆為氧化去羧化）</td></tr>
+      <tr><td>產物為乙醯輔酶A</td><td>產物為琥珀醯輔酶A</td><td>產物不同，但都生成CoA硫酯、CO₂、NADH</td></tr>
+      <tr><td>位於糖解與循環的交界，不屬於循環本身</td><td>屬於循環的第④步驟</td><td>PDH複合體是進入循環「前」的反應；本複合體是循環「中」的反應</td></tr>
+      <tr><td>E₁、E₂、E₃三種酵素、五種輔因子（TPP、硫辛酸、CoA、FAD、NAD）</td><td>結構與輔因子組成幾乎相同，E₃與PDH複合體共用</td><td>兩者由共同祖先經基因重複演化而來（同源）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>能量產出</h3>
+  <p>循環每轉一圈，直接產生1分子ATP（或GTP），但四個氧化步驟釋出的電子經NADH與FADH₂送入呼吸鏈後，透過氧化磷酸化可再產生約10倍的ATP。</p>
+
+  <table>
+    <caption>檸檬酸循環一圈的能量收支（每消耗1個乙醯輔酶A）</caption>
+    <thead><tr><th>項目</th><th>數量</th><th>經氧化磷酸化後約可產生</th></tr></thead>
+    <tbody>
+      <tr><td>NADH</td><td>3</td><td>3 × 2.5 = 7.5 ATP</td></tr>
+      <tr><td>FADH₂</td><td>1</td><td>1 × 1.5 = 1.5 ATP</td></tr>
+      <tr><td>GTP（或ATP，受質層次磷酸化）</td><td>1</td><td>1 ATP</td></tr>
+      <tr><td>CO₂</td><td>2</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p>合併醣解作用、PDH複合體反應與兩圈循環（一分子葡萄糖產生2個丙酮酸），一分子葡萄糖完全氧化最多可產生約<strong>30–32個ATP</strong>，效率遠高於無氧醣解（每葡萄糖僅2 ATP）。</p>
+
+  <h3>本章容易混淆的概念比較②</h3>
+  <table class="compare-table">
+    <caption>受質層次磷酸化 vs. 氧化磷酸化</caption>
+    <thead><tr><th>A：受質層次磷酸化<br>(substrate-level phosphorylation)</th><th>B：氧化磷酸化<br>(oxidative phosphorylation)</th><th>差異</th></tr></thead>
+    <tbody>
+      <tr><td>發生於循環步驟⑤（琥珀醯輔酶A→琥珀酸）</td><td>發生於粒線體內膜的呼吸鏈（第19章）</td><td>反應發生位置不同</td></tr>
+      <tr><td>由代謝中間產物的高能鍵直接轉移磷酸基給ADP/GDP</td><td>由電子經呼吸鏈傳遞至O₂所建立的質子梯度驅動ATP合成酶</td><td>能量來源與機制完全不同</td></tr>
+      <tr><td>不需要O₂</td><td>需要O₂作為最終電子受體</td><td>對氧氣的依賴性不同</td></tr>
+      <tr><td>每次反應僅產生1分子ATP/GTP</td><td>每對電子（NADH或FADH₂）可產生1.5–2.5個ATP，貢獻絕大多數ATP</td><td>產能效率相差懸殊</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 16.3 ============ -->
+<section id="s3">
+  <h2>16.3 中間代謝的樞紐</h2>
+
+  <h3>雙向路徑：分解與合成代謝並行</h3>
+  <p>檸檬酸循環是一條<strong>雙向路徑（amphibolic pathway）</strong>，同時參與分解代謝（catabolism）與合成代謝（anabolism）：</p>
+  <ul>
+    <li>草醯乙酸、α-酮戊二酸可經轉胺作用（transamination）分別轉為天門冬胺酸（aspartate）與麩胺酸（glutamate），進一步合成其他胺基酸、嘌呤與嘧啶核苷酸；</li>
+    <li>琥珀醯輔酶A是血基質（heme）卟啉環的合成前驅物；</li>
+    <li>草醯乙酸可經糖質新生（gluconeogenesis）轉為葡萄糖；</li>
+    <li>檸檬酸可運出粒線體，作為細胞質中脂肪酸與固醇合成的碳源。</li>
+  </ul>
+
+  <div class="box">
+    <div class="box-title">💡 重要觀念：動物無法將脂肪酸淨轉化為葡萄糖</div>
+    <p style="margin:0">乙醯輔酶A進入循環的兩個碳，最終仍以兩個CO₂的形式離開循環，因此<strong>沒有淨（net）碳骨架</strong>從乙醯輔酶A轉為草醯乙酸，動物無法藉此路徑將脂肪酸轉換成葡萄糖。植物、真菌與部分細菌則擁有<strong>乙醛酸循環（glyoxylate cycle）</strong>，跳過兩個去羧化步驟，可將兩分子乙酸淨轉為一分子草醯乙酸，因此能以脂肪酸合成醣類。</p>
+  </div>
+
+  <h3>回補反應：補充循環中間產物</h3>
+  <p>當循環的中間產物被大量抽出用於生合成時，其濃度下降會使循環變慢，此時需靠<strong>回補反應（anaplerotic reactions）</strong>加以補充。</p>
+
+  <table>
+    <caption>常見回補反應（Table 16-2）</caption>
+    <thead><tr><th>反應</th><th>酵素</th><th>主要組織/生物</th></tr></thead>
+    <tbody>
+      <tr><td>丙酮酸 + HCO₃⁻ + ATP → 草醯乙酸 + ADP + Pi</td><td>丙酮酸羧化酶 pyruvate carboxylase</td><td>肝臟、腎臟（哺乳動物最重要的回補反應）</td></tr>
+      <tr><td>磷酸烯醇丙酮酸 + CO₂ + GDP → 草醯乙酸 + GTP</td><td>PEP羧激酶</td><td>心臟、骨骼肌</td></tr>
+      <tr><td>磷酸烯醇丙酮酸 + HCO₃⁻ → 草醯乙酸 + Pi</td><td>PEP羧化酶</td><td>高等植物、酵母菌、細菌</td></tr>
+      <tr><td>丙酮酸 + HCO₃⁻ + NAD(P)H → 蘋果酸 + NAD(P)⁺</td><td>蘋果酸酶 malic enzyme</td><td>廣泛存在於真核生物與細菌</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>丙酮酸羧化酶（pyruvate carboxylase）</strong>是一個受調節的酵素，須有其正向異位調節物<strong>乙醯輔酶A</strong>存在才具活性：當乙醯輔酶A過剩時，會刺激更多草醯乙酸生成，使循環能容納更多乙醯輔酶A進入，達到供需平衡。此反應需要維生素<strong>生物素（biotin）</strong>作為輔基，以活化態CO₂的形式攜帶羧基，經由酵素上的柔軟臂在兩個活性位點間傳遞——與PDH複合體中硫辛酸臂的角色類似，同屬受質通道化策略。</p>
+
+  <div class="box enzyme">
+    <div class="box-title">🌐 檸檬酸循環作為代謝樞紐（改繪自 Fig. 16-15）</div>
+    <div class="hub-diagram">
+      <div class="hub-col">
+        <div class="hub-item in">丙酮酸 → 草醯乙酸<br><small>(回補)</small></div>
+        <div class="hub-item in">磷酸烯醇丙酮酸 → 草醯乙酸<br><small>(回補)</small></div>
+      </div>
+      <div class="hub-center">檸檬酸循環<br><small style="font-weight:400">中間產物庫</small></div>
+      <div class="hub-col">
+        <div class="hub-item">檸檬酸 → 脂肪酸、固醇</div>
+        <div class="hub-item">α-酮戊二酸 → 麩胺酸類胺基酸、嘌呤</div>
+        <div class="hub-item">草醯乙酸 → 天門冬胺酸類胺基酸、嘧啶、葡萄糖</div>
+        <div class="hub-item">琥珀醯輔酶A → 血基質（porphyrin）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16.4 ============ -->
+<section id="s4">
+  <h2>16.4 檸檬酸循環的調節</h2>
+
+  <p>檸檬酸循環身居代謝樞紐，需與多條路徑協調，因此受到多層次的嚴密調節，主要作用於（1）PDH複合體生成乙醯輔酶A，以及（2）循環中三個強放能、不可逆的步驟。</p>
+
+  <h3>PDH複合體的調節：異位調節 + 共價修飾</h3>
+  <table>
+    <caption>PDH複合體的雙重調節機制</caption>
+    <thead><tr><th>調節方式</th><th>抑制訊號</th><th>活化訊號</th></tr></thead>
+    <tbody>
+      <tr><td><strong>異位調節（allosteric）</strong></td><td>ATP、乙醯輔酶A、NADH、長鏈脂肪酸</td><td>AMP、CoA-SH、NAD⁺</td></tr>
+      <tr><td><strong>共價修飾（covalent, 磷酸化）</strong></td><td>PDH激酶（PDH kinase）使E₁上Ser殘基磷酸化 → 失活</td><td>PDH磷酸酶（PDH phosphatase）去磷酸化 → 恢復活性；肌肉中Ca²⁺可活化磷酸酶</td></tr>
+    </tbody>
+  </table>
+  <p>整體邏輯：當ATP、NADH、乙醯輔酶A（代表能量充足）濃度高時，PDH複合體受到雙重抑制而關閉；當ADP、NAD⁺、丙酮酸（代表能量需求上升）濃度升高時，PDH複合體被重新活化，讓更多乙醯輔酶A流入循環。</p>
+
+  <div class="box clinical">
+    <div class="box-title">🩺 臨床相關：DCA與腫瘤代謝</div>
+    <p style="margin:0">雙氯乙酸（<strong>dichloroacetate, DCA</strong>）可抑制PDH激酶，使PDH複合體維持活化，促進丙酮酸進入粒線體氧化，有助於將腫瘤細胞的代謝模式從「有氧糖解（Warburg effect）」導回正常粒線體氧化，並可能促進癌細胞凋亡，目前已進入第三期臨床試驗。</p>
+  </div>
+
+  <h3>循環中三個限速步驟</h3>
+  <p>檸檬酸合成酶、異檸檬酸去氫酶與α-酮戊二酸去氫酶三個強放能反應，都可能在不同生理狀態下成為限速步驟（rate-limiting step）。</p>
+
+  <table>
+    <caption>三個限速步驟的異位調節</caption>
+    <thead><tr><th>酵素</th><th>抑制物</th><th>活化物</th></tr></thead>
+    <tbody>
+      <tr><td>檸檬酸合成酶</td><td>NADH、琥珀醯輔酶A、檸檬酸、ATP</td><td>ADP</td></tr>
+      <tr><td>異檸檬酸去氫酶</td><td>ATP</td><td>Ca²⁺、ADP</td></tr>
+      <tr><td>α-酮戊二酸去氫酶</td><td>琥珀醯輔酶A、NADH</td><td>Ca²⁺</td></tr>
+    </tbody>
+  </table>
+  <p>在脊椎動物肌肉中，Ca²⁺同時是收縮訊號，也同步活化PDH複合體、異檸檬酸去氫酶與α-酮戊二酸去氫酶，使能量產生與能量消耗（收縮）需求相互配合。此外，檸檬酸本身也會異位抑制醣解路徑中的磷酸果糖激酶-1（PFK-1），將醣解與循環的速率整合在一起。</p>
+
+  <h3>臨床相關性：致癌代謝物與腫瘤</h3>
+  <div class="box clinical">
+    <div class="box-title">🩺 循環酵素突變與腫瘤</div>
+    <ul style="margin:0 0 0 18px">
+      <li><strong>琥珀酸去氫酶（SDH）</strong>突變 → 腎上腺嗜鉻細胞瘤（pheochromocytoma）</li>
+      <li><strong>延胡索酸酶（fumarase）</strong>突變 → 平滑肌瘤、腎臟腫瘤</li>
+      <li>兩者皆屬<strong>腫瘤抑制基因（tumor suppressor）</strong>，突變後失去活性，導致琥珀酸或延胡索酸異常堆積</li>
+      <li>某些神經膠質瘤（glioma）中，NADP⁺依賴型異檸檬酸去氫酶（IDH）發生突變，喪失原本活性，卻獲得新功能：將α-酮戊二酸轉為<strong>2-羥基戊二酸（2-hydroxyglutarate）</strong>，此代謝物會競爭性抑制組蛋白去甲基酶，干擾基因調控，促進腫瘤生長</li>
+      <li>腫瘤細胞中粒線體丙酮酸載體（MPC）常被下調，PDH複合體與SDH活性降低，導致乳酸與琥珀酸堆積，兩者皆為<strong>致癌代謝物（oncometabolite）</strong>，可透過G蛋白偶聯受體促進腫瘤生長</li>
+    </ul>
+  </div>
+
+  <h3>受質通道化與代謝體（metabolon）</h3>
+  <p>除了PDH複合體與丙酮酸羧化酶，證據顯示循環中連續三個酵素——<strong>蘋果酸去氫酶、檸檬酸合成酶、烏頭酸酶</strong>——可組成一個鬆散的多酵素複合體，稱為<strong>代謝體（metabolon）</strong>。草醯乙酸可沿著複合體表面帶正電的通道，直接從蘋果酸去氫酶的活性位點傳遞到檸檬酸合成酶，避免因擴散稀釋而降低反應效率。</p>
+
+  <h3>本章容易混淆的概念比較③</h3>
+  <table class="compare-table">
+    <caption>異位調節 vs. 共價修飾（以PDH複合體為例）</caption>
+    <thead><tr><th>A：異位調節<br>(allosteric regulation)</th><th>B：共價修飾<br>(covalent modification)</th><th>差異</th></tr></thead>
+    <tbody>
+      <tr><td>代謝物（ATP、ADP、NADH、乙醯輔酶A等）直接結合酵素調節位點</td><td>PDH激酶／磷酸酶對E₁進行磷酸化／去磷酸化</td><td>調節分子的性質不同（小分子代謝物 vs. 酵素催化的共價修飾）</td></tr>
+      <tr><td>反應快速、可逆，即時反映代謝物濃度變化</td><td>需消耗ATP（磷酸化）與水解磷酸鍵（去磷酸化），反應相對較慢但可放大訊號</td><td>速度與能量成本不同</td></tr>
+      <tr><td>直接調節酵素活性</td><td>間接調節：先影響激酶／磷酸酶活性，再改變PDH複合體的磷酸化狀態</td><td>調節層級不同</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="s5">
+  <h2>Key Takeaways 重點回顧</h2>
+  <ul class="kt-list">
+    <li>檸檬酸循環是好氧生物能量代謝的核心樞紐，功能是將乙醯輔酶A的二碳單位完全氧化成CO₂，並以NADH、FADH₂保存能量。</li>
+    <li>丙酮酸須先經<strong>PDH複合體</strong>（三酵素、五輔因子：TPP、硫辛酸、CoA、FAD、NAD）不可逆地轉為乙醯輔酶A，才能進入循環。</li>
+    <li>循環每轉一圈：消耗1個乙醯輔酶A，產生<strong>2個CO₂、3個NADH、1個FADH₂、1個GTP（ATP）</strong>，並再生1個草醯乙酸。</li>
+    <li>循環中三個<strong>不可逆步驟</strong>由檸檬酸合成酶、異檸檬酸去氫酶、α-酮戊二酸去氫酶催化，是主要的調節與限速位點。</li>
+    <li>檸檬酸循環是<strong>雙向路徑（amphibolic pathway）</strong>，中間產物既可被氧化產能，也可流出作為胺基酸、脂肪酸、血基質、核苷酸等生合成原料。</li>
+    <li>當中間產物被抽出過多時，需靠<strong>回補反應</strong>（如丙酮酸羧化酶）補充，維持循環正常運轉。</li>
+    <li>NADH與FADH₂攜帶的電子進入呼吸鏈，經氧化磷酸化可產生絕大多數ATP，一分子葡萄糖完全氧化最多可得約30–32個ATP。</li>
+    <li>調節機制包含<strong>異位調節</strong>（ATP/ADP、NADH/NAD⁺比值等）與<strong>共價修飾</strong>（PDH激酶／磷酸酶），並整合Ca²⁺訊號以配合能量需求。</li>
+    <li>臨床重點：硫胺素缺乏致腳氣病；SDH與延胡索酸酶突變與腫瘤相關；突變型IDH產生致癌代謝物2-羥基戊二酸；DCA可能用於調控腫瘤代謝。</li>
+    <li>必背八種循環酵素：<strong>檸檬酸合成酶、烏頭酸酶、異檸檬酸去氫酶、α-酮戊二酸去氫酶複合體、琥珀醯輔酶A合成酶、琥珀酸去氫酶、延胡索酸酶、蘋果酸去氫酶</strong>；並理解「受質通道化」與「代謝體」如何提升代謝效率。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <button id="backToTop">回到頂端 ↑</button>
+  <p>第16章：檸檬酸循環｜學習指南</p>
+</footer>
+
+<script>
+  // Back to top
+  document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('nav a').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if(target){
+        var navHeight = document.getElementById('navbar').offsetHeight;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 8;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Scroll spy: highlight active nav item
+  var sections = document.querySelectorAll('main section');
+  var navLinks = document.querySelectorAll('nav a');
+
+  function onScroll(){
+    var scrollPos = window.pageYOffset + document.getElementById('navbar').offsetHeight + 40;
+    var currentId = sections[0].id;
+    sections.forEach(function(sec){
+      if(sec.offsetTop <= scrollPos){
+        currentId = sec.id;
+      }
+    });
+    navLinks.forEach(function(link){
+      link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第22章：胺基酸、核苷酸與相關分子的生合成｜學習指南</title>
+<style>
+  :root{
+    --hue: 314;
+    --main: hsl(314, 45%, 35%);
+    --main-light: hsl(314, 45%, 92%);
+    --main-dark: hsl(314, 45%, 25%);
+    --text: #1a1a1a;
+    --border: hsl(314, 25%, 80%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","PingFang TC","Heiti TC","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    line-height:1.85;
+    background:#fdfbfd;
+    font-size:16px;
+  }
+  h1,h2,h3,h4{
+    color:var(--main-dark);
+    font-weight:700;
+    line-height:1.4;
+  }
+  p{margin:0.9em 0;}
+
+  /* ---------- Header ---------- */
+  header{
+    text-align:center;
+    padding:2.6rem 1rem 2rem;
+    background:linear-gradient(180deg, var(--main-light) 0%, #fff 100%);
+    border-bottom:1px solid var(--border);
+  }
+  header h1{
+    font-size:1.7rem;
+    margin:0 0 .6rem;
+    color:var(--main-dark);
+  }
+  header p.subtitle{
+    color:#555;
+    font-size:.95rem;
+    margin:0;
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:2px solid var(--main);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:.5rem 1rem;
+    gap:.3rem;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--main-dark);
+    font-size:.88rem;
+    padding:.5rem .9rem;
+    border-radius:20px;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{background:var(--main-light);}
+  nav a.active{
+    background:var(--main);
+    color:#fff;
+    font-weight:700;
+  }
+
+  /* ---------- Main layout ---------- */
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:1rem 1.3rem 4rem;
+  }
+  section{
+    padding-top:2.2rem;
+    margin-top:.5rem;
+    border-top:1px dashed var(--border);
+  }
+  section:first-of-type{border-top:none;}
+  h2{
+    font-size:1.35rem;
+    border-left:6px solid var(--main);
+    padding-left:.6rem;
+    margin-top:0;
+  }
+  h3{
+    font-size:1.12rem;
+    margin-top:2rem;
+    color:var(--main-dark);
+    padding-bottom:.3rem;
+    border-bottom:2px solid var(--main-light);
+  }
+  h4{
+    font-size:1rem;
+    margin-top:1.3rem;
+    color:var(--main);
+  }
+  .lead{
+    font-size:1rem;
+    color:#333;
+    background:var(--main-light);
+    padding:1rem 1.2rem;
+    border-radius:10px;
+  }
+  .term{font-weight:700; color:var(--main-dark);}
+  small.eng{color:#777; font-weight:400;}
+
+  /* ---------- Info Boxes ---------- */
+  .box{
+    margin:1.1rem 0;
+    padding:.9rem 1.1rem;
+    border-left:5px solid var(--main);
+    background:var(--main-light);
+    border-radius:0 8px 8px 0;
+    font-size:.93rem;
+  }
+  .box .box-title{
+    font-weight:700;
+    color:var(--main-dark);
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    margin-bottom:.4rem;
+    font-size:.95rem;
+  }
+  .box.outline{
+    background:#fff;
+    border:2px solid var(--main);
+  }
+  .box-clinical{border-left-color:#333; }
+  .box-clinical .box-title{color:#333;}
+
+  /* ---------- Pathway flow ---------- */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.35rem;
+    margin:1rem 0;
+    padding:.9rem;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow-x:auto;
+  }
+  .flow-box{
+    border:2px solid var(--main);
+    border-radius:8px;
+    padding:.4rem .75rem;
+    background:#fff;
+    font-size:.85rem;
+    font-weight:700;
+    color:var(--main-dark);
+    white-space:nowrap;
+    text-align:center;
+  }
+  .flow-box.end{background:var(--main); color:#fff;}
+  .flow-box.mid{border-style:dashed; font-weight:400; color:#555; font-size:.78rem;}
+  .flow-arrow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:.7rem;
+    color:#666;
+    min-width:60px;
+  }
+  .flow-arrow .arr{color:var(--main); font-size:1.1rem; line-height:1;}
+  .flow-vert{width:100%; display:flex; justify-content:center; margin:.15rem 0;}
+
+  /* ---------- Tables ---------- */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.1rem 0;
+    font-size:.88rem;
+  }
+  caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--main-dark);
+    margin-bottom:.4rem;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:.5rem .6rem;
+    text-align:left;
+  }
+  th{
+    background:var(--main);
+    color:#fff;
+    font-weight:700;
+  }
+  tr:nth-child(even) td{background:#faf6fa;}
+  table.compare th:nth-child(1){width:32%;}
+  table.compare th:nth-child(2){width:32%;}
+
+  /* ---------- Misc ---------- */
+  ul,ol{padding-left:1.4rem;}
+  li{margin:.35rem 0;}
+  .tag{
+    display:inline-block;
+    font-size:.72rem;
+    background:var(--main);
+    color:#fff;
+    padding:.1rem .55rem;
+    border-radius:10px;
+    margin-right:.3rem;
+  }
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.8rem;
+  }
+  .mini-card{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:.6rem .8rem;
+    background:#fff;
+    font-size:.85rem;
+  }
+  .mini-card b{color:var(--main-dark);}
+  code{
+    background:#f1eaf1;
+    padding:.1rem .35rem;
+    border-radius:4px;
+    font-size:.86em;
+  }
+  .eq{
+    text-align:center;
+    background:#fff;
+    border:1px dashed var(--border);
+    border-radius:8px;
+    padding:.6rem;
+    margin:.9rem 0;
+    font-size:.92rem;
+    overflow-x:auto;
+  }
+  .svgwrap{
+    text-align:center;
+    margin:1rem 0;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:.6rem;
+    overflow-x:auto;
+  }
+  .svgwrap svg{max-width:100%; height:auto;}
+  .caption-note{font-size:.78rem; color:#666; text-align:center; margin-top:.3rem;}
+
+  .takeaway-list{
+    background:var(--main-light);
+    border-radius:12px;
+    padding:1.3rem 1.6rem;
+  }
+  .takeaway-list li{margin:.6rem 0; font-size:.95rem;}
+  .takeaway-list b{color:var(--main-dark);}
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    background:var(--main-light);
+    border-top:1px solid var(--border);
+  }
+  footer p{color:#444; font-size:.9rem; margin:.3rem 0 1.2rem;}
+  #backToTop{
+    background:var(--main);
+    color:#fff;
+    border:none;
+    padding:.65rem 1.4rem;
+    border-radius:24px;
+    font-size:.9rem;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .2s;
+  }
+  #backToTop:hover{background:var(--main-dark);}
+
+  /* ---------- RWD ---------- */
+  @media (max-width:1024px){
+    main{max-width:100%; padding:1rem 1rem 3rem;}
+  }
+  @media (max-width:768px){
+    header h1{font-size:1.3rem;}
+    nav{gap:.15rem; padding:.4rem .5rem;}
+    nav a{font-size:.78rem; padding:.4rem .6rem;}
+    .grid2{grid-template-columns:1fr;}
+    table{font-size:.78rem;}
+    h2{font-size:1.15rem;}
+    h3{font-size:1.02rem;}
+    .flow{padding:.6rem;}
+    .flow-box{font-size:.76rem; padding:.3rem .5rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第22章：胺基酸、核苷酸與相關分子的生合成</h1>
+  <p class="subtitle">學習指南 ｜ Biosynthesis of Amino Acids, Nucleotides, and Related Molecules</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#sec1">22.1 氮代謝總覽</a>
+  <a href="#sec2">22.2 胺基酸生合成</a>
+  <a href="#sec3">22.3 胺基酸衍生分子</a>
+  <a href="#sec4">22.4 核苷酸生合成與分解</a>
+  <a href="#takeaways">重點回顧</a>
+</nav>
+
+<main>
+
+<section id="intro">
+  <p class="lead">
+  氮 (nitrogen) 的重要性僅次於碳、氫、氧，而生物體中的氮絕大部分存在於<span class="term">胺基酸（amino acid）</span>與<span class="term">核苷酸（nucleotide）</span>之中。本章要談的，就是這兩類含氮分子「從無到有」被製造出來的過程（胺基酸的分解代謝已在第18章介紹過，這裡不重複）。
+  </p>
+  <div class="box outline">
+    <div class="box-title">🧭 貫穿全章的五個觀念</div>
+    <ol>
+      <li>胺基酸與核苷酸不只是蛋白質、核酸的原料，也是許多神經傳導物質、輔因子等重要分子的前驅物。</li>
+      <li>生物可利用的氮在自然界十分稀少，大氣中的 N<sub>2</sub> 十分穩定不活潑，需要特殊的酵素系統才能「固定」下來。</li>
+      <li>氮代謝與氧代謝密切相關，許多氮的氧化還原反應都需要氧參與。</li>
+      <li>這些路徑受到嚴密的調節，胺基酸與核苷酸通常「現用現做」，不像肝醣或脂肪會大量儲存。</li>
+      <li><span class="term">麩胺酸（glutamate）</span>與<span class="term">麩醯胺酸（glutamine）</span>是活性氮進入生物系統的入口，之後才分送到其他分子。</li>
+    </ol>
+  </div>
+  <p>整體而言，胺基酸與核苷酸的生合成反應是<span class="term">耗能（endergonic）</span>且<span class="term">還原性（reductive）</span>的：需要消耗 ATP 作為能量來源，並利用 NADPH 作為還原力來源。</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="sec1">
+<h2>22.1 氮代謝總覽 <small class="eng">Overview of Nitrogen Metabolism</small></h2>
+
+<h3>全球氮循環網路：維持可用氮的儲庫</h3>
+<p>地球大氣有五分之四是 N<sub>2</sub>，但 N<sub>2</sub> 太安定，生物無法直接利用。氮在生物圈中並非單純的「循環」，而是一張複雜的<span class="term">氮元素轉換網（nitrogen web）</span>，由不同氧化態的氮物種互相轉換而成。</p>
+
+<table>
+<caption>氮物種的氧化態（由氧化到還原排列）</caption>
+<thead><tr><th>氮物種</th><th>氧化數</th><th>化學式</th></tr></thead>
+<tbody>
+<tr><td>硝酸鹽 Nitrate</td><td>+5</td><td>NO₃⁻</td></tr>
+<tr><td>亞硝酸鹽 Nitrite</td><td>+3</td><td>NO₂⁻</td></tr>
+<tr><td>一氧化氮 Nitric oxide</td><td>+2</td><td>NO</td></tr>
+<tr><td>氧化亞氮 Nitrous oxide</td><td>+1</td><td>N₂O</td></tr>
+<tr><td>氮氣 Dinitrogen gas</td><td>0</td><td>N₂</td></tr>
+<tr><td>氨 Ammonia</td><td>−3</td><td>NH₃</td></tr>
+<tr><td>有機氮 Organic nitrogen</td><td>&lt; −3</td><td>—</td></tr>
+</tbody>
+</table>
+
+<div class="svgwrap">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .nbox{fill:#fff; stroke:var(--main); stroke-width:2;}
+    .ntxt{font-size:13px; fill:#1a1a1a; text-anchor:middle; font-family:inherit;}
+    .nlabel{font-size:11px; fill:#666; text-anchor:middle;}
+  </style>
+  <rect x="10" y="20" width="120" height="40" rx="8" class="nbox"/>
+  <text x="70" y="45" class="ntxt">N₂（大氣）</text>
+
+  <rect x="260" y="20" width="120" height="40" rx="8" class="nbox"/>
+  <text x="320" y="45" class="ntxt">NH₃ / NH₄⁺</text>
+
+  <rect x="510" y="20" width="120" height="40" rx="8" class="nbox"/>
+  <text x="570" y="45" class="ntxt">NO₂⁻ → NO₃⁻</text>
+
+  <rect x="260" y="230" width="120" height="40" rx="8" class="nbox"/>
+  <text x="320" y="255" class="ntxt">有機氮（胺基酸）</text>
+
+  <!-- fixation -->
+  <line x1="130" y1="40" x2="258" y2="40" stroke="#000" stroke-width="2" marker-end="url(#arrM)"/>
+  <text x="195" y="30" class="nlabel">固氮作用 fixation</text>
+
+  <!-- nitrification -->
+  <line x1="380" y1="40" x2="508" y2="40" stroke="#8e44ad" stroke-width="2" marker-end="url(#arrP)"/>
+  <text x="445" y="30" class="nlabel">硝化 nitrification</text>
+
+  <!-- denitrification -->
+  <line x1="570" y1="60" x2="570" y2="150" stroke="#c0392b" stroke-width="2" marker-end="url(#arrR)"/>
+  <line x1="568" y1="150" x2="132" y2="45" stroke="#c0392b" stroke-width="2" marker-end="url(#arrR)"/>
+  <text x="570" y="170" class="nlabel">脫氮 denitrification</text>
+
+  <!-- anammox -->
+  <line x1="500" y1="150" x2="382" y2="45" stroke="#2980b9" stroke-width="2" marker-end="url(#arrB)"/>
+  <text x="500" y="170" class="nlabel">厭氧氨氧化 anammox</text>
+
+  <!-- assimilation -->
+  <line x1="320" y1="60" x2="320" y2="228" stroke="#27ae60" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="320" y="150" class="nlabel">同化 assimilation</text>
+
+  <defs>
+    <marker id="arrM" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#000"/></marker>
+    <marker id="arrP" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#8e44ad"/></marker>
+    <marker id="arrR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#c0392b"/></marker>
+    <marker id="arrB" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2980b9"/></marker>
+    <marker id="arrG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#27ae60"/></marker>
+  </defs>
+</svg>
+<p class="caption-note">圖 22-1（重製）氮元素轉換網：固氮、硝化、脫氮、厭氧氨氧化（anammox）、同化五種主要反應交織成網，而非單純的循環。</p>
+</div>
+
+<div class="box">
+<div class="box-title">🧪 補充：厭氧氨氧化菌（anammox）小知識</div>
+<p>1980 年代在荷蘭污水處理廠中發現的一群細菌，能在無氧環境下把 NH₃ 和 NO₂⁻ 直接轉成 N₂，中間產物竟然是劇毒又易燃的<span class="term">聯胺（hydrazine, N₂H₄）</span>！這些細菌把聯胺關在特殊胞器「anammoxosome」中，其膜由特殊的梯烷脂質（ladderane）構成，能有效阻絕聯胺外漏。這類細菌現已被應用在廢水中氨氮的去除，可比傳統硝化—脫氮流程省下約 90% 的成本。</p>
+</div>
+
+<h3>固氮酶複合體固定氮氣</h3>
+<p>N<sub>2</sub> 分子的三鍵鍵能高達 930 kJ/mol，極為安定，因此無論是工業上的哈柏法（Haber process，需高溫高壓）或生物固氮，都必須克服很高的活化能。生物固氮由<span class="term">固氮酶複合體（nitrogenase complex）</span>完成，只有少數細菌與古菌（統稱<span class="term">固氮菌 diazotroph</span>）具備這套系統。</p>
+
+<div class="eq">N<sub>2</sub> + 10H<sup>+</sup> + 8e<sup>−</sup> + 16ATP → 2NH<sub>4</sub><sup>+</sup> + 16ADP + 16P<sub>i</sub> + H<sub>2</sub></div>
+
+<div class="box">
+<div class="box-title">🧪 固氮酶複合體的兩個關鍵蛋白</div>
+<ul>
+  <li><b>雙氮酶還原酶（dinitrogenase reductase）</b>：二聚體，含 1 個 4Fe-4S 中心，負責一次傳遞一個電子，每傳一個電子需水解 2 分子 ATP。</li>
+  <li><b>雙氮酶（dinitrogenase）</b>：α₂β₂ 四聚體，含 P cluster（8Fe-7S）與 <span class="term">FeMo 輔因子</span>（7Fe、9S、1C、1個Mo原子＋高檸檬酸）。固定 1 個 N₂ 需要 8 個電子（6 個還原 N₂，2 個產生副產物 H₂）。</li>
+</ul>
+</div>
+
+<p>固氮酶對氧極度敏感：還原酶在空氣中半衰期僅約 30 秒，雙氮酶約 10 分鐘。豆科植物根瘤中的<span class="term">豆血紅蛋白（leghemoglobin）</span>能高親和力結合氧，保護根瘤菌內的固氮酶，這也是豆科植物能與根瘤菌互利共生固氮的關鍵。</p>
+
+<div class="box box-clinical">
+<div class="box-title">⏱ 調節與限速步驟</div>
+<p>固氮反應能量成本極高（16 ATP 只換來 2 分子 NH₃），因此受到嚴格調節：高 [ADP]（代表低 ATP）強烈抑制固氮酶；細胞內 NH₄⁺ 濃度高時會壓抑固氮相關基因（<i>nif</i> 基因，約20個）的表現，直接關閉整個路徑。</p>
+</div>
+
+<h3>氨經由麩胺酸與麩醯胺酸進入生物分子</h3>
+<p>NH₄⁺ 進入胺基酸與其他含氮分子的主要入口，是兩步驟反應：</p>
+
+<div class="flow">
+  <div class="flow-box">麩胺酸<br><small>Glutamate</small></div>
+  <div class="flow-arrow"><span class="arr">→</span>+NH₄⁺ +ATP<br>麩醯胺酸合成酶</div>
+  <div class="flow-box end">麩醯胺酸<br><small>Glutamine</small></div>
+</div>
+<div class="flow">
+  <div class="flow-box">麩醯胺酸<br>+α-酮戊二酸</div>
+  <div class="flow-arrow"><span class="arr">→</span>+NAD(P)H<br>麩胺酸合成酶(GOGAT)</div>
+  <div class="flow-box end">2 分子麩胺酸</div>
+</div>
+
+<p>兩反應加總後，淨效果是把 1 分子 α-酮戊二酸、1 分子 NH₄⁺、1 個 ATP 及還原力轉換成 1 分子麩胺酸。動物體內沒有麩胺酸合成酶（GOGAT），主要靠胺基酸分解代謝中的轉胺作用來維持麩胺酸濃度；另外還有一條較次要的路徑，由<span class="term">麩胺酸去氫酶（glutamate dehydrogenase）</span>一步完成 α-酮戊二酸 + NH₄⁺ → 麩胺酸的反應，但因為對 NH₄⁺ 的 K<sub>m</sub> 太高（約 1 mM），在哺乳動物中對 NH₄⁺同化的貢獻不大。</p>
+
+<h3>麩醯胺酸合成酶：氮代謝的主要調節點</h3>
+<p>細菌型麩醯胺酸合成酶（GSI）由 12 個相同次單元組成，是氮代謝中調節最複雜的酵素之一，具有兩層調節機制：</p>
+
+<div class="box">
+<div class="box-title">⏱ 第一層：累積型別構抑制（cumulative feedback inhibition）</div>
+<p>丙胺酸、甘胺酸，以及麩醯胺酸代謝下游的 6 種終產物（AMP、CTP、色胺酸、組胺酸、氨甲醯磷酸、葡萄糖胺-6-磷酸）都是別構抑制劑。單一抑制劑只能造成部分抑制，但多種抑制劑合併作用時效果「大於相加」，這種現象稱為<span class="term">協同抑制（concerted inhibition）</span>。</p>
+</div>
+
+<div class="box">
+<div class="box-title">⚙ 第二層：共價修飾（腺苷醯化 adenylylation）</div>
+<p>Tyr397 被腺苷醯基化後，酵素對別構抑制劑更敏感、活性下降。這個修飾由腺苷醯基轉移酶（AT）催化，而 AT 的活性又受調節蛋白 P<sub>II</sub> 控制，P<sub>II</sub> 本身也會被尿苷醯化（uridylylation）修飾——形成一個多層級的調節級聯（cascade），最終讓麩醯胺酸的生成量精準對應細胞需求。</p>
+</div>
+
+<h3>三種重要的反應類型</h3>
+<p>本章反應會不斷重複出現以下三種化學策略，值得先記熟：</p>
+<div class="grid2">
+  <div class="mini-card"><b>吡哆醛磷酸 PLP</b><br>參與轉胺作用（transamination）及其他胺基酸重排反應。</div>
+  <div class="mini-card"><b>四氫葉酸 THF／SAM</b><br>THF 傳遞 —CHO、—CH₂OH 等一碳單位；SAM 傳遞 —CH₃（甲基）。</div>
+  <div class="mini-card"><b>麩醯胺酸醯胺基轉移酶</b><br>用麩醯胺酸醯胺氮作為多種生合成反應的胺基來源，機制上常見一個「氨氣通道」把 NH₃ 從一個活性中心送到另一個活性中心，避免游離氨逸失。</div>
+  <div class="mini-card"><b>麩胺酸酶（glutaminase）</b><br>與上述機制類似，但以 H₂O 為第二受質，生成 NH₄⁺ + 麩胺酸。</div>
+</div>
+
+<div class="box outline">
+<div class="box-title">📌 22.1 小結</div>
+<ul>
+  <li>N₂ 需經固氮作用轉為 NH₃ 才能被大多數生物利用；硝化、脫氮、厭氧氨氧化、同化共同構成氮元素轉換網。</li>
+  <li>固氮酶複合體對氧極敏感，且耗能極高，因此受到嚴密調節。</li>
+  <li>麩胺酸與麩醯胺酸是活性氮進入生物系統的入口；麩醯胺酸合成酶是氮代謝的核心調節點。</li>
+  <li>PLP、THF、SAM 與麩醯胺酸醯胺基轉移酶是貫穿全章的化學工具。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="sec2">
+<h2>22.2 胺基酸的生合成 <small class="eng">Biosynthesis of Amino Acids</small></h2>
+
+<p>20 種胺基酸的碳骨架都來自<span class="term">醣解作用</span>、<span class="term">檸檬酸循環</span>或<span class="term">五碳糖磷酸路徑</span>的中間產物，氮則經由麩胺酸／麩醯胺酸引入。植物與細菌能合成全部 20 種胺基酸，哺乳動物只能合成約一半（<span class="term">非必需胺基酸</span>），其餘須由飲食取得（<span class="term">必需胺基酸</span>）。</p>
+
+<table class="compare">
+<caption>比較表①：必需胺基酸 vs 非必需胺基酸（哺乳動物）</caption>
+<thead><tr><th>A：必需胺基酸</th><th>B：非必需胺基酸</th><th>差異</th></tr></thead>
+<tbody>
+<tr><td>Val、Leu、Ile、Trp、Phe、Met、Thr、Lys、His（共9種，其中Ile也可由Thr而來）</td><td>Ala、Asp、Asn、Glu、Gln、Pro、Arg、Ser、Gly、Cys、Tyr</td><td>必需胺基酸的合成路徑較長、較複雜（如經分支酸、草醯乙酸多步驟路徑），哺乳動物缺乏相關酵素，須由食物攝取；非必需胺基酸合成路徑短，多由醣解／檸檬酸循環中間產物一兩步轉胺即可完成。</td></tr>
+<tr><td>酪胺酸（Tyr）屬於「條件性必需」</td><td>—</td><td>Tyr 可由必需胺基酸 Phe 經羥化而來，若飲食中 Phe 充足則 Tyr 非必需；苯酮尿症患者則變成必需。</td></tr>
+</tbody>
+</table>
+
+<h3>六大胺基酸生合成家族總覽</h3>
+<p>依代謝前驅物可將 20 種胺基酸分成六大家族，另外還有一個重要的共同中間產物 <span class="term">PRPP（5-磷酸核糖焦磷酸）</span>，由核糖 5-磷酸與 ATP 反應而來，也是嘌呤、嘧啶與色胺酸、組胺酸生合成的重要原料。</p>
+
+<div class="svgwrap">
+<svg viewBox="0 0 700 330" xmlns="http://www.w3.org/2000/svg">
+<style>
+ .pbox{fill:#fff; stroke:var(--main); stroke-width:1.6; rx:6;}
+ .ptxt{font-size:12px; text-anchor:middle; fill:#1a1a1a;}
+ .phead{font-size:12px; font-weight:700; text-anchor:middle; fill:#fff;}
+ .pheadbox{fill:var(--main);}
+</style>
+<!-- glycolysis precursors -->
+<rect x="10" y="10" width="150" height="26" class="pheadbox" rx="5"/><text x="85" y="28" class="phead">3-磷酸甘油酸</text>
+<rect x="10" y="45" width="150" height="60" class="pbox" rx="6"/>
+<text x="85" y="65" class="ptxt">絲胺酸 Ser</text><text x="85" y="82" class="ptxt">甘胺酸 Gly</text><text x="85" y="99" class="ptxt">半胱胺酸 Cys</text>
+
+<rect x="185" y="10" width="150" height="26" class="pheadbox" rx="5"/><text x="260" y="28" class="phead">丙酮酸</text>
+<rect x="185" y="45" width="150" height="60" class="pbox" rx="6"/>
+<text x="260" y="65" class="ptxt">丙胺酸 Ala</text><text x="260" y="82" class="ptxt">纈胺酸 Val*</text><text x="260" y="99" class="ptxt">白胺酸 Leu* / 異白胺酸 Ile*</text>
+
+<rect x="360" y="10" width="150" height="26" class="pheadbox" rx="5"/><text x="435" y="28" class="phead">草醯乙酸</text>
+<rect x="360" y="45" width="150" height="80" class="pbox" rx="6"/>
+<text x="435" y="65" class="ptxt">天門冬胺酸 Asp</text><text x="435" y="82" class="ptxt">天門冬醯胺 Asn</text><text x="435" y="99" class="ptxt">Met* Thr* Lys* Ile*</text>
+
+<rect x="535" y="10" width="150" height="26" class="pheadbox" rx="5"/><text x="610" y="28" class="phead">α-酮戊二酸</text>
+<rect x="535" y="45" width="150" height="60" class="pbox" rx="6"/>
+<text x="610" y="65" class="ptxt">麩胺酸 Glu</text><text x="610" y="82" class="ptxt">麩醯胺酸 Gln</text><text x="610" y="99" class="ptxt">脯胺酸 Pro / 精胺酸 Arg</text>
+
+<rect x="10" y="150" width="330" height="26" class="pheadbox" rx="5"/><text x="175" y="168" class="phead">PEP + 赤蘚糖4-磷酸</text>
+<rect x="10" y="185" width="330" height="55" class="pbox" rx="6"/>
+<text x="175" y="205" class="ptxt">→ 經分支酸(chorismate)</text>
+<text x="175" y="222" class="ptxt">色胺酸 Trp* / 苯丙胺酸 Phe* / 酪胺酸 Tyr</text>
+
+<rect x="360" y="150" width="200" height="26" class="pheadbox" rx="5"/><text x="460" y="168" class="phead">核糖 5-磷酸</text>
+<rect x="360" y="185" width="200" height="55" class="pbox" rx="6"/>
+<text x="460" y="205" class="ptxt">→ 經 PRPP</text>
+<text x="460" y="222" class="ptxt">組胺酸 His*</text>
+
+<text x="350" y="290" font-size="12" fill="#666" text-anchor="middle">＊標示為哺乳動物必需胺基酸</text>
+</svg>
+<p class="caption-note">圖 22-11（重製）胺基酸生合成的六大家族及其碳骨架來源。</p>
+</div>
+
+<h3>α-酮戊二酸家族：麩胺酸、麩醯胺酸、脯胺酸、精胺酸</h3>
+<div class="flow">
+  <div class="flow-box">α-酮戊二酸</div><div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box end">麩胺酸</div>
+</div>
+<p><span class="term">脯胺酸（Proline）</span>是麩胺酸的環化衍生物：ATP 先活化麩胺酸的 γ-羧基為醯基磷酸，經 NAD(P)H 還原為麩胺酸 γ-半醛，自發環化後再還原即得脯胺酸。<span class="term">精胺酸（Arginine）</span>的合成則經由 N-乙醯麩胺酸等中間產物，並與尿素循環（第18章）的鳥胺酸路徑相通。</p>
+
+<h3>3-磷酸甘油酸家族：絲胺酸、甘胺酸、半胱胺酸</h3>
+<p>3-磷酸甘油酸先氧化、轉胺、去磷酸化生成<span class="term">絲胺酸（Serine）</span>。絲胺酸經<span class="term">絲胺酸羥甲基轉移酶</span>移除一個碳（交給四氫葉酸）即生成<span class="term">甘胺酸（Glycine）</span>；脊椎動物肝臟另有一條「甘胺酸合成酶（glycine cleavage enzyme 逆反應）」路徑。</p>
+
+<table class="compare">
+<caption>比較表②：半胱胺酸合成——細菌/植物 vs 哺乳動物</caption>
+<thead><tr><th>A：細菌與植物</th><th>B：哺乳動物</th><th>差異</th></tr></thead>
+<tbody>
+<tr><td>由環境硫酸鹽活化成 PAPS，還原為硫化物，再與絲胺酸反應</td><td>由甲硫胺酸提供硫原子、絲胺酸提供碳骨架</td><td>硫的來源不同：細菌/植物直接還原無機硫酸鹽；哺乳動物須拆解另一個含硫胺基酸（甲硫胺酸）取得硫。</td></tr>
+<tr><td>—</td><td>經 S-腺苷甲硫胺酸 → 高半胱胺酸 → 與絲胺酸縮合成胱硫醚（cystathionine）→ 裂解生成半胱胺酸</td><td>哺乳動物路徑需要 <span class="term">胱硫醚 β-合成酶</span>與<span class="term">胱硫醚 γ-裂解酶</span>（皆需PLP）兩個酵素依序作用。</td></tr>
+</tbody>
+</table>
+
+<h3>草醯乙酸與丙酮酸家族：3 個非必需 + 6 個必需胺基酸</h3>
+<p><span class="term">丙胺酸</span>與<span class="term">天門冬胺酸</span>分別由丙酮酸、草醯乙酸經麩胺酸轉胺而來；<span class="term">天門冬醯胺</span>則由天門冬胺酸醯胺化（麩醯胺酸提供 NH₄⁺）生成。這三者路徑簡單，屬非必需胺基酸。</p>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：急性淋巴性白血病（ALL）與天門冬醯胺酶</div>
+<p>兒童急性淋巴性白血病的惡性淋巴球幾乎不表現天門冬醯胺合成酶，必須仰賴血中游離天門冬醯胺維生。臨床上合併化療與細菌來源的 L-天門冬醯胺酶（消耗血中天門冬醯胺）使用，緩解率可達 95% 以上。</p>
+</div>
+
+<p>甲硫胺酸、蘇胺酸、離胺酸、異白胺酸、纈胺酸、白胺酸這 6 個<span class="term">必需胺基酸</span>的細菌生合成路徑相對複雜、彼此交織：</p>
+<div class="flow">
+  <div class="flow-box">草醯乙酸</div><div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box">天門冬胺酸</div><div class="flow-arrow"><span class="arr">→</span>分支點</div>
+  <div class="flow-box mid">天門冬胺酸β-半醛</div>
+</div>
+<div class="flow">
+  <div class="flow-box mid">天門冬胺酸β-半醛</div>
+  <div class="flow-arrow"><span class="arr">↘</span></div>
+  <div class="flow-box end">離胺酸 Lys</div>
+</div>
+<div class="flow">
+  <div class="flow-box mid">天門冬胺酸β-半醛</div>
+  <div class="flow-arrow"><span class="arr">↘</span></div>
+  <div class="flow-box mid">高絲胺酸（分支點）</div>
+  <div class="flow-arrow"><span class="arr">↘</span></div>
+  <div class="flow-box end">甲硫胺酸 Met</div>
+</div>
+<div class="flow">
+  <div class="flow-box mid">高絲胺酸</div>
+  <div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box end">蘇胺酸 Thr</div>
+  <div class="flow-arrow"><span class="arr">→</span>PLP</div>
+  <div class="flow-box mid">α-酮丁酸</div>
+  <div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box end">異白胺酸 Ile</div>
+</div>
+<div class="flow">
+  <div class="flow-box">丙酮酸 × 2</div>
+  <div class="flow-arrow"><span class="arr">→</span>TPP</div>
+  <div class="flow-box mid">α-酮異戊酸</div>
+  <div class="flow-arrow"><span class="arr">↘</span></div>
+  <div class="flow-box end">纈胺酸 Val</div>
+</div>
+<div class="flow">
+  <div class="flow-box mid">α-酮異戊酸</div>
+  <div class="flow-arrow"><span class="arr">→</span>+乙醯CoA</div>
+  <div class="flow-box end">白胺酸 Leu</div>
+</div>
+<p class="caption-note" style="text-align:left">重點：<b>纈胺酸與異白胺酸路徑共用 4 個酵素</b>；α-酮丁酸（來自蘇胺酸）與丙酮酸縮合走向異白胺酸，丙酮酸自身縮合走向纈胺酸／白胺酸。</p>
+
+<h3>分支酸：色胺酸、苯丙胺酸、酪胺酸的共同關鍵中間產物</h3>
+<p>芳香環在自然界不易取得，細菌、真菌、植物需自行合成。PEP 與赤蘚糖 4-磷酸先縮合成 7 碳的<span class="term">莽草酸（shikimate）</span>，再加上另一分子 PEP 形成<span class="term">分支酸（chorismate）</span>——這是芳香族胺基酸路徑的第一個分支點。</p>
+
+<div class="box">
+<div class="box-title">🩺 除草劑嘉磷賽（Roundup）的作用機轉</div>
+<p>莽草酸路徑第 6 步的酵素會被嘉磷賽（glyphosate）競爭性抑制。由於哺乳動物體內沒有這條路徑，嘉磷賽對人體相對低毒，卻能有效殺死缺乏此路徑的植物與微生物。</p>
+</div>
+
+<div class="flow">
+  <div class="flow-box">分支酸</div>
+  <div class="flow-arrow"><span class="arr">↘</span>+麩醯胺酸</div>
+  <div class="flow-box mid">花菁酸鹽 (anthranilate)</div>
+  <div class="flow-arrow"><span class="arr">→</span>+PRPP，多步驟</div>
+  <div class="flow-box end">色胺酸 Trp</div>
+</div>
+<div class="flow">
+  <div class="flow-box">分支酸</div>
+  <div class="flow-arrow"><span class="arr">↘</span>分支酸變位酶</div>
+  <div class="flow-box mid">預苯酸 (prephenate)</div>
+</div>
+<div class="flow">
+  <div class="flow-box mid">預苯酸</div>
+  <div class="flow-arrow"><span class="arr">↘</span>脫羧+轉胺</div>
+  <div class="flow-box end">苯丙胺酸 Phe</div>
+</div>
+<div class="flow">
+  <div class="flow-box mid">預苯酸</div>
+  <div class="flow-arrow"><span class="arr">↘</span>氧化脫羧+轉胺</div>
+  <div class="flow-box end">酪胺酸 Tyr</div>
+</div>
+
+<div class="box">
+<div class="box-title">🧪 關鍵酵素：色胺酸合成酶（tryptophan synthase）</div>
+<p>α₂β₂ 結構，α 次單元催化「吲哚甘油磷酸 → 吲哚 + 甘油醛3-磷酸」，吲哚不釋出，而是透過分子內通道傳送到 β 次單元，與絲胺酸經 PLP 縮合成色胺酸——這種「中間產物直接傳遞（channeling）」的設計可避免不穩定中間產物流失，也是本章多條路徑共同的特色（metabolon，多酵素複合體）。</p>
+</div>
+
+<p>動物雖不能從頭合成酪胺酸，但可由苯丙胺酸經<span class="term">苯丙胺酸羥化酶</span>直接羥化生成，因此酪胺酸屬於「條件性必需」。</p>
+
+<h3>組胺酸：借用嘌呤合成的前驅物</h3>
+<p>組胺酸的合成路徑很特別，同時用到 <b>PRPP</b>（提供5個碳）、<b>ATP 的嘌呤環</b>（提供1個氮1個碳）與<b>麩醯胺酸</b>（提供另一個環氮）。ATP 在這裡不是當高能輔因子，而是直接被拆解利用——反應後釋出的殘餘片段 <span class="term">AICAR</span> 正好是嘌呤生合成路徑的中間產物，會被回收再利用，一點也不浪費。</p>
+
+<h3>胺基酸生合成的別構調節</h3>
+<p>胺基酸合成路徑的第一步反應，通常由該路徑終產物進行<span class="term">回饋抑制（feedback inhibition）</span>，且常搭配以下策略達到更精細的調控：</p>
+
+<table class="compare">
+<caption>比較表③：協同抑制 vs 序列回饋抑制</caption>
+<thead><tr><th>A：協同抑制<br><small>concerted inhibition</small></th><th>B：序列回饋抑制<br><small>sequential feedback inhibition</small></th><th>差異</th></tr></thead>
+<tbody>
+<tr><td>多個終產物「同時」作用在同一個酵素上，效果大於個別加總（如麩醯胺酸合成酶被6種產物合併抑制）</td><td>路徑分支上「各自」的終產物抑制各自分支的第一步，當所有分支產物都足量時，共同中間產物（如IMP）才會回頭抑制最上游步驟</td><td>協同抑制強調「多因子加成大於相加」；序列回饋抑制強調「分支路徑各自獨立控制，中間產物堆積才觸發上游共同步驟」。</td></tr>
+</tbody>
+</table>
+
+<div class="box box-clinical">
+<div class="box-title">⏱ 調節案例：由天門冬胺酸出發的離胺酸／甲硫胺酸／蘇胺酸／異白胺酸路徑</div>
+<p><i>E. coli</i> 用<span class="term">酵素多型性（enzyme multiplicity，同工酶）</span>解決「一個終產物不該關掉整條路徑」的問題：天門冬胺酸到天門冬胺醯磷酸這一步，由 3 種各自受不同調節物控制的同工酶催化，確保即使離胺酸過多，甲硫胺酸與蘇胺酸仍可持續合成。異白胺酸抑制蘇胺酸→α-酮丁酸；蘇胺酸則在三個不同步驟抑制自身合成——這就是典型的序列回饋抑制。</p>
+</div>
+
+<div class="box outline">
+<div class="box-title">📌 22.2 小結</div>
+<ul>
+  <li>20 種胺基酸依碳骨架可分為六大家族；植物、細菌能合成全部20種，哺乳動物僅能合成約一半。</li>
+  <li>麩胺酸是 α-酮戊二酸家族起點；絲胺酸經THF去碳變成甘胺酸；半胱胺酸來源在細菌/植物與哺乳動物不同。</li>
+  <li>6個必需胺基酸（Met、Thr、Lys、Ile、Val、Leu）由草醯乙酸、丙酮酸經複雜且交織的路徑合成。</li>
+  <li>分支酸是三個芳香族胺基酸（Trp、Phe、Tyr）的共同關鍵中間產物；組胺酸合成與嘌呤合成路徑共用中間產物。</li>
+  <li>胺基酸合成受別構回饋抑制調控，常見協同抑制與序列回饋抑制兩種精細調控模式。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="sec3">
+<h2>22.3 胺基酸衍生的分子 <small class="eng">Molecules Derived from Amino Acids</small></h2>
+
+<p>胺基酸除了是蛋白質的建構單元，也是許多重要生物分子的前驅物：荷爾蒙、輔酶、生物鹼、細胞壁聚合物、紫質、抗生素、色素與神經傳導物質等。</p>
+
+<h3>甘胺酸是紫質（卟啉）的前驅物</h3>
+<p>紫質（porphyrin，血基質的骨架）由 4 分子<span class="term">卟膽色素原（porphobilinogen）</span>組成，而卟膽色素原又來自 2 分子 <span class="term">δ-胺基酮戊酸（δ-aminolevulinate, ALA）</span>。ALA 的來源有兩條路徑：</p>
+<div class="grid2">
+  <div class="mini-card"><b>高等真核生物（含人類）</b><br>甘胺酸 + 琥珀醯CoA → α-胺基-β-酮己二酸 → 去羧 → ALA</div>
+  <div class="mini-card"><b>植物、藻類、多數細菌</b><br>麩胺酸先酯化成麩胺醯-tRNA<sup>Glu</sup> → NADPH還原 → 麩胺酸1-半醛 → 轉胺 → ALA</div>
+</div>
+
+<div class="flow">
+  <div class="flow-box">2 ALA</div><div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box">卟膽色素原 × 4</div><div class="flow-arrow"><span class="arr">→</span>多步驟</div>
+  <div class="flow-box">原紫質原 (protoporphyrinogen)</div><div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box">原紫質 (protoporphyrin)</div><div class="flow-arrow"><span class="arr">→</span>+Fe²⁺／亞鐵螯合酶</div>
+  <div class="flow-box end">血基質 Heme</div>
+</div>
+<p>血基質會回頭<span class="term">回饋抑制</span>紫質合成路徑早期步驟，這是本段落的限速調節點。</p>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：紫質症（porphyria）</div>
+<table>
+<thead><tr><th>堆積中間產物</th><th>受阻酵素步驟</th><th>疾病</th></tr></thead>
+<tbody>
+<tr><td>δ-胺基酮戊酸</td><td>步驟1</td><td>Doss 紫質症</td></tr>
+<tr><td>卟膽色素原</td><td>步驟2</td><td>急性間歇性紫質症</td></tr>
+<tr><td>原紫質</td><td>步驟6</td><td>紅血球生成性原紫質症（對光敏感）</td></tr>
+</tbody>
+</table>
+<p>紫質症是紫質合成路徑中特定酵素缺陷造成中間產物堆積的一群遺傳疾病，症狀包含急性腹痛、神經精神症狀，或對光敏感造成的皮膚傷害。歷史上英王喬治三世的間歇性精神異常，被認為可能與急性間歇性紫質症有關。</p>
+</div>
+
+<h3>血基質分解：多重生理功能</h3>
+<div class="flow">
+  <div class="flow-box">血基質 Heme</div>
+  <div class="flow-arrow"><span class="arr">→</span>血基質氧化酶<br>釋出Fe²⁺+CO</div>
+  <div class="flow-box">膽綠素 Biliverdin</div>
+  <div class="flow-arrow"><span class="arr">→</span>膽綠素還原酶</div>
+  <div class="flow-box">膽紅素 Bilirubin</div>
+  <div class="flow-arrow"><span class="arr">→</span>腸道菌代謝</div>
+  <div class="flow-box end">尿膽素原→尿膽素／糞膽素</div>
+</div>
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：黃疸與新生兒光照治療</div>
+<p>肝功能受損或膽汁排泄受阻時，膽紅素會滲入血液造成皮膚與眼白泛黃（黃疸）。新生兒因葡萄糖醛酸轉移酶尚未成熟，常見輕度黃疸，可用螢光燈照射，將膽紅素轉為更易溶、易排出的形式。膽紅素同時也是血漿中最主要的抗氧化物質之一。血基質分解產生的一氧化碳（CO）在低濃度下有血管舒張與神經傳導調節作用。</p>
+</div>
+
+<h3>肌酸與麩胱甘肽：胺基酸的另一種用途</h3>
+<div class="grid2">
+  <div class="mini-card"><b>肌酸 Creatine</b><br>由甘胺酸＋精胺酸（提供脒基）＋甲硫胺酸（提供甲基，經SAM）合成，磷酸肌酸是骨骼肌重要的「能量緩衝」。</div>
+  <div class="mini-card"><b>麩胱甘肽 GSH</b><br>由麩胺酸、半胱胺酸、甘胺酸依序縮合而成，是重要的細胞氧化還原緩衝劑，可維持蛋白質硫氫基還原態，並經麩胱甘肽過氧化酶（含硒半胱胺酸）分解過氧化物。</p></div>
+</div>
+
+<h3>D-型胺基酸主要見於細菌</h3>
+<p>細菌細胞壁的胜肽聚醣（peptidoglycan）含 D-丙胺酸與 D-麩胺酸，由 PLP 依賴性的<span class="term">胺基酸消旋酶（racemase）</span>將 L 型轉為 D 型。此類酵素是抗生素設計的重要標靶（如環絲胺酸用於治療結核病）。</p>
+
+<h3>芳香族胺基酸是許多植物物質的前驅物</h3>
+<p>苯丙胺酸、酪胺酸是木質素（lignin，植物體內含量僅次於纖維素）的前驅物；色胺酸則是植物生長素<span class="term">吲哚乙酸（auxin）</span>的前驅物。</p>
+
+<h3>胺基酸去羧化產生的生物胺（神經傳導物質）</h3>
+<p>許多重要神經傳導物質都是胺基酸經 <span class="term">PLP 依賴性去羧反應</span>而來：</p>
+<table>
+<caption>常見胺基酸去羧化產物一覽</caption>
+<thead><tr><th>前驅胺基酸</th><th>產物</th><th>生理／臨床意義</th></tr></thead>
+<tbody>
+<tr><td>酪胺酸 Tyr</td><td>多巴胺→正腎上腺素→腎上腺素（兒茶酚胺類）</td><td>多巴胺不足與帕金森氏症有關（治療：L-多巴）</td></tr>
+<tr><td>麩胺酸 Glu</td><td>GABA（γ-胺基丁酸）</td><td>抑制性神經傳導物質，不足與癲癇有關</td></tr>
+<tr><td>組胺酸 His</td><td>組織胺 Histamine</td><td>過敏反應、刺激胃酸分泌；西咪替丁（Tagamet）為其受體拮抗劑</td></tr>
+<tr><td>色胺酸 Trp</td><td>血清素 Serotonin</td><td>情緒調節相關神經傳導物質</td></tr>
+<tr><td>鳥胺酸 Ornithine</td><td>亞精胺、精胺（多胺類）</td><td>參與DNA包裝；鳥胺酸去羧酶為多種藥物標靶</td></tr>
+</tbody>
+</table>
+
+<h3>精胺酸是一氧化氮的生合成前驅物</h3>
+<p>一氧化氮（NO）是重要的氣體訊息分子，參與神經傳導、血液凝固與血壓調控。由<span class="term">一氧化氮合酶（NOS）</span>催化，消耗 NADPH 與 O₂，把精胺酸轉為<span class="term">瓜胺酸（citrulline）</span>並釋出 NO，屬於 5-電子氧化反應，需 Ca²⁺-鈣調蛋白刺激才活化。</p>
+
+<div class="box outline">
+<div class="box-title">📌 22.3 小結</div>
+<ul>
+  <li>甘胺酸（或麩胺酸）→ ALA → 卟膽色素原 → 血基質，此路徑受血基質回饋抑制；相關酵素缺陷造成紫質症。</li>
+  <li>血基質分解生成膽紅素等膽色素，具有抗氧化與訊息傳遞功能，異常堆積導致黃疸。</li>
+  <li>肌酸（能量緩衝）與麩胱甘肽（氧化還原緩衝）皆由胺基酸組合而成。</li>
+  <li>多種胺基酸經 PLP 依賴性去羧反應生成神經傳導物質；精胺酸是一氧化氮的前驅物。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="sec4">
+<h2>22.4 核苷酸的生合成與分解 <small class="eng">Biosynthesis and Degradation of Nucleotides</small></h2>
+
+<p>核苷酸不只是 DNA、RNA 的原料，也是 ATP 等能量載體、NAD／FAD／CoA／SAM 等輔因子的成分，以及 cAMP／cGMP 等第二信使。核苷酸的形成有兩條路徑：</p>
+
+<table class="compare">
+<caption>比較表④：從頭合成 vs 挽救路徑</caption>
+<thead><tr><th>A：從頭合成路徑<br><small>de novo pathway</small></th><th>B：挽救路徑<br><small>salvage pathway</small></th><th>差異</th></tr></thead>
+<tbody>
+<tr><td>由胺基酸、核糖 5-磷酸、CO₂、NH₃ 等小分子從零開始組裝環狀結構</td><td>回收核酸分解釋出的游離鹼基與核苷，重新接上核糖磷酸</td><td>從頭合成耗能較高、步驟多；挽救路徑步驟簡短、省能量，對腦部等高需求組織特別重要（如缺乏挽救酵素會造成Lesch-Nyhan症候群）。</td></tr>
+<tr><td>嘌呤環是「邊接核糖邊組裝」；嘧啶則先做出完整環（orotate）才接上核糖</td><td>游離鹼基直接與 PRPP 反應（如：腺嘌呤 + PRPP → AMP + PPi）</td><td>從頭合成中游離鹼基<b>不是</b>中間產物；挽救路徑中游離鹼基<b>就是</b>反應受質，這是兩者最本質的差異。</td></tr>
+</tbody>
+</table>
+
+<h3>嘌呤核苷酸從頭合成：從 PRPP 到 IMP</h3>
+<p>嘌呤環是「一邊組裝一邊連在核糖上」，並非先做好游離鹼基再接上核糖。整個環系統的原子來源如下：</p>
+
+<div class="svgwrap">
+<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+<style>
+  .ring{fill:none; stroke:#333; stroke-width:2;}
+  .atom{fill:var(--main-light); stroke:var(--main); stroke-width:1.6;}
+  .atxt{font-size:12px; text-anchor:middle; fill:#1a1a1a; font-weight:700;}
+  .src{font-size:11px; fill:#555; text-anchor:middle;}
+</style>
+<!-- simplified purine double ring -->
+<polygon points="150,60 200,40 250,60 240,100 160,100" class="ring"/>
+<polygon points="250,60 300,50 320,90 290,120 240,100" class="ring"/>
+
+<circle cx="150" cy="60" r="14" class="atom"/><text x="150" y="64" class="atxt">N1</text>
+<text x="120" y="45" class="src">天門冬胺酸</text>
+
+<circle cx="200" cy="40" r="14" class="atom"/><text x="200" y="44" class="atxt">C2</text>
+<text x="200" y="20" class="src">甲酸鹽(N10-CHO-THF)</text>
+
+<circle cx="250" cy="60" r="14" class="atom"/><text x="250" y="64" class="atxt">N3</text>
+<text x="290" y="35" class="src">麩醯胺酸醯胺氮</text>
+
+<circle cx="240" cy="100" r="14" class="atom"/><text x="240" y="104" class="atxt">C4</text>
+<circle cx="160" cy="100" r="14" class="atom"/><text x="160" y="104" class="atxt">C5</text>
+<text x="160" y="130" class="src">甘胺酸 (C4,C5,N7)</text>
+
+<circle cx="300" cy="50" r="14" class="atom"/><text x="300" y="54" class="atxt">C6</text>
+<text x="345" y="45" class="src">CO₂</text>
+
+<circle cx="320" cy="90" r="14" class="atom"/><text x="320" y="94" class="atxt">N7</text>
+<circle cx="290" cy="120" r="14" class="atom"/><text x="290" y="124" class="atxt">C8</text>
+<text x="330" y="140" class="src">甲酸鹽</text>
+<circle cx="240" cy="100" r="0" /> 
+<text x="230" y="150" class="src">N9：核糖來源</text>
+</svg>
+<p class="caption-note">圖 22-34（重製，示意）嘌呤環各原子來源：天門冬胺酸(N1)、甲酸鹽(C2、C8)、麩醯胺酸醯胺氮(N3、N9)、甘胺酸(C4、C5、N7)、CO₂(C6)。</p>
+</div>
+
+<div class="flow">
+  <div class="flow-box">核糖5-磷酸</div><div class="flow-arrow"><span class="arr">→</span>+ATP</div>
+  <div class="flow-box">PRPP</div><div class="flow-arrow"><span class="arr">→</span>+麩醯胺酸<br>第一個限定步驟</div>
+  <div class="flow-box">5-磷酸核糖胺</div><div class="flow-arrow"><span class="arr">→</span>約9步</div>
+  <div class="flow-box end">IMP（次黃嘌呤核苷酸）</div>
+</div>
+<div class="box box-regulatory">
+<div class="box-title">⏱ 限速步驟</div>
+<p>PRPP → 5-磷酸核糖胺這一步由<span class="term">麩醯胺酸-PRPP醯胺基轉移酶</span>催化，是嘌呤從頭合成的第一個限定步驟（committed step），受終產物 IMP、AMP、GMP 協同回饋抑制。</p>
+</div>
+
+<p>IMP 是第一個帶有完整嘌呤環的核苷酸，再分兩條路徑分別走向 AMP 與 GMP：</p>
+<div class="flow">
+  <div class="flow-box">IMP</div><div class="flow-arrow"><span class="arr">→</span>+天門冬胺酸+GTP</div>
+  <div class="flow-box mid">腺苷代琥珀酸</div><div class="flow-arrow"><span class="arr">→</span>脫延胡索酸</div>
+  <div class="flow-box end">AMP</div>
+</div>
+<div class="flow">
+  <div class="flow-box">IMP</div><div class="flow-arrow"><span class="arr">→</span>NAD⁺氧化</div>
+  <div class="flow-box mid">XMP</div><div class="flow-arrow"><span class="arr">→</span>+麩醯胺酸+ATP</div>
+  <div class="flow-box end">GMP</div>
+</div>
+<p class="caption-note" style="text-align:left">巧妙的交互設計：合成 AMP 需要消耗 GTP，合成 GMP 則需消耗 ATP，這種「互相牽制」的安排能自動平衡兩種嘌呤核苷酸的生成比例。</p>
+
+<h3>嘧啶核苷酸從頭合成：先做環，再接核糖</h3>
+<p>與嘌呤相反，嘧啶是先合成完整六員環（<span class="term">乳清酸 orotate</span>），最後才接上核糖 5-磷酸（來自PRPP）。</p>
+<div class="flow">
+  <div class="flow-box">CO₂+NH₄⁺+ATP</div><div class="flow-arrow"><span class="arr">→</span>氨甲醯磷酸合成酶II</div>
+  <div class="flow-box">氨甲醯磷酸</div><div class="flow-arrow"><span class="arr">→</span>+天門冬胺酸<br>天門冬胺酸氨甲醯基轉移酶</div>
+  <div class="flow-box">N-氨甲醯天門冬胺酸</div><div class="flow-arrow"><span class="arr">→</span>去水環化</div>
+  <div class="flow-box">L-二氫乳清酸</div><div class="flow-arrow"><span class="arr">→</span>NAD⁺氧化</div>
+  <div class="flow-box mid">乳清酸 Orotate</div>
+</div>
+<div class="flow">
+  <div class="flow-box mid">乳清酸</div><div class="flow-arrow"><span class="arr">→</span>+PRPP</div>
+  <div class="flow-box">乳清酸核苷酸</div><div class="flow-arrow"><span class="arr">→</span>去羧+磷酸化</div>
+  <div class="flow-box end">UTP</div><div class="flow-arrow"><span class="arr">→</span>+麩醯胺酸+ATP<br>CTP合成酶</div>
+  <div class="flow-box end">CTP</div>
+</div>
+
+<div class="box box-regulatory">
+<div class="box-title">⏱ 限速步驟：天門冬胺酸氨甲醯基轉移酶（ATCase）</div>
+<p>細菌 ATCase 是研究最透徹的別構酵素之一，由 6 個催化次單元＋6 個調節次單元組成，是嘧啶從頭合成的第一個限定步驟，受終產物 <b>CTP 抑制</b>、<b>ATP 活化</b>（可逆轉CTP的抑制作用）。</p>
+</div>
+
+<div class="box">
+<div class="box-title">🧪 動物 vs 細菌氨甲醯磷酸合成酶的區別</div>
+<p>動物體內，尿素循環用的氨甲醯磷酸由粒線體內的<span class="term">氨甲醯磷酸合成酶I</span>製造；嘧啶合成用的氨甲醯磷酸則由細胞質中的<span class="term">氨甲醯磷酸合成酶II</span>製造——兩者位置與用途分開。細菌只有一種酵素，同時供應精胺酸與嘧啶合成所需。</p>
+</div>
+
+<h3>NMP 轉為 NTP：磷酸化兩部曲</h3>
+<div class="flow">
+  <div class="flow-box">NMP</div><div class="flow-arrow"><span class="arr">→</span>核苷單磷酸激酶</div>
+  <div class="flow-box">NDP</div><div class="flow-arrow"><span class="arr">→</span>核苷雙磷酸激酶</div>
+  <div class="flow-box end">NTP</div>
+</div>
+<p>核苷單磷酸激酶對<b>鹼基</b>專一但對<b>醣</b>不挑（核糖或去氧核糖皆可）；核苷雙磷酸激酶則對鹼基與醣都不挑剔，供體幾乎都是 ATP（因細胞內濃度最高）。</p>
+
+<h3>核糖核苷酸是去氧核糖核苷酸的前驅物</h3>
+<p>DNA 的原料由 RNA 的原料「還原」而來——<span class="term">核糖核苷酸還原酶（ribonucleotide reductase, RNR）</span>將核苷雙磷酸（NDP）2' 位置的 -OH 直接還原成 -H，是少見的「非活化碳」還原反應。還原力來自 NADPH，經由<span class="term">硫氧還蛋白（thioredoxin）</span>或<span class="term">麩硫氧還蛋白（glutaredoxin，由麩胱甘肽提供還原力）</span>傳遞。</p>
+
+<div class="box">
+<div class="box-title">🧪 關鍵酵素：核糖核苷酸還原酶的自由基機制</div>
+<p>大腸桿菌與多數真核生物的 RNR 為 α₂β₂ 結構：α 次單元提供反應所需硫氫基，β 次單元含雙核鐵中心，穩定一個 <span class="term">酪胺酸自由基（Tyr122）</span>。這個自由基經一連串芳香族胺基酸「接力傳遞」到活性中心，是生化學中自由基參與反應機制的經典範例。</p>
+</div>
+
+<table>
+<caption>核糖核苷酸還原酶的雙層別構調節</caption>
+<thead><tr><th>調節位置</th><th>結合分子</th><th>效果</th></tr></thead>
+<tbody>
+<tr><td rowspan="2">整體活性調節位</td><td>ATP</td><td>活化酵素</td></tr>
+<tr><td>dATP</td><td>抑制酵素（高濃度時形成無活性的 α₄β₄ 環狀結構）</td></tr>
+<tr><td rowspan="4">受質專一性調節位</td><td>ATP／dATP</td><td>促進 CDP、UDP 的還原</td></tr>
+<tr><td>dTTP</td><td>促進 GDP 還原，抑制 UDP 還原</td></tr>
+<tr><td>dGTP</td><td>促進 ADP 還原</td></tr>
+<tr><td>（設計目的）</td><td colspan="1">確保四種 dNTP 供應量保持平衡，供DNA複製使用</td></tr>
+</tbody>
+</table>
+
+<h3>胸苷酸（dTMP）來自 dUMP</h3>
+<div class="flow">
+  <div class="flow-box">dUMP</div>
+  <div class="flow-arrow"><span class="arr">→</span>N5,N10-次甲基THF<br>胸苷酸合成酶</div>
+  <div class="flow-box end">dTMP</div>
+</div>
+<p>此反應同時把四氫葉酸氧化成二氫葉酸，須靠<span class="term">二氫葉酸還原酶</span>把它還原回四氫葉酸，才能持續供應一碳單位。</p>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：葉酸缺乏與神經管缺陷</div>
+<p>葉酸不足會使胸苷酸合成受阻，導致尿嘧啶異常摻入 DNA，經修復系統切除後造成 DNA 斷裂，與心臟病、癌症及懷孕時的胎兒神經管缺陷有關，因此孕婦需特別補充葉酸。</p>
+</div>
+
+<h3>嘌呤與嘧啶的分解代謝</h3>
+<div class="flow">
+  <div class="flow-box">AMP</div><div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box">腺苷</div><div class="flow-arrow"><span class="arr">→</span>腺苷去胺酶</div>
+  <div class="flow-box">次黃嘌呤核苷</div><div class="flow-arrow"><span class="arr">→</span></div>
+  <div class="flow-box">次黃嘌呤</div>
+  <div class="flow-arrow"><span class="arr">→</span>黃嘌呤氧化酶</div>
+  <div class="flow-box">黃嘌呤</div>
+  <div class="flow-arrow"><span class="arr">→</span>黃嘌呤氧化酶</div>
+  <div class="flow-box end">尿酸 Uric acid</div>
+</div>
+<table>
+<caption>不同物種嘌呤最終排除產物</caption>
+<thead><tr><th>物種</th><th>排出型式</th></tr></thead>
+<tbody>
+<tr><td>靈長類、鳥類、爬蟲類、昆蟲</td><td>尿酸</td></tr>
+<tr><td>大多數哺乳動物</td><td>尿囊素</td></tr>
+<tr><td>硬骨魚</td><td>尿囊酸</td></tr>
+<tr><td>兩生類、軟骨魚</td><td>尿素</td></tr>
+<tr><td>海洋無脊椎動物</td><td>NH₄⁺</td></tr>
+</tbody>
+</table>
+<p>嘧啶的分解產物則導向 NH₄⁺（進一步變成尿素）：胸腺嘧啶碳骨架變成琥珀醯CoA，胞嘧啶、尿嘧啶則變成乙醯CoA。</p>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：ADA 缺乏症（重症複合型免疫缺乏）</div>
+<p>缺乏<span class="term">腺苷去胺酶（ADA）</span>會使 dATP 堆積達百倍，強烈抑制核糖核苷酸還原酶，造成 T、B 淋巴球無法正常發育。是最早的人類基因治療試驗標的之一（1990年）。</p>
+</div>
+
+<h3>挽救路徑與 Lesch-Nyhan 症候群</h3>
+<div class="eq">腺嘌呤 + PRPP → AMP + PP<sub>i</sub>（腺嘌呤磷酸核糖轉移酶）</div>
+<div class="eq">次黃嘌呤／鳥糞嘌呤 + PRPP → IMP／GMP + PP<sub>i</sub>（次黃嘌呤-鳥糞嘌呤磷酸核糖轉移酶 HGPRT）</div>
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：Lesch-Nyhan 症候群</div>
+<p>HGPRT 完全缺乏（幾乎只見於男孩）會導致 PRPP 堆積、嘌呤從頭合成路徑過度活躍，尿酸大量生成，並出現自殘、不自主攻擊行為與智能障礙等神經症狀。此病凸顯挽救路徑對腦部的重要性。</p>
+</div>
+
+<h3>尿酸過多引發痛風</h3>
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：痛風與 allopurinol</div>
+<p>痛風是血液及組織中尿酸濃度過高，造成尿酸鈉結晶沉積於關節而發炎腫痛的疾病，好發於男性。治療藥物<span class="term">別嘌呤醇（allopurinol）</span>的結構與次黃嘌呤相似，在活性中心被轉為 oxypurinol 後緊密結合黃嘌呤氧化酶還原態，屬於「機制性抑制劑」。</p>
+</div>
+
+<h3>核苷酸合成酵素是重要的化療藥物標靶</h3>
+<p>癌細胞對核苷酸的需求量大，因此抑制核苷酸合成的藥物常對快速分裂的癌細胞（以及細菌、寄生蟲）較敏感：</p>
+<table>
+<caption>常見核苷酸合成抑制劑</caption>
+<thead><tr><th>藥物</th><th>標靶酵素</th><th>用途／機制</th></tr></thead>
+<tbody>
+<tr><td>氟尿嘧啶 Fluorouracil</td><td>胸苷酸合成酶</td><td>經挽救路徑轉為 FdUMP，與酵素形成穩定共價複合物（機制性去活化），用於癌症化療</td></tr>
+<tr><td>胺甲喋呤 Methotrexate</td><td>二氫葉酸還原酶</td><td>結構類似葉酸，親和力約為天然受質的100倍，屬競爭性抑制</td></tr>
+<tr><td>三甲氧芐胺嘧啶 Trimethoprim</td><td>細菌型二氫葉酸還原酶</td><td>對細菌酵素的親和力比人類酵素高近10萬倍，作為抗生素</td></tr>
+<tr><td>別嘌呤醇 Allopurinol</td><td>黃嘌呤氧化酶</td><td>治療痛風，也可用於治療非洲昏睡病等原蟲感染</td></tr>
+</tbody>
+</table>
+
+<div class="box outline">
+<div class="box-title">📌 22.4 小結</div>
+<ul>
+  <li>核苷酸有從頭合成與挽救兩條路徑；嘌呤環是邊接核糖邊組裝，嘧啶則先完成環再接核糖。</li>
+  <li>嘌呤合成受麩醯胺酸-PRPP醯胺基轉移酶回饋抑制；嘧啶合成受ATCase回饋抑制（CTP抑制、ATP活化）。</li>
+  <li>核糖核苷酸還原酶把NDP還原成dNDP，是DNA原料的唯一來源，具獨特的自由基機制與雙層別構調節。</li>
+  <li>dTMP由dUMP經胸苷酸合成酶／二氫葉酸還原酶循環合成，是多種化療藥物的標靶。</li>
+  <li>嘌呤分解終產物為尿酸，尿酸過多可致痛風；HGPRT缺乏造成Lesch-Nyhan症候群；ADA缺乏造成免疫缺乏。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="takeaways">
+<h2># Key Takeaways</h2>
+<div class="takeaway-list">
+<ol>
+  <li><b>麩胺酸與麩醯胺酸</b>是活性氮進入生物系統的入口；麩醯胺酸合成酶受協同抑制與共價修飾（腺苷醯化）雙重調節，是氮代謝的核心調節點。</li>
+  <li>固氮酶複合體把 N₂ 還原成 NH₃，耗能極高（16 ATP／2 NH₃），且對氧極為敏感。</li>
+  <li>20 種胺基酸可依碳骨架分為六大家族（α-酮戊二酸、3-磷酸甘油酸、草醯乙酸、丙酮酸、PEP+赤蘚糖4-磷酸、核糖5-磷酸），哺乳動物僅能合成約一半，其餘為必需胺基酸。</li>
+  <li><b>分支酸（chorismate）</b>是色胺酸、苯丙胺酸、酪胺酸的共同關鍵分支點；<b>組胺酸合成</b>與嘌呤合成路徑共用中間產物（AICAR）。</li>
+  <li>胺基酸合成主要靠終產物對第一步反應的<b>回饋抑制</b>調節，常見協同抑制與序列回饋抑制。</li>
+  <li>甘胺酸（或麩胺酸）→ ALA →血基質；血基質分解生成膽紅素等具生理功能的膽色素；紫質合成路徑酵素缺陷造成紫質症。</li>
+  <li>胺基酸經 PLP 依賴性去羧反應可生成重要神經傳導物質（多巴胺、GABA、組織胺、血清素）；精胺酸是一氧化氮的前驅物。</li>
+  <li>核苷酸合成分<b>從頭合成</b>與<b>挽救路徑</b>；嘌呤「邊接糖邊建環」，嘧啶「先建環再接糖」。</li>
+  <li><b>核糖核苷酸還原酶</b>是DNA原料的唯一來源，具自由基反應機制與獨特的雙層別構調節，決定四種dNTP的供應平衡。</li>
+  <li>核苷酸代謝異常會導致重要疾病：<b>痛風</b>（尿酸過多）、<b>Lesch-Nyhan症候群</b>（HGPRT缺乏）、<b>ADA缺乏症</b>（重症免疫缺乏）；相關酵素也是化療與抗生素藥物的重要標靶。</li>
+</ol>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>第22章：胺基酸、核苷酸與相關分子的生合成｜學習指南</p>
+  <button id="backToTop">⬆ Back to Top</button>
+</footer>
+
+<script>
+(function(){
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+  var sections = navLinks.map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  });
+
+  function onScroll(){
+    var pos = window.scrollY + 140;
+    var currentIndex = 0;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i] && sections[i].offsetTop <= pos){
+        currentIndex = i;
+      }
+    }
+    navLinks.forEach(function(a){a.classList.remove('active');});
+    if(navLinks[currentIndex]) navLinks[currentIndex].classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  navLinks.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.querySelector(a.getAttribute('href'));
+      if(target){
+        window.scrollTo({top: target.offsetTop - 70, behavior:'smooth'});
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

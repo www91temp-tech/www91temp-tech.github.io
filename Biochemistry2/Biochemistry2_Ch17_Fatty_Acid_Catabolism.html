@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第17章：脂肪酸代謝｜學習指南</title>
+<style>
+:root{
+  --hue: 79;
+  --main: hsl(79, 45%, 35%);
+  --main-light: hsl(79, 45%, 92%);
+  --main-mid: hsl(79, 45%, 80%);
+  --text: #1a1a1a;
+  --white: #ffffff;
+  --warn-bg: #fff4e5;
+  --warn-border: #d98c1f;
+  --clinical-bg: #fdeaea;
+  --clinical-border: #c0392b;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family:"Noto Sans TC","思源黑體","Heiti TC",sans-serif;
+  color:var(--text);
+  line-height:1.85;
+  background:#fbfbf9;
+  font-size:16px;
+}
+
+img{max-width:100%;}
+
+/* ---------- Header ---------- */
+header{
+  padding:2.6rem 1.5rem 2rem;
+  text-align:center;
+  background:linear-gradient(180deg, var(--main-light), #fbfbf9);
+}
+header h1{
+  color:var(--main);
+  font-size:1.9rem;
+  font-weight:700;
+  letter-spacing:0.05em;
+}
+header p.subtitle{
+  margin-top:0.6rem;
+  color:#555;
+  font-size:0.95rem;
+}
+
+/* ---------- Nav ---------- */
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--white);
+  border-bottom:1px solid #e5e2da;
+  box-shadow:0 2px 6px rgba(0,0,0,0.04);
+}
+nav ul{
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:0.3rem;
+  max-width:1000px;
+  margin:0 auto;
+  padding:0.6rem 1rem;
+}
+nav a{
+  display:block;
+  text-decoration:none;
+  color:#555;
+  font-size:0.92rem;
+  padding:0.55rem 0.9rem;
+  border-radius:6px;
+  transition:background 0.2s, color 0.2s;
+  white-space:nowrap;
+}
+nav a:hover{ background:var(--main-light); color:var(--main); }
+nav a.active{
+  background:var(--main);
+  color:#fff;
+  font-weight:700;
+}
+
+/* ---------- Main layout ---------- */
+main{
+  max-width:880px;
+  margin:0 auto;
+  padding:2rem 1.3rem 4rem;
+}
+
+section{ padding-top:1.4rem; margin-bottom:2.6rem; }
+
+h2{
+  color:var(--main);
+  font-size:1.45rem;
+  border-bottom:3px solid var(--main-light);
+  padding-bottom:0.5rem;
+  margin:2.2rem 0 1.1rem;
+}
+h3{
+  color:var(--main);
+  font-size:1.15rem;
+  margin:1.8rem 0 0.8rem;
+  padding-left:0.6rem;
+  border-left:5px solid var(--main);
+}
+h4{
+  color:#3a3a3a;
+  font-size:1rem;
+  margin:1.2rem 0 0.6rem;
+  font-weight:700;
+}
+p{ margin-bottom:0.9rem; text-align:justify; }
+ul, ol{ margin:0.5rem 0 1rem 1.4rem; }
+li{ margin-bottom:0.4rem; }
+
+strong{ color:var(--main); }
+
+.term{ font-weight:700; }
+
+/* ---------- Callout boxes ---------- */
+.box{
+  border-radius:10px;
+  padding:1rem 1.2rem;
+  margin:1.2rem 0;
+  border-left:5px solid var(--main);
+  background:var(--main-light);
+}
+.box-title{
+  font-weight:700;
+  color:var(--main);
+  margin-bottom:0.4rem;
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+}
+.box.mechanism{ border-left-color:#6a5acd; background:#eeecfb; }
+.box.mechanism .box-title{ color:#5b4bc4; }
+.box.pathway{ border-left-color:var(--main); background:var(--main-light); }
+.box.regulatory{ border-left-color:var(--warn-border); background:var(--warn-bg); }
+.box.regulatory .box-title{ color:var(--warn-border); }
+.box.clinical{ border-left-color:var(--clinical-border); background:var(--clinical-bg); }
+.box.clinical .box-title{ color:var(--clinical-border); }
+.box.enzyme{ border-left-color:#2266aa; background:#e6f0f9; }
+.box.enzyme .box-title{ color:#2266aa; }
+
+/* ---------- Flow diagrams (CSS-based) ---------- */
+.flow{
+  display:flex;
+  align-items:stretch;
+  flex-wrap:wrap;
+  gap:0.5rem 0.3rem;
+  margin:1rem 0;
+  padding:0.9rem;
+  background:#fff;
+  border:1px solid #e5e2da;
+  border-radius:10px;
+  overflow-x:auto;
+}
+.flow-step{
+  flex:1 1 auto;
+  min-width:118px;
+  background:var(--main-light);
+  border:1px solid var(--main-mid);
+  border-radius:8px;
+  padding:0.55rem 0.6rem;
+  font-size:0.85rem;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.flow-step .label{ font-weight:700; color:var(--main); margin-bottom:0.15rem; }
+.flow-step .sub{ color:#555; font-size:0.78rem; }
+.flow-arrow{
+  align-self:center;
+  color:var(--main);
+  font-weight:700;
+  font-size:1.1rem;
+  padding:0 0.15rem;
+  flex:0 0 auto;
+}
+.flow-arrow .cond{
+  display:block;
+  font-size:0.66rem;
+  color:#666;
+  font-weight:400;
+  max-width:90px;
+  white-space:normal;
+  line-height:1.2;
+}
+.flow.vertical{ flex-direction:column; align-items:center; }
+.flow.vertical .flow-arrow{ transform:none; }
+
+@media (max-width:640px){
+  .flow{ flex-direction:column; }
+  .flow-arrow{ transform:rotate(90deg); margin:0.15rem 0; }
+  .flow-arrow .cond{ transform:rotate(-90deg); max-width:70px; }
+}
+
+/* cycle diagram */
+.cycle-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.4rem;
+  margin:1.2rem 0;
+  padding:1rem;
+  background:#fff;
+  border:1px solid #e5e2da;
+  border-radius:10px;
+}
+.cycle-step{
+  width:100%;
+  max-width:520px;
+  background:var(--main-light);
+  border:1px solid var(--main-mid);
+  border-radius:8px;
+  padding:0.6rem 0.9rem;
+  font-size:0.87rem;
+  display:flex;
+  justify-content:space-between;
+  gap:0.6rem;
+  align-items:center;
+}
+.cycle-step .num{
+  background:var(--main);
+  color:#fff;
+  border-radius:50%;
+  width:1.6rem;
+  height:1.6rem;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.8rem;
+  font-weight:700;
+}
+.cycle-arrow-down{ color:var(--main); font-size:1.1rem; }
+.cycle-loop{
+  margin-top:0.4rem;
+  font-size:0.8rem;
+  color:#555;
+  text-align:center;
+  border-top:1px dashed var(--main-mid);
+  padding-top:0.6rem;
+  width:100%;
+  max-width:520px;
+}
+
+/* membrane diagram for carnitine shuttle */
+.membrane-diagram{
+  display:flex;
+  overflow-x:auto;
+  gap:0;
+  margin:1.2rem 0;
+  border:1px solid #e5e2da;
+  border-radius:10px;
+  background:#fff;
+  padding:0.8rem;
+}
+.membrane-col{
+  flex:1 1 0;
+  min-width:130px;
+  padding:0.6rem 0.5rem;
+  font-size:0.8rem;
+  text-align:center;
+}
+.membrane-col h5{
+  font-size:0.78rem;
+  color:#666;
+  margin-bottom:0.5rem;
+  font-weight:700;
+}
+.membrane-col.cytosol{ background:#f5f8f2; }
+.membrane-col.omm{ background:repeating-linear-gradient(135deg, var(--main-mid), var(--main-mid) 4px, #fff 4px, #fff 8px); width:14px; flex:0 0 14px; min-width:14px; }
+.membrane-col.space{ background:#fbf9f2; }
+.membrane-col.imm{ background:repeating-linear-gradient(135deg, var(--main), var(--main) 4px, #fff 4px, #fff 8px); width:14px; flex:0 0 14px; min-width:14px; }
+.membrane-col.matrix{ background:var(--main-light); }
+.membrane-item{
+  background:#fff;
+  border:1px solid var(--main-mid);
+  border-radius:6px;
+  padding:0.35rem 0.3rem;
+  margin-bottom:0.4rem;
+}
+
+/* ---------- Tables ---------- */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:1.1rem 0;
+  font-size:0.88rem;
+  background:#fff;
+}
+caption{
+  text-align:left;
+  font-weight:700;
+  color:var(--main);
+  margin-bottom:0.4rem;
+  font-size:0.92rem;
+}
+th, td{
+  border:1px solid #e0ddd3;
+  padding:0.55rem 0.6rem;
+  text-align:left;
+  vertical-align:top;
+}
+th{ background:var(--main); color:#fff; font-weight:700; }
+tr:nth-child(even) td{ background:#f8f7f2; }
+
+.compare-table th.colA{ background:hsl(79,45%,42%); }
+.compare-table th.colB{ background:hsl(79,45%,28%); }
+.compare-table th.colDiff{ background:#555; }
+
+/* key takeaways */
+#takeaways ul{ list-style:none; margin-left:0; }
+#takeaways li{
+  background:#fff;
+  border:1px solid #e5e2da;
+  border-left:5px solid var(--main);
+  border-radius:8px;
+  padding:0.7rem 1rem;
+  margin-bottom:0.6rem;
+  font-size:0.94rem;
+}
+#takeaways li b{ color:var(--main); }
+
+/* ---------- Footer ---------- */
+footer{
+  text-align:center;
+  padding:2.2rem 1rem 3rem;
+  background:var(--main-light);
+  color:#444;
+  font-size:0.9rem;
+}
+#backToTop{
+  display:inline-block;
+  margin-bottom:1rem;
+  background:var(--main);
+  color:#fff;
+  border:none;
+  padding:0.6rem 1.4rem;
+  border-radius:30px;
+  font-size:0.9rem;
+  cursor:pointer;
+  font-family:inherit;
+  transition:opacity 0.2s;
+}
+#backToTop:hover{ opacity:0.85; }
+
+/* ---------- RWD ---------- */
+@media (max-width:1024px){
+  main{ max-width:92%; }
+}
+@media (max-width:768px){
+  header h1{ font-size:1.5rem; }
+  nav ul{ gap:0.15rem; padding:0.5rem 0.6rem; justify-content:center;}
+  nav a{ font-size:0.82rem; padding:0.45rem 0.6rem; }
+  h2{ font-size:1.25rem; }
+  h3{ font-size:1.05rem; }
+  table{ font-size:0.78rem; }
+  th, td{ padding:0.4rem 0.4rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第17章：脂肪酸代謝</h1>
+  <p class="subtitle">Fatty Acid Catabolism｜學習指南</p>
+</header>
+
+<nav id="mainNav">
+  <ul>
+    <li><a href="#overview" class="nav-link">章節總覽</a></li>
+    <li><a href="#sec1" class="nav-link">17.1 消化、動員與運輸</a></li>
+    <li><a href="#sec2" class="nav-link">17.2 脂肪酸的氧化</a></li>
+    <li><a href="#sec3" class="nav-link">17.3 酮體</a></li>
+    <li><a href="#takeaways" class="nav-link">重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ OVERVIEW ============ -->
+<section id="overview">
+  <h2>章節總覽</h2>
+  <p>長鏈脂肪酸氧化成乙醯輔酶A（acetyl-CoA）是許多生物體中重要的產能路徑。以哺乳動物的心臟與肝臟為例，脂肪酸氧化最多可供應 80% 的能量需求。氧化過程中移除的電子會進入呼吸鏈，驅動 ATP 合成；產生的乙醯輔酶A 也可以在檸檬酸循環（citric acid cycle）中被完全氧化，進一步保存能量。</p>
+
+  <div class="box pathway">
+    <div class="box-title">🔑 為什麼三酸甘油酯適合儲存能量？</div>
+    <ul>
+      <li>脂肪酸的長碳氫鏈高度還原，完全氧化釋放的能量（約 38 kJ/g）是等重醣類或蛋白質的兩倍以上。</li>
+      <li>三酸甘油酯（triacylglycerol）極不溶於水，會聚集成脂滴，不需水合，也不會提高細胞質的滲透壓。</li>
+      <li>化學性質相對惰性，可大量儲存而不易與其他細胞成分發生反應。</li>
+    </ul>
+  </div>
+
+  <p>然而，這些優點也帶來運輸與活化上的挑戰：脂肪必須先經乳化才能被水溶性酵素消化，吸收後也需要蛋白質協助運輸；此外，脂肪酸羧基端（C-1）必須先與輔酶A（coenzyme A）連接活化，之後才能在 C-3（即 <em>β</em> 位）進行逐步氧化——這正是「<strong>β氧化（β oxidation）</strong>」名稱的由來。</p>
+
+  <div class="box">
+    <div class="box-title">📌 本章與其他代謝路徑共通的原則</div>
+    <ul>
+      <li>不同來源的代謝物匯聚到少數幾條中央路徑：脂肪酸與葡萄糖分解最終都產生乙醯輔酶A。</li>
+      <li>相似的化學機制重複用於不同路徑：例如將羧酸轉為硫酯（thioester）以活化反應。</li>
+      <li>異位調節與蛋白質磷酸化協調細胞內代謝；激素則協調器官間的代謝活動。</li>
+      <li>關鍵酵素、輔因子或調節因子的缺失，會造成不同嚴重程度的疾病。</li>
+    </ul>
+  </div>
+
+  <p>肝臟在全身代謝中扮演獨特角色：血糖不足時，肝臟以糖質新生（gluconeogenesis）製造葡萄糖供應腦部；飢餓時，肝臟也將脂肪酸轉為<strong>酮體（ketone bodies）</strong>，供給無法直接利用脂肪酸的腦部作為燃料。</p>
+</section>
+
+<!-- ============ 17.1 ============ -->
+<section id="sec1">
+  <h2>17.1 脂肪的消化、動員與運輸</h2>
+  <p>細胞可以從四個來源取得脂肪酸燃料：飲食攝取、細胞內儲存的脂滴、其他器官合成後輸出的脂肪，以及自噬（autophagy）分解自身胞器所得。人類日常約 40% 以上的能量來自飲食中的三酸甘油酯，在肝臟、心臟與靜止的骨骼肌中，三酸甘油酯更提供超過一半的能量需求。</p>
+
+  <h3>膳食脂肪在小腸中的消化與吸收</h3>
+  <p>攝入的三酸甘油酯必須先由膽鹽（bile salts，如牛磺膽酸）乳化成微胞（micelle），才能被腸道中水溶性的脂肪酶（lipase）作用，分解成單酸甘油酯、雙酸甘油酯與游離脂肪酸。這些產物進入腸黏膜細胞後，重新合成三酸甘油酯，並與膽固醇、載脂蛋白（apolipoprotein）組裝成<strong>乳糜微粒（chylomicron）</strong>。</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="label">① 膽鹽乳化</span><span class="sub">小腸中形成混合微胞</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">② 脂肪酶分解</span><span class="sub">三酸甘油酯 → 脂肪酸+單/雙酸甘油酯</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">③ 腸黏膜吸收</span><span class="sub">重新合成三酸甘油酯</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">④ 組裝乳糜微粒</span><span class="sub">+膽固醇+載脂蛋白</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><span class="label">⑤ 淋巴系統→血液</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">⑥ 微血管中<br>脂蛋白脂酶作用</span><span class="sub">apoC-II 活化</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">⑦ 脂肪酸進入<br>肌細胞/脂肪細胞</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">⑧ 氧化產能<br>或再酯化儲存</span></div>
+  </div>
+  <p style="font-size:0.85rem;color:#666;">圖示重現原文 Figure 17-1 的八個步驟，僅保留關鍵節點與流程順序。</p>
+
+  <p>血液中，乳糜微粒會從高密度脂蛋白（HDL）取得 <strong>apoC-II</strong>，並被送往肌肉與脂肪組織。在微血管中，胞外酵素<strong>脂蛋白脂酶（lipoprotein lipase）</strong>被 apoC-II 活化，將三酸甘油酯分解成脂肪酸與單酸甘油酯，供組織細胞攝取：肌肉氧化產能，脂肪組織則再酯化儲存。乳糜微粒殘餘則被肝臟以接受器媒介的胞吞作用攝入。當飲食中脂肪酸過量時，肝臟會將其轉為三酸甘油酯，包裝成<strong>極低密度脂蛋白（VLDL）</strong>運送到脂肪組織儲存。</p>
+
+  <h3>激素觸發儲存三酸甘油酯的動員</h3>
+  <p>脂肪細胞（adipocyte）內的脂滴由<strong>周脂蛋白（perilipin）</strong>包覆，平時限制脂肪酶接觸脂滴，避免不當動員。當血糖降低或面臨緊急狀況時，腎上腺素與升糖素（glucagon）會啟動下列級聯反應：</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="label">升糖素</span><span class="sub">結合受體</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">腺苷酸環化酶</span><span class="sub">活化 → cAMP↑</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">PKA 活化</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">磷酸化 HSL<br>+磷酸化周脂蛋白</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><span class="label">CGI-58 釋放</span><span class="sub">脫離周脂蛋白</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">ATGL 活化</span><span class="sub">TAG→DAG</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">HSL 作用</span><span class="sub">DAG→MAG</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">MGL 作用</span><span class="sub">MAG→脂肪酸+甘油</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">脂肪酸結合<br>血清白蛋白</span><span class="sub">運送至肌肉等組織</span></div>
+  </div>
+
+  <div class="box enzyme">
+    <div class="box-title">🧪 三種細胞質脂酶的分工</div>
+    <ul>
+      <li><strong>ATGL（脂肪組織三酸甘油酯脂酶）</strong>：三酸甘油酯 → 雙酸甘油酯</li>
+      <li><strong>HSL（激素敏感脂酶，hormone-sensitive lipase）</strong>：雙酸甘油酯 → 單酸甘油酯</li>
+      <li><strong>MGL（單酸甘油酯脂酶）</strong>：單酸甘油酯 → 脂肪酸 + 甘油</li>
+    </ul>
+  </div>
+
+  <p>釋出的<strong>游離脂肪酸（free fatty acids, FFAs）</strong>與血清白蛋白（serum albumin）非共價結合後運送到骨骼肌、心臟與腎皮質等目標組織，於當地解離並經特定運輸蛋白進入細胞作為燃料。</p>
+
+  <h3>甘油進入糖解途徑</h3>
+  <p>三酸甘油酯中約 95% 的可利用能量來自脂肪酸部分，僅 5% 來自甘油。甘油會被<strong>甘油激酶（glycerol kinase）</strong>磷酸化為甘油3-磷酸，再氧化為磷酸二羥丙酮，最後由丙糖磷酸異構酶轉為3-磷酸甘油醛，進入糖解（glycolysis）。</p>
+  <div class="flow">
+    <div class="flow-step"><span class="label">甘油</span></div>
+    <div class="flow-arrow">→<span class="cond">甘油激酶 +ATP</span></div>
+    <div class="flow-step"><span class="label">甘油3-磷酸</span></div>
+    <div class="flow-arrow">→<span class="cond">甘油3-磷酸<br>去氫酶 +NAD⁺</span></div>
+    <div class="flow-step"><span class="label">磷酸二羥丙酮</span></div>
+    <div class="flow-arrow">→<span class="cond">丙糖磷酸<br>異構酶</span></div>
+    <div class="flow-step"><span class="label">3-磷酸甘油醛<br>→ 糖解</span></div>
+  </div>
+
+  <h3>脂肪酸的活化與轉運進入粒線體：肉鹼穿梭</h3>
+  <p>短鏈與中鏈脂肪酸（≤12 碳）可直接擴散進入粒線體；長鏈脂肪酸（≥14 碳）則必須先在粒線體外膜活化，再經由<strong>肉鹼穿梭（carnitine shuttle）</strong>運入基質。活化反應由<strong>脂肪醯輔酶A合成酶（fatty acyl–CoA synthetase）</strong>催化：</p>
+  <div class="flow">
+    <div class="flow-step"><span class="label">脂肪酸 + CoA + ATP</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">脂肪醯-AMP<br>（中間產物）+PPi</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">脂肪醯輔酶A<br>+ AMP</span></div>
+  </div>
+  <p>焦磷酸（PPi）立即被無機焦磷酸酶水解，將反應拉向產物方向，使整體反應變得非常有利（ΔG'° ≈ −34 kJ/mol）。此步驟消耗兩個高能磷酸鍵，相當於 2 分子 ATP 的代價。</p>
+
+  <div class="box regulatory">
+    <div class="box-title">⚠️ 調節與限速步驟：肉鹼穿梭</div>
+    <p>肉鹼穿梭是脂肪酸氧化的<strong>限速步驟（rate-limiting step）</strong>，也是重要的調控點。</p>
+    <div class="membrane-diagram">
+      <div class="membrane-col cytosol">
+        <h5>細胞質</h5>
+        <div class="membrane-item">脂肪醯輔酶A</div>
+      </div>
+      <div class="membrane-col omm"></div>
+      <div class="membrane-col cytosol" style="background:#fbf9f2;">
+        <h5>外膜上</h5>
+        <div class="membrane-item">CAT1／CPT1<br>轉為脂肪醯肉鹼</div>
+      </div>
+      <div class="membrane-col imm"></div>
+      <div class="membrane-col matrix">
+        <h5>基質</h5>
+        <div class="membrane-item">CAT2／CPT2<br>還原為脂肪醯輔酶A</div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem;">脂肪醯肉鹼經由「肉鹼／脂肪醯肉鹼反向運輸蛋白」以逆向運輸方式通過內膜，一分子脂肪醯肉鹼進入基質，同時一分子肉鹼被送回細胞質，供下一輪使用。<strong>丙二醯輔酶A（malonyl-CoA）</strong>——脂肪酸合成的第一個中間產物——會抑制 CAT1，避免脂肪酸合成與分解同時發生（無效循環）。</p>
+  </div>
+
+  <div class="box">
+    <div class="box-title">📋 17.1 節重點摘要</div>
+    <ul>
+      <li>膳食三酸甘油酯經膽鹽乳化、脂肪酶水解、腸黏膜吸收後，重組為乳糜微粒經淋巴與血液運送。</li>
+      <li>儲存的三酸甘油酯經激素敏感脂酶等動員，脂肪酸與血清白蛋白結合運輸。</li>
+      <li>脂肪酸須先活化為脂肪醯輔酶A，長鏈者須經肉鹼穿梭進入粒線體，此為主要調控點。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 17.2 ============ -->
+<section id="sec2">
+  <h2>17.2 脂肪酸的氧化</h2>
+  <p>粒線體中脂肪酸氧化分為三個階段：</p>
+  <div class="flow">
+    <div class="flow-step"><span class="label">階段1：β氧化</span><span class="sub">長鏈脂肪酸 → 乙醯輔酶A<br>(28e⁻)</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">階段2：檸檬酸循環</span><span class="sub">8 乙醯輔酶A → 16CO₂<br>(64e⁻)</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">階段3：呼吸鏈</span><span class="sub">電子傳遞 → O₂+H₂O<br>ADP+Pi → ATP</span></div>
+  </div>
+  <p>第一、二階段產生的 NADH 與 FADH₂ 在第三階段將電子交給呼吸鏈，驅動氧化磷酸化生成 ATP。</p>
+
+  <h3>飽和脂肪酸的β氧化：四個基本步驟</h3>
+  <p>每一輪β氧化循環由四個酵素連續催化，每次移除一個二碳單位（以乙醯輔酶A形式釋出）。以16碳的棕櫚醯輔酶A（palmitoyl-CoA）為例：</p>
+
+  <div class="cycle-wrap">
+    <div class="cycle-step">
+      <span><span class="num">1</span>脫氫反應：形成 α,β 雙鍵（trans-Δ²）</span>
+      <span style="font-size:0.78rem;color:#555;">酵素：醯輔酶A去氫酶<br>FAD→FADH₂ →電子轉移黃素蛋白(ETF)→呼吸鏈</span>
+    </div>
+    <div class="cycle-arrow-down">↓</div>
+    <div class="cycle-step">
+      <span><span class="num">2</span>水合反應：雙鍵加水</span>
+      <span style="font-size:0.78rem;color:#555;">酵素：enoyl-CoA hydratase<br>生成 L-β-羥醯輔酶A</span>
+    </div>
+    <div class="cycle-arrow-down">↓</div>
+    <div class="cycle-step">
+      <span><span class="num">3</span>第二次脫氫：羥基氧化為酮基</span>
+      <span style="font-size:0.78rem;color:#555;">酵素：β-羥醯輔酶A去氫酶<br>NAD⁺→NADH →Complex I →呼吸鏈</span>
+    </div>
+    <div class="cycle-arrow-down">↓</div>
+    <div class="cycle-step">
+      <span><span class="num">4</span>硫解反應：釋出乙醯輔酶A</span>
+      <span style="font-size:0.78rem;color:#555;">酵素：硫解酶（thiolase）<br>+CoA-SH → 縮短兩碳的脂肪醯輔酶A</span>
+    </div>
+    <div class="cycle-loop">縮短兩碳的脂肪醯輔酶A重新進入步驟①，重複循環 ↺（16碳棕櫚酸酯共需 7 輪，產生 8 個乙醯輔酶A）</div>
+  </div>
+
+  <div class="box enzyme">
+    <div class="box-title">🧪 β氧化四步驟酵素一覽</div>
+    <table>
+      <thead><tr><th>步驟</th><th>酵素</th><th>輔因子</th><th>產物</th></tr></thead>
+      <tbody>
+        <tr><td>①脫氫</td><td>acyl-CoA dehydrogenase（VLCAD/MCAD/SCAD 依鏈長分工）</td><td>FAD</td><td>trans-Δ²-enoyl-CoA + FADH₂</td></tr>
+        <tr><td>②水合</td><td>enoyl-CoA hydratase</td><td>—（加水）</td><td>L-β-hydroxyacyl-CoA</td></tr>
+        <tr><td>③脫氫</td><td>β-hydroxyacyl-CoA dehydrogenase</td><td>NAD⁺</td><td>β-ketoacyl-CoA + NADH</td></tr>
+        <tr><td>④硫解</td><td>thiolase（acyl-CoA acetyltransferase）</td><td>CoA-SH</td><td>乙醯輔酶A + 縮短的脂肪醯輔酶A</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>12碳以上的脂肪醯鏈由內膜上的<strong>三功能蛋白（trifunctional protein, TFP）</strong>連續催化步驟②③④，效率極高；縮短至12碳以下後，改由基質中四個獨立可溶酵素接手。</p>
+
+  <div class="box mechanism">
+    <div class="box-title">🔬 機制小重點：為什麼β氧化能打斷穩定的C–C鍵？</div>
+    <p>β氧化前三步驟在β碳（C-3）製造出酮基，使α碳（C-2）同時鍵結兩個羰基碳，形成不穩定的中間產物。酮基使β碳成為輔酶A硫醇基親核攻擊的良好目標，α氫的酸性與離去碳陰離子的共振穩定則有助於α–β鍵斷裂——這與檸檬酸循環中琥珀酸→草醯乙酸的反應序列幾乎相同，也與支鏈胺基酸（異白胺酸、白胺酸、纈胺酸）分解途徑的機制相似，可能是基因重複演化的結果。</p>
+  </div>
+
+  <h3>重複循環產生乙醯輔酶A與ATP</h3>
+  <p>16碳的棕櫚醯輔酶A需經 7 輪β氧化，共產生 8 分子乙醯輔酶A、7 FADH₂、7 NADH。每對電子經 FADH₂ 約可產生 1.5 ATP，經 NADH 約可產生 2.5 ATP，因此每輪循環（移除一個二碳單位）淨得約 4 分子 ATP。</p>
+
+  <div class="box pathway">
+    <div class="box-title">🧮 棕櫚酸酯完全氧化的能量帳（Table 17-1 簡化）</div>
+    <table>
+      <thead><tr><th>階段</th><th>NADH/FADH₂ 產量</th><th>約當 ATP</th></tr></thead>
+      <tbody>
+        <tr><td>β氧化（7輪）</td><td>7 FADH₂ + 7 NADH</td><td>10.5 + 17.5 = 28</td></tr>
+        <tr><td>檸檬酸循環（8圈）</td><td>24 NADH + 8 FADH₂ + 8 GTP-等效</td><td>60 + 12 + 8 = 80</td></tr>
+        <tr><td><strong>總計</strong></td><td>—</td><td><strong>108（扣除活化耗費2 ATP，淨得106 ATP）</strong></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.85rem;">在標準條件下，回收效率約 33%；若以細胞內實際濃度計算，效率可達 60% 以上。</p>
+  </div>
+
+  <h3>不飽和脂肪酸的氧化：需要兩個額外酵素</h3>
+  <p>天然不飽和脂肪酸的雙鍵為 <em>cis</em> 構型，但 enoyl-CoA hydratase 只能作用於 <em>trans</em> 雙鍵，因此需要兩個輔助酵素協助。</p>
+  <h4>單元不飽和脂肪酸（以油酸 oleate, Δ⁹ 為例）</h4>
+  <div class="flow">
+    <div class="flow-step"><span class="label">油醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">3輪β氧化</span></div>
+    <div class="flow-step"><span class="label">cis-Δ³-十二碳<br>烯醯輔酶A</span><span class="sub">+3 乙醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">Δ³,Δ²-enoyl-CoA<br>isomerase</span></div>
+    <div class="flow-step"><span class="label">trans-Δ²-烯醯輔酶A</span><span class="sub">可進入β氧化</span></div>
+    <div class="flow-arrow">→<span class="cond">4輪β氧化</span></div>
+    <div class="flow-step"><span class="label">共9個乙醯輔酶A</span></div>
+  </div>
+  <h4>多元不飽和脂肪酸（以亞油酸 linoleate, Δ⁹,¹² 為例）</h4>
+  <p>需要異構酶（enoyl-CoA isomerase）與 <strong>2,4-二烯醯輔酶A還原酶（2,4-dienoyl-CoA reductase，需 NADPH）</strong>共同作用，才能把雙鍵位置與構型調整為可進入β氧化的形式；亞油酸最終同樣可產生 9 個乙醯輔酶A。</p>
+
+  <h3>奇數碳脂肪酸的完全氧化：需要三個額外反應</h3>
+  <p>奇數碳脂肪酸以與偶數碳相同的β氧化方式進行，最後一輪會產生乙醯輔酶A與三碳的<strong>丙醯輔酶A（propionyl-CoA）</strong>。丙醯輔酶A須經下列三步驟才能進入檸檬酸循環：</p>
+  <div class="flow">
+    <div class="flow-step"><span class="label">丙醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">丙醯輔酶A羧化酶<br>(生物素+ATP+HCO₃⁻)</span></div>
+    <div class="flow-step"><span class="label">D-甲基丙二醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">甲基丙二醯輔酶A<br>差向異構酶</span></div>
+    <div class="flow-step"><span class="label">L-甲基丙二醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">甲基丙二醯輔酶A<br>變位酶(輔酶B₁₂)</span></div>
+    <div class="flow-step"><span class="label">琥珀醯輔酶A</span><span class="sub">進入檸檬酸循環</span></div>
+  </div>
+
+  <div class="box mechanism">
+    <div class="box-title">🔬 輔因子焦點：輔酶B₁₂（Coenzyme B₁₂）</div>
+    <p><strong>甲基丙二醯輔酶A變位酶（methylmalonyl-CoA mutase）</strong>需要維生素B₁₂衍生的輔酶B₁₂（5'-deoxyadenosylcobalamin）。此酵素可讓氫原子與取代基在相鄰碳原子間互換位置，且互換過程中氫原子完全不與周圍溶劑水分子交換——這是透過鈷-碳鍵均裂形成自由基中間產物達成的。維生素B₁₂缺乏會導致<strong>惡性貧血（pernicious anemia）</strong>，常因缺乏<strong>內因子（intrinsic factor）</strong>使腸道無法有效吸收B₁₂所致。</p>
+  </div>
+
+  <div class="box clinical">
+    <div class="box-title">🏥 臨床相關：丙酸血症（propionic acidemia）</div>
+    <p>約每 10 萬名新生兒中有 1 人因遺傳性<strong>丙醯輔酶A羧化酶</strong>缺陷，無法代謝丙醯輔酶A，導致其在粒線體中堆積並經肉鹼穿梭釋出為丙酸，使血液與尿液嚴重酸化。症狀常在出生後數天內出現，包括嘔吐、低血糖、抽搐與神經學異常。治療包括嚴格限制蛋白質攝取、補充肉鹼，部分患者可用高劑量生物素改善。</p>
+  </div>
+
+  <h3>脂肪酸氧化受到嚴密調控</h3>
+  <p>肝臟中的脂肪醯輔酶A有兩條路可走：進入粒線體β氧化，或在細胞質中合成三酸甘油酯與磷脂。決定去向的關鍵在於肉鹼穿梭的流量。</p>
+
+  <div class="box regulatory">
+    <div class="box-title">⚠️ 調節機制：丙二醯輔酶A抑制CAT1</div>
+    <div class="flow">
+      <div class="flow-step"><span class="label">高血糖</span></div>
+      <div class="flow-arrow">→<span class="cond">①</span></div>
+      <div class="flow-step"><span class="label">胰島素↑</span></div>
+      <div class="flow-arrow">→<span class="cond">②去磷酸酶</span></div>
+      <div class="flow-step"><span class="label">ACC活化</span></div>
+      <div class="flow-arrow">→<span class="cond">③</span></div>
+      <div class="flow-step"><span class="label">丙二醯輔酶A↑</span></div>
+      <div class="flow-arrow">→<span class="cond">④抑制</span></div>
+      <div class="flow-step"><span class="label">CAT1受抑制<br>β氧化↓</span></div>
+    </div>
+    <div class="flow">
+      <div class="flow-step"><span class="label">低血糖</span></div>
+      <div class="flow-arrow">→<span class="cond">⑤</span></div>
+      <div class="flow-step"><span class="label">升糖素↑ →PKA<br>／AMPK活化</span></div>
+      <div class="flow-arrow">→<span class="cond">⑥磷酸化</span></div>
+      <div class="flow-step"><span class="label">ACC失活</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="label">丙二醯輔酶A↓</span></div>
+      <div class="flow-arrow">→<span class="cond">⑦⑧解除抑制</span></div>
+      <div class="flow-step"><span class="label">CAT1恢復活性<br>β氧化↑</span></div>
+    </div>
+    <p style="font-size:0.85rem;">此外，高 [NADH]/[NAD⁺] 比值會抑制 β-羥醯輔酶A去氫酶，高濃度乙醯輔酶A則抑制硫解酶，兩者皆是「能量充足」訊號的回饋抑制。</p>
+  </div>
+
+  <h3>轉錄因子調控脂肪分解相關蛋白質合成</h3>
+  <p><strong>PPARα</strong>（過氧化體增殖物活化受體α家族）作用於肌肉、脂肪組織與肝臟，在能量需求增加時（如飢餓、長時間禁食）活化一整套β氧化相關基因，包括脂肪酸轉運蛋白、CAT1/CAT2 與各鏈長的醯輔酶A去氫酶。這是分鐘至小時尺度的長期調控，有別於前述快速的異位調控。</p>
+
+  <div class="box clinical">
+    <div class="box-title">🏥 臨床相關：脂肪醯輔酶A去氫酶基因缺陷</div>
+    <p><strong>中鏈醯輔酶A去氫酶（MCAD）缺陷</strong>是北歐與美國人群中最常見的脂肪酸代謝遺傳缺陷，帶因率約 1/40，約 1/10,000 人發病，無法氧化 6–12 碳脂肪酸，臨床表現包括肝臟脂肪堆積、血中辛酸（8:0）升高、低血糖、嗜睡、嘔吐與昏迷，兒童期死亡率可達 25–60%。及早診斷並採低脂高碳水化合物飲食、避免長時間空腹，預後良好。其他更罕見的缺陷則涉及三功能蛋白（TFP）的活性喪失，可導致嚴重心臟病與骨骼肌異常。</p>
+  </div>
+
+  <h3>過氧化體也進行β氧化</h3>
+  <p>植物細胞中，β氧化主要發生在<strong>過氧化體（peroxisome）</strong>而非粒線體；動物細胞中過氧化體也具備類似（但不完全相同）的四步驟β氧化。</p>
+
+  <table class="compare-table">
+    <caption>🔍 本章容易混淆的概念①：粒線體β氧化 vs. 過氧化體β氧化</caption>
+    <thead><tr><th class="colA">粒線體β氧化</th><th class="colB">過氧化體β氧化</th><th class="colDiff">關鍵差異</th></tr></thead>
+    <tbody>
+      <tr><td>第一步電子經呼吸鏈傳給O₂，生成H₂O並偶合ATP合成</td><td>第一步電子直接傳給O₂，生成H₂O₂（再由過氧化氫酶分解）</td><td>粒線體保存能量為ATP；過氧化體以熱能形式釋放</td></tr>
+      <tr><td>可氧化各種鏈長脂肪酸，並含檸檬酸循環酵素，可將乙醯輔酶A完全氧化為CO₂</td><td>特別擅長極長鏈（如26:0）與支鏈脂肪酸，不含檸檬酸循環酵素</td><td>過氧化體只能把長鏈脂肪酸「剪短」，短鏈產物需送至粒線體才能完全氧化</td></tr>
+      <tr><td>NADH可在粒線體內直接被呼吸鏈氧化</td><td>NADH需輸出至細胞質，再送入粒線體重新氧化</td><td>還原力的去處不同</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box clinical">
+    <div class="box-title">🏥 臨床相關：過氧化體疾病</div>
+    <ul>
+      <li><strong>Zellweger 症候群</strong>：無法形成過氧化體，喪失所有過氧化體代謝功能。</li>
+      <li><strong>X 連鎖腎上腺腦白質失養症（X-ALD）</strong>：過氧化體膜運輸蛋白缺陷，無法氧化極長鏈脂肪酸，導致血中26:0等脂肪酸堆積，好發於10歲以下男孩，造成視力喪失、行為異常，數年內死亡。</li>
+    </ul>
+  </div>
+
+  <h3>植烷酸的α氧化</h3>
+  <p>植烷酸（phytanic acid）來自葉綠素的植醇側鏈，其 β 碳上有甲基取代，無法形成β-酮中間產物，因此無法直接進行β氧化，須先在過氧化體中經<strong>α氧化（α oxidation）</strong>移除一個碳。</p>
+  <div class="flow">
+    <div class="flow-step"><span class="label">植烷醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">羥化酶<br>(α-KG,Fe²⁺,O₂)</span></div>
+    <div class="flow-step"><span class="label">α-羥基植烷醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">裂解酶</span></div>
+    <div class="flow-step"><span class="label">Pristanal<br>(少一個碳)</span></div>
+    <div class="flow-arrow">→<span class="cond">醛去氫酶</span></div>
+    <div class="flow-step"><span class="label">Pristanic acid</span><span class="sub">β碳已無取代<br>可進行β氧化</span></div>
+  </div>
+
+  <table class="compare-table">
+    <caption>🔍 本章容易混淆的概念②：β氧化 vs. α氧化</caption>
+    <thead><tr><th class="colA">β氧化（β oxidation）</th><th class="colB">α氧化（α oxidation）</th><th class="colDiff">關鍵差異</th></tr></thead>
+    <tbody>
+      <tr><td>每輪移除2個碳（乙醯輔酶A）</td><td>每輪移除1個碳</td><td>移除碳數不同</td></tr>
+      <tr><td>作用於直鏈、β碳無取代的脂肪酸</td><td>作用於β碳有甲基取代（如植烷酸）的脂肪酸，先清除β取代基之障礙</td><td>受質結構不同；α氧化是β氧化的「前處理」</td></tr>
+      <tr><td>主要發生於粒線體（也存在過氧化體）</td><td>只發生於過氧化體</td><td>發生位置不同</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box clinical">
+    <div class="box-title">🏥 臨床相關：Refsum 氏病</div>
+    <p>植烷醯輔酶A羥化酶的基因缺陷會使植烷酸無法被α氧化，血中濃度異常升高，造成嚴重神經學症狀，包括失明與失聰。</p>
+  </div>
+
+  <div class="box">
+    <div class="box-title">📋 17.2 節重點摘要</div>
+    <ul>
+      <li>飽和脂肪酸β氧化：脫氫→水合→脫氫→硫解，每輪移除一個乙醯輔酶A單位。</li>
+      <li>不飽和脂肪酸需要異構酶（與多元不飽和者還需還原酶）。</li>
+      <li>奇數碳脂肪酸產生的丙醯輔酶A須經羧化、差向異構化、變位（需輔酶B₁₂）轉為琥珀醯輔酶A。</li>
+      <li>肉鹼穿梭是限速步驟；丙二醯輔酶A是關鍵抑制劑，避免脂肪合成與分解同時發生。</li>
+      <li>過氧化體以類似但不完全相同的機制進行β氧化，專責極長鏈與支鏈脂肪酸。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 17.3 ============ -->
+<section id="sec3">
+  <h2>17.3 酮體</h2>
+  <p>肝臟中，脂肪酸氧化產生的乙醯輔酶A除了進入檸檬酸循環，也可轉為三種<strong>酮體（ketone bodies）</strong>：<strong>丙酮（acetone）</strong>、<strong>乙醯乙酸（acetoacetate）</strong>與 <strong>D-β-羥基丁酸（D-β-hydroxybutyrate）</strong>，輸出供其他組織作為燃料使用。（「酮體」一詞是歷史沿用的說法，這些化合物可溶於血液與尿液，並非顆粒狀，也並非全部都是酮類。）</p>
+
+  <h3>酮體在肝臟生成，輸出至其他器官作為燃料</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="label">2 乙醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">硫解酶</span></div>
+    <div class="flow-step"><span class="label">乙醯乙醯輔酶A</span></div>
+    <div class="flow-arrow">→<span class="cond">HMG-CoA合成酶<br>+乙醯輔酶A+H₂O</span></div>
+    <div class="flow-step"><span class="label">HMG-CoA</span></div>
+    <div class="flow-arrow">→<span class="cond">HMG-CoA裂解酶<br>→乙醯輔酶A</span></div>
+    <div class="flow-step"><span class="label">乙醯乙酸</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><span class="label">乙醯乙酸</span></div>
+    <div class="flow-arrow">→<span class="cond">脫羧酶</span></div>
+    <div class="flow-step"><span class="label">丙酮 + CO₂</span><span class="sub">經肺部呼出</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><span class="label">乙醯乙酸</span></div>
+    <div class="flow-arrow">→<span class="cond">D-β-羥基丁酸<br>去氫酶(NADH⇌NAD⁺)</span></div>
+    <div class="flow-step"><span class="label">D-β-羥基丁酸</span><span class="sub">主要輸出形式</span></div>
+  </div>
+  <p>此路徑發生於肝臟粒線體基質。值得注意的是，HMG-CoA 也是固醇合成的中間產物，但該路徑的合成酶位於細胞質，與此處粒線體內的酵素不同；HMG-CoA裂解酶則只存在於粒線體基質。</p>
+
+  <h3>肝外組織如何利用酮體</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="label">D-β-羥基丁酸</span></div>
+    <div class="flow-arrow">→<span class="cond">去氫酶+NAD⁺</span></div>
+    <div class="flow-step"><span class="label">乙醯乙酸</span></div>
+    <div class="flow-arrow">→<span class="cond">β-酮醯輔酶A<br>轉移酶(硫解酶)<br>+琥珀醯輔酶A</span></div>
+    <div class="flow-step"><span class="label">乙醯乙醯輔酶A</span><span class="sub">+琥珀酸</span></div>
+    <div class="flow-arrow">→<span class="cond">硫解酶+CoA-SH</span></div>
+    <div class="flow-step"><span class="label">2 乙醯輔酶A</span><span class="sub">進入檸檬酸循環</span></div>
+  </div>
+
+  <table class="compare-table">
+    <caption>🔍 本章容易混淆的概念③：酮體的「生成」與「利用」</caption>
+    <thead><tr><th class="colA">肝臟：酮體生成</th><th class="colB">肝外組織：酮體利用</th><th class="colDiff">關鍵差異</th></tr></thead>
+    <tbody>
+      <tr><td>使用硫解酶、HMG-CoA合成酶、HMG-CoA裂解酶</td><td>使用去氫酶、β-酮醯輔酶A轉移酶（thiophorase）、硫解酶</td><td>兩端所用酵素完全不同</td></tr>
+      <tr><td>肝臟<strong>缺乏</strong> β-酮醯輔酶A轉移酶</td><td>心臟、骨骼肌、腎皮質、腦（飢餓時）皆具備此酵素</td><td>肝臟只能「生產」酮體，不能自己「消費」酮體</td></tr>
+      <tr><td>目的：釋放輔酶A，讓β氧化得以持續進行</td><td>目的：把酮體轉為乙醯輔酶A，供檸檬酸循環產能</td><td>生理意義不同</td></tr>
+    </tbody>
+  </table>
+
+  <p>肝臟持續生成並輸出酮體，可在檸檬酸循環中間產物被糖質新生大量消耗、或輔酶A庫存有限時，仍能維持β氧化持續進行（因為硫解反應釋出輔酶A）。</p>
+
+  <h3>糖尿病與飢餓時酮體的過量生成</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="label">飢餓／未控制<br>糖尿病</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">糖質新生↑<br>消耗檸檬酸循環<br>中間產物</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">乙醯輔酶A<br>無法進入循環</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">酮體大量生成<br>釋入血液</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="label">血液pH↓<br>酸中毒</span></div>
+  </div>
+
+  <div class="box clinical">
+    <div class="box-title">🏥 臨床相關：酮症、酸中毒與酮酸中毒</div>
+    <p>未控制的糖尿病患者血中酮體濃度可高達 90 mg/100 mL（正常 &lt;3 mg/100 mL），尿中排出量可達每日 5,000 mg（正常 ≤125 mg/24h）。此現象稱為<strong>酮症（ketosis）</strong>；若合併血液pH下降，稱為<strong>酸中毒（acidosis）</strong>；兩者合併發生則稱<strong>酮酸中毒（ketoacidosis）</strong>，嚴重時可導致昏迷甚至死亡。丙酮因具揮發性，會使患者呼氣帶有特殊氣味，臨床上可作為輔助診斷線索。</p>
+  </div>
+
+  <div class="box">
+    <div class="box-title">📋 17.3 節重點摘要</div>
+    <ul>
+      <li>酮體（丙酮、乙醯乙酸、D-β-羥基丁酸）於肝臟粒線體生成，供肝外組織作為燃料。</li>
+      <li>肝臟缺乏β-酮醯輔酶A轉移酶，因此只生產、不利用酮體。</li>
+      <li>飢餓或糖尿病時，檸檬酸循環中間產物被抽用於糖質新生，促使乙醯輔酶A大量轉為酮體，可能導致酮酸中毒。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TAKEAWAYS ============ -->
+<section id="takeaways">
+  <h2># Key Takeaways</h2>
+  <ul>
+    <li><b>核心概念：</b>脂肪酸氧化分三階段——β氧化產生乙醯輔酶A、檸檬酸循環氧化乙醯輔酶A、呼吸鏈利用電子生成ATP。</li>
+    <li><b>必背名詞：</b>β氧化（β oxidation）、肉鹼穿梭（carnitine shuttle）、CAT1/CPT1、CAT2/CPT2、丙二醯輔酶A（malonyl-CoA）、酮體（ketone bodies）。</li>
+    <li><b>必懂流程：</b>β氧化四步驟循環——脫氫→水合→脫氫→硫解，每輪移除一個二碳單位並產生 1 FADH₂、1 NADH。</li>
+    <li><b>限速／調控步驟：</b>肉鹼穿梭是脂肪酸氧化的限速步驟；丙二醯輔酶A抑制CAT1，防止脂肪合成與分解同時發生（無效循環）。</li>
+    <li><b>常考重點：</b>不飽和脂肪酸需要 enoyl-CoA isomerase（與多元不飽和脂肪酸還需 2,4-dienoyl-CoA reductase）。</li>
+    <li><b>常考重點：</b>奇數碳脂肪酸產生丙醯輔酶A，須經羧化（生物素）、差向異構化、變位（輔酶B₁₂）轉為琥珀醯輔酶A進入檸檬酸循環。</li>
+    <li><b>能量計算：</b>1分子棕櫚醯輔酶A完全氧化淨得約106 ATP（活化耗費2 ATP）。</li>
+    <li><b>過氧化體β氧化：</b>與粒線體機制相似但第一步電子直接傳給O₂生成H₂O₂，且不含檸檬酸循環酵素，專責極長鏈及支鏈脂肪酸。</li>
+    <li><b>臨床連結：</b>MCAD缺陷、丙酸血症、Zellweger症候群、X-ALD、Refsum氏病、惡性貧血、酮酸中毒，皆源於本章路徑中特定酵素或輔因子的缺失。</li>
+    <li><b>肝臟的特殊角色：</b>肝臟能生成酮體卻缺乏利用酮體所需的酵素（β-酮醯輔酶A轉移酶），因此只輸出、不消費。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <button id="backToTop">⬆ Back to Top</button>
+  <p>第17章：脂肪酸代謝｜學習指南</p>
+</footer>
+
+<script>
+(function(){
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+
+  function setActive(id){
+    navLinks.forEach(link => {
+      if(link.getAttribute('href') === '#' + id){
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    let bestEntry = null;
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        if(!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio){
+          bestEntry = entry;
+        }
+      }
+    });
+    if(bestEntry){
+      setActive(bestEntry.target.id);
+    }
+  }, {
+    root: null,
+    rootMargin: '-15% 0px -60% 0px',
+    threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
+  });
+
+  sections.forEach(sec => { if(sec) observer.observe(sec); });
+
+  // default active
+  setActive('overview');
+
+  document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>
