@@ -973,7 +973,7 @@ day,day_title,En,zh
 30,肘部與相關關節,Trochlear Notch,滑車切跡
 30,肘部與相關關節,Ulna,尺骨
 30,肘部與相關關節,Ulnar Collateral Ligament,尺側副韌帶
-31,手與腕的骨骼/關節,1St Cm Joint,第一腕掌關節
+31,手與腕的骨骼/關節,1St CM Joint,第一腕掌關節
 31,手與腕的骨骼/關節,Articular Cartilage,關節軟骨
 31,手與腕的骨骼/關節,Articular Disc,關節盤
 31,手與腕的骨骼/關節,Base,基底
@@ -1237,7 +1237,7 @@ day,day_title,En,zh
 37,膝關節,Patellar Articular Surface,髕骨關節面
 37,膝關節,Patellar Ligament,髕韌帶
 37,膝關節,Patellofemoral Articulation,髕股關節
-37,膝關節,Post. Horn Of Lat. Meniscus,外側半月板後角
+37,膝關節,Posterior Horn Of Lateral Meniscus,外側半月板後角
 37,膝關節,Posterior Cruciate Ligament,後十字韌帶
 37,膝關節,Posterior Fibrous Capsule,後纖維囊
 37,膝關節,Posterior Horn,後角
@@ -1278,11 +1278,11 @@ day,day_title,En,zh
 38,踝關節和足部的骨骼,Middle Phalanx,中節趾骨
 38,踝關節和足部的骨骼,Navicular,舟狀骨
 38,踝關節和足部的骨骼,Phalanges,趾骨
-38,踝關節和足部的骨骼,Post. Inferior Tibiofibular Ligaments,脛腓後下韌帶
-38,踝關節和足部的骨骼,Ant. Inferior Tibiofibular Ligaments,脛腓前下韌帶
-38,踝關節和足部的骨骼,Post. Process Of Talus,距骨後突
-38,踝關節和足部的骨骼,Post. Talocalcaneal Ligament,距跟後韌帶
-38,踝關節和足部的骨骼,Post. Tibiofibular Ligament,脛腓後韌帶
+38,踝關節和足部的骨骼,Posterior Inferior Tibiofibular Ligaments,脛腓後下韌帶
+38,踝關節和足部的骨骼,Anterior Inferior Tibiofibular Ligaments,脛腓前下韌帶
+38,踝關節和足部的骨骼,Posterior Process Of Talus,距骨後突
+38,踝關節和足部的骨骼,Posterior Talocalcaneal Ligament,距跟後韌帶
+38,踝關節和足部的骨骼,Posterior Tibiofibular Ligament,脛腓後韌帶
 38,踝關節和足部的骨骼,Posterior Pillar,後柱
 38,踝關節和足部的骨骼,Proximal Phalanx,近側節趾骨
 38,踝關節和足部的骨骼,Sesamoid Bone,種子骨
@@ -1551,7 +1551,7 @@ day,day_title,En,zh
 46,骨性胸廓與後腹壁的肌群,Right Crus,右膈腳
 46,骨性胸廓與後腹壁的肌群,Sternum,胸骨
 46,骨性胸廓與後腹壁的肌群,Subcostal Muscle,肋下肌
-46,骨性胸廓與後腹壁的肌群,Sup. Pubic Ramus,恥骨上枝
+46,骨性胸廓與後腹壁的肌群,Superior Pubic Ramus,恥骨上枝
 46,骨性胸廓與後腹壁的肌群,Thoracic Diaphragm,胸膈/橫膈
 46,骨性胸廓與後腹壁的肌群,Transversus Thoracis Muscle,胸橫肌
 46,骨性胸廓與後腹壁的肌群,Xiphoid Process,劍突
@@ -3412,7 +3412,7 @@ day,day_title,En,zh
 97,味覺與嗅覺,Filiform Papillae,絲狀乳頭
 97,味覺與嗅覺,Foliate Papillae,葉狀乳頭
 97,味覺與嗅覺,Frontal Lobe,額葉
-97,味覺與嗅覺,Ant. Perforated Substance,前穿通質
+97,味覺與嗅覺,Anterior Perforated Substance,前穿通質
 97,味覺與嗅覺,Septal Area,中隔區
 97,味覺與嗅覺,Fungiform Papillae,蕈狀乳頭
 97,味覺與嗅覺,Inferior Frontal Lobe,額下葉
@@ -3473,8 +3473,8 @@ day,day_title,En,zh
 99,血液循環示意圖,Gastrointestinal Tract,胃腸道
 99,血液循環示意圖,Heart Muscle,心肌
 99,血液循環示意圖,Hypophyseal Portal System,垂體門脈系統
-99,血液循環示意圖,L. Atrium,左心房
-99,血液循環示意圖,L. Ventricle,左心室
+99,血液循環示意圖,Left Atrium,左心房
+99,血液循環示意圖,Left Ventricle,左心室
 99,血液循環示意圖,Left Lung,左肺
 99,血液循環示意圖,Liver,肝
 99,血液循環示意圖,Lower Limb,下肢
@@ -3487,8 +3487,8 @@ day,day_title,En,zh
 99,血液循環示意圖,Pulmonary Artery,肺動脈
 99,血液循環示意圖,Pulmonary Circulation,肺循環
 99,血液循環示意圖,Pulmonary Vein,肺靜脈
-99,血液循環示意圖,R. Atrium,右心房
-99,血液循環示意圖,R. Ventricle,右心室
+99,血液循環示意圖,Right Atrium,右心房
+99,血液循環示意圖,Right Ventricle,右心室
 99,血液循環示意圖,Right Lung,右肺
 99,血液循環示意圖,Systemic Artery,體循環動脈
 99,血液循環示意圖,Systemic Circulation,體循環
