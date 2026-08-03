@@ -1902,13 +1902,13 @@ day,day_title,En,zh
 56,肌肉複習,Anconeus,肘肌
 56,肌肉複習,Brachioradialis,肱橈肌
 56,肌肉複習,Pronator Teres,旋前圓肌
-56,肌肉複習,Flexor Carpi Radialis,橈側腕屈肌
+56,肌肉複習,Flexor Carpi Radialis,橈側屈腕肌
 56,肌肉複習,Palmaris Longus,掌長肌
-56,肌肉複習,Flexor Carpi Ulnaris,尺側腕屈肌
+56,肌肉複習,Flexor Carpi Ulnaris,尺側屈腕肌
 56,肌肉複習,Extensor Carpi Radialis Longus,橈側伸腕長肌
 56,肌肉複習,Extensor Carpi Radialis Brevis,橈側伸腕短肌
-56,肌肉複習,Extensor Digitorum,指伸肌
-56,肌肉複習,Extensor Digiti Minimi,小指伸肌
+56,肌肉複習,Extensor Digitorum,伸指肌
+56,肌肉複習,Extensor Digiti Minimi,伸小指肌
 56,肌肉複習,Extensor Carpi Ulnaris,尺側伸腕肌
 56,肌肉複習,Abductor Pollicis Longus,外展拇長肌
 56,肌肉複習,Extensor Pollicis Longus,伸拇長肌
@@ -2192,17 +2192,17 @@ day,day_title,En,zh
 64,肌肉複習,Gastrocnemius,腓腸肌
 64,肌肉複習,Plantaris,蹠肌
 64,肌肉複習,Soleus,比目魚肌
-64,肌肉複習,Flexor Digitorum Longus,趾長屈肌
-64,肌肉複習,Flexor Hallucis Longus,拇長屈肌
+64,肌肉複習,Flexor Digitorum Longus,屈趾長肌
+64,肌肉複習,Flexor Hallucis Longus,屈拇趾長肌
 64,肌肉複習,Tibialis Anterior,脛前肌
-64,肌肉複習,Extensor Digitorum Longus,趾長伸肌
-64,肌肉複習,Extensor Hallucis Longus,拇長伸肌
+64,肌肉複習,Extensor Digitorum Longus,伸趾長肌
+64,肌肉複習,Extensor Hallucis Longus,伸拇趾長肌
 64,肌肉複習,Fibularis Tertius,第三腓骨肌
 64,肌肉複習,Fibularis Longus,腓骨長肌
 64,肌肉複習,Fibularis Brevis,腓骨短肌
 64,肌肉複習,Abductor Hallucis,外展拇趾肌
 64,肌肉複習,Abductor Digiti Minimi,外展小趾肌
-64,肌肉複習,Extensor Digitorum Brevis,趾短伸肌
+64,肌肉複習,Extensor Digitorum Brevis,伸趾短肌
 65,肌肉功能概述,Abductor,外展肌
 65,肌肉功能概述,Adductor,內收肌
 65,肌肉功能概述,Clavicle,鎖骨
