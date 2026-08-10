@@ -12,6 +12,25 @@
       ]
     },
     {
+      "key": "CellBio",
+      "label": "🔬 細生 (CellBio)",
+      "folder": "CellBio",
+      "notes": [
+        {
+          "title": "Ch01 A Preview of Cell Biology",
+          "file": "CellBio_Ch01_A_Preview_of_Cell_Biology.html"
+        },
+        {
+          "title": "Ch04 Cells and Organelles",
+          "file": "CellBio_Ch04_Cells_and_Organelles.html"
+        },
+        {
+          "title": "Ch07 Membranes Their Structure, Function, and Chemistry",
+          "file": "CellBio_Ch07_Membranes_Their_Structure,_Function,_and_Chemistry.html"
+        }
+      ]
+    },
+    {
       "key": "Biochemistry2",
       "label": "🧪 生化 2 (Biochemistry)",
       "folder": "Biochemistry2",
