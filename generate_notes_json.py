@@ -62,6 +62,7 @@ OUTPUT_PATH = os.path.join(REPO_ROOT, 'notes.json')
 # 「單頁應用」型資料夾（例如 Anatomy_words）請改到下面的 SINGLE_PAGE_FOLDERS 設定，
 # 不要放在這裡，否則會因為資料夾裡找不到「非 index.html」的 html 檔而被略過。
 CATEGORY_META = {
+    'CellBio':      '🔬 細生 (CellBio)',
     'Biochemistry2': '🧪 生化 2 (Biochemistry)',
     'Biochemistry': '🧪 生化 1 (Biochemistry)',
     'Biology':      '🧬 普生 (Biology)',
@@ -112,6 +113,7 @@ SINGLE_PAGE_FOLDERS = {
 # ------------------------------------------------------------
 CATEGORY_ORDER = [
     'Anatomy_words',   # 解剖學字彙放最上面
+    'CellBio',
     'Biochemistry2',
     'Biochemistry',
     'Biology',
