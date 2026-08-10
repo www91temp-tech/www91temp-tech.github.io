@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第26章：膽固醇的合成、運輸與排泄｜學習指南</title>
+<style>
+  :root{
+    --hue: 142;
+    --primary: hsl(142, 45%, 35%);
+    --primary-light: hsl(142, 45%, 92%);
+    --primary-dark: hsl(142, 45%, 25%);
+    --text: #1a1a1a;
+    --border: hsl(142, 25%, 78%);
+    --warn-bg: #fff4e5;
+    --warn-border: #e8a33d;
+    --clinic-bg: #fdecec;
+    --clinic-border: #d9534f;
+    --enzyme-bg: hsl(142, 45%, 96%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Noto Sans CJK TC",sans-serif;
+    color:var(--text);
+    line-height:1.8;
+    background:#fbfbf9;
+  }
+  header{
+    background:var(--primary);
+    color:#fff;
+    padding:2.2rem 1rem 1.6rem;
+    text-align:center;
+  }
+  header h1{
+    margin:0 0 .4rem;
+    font-size:1.6rem;
+    letter-spacing:.03em;
+  }
+  header p.subtitle{
+    margin:0;
+    font-size:.95rem;
+    opacity:.9;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    overflow-x:auto;
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    margin:0;
+    padding:0 .5rem;
+    gap:.3rem;
+    flex-wrap:nowrap;
+  }
+  nav li{flex:0 0 auto;}
+  nav a{
+    display:block;
+    padding:.85rem .9rem;
+    color:var(--text);
+    text-decoration:none;
+    font-size:.88rem;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{background:var(--primary-light);}
+  nav a.active{
+    color:var(--primary-dark);
+    font-weight:700;
+    border-bottom:3px solid var(--primary);
+    background:var(--primary-light);
+  }
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:2rem 1.2rem 3rem;
+  }
+  section{padding-top:1.6rem; margin-bottom:2.2rem;}
+  h2{
+    color:var(--primary-dark);
+    border-left:6px solid var(--primary);
+    padding:.35rem .7rem;
+    background:var(--primary-light);
+    font-size:1.25rem;
+    border-radius:4px;
+    margin-top:2.2rem;
+  }
+  h3{
+    color:var(--primary-dark);
+    font-size:1.08rem;
+    margin-top:1.6rem;
+    border-bottom:2px solid var(--primary-light);
+    padding-bottom:.3rem;
+  }
+  h4{
+    color:var(--primary-dark);
+    font-size:1rem;
+    margin-top:1.2rem;
+  }
+  p{margin:.7rem 0;}
+  .box{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:1rem 1.2rem;
+    margin:1rem 0;
+    background:#fff;
+  }
+  .box-title{
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:.5rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .tip{
+    background:var(--primary-light);
+    border-left:5px solid var(--primary);
+  }
+  .warn{
+    background:var(--warn-bg);
+    border-left:5px solid var(--warn-border);
+  }
+  .clinic{
+    background:var(--clinic-bg);
+    border-left:5px solid var(--clinic-border);
+  }
+  .clinic .box-title{color:var(--clinic-border);}
+  .enzyme-tag{
+    display:inline-block;
+    background:var(--enzyme-bg);
+    border:1px solid var(--primary);
+    color:var(--primary-dark);
+    font-size:.82rem;
+    padding:.05rem .5rem;
+    border-radius:12px;
+    margin:0 .15rem;
+    white-space:nowrap;
+  }
+  .term{font-weight:700; color:var(--primary-dark);}
+  ol, ul{padding-left:1.4rem;}
+  li{margin:.35rem 0;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1rem 0;
+    font-size:.92rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{background:var(--primary-light);}
+  .compare-table th:first-child, .compare-table th:nth-child(2){width:24%;}
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.4rem;
+    margin:1rem 0;
+    padding:1rem;
+    background:#fff;
+    border:1px dashed var(--primary);
+    border-radius:8px;
+  }
+  .flow-node{
+    background:var(--primary-light);
+    border:1px solid var(--primary);
+    color:var(--primary-dark);
+    padding:.45rem .7rem;
+    border-radius:6px;
+    font-size:.88rem;
+    font-weight:700;
+    text-align:center;
+  }
+  .flow-node.small{font-weight:400; font-size:.8rem;}
+  .flow-arrow{
+    color:var(--primary);
+    font-size:1.2rem;
+    font-weight:700;
+  }
+  .flow-enzyme{
+    font-size:.72rem;
+    color:var(--primary-dark);
+    text-align:center;
+    max-width:110px;
+  }
+  .flow-col{display:flex; flex-direction:column; align-items:center; gap:.15rem;}
+  .fig-caption{
+    font-size:.82rem;
+    color:#555;
+    text-align:center;
+    margin-top:.3rem;
+  }
+  .balance-diagram{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+    margin:1rem 0;
+  }
+  .balance-col{
+    border-radius:8px;
+    padding:.8rem 1rem;
+  }
+  .balance-col.up{background:#fdecec; border:1px solid #d9534f;}
+  .balance-col.down{background:var(--primary-light); border:1px solid var(--primary);}
+  .balance-col h4{margin-top:0;}
+  .balance-col ol{padding-left:1.2rem; font-size:.88rem;}
+  .center-pool{
+    grid-column:1/3;
+    text-align:center;
+    font-weight:700;
+    color:var(--primary-dark);
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:50px;
+    padding:.6rem;
+    margin:.4rem 0;
+  }
+  svg text{font-family:"Noto Sans TC",sans-serif;}
+  .objectives-list{font-size:.92rem;}
+  .toc-note{font-size:.85rem; color:#666;}
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#555;
+    font-size:.9rem;
+  }
+  .back-top{
+    display:inline-block;
+    margin-top:1rem;
+    background:var(--primary);
+    color:#fff;
+    padding:.6rem 1.4rem;
+    border-radius:24px;
+    text-decoration:none;
+    font-weight:700;
+    transition:background .2s;
+  }
+  .back-top:hover{background:var(--primary-dark);}
+  .takeaway-box{
+    background:var(--primary-light);
+    border:1px solid var(--primary);
+    border-radius:8px;
+    padding:1.2rem 1.5rem;
+  }
+  .takeaway-box li{margin:.55rem 0;}
+
+  @media (max-width:1024px){
+    main{max-width:94%;}
+    .balance-diagram{grid-template-columns:1fr;}
+    .center-pool{grid-column:1/2;}
+  }
+  @media (max-width:768px){
+    header h1{font-size:1.25rem;}
+    nav a{padding:.7rem .6rem; font-size:.8rem;}
+    h2{font-size:1.1rem;}
+    .flow{flex-direction:column; align-items:stretch;}
+    .flow-arrow{transform:rotate(90deg); text-align:center;}
+    table, thead, tbody, th, td, tr{display:block;}
+    thead{display:none;}
+    td{border:none; border-bottom:1px solid var(--border); padding:.4rem .2rem;}
+    td::before{content: attr(data-label); font-weight:700; color:var(--primary-dark); display:block; font-size:.78rem;}
+    tr{margin-bottom:.6rem; border:1px solid var(--border); border-radius:6px; padding:.4rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第26章：膽固醇的合成、運輸與排泄</h1>
+  <p class="subtitle">Cholesterol Synthesis, Transport, &amp; Excretion｜生物化學學習指南</p>
+</header>
+
+<nav>
+  <ul id="navList">
+    <li><a href="#intro">背景與重要性</a></li>
+    <li><a href="#synthesis">膽固醇的生合成</a></li>
+    <li><a href="#regulation">HMG-CoA還原酶調控</a></li>
+    <li><a href="#balance">細胞內膽固醇平衡</a></li>
+    <li><a href="#transport">血漿脂蛋白運輸</a></li>
+    <li><a href="#excretion">膽汁酸生成與排泄</a></li>
+    <li><a href="#enterohepatic">腸肝循環</a></li>
+    <li><a href="#clinical">臨床面向</a></li>
+    <li><a href="#takeaways">重點整理</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ 1. 背景 ============ -->
+<section id="intro">
+  <h2>一、背景與臨床重要性（Biomedical Importance）</h2>
+
+  <p>膽固醇（cholesterol）是一種兩性分子（amphipathic lipid），廣泛存在於組織與血漿中，可以「游離膽固醇（free cholesterol）」或與長鏈脂肪酸結合成「膽固醇酯（cholesteryl ester）」（儲存形式）兩種形式存在。在血漿中，兩者皆由脂蛋白（lipoprotein）運送。</p>
+
+  <div class="box tip">
+    <div class="box-title">🧩 膽固醇的兩大生理角色</div>
+    <ol>
+      <li><strong>結構角色：</strong>維持細胞膜與脂蛋白外層的通透性（permeability）與流動性（fluidity）。</li>
+      <li><strong>前驅物角色：</strong>合成所有其他類固醇，包括腎上腺皮質類固醇（corticosteroids）、性荷爾蒙（sex hormones）、膽汁酸（bile acids）與維生素D（vitamin D）。</li>
+    </ol>
+  </div>
+
+  <p>人體中所有含核細胞的組織幾乎都能自行合成膽固醇；血漿低密度脂蛋白（<span class="term">LDL, low-density lipoprotein</span>）負責將膽固醇送往各組織，而血漿高密度脂蛋白（<span class="term">HDL, high-density lipoprotein</span>）則負責將組織中多餘的游離膽固醇移除、送回肝臟，此過程稱為「逆向膽固醇運輸（reverse cholesterol transport）」。</p>
+
+  <div class="box clinic">
+    <div class="box-title">⚕️ Clinical Correlation：致病角色</div>
+    <p>膽固醇是<strong>膽結石（gallstones）</strong>的主要成分之一；更重要的是，它在<strong>動脈粥狀硬化（atherosclerosis）</strong>的發生中扮演關鍵因子，可導致腦血管、冠狀動脈與周邊血管疾病。</p>
+  </div>
+</section>
+
+<!-- ============ 2. 生合成 ============ -->
+<section id="synthesis">
+  <h2>二、膽固醇由乙醯輔酶A生合成（Biosynthesis from Acetyl-CoA）</h2>
+
+  <p>人體每天約合成 700 mg 膽固醇（略多於一半的需求量），其餘來自飲食。肝臟與腸道各佔全身合成量約 10%。合成場所為<strong>內質網（endoplasmic reticulum）</strong>與<strong>細胞質（cytosol）</strong>。膽固醇是27個碳的化合物，由四個環與一條側鏈組成，其所有碳原子皆來自乙醯輔酶A（acetyl-CoA）。</p>
+
+  <div class="box tip">
+    <div class="box-title">🔢 生合成五大步驟總覽</div>
+    <div class="flow">
+      <div class="flow-node">Acetyl-CoA</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Mevalonate<br><span class="flow-node small">(步驟1)</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Isoprenoid unit<br><span class="flow-node small">(步驟2)</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Squalene<br><span class="flow-node small">(步驟3)</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Lanosterol<br><span class="flow-node small">(步驟4)</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Cholesterol<br><span class="flow-node small">(步驟5)</span></div>
+    </div>
+  </div>
+
+  <h3>步驟1：合成甲羥戊酸（Mevalonate）——調控關鍵步驟</h3>
+  <p>此步驟雖與粒線體內生成酮體（ketone bodies）的反應相似，但膽固醇合成發生在<strong>粒線體外（extramitochondrial）</strong>，故為不同路徑。</p>
+
+  <div class="flow">
+    <div class="flow-col">
+      <div class="flow-node">2× Acetyl-CoA</div>
+    </div>
+    <div class="flow-col">
+      <div class="flow-arrow">→</div>
+      <div class="flow-enzyme">Thiolase（胞質）</div>
+    </div>
+    <div class="flow-col"><div class="flow-node">Acetoacetyl-CoA</div></div>
+    <div class="flow-col">
+      <div class="flow-arrow">→</div>
+      <div class="flow-enzyme">+Acetyl-CoA<br>HMG-CoA synthase</div>
+    </div>
+    <div class="flow-col"><div class="flow-node">HMG-CoA</div></div>
+    <div class="flow-col">
+      <div class="flow-arrow">→</div>
+      <div class="flow-enzyme">NADPH<br><strong>HMG-CoA reductase</strong></div>
+    </div>
+    <div class="flow-col"><div class="flow-node" style="background:#fdecec;border-color:#d9534f;">Mevalonate</div></div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-title">⭐ Regulatory & Rate-limiting Step</div>
+    <p><span class="term">HMG-CoA reductase</span>（3-hydroxy-3-methylglutaryl-CoA reductase）催化的這一步，是整條膽固醇合成路徑的<strong>主要調控與限速步驟（principal regulatory / rate-limiting step）</strong>，也是最有效的降膽固醇藥物——<span class="term">statins（史他汀類藥物）</span>——的作用標的（HMG-CoA reductase inhibitor）。</p>
+  </div>
+
+  <h3>步驟2：形成異戊二烯單位（Isoprenoid Unit）</h3>
+  <p>Mevalonate 經三個激酶（kinase）依序以ATP磷酸化，並經去羧化（decarboxylation）後，形成活化的異戊二烯單位——<strong>異戊烯基雙磷酸（isopentenyl diphosphate, IDP）</strong>。</p>
+
+  <h3>步驟3：六個異戊二烯單位形成鯊烯（Squalene）</h3>
+  <div class="flow">
+    <div class="flow-node small">Isopentenyl diphosphate</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">Dimethylallyl diphosphate</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">Geranyl diphosphate（10C）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">Farnesyl diphosphate（15C）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Squalene（30C）<br><span class="flow-node small">2分子Farnesyl-PP縮合<br>NADPH</span></div>
+  </div>
+  <p>Farnesyl diphosphate 也是合成 <strong>dolichol（多烯醇）</strong>與<strong>ubiquinone（輔酶Q）</strong>的重要中間產物，並可用於蛋白質的異戊烯化（prenylation），協助蛋白質錨定於膜上。</p>
+
+  <div class="box tip">
+    <div class="box-title">🔀 Farnesyl Diphosphate 的分支去路</div>
+    <div class="flow">
+      <div class="flow-node">Farnesyl-PP</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-col">
+        <div class="flow-node small">Squalene → Cholesterol</div>
+        <div class="flow-node small">Dolichol（醣蛋白合成）</div>
+        <div class="flow-node small">Ubiquinone（電子傳遞鏈）</div>
+        <div class="flow-node small">Prenylated proteins（膜錨定）</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>步驟4：鯊烯環化形成羊毛固醇（Lanosterol）</h3>
+  <p>鯊烯先經<span class="enzyme-tag">squalene epoxidase</span>（內質網混合功能氧化酶）轉為 squalene 2,3-epoxide；再由<span class="enzyme-tag">oxidosqualene-lanosterol cyclase</span>催化環化，形成類固醇核（steroid nucleus）的雛形——羊毛固醇。</p>
+
+  <h3>步驟5：由羊毛固醇形成膽固醇</h3>
+  <div class="flow">
+    <div class="flow-node small">Lanosterol</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">14-Desmethyl lanosterol</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">Zymosterol</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">Desmosterol<br>（24-dehydrocholesterol）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">Cholesterol</div>
+  </div>
+  <p class="fig-caption">此階段涉及去除C14、C4上的甲基、雙鍵位置由C8–C9轉移至C5–C6，最後側鏈雙鍵被還原。（原文 Figure 26-1 ~ 26-3 之關鍵節點重現）</p>
+
+</section>
+
+<!-- ============ 3. 調控 ============ -->
+<section id="regulation">
+  <h2>三、膽固醇合成由 HMG-CoA 還原酶調控</h2>
+
+  <p>此酵素活性受到反應產物<strong>甲羥戊酸（mevalonate）</strong>與最終產物<strong>膽固醇</strong>的抑制——飲食中膽固醇攝取增加，會降低肝臟中膽固醇的<em>從頭合成（de novo synthesis）</em>。</p>
+
+  <div class="box tip">
+    <div class="box-title">🧬 長期調控：SREBP 路徑（基因轉錄層次）</div>
+    <div class="flow">
+      <div class="flow-node small">細胞內膽固醇 ↑</div>
+      <div class="flow-arrow">⊣</div>
+      <div class="flow-node small">SREBP（sterol regulatory element-binding protein）活化</div>
+      <div class="flow-arrow">⊣</div>
+      <div class="flow-node small">HMG-CoA reductase / synthase 基因轉錄</div>
+    </div>
+    <p style="font-size:.9rem;">胰島素誘導基因（<span class="term">Insig</span>）會抑制 SREBP 活化，並促進 HMG-CoA reductase 的降解；此路徑同時受晝夜節律（diurnal variation）影響。</p>
+  </div>
+
+  <div class="box tip">
+    <div class="box-title">⚡ 短期調控：磷酸化／去磷酸化（轉譯後修飾）</div>
+    <div class="flow">
+      <div class="flow-node small">升糖素（Glucagon）→ cAMP ↑</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node small">AMPK 活化（磷酸化）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="background:#fdecec;border-color:#d9534f;">HMG-CoA reductase 去活化（磷酸化態）</div>
+    </div>
+    <div class="flow">
+      <div class="flow-node small">胰島素（Insulin）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node small">活化蛋白質磷酸酶（protein phosphatase）</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">HMG-CoA reductase 活化（去磷酸化態）</div>
+    </div>
+    <p style="font-size:.9rem;">甲狀腺素（thyroid hormone）可增加酵素活性；升糖素與糖皮質素（glucocorticoids）則會降低活性。整體而言<strong>胰島素的作用較升糖素更為主導</strong>。</p>
+  </div>
+
+  <div class="box">
+    <div class="box-title">📊 容易混淆的概念比較①：長期 vs 短期調控</div>
+    <table class="compare-table">
+      <thead><tr><th>A：基因轉錄調控（長期）</th><th>B：磷酸化修飾調控（短期）</th><th>差異重點</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-label="A">經 SREBP／Insig 調控 HMG-CoA reductase <strong>mRNA</strong> 的表現量</td>
+          <td data-label="B">經 AMPK／磷酸酶調控酵素<strong>活性</strong>（不改變酵素量）</td>
+          <td data-label="差異">A 改變「酵素多寡」；B 改變「已存在酵素的開關狀態」，反應速度較快</td>
+        </tr>
+        <tr>
+          <td data-label="A">受細胞內膽固醇濃度長期回饋調控</td>
+          <td data-label="B">受升糖素／胰島素及能量狀態（AMP）調控</td>
+          <td data-label="差異">A 反映「膽固醇存量」；B 反映「賀爾蒙與能量狀態」</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 4. 細胞內平衡 ============ -->
+<section id="balance">
+  <h2>四、細胞內膽固醇平衡受到嚴密調控</h2>
+  <p>細胞內膽固醇濃度需維持在狹窄範圍內，取決於「增加」與「減少」兩組因子的動態平衡。</p>
+
+  <div class="balance-diagram">
+    <div class="balance-col up">
+      <h4>⬆ 使細胞膽固醇增加</h4>
+      <ol>
+        <li>經 LDL 受體或清道夫受體（scavenger receptor，如 CD36）攝入含膽固醇脂蛋白</li>
+        <li>由富含膽固醇的脂蛋白直接攝入游離膽固醇至細胞膜</li>
+        <li>細胞自行合成膽固醇</li>
+        <li>膽固醇酯經 <span class="enzyme-tag">cholesteryl ester hydrolase</span> 水解</li>
+      </ol>
+    </div>
+    <div class="center-pool">細胞內游離膽固醇濃度（維持恆定）</div>
+    <div class="balance-col down">
+      <h4>⬇ 使細胞膽固醇減少</h4>
+      <ol>
+        <li>經 ABCA1、ABCG1 或 SR-B1 將膽固醇外流至 HDL</li>
+        <li>經 <span class="enzyme-tag">ACAT</span>（acyl-CoA:cholesterol acyltransferase）酯化儲存</li>
+        <li>用於合成類固醇激素（steroidogenic tissue）或肝臟中的膽汁酸</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>LDL 受體在維持平衡中的角色</h3>
+  <p>LDL 受體位於細胞膜表面被<strong>網格蛋白（clathrin）</strong>包覆的凹陷處。LDL 經由受體媒介的胞吞作用（receptor-mediated endocytosis）被整個攝入細胞，於溶小體中水解，釋出游離膽固醇，受體則被回收再利用。</p>
+
+  <div class="box warn">
+    <div class="box-title">🔑 協調抑制機制</div>
+    <p>細胞內膽固醇增加會經由 <span class="term">SREBP</span> 路徑，同時抑制：HMG-CoA synthase、HMG-CoA reductase 等合成酵素基因，<strong>以及 LDL 受體本身</strong>的基因表現，達到「合成」與「攝入」的協同抑制；同時刺激 ACAT 促進酯化。</p>
+    <p><span class="term">PCSK9</span>（proprotein convertase subtilisin/kexin type 9）則會促使 LDL 受體降解、減少其回收再利用，是新一代降血脂藥物的標的。</p>
+  </div>
+</section>
+
+<!-- ============ 5. 血漿運輸 ============ -->
+<section id="transport">
+  <h2>五、膽固醇經血漿脂蛋白在組織間運輸</h2>
+
+  <p>血漿中膽固醇主要以<strong>膽固醇酯</strong>形式存在，人類以 LDL 攜帶比例最高。飲食中的膽固醇酯先水解為游離膽固醇，於腸道吸收後（80–90% 再酯化），與腸道自行合成的膽固醇一起併入乳糜微粒（chylomicron）。</p>
+
+  <div class="flow">
+    <div class="flow-col"><div class="flow-node small">飲食膽固醇<br>+腸道合成</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-col"><div class="flow-node small">Chylomicron</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-col"><div class="flow-node small">Chylomicron remnant<br>（95%膽固醇送至肝臟）</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-col"><div class="flow-node small">肝臟分泌 VLDL</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-col"><div class="flow-node small">IDL</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-col"><div class="flow-node">LDL<br>（經LDL受體<br>被肝臟／組織攝入）</div></div>
+  </div>
+
+  <h3>LCAT：血漿膽固醇酯化的關鍵酵素</h3>
+  <p><span class="term">LCAT（lecithin:cholesterol acyltransferase）</span>與含 apo A-I 的 HDL 結合，將 HDL 上的膽固醇酯化，形成濃度梯度，持續自組織及其他脂蛋白吸入游離膽固醇，是「逆向膽固醇運輸」得以進行的核心機制。</p>
+
+  <h3>CETP：膽固醇酯轉運蛋白</h3>
+  <p><span class="term">CETP（cholesteryl ester transfer protein）</span>將 HDL 上的膽固醇酯轉移給 VLDL、IDL、LDL，交換得到三酸甘油酯，並藉此解除 LCAT 的產物抑制。人體中大部分由 LCAT 生成的膽固醇酯，最終經由 VLDL 殘餘物（IDL）或 LDL 被送回肝臟。</p>
+
+  <div class="box">
+    <div class="box-title">📊 容易混淆的概念比較②：LDL vs HDL</div>
+    <table class="compare-table">
+      <thead><tr><th>A：LDL（低密度脂蛋白）</th><th>B：HDL（高密度脂蛋白）</th><th>差異重點</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-label="A">將膽固醇由肝臟<strong>送往</strong>周邊組織</td>
+          <td data-label="B">將周邊組織游離膽固醇<strong>送回</strong>肝臟（逆向運輸）</td>
+          <td data-label="差異">運輸方向相反</td>
+        </tr>
+        <tr>
+          <td data-label="A">濃度升高與動脈粥狀硬化風險呈<strong>正相關</strong>，屬於致動脈粥狀硬化脂蛋白</td>
+          <td data-label="B">濃度升高與冠心病風險呈<strong>負相關</strong>，具保護作用</td>
+          <td data-label="差異">臨床上 LDL:HDL 比值是重要預測指標</td>
+        </tr>
+        <tr>
+          <td data-label="A">經 LDL 受體（apo B-100, E 辨識）被細胞攝入</td>
+          <td data-label="B">結合 LCAT／ABCA1／SR-B1，負責膽固醇外流與酯化</td>
+          <td data-label="差異">兩者作用的受體／酵素系統不同</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 6. 排泄／膽汁酸 ============ -->
+<section id="excretion">
+  <h2>六、膽固醇經膽汁以膽固醇或膽汁酸形式排出體外</h2>
+
+  <p>膽固醇經膽汁排出體外，可以未經修飾的形式，或轉化為<strong>膽汁酸（bile acid）</strong>後排出。糞便中的主要固醇是<strong>糞固醇（coprostanol）</strong>，由腸道細菌將膽固醇轉化而成。</p>
+
+  <h3>初級膽汁酸的生合成</h3>
+  <p>初級膽汁酸（primary bile acids）於肝臟由膽固醇合成，包括<strong>膽酸（cholic acid，含量最多）</strong>與<strong>鵝去氧膽酸（chenodeoxycholic acid）</strong>。</p>
+
+  <div class="box warn">
+    <div class="box-title">⭐ Regulatory & Rate-limiting Step：CYP7A1</div>
+    <p>膽固醇的 <strong>7α-羥化（7α-hydroxylation）</strong>是膽汁酸生合成的第一步也是主要限速步驟，由微粒體細胞色素P450酵素<span class="term">膽固醇7α-羥化酶（cholesterol 7α-hydroxylase, CYP7A1）</span>催化，需要氧氣、NADPH與細胞色素P450協同作用。粒線體中另有 <span class="enzyme-tag">sterol 27-hydroxylase（CYP27A1）</span>路徑，負責一部分初級膽汁酸的合成。</p>
+  </div>
+
+  <div class="flow">
+    <div class="flow-node">Cholesterol</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-enzyme">CYP7A1<br>（7α-hydroxylase）</div>
+    <div class="flow-col">
+      <div class="flow-node small">7α-Hydroxycholesterol</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-col">
+      <div class="flow-node small">Cholic acid 系列<br>（12α-OH）</div>
+      <div class="flow-node small">Chenodeoxycholic acid 系列</div>
+    </div>
+  </div>
+  <p>初級膽汁酸以甘胺酸（glycine）或牛磺酸（taurine）接合形式進入膽汁（人類接合比例約3:1），其陰離子形式稱為<strong>膽鹽（bile salts）</strong>。腸道細菌進一步將其去接合（deconjugation）並 7α-脫羥基化（7α-dehydroxylation），形成<strong>次級膽汁酸（secondary bile acids）</strong>：去氧膽酸（deoxycholic acid）與石膽酸（lithocholic acid）。</p>
+
+  <div class="box">
+    <div class="box-title">📊 容易混淆的概念比較③：初級 vs 次級膽汁酸</div>
+    <table class="compare-table">
+      <thead><tr><th>A：初級膽汁酸</th><th>B：次級膽汁酸</th><th>差異重點</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-label="A">膽酸、鵝去氧膽酸</td>
+          <td data-label="B">去氧膽酸、石膽酸</td>
+          <td data-label="差異">名稱與結構不同</td>
+        </tr>
+        <tr>
+          <td data-label="A">由<strong>肝臟</strong>直接以膽固醇經 CYP7A1 等酵素合成</td>
+          <td data-label="B">由<strong>腸道細菌</strong>對初級膽汁酸進行去接合與7α-脫羥基作用產生</td>
+          <td data-label="差異">合成場所與催化者不同（人體酵素 vs 微生物酵素）</td>
+        </tr>
+        <tr>
+          <td data-label="A">溶解度較高，可被有效再吸收</td>
+          <td data-label="B">石膽酸因溶解度低，<strong>不被</strong>顯著再吸收</td>
+          <td data-label="差異">影響腸肝循環的再吸收效率</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 7. 腸肝循環 ============ -->
+<section id="enterohepatic">
+  <h2>七、大部分膽汁酸經腸肝循環返回肝臟</h2>
+
+  <p>雖然脂肪消化產物（含膽固醇）主要在小腸前100公分吸收，但初級與次級膽汁酸幾乎完全在<strong>迴腸（ileum）</strong>被吸收，其中 <strong>98–99%</strong> 經由肝門靜脈循環（portal circulation）送回肝臟，此循環稱為<strong>腸肝循環（enterohepatic circulation）</strong>。</p>
+
+  <div class="flow">
+    <div class="flow-node small">肝臟合成／分泌膽汁酸</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">膽管→十二指腸</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">迴腸再吸收（98–99%）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node small">肝門靜脈</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">回到肝臟</div>
+  </div>
+
+  <div class="box tip">
+    <div class="box-title">🔁 每日循環量</div>
+    <p>膽汁酸池（bile acid pool）約 3–5 g，每日在腸道循環 <strong>6–10 次</strong>；僅有小部分未被吸收而隨糞便排出，但這卻是<strong>清除膽固醇最主要的路徑</strong>。肝臟會合成與糞便流失量相當的膽汁酸，以維持池的恆定大小。</p>
+  </div>
+
+  <h3>CYP7A1 步驟的回饋調控</h3>
+  <p>腸肝循環中膽汁酸池增大時，會活化核內膽汁酸受體<span class="term">FXR（farnesoid X receptor）</span>，進而抑制 <em>CYP7A1</em> 基因轉錄；<strong>鵝去氧膽酸</strong>是活化FXR最有效的膽汁酸。內生性與飲食性膽固醇則會增強CYP7A1活性，此酵素同時受胰島素、升糖素、糖皮質素與甲狀腺素調節。</p>
+</section>
+
+<!-- ============ 8. 臨床面向 ============ -->
+<section id="clinical">
+  <h2>八、臨床面向：血脂異常與治療</h2>
+
+  <h3>血清膽固醇與動脈粥狀硬化</h3>
+  <div class="box clinic">
+    <div class="box-title">⚕️ 危險因子</div>
+    <p>血漿膽固醇 <strong>&gt;5.2 mmol/L</strong> 是促進動脈粥狀硬化的重要因子，血中三酸甘油酯升高亦為獨立危險因子。VLDL、IDL、乳糜微粒殘餘物或LDL長期升高的疾病（如糖尿病、腎病症候群、甲狀腺低能症）常伴隨較嚴重的動脈粥狀硬化；反之 HDL（尤其HDL₂）濃度與冠心病風險呈負相關，故 <strong>LDL:HDL 比值</strong>為良好預測指標。</p>
+  </div>
+
+  <h3>飲食與生活型態因子</h3>
+  <ul>
+    <li>以多元不飽和（polyunsaturated）與單元不飽和脂肪酸（monounsaturated fatty acid）取代飽和脂肪酸，可上調 LDL 受體、加速 LDL 代謝清除。</li>
+    <li>ω3 脂肪酸（魚油）具抗發炎與降三酸甘油酯效果；飽和脂肪酸則促使形成較小、膽固醇比例較高的 VLDL 顆粒，較不利健康。</li>
+    <li>蔗糖與果糖較其他碳水化合物更易升高血脂，尤其三酸甘油酯。</li>
+    <li>高血壓、吸菸、男性、肥胖（尤其腹部肥胖）、缺乏運動皆為冠心病風險因子；情緒壓力與咖啡因可能提高血漿游離脂肪酸並增加VLDL輸出。</li>
+    <li>適量飲酒（尤其紅酒）與規律運動則與較高HDL、較低冠心病風險相關，可能與雌激素的保護效果、apo A-I合成增加及脂蛋白脂解酶（LPL）活性提升有關。</li>
+  </ul>
+
+  <h3>降血脂藥物</h3>
+  <div class="box tip">
+    <div class="box-title">💊 藥物作用機制一覽</div>
+    <table>
+      <thead><tr><th>藥物類別</th><th>代表藥物</th><th>作用機制</th></tr></thead>
+      <tbody>
+        <tr><td data-label="類別">Statins（史他汀類）</td><td data-label="藥物">atorvastatin、simvastatin、fluvastatin、pravastatin</td><td data-label="機制">抑制 HMG-CoA reductase，並上調 LDL 受體表現</td></tr>
+        <tr><td data-label="類別">腸道吸收抑制劑</td><td data-label="藥物">Ezetimibe</td><td data-label="機制">阻斷 Niemann-Pick C1-like 1 蛋白，抑制腸道膽固醇吸收</td></tr>
+        <tr><td data-label="類別">Fibrates 及菸鹼酸</td><td data-label="藥物">clofibrate、gemfibrozil、nicotinic acid</td><td data-label="機制">降低肝臟分泌含三酸甘油酯與膽固醇之VLDL，主要降三酸甘油酯</td></tr>
+        <tr><td data-label="類別">PCSK9抑制劑</td><td data-label="藥物">alirocumab、evolocumab</td><td data-label="機制">抑制PCSK9活性，減少LDL受體被降解，增加LDL清除</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>遺傳性血脂蛋白疾病（原文 Table 26–1 重點整理）</h3>
+  <table>
+    <thead><tr><th>疾病名稱</th><th>缺陷</th><th>臨床重點</th></tr></thead>
+    <tbody>
+      <tr><td data-label="疾病">無β脂蛋白血症（Abetalipoproteinemia）</td><td data-label="缺陷">apo B 無法正常負載脂質，無法形成 chylomicron、VLDL、LDL</td><td data-label="重點">罕見；腸道吸收不良，需大量補充脂溶性維生素（尤其維生素E）</td></tr>
+      <tr><td data-label="疾病">Tangier disease 等 α-脂蛋白缺乏症</td><td data-label="缺陷">HDL 近乎缺乏</td><td data-label="重點">因缺乏apo C-II使LPL失活，易高三酸甘油酯血症；老年後動脈粥狀硬化</td></tr>
+      <tr><td data-label="疾病">家族性LPL缺乏症（Type I）</td><td data-label="缺陷">LPL缺乏或apo C-II缺乏使LPL失活</td><td data-label="重點">乳糜微粒與VLDL清除慢；LDL、HDL偏低，冠心病風險未增加</td></tr>
+      <tr><td data-label="疾病">家族性高膽固醇血症（Type IIa，FH）</td><td data-label="缺陷">LDL受體缺陷或apo B-100配體區突變</td><td data-label="重點">LDL顯著升高，導致早發性動脈粥狀硬化與冠心病</td></tr>
+      <tr><td data-label="疾病">Type III高脂蛋白血症</td><td data-label="缺陷">apo E異常（僅有E2，不與受體反應），殘餘物清除障礙</td><td data-label="重點">乳糜微粒與VLDL殘餘物增加，伴黃色瘤與動脈粥狀硬化</td></tr>
+      <tr><td data-label="疾病">家族性高三酸甘油酯血症（Type IV）</td><td data-label="缺陷">VLDL過度合成，常伴葡萄糖耐受不良與高胰島素血症</td><td data-label="重點">與冠心病、第2型糖尿病、肥胖、酗酒相關</td></tr>
+      <tr><td data-label="疾病">LCAT缺乏症</td><td data-label="缺陷">LCAT缺失，逆向膽固醇運輸受阻</td><td data-label="重點">HDL停留於初生盤狀，無法攝取及酯化膽固醇</td></tr>
+    </tbody>
+  </table>
+  <p class="fig-caption">Apo E4 等位基因帶原者，罹患阿茲海默症風險亦較高（apo E4與β類澱粉蛋白結合力較強）。</p>
+</section>
+
+<!-- ============ 9. Key Takeaways ============ -->
+<section id="takeaways">
+  <h2>九、Key Takeaways</h2>
+  <div class="takeaway-box">
+    <ul>
+      <li><strong>膽固醇</strong>是所有類固醇（皮質類固醇、性荷爾蒙、膽汁酸、維生素D）的共同前驅物，並具細胞膜結構功能；病理角色與膽結石、動脈粥狀硬化相關。</li>
+      <li>膽固醇合成之碳原子皆來自 <strong>Acetyl-CoA</strong>，共分五步驟：Mevalonate → 異戊二烯單位 → Squalene → Lanosterol → Cholesterol。</li>
+      <li><strong>HMG-CoA reductase</strong> 是全合成路徑的限速酵素，也是 statins 藥物的作用標的；受長期（SREBP／Insig基因調控）與短期（AMPK磷酸化）雙重調控。</li>
+      <li>細胞內膽固醇濃度靠「攝入／合成」與「外流／酯化／利用」兩組因子動態平衡，LDL受體活性受SREBP協同調控，PCSK9促進LDL受體降解。</li>
+      <li>血漿中膽固醇由脂蛋白（chylomicron、VLDL、IDL、LDL、HDL）運輸；<strong>LDL負責送出、HDL負責逆向運回肝臟</strong>；LCAT負責HDL上膽固醇酯化，CETP負責脂蛋白間膽固醇酯轉移。</li>
+      <li>膽固醇經肝臟轉化為<strong>初級膽汁酸</strong>（膽酸、鵝去氧膽酸），限速步驟為 <strong>CYP7A1（7α-hydroxylase）</strong>；腸道細菌再轉化生成<strong>次級膽汁酸</strong>（去氧膽酸、石膽酸）。</li>
+      <li><strong>腸肝循環</strong>使98–99%膽汁酸重新吸收回肝臟，糞便排出的少量膽汁酸與膽固醇，仍是體內膽固醇清除的主要途徑；FXR受體負回饋調控CYP7A1。</li>
+      <li>血漿膽固醇濃度、LDL:HDL比值、飲食脂肪種類與生活型態（吸菸、運動、飲酒）皆與冠心病及動脈粥狀硬化風險相關。</li>
+      <li>降血脂藥物包括 <strong>statins</strong>（抑制HMG-CoA reductase）、<strong>ezetimibe</strong>（抑制腸道吸收）、<strong>fibrates</strong>（降三酸甘油酯）與 <strong>PCSK9抑制劑</strong>（減少LDL受體降解）。</li>
+      <li>遺傳性血脂蛋白疾病中，<strong>家族性高膽固醇血症（FH）</strong>因LDL受體缺陷導致血中LDL無法清除，為必考重點之一。</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>第26章：膽固醇的合成、運輸與排泄｜學習指南</div>
+  <a href="#top" class="back-top" id="backTop">⬆ Back to Top</a>
+</footer>
+
+<div id="top"></div>
+
+<script>
+(function(){
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('nav a');
+  function onScroll(){
+    var scrollPos = window.scrollY + document.querySelector('nav').offsetHeight + 20;
+    var currentId = sections[0] ? sections[0].id : '';
+    sections.forEach(function(sec){
+      if(sec.offsetTop <= scrollPos){
+        currentId = sec.id;
+      }
+    });
+    navLinks.forEach(function(link){
+      var href = link.getAttribute('href').substring(1);
+      if(href === currentId){
+        link.classList.add('active');
+      }else{
+        link.classList.remove('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('load', onScroll);
+
+  document.getElementById('backTop').addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>

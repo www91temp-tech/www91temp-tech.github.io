@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第23章：脂肪酸與類花生酸的生合成｜學習指南</title>
+<style>
+  :root{
+    --hue: 1;
+    --primary: hsl(var(--hue), 45%, 35%);
+    --primary-light: hsl(var(--hue), 45%, 92%);
+    --primary-dark: hsl(var(--hue), 45%, 24%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(var(--hue), 20%, 85%);
+    --good: hsl(140, 40%, 32%);
+    --good-bg: hsl(140, 45%, 94%);
+    --bad: hsl(6, 60%, 40%);
+    --bad-bg: hsl(6, 55%, 95%);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    font-family: "Noto Sans TC", "思源黑體", "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.85;
+    font-size: 17px;
+  }
+
+  header.page-header{
+    text-align: center;
+    padding: 44px 20px 28px;
+    background: linear-gradient(180deg, var(--primary-light) 0%, #fff 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  header.page-header h1{
+    margin: 0 0 8px;
+    font-size: clamp(22px, 4vw, 32px);
+    color: var(--primary-dark);
+    letter-spacing: 0.02em;
+  }
+
+  header.page-header p.subtitle{
+    margin: 0;
+    color: #555;
+    font-size: 15px;
+  }
+
+  nav.toc{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(4px);
+  }
+
+  nav.toc ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 16px;
+  }
+
+  nav.toc a{
+    display: inline-block;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14.5px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+  }
+
+  nav.toc a:hover{
+    background: var(--primary-light);
+  }
+
+  nav.toc a.active{
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  main{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 10px 20px 60px;
+  }
+
+  section{
+    padding-top: 34px;
+    margin-top: 10px;
+    border-top: 1px dashed var(--border);
+  }
+  section:first-of-type{ border-top: none; }
+
+  h2{
+    color: var(--primary-dark);
+    font-size: 23px;
+    border-left: 6px solid var(--primary);
+    padding: 4px 0 4px 12px;
+    margin: 34px 0 18px;
+  }
+
+  h3{
+    color: var(--primary);
+    font-size: 19px;
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--primary-light);
+  }
+
+  h4{
+    color: var(--primary-dark);
+    font-size: 16.5px;
+    margin: 18px 0 8px;
+  }
+
+  p{ margin: 10px 0; }
+
+  .lead{
+    background: var(--primary-light);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+
+  strong{ color: var(--primary-dark); }
+
+  .box{
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+  }
+
+  .box-title{
+    font-weight: 700;
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+  }
+
+  .box.rate{ background: var(--bad-bg); border-color: hsl(6,55%,85%); }
+  .box.rate .box-title{ color: var(--bad); }
+
+  .box.enzyme{ background: var(--primary-light); border-color: var(--border); }
+  .box.enzyme .box-title{ color: var(--primary-dark); }
+
+  .box.clinical{ background: hsl(45, 70%, 94%); border-color: hsl(45,50%,80%); }
+  .box.clinical .box-title{ color: hsl(35, 65%, 32%); }
+
+  .box.cofactor{ background: hsl(200, 45%, 95%); border-color: hsl(200,35%,82%); }
+  .box.cofactor .box-title{ color: hsl(205, 55%, 32%); }
+
+  ul, ol{ padding-left: 22px; }
+  li{ margin: 6px 0; }
+
+  /* 比較表 */
+  table.compare{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 15px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  table.compare caption{
+    text-align: left;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    font-size: 15.5px;
+  }
+  table.compare th, table.compare td{
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.compare th{
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+  }
+  table.compare tr:nth-child(even) td{ background: var(--primary-light); }
+
+  /* flow diagram */
+  .diagram{
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 16px;
+    margin: 18px 0;
+    overflow-x: auto;
+  }
+  .diagram-caption{
+    font-size: 13.5px;
+    color: #555;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .flow{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: max-content;
+  }
+  .flow.center{ justify-content: center; }
+  .fnode{
+    background: #fff;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13.5px;
+    text-align: center;
+    min-width: 70px;
+    line-height: 1.4;
+  }
+  .fnode.hl{ background: var(--primary-light); font-weight: 700; }
+  .fnode.enz{
+    background: var(--primary);
+    color: #fff;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+  .farrow{
+    color: var(--primary);
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0 2px;
+  }
+  .flabel{
+    font-size: 11.5px;
+    color: #666;
+    text-align: center;
+    max-width: 90px;
+  }
+  .fcol{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .frow-branch{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .fgrid3{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    gap: 18px;
+  }
+  .fgrid3 h4{ text-align:center; margin-top:0; }
+  .fchain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .fdown{
+    color: var(--primary);
+    font-size: 18px;
+  }
+  .two-col{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+  .compartment{
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .compartment-title{
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+  }
+  .badge{
+    display: inline-block;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    margin: 2px;
+  }
+  .badge.plus{ background: var(--good-bg); color: var(--good); }
+  .badge.minus{ background: var(--bad-bg); color: var(--bad); }
+
+  .term{
+    color: var(--primary-dark);
+    font-weight: 700;
+  }
+
+  .keytakeaways{
+    background: var(--primary-light);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 20px 0 8px;
+  }
+  .keytakeaways h2{
+    border-left: none;
+    padding-left: 0;
+    margin-top: 0;
+  }
+  .keytakeaways ol{ padding-left: 20px; }
+  .keytakeaways li{ margin: 10px 0; }
+
+  .obj-box{
+    margin: 16px 0;
+  }
+  .obj-box ul{ margin: 6px 0; }
+
+  footer{
+    text-align: center;
+    padding: 30px 20px 50px;
+    color: #555;
+    font-size: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  #backToTop{
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .2s;
+  }
+  #backToTop:hover{ background: var(--primary-dark); }
+
+  /* RWD */
+  @media (max-width: 1024px){
+    main{ max-width: 92%; }
+    .fgrid3{ grid-template-columns: repeat(3, minmax(120px,1fr)); gap: 10px; }
+  }
+
+  @media (max-width: 768px){
+    body{ font-size: 16px; }
+    header.page-header{ padding: 30px 14px 20px; }
+    nav.toc ul{ gap: 3px; padding: 8px 10px; }
+    nav.toc a{ font-size: 13px; padding: 6px 10px; }
+    h2{ font-size: 20px; }
+    h3{ font-size: 17px; }
+    .fgrid3{ grid-template-columns: 1fr; }
+    .two-col{ grid-template-columns: 1fr; }
+    table.compare{ font-size: 13.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>第23章：脂肪酸與類花生酸的生合成</h1>
+  <p class="subtitle">Biosynthesis of Fatty Acids &amp; Eicosanoids ｜ 生物化學學習指南</p>
+</header>
+
+<nav class="toc">
+  <ul id="navList">
+    <li><a href="#sec-intro">章節導讀</a></li>
+    <li><a href="#sec-pathway">從頭合成路徑</a></li>
+    <li><a href="#sec-regulation">合成調控</a></li>
+    <li><a href="#sec-unsaturated">不飽和脂肪酸</a></li>
+    <li><a href="#sec-eicosanoids">類花生酸</a></li>
+    <li><a href="#sec-clinical">臨床關聯</a></li>
+    <li><a href="#sec-summary">重點整理</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ========================= 1. 章節導讀 ========================= -->
+<section id="sec-intro">
+  <h2>一、生醫重要性（Biomedical Importance）</h2>
+
+  <p>脂肪酸的從頭合成（<span class="term">de novo synthesis</span>）是由一套<strong>細胞質外系統（extramitochondrial system）</strong>負責，完整地將乙醯輔酶A（acetyl-CoA）合成為軟脂酸（palmitate），整個反應都在<strong>細胞質（cytosol）</strong>中進行。大多數哺乳類動物以葡萄糖為主要的脂肪生成（lipogenesis）原料；但反芻動物則以醋酸鹽（acetate）作為主要燃料。</p>
+
+  <div class="box clinical">
+    <p class="box-title">🩺 臨床連結 Clinical Correlation</p>
+    <ul>
+      <li>目前尚未發現此路徑本身的先天性疾病，但第1型（胰島素依賴型）<strong>糖尿病（diabetes mellitus）</strong>會抑制脂肪生成。</li>
+      <li>此路徑活性的變化會影響<strong>肥胖（obesity）</strong>的性質與程度。</li>
+    </ul>
+  </div>
+
+  <p>細胞膜磷脂中的不飽和脂肪酸，對維持<strong>膜流動性（membrane fluidity）</strong>相當重要。飲食中<strong>多元不飽和：飽和脂肪酸比值（P:S ratio）</strong>較高，被認為有助於預防冠狀動脈心臟病。動物組織的去飽和能力有限，必須依賴植物性飲食提供某些多元不飽和脂肪酸，這些即為<strong>必需脂肪酸（essential fatty acids）</strong>。它們可進一步形成20碳（eicosanoic）脂肪酸，再轉變為<strong>類花生酸（eicosanoids）</strong>：前列腺素（prostaglandin）、凝血脂素（thromboxane）、白三烯（leukotriene）及脂氧素（lipoxin）。</p>
+
+  <div class="lead">
+    前列腺素參與調節<strong>發炎、疼痛、睡眠、凝血與生殖</strong>；<strong>非類固醇消炎藥（NSAID）</strong>如阿斯匹靈（aspirin）、布洛芬（ibuprofen）即是透過抑制前列腺素合成而發揮療效。白三烯則具有肌肉收縮與趨化作用，在過敏反應與發炎反應中扮演重要角色。
+  </div>
+
+  <div class="box cofactor obj-box">
+    <p class="box-title">🎯 學習目標</p>
+    <ul>
+      <li>說明乙醯輔酶A羧化酶（acetyl-CoA carboxylase）催化的反應及其調控機制。</li>
+      <li>認識脂肪酸合成酶（fatty acid synthase）多酵素複合體的結構。</li>
+      <li>理解長鏈脂肪酸如何透過二碳單位重複縮合而合成，並辨識所需輔因子。</li>
+      <li>掌握脂肪酸合成所需 NADPH 的來源。</li>
+      <li>說明營養狀態如何調控脂肪酸合成。</li>
+      <li>辨識必需脂肪酸，並理解為何人體無法自行合成。</li>
+      <li>了解去飽和酶（desaturase）與延長酶（elongase）如何合成多元不飽和脂肪酸。</li>
+      <li>概述環氧化酶（cyclooxygenase）與脂氧化酶（lipoxygenase）路徑如何生成各類類花生酸。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= 2. 從頭合成路徑 ========================= -->
+<section id="sec-pathway">
+  <h2>二、脂肪酸從頭合成路徑（De Novo Lipogenesis）</h2>
+
+  <p>此系統存在於肝臟、腎臟、腦、肺、乳腺與脂肪組織等多種組織。其反應所需的輔因子（cofactor）包括：<strong>NADPH、ATP、Mn²⁺、生物素（biotin）、HCO₃⁻</strong>（作為CO₂來源）。反應以 acetyl-CoA 為直接受質，終產物為<strong>游離軟脂酸（free palmitate）</strong>。</p>
+
+  <h3>（一）丙二醯輔酶A的生成——合成的起始與限速步驟</h3>
+
+  <div class="box rate">
+    <p class="box-title">⭐ 限速步驟 Rate-limiting Step</p>
+    <p>脂肪酸合成的第一步，也是<strong>限速且受調控的步驟</strong>：acetyl-CoA 經<strong>乙醯輔酶A羧化酶（acetyl-CoA carboxylase, ACC）</strong>羧化，形成<strong>丙二醯輔酶A（malonyl-CoA）</strong>。此反應需要 ATP 與維生素 B 群中的<strong>生物素（biotin）</strong>。</p>
+  </div>
+
+  <p>ACC 是一個<strong>多酵素蛋白（multienzyme protein）</strong>，含有生物素羧化酶（biotin carboxylase）、羧基轉移酶（carboxyl transferase）、生物素攜帶蛋白（biotin carrier protein, BCP）以及一個別構調節位（allosteric site）。反應分兩步驟進行：</p>
+
+  <div class="diagram">
+    <div class="flow">
+      <div class="fcol">
+        <div class="fnode hl">Acetyl-CoA + HCO₃⁻</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">步驟1：Biotin carboxylase (E1)</div>
+        <div class="flabel">生物素羧化（耗ATP）</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">步驟2：Carboxyltransferase (E2)</div>
+        <div class="flabel">將 COO⁻ 轉給 acetyl-CoA</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode hl">Malonyl-CoA</div>
+    </div>
+    <p class="diagram-caption">圖23-1（重製）：Acetyl-CoA carboxylase 兩步驟反應。E1 使生物素羧化，E2 再將羧基轉移至 acetyl-CoA 形成 malonyl-CoA。</p>
+  </div>
+
+  <p>ACC 在脂肪酸合成的調控上扮演核心角色（詳見「合成調控」章節）。</p>
+
+  <h3>（二）脂肪酸合成酶複合體：六種酵素活性 + 醯基載體蛋白</h3>
+
+  <p>形成 malonyl-CoA 後，脂肪酸由<strong>脂肪酸合成酶複合體（fatty acid synthase complex, FAS）</strong>組裝而成。此多酵素複合體含有<strong>醯基載體蛋白（acyl carrier protein, ACP）</strong>，功能類似 β-氧化路徑中的輔酶A，其結構中含有維生素<strong>泛酸（pantothenic acid）</strong>（以 4′-磷酸泛醯巰基乙胺形式存在）。</p>
+
+  <p>X光晶體繞射顯示，此複合體是由兩條相同多肽鏈組成的<strong>同源二聚體（homodimer）</strong>，每條鏈含六種酵素活性與一個 ACP，整體排列成 X 形，如此可在細胞內達成反應區室化，且因由單一基因編碼，各酵素合成能協同進行。</p>
+
+  <div class="diagram">
+    <div class="diagram-caption" style="margin-top:0; margin-bottom:10px;">圖23-2（重製）：單一多肽鏈上六種酵素活性的排列順序</div>
+    <div class="flow center">
+      <div class="fnode enz">Malonyl/Acetyl transacylase</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">3-Ketoacyl synthase</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">Dehydratase</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">Enoyl reductase</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">3-Ketoacyl reductase</div>
+      <span class="farrow">→</span>
+      <div class="fnode hl">ACP</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">Thioesterase</div>
+    </div>
+    <p class="diagram-caption">兩條相同多肽鏈以「X形」排列成同源二聚體，形成有功能的複合體。</p>
+  </div>
+
+  <h4>延長循環：每輪反應增加兩個碳</h4>
+
+  <p>反應起始時，一分子引子 acetyl-CoA 先結合到一個單體 ACP 上的半胱胺酸（cysteine）—SH 基（反應1a），而 malonyl-CoA 則結合到另一單體 ACP 的 4′-磷酸泛醯巰基乙胺 —SH 基（反應1b），此步驟由 <strong>malonyl acetyl transacylase</strong> 催化，形成「acetyl(acyl)-malonyl enzyme」。之後每一輪循環包含以下五個步驟：</p>
+
+  <div class="diagram">
+    <div class="flow">
+      <div class="fcol">
+        <div class="fnode hl">Acetyl(acyl)-<br>malonyl enzyme</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">① 3-Ketoacyl synthase</div>
+        <div class="flabel">縮合，釋出CO₂</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode">3-酮醯基酵素<br>(3-Ketoacyl enzyme)</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">② 3-Ketoacyl reductase</div>
+        <div class="flabel">還原（耗NADPH）</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode">D(-)-3-羥醯基酵素</div>
+      </div>
+    </div>
+    <div class="flow" style="margin-top:12px;">
+      <div class="fcol">
+        <div class="fnode">D(-)-3-羥醯基酵素</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">③ Dehydratase</div>
+        <div class="flabel">脫水</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode">2,3-不飽和醯基酵素</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">④ Enoyl reductase</div>
+        <div class="flabel">還原（耗NADPH）</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode hl">飽和醯基酵素<br>(Cn)</div>
+      </div>
+      <span class="farrow">↻</span>
+      <div class="fcol">
+        <div class="fnode enz">⑤ 轉移至Cys-SH，<br>再與新malonyl-CoA縮合</div>
+        <div class="flabel">共重複7次縮合</div>
+      </div>
+    </div>
+    <p class="diagram-caption">圖23-3（重製，簡化）：脂肪酸合成酶延長循環。每輪增加2個碳，重複7輪後由第六種酵素<strong>硫酯酶（thioesterase）</strong>釋出16碳的軟脂醯基（palmitoyl），即游離軟脂酸。</p>
+  </div>
+
+  <div class="box enzyme">
+    <p class="box-title">🧪 反應總覽</p>
+    <p style="font-size:14px;">CH₃CO—S-CoA ＋ 7 HOOCCH₂CO—S-CoA ＋ 14 NADPH ＋ 14 H⁺ → 軟脂酸（16碳）＋ 7 CO₂ ＋ 6 H₂O ＋ 8 CoA-SH ＋ 14 NADP⁺</p>
+    <p>作為引子的 acetyl-CoA 會形成軟脂酸的第15、16號碳；其餘的二碳單位皆由 malonyl-CoA 提供。若以<strong>丙醯輔酶A（propionyl-CoA）</strong>取代 acetyl-CoA 作引子，則可合成奇數碳長鏈脂肪酸（常見於反芻動物脂肪與乳汁）。</p>
+  </div>
+
+  <p>游離的軟脂酸必須先活化為 acyl-CoA，才能進入其他代謝路徑，如酯化形成三酸甘油酯、鏈延長、去飽和或酯化為膽固醇酯。乳腺組織另有專一的硫酯酶，可釋放 C₈、C₁₀、C₁₂ 醯基，成為乳脂中的脂質。</p>
+
+  <h3>（三）脂肪生成所需 NADPH 的來源</h3>
+
+  <p>NADPH 在還原3-酮醯基與2,3-不飽和醯基衍生物時作為還原當量的供應者（即上述反應②、④）。主要來源包括：</p>
+
+  <ol>
+    <li><strong>五碳醣磷酸路徑（pentose phosphate pathway, PPP）</strong>：氧化反應是脂肪生成組織（肝臟、脂肪組織、哺乳中的乳腺）NADPH 的最主要來源，且此路徑與脂肪酸合成同樣位於細胞質中，兩者間不需跨膜運輸。</li>
+        <li><strong>蘋果酸酶（NADP malate dehydrogenase, malic enzyme）</strong>：將蘋果酸轉為丙酮酸的同時產生 NADPH。</li>
+    <li><strong>細胞質外異檸檬酸去氫酶（isocitrate dehydrogenase）</strong>：在反芻動物中是重要來源。</li>
+  </ol>
+
+  <h3>（四）Acetyl-CoA 的來源：檸檬酸穿梭系統</h3>
+
+  <p>Acetyl-CoA 主要在粒線體基質中由丙酮酸氧化而來，但無法自由穿越粒線體內膜，因此需要一套特殊機制——<strong>檸檬酸（citrate）穿梭</strong>——將其運送至細胞質中進行脂肪酸合成。</p>
+
+  <div class="diagram">
+    <div class="two-col">
+      <div class="compartment">
+        <div class="compartment-title">粒線體 Mitochondrion</div>
+        <div class="flow center" style="flex-direction: column;">
+          <div class="fnode">丙酮酸（Pyruvate）</div>
+          <span class="fdown">↓ 氧化去羧</span>
+          <div class="fnode">Acetyl-CoA + OAA</div>
+          <span class="fdown">↓ 檸檬酸循環</span>
+          <div class="fnode hl">檸檬酸（Citrate）</div>
+        </div>
+      </div>
+      <div class="fcol">
+        <div class="farrow" style="font-size:26px;">⇌</div>
+        <div class="flabel">Tricarboxylate<br>transporter</div>
+      </div>
+      <div class="compartment">
+        <div class="compartment-title">細胞質 Cytosol</div>
+        <div class="flow center" style="flex-direction: column;">
+          <div class="fnode hl">檸檬酸（Citrate）</div>
+          <span class="fdown">↓ ATP-citrate lyase</span>
+          <div class="fnode">Acetyl-CoA（合成脂肪酸用）＋ OAA</div>
+          <span class="fdown">↓ 蘋果酸去氫酶</span>
+          <div class="fnode">蘋果酸（Malate）</div>
+          <span class="fdown">↓ Malic enzyme（產生NADPH）</span>
+          <div class="fnode">丙酮酸（回粒線體再生Acetyl-CoA）</div>
+        </div>
+      </div>
+    </div>
+    <p class="diagram-caption">圖23-4（重製，簡化）：Acetyl-CoA 與 NADPH 供應脂肪生成的途徑。此路徑同時將粒線體內的還原當量以 NADH → NADPH 形式轉移到細胞質。</p>
+  </div>
+
+  <p>此穿梭系統中，ATP-citrate lyase 在餵食後（well-fed state）活性增加。由於粒線體的三羧酸運輸蛋白須以蘋果酸交換檸檬酸，蘋果酸本身也可被運回粒線體重新形成 OAA。反芻動物因主要以醋酸鹽作為 acetyl-CoA 來源，體內 ATP-citrate lyase 與 malic enzyme 活性都很低。</p>
+
+  <h3>（五）脂肪酸鏈延長：內質網系統</h3>
+
+  <p>此「微粒體系統（microsomal system）」可將 C₁₀ 以上的飽和及不飽和脂肪醯輔酶A（fatty acyl-CoA）每次延長2個碳，以 malonyl-CoA 為碳源供給者、NADPH 為還原劑，由微粒體<strong>脂肪酸延長酶（fatty acid elongase）</strong>系統催化。腦部中硬脂醯輔酶A（stearyl-CoA）的延長作用在髓鞘形成（myelination）期間會快速增加，以提供合成鞘脂質所需的 C₂₂、C₂₄ 脂肪酸。</p>
+
+  <div class="diagram">
+    <div class="flow center">
+      <div class="fnode hl">Acyl-CoA + Malonyl-CoA</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">3-Ketoacyl-CoA synthase</div>
+        <div class="flabel">縮合，釋CO₂</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode">3-Ketoacyl-CoA</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">Reductase</div>
+        <div class="flabel">耗NADPH</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode">3-Hydroxyacyl-CoA</div>
+    </div>
+    <div class="flow center" style="margin-top:10px;">
+      <div class="fnode">3-Hydroxyacyl-CoA</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">Dehydrase</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode">2-trans-Enoyl-CoA</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">Reductase</div>
+        <div class="flabel">耗NADPH</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode hl">延長2碳的Acyl-CoA</div>
+    </div>
+    <p class="diagram-caption">圖23-5（重製）：微粒體延長酶系統。反應機轉與 FAS 循環相似，但輔因子為 CoA 而非 ACP。</p>
+  </div>
+
+  <table class="compare">
+    <caption>易混淆概念比較①：細胞質脂肪酸合成酶 vs. 微粒體延長酶系統</caption>
+    <thead>
+      <tr><th>比較項目</th><th>A：脂肪酸合成酶（從頭合成）</th><th>B：微粒體延長酶系統</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>位置</td><td>細胞質，單一多酵素複合體（同源二聚體）</td><td>內質網（ER）膜上的一組獨立酵素</td></tr>
+      <tr><td>醯基載體</td><td>以 ACP 的 4′-磷酸泛醯巰基乙胺攜帶</td><td>以輔酶A（CoA）攜帶</td></tr>
+      <tr><td>起始受質</td><td>由 acetyl-CoA 引子開始，從零組裝</td><td>延長既有的 C₁₀ 以上 acyl-CoA</td></tr>
+      <tr><td>典型產物</td><td>軟脂酸（16碳）</td><td>硬脂酸、C₂₂、C₂₄等更長鏈脂肪酸（如髓鞘脂質原料）</td></tr>
+      <tr><td>共同點</td><td colspan="2">兩者反應機制皆為「縮合 → 還原 → 脫水 → 還原」四步驟，皆需 malonyl-CoA 提供碳源及 NADPH 提供還原力</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========================= 3. 合成調控 ========================= -->
+<section id="sec-regulation">
+  <h2>三、脂肪酸合成的調控</h2>
+
+  <h3>（一）營養狀態是主要調控因子</h3>
+  <p>過剩的醣類會以脂肪形式儲存，以備飢餓、冬眠等熱量不足時期使用，也提供進食間隔期間的能量。脂肪生成將多餘的葡萄糖、丙酮酸、乳酸與 acetyl-CoA 轉為脂肪。</p>
+  <ul>
+    <li><strong>餵食狀態（well-fed）、高醣飲食</strong>→ 脂肪生成速率高。</li>
+    <li><strong>熱量限制、高脂飲食、胰島素缺乏（如糖尿病）</strong>→ 脂肪生成受抑制，並伴隨血漿游離脂肪酸濃度上升；肝臟脂肪生成與血清游離脂肪酸濃度呈<strong>反向關係</strong>。</li>
+    <li>攝取<strong>蔗糖（sucrose，葡萄糖＋果糖）</strong>比單純攝取葡萄糖更能刺激脂肪生成，因為果糖可繞過糖解作用中磷酸果糖激酶（PFK）的控制點，直接大量流入脂肪生成路徑。</li>
+  </ul>
+
+  <h3>（二）短期調控：乙醯輔酶A羧化酶的別構與磷酸化調控</h3>
+
+  <div class="box rate">
+    <p class="box-title">⭐ ACC 是脂肪生成調控中最重要的酵素</p>
+    <p>ACC 為別構酵素（allosteric enzyme），主要受兩種方式調控：</p>
+  </div>
+
+  <div class="diagram">
+    <div class="flow center">
+      <div class="fcol">
+        <div class="fnode">無活性二聚體<br>(Inactive dimer)</div>
+      </div>
+      <span class="farrow">⇌</span>
+      <div class="fcol">
+        <div class="fnode hl">有活性聚合體<br>(Active polymer)</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:10px;">
+      <span class="badge plus">＋ 檸檬酸 Citrate</span>
+      <span class="badge minus">－ 長鏈醯輔酶A Long-chain acyl-CoA</span>
+      <span class="badge minus">－ 磷酸化 Phosphorylation</span>
+    </div>
+    <p class="diagram-caption">圖23-6（重製）：檸檬酸（餵食狀態、acetyl-CoA充足的指標）促使無活性二聚體聚合成有活性的聚合體；長鏈醯輔酶A與磷酸化則使其去活化，屬於產物負回饋抑制。醯輔酶A同時也會抑制三羧酸運輸蛋白（tricarboxylate transporter），減少檸檬酸自粒線體釋出，間接加強去活化。</p>
+  </div>
+
+  <div class="diagram">
+    <div class="flow center">
+      <div class="fcol">
+        <div class="fnode">升糖素／腎上腺素</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">cAMP依賴性蛋白激酶</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">AMPKK</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">AMPK（活化）</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode">ACC 磷酸化<br>（去活化）</div>
+        <div class="flabel">抑制脂肪合成</div>
+      </div>
+    </div>
+    <div class="flow center" style="margin-top:12px;">
+      <div class="fnode">胰島素 Insulin</div>
+      <span class="farrow">→</span>
+      <div class="fnode enz">蛋白磷酸酶</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode hl">ACC 去磷酸化<br>（活化）</div>
+        <div class="flabel">促進脂肪合成</div>
+      </div>
+    </div>
+    <p class="diagram-caption">圖23-7（重製）：ACC 的磷酸化／去磷酸化調控。醯輔酶A亦可活化 AMPKK。</p>
+  </div>
+
+  <table class="compare">
+    <caption>易混淆概念比較②：胰島素 vs. 升糖素／腎上腺素 對 ACC 的作用</caption>
+    <thead>
+      <tr><th>比較項目</th><th>A：胰島素（Insulin）</th><th>B：升糖素／腎上腺素（Glucagon／Epinephrine）</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>作用機轉</td><td>活化蛋白磷酸酶，使 ACC 去磷酸化</td><td>經 cAMP 依賴性蛋白激酶活化 AMPKK，再活化 AMPK，使 ACC 磷酸化</td></tr>
+      <tr><td>對ACC活性的影響</td><td>活化（去磷酸化態為活性態）</td><td>去活化（磷酸化態為非活性態）</td></tr>
+      <tr><td>對脂肪合成的淨效應</td><td>促進脂肪酸合成</td><td>抑制脂肪酸合成</td></tr>
+      <tr><td>生理情境</td><td>餵食狀態、血糖上升</td><td>飢餓、緊急狀態、血糖下降</td></tr>
+    </tbody>
+  </table>
+
+  <h3>（三）丙酮酸去氫酶也受醯輔酶A調控</h3>
+  <p>長鏈醯輔酶A（acyl-CoA）可抑制粒線體內膜的 ATP-ADP 交換運輸蛋白，導致粒線體內 ATP/ADP 比值上升，使<strong>丙酮酸去氫酶（pyruvate dehydrogenase, PDH）</strong>由活性型轉為非活性型，進而限制脂肪生成所需 acetyl-CoA 的供應。此外，游離脂肪酸增加所致的醯輔酶A氧化，也會提高粒線體中 acetyl-CoA/CoA 及 NADH/NAD⁺ 比值，同樣抑制 PDH。</p>
+
+  <h3>（四）胰島素的其他調控機轉</h3>
+  <p>除了直接活化 ACC 外，胰島素還透過下列方式促進脂肪生成：</p>
+  <ul>
+    <li>增加葡萄糖進入細胞（如脂肪組織），提供更多丙酮酸（進而 acetyl-CoA）及合成三酸甘油酯所需的甘油-3-磷酸。</li>
+    <li>在脂肪組織（但非肝臟）中，將非活性型 PDH 轉為活性型。</li>
+    <li>降低細胞內 cAMP 濃度，<strong>抑制脂肪組織中的脂解作用（lipolysis）</strong>，進而降低血漿游離脂肪酸及長鏈醯輔酶A（兩者皆為脂肪生成的抑制劑）濃度。</li>
+  </ul>
+
+  <h3>（五）長期調控：基因表現的誘導與抑制</h3>
+  <p>ACC 與脂肪酸合成酶皆屬於<strong>適應性酶（adaptive enzymes）</strong>，會依生理需求調整基因表現，改變酵素蛋白總量：</p>
+  <ul>
+    <li>餵食狀態下酵素量增加；高脂飲食、飢餓及糖尿病狀態下酵素量減少。</li>
+    <li>胰島素促進基因表現與酵素合成的誘導；升糖素（透過cAMP）則拮抗此效應。</li>
+    <li>攝取含多元不飽和脂肪酸的油脂會協同抑制糖解及脂肪生成關鍵酶的基因表現。</li>
+  </ul>
+  <p>此長期調控機制需數天才能完全顯現，可強化胰島素、升糖素等荷爾蒙與游離脂肪酸的立即效應。</p>
+</section>
+
+<!-- ========================= 4. 不飽和脂肪酸 ========================= -->
+<section id="sec-unsaturated">
+  <h2>四、不飽和脂肪酸的生合成</h2>
+
+  <h3>（一）單元不飽和脂肪酸：Δ⁹去飽和酶系統</h3>
+  <p>肝臟等組織可將飽和脂肪酸轉為非必需的單元不飽和脂肪酸，第一個引入的雙鍵幾乎都位於 <strong>Δ⁹位置</strong>。位於內質網的 <strong>Δ⁹去飽和酶（Δ⁹ desaturase）</strong>可將軟脂醯輔酶A或硬脂醯輔酶A分別轉為棕櫚油醯輔酶A（palmitoleoyl-CoA）或油醯輔酶A（oleoyl-CoA）。此反應需要氧氣及 NADH 或 NADPH，酵素系統與含細胞色素b₅（cytochrome b₅）的單氧化酶系統類似。</p>
+
+  <div class="diagram">
+    <div class="flow center">
+      <div class="fnode">硬脂醯輔酶A（Stearoyl-CoA）</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">Δ⁹去飽和酶［Cyt b₅］</div>
+        <div class="flabel">O₂ + NADH → NAD⁺ + 2H₂O</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode hl">油醯輔酶A（Oleoyl-CoA）</div>
+    </div>
+    <p class="diagram-caption">圖23-9（重製）：微粒體Δ⁹去飽和酶反應。</p>
+  </div>
+
+  <h3>（二）多元不飽和脂肪酸：去飽和酶與延長酶系統</h3>
+  <p>動物體內具有 Δ⁴、Δ⁵、Δ⁶ 及 Δ⁹ 去飽和酶，<strong>但永遠無法在 Δ⁹ 位置之後（往甲基端方向）插入新雙鍵</strong>；植物則能在 Δ¹² 及 Δ¹⁵ 位置引入雙鍵，因此人類必須從飲食中攝取<strong>亞麻油酸（linoleic acid, ω6）</strong>及<strong>α-次亞麻油酸（α-linolenic acid, ω3）</strong>，這兩者即為<strong>營養必需脂肪酸</strong>。相對地，油酸（oleic acid，ω9家族）因可由飽和脂肪酸經 Δ⁹ 去飽和作用完全自行合成，故非必需。</p>
+
+  <div class="diagram">
+    <div class="fgrid3">
+      <div>
+        <h4>ω9家族</h4>
+        <div class="fchain">
+          <div class="fnode">油酸 18:1 ω9</div>
+          <span class="fdown">↓ 延長／Δ⁵去飽和</span>
+          <div class="fnode">20:3 ω9<br>（EFA缺乏時堆積）</div>
+        </div>
+      </div>
+      <div>
+        <h4>ω6家族</h4>
+        <div class="fchain">
+          <div class="fnode hl">亞麻油酸 18:2 ω6<br>（必需）</div>
+          <span class="fdown">↓ Δ⁶去飽和</span>
+          <div class="fnode">γ-次亞麻油酸(GLA)</div>
+          <span class="fdown">↓ 延長／Δ⁵去飽和</span>
+          <div class="fnode hl">花生四烯酸(AA)<br>20:4 ω6</div>
+          <span class="fdown">↓ 延長×2／Δ⁶去飽和</span>
+          <div class="fnode">24:5 ω6</div>
+          <span class="fdown">↓ 過氧化體β-氧化</span>
+          <div class="fnode">22:5 ω6</div>
+        </div>
+      </div>
+      <div>
+        <h4>ω3家族</h4>
+        <div class="fchain">
+          <div class="fnode hl">α-次亞麻油酸 18:3 ω3<br>（必需）</div>
+          <span class="fdown">↓ Δ⁶去飽和／延長</span>
+          <div class="fnode">20:4 ω3</div>
+          <span class="fdown">↓ Δ⁵去飽和</span>
+          <div class="fnode hl">EPA 20:5 ω3</div>
+          <span class="fdown">↓ 延長×2／Δ⁶去飽和</span>
+          <div class="fnode">24:6 ω3</div>
+          <span class="fdown">↓ 過氧化體β-氧化</span>
+          <div class="fnode hl">DHA 22:6 ω3</div>
+        </div>
+      </div>
+    </div>
+    <p class="diagram-caption">圖23-10（重製，簡化）：ω9、ω6、ω3三家族多元不飽和脂肪酸的合成，皆在內質網進行去飽和與延長反應；產生22:5 ω6及22:6 ω3（DHA）需要在過氧化體（peroxisome）內進行一輪β-氧化。（EFA，必需脂肪酸；AA，花生四烯酸；EPA，二十碳五烯酸；DHA，二十二碳六烯酸）</p>
+  </div>
+
+  <p>亞麻油酸經 γ-次亞麻油酸轉為花生四烯酸；若飲食中亞麻油酸充足，即不一定需要額外攝取花生四烯酸。但<strong>貓因缺乏 Δ⁶去飽和酶</strong>，無法自行轉換，必須從飲食中直接攝取花生四烯酸。飢餓狀態、升糖素／腎上腺素作用增強，以及胰島素缺乏（如第1型糖尿病）都會大幅降低去飽和及鏈延長系統的活性。</p>
+
+  <table class="compare">
+    <caption>易混淆概念比較③：碳原子傳統編號 vs. ω（omega）編號</caption>
+    <thead>
+      <tr><th>比較項目</th><th>A：傳統碳編號</th><th>B：ω編號</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>計算起點</td><td>從<strong>羧基端（carboxyl terminal）</strong>開始計數</td><td>從<strong>甲基端（methyl terminal）</strong>反向計數</td></tr>
+      <tr><td>用途</td><td>標示雙鍵在分子中的絕對位置（如Δ⁹）</td><td>標示脂肪酸所屬的代謝家族（如ω3、ω6、ω9）</td></tr>
+      <tr><td>舉例</td><td>α-次亞麻油酸雙鍵位於第9、12、15號碳（18碳、3個雙鍵）</td><td>同一分子由甲基端數來，第一個雙鍵在第3個碳，故稱為 ω3</td></tr>
+    </tbody>
+  </table>
+
+  <h3>（三）必需脂肪酸的生理功能</h3>
+  <p>必需脂肪酸是形成前列腺素、凝血脂素、白三烯與脂氧素的原料，也存在於結構性脂質中（常位於磷脂第2號碳位置），與粒線體膜結構完整性有關。</p>
+  <ul>
+    <li>花生四烯酸（AA）約佔膜磷脂脂肪酸的5-15%。</li>
+    <li><strong>DHA（二十二碳六烯酸）</strong>可由α-次亞麻油酸少量合成，或直接來自魚油，大量存在於視網膜、大腦皮質、睪丸與精子中，對腦部與視網膜發育尤其重要，經胎盤與母乳供應；視網膜色素病變（retinitis pigmentosa）患者血中 DHA 濃度偏低。</li>
+    <li>必需脂肪酸缺乏時，ω9家族的非必需多烯酸（尤其是20:3 ω9）會取代必需脂肪酸進入磷脂與細胞膜；血漿脂質中的<strong>三烯：四烯比值（triene:tetraene ratio）</strong>可用以診斷必需脂肪酸缺乏的程度。</li>
+  </ul>
+</section>
+
+<!-- ========================= 5. 類花生酸 ========================= -->
+<section id="sec-eicosanoids">
+  <h2>五、類花生酸的生合成</h2>
+
+  <h3>（一）概論：三大類花生酸與兩條競爭路徑</h3>
+  <p>花生四烯酸及其他 C₂₀ 多元不飽和脂肪酸可轉變為類花生酸——<strong>前列腺素（PG）、凝血脂素（TX）、白三烯（LT）與脂氧素（LX）</strong>，這些生理與藥理活性化合物被視為透過G蛋白偶聯受體作用的「局部荷爾蒙」。</p>
+
+  <p>花生四烯酸主要來自飲食，或由<strong>磷脂酶A₂（phospholipase A₂）</strong>自細胞膜磷脂第2位置釋出（可被血管收縮素II、緩激肽、腎上腺素、凝血酶等訊號活化）。</p>
+
+  <div class="diagram">
+    <div class="flow center">
+      <div class="fnode">二十碳三烯酸<br>(dihomo-γ-次亞麻油酸)</div>
+      <span class="farrow">→</span>
+      <div class="fnode">第1系列<br>PG₁、TX₁</div>
+    </div>
+    <div class="flow center" style="margin-top:10px;">
+      <div class="fnode hl">花生四烯酸（Arachidonate）</div>
+      <span class="farrow">↗</span>
+      <div class="fcol">
+        <div class="fnode enz">① 環氧化酶路徑</div>
+        <div class="flabel">Cyclooxygenase</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode hl">第2系列前列腺素／凝血脂素<br>PGD₂、PGE₂、PGF₂、PGI₂、TXA₂</div>
+    </div>
+    <div class="flow center" style="margin-top:4px;">
+      <div style="width:180px;"></div>
+      <span class="farrow">↘</span>
+      <div class="fcol">
+        <div class="fnode enz">② 脂氧化酶路徑</div>
+        <div class="flabel">Lipoxygenase</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode hl">第4系列白三烯與脂氧素<br>LTA₄~LTE₄、LXA₄~LXE₄</div>
+    </div>
+    <div class="flow center" style="margin-top:10px;">
+      <div class="fnode">EPA（二十碳五烯酸）</div>
+      <span class="farrow">→</span>
+      <div class="fnode">第3系列<br>PG₃、TX₃、LT₅</div>
+    </div>
+    <p class="diagram-caption">圖23-11（重製，簡化）：三組類花生酸依前驅物不同分為第1、2、3系列；每一前驅物皆可經環氧化酶（①）或脂氧化酶（②）兩條互相競爭的路徑代謝。下標數字代表分子中雙鍵總數／所屬系列。</p>
+  </div>
+
+  <h3>（二）環氧化酶路徑：前列腺素與凝血脂素的生成</h3>
+  <p><strong>環氧化酶（cyclooxygenase, COX）</strong>又稱前列腺素H合成酶，同時具有環氧化酶與過氧化酶兩種活性，反應消耗兩分子O₂。COX 有 <strong>COX-1</strong> 與 <strong>COX-2</strong> 兩種同功酶。產物內過氧化物（PGH）可再轉為 PGD、PGE、凝血脂素（TXA₂）及前列環素（PGI₂）。每一種細胞類型通常只產生一種主要的類花生酸。</p>
+
+  <div class="diagram">
+    <div class="flow center">
+      <div class="fnode hl">花生四烯酸</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">COX（環氧化＋過氧化）</div>
+        <div class="flabel">被NSAID抑制</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode">PGG₂</div>
+      <span class="farrow">→</span>
+      <div class="fnode">PGH₂</div>
+    </div>
+    <div class="flow center" style="margin-top:10px; flex-wrap:wrap;">
+      <div class="fnode">→ PGI₂（前列環素）</div>
+      <div class="fnode">→ PGE₂</div>
+      <div class="fnode">→ PGF₂α</div>
+      <div class="fnode">→ PGD₂</div>
+      <div class="fnode">→ TXA₂（凝血脂素）</div>
+    </div>
+    <p class="diagram-caption">圖23-12（重製，簡化）：花生四烯酸經COX路徑生成第2系列前列腺素與凝血脂素。阿斯匹靈、消炎痛（indomethacin）、布洛芬皆抑制COX。</p>
+  </div>
+
+  <div class="box enzyme">
+    <p class="box-title">🧬 凝血脂素 vs. 前列環素——拮抗作用</p>
+    <ul>
+      <li><strong>凝血脂素（TXA₂）</strong>：由血小板合成，釋出後造成<strong>血管收縮與血小板凝集</strong>，低劑量阿斯匹靈可專一性抑制其合成。</li>
+      <li><strong>前列環素（PGI₂）</strong>：由血管壁合成，是強效的<strong>血小板凝集抑制劑</strong>。</li>
+    </ul>
+    <p>由EPA形成的PG₃、TX₃會抑制花生四烯酸自磷脂釋出，進而減少PG₂、TX₂的生成；PGI₃的抗凝集效力與PGI₂相當，但TXA₃的凝集作用比TXA₂弱，整體使凝血時間延長（此即魚油有益心血管的機轉之一）。極微量（每毫升血漿1奈克）的前列腺素即可引起動物平滑肌收縮。</p>
+  </div>
+
+  <div class="box cofactor">
+    <p class="box-title">🔄 環氧化酶是「自殺酶」</p>
+    <p>前列腺素活性的「關閉」部分依賴COX本身的自我催化失活特性，即所謂<strong>自殺酶（suicide enzyme）</strong>；此外，15-羥基前列腺素去氫酶能迅速使前列腺素失活。若以磺胺沙拉嗪（sulfasalazine）或消炎痛抑制此去氫酶，可延長前列腺素在體內的半衰期。</p>
+  </div>
+
+  <h3>（三）脂氧化酶路徑：白三烯與脂氧素的生成</h3>
+  <p>白三烯是一群共軛三烯（conjugated triene），由白血球、肥大細胞瘤細胞、血小板與巨噬細胞內的<strong>脂氧化酶路徑（lipoxygenase pathway）</strong>因免疫性或非免疫性刺激而生成。三種不同的脂氧化酶分別將氧插入花生四烯酸的5、12、15位置，形成氫過氧化物（HPETE）；<strong>只有5-脂氧化酶能生成白三烯</strong>。脂氧素則是共軛四烯（conjugated tetraene），需一種以上脂氧化酶協同作用才能生成。</p>
+
+  <div class="diagram">
+    <div class="flow center" style="flex-wrap:wrap;">
+      <div class="fnode hl">花生四烯酸</div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">12-脂氧化酶</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode">12-HPETE → 12-HETE</div>
+    </div>
+    <div class="flow center" style="margin-top:8px; flex-wrap:wrap;">
+      <div style="width:70px;"></div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">15-脂氧化酶</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode">15-HPETE → 15-HETE</div>
+    </div>
+    <div class="flow center" style="margin-top:8px; flex-wrap:wrap;">
+      <div style="width:70px;"></div>
+      <span class="farrow">→</span>
+      <div class="fcol">
+        <div class="fnode enz">5-脂氧化酶</div>
+      </div>
+      <span class="farrow">→</span>
+      <div class="fnode">5-HPETE</div>
+      <span class="farrow">→</span>
+      <div class="fnode hl">白三烯A₄（LTA₄）</div>
+    </div>
+    <div class="flow center" style="margin-top:10px; flex-wrap:wrap;">
+      <div style="width:150px;"></div>
+      <span class="farrow">↙</span>
+      <div class="fnode">LTB₄</div>
+    </div>
+    <div class="flow center" style="flex-wrap:wrap;">
+      <div style="width:150px;"></div>
+      <span class="farrow">↓ +麩胱甘肽</span>
+      <div class="fnode">LTC₄ → LTD₄ → LTE₄</div>
+    </div>
+    <div class="flow center" style="flex-wrap:wrap;">
+      <div style="width:150px;"></div>
+      <span class="farrow">↘ 15-脂氧化酶</span>
+      <div class="fnode">脂氧素（如LXA₄）</div>
+    </div>
+    <p class="diagram-caption">圖23-13（重製，簡化）：花生四烯酸經脂氧化酶路徑生成白三烯與脂氧素。LTA₄可轉為LTB₄，或依序加上麩胱甘肽、麩胺酸、甘胺酸形成LTC₄、LTD₄、LTE₄；亦可經15-脂氧化酶作用生成脂氧素。</p>
+  </div>
+
+  <table class="compare">
+    <caption>易混淆概念比較④：環氧化酶路徑 vs. 脂氧化酶路徑</caption>
+    <thead>
+      <tr><th>比較項目</th><th>A：環氧化酶路徑（COX）</th><th>B：脂氧化酶路徑（LOX）</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>關鍵酵素</td><td>環氧化酶（COX-1／COX-2）</td><td>5-、12-、15-脂氧化酶</td></tr>
+      <tr><td>主要產物</td><td>前列腺素（PG）、凝血脂素（TX）、前列環素（PGI）——統稱前列腺類（prostanoids）</td><td>白三烯（LT）、脂氧素（LX）</td></tr>
+      <tr><td>代表藥物抑制</td><td>阿斯匹靈、布洛芬、消炎痛等NSAID</td><td>目前臨床常用抑制劑較少於COX抑制劑</td></tr>
+      <tr><td>代表生理作用</td><td>凝血調節、發炎、疼痛、胃黏膜保護</td><td>支氣管收縮（氣喘）、白血球趨化、血管通透性</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========================= 6. 臨床關聯 ========================= -->
+<section id="sec-clinical">
+  <h2>六、臨床關聯</h2>
+
+  <div class="box clinical">
+    <p class="box-title">🩺 必需脂肪酸缺乏症</p>
+    <p>一般成人正常飲食下極少發生必需脂肪酸缺乏；但接受低脂配方奶的嬰兒，或長期完全依賴低必需脂肪酸靜脈營養的病人，可能出現<strong>皮膚病灶與脂質運輸障礙</strong>等缺乏症狀，攝取占總熱量1-2%的必需脂肪酸即可預防。與必需脂肪酸代謝異常相關的疾病包括：囊狀纖維化、腸病性肢皮炎、肝腎症候群、Sjögren-Larsson症候群、多系統神經元退化、克隆氏症、肝硬化與酒精中毒、Reye症候群；Zellweger症候群患者腦中極長鏈多烯酸則會升高。高P:S比值飲食可降低血清膽固醇，有助降低冠心病風險。</p>
+  </div>
+
+  <div class="box clinical">
+    <p class="box-title">🩺 反式脂肪酸的危害</p>
+    <p>反芻動物脂肪中含少量反式不飽和脂肪酸（如奶油含2-7%），源自瘤胃微生物作用；但人類飲食中主要來源是<strong>部分氫化植物油</strong>（如人造奶油）。反式脂肪酸會與必需脂肪酸競爭，加重其缺乏；因結構上類似飽和脂肪酸，同樣會促進高膽固醇血症與動脈粥狀硬化。</p>
+  </div>
+
+  <div class="box clinical">
+    <p class="box-title">🩺 NSAID 與 COX 抑制劑</p>
+    <p>阿斯匹靈可同時抑制COX-1與COX-2；消炎痛、布洛芬等其他NSAID則主要以競爭花生四烯酸的方式抑制環氧化酶。由於抑制COX-1常伴隨胃部刺激的副作用，研發人員嘗試開發選擇性抑制COX-2的藥物（<strong>昔布類 coxibs</strong>），但成效有限，部分藥物已因安全疑慮下市。抗發炎皮質類固醇可完全抑制 COX-2（而非COX-1）的轉錄。</p>
+  </div>
+
+  <div class="box clinical">
+    <p class="box-title">🩺 前列腺類的治療應用</p>
+    <p>前列腺類可能的治療用途包括：避孕、引產、終止妊娠、預防或緩解胃潰瘍、控制發炎與血壓、緩解氣喘與鼻塞；PGD₂ 更是強效的促眠物質。前列腺素會提高血小板、甲狀腺、黃體、胎兒骨骼、腺垂體及肺部的cAMP，但降低腎小管細胞與脂肪組織的cAMP。</p>
+  </div>
+
+  <div class="box clinical">
+    <p class="box-title">🩺 白三烯與脂氧素在疾病中的角色</p>
+    <p><strong>過敏反應緩慢作用物質（SRS-A）</strong>是LTC₄、LTD₄、LTE₄的混合物，為強效的支氣管平滑肌收縮劑；此三者與LTB₄皆會造成血管通透性增加，並吸引、活化白血球，在氣喘等發炎或立即型過敏反應疾病中十分重要。動脈壁中發現有5-脂氧化酶，顯示白三烯具血管活性。脂氧素則被認為在血管活性及免疫調節上扮演抗發炎角色，屬於免疫反應的反調節物質（chalones）。</p>
+  </div>
+</section>
+
+<!-- ========================= 7. Key Takeaways ========================= -->
+<section id="sec-summary">
+  <div class="keytakeaways">
+    <h2>Key Takeaways 本章重點整理</h2>
+    <ol>
+      <li>長鏈脂肪酸的從頭合成（脂肪生成）由<strong>兩套酵素系統</strong>共同完成：乙醯輔酶A羧化酶（ACC）與脂肪酸合成酶（FAS），全程在<strong>細胞質</strong>進行。</li>
+      <li>路徑所需輔因子為 <strong>NADPH、ATP、Mn²⁺、生物素、泛酸</strong>；由 acetyl-CoA 與 7 分子 malonyl-CoA 合成軟脂酸。</li>
+      <li>ACC 催化 acetyl-CoA → malonyl-CoA，為<strong>限速步驟</strong>；FAS 是含六種酵素活性與ACP的<strong>同源二聚體</strong>複合體。</li>
+      <li>NADPH主要來自<strong>五碳醣磷酸路徑</strong>，其次為蘋果酸酶及異檸檬酸去氫酶反應；acetyl-CoA則透過<strong>檸檬酸穿梭</strong>由粒線體運至細胞質。</li>
+      <li>ACC受<strong>別構調控</strong>（檸檬酸活化、長鏈醯輔酶A抑制）與<strong>共價磷酸化調控</strong>（胰島素去磷酸化活化；升糖素／腎上腺素經AMPK磷酸化去活化），另有長期基因表現調控。</li>
+      <li>動物僅能合成到<strong>Δ⁹去飽和</strong>，故<strong>亞麻油酸（ω6）與α-次亞麻油酸（ω3）</strong>為必需脂肪酸，需由飲食攝取；油酸（ω9）則可自行合成。</li>
+      <li>亞麻油酸經去飽和／延長可轉為花生四烯酸（AA）；α-次亞麻油酸可轉為 EPA、DHA，DHA對腦與視網膜發育尤其重要。</li>
+      <li>類花生酸（前列腺素、凝血脂素、白三烯、脂氧素）由花生四烯酸經<strong>環氧化酶路徑（COX，生成前列腺類）</strong>或<strong>脂氧化酶路徑（LOX，生成白三烯與脂氧素）</strong>兩條互相競爭的路徑產生。</li>
+      <li>NSAID（阿斯匹靈、布洛芬等）透過抑制COX發揮消炎、止痛與抗凝血作用；COX本身具「自殺酶」特性。</li>
+      <li>凝血脂素（TXA₂，促凝血）與前列環素（PGI₂，抗凝血）互相拮抗；白三烯（尤其SRS-A）在氣喘與過敏反應中扮演關鍵角色。</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>第23章：脂肪酸與類花生酸的生合成｜學習指南</div>
+  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">回到頂端 ↑</button>
+</footer>
+
+<script>
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+    var sections = links.map(function(a){
+      return document.querySelector(a.getAttribute('href'));
+    });
+
+    function onScroll(){
+      var scrollPos = window.scrollY || window.pageYOffset;
+      var navHeight = document.querySelector('nav.toc').offsetHeight;
+      var current = sections[0];
+
+      for (var i = 0; i < sections.length; i++){
+        var sec = sections[i];
+        if (!sec) continue;
+        var top = sec.offsetTop - navHeight - 20;
+        if (scrollPos >= top){
+          current = sec;
+        }
+      }
+
+      links.forEach(function(a){
+        var target = document.querySelector(a.getAttribute('href'));
+        if (target === current){
+          a.classList.add('active');
+        } else {
+          a.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

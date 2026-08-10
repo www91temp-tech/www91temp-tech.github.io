@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第31章：紫質與膽色素｜學習指南</title>
+<style>
+  :root{
+    --hue: 17;
+    --primary: hsl(17, 45%, 35%);
+    --primary-light: hsl(17, 45%, 92%);
+    --primary-dark: hsl(17, 45%, 25%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: #e3d9d3;
+    --mito: hsl(200, 45%, 35%);
+    --mito-light: hsl(200, 45%, 92%);
+    --cyto: hsl(140, 30%, 32%);
+    --cyto-light: hsl(140, 30%, 92%);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    font-family: "Noto Sans TC", "思源黑體", "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.85;
+    font-size: 16px;
+  }
+
+  header{
+    text-align:center;
+    padding: 2.5rem 1.5rem 2rem;
+    background: linear-gradient(180deg, var(--primary-light), #fff);
+    border-bottom: 2px solid var(--primary);
+  }
+  header h1{
+    color: var(--primary-dark);
+    font-size: 1.8rem;
+    margin: 0 0 .5rem;
+    letter-spacing: .02em;
+  }
+  header p.subtitle{
+    color: #555;
+    margin:0;
+    font-size: .95rem;
+  }
+
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,.97);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(4px);
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    gap: .3rem;
+    margin:0;
+    padding: .6rem 1rem;
+  }
+  nav a{
+    display:block;
+    text-decoration:none;
+    color: var(--text);
+    font-size: .88rem;
+    padding: .45rem .8rem;
+    border-radius: 999px;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+  }
+  nav a:hover{ background: var(--primary-light); }
+  nav a.active{
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  main{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+  }
+
+  section{ padding-top: 1.6rem; margin-top: 1rem; }
+  section:first-of-type{ margin-top: 1.5rem; }
+
+  h2{
+    color: var(--primary-dark);
+    font-size: 1.35rem;
+    border-left: 6px solid var(--primary);
+    padding: .3rem .8rem;
+    background: var(--primary-light);
+    border-radius: 4px;
+    margin: 2.2rem 0 1.1rem;
+  }
+  h3{
+    color: var(--primary);
+    font-size: 1.12rem;
+    margin: 1.6rem 0 .7rem;
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: .3rem;
+  }
+  h4{
+    color: var(--primary-dark);
+    font-size: 1rem;
+    margin: 1.1rem 0 .5rem;
+  }
+  p{ margin: .6rem 0; }
+  ul, ol{ padding-left: 1.4rem; }
+  li{ margin: .35rem 0; }
+
+  strong.term{ color: var(--primary-dark); }
+
+  .callout{
+    background: var(--primary-light);
+    border-left: 5px solid var(--primary);
+    border-radius: 6px;
+    padding: .9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: .95rem;
+  }
+  .callout h4{ margin-top:0; color: var(--primary-dark); }
+
+  .tip{
+    background: #fffaf0;
+    border: 1px dashed #c9a35e;
+    border-radius: 6px;
+    padding: .8rem 1.1rem;
+    margin: 1rem 0;
+    font-size: .92rem;
+  }
+  .tip strong{ color:#a5701c; }
+
+  .clinical{
+    background: #fdeeee;
+    border-left: 5px solid #b64545;
+    border-radius: 6px;
+    padding: .8rem 1.1rem;
+    margin: 1rem 0;
+    font-size: .93rem;
+  }
+  .clinical h4{ margin-top:0; color:#8e2f2f; }
+
+  /* tables */
+  .table-wrap{ overflow-x:auto; margin: 1rem 0; }
+  table{
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .88rem;
+    min-width: 480px;
+  }
+  caption{
+    caption-side: top;
+    text-align:left;
+    font-weight:700;
+    color: var(--primary-dark);
+    margin-bottom: .4rem;
+    font-size: .95rem;
+  }
+  th, td{
+    border: 1px solid var(--border);
+    padding: .55rem .6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th{
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+  }
+  tr:nth-child(even) td{ background: var(--primary-light); }
+
+  .compare-table th:nth-child(1){ background: var(--cyto); }
+  .compare-table th:nth-child(2){ background: var(--mito); }
+  .compare-table th:nth-child(3){ background: var(--primary-dark); }
+
+  /* pathway timeline */
+  .timeline{
+    position: relative;
+    margin: 1.4rem 0;
+    padding-left: 2.6rem;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left: 1.05rem;
+    top: .3rem;
+    bottom: .3rem;
+    width: 3px;
+    background: var(--primary-light);
+    border-radius:2px;
+  }
+  .tl-step{
+    position: relative;
+    margin-bottom: 1.1rem;
+    background:#fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .7rem .9rem;
+  }
+  .tl-step::before{
+    content: attr(data-n);
+    position: absolute;
+    left: -2.6rem;
+    top: .5rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var(--primary);
+    color:#fff;
+    font-weight:700;
+    font-size: .85rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .tl-step .eq{ font-size: .9rem; margin: .2rem 0; }
+  .tag{
+    display:inline-block;
+    font-size: .72rem;
+    padding: .12rem .55rem;
+    border-radius: 999px;
+    font-weight:700;
+    margin-right:.4rem;
+    color:#fff;
+  }
+  .tag.cyto{ background: var(--cyto); }
+  .tag.mito{ background: var(--mito); }
+  .tag.enzyme{ background: var(--primary-dark); }
+
+  /* horizontal flow */
+  .flow-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap: .5rem;
+    margin: 1.2rem 0;
+  }
+  .flow-node{
+    background: #fff;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: .55rem .8rem;
+    font-size: .85rem;
+    text-align:center;
+    min-width: 90px;
+  }
+  .flow-arrow{
+    font-size: 1.3rem;
+    color: var(--primary);
+  }
+
+  /* branch diagram for fig 31-10 */
+  .branch-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.4rem;
+    margin: 1.2rem 0;
+  }
+  .branch-root{
+    background: var(--primary);
+    color:#fff;
+    padding:.55rem 1rem;
+    border-radius:8px;
+    font-size:.88rem;
+    text-align:center;
+  }
+  .branch-split{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 1.2rem;
+    justify-content:center;
+    width:100%;
+  }
+  .branch-col{
+    flex:1 1 220px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.4rem;
+  }
+  .branch-node{
+    background:#fff;
+    border:2px solid var(--primary-light);
+    border-left: 5px solid var(--primary);
+    padding:.5rem .8rem;
+    border-radius:6px;
+    font-size:.82rem;
+    text-align:center;
+    width:100%;
+  }
+  .branch-arrow{ color: var(--primary); font-size:1.1rem; }
+
+  /* jaundice cause cards */
+  .cause-cards{
+    display:flex;
+    flex-wrap:wrap;
+    gap: .9rem;
+    margin: 1.2rem 0;
+  }
+  .cause-card{
+    flex: 1 1 220px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    overflow:hidden;
+  }
+  .cause-card h5{
+    margin:0;
+    background: var(--primary);
+    color:#fff;
+    padding:.5rem .7rem;
+    font-size:.9rem;
+  }
+  .cause-card div{
+    padding:.6rem .8rem;
+    font-size:.85rem;
+  }
+
+  /* SVG figure box */
+  .figure-box{
+    background:#fafafa;
+    border:1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1.2rem 0;
+    text-align:center;
+  }
+  .figure-box svg{ max-width:100%; height:auto; }
+  .figure-caption{
+    font-size: .8rem;
+    color:#555;
+    margin-top: .5rem;
+    text-align:left;
+  }
+
+  .porphyrin-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap: .8rem;
+    justify-content:center;
+    font-size:.78rem;
+    margin-top:.6rem;
+  }
+  .porphyrin-legend span{ display:flex; align-items:center; gap:.3rem; }
+  .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+
+  footer{
+    text-align:center;
+    padding: 2rem 1rem 3rem;
+    border-top: 2px solid var(--primary);
+    background: var(--primary-light);
+  }
+  footer p{ color: var(--primary-dark); font-weight:700; margin:0 0 1rem; }
+  #backToTop{
+    background: var(--primary);
+    color:#fff;
+    border:none;
+    padding: .6rem 1.4rem;
+    border-radius: 999px;
+    cursor:pointer;
+    font-size: .9rem;
+    font-family: inherit;
+    transition: background .2s;
+  }
+  #backToTop:hover{ background: var(--primary-dark); }
+
+  .kt-list{ list-style:none; padding:0; counter-reset: kt; }
+  .kt-list li{
+    counter-increment: kt;
+    background:#fff;
+    border:1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    border-radius:6px;
+    padding: .6rem .9rem .6rem 2.4rem;
+    margin-bottom: .6rem;
+    position:relative;
+    font-size:.93rem;
+  }
+  .kt-list li::before{
+    content: counter(kt);
+    position:absolute;
+    left:.7rem;
+    top:.55rem;
+    background: var(--primary);
+    color:#fff;
+    width:1.3rem;
+    height:1.3rem;
+    border-radius:50%;
+    font-size:.75rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+  }
+
+  @media (max-width: 1024px){
+    main{ padding: 1rem 1.2rem 3rem; }
+  }
+  @media (max-width: 768px){
+    header h1{ font-size: 1.4rem; }
+    nav ul{ gap:.15rem; padding:.5rem .6rem; }
+    nav a{ font-size:.78rem; padding:.35rem .6rem; }
+    h2{ font-size: 1.15rem; }
+    h3{ font-size: 1.02rem; }
+    table{ font-size: .8rem; min-width: 420px; }
+    .timeline{ padding-left: 2.2rem; }
+    .tl-step::before{ left: -2.2rem; width:1.6rem; height:1.6rem; font-size:.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第31章：紫質與膽色素</h1>
+  <p class="subtitle">Porphyrins &amp; Bile Pigments｜學習指南</p>
+</header>
+
+<nav id="mainNav">
+  <ul>
+    <li><a href="#importance">臨床意義</a></li>
+    <li><a href="#structure">紫質結構</a></li>
+    <li><a href="#synthesis">血基質生合成</a></li>
+    <li><a href="#porphyria">紫質症</a></li>
+    <li><a href="#catabolism">血基質分解</a></li>
+    <li><a href="#bilirubin">膽紅素代謝與黃疸</a></li>
+    <li><a href="#takeaways">重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ 1. 臨床意義 ============ -->
+<section id="importance">
+  <h2>生物醫學重要性（Biomedical Importance）</h2>
+  <p>紫質（Porphyrin，音譯「卟啉」）與膽色素（Bile Pigment）這兩個主題密切相關：<strong class="term">血基質（Heme）</strong>由紫質與鐵組成；而血基質分解後的產物，正是膽色素與鐵。理解紫質與血基質的生化反應，是認識各種<strong class="term">血基質蛋白（Hemoprotein）</strong>功能的基礎，也是理解<strong class="term">紫質症（Porphyria）</strong>——一群因紫質生合成路徑異常所引起的疾病——的關鍵。</p>
+  <p>臨床上更常見的情形是<strong class="term">黃疸（Jaundice）</strong>：血漿中膽紅素（Bilirubin）濃度過高所造成，原因可能是膽紅素生成過多，或是排除障礙。黃疸可見於多種疾病，從溶血性貧血、病毒性肝炎，到胰臟癌都可能發生。</p>
+
+  <div class="tip">
+    <strong>本章學習目標</strong>
+    <ul>
+      <li>寫出啟動血基質生合成的兩個兩性中間物（succinyl-CoA、glycine）之結構概念</li>
+      <li>指出肝臟血基質生合成中，速率限制步驟的關鍵酵素</li>
+      <li>說明紫質原（porphyrinogen）與紫質（porphyrin）雖同為四吡咯，為何一個無色、一個有色</li>
+      <li>掌握血基質生合成各步驟酵素與代謝物的細胞內位置（細胞質 vs. 粒線體）</li>
+      <li>概述各類紫質症的成因與臨床表現</li>
+      <li>說明血基質氧化酶與UDP-葡萄醣醛酸基轉移酶在血基質分解中的角色</li>
+      <li>定義黃疸、列舉常見病因，並說明如何判斷其生化機轉</li>
+      <li>說明臨床檢驗中「直接膽紅素」與「間接膽紅素」的生化意義</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 2. 紫質結構 ============ -->
+<section id="structure">
+  <h2>紫質的結構與特性（Porphyrins）</h2>
+
+  <h3>基本構造：四個吡咯環的環狀分子</h3>
+  <p><strong class="term">紫質（Porphyrin）</strong>是由四個<strong class="term">吡咯環（Pyrrole ring）</strong>，透過<strong class="term">甲炔橋（Methyne bridge，=HC—）</strong>連接而成的環狀化合物。四個吡咯環分別標示為 I、II、III、IV，連接的甲炔橋則標示為 α、β、γ、δ；吡咯環上共有 8 個可被不同側鏈取代的位置（編號 1–8）。</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="160" cy="130" r="95" fill="none" stroke="hsl(17,45%,70%)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <!-- 4 pyrrole rings -->
+      <circle cx="160" cy="55" r="26" fill="none" stroke="var(--primary,#8a4a2e)" stroke-width="3"/>
+      <circle cx="235" cy="130" r="26" fill="none" stroke="var(--primary,#8a4a2e)" stroke-width="3"/>
+      <circle cx="160" cy="205" r="26" fill="none" stroke="var(--primary,#8a4a2e)" stroke-width="3"/>
+      <circle cx="85" cy="130" r="26" fill="none" stroke="var(--primary,#8a4a2e)" stroke-width="3"/>
+      <text x="160" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#8a4a2e">I</text>
+      <text x="235" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#8a4a2e">II</text>
+      <text x="160" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#8a4a2e">III</text>
+      <text x="85" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#8a4a2e">IV</text>
+      <!-- methyne bridges -->
+      <line x1="178" y1="72" x2="217" y2="112" stroke="#333" stroke-width="2"/>
+      <text x="205" y="85" font-size="12" fill="#333">α</text>
+      <line x1="217" y1="148" x2="178" y2="188" stroke="#333" stroke-width="2"/>
+      <text x="205" y="180" font-size="12" fill="#333">β</text>
+      <line x1="142" y1="188" x2="103" y2="148" stroke="#333" stroke-width="2"/>
+      <text x="112" y="180" font-size="12" fill="#333">γ</text>
+      <line x1="103" y1="112" x2="142" y2="72" stroke="#333" stroke-width="2"/>
+      <text x="112" y="85" font-size="12" fill="#333">δ</text>
+      <text x="160" y="134" text-anchor="middle" font-size="11" fill="#777">N₄ 中心</text>
+    </svg>
+    <div class="figure-caption">圖 31-1 概念重現：紫質分子由 4 個吡咯環（I–IV）以 4 個甲炔橋（α、β、γ、δ）相連而成環狀結構，環上共有 8 個取代位置（原圖 C₂₀H₁₄N₄ 骨架）。</div>
+  </div>
+
+  <h3>與金屬離子形成複合物</h3>
+  <p>紫質可與金屬離子形成配位鍵，結合在四個吡咯環的氮原子上。例如血紅素中的<strong class="term">鐵紫質（Iron porphyrin）</strong>，以及植物光合色素<strong class="term">葉綠素（Chlorophyll）</strong>中的鎂紫質。血基質蛋白廣泛存在於生物體中，功能包括氧氣運送與儲存（血紅素、肌紅素）、電子傳遞（細胞色素 c、細胞色素 P450）等。</p>
+
+  <div class="callout">
+    <h4>Heme b 與 Heme c 的差異</h4>
+    <p>血基質主要有兩型：<strong class="term">Heme b</strong>（最常見）與 <strong class="term">Heme c</strong>。Heme c 是 heme b 上的乙烯基（vinyl group）經由半胱胺酸（Cys）殘基以硫醚鍵與蛋白質共價結合而成，因此 heme c 不容易與其脫輔基蛋白解離；heme b 則以非共價方式結合，較易脫離。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <caption>表 31-1　重要血基質蛋白質舉例</caption>
+      <thead><tr><th>蛋白質</th><th>功能</th></tr></thead>
+      <tbody>
+        <tr><td>血紅素（Hemoglobin）</td><td>血液中氧氣的運送</td></tr>
+        <tr><td>肌紅素（Myoglobin）</td><td>肌肉中氧氣的儲存</td></tr>
+        <tr><td>細胞色素 c（Cytochrome c）</td><td>參與電子傳遞鏈</td></tr>
+        <tr><td>細胞色素 P450（Cytochrome P450）</td><td>異生物質（xenobiotics）的羥化作用</td></tr>
+        <tr><td>觸酶（Catalase）</td><td>分解過氧化氫</td></tr>
+        <tr><td>色胺酸吡咯酶（Tryptophan pyrrolase）</td><td>氧化色胺酸</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 3. 血基質生合成 ============ -->
+<section id="synthesis">
+  <h2>血基質的生合成（Heme Biosynthesis）</h2>
+  <p>血基質生合成涉及<strong class="term">細胞質</strong>與<strong class="term">粒線體</strong>兩處反應，發生於幾乎所有含粒線體的哺乳動物細胞（成熟紅血球因無粒線體故不能合成）。約 85% 發生於<strong class="term">骨髓</strong>的紅血球前驅細胞，其餘大部分發生於<strong class="term">肝細胞</strong>。</p>
+
+  <div class="tip"><strong>速記提示：</strong>整個路徑共 8 個反應步驟，第 1 及第 6–8 步在<span class="tag mito">粒線體</span>進行，第 2–5 步在<span class="tag cyto">細胞質</span>進行——原料進粒線體開始，中段跑到細胞質加工，最後回到粒線體完成鑲鐵。</p>
+
+  <h4>第一步：粒線體內的起始反應（速率限制步驟）</h4>
+  <div class="timeline">
+    <div class="tl-step" data-n="1">
+      <span class="tag mito">粒線體</span><span class="tag enzyme">ALA 合成酶</span>
+      <p class="eq">Succinyl-CoA ＋ Glycine → δ-胺基酮戊酸（ALA）＋ CoA-SH ＋ CO₂</p>
+      <p>由<strong class="term">δ-胺基酮戊酸合成酶（ALA synthase, ALAS）</strong>催化，屬吡哆醛磷酸（PLP）依賴性反應。人類有兩種同功酶：<strong>ALAS1</strong>（全身組織普遍表現）與 <strong>ALAS2</strong>（僅表現於紅血球前驅細胞）。此步驟是肝臟紫質生合成的<strong class="term">速率限制步驟（Rate-limiting step）</strong>。</p>
+    </div>
+  </div>
+
+  <h4>第二步：細胞質階段反應</h4>
+  <div class="timeline">
+    <div class="tl-step" data-n="2">
+      <span class="tag cyto">細胞質</span><span class="tag enzyme">ALA 去水酶</span>
+      <p class="eq">2 ALA → 卟膽色素原（Porphobilinogen）＋ 2 H₂O</p>
+      <p>由鋅金屬蛋白 <strong class="term">ALA 去水酶（ALA dehydratase）</strong>催化，此酵素對<strong>鉛（lead）</strong>的抑制特別敏感，是鉛中毒的重要作用點。</p>
+    </div>
+    <div class="tl-step" data-n="3">
+      <span class="tag cyto">細胞質</span><span class="tag enzyme">羥甲基膽色素合成酶</span>
+      <p class="eq">4 卟膽色素原 ＋ H₂O → 羥甲基膽色素烷（Hydroxymethylbilane）＋ 4 NH₃</p>
+      <p>又稱 uroporphyrinogen I synthase，4 個卟膽色素原分子以頭尾相接方式縮合，形成直鏈四吡咯。</p>
+    </div>
+    <div class="tl-step" data-n="4">
+      <span class="tag cyto">細胞質</span><span class="tag enzyme">尿紫質原 III 合成酶</span>
+      <p class="eq">羥甲基膽色素烷 → 尿紫質原 III（Uroporphyrinogen III）＋ H₂O</p>
+      <p>正常情況下絕大多數環化產物為 <strong>III 型異構物</strong>；若無此酵素，羥甲基膽色素烷會自發環化為 <strong>I 型異構物</strong>（在某些紫質症中過量產生）。由於環間以<strong class="term">亞甲基（—CH₂—）</strong>而非甲炔橋相連，雙鍵未形成共軛系統，因此紫質原是<strong>無色</strong>的（詳見下節）。</p>
+    </div>
+    <div class="tl-step" data-n="5">
+      <span class="tag cyto">細胞質</span><span class="tag enzyme">尿紫質原去羧酶</span>
+      <p class="eq">尿紫質原 III → 糞紫質原 III（Coproporphyrinogen III）＋ 4 CO₂</p>
+      <p>4 個乙酸基（acetate）去羧基化為甲基（methyl）。此酵素也可將 I 型尿紫質原轉為 I 型糞紫質原。</p>
+    </div>
+  </div>
+
+  <h4>第三步：粒線體終末反應</h4>
+  <div class="timeline">
+    <div class="tl-step" data-n="6">
+      <span class="tag mito">粒線體</span><span class="tag enzyme">糞紫質原氧化酶</span>
+      <p class="eq">糞紫質原 III ＋ O₂ ＋ 2H⁺ → 原紫質原 III（Protoporphyrinogen III）＋ 2CO₂ ＋ 2H₂O</p>
+      <p>此酵素僅對 III 型受質有專一性，故人體通常不產生 I 型原紫質。</p>
+    </div>
+    <div class="tl-step" data-n="7">
+      <span class="tag mito">粒線體</span><span class="tag enzyme">原紫質原氧化酶</span>
+      <p class="eq">原紫質原 III ＋ 3O₂ → 原紫質 III（Protoporphyrin III）＋ 3H₂O₂</p>
+    </div>
+    <div class="tl-step" data-n="8">
+      <span class="tag mito">粒線體</span><span class="tag enzyme">亞鐵螯合酶（Ferrochelatase）</span>
+      <p class="eq">原紫質 III ＋ Fe²⁺ → 血基質（Heme）＋ 2H⁺</p>
+      <p>最終步驟，將亞鐵離子鑲入原紫質環中，生成血基質。此酵素又稱 heme synthase。</p>
+    </div>
+  </div>
+
+  <h3>速率限制步驟與調控機制</h3>
+  <div class="clinical">
+    <h4>ALAS1 是肝臟血基質生合成的關鍵調控酵素</h4>
+    <p>ALAS1 半衰期短，是典型速率限制酵素的特徵。<strong class="term">血基質</strong>經由 Erg-1 脫抑制蛋白（aporepressor）與 NAB 共抑制蛋白，對 ALAS1 的合成產生<strong>負回饋調控（Negative feedback）</strong>：血基質不足時 ALAS1 合成大增，血基質充足時則被抑制。許多藥物（如苯巴比妥）會誘導細胞色素 P450 生合成，消耗細胞內血基質池，進而誘導 ALAS1 合成，使血基質生合成速率上升以因應代謝需求。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="compare-table">
+      <caption>本章易混淆概念比較①：ALAS1 與 ALAS2</caption>
+      <thead><tr><th>A：ALAS1</th><th>B：ALAS2</th><th>差異重點</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>全身組織普遍表現</td>
+          <td>僅表現於紅血球前驅細胞</td>
+          <td>表現範圍不同</td>
+        </tr>
+        <tr>
+          <td>受血基質負回饋調控；藥物誘導 P450 會間接誘導其合成</td>
+          <td>不受血基質回饋調控，也不受誘導 P450 之藥物影響</td>
+          <td>調控機制不同，是鑑別題常考點</td>
+        </tr>
+        <tr>
+          <td>基因缺陷目前尚無已知病例（可能致命）</td>
+          <td>基因缺陷導致 X 染色體性聯鐵胚細胞性貧血</td>
+          <td>臨床後果不同：ALAS2 缺陷是「貧血」而非紫質症</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>紫質的呈色與螢光特性</h3>
+  <p>紫質原（porphyrinogens）雖與紫質（porphyrins）同為四吡咯，性質卻大不相同：紫質原<strong>無色</strong>，但很容易自動氧化成<strong>有色</strong>的紫質。紫質分子中連接吡咯環的<strong class="term">共軛雙鍵系統</strong>（紫質原所缺乏）造就了其特殊的吸收與螢光光譜。</p>
+
+  <div class="table-wrap">
+    <table class="compare-table">
+      <caption>本章易混淆概念比較②：紫質原（Porphyrinogen）與紫質（Porphyrin）</caption>
+      <thead><tr><th>A：紫質原 Porphyrinogen</th><th>B：紫質 Porphyrin</th><th>差異重點</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>吡咯環間以亞甲基（—CH₂—）相連</td>
+          <td>吡咯環間以甲炔橋（=HC—）相連</td>
+          <td>鍵結方式不同，決定是否形成共軛系統</td>
+        </tr>
+        <tr>
+          <td>無共軛雙鍵系統 → <strong>無色</strong></td>
+          <td>具共軛雙鍵系統 → <strong>有色</strong>，可發螢光</td>
+          <td>是否呈色 / 螢光的根本原因</td>
+        </tr>
+        <tr>
+          <td>生合成路徑中的中間產物（如尿紫質原、糞紫質原）</td>
+          <td>紫質原自動氧化後的產物；亦是致光敏性物質</td>
+          <td>紫質症皮膚光敏症狀即源於紫質原氧化為紫質</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>所有紫質在波長<strong>接近 400 nm</strong>附近皆有一明顯尖銳的吸收帶，稱為<strong class="term">蘇瑞帶（Soret band）</strong>，是紫質類分子共同的鑑別特徵。紫質溶於強酸或有機溶劑並以紫外光照射時，會發出強烈的紅色螢光，可用於偵測微量游離紫質；此光動力學特性也被應用於<strong class="term">癌症光療（Cancer phototherapy）</strong>——因腫瘤細胞攝取紫質量較正常組織多，給予患者紫質類化合物（如血鐵紫質）後以氬雷射（argon laser）照射腫瘤,可產生細胞毒殺作用。</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="180" x2="360" y2="180" stroke="#333" stroke-width="1.5"/>
+      <line x1="50" y1="20" x2="50" y2="180" stroke="#333" stroke-width="1.5"/>
+      <text x="200" y="205" text-anchor="middle" font-size="11" fill="#333">波長 (nm)</text>
+      <text x="20" y="100" text-anchor="middle" font-size="11" fill="#333" transform="rotate(-90 20,100)">Log 吸光值</text>
+      <!-- x labels -->
+      <text x="70" y="195" font-size="9" fill="#555">300</text>
+      <text x="130" y="195" font-size="9" fill="#555">400</text>
+      <text x="190" y="195" font-size="9" fill="#555">500</text>
+      <text x="230" y="195" font-size="9" fill="#555">550</text>
+      <text x="270" y="195" font-size="9" fill="#555">600</text>
+      <text x="340" y="195" font-size="9" fill="#555">700</text>
+      <!-- data polyline: (300,1.8)(400,4.8)(500,1.5)(550,2.5)(600,2.0)(700,1.2), scaled -->
+      <polyline points="70,140 130,30 190,150 230,105 270,120 340,155"
+                fill="none" stroke="var(--primary,#8a4a2e)" stroke-width="2.5"/>
+      <circle cx="130" cy="30" r="4" fill="#b64545"/>
+      <text x="140" y="25" font-size="10" fill="#b64545" font-weight="700">Soret band</text>
+    </svg>
+    <div class="figure-caption">圖 31-9 概念重現：血鐵紫質（hematoporphyrin）稀釋液（5% HCl）之吸收光譜，於 400 nm 附近出現顯著尖峰（Soret band）。</div>
+  </div>
+</section>
+
+<!-- ============ 4. 紫質症 ============ -->
+<section id="porphyria">
+  <h2>血基質生合成障礙——紫質症（Porphyrias）</h2>
+
+  <h3>後天性缺陷：鉛中毒</h3>
+  <p>鉛可與必要的硫醇基（thiol group）結合，抑制<strong class="term">亞鐵螯合酶</strong>與<strong class="term">ALA 去水酶</strong>。臨床表現包括紅血球原紫質升高、尿液 ALA 與糞紫質升高。</p>
+
+  <div class="tip">
+    <strong>血基質與膽紅素代謝的遺傳缺陷，與尿素合成障礙（第28章）共通的五大特徵：</strong>
+    <ol>
+      <li>不同基因突變（同一酵素或連續反應的酵素）可造成相似或相同的臨床表徵</li>
+      <li>理性治療需先了解正常與異常個體的酵素反應生化機轉</li>
+      <li>代謝阻斷點前堆積的中間產物，可作為篩檢測試的依據</li>
+      <li>確定診斷需定量測定可疑缺陷酵素的活性</li>
+      <li>比對突變基因與野生型基因序列，可鑑定致病突變位點</li>
+    </ol>
+  </div>
+
+  <h3>紫質症總覽</h3>
+  <p>紫質症的症狀來自於阻斷點<strong>之後</strong>中間產物的<strong>缺乏</strong>，或阻斷點<strong>之前</strong>代謝物的<strong>堆積</strong>。除 ALAS1（可能因致命而未見已知缺陷）與 ALAS2（缺陷造成貧血而非紫質症）外，反應 2–8 的酵素缺陷各對應一種紫質症。</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption>表 31-2　主要紫質症整理（依原文精簡）</caption>
+      <thead><tr><th>缺陷酵素（反應編號）</th><th>疾病名稱與分類</th><th>主要症狀</th><th>檢驗特徵</th></tr></thead>
+      <tbody>
+        <tr><td>1. ALA 合成酶 2（ALAS2）</td><td>X 性聯鐵胚細胞性貧血（紅血球生成性；非紫質症）</td><td>貧血</td><td>紅血球數與血色素下降</td></tr>
+        <tr><td>2. ALA 去水酶</td><td>ALA 去水酶缺乏症（肝性，罕見）</td><td>腹痛、神經精神症狀</td><td>尿 ALA、糞紫質 III 升高</td></tr>
+        <tr><td>3. 羥甲基膽色素合成酶</td><td>急性間歇性紫質症（肝性）</td><td>腹痛、神經精神症狀</td><td>尿 ALA、卟膽色素原升高</td></tr>
+        <tr><td>4. 尿紫質原 III 合成酶</td><td>先天性紅血球生成性紫質症</td><td>光敏性</td><td>尿液、糞便、紅血球尿紫質 I 升高</td></tr>
+        <tr><td>5. 尿紫質原去羧酶</td><td>晚發性皮膚型紫質症</td><td>光敏性</td><td>尿尿紫質 I 升高</td></tr>
+        <tr><td>6. 糞紫質原氧化酶</td><td>遺傳性糞紫質症（肝性）</td><td>光敏性、腹痛、神經精神症狀</td><td>尿 ALA、卟膽色素原、糞紫質 III；糞便糞紫質 III 升高</td></tr>
+        <tr><td>7. 原紫質原氧化酶</td><td>雜色紫質症（肝性）</td><td>光敏性、腹痛、神經精神症狀</td><td>尿 ALA、卟膽色素原、糞紫質 III；糞便原紫質 IX 升高</td></tr>
+        <tr><td>8. 亞鐵螯合酶</td><td>原紫質症（紅血球生成性）</td><td>光敏性</td><td>糞便與紅血球原紫質 IX 升高</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="figure-caption">註：反應 3、5、8 為最常見之紫質症；反應 2 極為罕見。多數紫質症以體染色體顯性遺傳，先天性紅血球生成性紫質症則為隱性遺傳。</p>
+
+  <h3>症狀的生化機轉</h3>
+  <div class="branch-wrap">
+    <div class="branch-root">基因突變 → 血基質生合成酵素異常</div>
+    <div class="branch-arrow">↓</div>
+    <div class="branch-split">
+      <div class="branch-col">
+        <div class="branch-node">ALA、卟膽色素原堆積 / 血基質減少（組織及體液中）</div>
+        <div class="branch-arrow">↓</div>
+        <div class="branch-node" style="border-left-color:#b64545;">神經精神症狀（腹痛、焦躁等）</div>
+      </div>
+      <div class="branch-col">
+        <div class="branch-node">紫質原堆積於皮膚與組織</div>
+        <div class="branch-arrow">↓</div>
+        <div class="branch-node">紫質原自發氧化為紫質</div>
+        <div class="branch-arrow">↓</div>
+        <div class="branch-node" style="border-left-color:#b64545;">光敏性（皮膚受 ~400nm 可見光激發受損）</div>
+      </div>
+    </div>
+  </div>
+  <p class="figure-caption">圖 31-10 概念重現：紫質症的兩大症狀機轉——神經精神症狀源於 ALA/卟膽色素原堆積；光敏性則源於紫質原氧化為有色紫質後，經光激發產生自由基傷害皮膚組織。</p>
+
+  <h3>個別紫質症舉例</h3>
+  <ul>
+    <li><strong class="term">先天性紅血球生成性紫質症</strong>：缺陷酵素為尿紫質原 III 合成酶；隱性遺傳；嚴重光敏與毀容曾被聯想為「狼人」傳說原型。</li>
+    <li><strong class="term">急性間歇性紫質症</strong>：缺陷酵素為羥甲基膽色素合成酶；ALA 與卟膽色素原於體內堆積。</li>
+    <li><strong>後段酵素缺陷</strong>：路徑更下游的阻斷會造成相應紫質原的堆積（見表 31-2）。</li>
+  </ul>
+
+  <h3>紫質症的分類方式</h3>
+  <p>依主要受影響器官，紫質症可分為<strong class="term">紅血球生成性（Erythropoietic）</strong>（骨髓為主）與<strong class="term">肝性（Hepatic）</strong>（肝臟為主）；也可依臨床特徵分為<strong class="term">急性型</strong>與<strong class="term">皮膚型</strong>。診斷需綜合病史、家族史、理學檢查與實驗室檢驗（見表 31-2）。</p>
+
+  <h3>藥物誘發與治療</h3>
+  <p>某些藥物（如巴比妥類、灰黴素）會誘導細胞色素 P450 生成，消耗血基質，進而誘發 ALAS1 去抑制，使有害的血基質前驅物大量增加，可誘發紫質症急性發作。</p>
+  <div class="callout">
+    <h4>紫質症的對症治療</h4>
+    <ul>
+      <li>避免使用會誘導細胞色素 P450 的藥物</li>
+      <li>攝取大量碳水化合物</li>
+      <li>給予血紅素（hematin）以抑制 ALAS1 合成，減少有害前驅物產生</li>
+      <li>光敏症狀者可使用防曬與 β-胡蘿蔔素，減少自由基生成</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 5. 血基質分解 ============ -->
+<section id="catabolism">
+  <h2>血基質的分解代謝與膽紅素生成</h2>
+  <p>人體成人每日約破壞 2000 億個紅血球，一位 70 公斤成人每日更新約 <strong>6 公克血紅素</strong>。<strong class="term">球蛋白（globin）</strong>降解為胺基酸，<strong class="term">鐵</strong>進入鐵池被再利用，無鐵的<strong class="term">紫質</strong>部分則主要在肝、脾、骨髓的網狀內皮細胞中被分解。</p>
+
+  <h3>血基質氧化酶系統</h3>
+  <p>血基質分解發生於細胞的<strong>微粒體（microsomal）</strong>部分，由<strong class="term">血基質氧化酶（Heme oxygenase）</strong>催化，血基質本身既是受質也是輔因子。此反應消耗 3 分子 O₂ 及 7 個電子（由 NADPH–細胞色素 P450 還原酶提供）：</p>
+  <div class="flow-row">
+    <div class="flow-node">Fe³⁺-血基質<br>（3O₂ + 7e⁻）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">膽綠素（biliverdin）<br>+ CO + Fe³⁺</div>
+  </div>
+  <p>值得注意的是，反應中釋出的<strong>一氧化碳（CO）</strong>雖對血基質有高親和力，卻不會嚴重抑制血基質氧化酶本身。鳥類與兩生類直接排泄綠色的膽綠素；人類則進一步由<strong class="term">膽綠素還原酶（Biliverdin reductase）</strong>將膽綠素中央的亞甲基橋還原為甲基，形成黃色的<strong class="term">膽紅素（Bilirubin）</strong>：</p>
+  <div class="flow-row">
+    <div class="flow-node">膽綠素 + NADPH + H⁺</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">膽紅素 + NADP⁺</div>
+  </div>
+  <p class="figure-caption">圖 31-11 概念重現：Fe³⁺-血基質 →（血基質氧化酶系統）→ 膽綠素 →（膽綠素還原酶＋NADPH）→ 膽紅素。</p>
+  <p>每公克血紅素約產生 35 毫克膽紅素，成人每日約形成 <strong>250–350 毫克膽紅素</strong>，主要來自血紅素分解，亦有部分來自無效紅血球生成及其他血基質蛋白的分解。血腫由紫紅色逐漸轉為黃色，即是血基質轉為膽紅素的視覺化過程。</p>
+
+  <h3>膽紅素與白蛋白的運輸</h3>
+  <p>膽紅素在水中溶解度很低，須與<strong class="term">血清白蛋白</strong>結合以運送至肝臟。白蛋白具有高親和力與低親和力兩類結合位；高親和力位可結合約每 100 mL 血漿 25 mg 膽紅素。某些抗生素及藥物可與膽紅素競爭高親和力結合位，使膽紅素游離進入組織。</p>
+</section>
+
+<!-- ============ 6. 膽紅素代謝與黃疸 ============ -->
+<section id="bilirubin">
+  <h2>膽紅素代謝與黃疸（Bilirubin Metabolism &amp; Jaundice）</h2>
+
+  <h3>肝臟中膽紅素的三階段代謝</h3>
+  <p>肝臟對膽紅素的處理分為三個階段：<strong>攝取（uptake）→ 結合（conjugation）→ 分泌（secretion）</strong>。</p>
+
+  <div class="timeline">
+    <div class="tl-step" data-n="①">
+      <strong class="term">攝取</strong>
+      <p>膽紅素自白蛋白脫離，經肝竇狀隙表面由高容量、可飽和的促進性運輸系統攝入肝細胞。進入細胞後與細胞質蛋白（如麩胱甘肽 S-轉移酶，舊稱 ligandin）結合，避免逆向流回血液。</p>
+    </div>
+    <div class="tl-step" data-n="②">
+      <strong class="term">結合（葡萄醣醛酸化）</strong>
+      <p class="eq">膽紅素 + UDP-葡萄醣醛酸 → 膽紅素單葡萄醣醛酸苷 + UDP</p>
+      <p class="eq">膽紅素單葡萄醣醛酸苷 + UDP-葡萄醣醛酸 → 膽紅素雙葡萄醣醛酸苷 + UDP</p>
+      <p>由內質網上的<strong class="term">膽紅素 UDP-葡萄醣醛酸基轉移酶</strong>催化，將非極性的膽紅素轉為水溶性更佳的形式。臨床上此雙葡萄醣醛酸苷即為「直接反應型」膽紅素。</p>
+      <p><span class="tag" style="background:#b64545;">相關疾病</span> 新生兒黃疸、Crigler-Najjar 症候群、Gilbert 症候群、毒性黃疸</p>
+    </div>
+    <div class="tl-step" data-n="③">
+      <strong class="term">分泌</strong>
+      <p>經由膽小管膜上的<strong class="term">多重特異性有機陰離子運輸蛋白（MOAT）</strong>（ATP 結合匣運輸蛋白家族成員）以主動運輸方式分泌入膽汁，此步驟可能是整個肝臟膽紅素代謝的<strong class="term">速率限制步驟</strong>。</p>
+      <p><span class="tag" style="background:#b64545;">相關疾病</span> Dubin-Johnson 症候群</p>
+    </div>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="65" r="10" fill="none" stroke="#333" stroke-width="1.5"/>
+      <line x1="120" y1="65" x2="80" y2="45" stroke="#333" stroke-width="1.5"/>
+      <line x1="120" y1="65" x2="80" y2="85" stroke="#333" stroke-width="1.5"/>
+      <text x="40" y="35" font-size="9" fill="#555">膽紅素核心</text>
+      <line x1="120" y1="65" x2="170" y2="65" stroke="var(--primary,#8a4a2e)" stroke-width="2"/>
+      <rect x="170" y="50" width="55" height="30" rx="4" fill="var(--primary-light,#f2e2da)" stroke="var(--primary,#8a4a2e)"/>
+      <text x="197" y="69" text-anchor="middle" font-size="9" fill="#333">葡萄醣醛酸</text>
+      <line x1="80" y1="45" x2="30" y2="20" stroke="var(--primary,#8a4a2e)" stroke-width="2"/>
+      <rect x="0" y="0" width="55" height="30" rx="4" fill="var(--primary-light,#f2e2da)" stroke="var(--primary,#8a4a2e)"/>
+      <text x="27" y="19" text-anchor="middle" font-size="9" fill="#333">葡萄醣醛酸</text>
+      <text x="150" y="115" text-anchor="middle" font-size="10" fill="#555">兩個丙酸側鏈分別以酯鍵接上葡萄醣醛酸</text>
+    </svg>
+    <div class="figure-caption">圖 31-12 概念重現：膽紅素雙葡萄醣醛酸苷——兩個葡萄醣醛酸基以酯鍵接於膽紅素的兩個丙酸側鏈上，臨床稱為「直接反應型」膽紅素。</div>
+  </div>
+
+  <h3>腸道細菌將結合型膽紅素還原為尿膽素原</h3>
+  <p>結合型膽紅素到達迴腸末端與大腸後，經細菌的<strong class="term">β-葡萄醣醛酸苷酶</strong>移除葡萄醣醛酸基，再經腸道菌叢還原，形成一群無色四吡咯，稱為<strong class="term">尿膽素原（Urobilinogen）</strong>。部分尿膽素原在迴腸末端與大腸被再吸收，經<strong class="term">腸肝尿膽素原循環（enterohepatic urobilinogen cycle）</strong>再排出；異常狀況下（如膽色素生成過多或肝病干擾此循環）可出現於尿液中。大部分尿膽素原於結腸中氧化為有色的<strong class="term">尿膽素（urobilins）</strong>並隨糞便排出——糞便靜置於空氣中顏色變深，即是尿膽素原持續氧化為尿膽素所致。</p>
+
+  <h3>血清膽紅素的測定：直接與間接膽紅素</h3>
+  <p>臨床上以比色法測定膽紅素，利用膽紅素與重氮化磺胺酸反應生成的紫紅色呈色反應。</p>
+  <div class="table-wrap">
+    <table class="compare-table">
+      <caption>本章易混淆概念比較③：直接膽紅素與間接膽紅素</caption>
+      <thead><tr><th>A：直接膽紅素（Direct）</th><th>B：間接膽紅素（Indirect）</th><th>差異重點</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>不加甲醇時測得的數值</td>
+          <td>= 總膽紅素 − 直接膽紅素（需加甲醇測總膽紅素後計算）</td>
+          <td>測定方式不同：直接可直接測得，間接為計算值</td>
+        </tr>
+        <tr>
+          <td>即為<strong class="term">結合型膽紅素</strong>（膽紅素葡萄醣醛酸苷）</td>
+          <td>即為<strong class="term">未結合型膽紅素</strong></td>
+          <td>對應之生化型態不同</td>
+        </tr>
+        <tr>
+          <td>水溶性佳，可經腎臟排入尿液（choluria）</td>
+          <td>疏水性，可通過血腦障壁，過量恐致核黃疸</td>
+          <td>臨床意義不同——是判斷黃疸類型的關鍵</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>高膽紅素血症與黃疸的機轉</h3>
+  <p><strong class="term">高膽紅素血症（Hyperbilirubinemia）</strong>指血中膽紅素超過 1 mg/dL（17 μmol/L），可能源於膽紅素生成量超過肝臟代謝能力，或肝功能受損無法正常排除，亦可能因膽道阻塞造成排除障礙。當血中膽紅素濃度達到 2–2.5 mg/dL 時會擴散入組織，使組織泛黃，稱為<strong class="term">黃疸（Jaundice / Icterus）</strong>。</p>
+  <ul>
+    <li><strong class="term">貯留性高膽紅素血症（Retention）</strong>：膽紅素生成過多所致。</li>
+    <li><strong class="term">逆流性高膽紅素血症（Regurgitation）</strong>：因膽道阻塞導致膽紅素逆流入血。</li>
+  </ul>
+  <p>由於疏水性，只有<strong>未結合型（間接）膽紅素</strong>能通過血腦障壁進入中樞神經系統，過量時造成<strong class="term">核黃疸（Kernicterus）</strong>腦病變；只有<strong>水溶性的結合型（直接）膽紅素</strong>能出現於尿液，故<strong class="term">濁尿性黃疸（choluric jaundice）</strong>僅發生於逆流性高膽紅素血症，<strong class="term">非濁尿性黃疸（acholuric jaundice）</strong>則出現於未結合型膽紅素過量時。</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption>表 31-3　未結合型與結合型高膽紅素血症的常見原因</caption>
+      <thead><tr><th>未結合型（Unconjugated）</th><th>結合型（Conjugated）</th></tr></thead>
+      <tbody>
+        <tr><td>溶血性貧血</td><td>膽道阻塞</td></tr>
+        <tr><td>新生兒「生理性黃疸」</td><td>Dubin-Johnson 症候群</td></tr>
+        <tr><td>Crigler-Najjar 症候群（I、II 型）</td><td>Rotor 症候群</td></tr>
+        <tr><td>Gilbert 症候群</td><td>肝臟疾病（如各類肝炎）</td></tr>
+        <tr><td>毒性高膽紅素血症</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>即使溶血程度嚴重，健康肝臟因代謝能力強，高膽紅素血症通常仍屬輕度（&lt; 4 mg/dL）。</p>
+
+  <h3>膽紅素代謝障礙個論</h3>
+  <h4>新生兒生理性黃疸</h4>
+  <p>因加速溶血及肝臟攝取、結合、分泌系統尚未成熟所致的未結合型高膽紅素血症，屬暫時性。此時膽紅素-葡萄醣醛酸基轉移酶活性及 UDP-葡萄醣醛酸合成皆偏低。若未結合型膽紅素超過白蛋白緊密結合的容量（20–25 mg/dL），可穿透血腦障壁，若未治療可能導致<strong class="term">核黃疸性腦病變</strong>而造成智能障礙。治療可用藍光照射（phototherapy）促進膽紅素轉為可經膽汁排出的衍生物，亦可給予苯巴比妥。</p>
+
+  <h4>膽紅素 UDP-葡萄醣醛酸基轉移酶缺陷</h4>
+  <ul>
+    <li><strong class="term">Gilbert 症候群</strong>：保留約 30% 酵素活性，屬良性病症。</li>
+    <li><strong class="term">Crigler-Najjar 症候群 I 型</strong>：完全缺乏酵素活性，血清膽紅素可超過 20 mg/dL，常伴隨腦損傷；光療效果有限，苯巴比妥無效，多數在出生 15 個月內死亡。</li>
+    <li><strong class="term">Crigler-Najjar 症候群 II 型</strong>：保留部分酵素活性，病情較輕，血清膽紅素通常不超過 20 mg/dL，可用大劑量苯巴比妥治療。</li>
+  </ul>
+
+  <h4>毒性高膽紅素血症</h4>
+  <p>由氯仿、砷凡納明、四氯化碳、乙醯胺酚、肝炎病毒、肝硬化或鵝膏蕈中毒等因子造成肝實質細胞受損，影響膽紅素結合作用所致的未結合型高膽紅素血症。</p>
+
+  <h3>膽道阻塞——結合型高膽紅素血症最常見的原因</h3>
+  <p>膽道阻塞（如<strong class="term">膽結石</strong>或<strong class="term">胰頭癌</strong>）最常導致結合型高膽紅素血症。無法排出的膽紅素雙葡萄醣醛酸苷逆流入肝靜脈及淋巴系統，結合型膽紅素出現於血液及尿液中（濁尿性黃疸），糞便則呈現淺色。<strong class="term">膽汁鬱積性黃疸（Cholestatic jaundice）</strong>一詞涵蓋所有肝外阻塞性黃疸，以及因受損肝細胞造成肝內膽小管微阻塞（如感染性肝炎）所致的結合型高膽紅素血症。</p>
+
+  <div class="cause-cards">
+    <div class="cause-card">
+      <h5>肝前性（Prehepatic）</h5>
+      <div>血流中事件，主要為各類<strong>溶血性貧血</strong>。</div>
+    </div>
+    <div class="cause-card">
+      <h5>肝性（Hepatic）</h5>
+      <div>肝炎或其他肝臟疾病（如癌症）。</div>
+    </div>
+    <div class="cause-card">
+      <h5>肝後性（Posthepatic）</h5>
+      <div>膽道系統事件，主要為<strong>膽結石</strong>阻塞總膽管或<strong>胰頭癌</strong>。</div>
+    </div>
+  </div>
+  <p class="figure-caption">圖 31-14 概念重現：黃疸依發生位置分為肝前性、肝性、肝後性三大類。</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption>表 31-4　正常人與三類黃疸病人的實驗室檢驗結果</caption>
+      <thead><tr><th>狀況</th><th>血清膽紅素</th><th>尿尿膽素原</th><th>尿膽紅素</th><th>糞便尿膽素原</th></tr></thead>
+      <tbody>
+        <tr><td>正常</td><td>直接 0.1–0.4 mg/dL；間接 0.2–0.7 mg/dL</td><td>0–4 mg/24h</td><td>無</td><td>40–280 mg/24h</td></tr>
+        <tr><td>溶血性貧血</td><td>間接↑</td><td>增加</td><td>無</td><td>增加</td></tr>
+        <tr><td>肝炎</td><td>直接與間接↑</td><td>若有微阻塞則下降</td><td>若有微阻塞則出現</td><td>下降</td></tr>
+        <tr><td>阻塞性黃疸</td><td>直接↑</td><td>無</td><td>出現</td><td>微量至無</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>其他相關的臨床症候群</h3>
+  <div class="callout">
+    <h4>Dubin-Johnson 症候群</h4>
+    <p>良性體染色體隱性遺傳疾病，因參與結合型膽紅素<strong>分泌</strong>入膽汁的蛋白質基因突變，造成結合型高膽紅素血症，可於兒童或成年期出現。</p>
+  </div>
+  <div class="callout">
+    <h4>δ-膽紅素（δ-bilirubin）</h4>
+    <p>當血漿中結合型膽紅素持續偏高，部分會與白蛋白產生<strong>共價結合</strong>，稱為 δ-膽紅素，其血漿半衰期較一般結合型膽紅素長，即使循環中結合型膽紅素已恢復正常，患者仍可能持續出現黃疸外觀。</p>
+  </div>
+  <p>完全性膽道阻塞時，膽紅素無法進入腸道轉為尿膽素原，故尿液中不會出現尿膽素原；尿中出現結合型膽紅素且無尿膽素原，提示肝內或肝後阻塞性黃疸。反之，溶血性黃疸時膽紅素生成增加，尿膽素原大量出現於尿中，但膽紅素通常不會出現於尿中——「尿膽素原增加且膽紅素缺席」提示溶血性黃疸。任何原因造成的血液破壞增加，都會使尿中尿膽素原上升。</p>
+</section>
+
+<!-- ============ 7. 重點回顧 ============ -->
+<section id="takeaways">
+  <h2>Key Takeaways</h2>
+  <ul class="kt-list">
+    <li>血基質（heme）是鐵-紫質複合物；紫質由 4 個吡咯環經甲炔橋相連而成，8 個側鏈取代基依特定順序排列於環上。</li>
+    <li>血基質生合成共 8 步酵素反應：步驟 1、6、7、8 在<strong>粒線體</strong>，步驟 2–5 在<strong>細胞質</strong>。</li>
+    <li>速率限制步驟為 succinyl-CoA ＋ glycine → ALA，由 <strong>ALAS1</strong>（肝臟調控酵素）催化，受血基質負回饋抑制；ALAS2 不受此調控。</li>
+    <li>紫質原（porphyrinogen）因缺乏共軛雙鍵而<strong>無色</strong>；自動氧化為紫質（porphyrin）後因共軛系統而<strong>有色且具螢光</strong>，所有紫質在 ~400 nm 皆有 Soret band。</li>
+    <li>反應 2–8 中任一酵素的遺傳缺陷會導致對應的紫質症，症狀源於中間產物堆積（神經精神症狀）或紫質原氧化堆積（光敏性）。</li>
+    <li>血基質分解：<strong>血基質氧化酶</strong>將血基質轉為膽綠素（釋出 CO），<strong>膽綠素還原酶</strong>再將膽綠素還原為膽紅素。</li>
+    <li>肝臟處理膽紅素分三階段：攝取 → 結合（UDP-葡萄醣醛酸基轉移酶，形成雙葡萄醣醛酸苷）→ 分泌（MOAT，為速率限制步驟）。</li>
+    <li>「直接膽紅素」＝結合型（不加甲醇可測得）；「間接膽紅素」＝未結合型（總膽紅素－直接膽紅素）。未結合型可通過血腦障壁（核黃疸風險），結合型可經尿排出（濁尿）。</li>
+    <li>黃疸依部位分為肝前性（如溶血）、肝性（如肝炎）、肝後性（如膽結石、胰頭癌），可用血清膽紅素、尿尿膽素原/膽紅素、糞便尿膽素原等檢驗鑑別（表 31-4）。</li>
+    <li>常見膽紅素代謝障礙：新生兒生理性黃疸、Gilbert 症候群（輕度）、Crigler-Najjar I／II 型（UDP-GT 缺陷程度不同）、Dubin-Johnson 症候群（分泌缺陷）。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>第31章：紫質與膽色素｜學習指南</p>
+  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">回到頂端 ↑</button>
+</footer>
+
+<script>
+  (function(){
+    var sections = document.querySelectorAll('main section[id]');
+    var navLinks = document.querySelectorAll('nav a');
+
+    function onScroll(){
+      var scrollPos = window.scrollY + document.querySelector('nav').offsetHeight + 20;
+      var currentId = sections[0] ? sections[0].id : null;
+      sections.forEach(function(sec){
+        if(sec.offsetTop <= scrollPos){
+          currentId = sec.id;
+        }
+      });
+      navLinks.forEach(function(link){
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>

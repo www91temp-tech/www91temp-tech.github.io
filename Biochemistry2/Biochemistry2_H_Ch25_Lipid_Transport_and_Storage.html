@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第25章：脂質運輸與儲存｜學習指南</title>
+<style>
+  :root{
+    --primary: hsl(95, 45%, 35%);
+    --primary-light: hsl(95, 45%, 92%);
+    --text: #1a1a1a;
+    --border: hsl(95, 45%, 80%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    line-height:1.8;
+    background:#fdfdfb;
+  }
+  header{
+    background:var(--primary);
+    color:#fff;
+    padding:2.2rem 1rem 1.6rem;
+    text-align:center;
+  }
+  header h1{
+    margin:0;
+    font-size:1.6rem;
+    letter-spacing:0.05em;
+  }
+  header p.subtitle{
+    margin:0.6rem 0 0;
+    font-size:0.95rem;
+    opacity:0.9;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:2px solid var(--border);
+    display:flex;
+    justify-content:center;
+    overflow-x:auto;
+    white-space:nowrap;
+    padding:0.3rem 0.5rem;
+  }
+  nav a{
+    display:inline-block;
+    color:var(--text);
+    text-decoration:none;
+    font-size:0.85rem;
+    padding:0.6rem 0.8rem;
+    margin:0 0.15rem;
+    border-radius:6px;
+    transition:background 0.2s, color 0.2s;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:860px;
+    margin:0 auto;
+    padding:1.5rem 1.2rem 3rem;
+  }
+  section{
+    padding-top:1.6rem;
+    margin-top:0.8rem;
+  }
+  h1{ color:var(--primary); }
+  h2{
+    color:var(--primary);
+    border-bottom:3px solid var(--primary);
+    padding-bottom:0.4rem;
+    margin-top:2.4rem;
+    font-size:1.3rem;
+  }
+  h3{
+    color:var(--primary);
+    margin-top:1.8rem;
+    font-size:1.08rem;
+    border-left:5px solid var(--primary);
+    padding-left:0.6rem;
+  }
+  h4{
+    color:var(--text);
+    font-size:0.98rem;
+    margin-top:1.2rem;
+    text-decoration:underline;
+    text-decoration-color:var(--primary);
+  }
+  p{ margin:0.8rem 0; }
+  .lead{
+    background:var(--primary-light);
+    border-radius:8px;
+    padding:1rem 1.2rem;
+    font-size:0.95rem;
+  }
+  strong{ color:var(--primary); }
+
+  /* ===== Callout boxes ===== */
+  .callout{
+    border:2px solid var(--primary);
+    background:var(--primary-light);
+    border-radius:8px;
+    padding:0.9rem 1.1rem;
+    margin:1.1rem 0;
+    font-size:0.93rem;
+  }
+  .callout-title{
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:0.4rem;
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+  }
+  .callout.mechanism{ border-style:solid; }
+  .callout.enzyme{ border-style:dashed; }
+  .callout.clinical{ border-style:dotted; border-width:3px; }
+  .callout ol, .callout ul{ margin:0.3rem 0 0; padding-left:1.3rem; }
+
+  /* ===== Flow diagrams ===== */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:0.4rem;
+    margin:1rem 0;
+    justify-content:flex-start;
+  }
+  .flow.vertical{ flex-direction:column; align-items:stretch; }
+  .flow-box{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:8px;
+    padding:0.5rem 0.7rem;
+    font-size:0.85rem;
+    text-align:center;
+    min-width:88px;
+  }
+  .flow-box.fill{ background:var(--primary-light); font-weight:700; }
+  .flow-arrow{
+    color:var(--primary);
+    font-size:1.2rem;
+    font-weight:700;
+    white-space:nowrap;
+    text-align:center;
+    min-width:1.5rem;
+  }
+  .flow-label{
+    display:block;
+    font-size:0.68rem;
+    color:#555;
+    font-weight:400;
+  }
+  .flow-caption{
+    font-size:0.82rem;
+    color:#444;
+    margin-top:0.3rem;
+    font-style:normal;
+  }
+  figure{ margin:1.2rem 0; }
+  figcaption{
+    font-size:0.82rem;
+    color:#444;
+    margin-top:0.5rem;
+    line-height:1.6;
+  }
+  figcaption b{ color:var(--primary); }
+
+  /* ===== Tables ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1rem 0;
+    font-size:0.85rem;
+  }
+  caption{
+    caption-side:top;
+    font-weight:700;
+    color:var(--primary);
+    text-align:left;
+    margin-bottom:0.4rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:0.5rem 0.6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{ background:var(--primary-light); }
+
+  .compare-table th:nth-child(1){ width:32%; }
+  .compare-table th:nth-child(2){ width:32%; }
+  .compare-table th:nth-child(3){ width:36%; }
+
+  /* ===== SVG figure ===== */
+  .svg-wrap{ text-align:center; background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem; }
+
+  /* ===== Key takeaways ===== */
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:1.2rem 1.4rem;
+  }
+  .takeaways ol{ padding-left:1.4rem; margin:0; }
+  .takeaways li{ margin:0.6rem 0; }
+
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#555;
+    font-size:0.85rem;
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top:1rem;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:0.6rem 1.4rem;
+    border-radius:20px;
+    font-size:0.9rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  #backToTop:hover{ opacity:0.85; }
+
+  @media (max-width:1024px){
+    main{ padding:1.2rem 1rem 2.5rem; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.25rem; }
+    h2{ font-size:1.12rem; }
+    nav{ justify-content:flex-start; }
+    .flow{ justify-content:center; }
+    .flow-box{ font-size:0.78rem; min-width:74px; padding:0.4rem 0.5rem; }
+    table{ font-size:0.76rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第25章：脂質運輸與儲存</h1>
+  <p class="subtitle">Lipid Transport &amp; Storage｜生物化學學習指南</p>
+</header>
+
+<nav id="navbar">
+  <a href="#importance">生醫重要性</a>
+  <a href="#overview">脂蛋白總覽</a>
+  <a href="#ffa">游離脂肪酸</a>
+  <a href="#chylo-vldl">乳糜微粒與VLDL</a>
+  <a href="#catabolism">分解代謝</a>
+  <a href="#ldl">LDL代謝</a>
+  <a href="#hdl">HDL與逆向運輸</a>
+  <a href="#liver">肝臟角色</a>
+  <a href="#adipose">脂肪組織儲存</a>
+  <a href="#hormone">荷爾蒙調控</a>
+  <a href="#bat">棕色脂肪組織</a>
+  <a href="#takeaways">重點整理</a>
+</nav>
+
+<main>
+
+<section id="importance">
+  <h2>生物醫學重要性（Biomedical Importance）</h2>
+  <p class="lead">
+    飲食吸收的脂肪，以及肝臟、脂肪組織合成的脂質，必須在各組織器官之間運輸以供利用或儲存。由於脂質不溶於水，人體的解決方法是：將<strong>非極性脂質</strong>（三酸甘油酯 triacylglycerol, TG；膽固醇酯 cholesteryl ester）與<strong>兩性脂質</strong>（磷脂質 phospholipid；膽固醇 cholesterol）及蛋白質組合成可溶於水的<strong>脂蛋白（lipoprotein）</strong>。
+  </p>
+  <p>
+    人類屬於「進食型雜食動物」：進食後為合成代謝期（吸收養分、儲存），之後進入負熱量平衡期（動用碳水化合物與脂肪儲備）。脂蛋白負責這個循環：小腸以<strong>乳糜微粒（chylomicron）</strong>運送飲食脂質；肝臟以<strong>極低密度脂蛋白（VLDL）</strong>運送內生TG。脂肪組織則以與白蛋白（albumin）結合的<strong>游離脂肪酸（FFA）</strong>動員能量。
+  </p>
+  <div class="callout clinical">
+    <div class="callout-title">🩺 臨床連結（Clinical Correlation）</div>
+    脂蛋白代謝異常會造成高脂蛋白血症或低脂蛋白血症。最常見於<strong>糖尿病（diabetes mellitus）</strong>：胰島素不足→FFA過度動員、乳糜微粒與VLDL利用不良→<strong>高三酸甘油酯血症（hypertriacylglycerolemia）</strong>。另有遺傳性缺陷導致<strong>高膽固醇血症</strong>與早發性<strong>動脈粥狀硬化（atherosclerosis）</strong>；腹部肥胖則是死亡率、高血壓、第2型糖尿病、高血脂等風險因子。
+  </div>
+</section>
+
+<section id="overview">
+  <h2>脂質以脂蛋白形式在血漿中運輸</h2>
+
+  <h3>血漿中的四大脂質種類</h3>
+  <p>血漿脂質主要包含四類：三酸甘油酯（16%）、磷脂質（30%）、膽固醇（14%）、膽固醇酯（36%），以及少量游離脂肪酸（FFA，約4%）。FFA雖然佔比最小，卻是<strong>代謝活性最高</strong>的血漿脂質。</p>
+
+  <h3>四大血漿脂蛋白群</h3>
+  <p>脂肪密度低於水，因此脂蛋白中脂質比例越高，密度越低。依此原則可分為四大類：</p>
+  <div class="flow">
+    <div class="flow-box fill">① 乳糜微粒<span class="flow-label">腸道吸收TG</span></div>
+    <div class="flow-box fill">② VLDL<span class="flow-label">肝臟輸出TG</span></div>
+    <div class="flow-box fill">③ LDL<span class="flow-label">運送膽固醇</span></div>
+    <div class="flow-box fill">④ HDL<span class="flow-label">逆向膽固醇運輸</span></div>
+  </div>
+  <p>乳糜微粒與VLDL以<strong>TG為主要脂質</strong>；LDL以<strong>膽固醇</strong>為主，HDL以<strong>磷脂質</strong>為主。依電泳分類，HDL為α-脂蛋白、LDL為β-脂蛋白、VLDL為pre-β-脂蛋白。</p>
+
+  <table class="compare-table">
+    <caption>表 25-1（精簡版）主要血漿脂蛋白之組成特徵</caption>
+    <thead><tr><th>脂蛋白</th><th>來源／主要脂質</th><th>關鍵Apo</th></tr></thead>
+    <tbody>
+      <tr><td>乳糜微粒 Chylomicron</td><td>小腸／三酸甘油酯（98-99%脂質）</td><td>B-48, A, C, E</td></tr>
+      <tr><td>乳糜微粒殘餘 Remnant</td><td>乳糜微粒代謝後／TG、磷脂質、膽固醇</td><td>B-48, E</td></tr>
+      <tr><td>VLDL</td><td>肝臟／三酸甘油酯（90-93%脂質）</td><td>B-100, C, E</td></tr>
+      <tr><td>IDL（VLDL殘餘）</td><td>VLDL代謝後／TG與膽固醇</td><td>B-100, E</td></tr>
+      <tr><td>LDL</td><td>由VLDL轉化／膽固醇為主（79%脂質）</td><td>B-100</td></tr>
+      <tr><td>HDL</td><td>肝、腸、VLDL、乳糜微粒／磷脂質、膽固醇</td><td>A-I, A-II, C, E</td></tr>
+    </tbody>
+  </table>
+
+  <h3>脂蛋白結構：非極性核心與單層兩性分子表層</h3>
+  <p>脂蛋白的<strong>非極性核心</strong>主要由三酸甘油酯與膽固醇酯構成，外圍包覆<strong>單層兩性磷脂質與膽固醇</strong>，極性端朝外面向水相環境，原理與細胞膜相似。蛋白質部分稱為<strong>脂蛋白質（apolipoprotein/apoprotein）</strong>，佔HDL近70%，但在乳糜微粒中僅約1%。</p>
+
+  <figure>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 340 260" width="100%" style="max-width:420px" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="170" cy="120" r="95" fill="hsl(95,45%,92%)" stroke="hsl(95,45%,35%)" stroke-width="3"/>
+        <circle cx="170" cy="120" r="60" fill="hsl(95,45%,55%)" stroke="hsl(95,45%,35%)" stroke-width="2"/>
+        <text x="170" y="116" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">TG + 膽固醇酯</text>
+        <text x="170" y="132" text-anchor="middle" font-size="10" fill="#fff">（非極性核心）</text>
+        <g fill="hsl(95,45%,35%)">
+          <circle cx="170" cy="25" r="5"/><circle cx="230" cy="45" r="5"/><circle cx="270" cy="90" r="5"/>
+          <circle cx="280" cy="150" r="5"/><circle cx="250" cy="200" r="5"/><circle cx="190" cy="220" r="5"/>
+          <circle cx="120" cy="215" r="5"/><circle cx="70" cy="185" r="5"/><circle cx="60" cy="130" r="5"/>
+          <circle cx="80" cy="70" r="5"/><circle cx="120" cy="35" r="5"/>
+        </g>
+        <text x="170" y="248" text-anchor="middle" font-size="11" fill="hsl(95,45%,35%)" font-weight="700">磷脂質＋游離膽固醇＋Apoprotein（兩性表層，極性端朝外）</text>
+      </svg>
+    </div>
+    <figcaption><b>圖 25-1 重現</b>：脂蛋白為球形顆粒，內部為非極性核心（TG、膽固醇酯），外層為單分子層的磷脂質、游離膽固醇與嵌入的apoprotein，極性頭端朝向水相血漿。</figcaption>
+  </figure>
+
+  <h3>脂蛋白質（Apolipoprotein）的分佈決定脂蛋白特性</h3>
+  <p>每個脂蛋白顆粒可含一種以上的apolipoprotein，簡稱為apo + 字母（A、B、C…）。部分apo為<strong>整合型</strong>不可轉移（如apo B），部分則可在脂蛋白間<strong>自由轉移</strong>（如apo C、apo E）。HDL主要apo為apo A；LDL主要為apo B-100（也存在於VLDL）。乳糜微粒含<strong>截短型apo B-48</strong>（僅為B-100的48%，由腸道經RNA editing產生終止密碼子而成，僅在腸道合成）；肝臟合成完整的<strong>apo B-100</strong>。</p>
+
+  <div class="callout enzyme">
+    <div class="callout-title">🧩 Apolipoprotein 三大功能</div>
+    <ol>
+      <li><strong>結構成分</strong>：例如apo B構成脂蛋白骨架。</li>
+      <li><strong>酵素輔因子／抑制劑</strong>：apo C-II活化脂蛋白脂酶（LPL）；apo A-I活化LCAT；apo A-II、apo C-III則抑制LPL。</li>
+      <li><strong>受體配體（ligand）</strong>：apo B-100、apo E結合LDL受體；apo E結合LRP-1；apo A-I結合HDL受體。</li>
+    </ol>
+  </div>
+
+  <table class="compare-table">
+    <caption>本章易混淆概念①：Apo B-48 與 Apo B-100</caption>
+    <thead><tr><th>A：Apo B-48</th><th>B：Apo B-100</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr><td>由小腸合成</td><td>由肝臟合成</td><td>合成器官不同</td></tr>
+      <tr><td>為B-100 mRNA經RNA editing產生終止密碼子而成的截短版（48%長度）</td><td>完整長鏈（&gt;4500個胺基酸，540,000 Da）</td><td>B-48缺少B-100羧基端的LDL受體結合區</td></tr>
+      <tr><td>存在於乳糜微粒 / 乳糜微粒殘餘</td><td>存在於VLDL、IDL、LDL</td><td>不能被LDL受體辨識（B-48不含配體區）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="ffa">
+  <h2>游離脂肪酸（FFA）迅速被代謝</h2>
+  <p>FFA（又稱非酯化脂肪酸NEFA）主要來自脂肪組織TG分解，或血漿TG受脂蛋白脂酶作用後釋出，並<strong>與白蛋白結合</strong>運輸。空腹狀態濃度可升高至0.7-0.8 mEq/mL，未控制糖尿病可達2 mEq/mL。</p>
+  <p>FFA被組織迅速攝取，飢餓時可提供25-50%能量需求，或再酯化為TG。FFA濃度與脂肪組織脂解速率直接相關；進入細胞需依賴<strong>膜脂肪酸轉運蛋白</strong>（與Na⁺共同運輸），細胞內則由<strong>脂肪酸結合蛋白</strong>負責胞內運輸，功能類似細胞外的白蛋白。</p>
+</section>
+
+<section id="chylo-vldl">
+  <h2>三酸甘油酯由乳糜微粒（腸）與VLDL（肝）運輸</h2>
+  <p>乳糜微粒由淋巴系統（乳糜chyle）自小腸引流而來，負責運送<strong>所有飲食脂質</strong>；VLDL絕大部分源自肝臟，負責將肝臟TG運至肝外組織。兩者組裝機轉高度相似：apo B在粗內質網（RER）合成，於滑面內質網（SER）與TG、膽固醇、磷脂質組裝成顆粒，經高基氏體加上醣鏈後以逆胞飲作用（reverse pinocytosis）分泌出細胞。</p>
+  <p>初生（nascent）顆粒只帶少量apo C與apo E，其餘須自循環中的<strong>HDL</strong>轉移取得。apo B則為顆粒組裝所<strong>必需</strong>的整合性蛋白。</p>
+
+  <div class="callout clinical">
+    <div class="callout-title">🩺 臨床連結</div>
+    <strong>Abetalipoproteinemia（β脂蛋白缺乏症）</strong>：罕見疾病，因無法形成含apo B的脂蛋白，導致脂滴堆積於腸道與肝臟。
+  </div>
+
+  <h3>乳糜微粒的代謝途徑（圖25-3重現）</h3>
+  <div class="flow">
+    <div class="flow-box">飲食TG</div><div class="flow-arrow">→</div>
+    <div class="flow-box">小腸</div><div class="flow-arrow">→</div>
+    <div class="flow-box fill">初生乳糜微粒<span class="flow-label">B-48, TG, A</span></div><div class="flow-arrow">→</div>
+    <div class="flow-box fill">成熟乳糜微粒<span class="flow-label">+Apo C, E（來自HDL）</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-box fill">成熟乳糜微粒</div><div class="flow-arrow">─LPL→</div>
+    <div class="flow-box">肝外組織<span class="flow-label">釋出脂肪酸</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-box fill">成熟乳糜微粒</div><div class="flow-arrow">─LPL→</div>
+    <div class="flow-box fill">乳糜微粒殘餘<span class="flow-label">B-48, TG↓, C↓, E</span></div><div class="flow-arrow">─apoE/LRP→</div>
+    <div class="flow-box">肝臟移除</div>
+  </div>
+  <p class="flow-caption"><b>圖25-3 重現</b>：乳糜微粒在微血管接受LPL作用釋出脂肪酸予肝外組織，逐漸縮小形成富含膽固醇的殘餘顆粒，經apo E辨識由肝臟LDL受體與LRP-1移除。</p>
+
+  <h3>VLDL的代謝途徑：由VLDL→IDL→LDL（圖25-4重現）</h3>
+  <div class="flow">
+    <div class="flow-box fill">初生VLDL<span class="flow-label">B-100, TG</span></div><div class="flow-arrow">→</div>
+    <div class="flow-box fill">成熟VLDL<span class="flow-label">+Apo C, E</span></div><div class="flow-arrow">─LPL→</div>
+    <div class="flow-box fill">IDL<span class="flow-label">VLDL殘餘</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-box fill">IDL</div>
+    <div class="flow-arrow">↙</div><div class="flow-box">肝臟直接攝取<span class="flow-label">經LDL受體</span></div>
+  </div>
+  <div class="flow">
+    <div class="flow-box fill">IDL</div>
+    <div class="flow-arrow">↘</div><div class="flow-box fill">LDL<span class="flow-label">Apo B-100</span></div><div class="flow-arrow">→</div>
+    <div class="flow-box">肝臟／肝外組織<span class="flow-label">經LDL受體</span></div>
+  </div>
+  <p class="flow-caption"><b>圖25-4 重現</b>：每個LDL顆粒僅含<strong>一分子apo B-100</strong>，並在VLDL→IDL→LDL的轉換過程中始終保留，因此每個LDL皆源自單一VLDL前驅物。人類IDL轉為LDL的比例較高，是LDL濃度偏高的原因之一。</p>
+</section>
+
+<section id="catabolism">
+  <h2>乳糜微粒與VLDL的快速分解代謝</h2>
+  <p>乳糜微粒清除極快，半衰期&lt;1小時，大顆粒代謝更快。約80%脂肪酸送至脂肪組織、心臟與肌肉，僅約20%送至肝臟；<strong>肝臟本身不直接大量代謝完整的乳糜微粒或VLDL</strong>。</p>
+
+  <h3>脂蛋白脂酶（LPL）水解TG形成殘餘脂蛋白</h3>
+  <div class="callout enzyme">
+    <div class="callout-title">🔑 Enzyme／Cofactor</div>
+    <strong>脂蛋白脂酶（lipoprotein lipase, LPL）</strong>：位於微血管內皮，經肝素樣蛋白多醣（heparan sulfate）錨定；注射<strong>肝素（heparin）</strong>可將其釋放入血。<br>
+    輔因子：<strong>apo C-II（活化）</strong>、磷脂質；<strong>apo A-II、apo C-III為抑制劑</strong>。<br>
+    水解順序：TG →（經二酸甘油酯）→ 單酸甘油酯 → FFA + 甘油。
+  </div>
+  <p><strong>肝脂酶（hepatic lipase, HL）</strong>位於肝竇狀隙表面，不易作用於完整乳糜微粒或VLDL，主要參與殘餘顆粒與HDL代謝。心臟LPL對TG的Km遠低於脂肪組織（約1/10），使飢餓時脂肪酸供應可由脂肪組織<strong>重新導向心臟</strong>；哺乳期則導向乳腺。胰島素可促進脂肪細胞LPL合成並使其移位至內皮表面。</p>
+  <p>LPL作用後，乳糜微粒損失70-90%的TG，並失去apo C（回到HDL）但<strong>保留apo E</strong>，形成體積約一半、富含膽固醇酯的<strong>乳糜微粒殘餘</strong>；VLDL則類似地形成<strong>VLDL殘餘（IDL）</strong>。</p>
+
+  <h3>肝臟負責攝取殘餘脂蛋白</h3>
+  <p>乳糜微粒殘餘經<strong>apo E</strong>辨識，透過兩種受體被肝臟以受體媒介型胞飲作用攝取：<strong>LDL（apoB-100, E）受體</strong>與<strong>LRP-1</strong>。肝脂酶具雙重角色：（1）作為配體促進殘餘顆粒攝取；（2）水解殘餘顆粒的TG與磷脂質。</p>
+
+  <table class="compare-table">
+    <caption>本章易混淆概念②：脂蛋白脂酶（LPL）與荷爾蒙敏感性脂酶（HSL）</caption>
+    <thead><tr><th>A：脂蛋白脂酶 LPL</th><th>B：荷爾蒙敏感性脂酶 HSL</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr><td>位於微血管內皮表面</td><td>位於脂肪細胞內部</td><td>作用位置不同</td></tr>
+      <tr><td>水解循環中脂蛋白（乳糜微粒、VLDL）的TG</td><td>水解脂肪細胞內儲存的TG</td><td>受質來源不同</td></tr>
+      <tr><td>輔因子apo C-II活化；胰島素促進其合成與移位</td><td>經cAMP依賴性蛋白激酶磷酸化而活化；胰島素則抑制其活性</td><td>兩者對胰島素反應<strong>相反</strong></td></tr>
+      <tr><td>功能：釋放脂肪酸供組織攝取利用</td><td>功能：動員脂肪儲備，釋出FFA進入血液</td><td>生理意義不同（利用 vs 動員）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="ldl">
+  <h2>LDL經LDL受體代謝</h2>
+  <p>肝臟與多數肝外組織皆表現<strong>LDL（apo B-100, E）受體</strong>，可辨識apo B-100（不辨識B-48，因其缺乏含配體區的羧基端）也可攝取富含apo E的脂蛋白。此受體廣泛分布於肝臟、動脈壁、卵巢、睪丸與腎上腺皮質。</p>
+  <div class="callout clinical">
+    <div class="callout-title">🩺 臨床連結</div>
+    血漿LDL膽固醇濃度與<strong>動脈粥狀硬化（atherosclerosis）</strong>發生率呈<strong>正相關</strong>。<strong>家族性高膽固醇血症（familial hypercholesterolemia）</strong>即因LDL受體缺陷，造成血中LDL膽固醇升高，導致早發性動脈粥狀硬化。
+  </div>
+</section>
+
+<section id="hdl">
+  <h2>HDL參與脂蛋白三酸甘油酯與膽固醇代謝</h2>
+  <p>HDL由肝臟與小腸合成分泌，扮演apo C與apo E的<strong>儲存庫</strong>角色，供應乳糜微粒與VLDL代謝所需。初生HDL為含apo A與游離膽固醇的<strong>盤狀磷脂雙層</strong>；經<strong>LCAT（卵磷脂：膽固醇醯基轉移酶）</strong>與活化劑apo A-I作用，將表面磷脂質與游離膽固醇轉為膽固醇酯與溶血卵磷脂，膽固醇酯進入疏水核心，形成球形HDL。</p>
+
+  <h3>逆向膽固醇運輸（Reverse Cholesterol Transport）</h3>
+  <div class="callout mechanism">
+    <div class="callout-title">🔄 Pathway 重點流程</div>
+    <ol>
+      <li>盤狀HDL經LCAT（apo A-I活化）酯化膽固醇 → 形成HDL₃</li>
+      <li>HDL₃經<strong>SR-B1</strong>自肝外組織接受膽固醇 → LCAT再酯化 → 顆粒增大成<strong>HDL₂</strong></li>
+      <li>HDL₂經肝臟SR-B1選擇性卸載膽固醇酯，或經肝脂酶／內皮脂酶水解 → 重新形成HDL₃（此循環稱<strong>HDL cycle</strong>）</li>
+      <li>游離apo A-I與少量磷脂質、膽固醇形成<strong>preβ-HDL</strong>（誘導膽固醇外流能力最強）</li>
+    </ol>
+  </div>
+  <p>第二條路徑經<strong>ABC轉運蛋白</strong>：<strong>ABCA1</strong>促進膽固醇外流至preβ-HDL或apo A-I（形成HDL₃前驅物）；<strong>ABCG1</strong>則促進膽固醇轉移至已成形的HDL。SR-B1在肝臟負責<strong>卸載</strong>膽固醇酯（顆粒本身不被攝入），在肝外組織則負責<strong>接受</strong>細胞外流的膽固醇。</p>
+
+  <div class="flow">
+    <div class="flow-box">肝外組織膽固醇</div><div class="flow-arrow">─ABCA1/ABCG1/SR-B1→</div>
+    <div class="flow-box fill">preβ-HDL</div><div class="flow-arrow">─LCAT→</div>
+    <div class="flow-box fill">HDL₃</div><div class="flow-arrow">─LCAT→</div>
+    <div class="flow-box fill">HDL₂</div><div class="flow-arrow">─SR-B1（肝）→</div>
+    <div class="flow-box">膽汁排出（膽固醇／膽酸）</div>
+  </div>
+
+  <div class="callout clinical">
+    <div class="callout-title">🩺 臨床連結</div>
+    HDL濃度與血漿TG濃度呈<strong>反比</strong>，與LPL活性呈<strong>正比</strong>。<strong>HDL₂濃度與動脈粥狀硬化發生率呈負相關</strong>，反映逆向膽固醇運輸效率——這是LDL（"壞膽固醇"）與HDL（"好膽固醇"）稱呼的生理基礎。
+  </div>
+
+  <table class="compare-table">
+    <caption>本章易混淆概念③：LDL 與 HDL</caption>
+    <thead><tr><th>A：LDL</th><th>B：HDL</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr><td>將膽固醇由肝臟<strong>送往</strong>周邊組織</td><td>將膽固醇由周邊組織<strong>送回</strong>肝臟（逆向運輸）</td><td>運輸方向相反</td></tr>
+      <tr><td>主要apo：B-100</td><td>主要apo：A-I（活化LCAT）</td><td>配體與受體不同</td></tr>
+      <tr><td>經LDL（apoB-100, E）受體被攝取</td><td>經SR-B1、ABCA1、ABCG1作用</td><td>作用受體/轉運蛋白不同</td></tr>
+      <tr><td>濃度過高與動脈粥狀硬化<strong>正相關</strong>（"壞膽固醇"）</td><td>濃度（尤其HDL₂）與動脈粥狀硬化<strong>負相關</strong>（"好膽固醇"）</td><td>臨床意義相反</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="liver">
+  <h2>肝臟在脂質運輸與代謝中扮演核心角色</h2>
+  <div class="callout mechanism">
+    <div class="callout-title">🔑 肝臟四大脂質功能</div>
+    <ol>
+      <li>分泌膽汁，促進脂質消化吸收</li>
+      <li>脂肪酸的合成與氧化，以及TG、脂質的合成</li>
+      <li>脂肪酸轉為酮體（生酮作用 ketogenesis）</li>
+      <li>血漿脂蛋白的合成與代謝</li>
+    </ol>
+  </div>
+
+  <h3>肝臟VLDL分泌受飲食與荷爾蒙調控</h3>
+  <p>VLDL組裝需要<strong>apo B-100</strong>與TG來源。Apo B-100在核糖體合成並進入內質網（ER）腔，經<strong>微粒體三酸甘油酯轉移蛋白（MTP）</strong>加上磷脂質並協助TG跨膜轉移，形成前驅顆粒<strong>VLDL2</strong>；於高基氏體與富含TG的脂滴融合成<strong>VLDL1</strong>後分泌，過程需要<strong>ARF-1</strong>活化磷脂酶D產生磷脂酸。</p>
+  <div class="flow">
+    <div class="flow-box">Apo B-100合成<span class="flow-label">RER</span></div><div class="flow-arrow">→</div>
+    <div class="flow-box fill">MTP加脂質→VLDL₂<span class="flow-label">ER腔</span></div><div class="flow-arrow">→</div>
+    <div class="flow-box fill">與TG脂滴融合→VLDL₁<span class="flow-label">高基氏體</span></div><div class="flow-arrow">→</div>
+    <div class="flow-box">分泌＋取得Apo C, E<span class="flow-label">來自HDL</span></div><div class="flow-arrow">→</div>
+    <div class="flow-box fill">成熟VLDL</div>
+  </div>
+  <p class="flow-caption"><b>圖25-6 重現</b>：胰島素抑制apo B-100合成及VLDL2→VLDL1的融合過程，因而<strong>抑制VLDL分泌</strong>。</p>
+  <p>TG合成的脂肪酸來源有二：（1）由乙醯輔酶A經<strong>新生合成（de novo synthesis）</strong>——飽食狀態為主；（2）自循環攝取的<strong>FFA</strong>——飢餓、高脂飲食、糖尿病時為主。促進肝臟TG合成與VLDL分泌的因子包括：飽食狀態、高糖（尤其蔗糖／果糖）飲食、高循環FFA、飲酒、以及高胰島素低升糖素狀態。</p>
+
+  <h3 id="fatty-liver">三酸甘油酯生成與輸出失衡導致脂肪肝</h3>
+  <div class="callout clinical">
+    <div class="callout-title">🩺 臨床連結：非酒精性脂肪肝病（NAFLD）</div>
+    NAFLD為全球最常見的肝臟疾病，慢性堆積可進展為<strong>NASH（脂肪性肝炎）</strong>→<strong>肝硬化（cirrhosis）</strong>、肝細胞癌或肝衰竭。
+  </div>
+  <p><strong>脂肪肝的兩大類型：</strong></p>
+  <ol>
+    <li><strong>血漿FFA升高型</strong>：脂肪動員增加，VLDL生成跟不上TG酯化速度（如飢餓、高脂飲食、糖尿病）。</li>
+    <li><strong>脂蛋白生成障礙型</strong>：apo合成受阻、脂蛋白組裝失敗、磷脂質供應不足或分泌機制失效（如<strong>膽鹼（choline）缺乏</strong>為著名的「脂親因子lipotropic factor」缺乏症；<strong>橘黃酸（orotic acid）</strong>則干擾VLDL醣化）。</li>
+  </ol>
+
+  <h3>酒精也會導致脂肪肝</h3>
+  <p>酒精性脂肪肝為酒精性肝病（ALD）的第一階段，最終可進展為<strong>肝硬化</strong>。<strong>酒精去氫酶（alcohol dehydrogenase）</strong>氧化乙醇產生過量NADH，與脂肪酸等受質競爭呼吸鏈，<strong>抑制脂肪酸氧化並促進酯化</strong>，因而堆積TG。乙醛經<strong>醛去氫酶（aldehyde dehydrogenase）</strong>氧化為乙酸；NADH/NAD⁺比值上升也造成乳酸/丙酮酸比值上升，導致高乳酸血症並加重痛風。部分亞洲族群因粒線體醛去氫酶基因缺陷，飲酒後對乙醛的不良反應加劇。</p>
+</section>
+
+<section id="adipose">
+  <h2>脂肪組織是體內三酸甘油酯的主要儲存庫</h2>
+  <p>脂肪組織中TG不斷進行<strong>脂解（lipolysis）</strong>與<strong>再酯化（reesterification）</strong>——這是兩條完全獨立的路徑（不同受質、不同酵素），因此可分別受營養、代謝與荷爾蒙因子調控。兩者的平衡決定脂肪組織FFA池大小，進而影響血漿FFA濃度，深遠地影響肝臟與肌肉代謝。脂肪組織亦分泌<strong>脂肪激素（adipokine）</strong>如<strong>瘦素（leptin）</strong>與<strong>脂聯素（adiponectin）</strong>，具內分泌功能：瘦素抑制食慾、促進能量消耗；脂聯素調節葡萄糖與脂質代謝、增加胰島素敏感性。</p>
+
+  <h3>甘油-3-磷酸供應調控酯化；脂解由荷爾蒙敏感性脂酶控制</h3>
+  <p>由於脂肪組織<strong>不表現甘油激酶（glycerol kinase）</strong>，甘油無法被脂肪細胞再利用，酯化所需的甘油-3-磷酸須經葡萄糖、醣解作用供應。TG經<strong>荷爾蒙敏感性脂酶（HSL）</strong>水解為FFA與甘油；甘油進入血液，被具甘油激酶活性的肝臟、腎臟利用。FFA可經<strong>脂醯輔酶A合成酶（acyl-CoA synthetase）</strong>再活化為acyl-CoA，與甘油-3-磷酸再酯化為TG，形成持續的脂解—再酯化循環。</p>
+  <div class="flow">
+    <div class="flow-box">血糖</div><div class="flow-arrow">─胰島素→</div>
+    <div class="flow-box">醣解</div><div class="flow-arrow">→</div>
+    <div class="flow-box fill">甘油-3-磷酸</div><div class="flow-arrow">─酯化→</div>
+    <div class="flow-box fill">TG（儲存）</div>
+  </div>
+  <div class="flow">
+    <div class="flow-box fill">TG（儲存）</div><div class="flow-arrow">─HSL→</div>
+    <div class="flow-box">FFA＋甘油</div><div class="flow-arrow">→</div>
+    <div class="flow-box">血液（FFA與白蛋白結合／甘油）</div>
+  </div>
+  <p class="flow-caption"><b>圖25-7 重現</b>：當再酯化速度不足以配合脂解速度時，FFA會累積並擴散進入血漿，與白蛋白結合，提高血漿游離脂肪酸濃度。</p>
+
+  <h3>葡萄糖利用增加會降低FFA輸出</h3>
+  <p>脂肪組織葡萄糖利用增加時，FFA輸出<strong>減少</strong>，但甘油釋放不受影響——顯示此效應<strong>並非透過抑制脂解</strong>，而是因葡萄糖提供更多甘油-3-磷酸，<strong>促進FFA再酯化</strong>，減少FFA淨流出。</p>
+</section>
+
+<section id="hormone">
+  <h2>荷爾蒙調控脂肪動員</h2>
+
+  <h3>胰島素抑制脂肪組織脂解</h3>
+  <p><strong>胰島素</strong>是最主要的抗脂解荷爾蒙：抑制FFA釋放、促進脂肪生成與酯化、經<strong>GLUT4</strong>促進葡萄糖攝取，並抑制<strong>HSL</strong>活性（同時降低FFA與甘油釋放）。脂肪組織對胰島素的敏感度高於多數其他組織。</p>
+
+  <h3>多種荷爾蒙促進脂解（圖25-8重現）</h3>
+  <p>兒茶酚胺（腎上腺素epinephrine、正腎上腺素norepinephrine）、升糖素（glucagon）、ACTH、TSH、生長激素（GH）皆可促進脂解，多數需<strong>糖皮質激素與甲狀腺素</strong>的許可作用（permissive effect）才能發揮最佳效果。</p>
+  <div class="callout mechanism">
+    <div class="callout-title">🔄 cAMP路徑活化HSL</div>
+    <ol>
+      <li>兒茶酚胺結合受體 → <strong>刺激（+）</strong>腺苷酸環化酶（adenylate cyclase）</li>
+      <li>ATP → <strong>cAMP</strong></li>
+      <li>cAMP活化<strong>cAMP依賴性蛋白激酶</strong></li>
+      <li>磷酸化 → <strong>HSL活化（HSL a）</strong></li>
+      <li>TG逐步水解：TG→DG+FFA→MG+FFA→（2-MAGL）→甘油+FFA</li>
+    </ol>
+    <p style="margin:0.4rem 0 0;"><strong>訊號關閉機制</strong>：磷酸二酯酶（可被咖啡因、茶鹼等甲基黃嘌呤類抑制）降解cAMP；lipase phosphatase去磷酸化HSL；高濃度FFA負回饋抑制脂酶與腺苷酸環化酶；腺苷（adenosine）抑制腺苷酸環化酶；<strong>胰島素</strong>則透過抑制cAMP生成、刺激磷酸二酯酶與lipase phosphatase三重機制關閉脂解訊號。</p>
+  </div>
+  <p>糖皮質激素經<strong>cAMP非依賴路徑</strong>促進新脂酶蛋白合成而促進脂解；交感神經釋放的正腎上腺素則在脂肪組織脂肪動員中扮演核心角色（去神經支配或神經節阻斷可降低脂解）。</p>
+
+  <h3>Perilipin調控TG儲存與脂解的平衡</h3>
+  <p><strong>Perilipin</strong>是脂滴表面蛋白，基礎狀態下<strong>阻止脂酶接觸儲存的TG</strong>，抑制脂解；受促脂解荷爾蒙刺激後被磷酸化，構型改變，<strong>暴露脂滴表面</strong>供HSL作用，促進脂解。藉此協調TG的儲存與分解以配合身體代謝需求。</p>
+</section>
+
+<section id="bat">
+  <h2>棕色脂肪組織促進產熱作用</h2>
+  <p><strong>棕色脂肪組織（brown adipose tissue, BAT）</strong>在冬眠動物甦醒、寒冷暴露（非顫抖性產熱）、新生兒產熱時特別活躍；人類雖非主要組織，但正常個體仍存在。BAT血流豐富、粒線體與細胞色素含量高，但ATP合成酶活性低，可同時氧化葡萄糖與脂肪酸。<strong>正腎上腺素</strong>促進脂解與脂蛋白脂酶合成，增強對循環中富含TG脂蛋白的利用。</p>
+
+  <div class="callout mechanism">
+    <div class="callout-title">🔄 產熱機轉（圖25-9重現）</div>
+    <div class="flow vertical">
+      <div class="flow-box">正腎上腺素 → cAMP → HSL活化 → TG分解為FFA、甘油</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">呼吸鏈氧化（含FFA經β-氧化提供還原當量）</div>
+      <div class="flow-arrow">↓ 將H⁺自基質泵至膜間隙</div>
+      <div class="flow-box fill">正常情況：H⁺經F₁ ATP合酶回流 → 產生ATP</div>
+      <div class="flow-arrow">‖ BAT特有旁路 ‖</div>
+      <div class="flow-box fill">Thermogenin（UCP1）：H⁺不經ATP合酶直接回流 → 能量以<strong>熱</strong>形式釋放</div>
+    </div>
+  </div>
+  <p>Thermogenin（UCP1）在<strong>未受刺激</strong>時受嘌呤核苷酸（purine nucleotide）抑制；受<strong>正腎上腺素</strong>刺激產生的FFA與acyl-CoA可解除此抑制。Acyl-CoA同時扮演雙重角色：既供應呼吸鏈還原當量，又促進thermogenin活性。近期研究顯示BAT活性與體脂含量呈反比，是肥胖治療的潛在標的。</p>
+</section>
+
+<section id="takeaways">
+  <h2># Key Takeaways</h2>
+  <div class="takeaways">
+    <ol>
+      <li>脂蛋白由非極性核心（TG、膽固醇酯）與兩性表層（磷脂質、游離膽固醇、apoprotein）組成，使脂質能溶於血漿運輸。</li>
+      <li>四大脂蛋白：乳糜微粒（飲食脂質，來自腸）、VLDL（肝臟內生TG）、LDL（將膽固醇送到組織）、HDL（將膽固醇送回肝臟，逆向膽固醇運輸）。</li>
+      <li>Apo B-48（腸，乳糜微粒）與Apo B-100（肝，VLDL/LDL）是重要區分點；Apo C-II活化LPL；Apo E是肝臟受體辨識殘餘脂蛋白的關鍵配體。</li>
+      <li>脂蛋白脂酶（LPL）位於微血管內皮，水解循環中TG產生殘餘脂蛋白；胰島素促進其活性，是餐後脂質清除的關鍵酶。</li>
+      <li>VLDL經LPL水解後形成IDL；IDL可被肝臟直接攝取或轉為LDL。每個LDL只含一分子Apo B-100，源自單一VLDL前驅物。</li>
+      <li>LDL經LDL（apoB-100, E）受體被組織攝取；LDL受體缺陷會造成家族性高膽固醇血症與早發性動脈粥狀硬化。</li>
+      <li>HDL透過LCAT酯化膽固醇、SR-B1與ABCA1/ABCG1完成逆向膽固醇運輸，將周邊組織膽固醇送回肝臟排除；HDL₂濃度與動脈粥狀硬化呈負相關。</li>
+      <li>脂肪組織中，脂解（由HSL執行）與酯化為兩條各自獨立調控的路徑；胰島素抑制脂解、促進酯化，是體內最主要的抗脂解荷爾蒙。</li>
+      <li>兒茶酚胺、升糖素等經cAMP路徑活化HSL促進脂解；Perilipin磷酸化後暴露脂滴表面，協調TG儲存與分解。</li>
+      <li>棕色脂肪組織藉由Thermogenin（UCP1）使氧化磷酸化解偶聯，能量以熱形式釋放而非合成ATP，達成非顫抖性產熱。</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  第25章：脂質運輸與儲存｜學習指南
+  <br>
+  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">回到頂端 ↑</button>
+</footer>
+
+<script>
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href')));
+
+  function onScroll(){
+    let currentIndex = 0;
+    const scrollPos = window.scrollY + 120;
+    sections.forEach((sec, i) => {
+      if(sec && sec.offsetTop <= scrollPos){
+        currentIndex = i;
+      }
+    });
+    navLinks.forEach(a => a.classList.remove('active'));
+    if(navLinks[currentIndex]){
+      navLinks[currentIndex].classList.add('active');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll);
+</script>
+
+</body>
+</html>
