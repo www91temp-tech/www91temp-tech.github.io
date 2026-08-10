@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1章：細胞生物學導論｜學習指南</title>
+<style>
+  :root{
+    --primary: hsl(137.5, 45%, 35%);
+    --primary-light: hsl(137.5, 45%, 92%);
+    --text: #1a1a1a;
+    --border: hsl(137.5, 25%, 78%);
+    --white: #ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    line-height:1.85;
+    background:#fdfdfb;
+  }
+  header{
+    text-align:center;
+    padding:2.4rem 1.5rem 1.6rem;
+    background:linear-gradient(180deg, var(--primary-light), #fdfdfb);
+  }
+  header h1{
+    margin:0 0 .5rem;
+    color:var(--primary);
+    font-size:1.9rem;
+    letter-spacing:.03em;
+  }
+  header p{
+    margin:0;
+    color:#444;
+    font-size:.95rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.3rem;
+    padding:.6rem 1rem;
+  }
+  nav a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:.92rem;
+    padding:.5rem .9rem;
+    border-radius:999px;
+    transition:background .2s, color .2s;
+    white-space:nowrap;
+  }
+  nav a:hover{background:var(--primary-light);}
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:860px;
+    margin:0 auto;
+    padding:1rem 1.4rem 3rem;
+  }
+  section{padding-top:1.6rem;}
+  h2{
+    color:var(--primary);
+    border-bottom:3px solid var(--primary);
+    padding-bottom:.4rem;
+    margin-top:2.6rem;
+    font-size:1.45rem;
+  }
+  h3{
+    color:var(--primary);
+    margin-top:2rem;
+    font-size:1.18rem;
+    border-left:6px solid var(--primary);
+    padding-left:.6rem;
+  }
+  h4{
+    color:hsl(137.5,45%,28%);
+    margin-top:1.4rem;
+    font-size:1.03rem;
+  }
+  p{margin:.8rem 0;}
+  .lead{
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:1rem 1.2rem;
+    font-size:.98rem;
+  }
+  .box{
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:1rem 1.3rem;
+    margin:1.2rem 0;
+  }
+  .box-title{
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:.5rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .tip{
+    border-left:5px solid var(--primary);
+    background:#fff;
+    padding:.8rem 1rem;
+    margin:1rem 0;
+    border-radius:0 8px 8px 0;
+  }
+  .clinical{
+    border-left:5px solid #b5651d;
+    background:#fdf3ea;
+    padding:.8rem 1rem;
+    margin:1rem 0;
+    border-radius:0 8px 8px 0;
+  }
+  .clinical .box-title{color:#b5651d;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.2rem 0;
+    font-size:.93rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.6rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{background:#f7f9f6;}
+  .compare-table th:nth-child(3){background:hsl(137.5,45%,42%);}
+  .flow{
+    display:flex;
+    align-items:stretch;
+    flex-wrap:wrap;
+    gap:.4rem;
+    margin:1.2rem 0;
+    justify-content:center;
+  }
+  .flow-step{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:10px;
+    padding:.7rem .9rem;
+    font-size:.88rem;
+    min-width:140px;
+    max-width:190px;
+    flex:1 1 140px;
+    text-align:center;
+  }
+  .flow-step .num{
+    display:inline-block;
+    background:var(--primary);
+    color:#fff;
+    border-radius:50%;
+    width:1.4rem;
+    height:1.4rem;
+    line-height:1.4rem;
+    font-size:.8rem;
+    margin-bottom:.3rem;
+  }
+  .flow-arrow{
+    align-self:center;
+    color:var(--primary);
+    font-size:1.4rem;
+    flex:0 0 auto;
+  }
+  .flow-branch{
+    display:flex;
+    flex-direction:column;
+    gap:.4rem;
+    justify-content:center;
+  }
+  svg text{
+    font-family:"Noto Sans TC",sans-serif;
+  }
+  .figure-wrap{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1rem;
+    margin:1.2rem 0;
+    text-align:center;
+  }
+  .figure-caption{
+    font-size:.85rem;
+    color:#555;
+    margin-top:.6rem;
+    text-align:left;
+  }
+  .badge-row{
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:.8rem 0;
+  }
+  .badge{
+    padding:.3rem .8rem;
+    border-radius:999px;
+    font-size:.82rem;
+    color:#fff;
+  }
+  .badge.cyto{background:#c97a2b;}
+  .badge.bio{background:#3a8c52;}
+  .badge.gene{background:#2f6fb0;}
+  ul, ol{padding-left:1.4rem;}
+  li{margin:.35rem 0;}
+  .concept-check{
+    background:#fff;
+    border:1px dashed var(--primary);
+    border-radius:8px;
+    padding:.8rem 1rem;
+    font-size:.9rem;
+    margin:1rem 0;
+  }
+  .concept-check b{color:var(--primary);}
+  .key-takeaways{
+    background:var(--primary-light);
+    border-radius:12px;
+    padding:1.4rem 1.6rem;
+    margin-top:2rem;
+  }
+  .key-takeaways h2{border:none;}
+  .key-takeaways ol{padding-left:1.3rem;}
+  .key-takeaways li{margin:.6rem 0;}
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#555;
+    font-size:.9rem;
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top:.6rem;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:.6rem 1.3rem;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:.9rem;
+    font-family:inherit;
+  }
+  #backToTop:hover{opacity:.85;}
+  .scale-bar{
+    display:flex;
+    align-items:flex-end;
+    gap:2px;
+    height:150px;
+    margin:1rem 0 .5rem;
+  }
+  .scale-seg{
+    flex:1;
+    border-radius:4px 4px 0 0;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    color:#fff;
+    font-size:.72rem;
+    padding-top:.3rem;
+    text-align:center;
+  }
+  @media (max-width:1024px){
+    main{padding:1rem 1.1rem 3rem;}
+  }
+  @media (max-width:768px){
+    header h1{font-size:1.4rem;}
+    nav{gap:.15rem; padding:.5rem .5rem;}
+    nav a{font-size:.82rem; padding:.4rem .6rem;}
+    h2{font-size:1.2rem;}
+    h3{font-size:1.05rem;}
+    .flow{flex-direction:column; align-items:center;}
+    .flow-arrow{transform:rotate(90deg);}
+    table{font-size:.82rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第1章：細胞生物學導論</h1>
+  <p>學習指南｜A Preview of Cell Biology</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#sec1-1">1.1 細胞學說</a>
+  <a href="#sec1-2">1.2 現代細胞生物學</a>
+  <a href="#sec1-3">1.3 我們如何得知</a>
+  <a href="#compare">重要比較表</a>
+  <a href="#takeaways">重點回顧</a>
+</nav>
+
+<main>
+
+<p class="lead">
+細胞（cell）是生物學的基本單位：每一個生物體不是由細胞組成，就是本身即為單一細胞。因此，唯有理解細胞的結構與功能，我們才能真正認識生物體的能力與限制。細胞生物學是一門快速發展的學科，融合了細胞學、生物化學與遺傳學三大歷史脈絡，並持續因基因體編輯等新技術而蓬勃發展。本章將簡介細胞學說的建立過程、現代細胞生物學三大歷史脈絡的匯流，以及科學家如何透過實驗與模式生物（model organism）建立我們對細胞的理解。
+</p>
+
+<!-- ===================== 1.1 ===================== -->
+<section id="sec1-1">
+<h2>1.1 細胞學說：簡史</h2>
+
+<p>細胞生物學的故事始於三百多年前，歐洲科學家開始用簡陋的顯微鏡觀察各種生物材料。1665 年，英國科學家羅伯特．虎克（Robert Hooke）以自製顯微鏡觀察軟木塞薄片，看到一格格如蜂巢般的小空格，並將其命名為「細胞（cell）」，取自拉丁文 cellula（意為「小房間」）。事實上他所看到的只是死去植物細胞遺留下的細胞壁空腔，但這個命名沿用至今。</p>
+
+<h3>顯微鏡技術的進展推動了細胞研究</h3>
+<p>虎克的顯微鏡只能放大 30 倍，難以觀察細胞內部構造。荷蘭商人安東尼．范雷文霍克（Antonie van Leeuwenhoek）製作出可放大近 300 倍的透鏡，成為第一位觀察到活細胞（血球、精子、細菌、藻類與原生動物）的人。當時的限制主要有二：一是顯微鏡的<b>解析度（resolution／resolving power）</b>——分辨精細結構的能力——有限；二是十七世紀生物學偏重描述、少有機制性的解釋。直到 1830 年代，複式顯微鏡（compound microscope，以目鏡與物鏡兩片透鏡放大影像）的光學品質大幅提升，才能清楚看到約 1 微米大小的結構。</p>
+
+<h3>細胞學說適用於所有生物</h3>
+<p>蘇格蘭植物學家羅伯特．布朗（Robert Brown）發現植物細胞中普遍存在一個圓形構造，命名為<b>細胞核（nucleus）</b>。1838 年，德國學者馬提亞斯．許萊登（Matthias Schleiden）提出所有植物組織皆由細胞組成；隔年，德國細胞學家西奧多．許旺（Theodor Schwann）證實動物組織也是如此，打破了「動植物構造截然不同」的舊觀念。許旺於 1839 年提出統一的<b>細胞學說（cell theory）</b>，其後又經卡爾．內格里（Karl Nägeli）與魯道夫．菲爾紹（Rudolf Virchow）補充第三項原則（1855 年），形成延續至今的三大原則：</p>
+
+<div class="box">
+  <div class="box-title">🧬 細胞學說三大原則</div>
+  <ol>
+    <li>所有生物皆由一個或多個細胞組成。</li>
+    <li>細胞是所有生物體結構的基本單位。</li>
+    <li>所有細胞皆源自於既存的細胞（拉丁文：<i>omnis cellula e cellula</i>，菲爾紹提出）。</li>
+  </ol>
+</div>
+
+<p>因此，細胞不僅是結構的基本單位，也是生殖／繁衍的基本單位。這也是為什麼理解細胞及其特性，是理解生物學其他面向的基礎。</p>
+
+<h3>細胞的多樣性</h3>
+<p>細胞的形狀與大小差異極大：從絲狀真菌細胞、螺旋狀的密螺旋體（<i>Treponema</i>）細菌，到形態各異的人類血球細胞；也包括矽藻、原生動物等具特殊形狀的細胞。細胞的形狀常常反映其功能，例如植物木質部（xylem）細胞壁上的螺旋加厚結構能強化輸水的管道，而人類神經元高度分支的形態則有利於與眾多其他神經元連結。</p>
+
+<div class="concept-check">
+<b>概念檢核 1.1</b>：哪些證據促使科學家建立了細胞學說的基本原則？技術（顯微鏡）在其中扮演了什麼角色？
+</div>
+</section>
+
+<!-- ===================== 1.2 ===================== -->
+<section id="sec1-2">
+<h2>1.2 現代細胞生物學的興起</h2>
+
+<p>現代細胞生物學由三股歷史脈絡交織而成：<b>細胞學（cytology）</b>——關注細胞結構；<b>生物化學（biochemistry）</b>——關注細胞的化學組成與反應；<b>遺傳學（genetics）</b>——關注資訊如何在世代間傳遞。三者原本各自獨立發展，但自 1925 年前後開始逐漸匯流成今日的細胞生物學。</p>
+
+<div class="figure-wrap">
+  <svg viewBox="0 0 700 230" width="100%" style="max-width:640px;">
+    <text x="40" y="30" font-size="13" fill="#c97a2b" font-weight="bold">細胞學（橘）</text>
+    <path d="M40 45 C 250 45, 400 100, 600 115" stroke="#c97a2b" stroke-width="6" fill="none"/>
+    <text x="40" y="110" font-size="13" fill="#3a8c52" font-weight="bold">生物化學（綠）</text>
+    <path d="M40 125 C 250 125, 400 110, 600 115" stroke="#3a8c52" stroke-width="6" fill="none"/>
+    <text x="40" y="200" font-size="13" fill="#2f6fb0" font-weight="bold">遺傳學（藍）</text>
+    <path d="M40 190 C 250 190, 400 130, 600 115" stroke="#2f6fb0" stroke-width="6" fill="none"/>
+    <circle cx="600" cy="115" r="10" fill="hsl(137.5,45%,35%)"/>
+    <text x="565" y="145" font-size="13" fill="hsl(137.5,45%,30%)" font-weight="bold">現代細胞生物學</text>
+    <text x="30" y="225" font-size="11" fill="#555">約1600年 → → → → → → → 現今（三脈絡自約1925年起逐漸匯流）</text>
+  </svg>
+  <p class="figure-caption"><b>圖 1-3 重製：細胞生物學時間軸概念圖。</b>細胞學、生物化學與遺傳學原本是各自獨立的學門，自 1925 年前後逐漸交會、整合為現代細胞生物學。</p>
+</div>
+
+<div class="badge-row">
+  <span class="badge cyto">細胞學：結構</span>
+  <span class="badge bio">生物化學：化學/功能</span>
+  <span class="badge gene">遺傳學：資訊流動</span>
+</div>
+
+<h3>細胞學脈絡：探討細胞結構</h3>
+<p>細胞學是三股脈絡中最早出現的，其發展高度仰賴光學顯微鏡，字首 <i>cyto–</i> 或字尾 <i>–cyte</i>（源自希臘文，意為「空腔」）在生物學詞彙中常代表「細胞」。</p>
+
+<h4>細胞的尺度單位</h4>
+<p>細胞與胞器的大小遠超出肉眼可見範圍，常用單位如下：</p>
+<ul>
+  <li><b>微米（micrometer, µm）</b>：百萬分之一公尺（10⁻⁶ m），適合描述細胞與胞器大小。細菌細胞約數微米，動植物細胞則大 10–20 倍；粒線體、葉綠體等胞器也約在微米等級。</li>
+  <li><b>奈米（nanometer, nm）</b>：十億分之一公尺（10⁻⁹ m，等於 1/1000 µm），用於描述光學顯微鏡看不到的分子與次細胞構造，如核糖體（約 25–30 nm）、細胞膜、微管、微絲、DNA 分子。</li>
+  <li><b>埃（angstrom, Å）</b>：等於 0.1 nm，約一個氫原子大小，用於描述蛋白質與 DNA 分子內部的精細尺度。</li>
+</ul>
+
+<div class="figure-wrap">
+  <div class="scale-bar">
+    <div class="scale-seg" style="background:#8a8a8a; flex:0.6;">原子<br>0.1nm</div>
+    <div class="scale-seg" style="background:#6c9bd1; flex:1;">DNA/蛋白質<br>1–10nm</div>
+    <div class="scale-seg" style="background:#5aa66b; flex:1.4;">核糖體/膜/微管<br>7–30nm</div>
+    <div class="scale-seg" style="background:hsl(137.5,45%,45%); flex:1.8;">病毒<br>~100nm</div>
+    <div class="scale-seg" style="background:hsl(137.5,45%,35%); flex:2.4;">粒線體/細菌<br>1–10µm</div>
+    <div class="scale-seg" style="background:hsl(137.5,45%,25%); flex:3;">真核細胞<br>10–100µm</div>
+  </div>
+  <p class="figure-caption"><b>圖 1-4／1-5 重製：微米與奈米的世界（尺度示意）。</b>由左至右代表尺度由小到大：肉眼僅能看到 100 µm 以上的物體；光學顯微鏡可解析至約 200 nm；電子顯微鏡可解析至約 2 nm。（尺度為對數關係示意，非等比例繪製）</p>
+</div>
+
+<h4>顯微鏡技術：光學顯微鏡與電子顯微鏡</h4>
+<p><b>光學顯微鏡（light microscope）</b>是最早的工具，最基本的型式為<i>明視野顯微鏡（brightfield microscopy）</i>，但標本常須固定、去水、包埋、切片並染色，因此觀察到的可能是製片過程造成的假影，而非活細胞的真實樣貌。為了觀察活細胞，發展出<i>相位差顯微鏡</i>、<i>微分干涉對比顯微鏡</i>、<i>螢光顯微鏡（fluorescence microscopy）</i>與<i>共軛焦顯微鏡（confocal microscopy）</i>等技術。</p>
+
+<p>螢光顯微鏡能偵測特定蛋白質、DNA 序列等分子，方式是將其連結螢光染料、螢光蛋白，或以螢光標記的<b>抗體（antibody）</b>（一種可辨識並結合特定目標分子〔抗原〕的免疫系統蛋白）進行標記。共軛焦顯微鏡以雷射光只照亮單一平面，克服了一般螢光顯微鏡影像模糊的問題。</p>
+
+<p>顯微鏡的<b>解析度（limit of resolution）</b>是指兩個相鄰物體必須相距多遠才能被辨識為兩個獨立個體；解析度數值越小，代表<b>解析力（resolving power）</b>越強。由於光的波長限制，光學顯微鏡的理論解析極限約為可見光波長的一半，即約 200–350 nm。<b>電子顯微鏡（electron microscope）</b>於 1931 年由 Max Knoll 與 Ernst Ruska 於德國發明，利用電子束取代可見光，因電子波長遠短於可見光，解析度可達約 2 nm，比光學顯微鏡強約 100 倍。</p>
+
+<table class="compare-table">
+<caption style="caption-side:top; text-align:left; font-weight:700; color:var(--primary); margin-bottom:.4rem;">
+🔍 容易混淆的概念比較：光學顯微鏡 vs. 電子顯微鏡
+</caption>
+<tr><th>比較項目</th><th>A：光學顯微鏡（Light Microscope）</th><th>B：電子顯微鏡（Electron Microscope）</th></tr>
+<tr><td>成像介質</td><td>可見光</td><td>電子束</td></tr>
+<tr><td>理論解析極限</td><td>約 200–350 nm</td><td>約 2 nm（約強 100 倍）</td></tr>
+<tr><td>最高有效放大倍率</td><td>約 1000–1400×</td><td>可達約 100,000×</td></tr>
+<tr><td>可否觀察活細胞</td><td>可以（部分技術如螢光/共軛焦）</td><td>不可以（需真空與特殊處理）</td></tr>
+<tr><td>常見類型</td><td>明視野、相位差、螢光、共軛焦</td><td>穿透式（TEM）、掃描式（SEM）</td></tr>
+<tr><td>差異重點</td><td colspan="2">光學顯微鏡波長較長、解析度較低，但能觀察活細胞的動態；電子顯微鏡解析度極高，能看清細部超微結構，但樣本須經固定、脫水、鍍膜等處理，無法觀察活細胞。</td></tr>
+</table>
+
+<div class="tip">
+<div class="box-title">💡 TEM 與 SEM 的差異</div>
+<b>穿透式電子顯微鏡（TEM）</b>：電子束穿透標本成像，可見內部超微結構。<br>
+<b>掃描式電子顯微鏡（SEM）</b>：電子束掃描標本表面、偵測反射電子成像，能呈現立體表面細節。
+</div>
+
+<h4>免疫螢光技術：以抗體標定特定分子</h4>
+<p><b>免疫螢光（immunofluorescence）</b>技術利用抗體對抗原的專一性，將螢光分子連接到抗體上，藉螢光或共軛焦顯微鏡觀察目標分子在細胞內的位置。可分為初級（直接）與次級（間接）兩種方式：</p>
+
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span><br>抗體本身接上螢光染料（fluorophore）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><br>標記抗體直接加入樣本，辨識並結合目標抗原</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><br>以螢光／共軛焦顯微鏡觀察訊號</div>
+</div>
+<p class="figure-caption"><b>圖 1A-2 重製：初級（直接）免疫螢光流程。</b></p>
+
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span><br>未標記的初級抗體加入樣本，結合特定抗原</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><br>帶螢光標記的次級抗體加入，結合初級抗體</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><br>訊號被放大（多個次級抗體可結合單一初級抗體）</div>
+</div>
+<p class="figure-caption"><b>圖 1A-3 重製：次級（間接）免疫螢光流程。</b>因訊號放大效果，次級免疫螢光比初級免疫螢光更敏感。</p>
+
+<table class="compare-table">
+<caption style="caption-side:top; text-align:left; font-weight:700; color:var(--primary); margin-bottom:.4rem;">
+🔍 容易混淆的概念比較：初級免疫螢光 vs. 次級免疫螢光
+</caption>
+<tr><th>比較項目</th><th>A：初級（直接）免疫螢光</th><th>B：次級（間接）免疫螢光</th></tr>
+<tr><td>螢光標記對象</td><td>直接標記在辨識抗原的抗體上</td><td>標記在「次級抗體」，用於結合初級抗體</td></tr>
+<tr><td>使用抗體數量</td><td>1 種（已標記）</td><td>2 種（初級未標記＋次級已標記）</td></tr>
+<tr><td>訊號強度</td><td>較弱</td><td>較強（訊號放大）</td></tr>
+<tr><td>差異重點</td><td colspan="2">次級免疫螢光因一個抗原可結合多個初級抗體，且每個初級抗體又可結合多個帶螢光的次級抗體，因此訊號被層層放大，靈敏度優於初級免疫螢光。</td></tr>
+</table>
+
+<h3>生物化學脈絡：生物結構與功能的化學基礎</h3>
+
+<h4>生化反應與代謝路徑</h4>
+<p>1828 年，德國化學家弗里德里希．維勒（Friedrich Wöhler）以無機原料合成出有機化合物尿素，打破「生物體不受物理化學定律支配」的舊觀念。約 30 年後，路易．巴斯德（Louis Pasteur）證明活酵母細胞負責將糖發酵成酒精；1897 年，畢希納兄弟（Eduard & Hans Buchner）發現離體的酵母萃取液也能進行發酵，證實發酵作用的活性成分是特定的生物催化劑——<b>酶（enzyme）</b>。</p>
+
+<p>1920–1930 年代，科學家陸續闡明了糖解作用（<i>glycolysis</i>，Embden–Meyerhof pathway）與檸檬酸循環（<i>Krebs cycle</i>）等能量代謝路徑；美國生化學家 Fritz Lipmann 證實<b>三磷酸腺苷（adenosine triphosphate, ATP）</b>是細胞主要的能量儲存分子。放射性同位素標記技術（如 ¹⁴C）的應用，使 Melvin Calvin 得以闡明光合作用固碳的<i>卡爾文循環（Calvin cycle）</i>。</p>
+
+<h4>生化技術方法</h4>
+<p><b>離心（centrifugation）</b>依大小、形狀與密度分離次細胞構造與大分子，此過程稱為<b>次細胞分級分離（subcellular fractionation）</b>。1920 年代後期，Theodor Svedberg 發展出<b>超高速離心機（ultracentrifuge）</b>，轉速可超過每分鐘 10 萬轉，離心力可達重力的 50 萬倍以上。此外，<b>層析（chromatography）</b>依分子大小、電荷或親和性分離混合物；<b>電泳（electrophoresis）</b>則利用電場，依分子大小與電荷使其在半固態凝膠中以不同速率移動，常用於分離 DNA、RNA 與蛋白質。蛋白質經電泳分離後，常搭配<b>質譜（mass spectrometry）</b>鑑定其大小與組成。</p>
+
+<h3>遺傳學脈絡：聚焦於資訊流動</h3>
+
+<h4>古典遺傳學</h4>
+<p>遺傳學脈絡始於孟德爾（Gregor Mendel）1866 年發表的豌豆實驗，提出分離律與獨立分配律，即今日所稱的<b>基因（gene）</b>。1880 年，德國生物學家弗萊明（Walther Flemming）辨識出分裂細胞中的<b>染色體（chromosome）</b>，並將分裂過程稱為<i>有絲分裂（mitosis）</i>。1900 年孟德爾的研究被重新發現，隨後美國學者薩頓（Walter Sutton）與德國學者博維里（Theodor Boveri）於數年內提出<b>染色體遺傳理論（chromosome theory of heredity）</b>：孟德爾遺傳因子位於細胞核中的染色體上。摩根（Thomas Hunt Morgan）團隊以果蠅（<i>Drosophila melanogaster</i>）為模式生物，將特定性狀連結至特定染色體，強化了此理論。</p>
+
+<p>與此同時，米歇爾（Johann Friedrich Miescher）於 1869 年發現 DNA（他稱之為「nuclein」），但當時科學家普遍認為 DNA 僅由 4 種核苷酸組成、結構單調，不太可能是遺傳物質；相對地，蛋白質由 20 種胺基酸組成、變化多樣，因此長期被認為才是遺傳訊息的載體。直到 1944 年 Avery、MacLeod 與 McCarty 的細菌轉型實驗，以及 1952 年 Hershey 與 Chase 以噬菌體感染實驗，才確立 DNA 才是真正的遺傳物質。</p>
+
+<h4>分子遺傳學與中心法則</h4>
+<p>1953 年，華生（James Watson）與克里克（Francis Crick）借助富蘭克林（Rosalind Franklin）的 X 光繞射影像，提出 DNA 的<b>雙股螺旋（double helix）</b>模型，說明 DNA 如何透過互補鹼基配對進行精確複製。克里克進一步提出<b>中心法則（central dogma）</b>，描述遺傳資訊的流動方向：</p>
+
+<div class="figure-wrap">
+  <div class="flow">
+    <div class="flow-step" style="border-color:#2f6fb0;"><span class="num" style="background:#2f6fb0;">1</span><br><b>複製</b><br>DNA → DNA<br><span style="font-size:.78rem;color:#555;">（細胞分裂前完整複製一次）</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" style="border-color:#3a8c52;"><span class="num" style="background:#3a8c52;">2</span><br><b>轉錄 transcription</b><br>DNA → mRNA<br><span style="font-size:.78rem;color:#555;">（細胞核內）</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" style="border-color:#c97a2b;"><span class="num" style="background:#c97a2b;">3</span><br><b>轉譯 translation</b><br>mRNA → 蛋白質<br><span style="font-size:.78rem;color:#555;">（細胞質，核糖體上）</span></div>
+  </div>
+  <p class="figure-caption"><b>圖 1-8 重製：中心法則——細胞內遺傳資訊的流動。</b>真核細胞中，DNA 位於細胞核；轉錄產生的 mRNA 需運輸至細胞質，再由核糖體、tRNA 攜帶胺基酸完成轉譯，合成蛋白質。部分 RNA 病毒（如 HIV）可進行「反轉錄」，屬於中心法則的例外。</p>
+</div>
+
+<table class="compare-table">
+<caption style="caption-side:top; text-align:left; font-weight:700; color:var(--primary); margin-bottom:.4rem;">
+🔍 容易混淆的概念比較：轉錄 vs. 轉譯
+</caption>
+<tr><th>比較項目</th><th>A：轉錄（Transcription）</th><th>B：轉譯（Translation）</th></tr>
+<tr><td>發生位置</td><td>細胞核</td><td>細胞質（核糖體）</td></tr>
+<tr><td>模板／產物</td><td>DNA → mRNA</td><td>mRNA → 蛋白質</td></tr>
+<tr><td>語言是否改變</td><td>否，皆為核酸「語言」不變</td><td>是，由核苷酸序列轉換為胺基酸序列</td></tr>
+<tr><td>差異重點</td><td colspan="2">轉錄僅是核酸之間的訊息「抄寫」，語言不變；轉譯則涉及語言轉換（核苷酸序列→胺基酸序列），因此稱為「translation（翻譯）」。</td></tr>
+</table>
+
+<h4>生物資訊學與「體學」研究</h4>
+<p>DNA 定序技術的發展，加上生物資訊學（bioinformatics，結合電腦科學與生物學分析序列資料）的興起，使人類基因體（human genome，約 32 億個鹼基）於 2003 年由「人類基因體計畫」完整定序完成。<b>基因體學（genomics）</b>研究生物體全部基因；<b>蛋白質體學（proteomics）</b>研究細胞中全部蛋白質（蛋白質體，proteome）的組成與交互作用。此外還衍生出轉錄體學（transcriptomics）、代謝體學（metabolomics）、脂質體學（lipidomics）、離子體學（ionomics）等「–omics」研究領域。</p>
+
+<h4>CRISPR 基因編輯</h4>
+<p><b>CRISPR/Cas9</b>（clustered regularly interspaced short palindromic repeats，成簇規律間隔短迴文重複序列）原本是細菌對抗病毒感染的防禦機制，如今被改造為精準的基因體編輯工具。</p>
+
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span><br>導引 RNA（guide RNA, gRNA）帶領 Cas9 蛋白鎖定基因體上特定序列</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><br>Cas9 於該位置造成 DNA 雙股斷裂</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-branch">
+    <div class="flow-step" style="border-color:#c97a2b;">路徑 A：無修復模板<br>細胞自行修復易出錯 → 基因失去功能（disruption）</div>
+    <div class="flow-step" style="border-color:#3a8c52;">路徑 B：提供修復模板<br>同源修復（HDR）→ 基因序列被精準修正</div>
+  </div>
+</div>
+<p class="figure-caption"><b>圖 1-9 重製：CRISPR 基因體編輯流程。</b>雙股斷裂後的修復方式，決定基因是被破壞還是被精準修正。</p>
+
+<div class="concept-check">
+<b>概念檢核 1.2</b>：若你發現一個缺陷基因使癌細胞更有效率地利用葡萄糖並因此過度增生形成腫瘤，這項發現可能如何同時涉及細胞學、生物化學與遺傳學三大歷史脈絡？
+</div>
+</section>
+
+<!-- ===================== 1.3 ===================== -->
+<section id="sec1-3">
+<h2>1.3 我們如何得知我們所知道的？</h2>
+
+<h3>生物學「事實」可能是不正確的</h3>
+<p>科學上的「事實」其實只是我們目前對自然界最好的理解，會隨新證據而修正。例如，十九世紀曾認為生物體不受一般物理化學定律支配，直到維勒合成尿素、畢希納證明無細胞萃取液也能發酵，此觀念才被推翻。又如，過去認為太陽是生物圈唯一的能量來源，直到發現深海熱泉生態系——當地生物依賴細菌利用硫化氫（H₂S）產生的化學能維生，而非陽光。</p>
+
+<h3>實驗用於檢驗特定假說</h3>
+<p>科學研究通常始於文獻回顧，接著提出可被檢驗的<b>假說（hypothesis）</b>，再設計對照實驗（控制變因、僅改變一項條件）進行驗證。科學家通常不直接「證明」假說，而是嘗試反證其對立的<b>虛無假說（null hypothesis）</b>；若在大量嘗試中都無法推翻虛無假說，則間接支持原假說成立，且重複驗證的次數越多，可信度越高。</p>
+
+<table class="compare-table">
+<caption style="caption-side:top; text-align:left; font-weight:700; color:var(--primary); margin-bottom:.4rem;">
+🔍 容易混淆的概念比較：活體外 vs. 活體內 vs. 電腦模擬實驗
+</caption>
+<tr><th>比較項目</th><th>A：活體外（in vitro，「在玻璃中」）</th><th>B：活體內（in vivo，「在生命中」）</th></tr>
+<tr><td>實驗場域</td><td>試管、培養皿中的純化成分或離體細胞</td><td>活的細胞或完整生物體內</td></tr>
+<tr><td>優點</td><td>條件可精準控制</td><td>更貼近真實生理狀況</td></tr>
+<tr><td>限制</td><td>結果未必反映完整生物體中的實際情形</td><td>變因較難完全控制</td></tr>
+<tr><td>差異重點</td><td colspan="2">兩者常互補使用：先以活體外實驗釐清分子機制，再以活體內實驗驗證其在完整生物體中的意義。另有「電腦模擬（in silico）」，指利用電腦運算巨量數據來檢驗假說，是近年興起的第三種研究取向。</td></tr>
+</table>
+
+<h3>模式生物在現代細胞生物學研究中的關鍵角色</h3>
+<p>許多細胞功能可用離體的細胞培養（cell culture）研究，但要理解細胞在完整生物體中的行為，科學家發展出多種<b>模式生物（model organism）</b>——被廣泛研究、特性清楚且易於操作的物種。</p>
+
+<table>
+<tr><th>模式生物</th><th>類型</th><th>主要優勢</th></tr>
+<tr><td><i>E. coli</i>（大腸桿菌）</td><td>原核單細胞</td><td>生長快（世代時間20分鐘）、易誘變、易轉形，是分子生物學的主力工具</td></tr>
+<tr><td><i>S. cerevisiae</i>（酵母菌）</td><td>真核單細胞</td><td>易培養與誘變，突變株資源豐富，廣泛用於研究細胞週期與蛋白質交互作用</td></tr>
+<tr><td><i>D. melanogaster</i>（果蠅）</td><td>真核多細胞</td><td>世代時間短（2週）、性狀易觀察，廣泛用於胚胎發育與訊息傳遞研究</td></tr>
+<tr><td><i>C. elegans</i>（線蟲）</td><td>真核多細胞</td><td>透明、細胞命運已完全定位，適合研究細胞分化與發育</td></tr>
+<tr><td><i>M. musculus</i>（小鼠）</td><td>哺乳類</td><td>與人類生理相似度高，廣泛用於疾病模式與基因剔除研究</td></tr>
+<tr><td><i>A. thaliana</i>（阿拉伯芥）</td><td>開花植物</td><td>基因體小、生活史短（6週），廣泛用於植物特有過程的研究</td></tr>
+</table>
+
+<div class="clinical">
+<div class="box-title">🏥 臨床關聯：海拉細胞（HeLa cells）</div>
+1951 年，來自子宮頸癌病人 Henrietta Lacks 的腫瘤組織樣本，被培養出人類史上第一株「永生化」細胞株——<b>海拉細胞（HeLa cells）</b>。這些細胞因體內 <i>myc</i> 基因附近插入了人類乳突病毒（HPV）序列而過度表現，並異常表現<b>端粒酶（telomerase）</b>，使其能無限分裂。海拉細胞後續被廣泛用於病毒學、癌症與 AIDS 研究，並在小兒麻痺疫苗開發中扮演關鍵角色，至今已被引用於超過 7 萬篇科學論文。此案例也引發重要的研究倫理議題：組織捐贈者對其細胞後續用途與商業利益，應享有多少知情與參與權？
+</div>
+
+<div class="concept-check">
+<b>連結思考 1.1</b>：哪一種顯微鏡技術最適合利用 <i>C. elegans</i>（線蟲）的透明特性，觀察其體內特定的內部構造？
+</div>
+
+<h3>精心設計的實驗一次只改變一個變因</h3>
+<p>典型的細胞生物學實驗中，研究者刻意改變的條件稱為<b>獨立變因（independent variable）</b>，而依此改變而變化、被測量的結果稱為<b>依變因（dependent variable）</b>。例如研究溫度對細胞生長速率的影響，溫度是獨立變因，生長速率是依變因，其餘培養條件須維持不變。基因突變株之所以珍貴，正是因為它們讓研究者能在「其餘 DNA 皆相同」的前提下，僅改變單一基因，藉此判斷該基因的功能；未改變 DNA 的原始個體稱為<b>野生型（wild type）</b>。</p>
+
+<div class="concept-check">
+<b>連結思考 1.2</b>：科學家在製作基因剔除小鼠時，通常使用近交系（inbred）小鼠品系。根據「精心設計實驗」的原則，這麼做的重要性是什麼？
+</div>
+</section>
+
+<!-- ===================== 比較表彙整 ===================== -->
+<section id="compare">
+<h2>重要比較表彙整</h2>
+<p>本章出現的核心比較表，統整如下，便於複習時快速對照：</p>
+<ol>
+  <li>光學顯微鏡 vs. 電子顯微鏡（見 1.2）</li>
+  <li>初級 vs. 次級免疫螢光（見 1.2）</li>
+  <li>轉錄 vs. 轉譯（見 1.2）</li>
+  <li>活體外 vs. 活體內 vs. 電腦模擬實驗（見 1.3）</li>
+</ol>
+</section>
+
+<!-- ===================== Key Takeaways ===================== -->
+<section id="takeaways" class="key-takeaways">
+<h2>Key Takeaways</h2>
+<ol>
+  <li><b>細胞學說（cell theory）</b>三原則：所有生物由細胞組成；細胞是結構的基本單位；所有細胞源自既存細胞。</li>
+  <li>細胞學說的建立仰賴顯微鏡技術的進步，關鍵人物包括 Hooke、van Leeuwenhoek、Brown、Schleiden、Schwann 與 Virchow。</li>
+  <li>現代細胞生物學由<b>細胞學、生物化學、遺傳學</b>三股歷史脈絡交織而成，約自 1925 年起逐漸整合。</li>
+  <li>顯微鏡尺度單位：<b>微米（µm）</b>用於細胞與胞器；<b>奈米（nm）</b>用於分子與次細胞構造；<b>解析度</b>越小、解析力越強。光學顯微鏡極限約 200 nm，電子顯微鏡約 2 nm。</li>
+  <li><b>免疫螢光</b>利用抗體專一性標定特定分子；次級（間接）免疫螢光因訊號放大，比初級（直接）更敏感。</li>
+  <li>生物化學脈絡的關鍵貢獻：<b>酶</b>作為生物催化劑、<b>ATP</b>為能量貨幣、糖解作用與克氏循環等代謝路徑；常用技術包含離心、層析、電泳、質譜。</li>
+  <li><b>中心法則</b>：DNA →（轉錄）→ mRNA →（轉譯）→ 蛋白質；轉錄不改變「語言」，轉譯則涉及核苷酸到胺基酸的語言轉換。</li>
+  <li><b>CRISPR/Cas9</b>利用 gRNA 導引造成 DNA 雙股斷裂，搭配修復模板可精準編輯基因體。</li>
+  <li>科學「事實」具有暫時性，會隨新證據修正；良好實驗設計強調一次僅改變一個<b>獨立變因</b>，並常以虛無假說驗證。</li>
+  <li><b>模式生物</b>（E. coli、酵母菌、果蠅、線蟲、小鼠、阿拉伯芥）與海拉細胞等細胞培養系統，是現代細胞生物學研究不可或缺的工具。</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+  <div>第1章：細胞生物學導論｜學習指南</div>
+  <button id="backToTop">⬆ Back to Top</button>
+</footer>
+
+<script>
+  document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  const navLinks = Array.from(document.querySelectorAll('#mainNav a'));
+  const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+
+  function updateActiveNav(){
+    const navHeight = document.querySelector('nav').offsetHeight;
+    let currentIndex = 0;
+    const scrollPos = window.scrollY + navHeight + 20;
+    sections.forEach((sec, i) => {
+      if(sec && sec.offsetTop <= scrollPos){
+        currentIndex = i;
+      }
+    });
+    navLinks.forEach((a, i) => {
+      a.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('resize', updateActiveNav);
+  updateActiveNav();
+</script>
+
+</body>
+</html>

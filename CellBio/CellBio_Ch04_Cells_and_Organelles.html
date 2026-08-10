@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4章：細胞與胞器｜學習指南</title>
+<style>
+  :root{
+    --hue: 190;
+    --primary: hsl(190,45%,35%);
+    --primary-dark: hsl(190,50%,24%);
+    --primary-light: hsl(190,45%,92%);
+    --primary-mid: hsl(190,40%,80%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(190,30%,82%);
+    --clinical: hsl(6,60%,45%);
+    --clinical-light: hsl(6,70%,95%);
+    --process: hsl(38,70%,40%);
+    --process-light: hsl(38,80%,94%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.85;
+    font-size:16px;
+  }
+  img,svg{max-width:100%;}
+
+  header{
+    padding:2.5rem 1rem 2rem;
+    text-align:center;
+    background: linear-gradient(180deg, var(--primary-light), #fff);
+    border-bottom:1px solid var(--border);
+  }
+  header h1{
+    margin:0 auto;
+    max-width:900px;
+    color:var(--primary-dark);
+    font-size:1.9rem;
+    letter-spacing:.02em;
+  }
+  header p.subtitle{
+    margin:.6rem auto 0;
+    max-width:700px;
+    color:#555;
+    font-size:.95rem;
+  }
+
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(4px);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:.25rem;
+    margin:0;
+    padding:.5rem .75rem;
+    overflow-x:auto;
+    max-width:1024px;
+    scrollbar-width:thin;
+  }
+  nav a{
+    display:block;
+    white-space:nowrap;
+    padding:.5rem .9rem;
+    border-radius:999px;
+    color:var(--primary-dark);
+    text-decoration:none;
+    font-size:.88rem;
+    transition:background .2s,color .2s;
+    border:1px solid transparent;
+  }
+  nav a:hover{background:var(--primary-light);}
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:2.5rem 1.25rem 4rem;
+  }
+  section{scroll-margin-top:64px;}
+
+  h2{
+    color:var(--primary-dark);
+    font-size:1.5rem;
+    border-left:6px solid var(--primary);
+    padding-left:.7rem;
+    margin-top:3.2rem;
+    margin-bottom:1.2rem;
+  }
+  h3{
+    color:var(--primary);
+    font-size:1.2rem;
+    margin-top:2.3rem;
+    padding-bottom:.35rem;
+    border-bottom:2px solid var(--primary-light);
+  }
+  h4{
+    color:var(--primary-dark);
+    font-size:1.02rem;
+    margin-top:1.4rem;
+    margin-bottom:.5rem;
+  }
+  p{margin:.85rem 0;}
+  ul,ol{padding-left:1.4rem;}
+  li{margin:.35rem 0;}
+  strong{color:var(--primary-dark);}
+  .term{font-weight:700;color:var(--primary-dark);}
+
+  /* ---- tip / callout boxes ---- */
+  .box{
+    border-radius:12px;
+    padding:1rem 1.1rem;
+    margin:1.3rem 0;
+    border:1px solid var(--border);
+  }
+  .box-title{
+    font-weight:700;
+    margin-bottom:.5rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    font-size:.95rem;
+  }
+  .box-concept{background:var(--primary-light); border-color:var(--primary-mid);}
+  .box-concept .box-title{color:var(--primary-dark);}
+  .box-mechanism{background:#f4f6f0; border-color:#cdd8bd;}
+  .box-mechanism .box-title{color:#4c6b2c;}
+  .box-clinical{background:var(--clinical-light); border-color:hsl(6,60%,80%);}
+  .box-clinical .box-title{color:var(--clinical);}
+  .box-check{background:#fff; border:2px dashed var(--primary-mid);}
+  .box-check .box-title{color:var(--primary-dark);}
+
+  /* ---- flow diagram ---- */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.4rem;
+    margin:1.2rem 0;
+    padding:1rem;
+    background:var(--process-light);
+    border:1px solid hsl(38,60%,80%);
+    border-radius:12px;
+  }
+  .flow-step{
+    background:#fff;
+    border:1.5px solid var(--process);
+    border-radius:10px;
+    padding:.55rem .8rem;
+    font-size:.86rem;
+    min-width:110px;
+    text-align:center;
+    flex:1 1 120px;
+  }
+  .flow-step b{display:block;color:var(--process);font-size:.82rem;margin-bottom:.15rem;}
+  .flow-arrow{
+    font-size:1.3rem;
+    color:var(--process);
+    flex:0 0 auto;
+  }
+  @media (max-width:600px){
+    .flow{flex-direction:column;}
+    .flow-arrow{transform:rotate(90deg);}
+  }
+
+  /* ---- compare table ---- */
+  .compare-wrap{overflow-x:auto; margin:1.3rem 0;}
+  table.compare{
+    border-collapse:collapse;
+    width:100%;
+    min-width:480px;
+    font-size:.92rem;
+  }
+  table.compare caption{
+    text-align:left;
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:.5rem;
+    font-size:.98rem;
+  }
+  table.compare th, table.compare td{
+    border:1px solid var(--border);
+    padding:.6rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.compare th{
+    background:var(--primary);
+    color:#fff;
+  }
+  table.compare tr:nth-child(even) td{background:var(--primary-light);}
+
+  table.datatable{border-collapse:collapse;width:100%;font-size:.85rem;min-width:600px;}
+  table.datatable th,table.datatable td{border:1px solid var(--border); padding:.45rem .6rem;}
+  table.datatable th{background:var(--primary); color:#fff;}
+  table.datatable tr:nth-child(even) td{background:var(--primary-light);}
+
+  figure{
+    margin:1.4rem 0;
+    padding:1rem;
+    background:#fafcfb;
+    border:1px solid var(--border);
+    border-radius:12px;
+    text-align:center;
+  }
+  figcaption{
+    font-size:.85rem;
+    color:#555;
+    margin-top:.6rem;
+    text-align:left;
+  }
+  figcaption b{color:var(--primary-dark);}
+
+  .badge{
+    display:inline-block;
+    background:var(--primary);
+    color:#fff;
+    border-radius:6px;
+    padding:.05rem .5rem;
+    font-size:.78rem;
+    margin-right:.4rem;
+  }
+
+  .takeaways{
+    background:var(--primary-light);
+    border:1px solid var(--primary-mid);
+    border-radius:14px;
+    padding:1.3rem 1.4rem;
+  }
+  .takeaways ol{padding-left:1.3rem;}
+  .takeaways li{margin:.6rem 0;}
+
+  footer{
+    text-align:center;
+    padding:2.5rem 1rem 3rem;
+    background:var(--primary-light);
+    border-top:1px solid var(--border);
+    color:var(--primary-dark);
+  }
+  #back-to-top{
+    display:inline-block;
+    margin-top:.8rem;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:.6rem 1.4rem;
+    border-radius:999px;
+    font-size:.9rem;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  #back-to-top:hover{background:var(--primary-dark);}
+
+  @media (max-width:1024px){
+    main{padding:2rem 1rem 3rem;}
+  }
+  @media (max-width:768px){
+    header h1{font-size:1.45rem;}
+    h2{font-size:1.25rem;}
+    h3{font-size:1.08rem;}
+    nav ul{justify-content:flex-start;}
+    body{font-size:15px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第4章：細胞與胞器</h1>
+  <p class="subtitle">從生命起源到真核細胞構造：探索細胞如何組織、分工與運作</p>
+</header>
+
+<nav>
+  <ul id="nav-list">
+    <li><a href="#s1" data-target="s1">4.1 最初細胞的起源</a></li>
+    <li><a href="#s2" data-target="s2">4.2 細胞的基本特性</a></li>
+    <li><a href="#s3" data-target="s3">4.3 真核細胞總覽</a></li>
+    <li><a href="#s4" data-target="s4">4.4 病毒與感染因子</a></li>
+    <li><a href="#s5" data-target="s5">重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+<section id="s1">
+<h2>4.1 最初細胞的起源</h2>
+<p>生命究竟如何開始，至今仍是科學史上最迷人的謎題之一。由於我們無法確知早期地球的精確環境條件，科學家只能在實驗室中重建可能的條件，觀察哪些化學反應能產生生命所需的基本材料。目前的推測認為，最早的細胞經歷了以下四個階段：</p>
+
+<div class="flow">
+  <div class="flow-step"><b>階段①</b>非生物合成簡單有機分子<br>（胺基酸、含氮鹼基）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>階段②</b>單體聚合成巨分子<br>（蛋白質、核酸）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>階段③</b>出現能自我複製並儲存<br>遺傳訊息的巨分子</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>階段④</b>此分子被包覆於簡單<br>膜中，形成原始細胞</div>
+</div>
+
+<h3>簡單有機分子的非生物合成</h3>
+<p>早期地球大氣可能缺乏氧氣，卻富含水氣與火山噴發釋出的氣體。要形成有機分子（如胺基酸、核酸鹼基、單醣），需要能量來源——閃電與紫外線輻射是可能的候選者。</p>
+
+<div class="box box-mechanism">
+<div class="box-title">🧪 經典實驗：米勒－尤瑞實驗（Miller–Urey experiment, 1953）</div>
+<p>史丹利．米勒（Stanley Miller）設計了一套裝置，測試「早期大氣中的閃電放電，是否足以將簡單氣體轉化為有機分子」這個假說。</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="米勒實驗裝置示意圖" font-family="sans-serif">
+  <circle cx="480" cy="95" r="70" fill="none" stroke="var(--primary)" stroke-width="3"/>
+  <text x="480" y="70" text-anchor="middle" font-size="12" fill="var(--text)">模擬大氣</text>
+  <text x="480" y="86" text-anchor="middle" font-size="11" fill="var(--text)">CH4  NH3  H2</text>
+  <path d="M455 60 L465 78 L450 78 L462 100" stroke="var(--process)" stroke-width="3" fill="none"/>
+  <text x="480" y="115" text-anchor="middle" font-size="10" fill="var(--process)">電極放電</text>
+
+  <rect x="440" y="150" width="80" height="26" rx="4" fill="none" stroke="var(--primary)" stroke-width="2"/>
+  <text x="480" y="167" text-anchor="middle" font-size="10" fill="var(--text)">冷凝器（冷水）</text>
+
+  <path d="M420 40 Q380 40 380 100 L380 220" stroke="var(--primary)" stroke-width="2" fill="none"/>
+  <path d="M380 220 Q380 245 405 245 L440 245" stroke="var(--primary)" stroke-width="2" fill="none"/>
+  <text x="330" y="150" font-size="10" fill="var(--text)" text-anchor="middle">U 型阱</text>
+
+  <ellipse cx="130" cy="230" rx="80" ry="45" fill="none" stroke="var(--primary)" stroke-width="3"/>
+  <text x="130" y="220" text-anchor="middle" font-size="11" fill="var(--text)">沸騰燒瓶</text>
+  <text x="130" y="238" text-anchor="middle" font-size="10" fill="var(--text)">H2O 加熱產生水蒸氣</text>
+
+  <path d="M130 185 Q200 120 400 100" stroke="var(--primary)" stroke-width="2" fill="none" marker-end="url(#arrow1)"/>
+  <path d="M440 245 Q280 260 130 260" stroke="var(--primary)" stroke-width="2" fill="none" stroke-dasharray="5,4" marker-end="url(#arrow1)"/>
+  <text x="270" y="285" text-anchor="middle" font-size="10" fill="var(--text)">凝結液回流（含胺基酸）</text>
+
+  <defs>
+    <marker id="arrow1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="var(--primary)"/>
+    </marker>
+  </defs>
+</svg>
+<figcaption><b>圖 4-1（重繪）</b> 米勒的實驗裝置：水蒸氣與模擬大氣氣體在上方燒瓶中接受電極放電，冷凝後的液體經 U 型阱流回沸騰燒瓶。運作一週後，燒瓶中偵測到微量的甘胺酸（glycine）與丙胺酸（alanine）。</figcaption>
+</figure>
+
+<p>雖然米勒僅得到兩種最簡單的胺基酸，但這證明在<strong>非生物（abiotic）</strong>條件下確實能合成生命所需的有機物；後續以不同模擬大氣重複的實驗，還偵測到甲醛、氰化氫、簡單醣類，甚至腺嘌呤（adenine）。2007 年，科學家重新分析米勒 1953 年模擬火山噴發的樣本，發現其中的胺基酸種類遠比當初測得的更豐富。除了大氣放電，深海熱泉的礦物（如黃鐵礦 FeS₂）也可能提供催化環境，這或許能解釋為何今日許多代謝酵素含有鐵－硫叢集。</p>
+
+<h3>RNA 世界假說：最初的遺傳訊息分子</h3>
+<p>現今細胞中的訊息流向是 DNA → RNA → 蛋白質，但這並不代表 DNA 是最早出現的資訊分子。問題在於：DNA 複製需要蛋白質酵素，而這些酵素的產生又需要 DNA 提供的訊息——這是一個先有雞還是先有蛋的矛盾。許多科學家因此認為，<span class="term">核糖核酸（RNA）</span>才是最初的遺傳訊息分子，理由是 DNA 的去氧核糖核苷酸單體其實是由核糖核苷酸經酵素轉換而來，暗示 RNA 在演化上早於 DNA。</p>
+
+<div class="box box-mechanism">
+<div class="box-title">🔑 關鍵發現：核酶（ribozyme）</div>
+<p>1980 年代初，Sidney Altman 與 Thomas Cech 發現某些 RNA 能摺疊成類似蛋白質酵素的形狀，具有催化能力，稱為<span class="term">核酶（ribozyme）</span>。核酶能以互補鹼基配對催化短 RNA 片段的合成——這正是「RNA 世界（RNA world）」假說的重要證據。現今核糖體中負責催化胜肽鍵形成的，也是核糖體 RNA（rRNA）而非蛋白質，進一步支持此假說。</p>
+</div>
+
+<p>不過此假說仍有限制：目前尚未證實 RNA 能催化合成與自身一樣長的 RNA 聚合物；此外，通用遺傳密碼（密碼子—反密碼子—胺基酸的對應關係）如何演化出來，也仍是未解之謎。</p>
+
+<h3>脂質體與原始細胞的形成</h3>
+<p>即使已有能自我複製的催化型 RNA，若沒有與外界環境分隔的邊界，仍稱不上是細胞。科學家利用膜脂質在水中會自發形成中空的<span class="term">脂質體（liposome）</span>，證實這類囊泡能夠「分裂」繁殖、可以增大，甚至能在內部進行簡單的代謝反應。软質黏土蒙脫石（montmorillonite，源自火山灰）可能加速了脂質體的自組裝，並吸附 RNA 分子；2013 年 Jack Szostak 團隊更成功製造出能複製 RNA 模板的人工囊泡——這些都支持「RNA 被包裹進脂質體、形成最早原始細胞」的情境。</p>
+
+<div class="box box-concept">
+<div class="box-title">💡 概念檢核 4.1</div>
+<p>為什麼許多科學家認為 RNA（而非 DNA）才是最初的遺傳訊息分子？提示：思考 DNA 複製與蛋白質酵素之間互相依賴的矛盾，以及核酶所展現的雙重能力（儲存訊息＋催化反應）。</p>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<section id="s2">
+<h2>4.2 細胞的基本特性</h2>
+<p>當我們開始檢視「細胞是什麼」時，會發現所有細胞都共享一些基本特徵：組織複雜度、大小與形狀的限制，以及功能上的特化。</p>
+
+<h3>生命三域：細菌、古菌與真核生物</h3>
+<p>過去生物學依細胞構造，將生物粗分為兩大類：沒有真正細胞核的<span class="term">原核生物（prokaryotes）</span>（細菌與古菌）與具有膜狀細胞核的<span class="term">真核生物（eukaryotes）</span>（動物、植物、真菌、藻類、原生生物）。但這種二分法逐漸被認為不夠準確——「原核生物」只是一個「沒有什麼」的負面定義，並不代表這些生物彼此有密切的演化關係。</p>
+
+<p>1970 年代，Carl Woese 等人以核糖體 RNA（rRNA）序列比對為基礎，發現傳統所稱的「原核生物」其實包含兩群差異極大的生物：<span class="term">細菌（Bacteria）</span>與<span class="term">古菌（Archaea）</span>，兩者的差異程度不亞於人類與細菌之間的差異。因此現今生物學採用更準確的「生命三域」架構：</p>
+
+<figure>
+<svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="生命三域演化樹" font-family="sans-serif">
+  <circle cx="310" cy="230" r="6" fill="var(--primary)"/>
+  <text x="310" y="252" text-anchor="middle" font-size="12" fill="var(--text)">共同祖先</text>
+  <path d="M310 224 L150 100" stroke="var(--primary)" stroke-width="2.5" fill="none"/>
+  <path d="M310 224 L310 60" stroke="var(--primary)" stroke-width="2.5" fill="none"/>
+  <path d="M310 224 L470 100" stroke="var(--primary)" stroke-width="2.5" fill="none"/>
+
+  <rect x="70" y="70" width="160" height="46" rx="8" fill="var(--primary-light)" stroke="var(--primary)"/>
+  <text x="150" y="90" text-anchor="middle" font-size="13" font-weight="bold" fill="var(--primary-dark)">細菌 Bacteria</text>
+  <text x="150" y="107" text-anchor="middle" font-size="10" fill="var(--text)">E. coli、藍綠菌</text>
+
+  <rect x="230" y="20" width="160" height="46" rx="8" fill="var(--primary-light)" stroke="var(--primary)"/>
+  <text x="310" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="var(--primary-dark)">真核生物 Eukarya</text>
+  <text x="310" y="57" text-anchor="middle" font-size="10" fill="var(--text)">動物、植物、真菌</text>
+
+  <rect x="390" y="70" width="160" height="46" rx="8" fill="var(--primary-light)" stroke="var(--primary)"/>
+  <text x="470" y="90" text-anchor="middle" font-size="13" font-weight="bold" fill="var(--primary-dark)">古菌 Archaea</text>
+  <text x="470" y="107" text-anchor="middle" font-size="10" fill="var(--text)">嗜熱菌、嗜鹽菌</text>
+
+  <path d="M390 96 Q350 60 320 40" stroke="var(--process)" stroke-width="1.6" stroke-dasharray="4,3" fill="none"/>
+  <text x="380" y="150" text-anchor="middle" font-size="10" fill="var(--process)">古菌與真核生物的親緣關係較近</text>
+</svg>
+<figcaption><b>圖 4-3（重繪）</b> 生命三域的分支關係。根據 rRNA 序列比對，古菌與真核生物享有較近的共同祖先，兩者在 DNA 複製、轉錄與轉譯起始的機制上也較為相似。</figcaption>
+</figure>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>【易混淆概念比較】原核生物（細菌與古菌）與真核生物</caption>
+<thead><tr><th style="width:30%">A．原核生物（細菌／古菌）</th><th style="width:30%">B．真核生物</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td>無膜狀細胞核，DNA 位於<span class="term">類核（nucleoid）</span></td><td>有真正的膜狀細胞核</td><td>「eu-真正、-karyon核」是兩域最經典的區分依據</td></tr>
+<tr><td>細胞小（約 1–5 µm），構造簡單</td><td>細胞大（約 10–100 µm），構造複雜</td><td>真核細胞以胞器分工彌補較低的表面積／體積比</td></tr>
+<tr><td>通常無膜狀胞器</td><td>具粒線體、內質網、高基氏體等膜狀胞器</td><td>真核生物以胞器分隔代謝反應，效率更高</td></tr>
+<tr><td>DNA 多為單一環狀分子，結合蛋白質少（古菌略多）</td><td>DNA 為多條線形分子，與組蛋白（histone）緊密纏繞成染色質</td><td>真核 DNA 需高度摺疊以塞入細胞核</td></tr>
+<tr><td>以<span class="term">二分裂（binary fission）</span>繁殖</td><td>以<span class="term">有絲分裂＋胞質分裂</span>繁殖</td><td>真核生物需精確分配多條染色體</td></tr>
+<tr><td>轉錄後 RNA 幾乎不需加工，可邊轉錄邊轉譯</td><td>mRNA 需經過加工、修飾後才能離開細胞核轉譯</td><td>無核膜使原核生物轉錄轉譯可同時進行</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="box box-check">
+<div class="box-title">📊 補充資料：表 4-1（節錄）三域細胞特徵比較</div>
+<div class="compare-wrap">
+<table class="datatable">
+<thead><tr><th>特徵</th><th>細菌</th><th>古菌</th><th>真核生物</th></tr></thead>
+<tbody>
+<tr><td>典型大小</td><td>1–5 µm</td><td>1–5 µm</td><td>10–100 µm</td></tr>
+<tr><td>核糖體沉降係數</td><td>70S</td><td>70S</td><td>80S</td></tr>
+<tr><td>細胞壁成分</td><td>peptidoglycan（胜肽聚醣）</td><td>蛋白質～peptidoglycan 類似物</td><td>植物：纖維素；真菌：幾丁質；動物：無</td></tr>
+<tr><td>轉錄／轉譯起始型式</td><td>細菌型</td><td>真核型</td><td>真核型</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>細胞大小的限制</h3>
+<p>細胞大小差異極大：最小的細菌僅約 0.2–0.3 µm，最長的神經細胞可達 1 公尺以上。但絕大多數細胞仍落在一個可預期的範圍內，主要受三項因素限制：</p>
+<ol>
+<li><strong>表面積／體積比（surface area/volume ratio）</strong>——決定物質交換效率</li>
+<li>分子擴散的速率</li>
+<li>維持特定物質、酵素局部濃度的需求</li>
+</ol>
+
+<div class="box box-mechanism">
+<div class="box-title">📐 為什麼細胞不能無限長大？</div>
+<p>細胞體積隨邊長的<strong>三次方</strong>增加，但表面積只隨邊長的<strong>平方</strong>增加。當細胞變大，表面積的成長跟不上體積的成長，導致物質交換（養分攝取、廢物排出）的效率下降。</p>
+</div>
+
+<figure>
+<div style="display:flex; justify-content:center; align-items:flex-end; gap:2.2rem; flex-wrap:wrap; padding:1rem 0;">
+  <div style="text-align:center;">
+    <div style="width:70px;height:70px;background:var(--primary-light);border:2px solid var(--primary);border-radius:6px;margin:0 auto;"></div>
+    <p style="font-size:.8rem;margin:.4rem 0 0;">1000 個小細胞<br>邊長 2 µm<br>SA/V = <b>3.0</b></p>
+  </div>
+  <div style="text-align:center;">
+    <div style="width:95px;height:95px;background:var(--primary-light);border:2px solid var(--primary);border-radius:6px;margin:0 auto;"></div>
+    <p style="font-size:.8rem;margin:.4rem 0 0;">8 個中細胞<br>邊長 10 µm<br>SA/V = <b>0.6</b></p>
+  </div>
+  <div style="text-align:center;">
+    <div style="width:130px;height:130px;background:var(--primary-light);border:2px solid var(--primary);border-radius:6px;margin:0 auto;"></div>
+    <p style="font-size:.8rem;margin:.4rem 0 0;">1 個大細胞<br>邊長 20 µm<br>SA/V = <b>0.3</b></p>
+  </div>
+</div>
+<figcaption><b>圖 4-4（重繪）</b> 三組總體積相同（皆為 8000 µm³）的立方體，個別細胞越大，總表面積與表面積／體積比反而越小。這正是多細胞生物「以多個小細胞取代單一大細胞」的原因之一。</figcaption>
+</figure>
+
+<p>有些細胞會靠內摺或外突來增加有效表面積，例如小腸黏膜細胞表面密布的<span class="term">微絨毛（microvilli）</span>，大幅提升養分吸收能力。而真核細胞則演化出<span class="term">胞器（organelle）</span>——膜狀分隔的功能單位，以分工方式彌補體積增大帶來的效率損失；細菌雖無膜狀胞器，也會以蛋白質複合體在特定位置聚集特定代謝功能。</p>
+
+<h3>三域生物之間的關鍵差異</h3>
+
+<h4>細胞核的有無</h4>
+<p>真核細胞的遺傳物質包在膜狀細胞核內；細菌與古菌的 DNA 則折疊聚集於細胞質中一個稱為<span class="term">類核（nucleoid）</span>的區域，沒有膜包覆。</p>
+
+<h4>內膜系統與胞器</h4>
+<p>細菌與古菌通常沒有內膜系統（藍綠菌例外，具有進行光合作用的內膜）；真核細胞則普遍具有內質網、高基氏體，以及粒線體、葉綠體、溶體、過氧化體等由膜包覆的胞器，各自執行特化功能。</p>
+
+<h4>胞吞與胞吐作用</h4>
+<p><span class="term">胞吞作用（endocytosis）</span>與<span class="term">胞吐作用（exocytosis）</span>是真核細胞特有的膜融合機制：胞吞是細胞膜內陷、包裹外部物質形成囊泡；胞吐則相反，細胞內的囊泡與細胞膜融合，將內容物釋出細胞外。</p>
+
+<h4>DNA 的組織與分離</h4>
+<p>細菌 DNA 通常是單一環狀分子，結合的蛋白質很少；真核 DNA 則是多條線形分子，與大量<span class="term">組蛋白（histone）</span>纏繞形成<span class="term">染色質（chromatin）</span>。以大腸桿菌為例，其環狀 DNA 周長約 1300 µm，卻要塞進僅 1–2 µm 長的細胞中，相當於把 18 公尺長的細線塞進頂針裡。真核細胞的 DNA 總量約為細菌的 1000 倍，因此演化出以多條染色體分裝、並在細胞分裂時精確分離的機制。</p>
+
+<h4>基因表現的方式</h4>
+<p>真核細胞在細胞核內轉錄出較大的 RNA 分子，需經加工與運輸才能送到細胞質進行轉譯，且一條成熟 mRNA 通常只轉譯出一種多肽鏈；細菌則常以一條 mRNA 同時攜帶多個基因的訊息，且幾乎不需要加工，因轉錄與轉譯之間沒有核膜阻隔，兩者可以同步進行。古菌在基因表現機制上，多數特徵反而更接近真核生物。</p>
+
+<div class="box box-concept">
+<div class="box-title">💡 概念檢核 4.2</div>
+<p>若在海洋沉積物中發現一種新生物，你會用哪些方法判斷它屬於細菌、古菌還是真核生物？（提示：可從細胞學、生物化學、遺傳學三個角度切入，例如觀察是否有細胞核、比對核糖體 RNA 序列等。）</p>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<section id="s3">
+<h2>4.3 真核細胞總覽：結構與功能</h2>
+<p>真核細胞在結構上遠比細菌或古菌複雜，主要原因就是它們擁有各種胞器與胞內構造，以分隔不同的功能。大多數真核細胞至少共享四項主要構造：</p>
+<ul>
+<li><strong>細胞膜（plasma membrane）</strong>——界定細胞邊界</li>
+<li><strong>細胞核（nucleus）</strong>——容納指揮細胞活動的 DNA</li>
+<li><strong>膜狀胞器（membrane-bounded organelles）</strong>——各自執行特化功能</li>
+<li><strong>細胞質溶膠（cytosol）與細胞骨架（cytoskeleton）</strong>——半流體基質與支撐纖維</li>
+</ul>
+<p>此外，植物與真菌細胞外側還有堅硬的<span class="term">細胞壁（cell wall）</span>；動物細胞雖無細胞壁，但通常被<span class="term">細胞外基質（extracellular matrix）</span>包圍支撐。以下我們依序巡覽這些構造。</p>
+
+<h3>細胞膜：界定細胞邊界</h3>
+<p>細胞膜由<span class="term">磷脂（phospholipid）</span>與<span class="term">膜蛋白（membrane protein）</span>組成兩層構造。磷脂分子具有疏水性的「尾巴」與親水性的「頭部」，屬於<span class="term">兩性分子（amphipathic molecule）</span>；兩層磷脂的疏水尾巴彼此相對朝內，親水頭部朝外接觸水環境，形成<span class="term">脂雙層（lipid bilayer）</span>——幾乎所有生物膜的基本結構單元，可作為大多數水溶性物質的通透屏障。</p>
+
+<figure>
+<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="細胞膜脂雙層示意圖" font-family="sans-serif">
+  <g id="upper-heads">
+    <!-- top row of phospholipid heads -->
+  </g>
+  <!-- generate two rows of heads/tails -->
+  <g>
+    <!-- top layer -->
+    <line x1="20" y1="70" x2="540" y2="70" stroke="none"/>
+  </g>
+  <g stroke="var(--primary)" stroke-width="1.6" fill="var(--primary-light)">
+    <circle cx="40" cy="60" r="10"/><line x1="40" y1="70" x2="40" y2="100"/>
+    <circle cx="80" cy="60" r="10"/><line x1="80" y1="70" x2="80" y2="100"/>
+    <circle cx="120" cy="60" r="10"/><line x1="120" y1="70" x2="120" y2="100"/>
+    <circle cx="240" cy="60" r="10"/><line x1="240" y1="70" x2="240" y2="100"/>
+    <circle cx="280" cy="60" r="10"/><line x1="280" y1="70" x2="280" y2="100"/>
+    <circle cx="440" cy="60" r="10"/><line x1="440" y1="70" x2="440" y2="100"/>
+    <circle cx="480" cy="60" r="10"/><line x1="480" y1="70" x2="480" y2="100"/>
+    <circle cx="520" cy="60" r="10"/><line x1="520" y1="70" x2="520" y2="100"/>
+  </g>
+  <g stroke="var(--primary)" stroke-width="1.6" fill="var(--primary-light)">
+    <circle cx="40" cy="160" r="10"/><line x1="40" y1="150" x2="40" y2="120"/>
+    <circle cx="80" cy="160" r="10"/><line x1="80" y1="150" x2="80" y2="120"/>
+    <circle cx="120" cy="160" r="10"/><line x1="120" y1="150" x2="120" y2="120"/>
+    <circle cx="240" cy="160" r="10"/><line x1="240" y1="150" x2="240" y2="120"/>
+    <circle cx="280" cy="160" r="10"/><line x1="280" y1="150" x2="280" y2="120"/>
+    <circle cx="440" cy="160" r="10"/><line x1="440" y1="150" x2="440" y2="120"/>
+    <circle cx="480" cy="160" r="10"/><line x1="480" y1="150" x2="480" y2="120"/>
+    <circle cx="520" cy="160" r="10"/><line x1="520" y1="150" x2="520" y2="120"/>
+  </g>
+  <!-- transmembrane protein -->
+  <path d="M170 40 C160 70 160 150 170 180 L200 180 C190 150 190 70 200 40 Z" fill="hsl(38,70%,88%)" stroke="var(--process)" stroke-width="2"/>
+  <text x="185" y="30" text-anchor="middle" font-size="10" fill="var(--process)">膜蛋白</text>
+  <!-- glycoprotein carb chain -->
+  <path d="M370 40 C362 70 362 150 370 180 L395 180 C387 150 387 70 395 40 Z" fill="hsl(38,70%,88%)" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="382" cy="28" r="5" fill="hsl(340,60%,70%)"/>
+  <circle cx="392" cy="20" r="5" fill="hsl(340,60%,70%)"/>
+  <text x="410" y="18" font-size="9" fill="var(--text)">寡醣鏈（醣蛋白）</text>
+  <text x="70" y="200" font-size="10" fill="var(--text)">親水頭部朝外</text>
+  <text x="70" y="112" font-size="10" fill="var(--text)">疏水尾部朝內</text>
+</svg>
+<figcaption><b>圖 4-11（重繪）</b> 細胞膜由脂雙層與嵌入的膜蛋白構成。膜蛋白的親水區露出膜表面，疏水區則埋在膜的疏水核心中；外側常帶有醣鏈而形成醣蛋白（glycoprotein）。</figcaption>
+</figure>
+
+<p>膜蛋白依功能可分為：催化反應的<strong>酵素</strong>、固定細胞骨架的<strong>錨定蛋白</strong>、負責物質運輸的<strong>運輸蛋白</strong>，以及接收外界訊號的<strong>受體蛋白</strong>。多數運輸蛋白與受體蛋白屬於<span class="term">穿膜蛋白（transmembrane protein）</span>，兩端親水區露出膜的內外兩側，中間以疏水的穿膜區相連。</p>
+
+<h3>細胞核：資訊中心</h3>
+<p>細胞核是真核細胞中最顯眼的胞器，內含承載 DNA 的染色體，並由內、外兩層膜構成的<span class="term">核被膜（nuclear envelope）</span>與細胞質分隔。</p>
+
+<figure>
+<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="細胞核示意圖" font-family="sans-serif">
+  <circle cx="200" cy="130" r="105" fill="none" stroke="var(--primary)" stroke-width="4"/>
+  <circle cx="200" cy="130" r="96" fill="var(--primary-light)" stroke="var(--primary)" stroke-width="2"/>
+  <!-- pores -->
+  <circle cx="200" cy="25" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="270" cy="45" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="310" cy="110" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="300" cy="190" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="240" cy="230" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="130" cy="230" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="95" cy="190" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="90" cy="110" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <circle cx="130" cy="45" r="5" fill="#fff" stroke="var(--process)" stroke-width="2"/>
+  <!-- nucleolus -->
+  <ellipse cx="215" cy="140" rx="42" ry="30" fill="hsl(38,70%,85%)" stroke="var(--process)" stroke-width="2"/>
+  <text x="215" y="144" text-anchor="middle" font-size="11" fill="var(--process)">核仁</text>
+  <!-- chromatin threads -->
+  <path d="M130 90 q20 20 0 40 q-20 20 10 35" stroke="var(--primary-dark)" stroke-width="2" fill="none"/>
+  <path d="M150 170 q25 -10 5 -35" stroke="var(--primary-dark)" stroke-width="2" fill="none"/>
+  <text x="200" y="15" text-anchor="middle" font-size="11" fill="var(--text)">核孔（複合體）</text>
+  <text x="345" y="130" font-size="11" fill="var(--text)">核被膜（雙層）</text>
+</svg>
+<figcaption><b>圖 4-12（重繪）</b> 細胞核由雙層核被膜包圍，膜上散布可調控巨分子進出的<span class="term">核孔（nuclear pore）</span>；核內可見負責合成 rRNA 與組裝核糖體次單元的<span class="term">核仁（nucleolus）</span>，以及間期時鬆散分布的染色質（chromatin）纖維。</figcaption>
+</figure>
+
+<p>染色體數目因物種而異，從少數幾條到數百條都有。細胞分裂（有絲分裂）時染色體高度濃縮，容易被觀察到；間期時則以 DNA 與組蛋白複合而成的<span class="term">染色質（chromatin）</span>形式鬆散分布，不易辨識。核內的<span class="term">核仁（nucleolus）</span>負責合成核糖體 RNA，並開始組裝核糖體的蛋白質成分。核被膜上密布稱為<span class="term">核孔（nuclear pore）</span>的通道，由核孔複合體調控水溶性分子（如 mRNA、核糖體蛋白）在細胞核與細胞質之間的運輸。</p>
+
+<h3>粒線體與葉綠體：提供能量的胞器</h3>
+<p>接下來介紹兩個負責能量產生的重要胞器。<span class="term">粒線體（mitochondrion）</span>透過分解醣類提供能量（第10章詳述）；<span class="term">葉綠體（chloroplast）</span>則將太陽能轉換為化學能，用於光合作用（第11章詳述）。</p>
+
+<h4>粒線體</h4>
+<p>粒線體存在於所有真核細胞中，體積可媲美一整個細菌細胞，由<strong>外膜</strong>與<strong>內膜</strong>雙層膜包圍。內膜向內摺疊形成<span class="term">嵴（cristae）</span>，內膜所包圍的半流體物質稱為<span class="term">基質（matrix）</span>，其中除了多種酵素外，還含有環狀的粒線體 DNA 與核糖體。檸檬酸循環的多數步驟發生在基質中，電子傳遞鏈相關的複合體則位於嵴（內膜）上。細胞對 ATP 需求越高的部位，粒線體的數量與位置就越集中——例如精子鞭毛基部、肌肉細胞的收縮纖維周圍。</p>
+
+<h4>葉綠體</h4>
+<p>葉綠體同樣具有內外雙層膜，內部還有第三套膜系統：由扁平囊狀構造<span class="term">類囊體（thylakoid）</span>堆疊形成的<span class="term">基粒（granum，複數 grana）</span>，彼此以基質類囊體（stroma thylakoid）相連。光反應在類囊體膜上進行；將 CO₂ 還原為醣類的反應則發生在填滿葉綠體內部的半流體<span class="term">基質（stroma）</span>中，基質內也含有葉綠體自己的 DNA 與核糖體。葉綠體是<span class="term">質粒體（plastid）</span>家族最著名的成員，其他質粒體還包括負責花果著色的<strong>色素體（chromoplast）</strong>與儲存澱粉的<strong>澱粉體（amyloplast）</strong>。</p>
+
+<figure>
+<svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="粒線體與葉綠體構造比較圖" font-family="sans-serif">
+  <!-- mitochondrion -->
+  <g>
+    <ellipse cx="150" cy="120" rx="130" ry="80" fill="none" stroke="var(--primary)" stroke-width="4"/>
+    <ellipse cx="150" cy="120" rx="118" ry="68" fill="var(--primary-light)" stroke="var(--primary)" stroke-width="2"/>
+    <path d="M60 90 q30 -18 60 0 q30 18 60 0 q30 -18 60 0" stroke="var(--primary-dark)" stroke-width="3" fill="none"/>
+    <path d="M60 120 q30 -18 60 0 q30 18 60 0 q30 -18 60 0" stroke="var(--primary-dark)" stroke-width="3" fill="none"/>
+    <path d="M60 150 q30 -18 60 0 q30 18 60 0 q30 -18 60 0" stroke="var(--primary-dark)" stroke-width="3" fill="none"/>
+    <text x="150" y="228" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--primary-dark)">粒線體：外膜／內膜／嵴／基質</text>
+  </g>
+  <!-- chloroplast -->
+  <g>
+    <ellipse cx="470" cy="120" rx="130" ry="80" fill="none" stroke="hsl(140,40%,35%)" stroke-width="4"/>
+    <ellipse cx="470" cy="120" rx="118" ry="68" fill="hsl(140,40%,92%)" stroke="hsl(140,40%,35%)" stroke-width="2"/>
+    <g>
+      <rect x="400" y="80" width="34" height="14" fill="hsl(140,50%,55%)"/>
+      <rect x="400" y="98" width="34" height="14" fill="hsl(140,50%,55%)"/>
+      <rect x="400" y="116" width="34" height="14" fill="hsl(140,50%,55%)"/>
+    </g>
+    <g>
+      <rect x="470" y="140" width="34" height="14" fill="hsl(140,50%,55%)"/>
+      <rect x="470" y="158" width="34" height="14" fill="hsl(140,50%,55%)"/>
+    </g>
+    <g>
+      <rect x="530" y="90" width="34" height="14" fill="hsl(140,50%,55%)"/>
+      <rect x="530" y="108" width="34" height="14" fill="hsl(140,50%,55%)"/>
+      <rect x="530" y="126" width="34" height="14" fill="hsl(140,50%,55%)"/>
+    </g>
+    <text x="470" y="228" text-anchor="middle" font-size="12" font-weight="bold" fill="hsl(140,40%,30%)">葉綠體：外膜／內膜／類囊體堆疊（基粒）／基質</text>
+  </g>
+</svg>
+<figcaption><b>圖 4-13、4-14（重繪）</b> 粒線體以嵴增加內膜表面積；葉綠體則以類囊體堆疊成基粒，增加捕光面積。兩者皆具雙層膜、環狀 DNA 與自身核糖體。</figcaption>
+</figure>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>【易混淆概念比較】粒線體 vs. 葉綠體</caption>
+<thead><tr><th>A．粒線體</th><th>B．葉綠體</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td>存在於幾乎所有真核細胞</td><td>僅存在於植物與藻類細胞</td><td>粒線體是能量代謝的共同構造，葉綠體是光合生物特有</td></tr>
+<tr><td>分解醣類以產生 ATP（有氧呼吸）</td><td>吸收光能、將 CO₂ 轉為醣類（光合作用）</td><td>粒線體「耗能產能」，葉綠體「捕能造糖」</td></tr>
+<tr><td>內膜摺疊形成嵴（cristae）</td><td>內部另有第三層膜系統：類囊體堆疊成基粒</td><td>葉綠體多一層膜系統，構造更複雜</td></tr>
+<tr><td>反應場所：基質（citric acid cycle）與嵴（電子傳遞鏈）</td><td>反應場所：類囊體（光反應）與基質（碳反應）</td><td>兩者皆有「兩個反應區」的分工模式</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>內共生學說：胞器起源於細菌</h3>
+<p><span class="term">內共生學說（endosymbiont theory）</span>由 Lynn Margulis 於 1967 年提出，主張粒線體與葉綠體是在 10～20 億年前，由古老細菌與原始有核細胞建立<strong>共生關係（symbiotic relationship）</strong>演化而來。支持證據包括：</p>
+<ul>
+<li>粒線體與葉綠體都具有<strong>環狀 DNA</strong>，如同細菌的染色體</li>
+<li>兩者都有自己的<strong>核糖體</strong>，大小與 rRNA 序列都與細菌相近</li>
+<li>兩者皆具<strong>雙層膜</strong>，如同革蘭氏陰性菌</li>
+<li>膜上具有細菌型脂質與蛋白質（例如粒線體的心磷脂與孔蛋白 porin）</li>
+</ul>
+
+<div class="box box-mechanism">
+<div class="box-title">🧬 兩種起源理論：由外而內 vs. 由內而外</div>
+<div class="flow">
+  <div class="flow-step"><b>由外而內</b>細胞膜內摺，逐漸<br>包住 DNA，形成核被膜</div>
+  <div class="flow-arrow">＋</div>
+  <div class="flow-step">以吞噬作用吞入細菌<br>（未消化，形成胞器前身）</div>
+</div>
+<div class="flow">
+  <div class="flow-step"><b>由內而外</b>細胞膜向外突出<br>指狀突起，捕捉表面細菌</div>
+  <div class="flow-arrow">＋</div>
+  <div class="flow-step">突起擴張、融合，<br>形成內質網等內膜系統</div>
+</div>
+<p style="margin-top:.6rem;font-size:.9rem;">兩種理論最終都指向：原始核膜與原始粒線體共同出現。2015～2020 年在挪威、日本海域發現的<span class="term">洛基古菌（Lokiarchaeota）</span>及其「阿斯嘉」超門親緣類群，具有類似「由內而外」模型所預測的中間型構造（指狀突起＋類核區），為這個理論提供了實證支持。</p>
+</div>
+
+<p>粒線體的 rRNA 序列與現生<strong>紫色需氧細菌</strong>最相近；葉綠體的 rRNA 序列則與<strong>藍綠菌（cyanobacteria）</strong>最相近——這也解釋了為何葉綠體具有與藍綠菌相同的類囊體構造。今日仍有超過 150 種原生生物與無脊椎動物與藻類、光合細菌維持內共生關係，進一步支持這個學說的合理性。</p>
+
+<h3>內膜系統：蛋白質的生產與運送網絡</h3>
+<p>接下來的一組胞器共同構成動態的<span class="term">內膜系統（endomembrane system）</span>，負責合成蛋白質並依目的地分裝、運送。</p>
+
+<h4>內質網（endoplasmic reticulum, ER）</h4>
+<p>內質網是延伸於細胞質中的管狀膜與扁平囊（<span class="term">池狀構造 cisternae</span>）網絡，內部空間稱為<span class="term">腔（lumen）</span>，並與核被膜外膜相連。內質網分為兩型：</p>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>【易混淆概念比較】粗糙內質網 vs. 平滑內質網</caption>
+<thead><tr><th>A．粗糙內質網（rough ER）</th><th>B．平滑內質網（smooth ER）</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td>膜表面附著大量核糖體</td><td>膜表面無核糖體附著</td><td>「粗糙」與「平滑」正是外觀差異的由來</td></tr>
+<tr><td>合成分泌性蛋白與膜蛋白</td><td>合成脂質與類固醇（如膽固醇）</td><td>兩者在蛋白質合成上的角色完全不同</td></tr>
+<tr><td>核糖體所製蛋白質可進入腔內或嵌入膜中</td><td>負責藥物與毒性物質的去毒作用</td><td>平滑內質網無蛋白質合成功能</td></tr>
+<tr><td>合成物需經高基氏體加工後才送往目的地</td><td>特化形式（肌肉細胞的肌漿網）可儲存與釋放鈣離子</td><td>肌漿網是平滑內質網在肌肉細胞中的特化型</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>高基氏體（Golgi apparatus）</h4>
+<p>高基氏體由一疊扁平的池狀構造組成，負責接收由內質網以<span class="term">過渡小泡（transition vesicle）</span>形式送來的蛋白質，進行加工、修飾（如醣化作用的後續步驟），再以出芽方式包裝進新的小泡，送往其他目的地。</p>
+
+<h4>分泌小泡與內膜系統整體路徑</h4>
+<div class="flow">
+  <div class="flow-step"><b>①</b>粗糙內質網<br>合成蛋白質</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>②</b>過渡小泡<br>運送至高基氏體</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>③</b>高基氏體<br>加工、分類、包裝</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>④</b>分泌小泡<br>移向細胞膜</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>⑤</b>胞吐作用<br>釋放至細胞外</div>
+</div>
+<p>由於功能上密切相關，內質網、高基氏體、分泌小泡與溶體被合稱為<span class="term">內膜系統（endomembrane system）</span>，共同負責細胞內的分子運輸與分類。</p>
+
+<h4>溶體（lysosome）</h4>
+<p>溶體是直徑約 0.5–1.0 µm、由單層膜包圍的胞器，作為儲存<span class="term">水解酶（hydrolase）</span>的「消化倉庫」，能分解蛋白質、醣類與脂質。這些水解酶如同粗糙內質網其他蛋白質一樣，先在內質網合成，再送至高基氏體加工，最後包裝成溶體；溶體內膜面高度醣化，可保護膜本身不被自己的水解酶消化。</p>
+
+<div class="box box-clinical">
+<div class="box-title">🏥 臨床關聯：I 細胞疾病（I-cell disease）</div>
+<p>正常情況下，溶體水解酶在粗糙內質網被加上<strong>甘露糖（mannose）</strong>標記，再於高基氏體被磷酸轉移酶加上磷酸根，形成<strong>甘露糖-6-磷酸（mannose-6-phosphate）</strong>標籤，藉此被受體辨識、送入溶體。</p>
+<div class="flow" style="background:var(--clinical-light); border-color:hsl(6,60%,80%);">
+  <div class="flow-step" style="border-color:var(--clinical);"><b>正常</b>水解酶加上<br>甘露糖-6-磷酸標籤</div>
+  <div class="flow-arrow" style="color:var(--clinical);">→</div>
+  <div class="flow-step" style="border-color:var(--clinical);">經內體<br>送入溶體</div>
+</div>
+<div class="flow" style="background:var(--clinical-light); border-color:hsl(6,60%,80%);">
+  <div class="flow-step" style="border-color:var(--clinical);"><b>I 細胞疾病</b>磷酸轉移酶<br>功能缺陷，無法加上標籤</div>
+  <div class="flow-arrow" style="color:var(--clinical);">→</div>
+  <div class="flow-step" style="border-color:var(--clinical);">水解酶被誤送、<br>經胞吐釋出細胞外</div>
+  <div class="flow-arrow" style="color:var(--clinical);">→</div>
+  <div class="flow-step" style="border-color:var(--clinical);">溶體無法降解物質，<br>腫大形成內含物</div>
+</div>
+<p>患者因溶體功能缺陷，出現生長遲緩、關節僵硬、肝脾腫大，通常活不過 7 歲，目前尚無有效治療方法。這個案例清楚說明「蛋白質分類標籤系統」一旦出錯，會如何導致嚴重疾病。</p>
+</div>
+
+<h3>其他胞器：過氧化體與液泡</h3>
+
+<h4>過氧化體（peroxisome）</h4>
+<p>過氧化體外觀與溶體相似，同樣由單層膜包圍，但<strong>不屬於內膜系統</strong>。其共同特徵是能同時生成與分解<span class="term">過氧化氫（H₂O₂）</span>——由觸酶（catalase）將有毒的過氧化氫分解為水與氧氣。動物的過氧化體集中在肝、腎細胞，除了解毒功能，也負責分解長鏈脂肪酸（超過 12 個碳，粒線體處理效率較差的脂肪酸交由過氧化體先行分解）。植物種子萌發時，特化的<span class="term">乙醛酸循環體（glyoxysome）</span>負責把儲存的脂肪轉為醣類；葉片中的<span class="term">葉過氧化體（leaf peroxisome）</span>則與粒線體、葉綠體協同進行光呼吸作用。</p>
+
+<h4>液泡（vacuole）</h4>
+<p>動物與酵母細胞的液泡用於暫時儲存或運輸；原生動物可經<span class="term">吞噬作用（phagocytosis）</span>形成含食物顆粒的<strong>吞噬體（phagosome）</strong>，再與溶體融合、消化分解。多數成熟植物細胞則具有單一的大型<span class="term">中央液泡（central vacuole）</span>，佔據細胞大部分體積，其高溶質濃度會吸引水分進入，撐起<span class="term">膨壓（turgor pressure）</span>，使植物組織保持挺立；植物枯萎正是中央液泡失去膨壓的結果。</p>
+
+<div class="compare-wrap">
+<table class="compare">
+<caption>【易混淆概念比較】溶體 vs. 過氧化體</caption>
+<thead><tr><th>A．溶體（lysosome）</th><th>B．過氧化體（peroxisome）</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td>屬於內膜系統的一員</td><td>不屬於內膜系統</td><td>過氧化體的蛋白質輸入路徑與內膜系統不同</td></tr>
+<tr><td>內含水解酶，分解蛋白質、醣類、脂質</td><td>內含觸酶等，生成並分解過氧化氫</td><td>核心化學反應完全不同</td></tr>
+<tr><td>來源：內質網 → 高基氏體 → 溶體</td><td>可由既有過氧化體分裂增殖而來</td><td>兩者的生成／增殖路徑不同</td></tr>
+<tr><td>功能缺陷會造成溶體儲積症（如泰－薩克斯病）</td><td>功能缺陷會造成新生兒腎上腺腦白質失養症（NALD）</td><td>對應不同的臨床疾病</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>核糖體：蛋白質合成工廠</h3>
+<p><span class="term">核糖體（ribosome）</span>是所有細胞中負責蛋白質合成的構造，數量遠多於其他胞內構造——原核細胞約有數千個，真核細胞可達數十萬甚至數百萬個。核糖體也存在於粒線體與葉綠體中，其大小與組成更接近細菌核糖體，這也是支持內共生學說的重要證據之一。</p>
+
+<figure>
+<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="核糖體大小次單元示意圖" font-family="sans-serif">
+  <ellipse cx="180" cy="80" rx="95" ry="60" fill="var(--primary-light)" stroke="var(--primary)" stroke-width="3"/>
+  <text x="180" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="var(--primary-dark)">大次單元</text>
+  <text x="180" y="80" text-anchor="middle" font-size="11" fill="var(--text)">真核 60S／原核 50S</text>
+  <ellipse cx="180" cy="155" rx="75" ry="35" fill="hsl(38,70%,88%)" stroke="var(--process)" stroke-width="3"/>
+  <text x="180" y="150" text-anchor="middle" font-size="13" font-weight="bold" fill="var(--process)">小次單元</text>
+  <text x="180" y="168" text-anchor="middle" font-size="11" fill="var(--text)">真核 40S／原核 30S</text>
+</svg>
+<figcaption><b>圖 4-23（重繪）</b> 核糖體由大、小兩個次單元組成，於轉譯開始時與 mRNA 結合。真核核糖體整體約 80S，原核（細菌、古菌）約 70S（S 為 Svedberg 沉降係數，反映粒子大小與形狀，並非簡單相加關係）。</figcaption>
+</figure>
+
+<p>沉降係數（以 <span class="term">Svedberg 單位 S</span> 表示）是利用超高速離心機（ultracentrifuge）測得粒子沉降速率的量度，數值越大代表粒子越大或越密。此單位以發明超高速離心機的瑞典化學家 Theodor Svedberg 命名。</p>
+
+<h3>細胞骨架：提供細胞質結構支撐</h3>
+<p>早期學界曾認為細胞質溶膠只是無結構的液體，但現代技術證實細胞質中存在一套精密的三維蛋白質網絡——<span class="term">細胞骨架（cytoskeleton）</span>，賦予細胞特定形狀、支援胞內運動與細胞分裂。估計高達 80% 的細胞質蛋白並非自由擴散，而是與細胞骨架相連。細胞骨架由三種主要纖維構成：</p>
+
+<div class="flow">
+  <div class="flow-step"><b>微管 microtubule</b>由微管蛋白（tubulin）組成，構成纖毛、鞭毛</div>
+  <div class="flow-step"><b>微絲 microfilament</b>由肌動蛋白（actin）組成，參與肌肉收縮</div>
+  <div class="flow-step"><b>中間絲 intermediate filament</b>提供結構性支撐，動態性較低</div>
+</div>
+
+<p>細胞骨架相關蛋白最初被認為僅存在於真核生物，但近年已在細菌與古菌中發現同源蛋白，同樣參與維持細胞形狀。</p>
+
+<h3>細胞外基質與細胞壁：細胞膜之外的支撐構造</h3>
+<p>多數細胞（真核與原核皆然）在細胞膜外還有額外的支撐構造。動物細胞外側通常是由<strong>膠原纖維（collagen fibril）</strong>與<strong>蛋白聚醣（proteoglycan）</strong>組成的<span class="term">細胞外基質（extracellular matrix, ECM）</span>，除了支撐功能，也調控細胞遷移、分裂、辨識與胚胎分化。</p>
+<p>植物與真菌細胞外則是堅硬的<span class="term">細胞壁（cell wall）</span>，主要成分是<strong>纖維素（cellulose）</strong>。植物細胞壁分兩層：細胞分裂時形成、質地柔軟可延展的<strong>初生細胞壁</strong>，以及細胞定型後在其內側加厚形成、質地堅硬（常含木質素 lignin）的<strong>次生細胞壁</strong>。相鄰植物細胞的細胞壁之間，還有稱為<span class="term">胞間連絲（plasmodesmata）</span>的開口相連通。</p>
+<p>細菌與古菌的細胞壁則以<span class="term">胜肽聚醣（peptidoglycan）</span>為主要成分（古菌則變化較大，從蛋白質到類胜肽聚醣皆有），可抵抗細胞因滲透壓吸水而脹破。</p>
+
+<div class="box box-concept">
+<div class="box-title">💡 概念檢核 4.3</div>
+<p>如果你要以一個人工細菌細胞為基礎，打造一個人工真核細胞，需要額外加入哪些構造？（提示：想想真核細胞獨有的四大結構特徵，以及粒線體、內質網等胞器分別提供哪些功能。）</p>
+</div>
+
+<h3>Key Technique：以離心技術分離胞器</h3>
+<p>要研究單一胞器，需先將組織<span class="term">均質化（homogenization）</span>——在冷的等張溶液（如 0.25 M 蔗糖）中打碎細胞，形成含各種胞器與分子的<strong>均質液（homogenate）</strong>。接著利用<span class="term">差速離心（differential centrifugation）</span>，依序以逐漸增加的離心力，將體積、密度不同的成分依序沉澱分離：</p>
+
+<div class="flow">
+  <div class="flow-step"><b>①</b>1000 g，10 分鐘<br>沉澱：細胞核、未破碎細胞</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>②</b>20,000 g，20 分鐘<br>沉澱：粒線體、溶體、過氧化體</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>③</b>80,000 g，1 小時<br>沉澱：內質網、細胞膜片段</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><b>④</b>200,000 g，2 小時<br>沉澱：游離核糖體、大分子</div>
+</div>
+
+<p>每次離心後，較大或較密的成分先沉澱成<strong>顆粒（pellet）</strong>，其餘懸浮成分則成為<strong>上清液（supernatant）</strong>，再送去進行下一輪更高速的離心。若要進一步純化某個顆粒中混雜的多種胞器（例如粒線體、溶體、過氧化體都可能同在一個顆粒中），則可採用<span class="term">密度梯度離心（density gradient centrifugation）</span>：將樣本鋪在密度逐漸增加的蔗糖梯度液上方，離心後不同密度的胞器會分別停在梯度中不同高度，形成清楚分層的條帶，再個別收集分析。</p>
+
+</section>
+
+<!-- ============================================================ -->
+<section id="s4">
+<h2>4.4 病毒、類病毒與普恩蛋白：入侵細胞的因子</h2>
+<p>除了細胞本身，還有幾類會入侵細胞、劫持其功能的非細胞性因子，包括研究已逾百年的<span class="term">病毒（virus）</span>，以及所知較少的<span class="term">類病毒（viroid）</span>與<span class="term">普恩蛋白（prion）</span>。</p>
+
+<h3>病毒的結構與特性</h3>
+<p>病毒是無法獨立生存的非細胞性寄生粒子，沒有細胞質、核糖體或胞器，僅由少數幾種核酸與蛋白質分子組成。病毒本身沒有代謝能力，必須入侵宿主細胞、劫持宿主的酵素與核糖體來複製自身，複製完成後常會使宿主細胞破裂死亡並釋出子代病毒。</p>
+
+<figure>
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="病毒基本構造示意圖" font-family="sans-serif">
+  <polygon points="150,25 210,60 210,130 150,165 90,130 90,60" fill="var(--primary-light)" stroke="var(--primary)" stroke-width="3"/>
+  <circle cx="150" cy="95" r="34" fill="hsl(38,70%,80%)" stroke="var(--process)" stroke-width="2"/>
+  <text x="150" y="99" text-anchor="middle" font-size="11" fill="var(--process)">核酸核心</text>
+  <text x="150" y="185" text-anchor="middle" font-size="11" fill="var(--text)">蛋白質外殼（capsid）</text>
+</svg>
+<figcaption><b>圖 4-26（重繪）</b> 病毒的基本構造：蛋白質外殼（capsid）包裹單一類型的核酸（DNA 或 RNA，二選一，這是病毒與細胞最根本的差異——細胞永遠同時具有 DNA 與 RNA）。部分病毒外還覆有源自宿主細胞膜的套膜，稱為<span class="term">套膜病毒（enveloped virus）</span>，例如人類免疫缺乏病毒（HIV）。</figcaption>
+</figure>
+
+<p>病毒大小約 25–300 nm，能穿過可截留細菌的濾紙孔洞——這也是病毒早在能被電子顯微鏡看見的 50 年前，就被路易．巴斯德（Louis Pasteur）推測其存在的原因。判斷生物是否「有生命」的三項基本標準是<strong>代謝、感應性、繁殖能力</strong>；病毒在宿主細胞外呈惰性狀態，不具備前兩項特徵，且無法自我複製，必須挾持宿主的代謝與遺傳機制才能產生子代——這與細胞學說「細胞只能來自既存細胞」的原則並不相同。</p>
+
+<h3>類病毒：只有 RNA 的植物病原體</h3>
+<p><span class="term">類病毒（viroid）</span>比病毒更簡單，是已知最小的感染因子：僅由 250–400 個核苷酸組成的小型環狀 RNA，不編碼任何蛋白質，卻能在宿主細胞內複製（部分具有自我催化能力）。類病毒只在植物細胞間傳播，經由受損表面在細胞之間移動，會造成多種作物病害（如馬鈴薯、菸草，以及經濟損失慘重的椰子 cadang-cadang 病）。目前推測其致病機制可能與干擾 DNA 轉錄（基因沉默）或 mRNA 加工有關。</p>
+
+<h3>普恩蛋白：能自我複製的異常蛋白質</h3>
+<p><span class="term">普恩蛋白（prion，音譯「普里昂」）</span>一詞源自「蛋白質（protein）」與「感染性（infectious）」的組合，是另一類非細胞性感染因子。普恩蛋白其實是正常細胞蛋白質的<strong>異常摺疊型式</strong>，能誘導其他正常蛋白質也跟著錯誤摺疊。</p>
+
+<div class="box box-clinical">
+<div class="box-title">🏥 臨床關聯：普恩蛋白相關疾病</div>
+<ul>
+<li><strong>羊搔癢症（scrapie）</strong>：綿羊與山羊，患畜因搔癢而摩擦皮毛脫落</li>
+<li><strong>牛海綿狀腦病（BSE，狂牛病）</strong>：牛隻腦部退化性病變，出現行為與運動異常</li>
+<li><strong>庫魯病（kuru）</strong>：源自食用受感染腦組織的新幾內亞部族</li>
+</ul>
+<p>這些疾病初期症狀為輕微無力與失智，逐漸惡化，最終致命。普恩蛋白耐高溫，煮沸或烹煮無法將其破壞，因此在慢性消耗病（chronic wasting disease，常見於鹿與麋鹿）流行地區，建議獵人將肉品送檢，避免食用患病動物。部分學者也推測，阿茲海默症患者腦中的異常蛋白斑塊，可能與類似的錯誤摺疊機制有關。</p>
+</div>
+
+<div class="box box-concept">
+<div class="box-title">💡 概念檢核 4.4</div>
+<p>病毒既然是非生物粒子，為什麼能夠繁殖並造成嚴重疾病？（提示：思考病毒如何「借用」宿主細胞的核糖體與酵素系統，而非自行完成代謝與複製。）</p>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<section id="s5">
+<h2># Key Takeaways</h2>
+<div class="takeaways">
+<ol>
+<li><strong>生命起源四階段</strong>：非生物合成有機分子 → 聚合成巨分子 → 出現能複製的資訊分子（RNA）→ 被膜包裹形成原始細胞。米勒實驗證明閃電能量可由簡單氣體合成胺基酸。</li>
+<li><strong>RNA 世界假說</strong>：核酶（ribozyme）兼具儲存訊息與催化反應的能力，被認為是 DNA 出現之前的原始遺傳分子；核糖體中催化胜肽鍵形成的仍是 rRNA，是支持證據之一。</li>
+<li><strong>生命三域</strong>：細菌、古菌、真核生物，取代傳統「原核 vs 真核」二分法；古菌在許多分子機制上更接近真核生物。</li>
+<li><strong>細胞大小受限於表面積／體積比</strong>：細胞越大，SA/V 比越小，物質交換效率越差，這是真核細胞演化出胞器分工的重要原因之一。</li>
+<li><strong>真核細胞四大共同構造</strong>：細胞膜、細胞核、膜狀胞器、細胞質（含細胞骨架）；植物、真菌另有細胞壁，動物則有細胞外基質。</li>
+<li><strong>內共生學說</strong>：粒線體源自古老需氧細菌，葉綠體源自藍綠菌，證據包括環狀 DNA、自身核糖體、雙層膜與細菌型脂質／蛋白質。</li>
+<li><strong>內膜系統的分工鏈</strong>：粗糙內質網（蛋白質合成）→ 高基氏體（加工分類）→ 分泌小泡／溶體（運送或消化）；平滑內質網則負責脂質合成與解毒，不參與蛋白質合成。</li>
+<li><strong>溶體 vs 過氧化體</strong>：溶體屬內膜系統、負責水解消化；過氧化體不屬內膜系統、負責過氧化氫的生成與分解及脂肪酸分解，兩者功能缺陷分別導致不同的臨床疾病（如 I 細胞疾病 vs NALD）。</li>
+<li><strong>離心分離技術</strong>：差速離心依大小密度依序沉澱不同胞器；密度梯度離心可進一步純化混合顆粒中的個別胞器。</li>
+<li><strong>病毒、類病毒、普恩蛋白皆非細胞生命</strong>：病毒具核酸＋蛋白質外殼但無法自行代謝；類病毒僅為環狀 RNA；普恩蛋白為異常摺疊蛋白，三者皆需劫持宿主機制才能「繁殖」或致病。</li>
+</ol>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>第4章：細胞與胞器｜學習指南</p>
+  <a href="#top" id="back-to-top">回到頂端 ↑</a>
+</footer>
+
+<script>
+(function(){
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#nav-list a'));
+  var linkMap = {};
+  navLinks.forEach(function(a){ linkMap[a.getAttribute('data-target')] = a; });
+
+  function setActive(id){
+    navLinks.forEach(function(a){ a.classList.remove('active'); });
+    if(linkMap[id]) linkMap[id].classList.add('active');
+  }
+
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      var visible = entries.filter(function(e){ return e.isIntersecting; });
+      if(visible.length > 0){
+        visible.sort(function(a,b){ return b.intersectionRatio - a.intersectionRatio; });
+        setActive(visible[0].target.id);
+      }
+    }, { root:null, rootMargin: '-80px 0px -55% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+    sections.forEach(function(s){ observer.observe(s); });
+  } else {
+    window.addEventListener('scroll', function(){
+      var pos = window.scrollY + 100;
+      sections.forEach(function(s){
+        if(s.offsetTop <= pos && (s.offsetTop + s.offsetHeight) > pos){
+          setActive(s.id);
+        }
+      });
+    });
+  }
+
+  if(sections.length) setActive(sections[0].id);
+
+  document.getElementById('back-to-top').addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>
