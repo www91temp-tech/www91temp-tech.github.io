@@ -2742,7 +2742,7 @@ day,day_title,En,zh
 80,腔室和覆蓋層：腦脊髓液的循環,Cerebrospinal Fluid,腦脊髓液（CSF）
 80,腔室和覆蓋層：腦脊髓液的循環,Choroid Plexus,脈絡叢
 80,腔室和覆蓋層：腦脊髓液的循環,Cistern,腦池
-80,腔室和覆蓋層：腦脊髓液的循環,Csf Subarachnoid Circulation,蛛網膜下腦脊髓液循環
+80,腔室和覆蓋層：腦脊髓液的循環,CSF Subarachnoid Circulation,蛛網膜下腦脊髓液循環
 80,腔室和覆蓋層：腦脊髓液的循環,Dura Mater,硬腦脊膜
 80,腔室和覆蓋層：腦脊髓液的循環,Dural Filum Terminale,硬脊膜終絲
 80,腔室和覆蓋層：腦脊髓液的循環,Falx Cerebri,大腦鐮
@@ -2886,18 +2886,18 @@ day,day_title,En,zh
 83,脊髓反射,Synapse,突觸
 83,脊髓反射,Tendon,肌腱
 83,脊髓反射,Withdrawal Reflex,回抽反射
-84,脊神經的分布,Anterior Cutaneous Branch,前皮枝
+84,脊神經的分布,Anterior Cutaneous Branch,前皮支
 84,脊神經的分布,Anterior Ramus,前枝
 84,脊神經的分布,Anterior Root,前根
 84,脊神經的分布,Axon,軸突
 84,脊神經的分布,Body Of Thoracic Vertebra,胸椎體
 84,脊神經的分布,Brachial Plexus,臂神經叢
-84,脊神經的分布,C4 Spinal Nerve C4,脊神經
-84,脊神經的分布,C7 Vertebra C7,脊椎
+84,脊神經的分布,C4 Spinal Nerve,C4脊神經
+84,脊神經的分布,C7 Vertebra,C7脊椎
 84,脊神經的分布,Cervical Nerves,頸神經
 84,脊神經的分布,Cervical Plexus,頸神經叢
 84,脊神經的分布,Coccyx,尾骨
-84,脊神經的分布,Cutaneous Branch,皮枝
+84,脊神經的分布,Cutaneous Branch,皮支
 84,脊神經的分布,Cutaneous Nerve,皮神經
 84,脊神經的分布,Endoneurium,神經內膜
 84,脊神經的分布,Epineurium,神經外膜
@@ -2909,12 +2909,12 @@ day,day_title,En,zh
 84,脊神經的分布,Intercostal Nerve,肋間神經
 84,脊神經的分布,Internal Intercostal Muscle,肋間內肌
 84,脊神經的分布,Intervertebral Foramen,椎間孔
-84,脊神經的分布,Lateral Cutaneous Branch,外側皮枝
+84,脊神經的分布,Lateral Cutaneous Branch,外側皮支
 84,脊神經的分布,Lateral Femoral Cutaneous Nerve,股外側皮神經
 84,脊神經的分布,Lumbar Nerves,腰神經
 84,脊神經的分布,Lumbar Plexus,腰神經叢
 84,脊神經的分布,Lumbosacral Trunk,腰薦神經幹
-84,脊神經的分布,Medial Cutaneous Branch,內側皮枝
+84,脊神經的分布,Medial Cutaneous Branch,內側皮支
 84,脊神經的分布,Muscular Branch,肌支
 84,脊神經的分布,Perineurium,神經束膜
 84,脊神經的分布,Phrenic Nerve,膈神經
@@ -3336,7 +3336,7 @@ day,day_title,En,zh
 95,聽覺與前庭系統（1）,Blind Sac,盲囊
 95,聽覺與前庭系統（1）,Bony Labyrinth,骨性迷路
 95,聽覺與前庭系統（1）,Cochlea,耳蝸
-95,聽覺與前庭系統（1）,Cochlear Branch,耳蝸枝
+95,聽覺與前庭系統（1）,Cochlear Branch,耳蝸支
 95,聽覺與前庭系統（1）,Cochlear Duct,耳蝸管
 95,聽覺與前庭系統（1）,Cranial Nerve,腦神經
 95,聽覺與前庭系統（1）,End Sac,終囊
@@ -3615,7 +3615,7 @@ day,day_title,En,zh
 103,心搏傳導系統與心電圖,Pulmonary Vein,肺靜脈
 103,心搏傳導系統與心電圖,Purkinje Cell,浦金埃氏細胞
 103,心搏傳導系統與心電圖,Purkinje Plexus,浦金埃氏細胞叢
-103,心搏傳導系統與心電圖,Qrs Complex,QRS複合波
+103,心搏傳導系統與心電圖,QRS Complex,QRS複合波
 103,心搏傳導系統與心電圖,Right Atrium,右心房
 103,心搏傳導系統與心電圖,Right Ventricle,右心室
 103,心搏傳導系統與心電圖,Sinoatrial Node,竇房結（SA node）
