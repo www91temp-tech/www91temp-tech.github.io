@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第8章：跨膜運輸——克服通透屏障｜學習指南</title>
+<style>
+  :root{
+    --hue: 20;
+    --primary: hsl(20, 45%, 35%);
+    --primary-light: hsl(20, 45%, 92%);
+    --primary-dark: hsl(20, 45%, 25%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(20, 20%, 85%);
+    --card-bg: #fafafa;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Source Han Sans TC",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    text-align:center;
+    padding:2.5rem 1.5rem 1.8rem;
+    border-bottom:1px solid var(--border);
+  }
+  header h1{
+    color:var(--primary);
+    font-size:1.7rem;
+    margin:0 0 .4rem;
+    font-weight:700;
+  }
+  header p{
+    color:#555;
+    margin:0;
+    font-size:.95rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.35rem;
+    padding:.6rem 1rem;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-size:.85rem;
+    padding:.45rem .8rem;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:840px;
+    margin:0 auto;
+    padding:1rem 1.3rem 3rem;
+  }
+  section{ padding-top:1.6rem; scroll-margin-top:64px; }
+  h2{
+    color:var(--primary);
+    font-size:1.35rem;
+    border-bottom:3px solid var(--primary-light);
+    padding-bottom:.4rem;
+    margin-top:2.6rem;
+  }
+  h3{
+    color:var(--primary-dark);
+    font-size:1.1rem;
+    margin-top:1.9rem;
+    padding-left:.6rem;
+    border-left:5px solid var(--primary);
+  }
+  h4{
+    color:var(--primary-dark);
+    font-size:1rem;
+    margin-top:1.3rem;
+  }
+  p{ margin:.8rem 0; }
+  .term-zh{font-weight:700;}
+  .box{
+    background:var(--primary-light);
+    border-left:5px solid var(--primary);
+    border-radius:6px;
+    padding:.9rem 1.1rem;
+    margin:1.1rem 0;
+  }
+  .box.mech{ background:hsl(var(--hue),45%,95%); }
+  .box-title{
+    font-weight:700;
+    color:var(--primary-dark);
+    margin:0 0 .4rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .box-title::before{ content:"🔑"; }
+  .box.clinical .box-title::before{ content:"🏥"; }
+  .box.clinical{ background:hsl(calc(var(--hue) + 340), 55%, 95%); border-left-color:hsl(calc(var(--hue)+340),50%,45%); }
+  .box.pathway .box-title::before{ content:"➡️"; }
+  .box.reg .box-title::before{ content:"⚙️"; }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.1rem 0;
+    font-size:.88rem;
+  }
+  caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:.4rem;
+    font-size:.95rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  tr:nth-child(even) td{ background:#f7f4f2; }
+  .compare-table th{ background:var(--primary-dark); }
+  .compare-table td:nth-child(3){ background:hsl(calc(var(--hue)+340),40%,96%); font-weight:600; }
+
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+    gap:.5rem;
+    margin:1.2rem 0;
+  }
+  .flow-step{
+    flex:1 1 140px;
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:8px;
+    padding:.6rem .7rem;
+    font-size:.82rem;
+    position:relative;
+    min-width:130px;
+  }
+  .flow-step .num{
+    display:inline-block;
+    background:var(--primary);
+    color:#fff;
+    width:1.4em;
+    height:1.4em;
+    border-radius:50%;
+    text-align:center;
+    line-height:1.4em;
+    font-size:.8rem;
+    margin-right:.3rem;
+    font-weight:700;
+  }
+  .flow-arrow{
+    align-self:center;
+    color:var(--primary);
+    font-size:1.3rem;
+    font-weight:700;
+  }
+  .cycle-note{
+    text-align:center;
+    color:var(--primary-dark);
+    font-size:.82rem;
+    margin-top:-.4rem;
+    margin-bottom:1rem;
+  }
+  figure{
+    margin:1.3rem 0;
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:1rem;
+  }
+  figcaption{
+    font-size:.82rem;
+    color:#555;
+    margin-top:.6rem;
+    line-height:1.6;
+  }
+  figcaption b{ color:var(--primary-dark); }
+  svg{ display:block; margin:0 auto; max-width:100%; height:auto; }
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.8rem;
+    justify-content:center;
+    font-size:.78rem;
+    margin-top:.6rem;
+  }
+  .legend span{ display:flex; align-items:center; gap:.3rem; }
+  .dot{ width:.8em; height:.8em; border-radius:50%; display:inline-block; }
+
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:1.4rem 1.6rem;
+    margin-top:1.4rem;
+  }
+  .takeaways ol{ padding-left:1.3rem; margin:0; }
+  .takeaways li{ margin:.55rem 0; }
+
+  .concept-check{
+    border:1px dashed var(--primary);
+    border-radius:8px;
+    padding:.8rem 1rem;
+    margin:1.1rem 0;
+    font-size:.88rem;
+    background:#fff;
+  }
+  .concept-check .cc-title{
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:.3rem;
+  }
+
+  footer{
+    text-align:center;
+    padding:2.2rem 1rem 3rem;
+    border-top:1px solid var(--border);
+    margin-top:2rem;
+  }
+  footer p{ color:#555; font-size:.85rem; margin-bottom:1rem; }
+  #backToTop{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:.7rem 1.4rem;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:.9rem;
+    font-family:inherit;
+    transition:background .2s;
+  }
+  #backToTop:hover{ background:var(--primary-dark); }
+
+  @media (max-width:1024px){
+    main{ max-width:94%; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.3rem; }
+    nav{ gap:.25rem; padding:.5rem .6rem; }
+    nav a{ font-size:.78rem; padding:.4rem .6rem; }
+    h2{ font-size:1.15rem; }
+    h3{ font-size:1rem; }
+    table{ font-size:.78rem; }
+    .flow{ flex-direction:column; }
+    .flow-arrow{ transform:rotate(90deg); align-self:center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第8章：跨膜運輸——克服通透屏障</h1>
+  <p>Transport Across Membranes: Overcoming the Permeability Barrier｜細胞生物學學習指南</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#s1">8.1 細胞與運輸</a>
+  <a href="#s2">8.2 簡單擴散</a>
+  <a href="#s3">8.3 促進性擴散</a>
+  <a href="#s4">8.4 主動運輸</a>
+  <a href="#s5">8.5 主動運輸實例</a>
+  <a href="#s6">8.6 運輸能量學</a>
+  <a href="#s7">重點回顧</a>
+</nav>
+
+<main>
+
+<!-- ================= 8.1 ================= -->
+<section id="s1">
+  <h2>8.1 細胞與運輸過程（Cells and Transport Processes）</h2>
+
+  <p>細胞要維持正常功能，必須讓內部環境的組成與外界截然不同，這種能力稱為<span class="term-zh">恆定性（homeostasis）</span>。要達成恆定，細胞膜必須能「選擇性」地控制物質進出——這正是本章的核心主題：<span class="term-zh">跨膜運輸（membrane transport）</span>。</p>
+
+  <p>跨膜運輸的對象主要是溶質（solute），包括氣體（O₂、CO₂）、離子（Na⁺、K⁺、Ca²⁺、Cl⁻、H⁺）以及小分子有機物（醣類、胺基酸、核苷酸等代謝物）。這些溶質在細胞內外的濃度往往差異很大，例如大腸桿菌（<i>E. coli</i>）約有 20% 的基因與運輸功能相關，可見運輸對細胞生存有多重要。</p>
+
+  <h3>三種基本跨膜運輸機制</h3>
+  <p>溶質跨膜的方式可分為三大類：</p>
+  <div class="box pathway">
+    <p class="box-title">三種運輸機制總覽</p>
+    <p>① <b>簡單擴散（simple diffusion）</b>：不需蛋白質，直接穿過脂雙層，順著濃度梯度移動。<br>
+    ② <b>促進性擴散（facilitated diffusion）</b>：需要運輸蛋白（transport protein）協助，順著自由能梯度移動，不需消耗能量，又稱被動運輸（passive transport）。<br>
+    ③ <b>主動運輸（active transport）</b>：需要運輸蛋白，且逆著自由能梯度移動，必須消耗能量（如 ATP 水解，或利用另一溶質的梯度）。</p>
+  </div>
+
+  <table class="compare-table">
+    <caption>表 8-1　簡單擴散、促進性擴散與主動運輸的比較</caption>
+    <thead>
+      <tr><th>比較項目</th><th>簡單擴散</th><th>促進性擴散</th><th>主動運輸</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>可運輸物質</td><td>小型非極性分子（O₂、CO₂）；小型極性分子（H₂O、甘油）</td><td>小型極性分子；大型極性分子（葡萄糖）；離子（Na⁺、K⁺、Ca²⁺）</td><td>大型極性分子；離子</td></tr>
+      <tr><td>相對電化學梯度方向</td><td>順（Down）</td><td>順（Down）</td><td>逆（Up）</td></tr>
+      <tr><td>需要代謝能量</td><td>否</td><td>否</td><td>是</td></tr>
+      <tr><td>內在方向性</td><td>否</td><td>否</td><td>是</td></tr>
+      <tr><td>需要膜蛋白</td><td>否</td><td>是</td><td>是</td></tr>
+      <tr><td>飽和動力學</td><td>否（線性）</td><td>是（雙曲線）</td><td>是</td></tr>
+      <tr><td>競爭性抑制</td><td>否</td><td>是</td><td>是</td></tr>
+    </tbody>
+  </table>
+
+  <h3>濃度梯度 vs 電化學電位</h3>
+  <p>不帶電的溶質，其移動方向只取決於<span class="term-zh">濃度梯度（concentration gradient）</span>——由高濃度往低濃度移動即為放能（exergonic，ΔG 為負）；逆濃度梯度移動則為吸能（endergonic，ΔG 為正），需要能量驅動。</p>
+  <p>帶電的溶質（離子）則同時受到濃度梯度與膜電位（membrane potential, V<sub>m</sub>）的影響，兩者合稱<span class="term-zh">電化學電位（electrochemical potential）</span>。多數細胞內部帶負電（V<sub>m</sub> 為負值，例如靜息神經細胞約 −60 mV），這會促進陽離子（如 Na⁺）流入、陰離子（如 Cl⁻）流出。</p>
+
+  <figure>
+    <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="640" height="210" fill="none"/>
+      <rect x="290" y="10" width="16" height="190" fill="hsl(20,30%,80%)" stroke="hsl(20,45%,35%)" stroke-width="1.5"/>
+      <text x="298" y="205" font-size="10" text-anchor="middle" fill="#555">細胞膜</text>
+      <text x="140" y="20" font-size="12" text-anchor="middle" fill="hsl(20,45%,35%)" font-weight="700">細胞外</text>
+      <text x="480" y="20" font-size="12" text-anchor="middle" fill="hsl(20,45%,35%)" font-weight="700">細胞內（V_m 較負）</text>
+      <!-- simple diffusion -->
+      <line x1="260" y1="55" x2="330" y2="55" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrowG)"/>
+      <text x="140" y="59" font-size="11" text-anchor="middle" fill="#2e7d32">O₂（簡單擴散，順濃度）</text>
+      <!-- facilitated diffusion -->
+      <line x1="260" y1="100" x2="330" y2="100" stroke="hsl(20,45%,35%)" stroke-width="3" marker-end="url(#arrowP)"/>
+      <text x="140" y="104" font-size="11" text-anchor="middle" fill="hsl(20,45%,35%)">葡萄糖（促進性擴散）</text>
+      <!-- active transport -->
+      <line x1="330" y1="150" x2="260" y2="150" stroke="hsl(340,55%,45%)" stroke-width="3" marker-end="url(#arrowR)"/>
+      <text x="480" y="154" font-size="11" text-anchor="middle" fill="hsl(340,55%,45%)">Na⁺（主動運輸，逆梯度，需ATP）</text>
+      <defs>
+        <marker id="arrowG" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2e7d32"/></marker>
+        <marker id="arrowP" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="hsl(20,45%,35%)"/></marker>
+        <marker id="arrowR" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="hsl(340,55%,45%)"/></marker>
+      </defs>
+    </svg>
+    <figcaption><b>圖 8-1（重製）</b>真核細胞膜上常見的運輸路徑示意：O₂ 以簡單擴散方式移動；葡萄糖需要載體蛋白進行促進性擴散；Na⁺ 則由幫浦逆梯度主動運出細胞。原圖中粒線體與葉綠體以質子梯度驅動 ATP 合成的細節，將於本章與後續章節詳述。</figcaption>
+  </figure>
+
+  <div class="concept-check">
+    <p class="cc-title">CONCEPT CHECK 8.1</p>
+    <p>濃度梯度與電化學電位有何不同？三種運輸機制中，哪一種只受濃度梯度影響？哪一種受電化學梯度影響？</p>
+  </div>
+</section>
+
+<!-- ================= 8.2 ================= -->
+<section id="s2">
+  <h2>8.2 簡單擴散：不需輔助、順梯度移動（Simple Diffusion）</h2>
+
+  <p><span class="term-zh">簡單擴散（simple diffusion）</span>是溶質不需任何蛋白質協助、直接由高濃度往低濃度穿越脂雙層的過程。由於膜內部是疏水環境，只有非極性分子與極小的極性分子才能以此方式通過。</p>
+
+  <h3>紅血球（erythrocyte）中的氣體交換實例</h3>
+  <p>O₂ 是小型非極性分子，能自由穿越脂雙層。這使紅血球得以在肺部攝取氧氣、在組織中釋放氧氣。CO₂ 同樣能簡單擴散，但方向與 O₂ 相反。</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="num">組織</span>O₂ 濃度低、CO₂ 濃度高<br>→ O₂ 由血紅素釋出並擴散出細胞<br>→ CO₂ 擴散入細胞，經碳酸酐酶轉為 HCO₃⁻，再由陰離子交換蛋白運出（換入 Cl⁻）</div>
+    <div class="flow-arrow">⇄</div>
+    <div class="flow-step"><span class="num">肺部</span>O₂ 濃度高、CO₂ 濃度低<br>→ O₂ 擴散入細胞並結合血紅素<br>→ HCO₃⁻ 由血漿運入細胞（換出 Cl⁻），轉回 CO₂ 後擴散出細胞、呼出體外</div>
+  </div>
+  <p style="font-size:.85rem;color:#555;">（此循環對應原文 <b>圖 8-3</b>：血液隨循環系統在組織與肺部間往返，O₂、CO₂、HCO₃⁻ 的淨移動方向因所在位置而相反。）</p>
+
+  <h3>簡單擴散總是趨向平衡</h3>
+  <p>無論初始分布如何，簡單擴散最終都會使溶質在膜兩側濃度相等，達到<span class="term-zh">熱力學平衡（equilibrium）</span>。這是一個自發（spontaneous）過程，驅動力來自亂度增加（entropy），不需額外能量、也不需運輸蛋白。</p>
+
+  <h3>滲透作用（Osmosis）</h3>
+  <p>當膜可通透水、卻不能通透溶質時，水會由溶質濃度低（水濃度高）的一側，往溶質濃度高（水濃度低）的一側移動，這種現象稱為<span class="term-zh">滲透作用（osmosis）</span>。</p>
+
+  <div class="box">
+    <p class="box-title">張力（tonicity）三種情況</p>
+    <p><b>低張溶液（hypotonic）</b>：外界溶質濃度 &lt; 細胞內，水流入細胞。<br>
+    <b>等張溶液（isotonic）</b>：內外溶質濃度相等，水進出平衡。<br>
+    <b>高張溶液（hypertonic）</b>：外界溶質濃度 &gt; 細胞內，水流出細胞。</p>
+  </div>
+
+  <table>
+    <caption>圖 8-5（重製）動物細胞與植物細胞對滲透壓變化的反應</caption>
+    <thead><tr><th>細胞類型</th><th>高張溶液</th><th>等張溶液</th><th>低張溶液</th></tr></thead>
+    <tbody>
+      <tr><td>動物細胞（無細胞壁）</td><td>皺縮（shriveled）</td><td>正常</td><td>腫脹甚至溶解（lysed）</td></tr>
+      <tr><td>植物細胞（有細胞壁）</td><td>質壁分離（plasmolyzed）</td><td>萎軟（flaccid）</td><td>膨壓正常、堅挺（turgid）</td></tr>
+    </tbody>
+  </table>
+  <p>細胞若沒有細胞壁，會靠持續主動運出離子（如動物細胞的 Na⁺/K⁺ 幫浦）來降低內部滲透壓，避免過度吸水破裂；植物、真菌、藻類與多數細菌則依賴堅硬的細胞壁抵抗膨壓。</p>
+
+  <h3>影響簡單擴散速率的三大因子</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="num">1</span><b>大小（Size）</b><br>分子越小，越容易通過脂雙層。水、O₂、CO₂ 等小分子可直接擴散；葡萄糖（MW 180）太大，無法簡單擴散。</div>
+    <div class="flow-step"><span class="num">2</span><b>極性（Polarity）</b><br>脂溶性越高（分配係數 partition coefficient 越大），越容易穿越脂雙層。類固醇激素雖分子量大，但因非極性仍可簡單擴散。</div>
+    <div class="flow-step"><span class="num">3</span><b>電荷（Charge）</b><br>離子因與水分子形成水合殼（hydration shell），需額外能量才能脫離水分子進入膜，因此離子幾乎無法簡單擴散。</div>
+  </div>
+
+  <h3>簡單擴散速率與濃度梯度成正比</h3>
+  <p>簡單擴散的速率公式為：</p>
+  <div class="box mech">
+    <p class="box-title">公式 8-1</p>
+    <p>v<sub>inward</sub> = P·Δ[S]</p>
+    <p style="font-size:.85rem;">P 為<span class="term-zh">通透係數（permeability coefficient）</span>，Δ[S] 為膜兩側濃度差。此關係為<b>線性（linear）</b>，不會飽和——這是簡單擴散與促進性擴散最關鍵的動力學差異。</p>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="190" x2="400" y2="190" stroke="#555" stroke-width="1.5"/>
+      <line x1="40" y1="190" x2="40" y2="15" stroke="#555" stroke-width="1.5"/>
+      <text x="220" y="212" font-size="11" text-anchor="middle" fill="#555">Δ[S]（濃度梯度）</text>
+      <text x="14" y="100" font-size="11" text-anchor="middle" fill="#555" transform="rotate(-90 14 100)">運輸速率 v</text>
+      <!-- linear simple diffusion -->
+      <line x1="40" y1="190" x2="380" y2="35" stroke="hsl(340,55%,45%)" stroke-width="3"/>
+      <text x="330" y="55" font-size="11" fill="hsl(340,55%,45%)" font-weight="700">簡單擴散（線性）</text>
+      <!-- hyperbolic facilitated -->
+      <path d="M40,190 C 120,80 220,45 380,40" fill="none" stroke="hsl(20,45%,35%)" stroke-width="3"/>
+      <text x="200" y="100" font-size="11" fill="hsl(20,45%,35%)" font-weight="700">促進性擴散（雙曲線，會飽和）</text>
+    </svg>
+    <figcaption><b>圖 8-6（重製）</b>簡單擴散的速率與濃度梯度呈線性關係，無飽和現象；促進性擴散因運輸蛋白數量有限，濃度升高後速率趨於飽和（類似酵素的 Michaelis–Menten 動力學）。</figcaption>
+  </figure>
+
+  <div class="concept-check">
+    <p class="cc-title">CONCEPT CHECK 8.2</p>
+    <p>滲透作用與 O₂ 的簡單擴散有何不同？又有何相似之處？</p>
+  </div>
+</section>
+
+<!-- ================= 8.3 ================= -->
+<section id="s3">
+  <h2>8.3 促進性擴散：蛋白質輔助的順梯度運輸（Facilitated Diffusion）</h2>
+
+  <p>大多數溶質（大型或帶電）無法簡單擴散，需要<span class="term-zh">運輸蛋白（transport protein）</span>協助才能以合理速率跨膜。若此過程仍是順著梯度、不需額外能量，就稱為<span class="term-zh">促進性擴散（facilitated diffusion）</span>。運輸蛋白分為兩大類：<b>載體蛋白（carrier protein）</b>與<b>通道蛋白（channel protein）</b>。</p>
+
+  <table class="compare-table">
+    <caption>容易混淆的概念①　載體蛋白 vs 通道蛋白</caption>
+    <thead><tr><th>比較項目</th><th>載體蛋白（Carrier protein）</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr><td>運作方式</td><td>結合溶質後發生<b>構型改變（conformational change）</b>，再釋放到另一側</td><td>載體蛋白像「旋轉門」，通道蛋白像「隧道」</td></tr>
+      <tr><td>開放狀態</td><td>某一時刻只對膜的一側開放</td><td>通道蛋白（Channel protein）：未關閉時同時對膜兩側開放</td></tr>
+      <tr><td>運輸速度</td><td>較慢（需構型變化）</td><td>通道蛋白運輸速度快得多，可達每秒近百萬個離子</td></tr>
+      <tr><td>動力學</td><td>飽和動力學，類似酵素（有 K<sub>m</sub>、V<sub>max</sub>）</td><td>兩者皆可飽和，但通道蛋白流量遠高於載體</td></tr>
+      <tr><td>代表例子</td><td>GLUT1 葡萄糖轉運蛋白、陰離子交換蛋白</td><td>通道例子：離子通道、孔蛋白（porin）、水通道蛋白（aquaporin）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>載體蛋白：交替構型模型</h3>
+  <p>載體蛋白（又稱透過酶 permease，因其動力學類似酵素）以<span class="term-zh">交替構型模型（alternating conformation model）</span>運作：結合位先朝膜一側開放，結合溶質後蛋白改變構型，結合位轉而朝另一側開放並釋放溶質。</p>
+  <p>載體蛋白與酵素相似之處：具有專一性（specificity，甚至能辨認立體異構物）、飽和動力學（saturation kinetics）、以及可被結構相似的分子競爭性抑制（competitive inhibition）。其動力學公式與酵素的 Michaelis–Menten 方程式相同：</p>
+  <div class="box mech">
+    <p class="box-title">公式 8-2</p>
+    <p>v₀ = V<sub>max</sub>[S] / (K<sub>m</sub> + [S])</p>
+  </div>
+
+  <h3>載體蛋白的三種運輸模式</h3>
+  <div class="flow">
+    <div class="flow-step"><b>單向運輸（Uniport）</b><br>單一溶質單向通過，例：GLUT1 葡萄糖轉運蛋白</div>
+    <div class="flow-step"><b>同向運輸（Symport）</b><br>兩溶質同方向偶聯運輸，例：Na⁺/葡萄糖共運蛋白</div>
+    <div class="flow-step"><b>逆向運輸（Antiport）</b><br>兩溶質反方向偶聯運輸，例：Cl⁻/HCO₃⁻ 陰離子交換蛋白</div>
+  </div>
+
+  <h4>實例：紅血球葡萄糖轉運蛋白 GLUT1（單向運輸）</h4>
+  <p>血漿葡萄糖濃度約 3.6–5.0 mM，遠高於細胞內（因葡萄糖進入細胞後迅速被己糖激酶磷酸化為 6-磷酸葡萄糖，維持濃度梯度）。GLUT1 使葡萄糖進入速度比自由擴散快約 5 萬倍。</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="num">1</span>葡萄糖結合到 T₁ 構型（結合位朝外）的 GLUT1</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">2</span>結合觸發構型改變為 T₂（結合位朝內）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">3</span>葡萄糖釋放到細胞內側</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">4</span>GLUT1 恢復 T₁ 構型，準備下一輪運輸</div>
+  </div>
+  <p class="cycle-note">（圖 8-8 重製：GLUT1 交替構型循環，此過程可逆，方向取決於膜兩側濃度）</p>
+
+  <h4>實例：陰離子交換蛋白（逆向運輸）</h4>
+  <p>此蛋白以「乒乓機制（ping-pong mechanism）」，嚴格以 1:1 比例交換 Cl⁻ 與 HCO₃⁻，是圖 8-3 中 CO₂ 運輸循環的關鍵角色。</p>
+
+  <h3>通道蛋白：離子通道、孔蛋白與水通道蛋白</h3>
+  <div class="box pathway">
+    <p class="box-title">三種通道蛋白</p>
+    <p><b>離子通道（ion channel）</b>：高度選擇性，只允許特定離子（如 Na⁺、K⁺、Ca²⁺、Cl⁻ 各有專屬通道）通過，速度可達每秒近百萬個離子。多數受「閘門（gate）」控制，依刺激分為電位閘控（voltage-gated）、配體閘控（ligand-gated）、機械閘控（mechanosensitive）三類。<br>
+    <b>孔蛋白（porin）</b>：見於粒線體、葉綠體與細菌外膜，以 β 桶（β barrel）構造形成較大、較不專一的孔道，可通過分子量 600 Da 以下的親水溶質。<br>
+    <b>水通道蛋白（aquaporin, AQP）</b>：由 Peter Agre 於 1992 年發現（2003 年獲諾貝爾獎），為四聚體通道蛋白，通道最窄處僅 0.3 nm，只允許水分子單行通過，可阻擋 H⁺、OH⁻ 等離子。腎臟與紅血球中大量存在，使水快速進出細胞。</p>
+  </div>
+
+  <div class="box clinical">
+    <p class="box-title">臨床連結：囊狀纖維化（Cystic Fibrosis, CF）</p>
+    <p>CF 是因<span class="term-zh">囊狀纖維化跨膜傳導調節蛋白（CFTR）</span>——一種受 cAMP 調控的氯離子通道——發生突變所致。正常情況下 CFTR 將 Cl⁻ 送入呼吸道管腔，Na⁺ 與水隨之而入，使黏液保持稀薄；CFTR 失去功能後，黏液變得濃稠，易滋生細菌並阻礙氣體交換。治療藥物包括：<b>增強劑（potentiator）</b>延長通道開啟時間、<b>校正劑（corrector）</b>協助蛋白正確摺疊與運送到細胞表面；基因治療則嘗試以病毒載體遞送正常 CFTR 基因，但濃稠黏液常阻礙病毒到達肺細胞。</p>
+  </div>
+
+  <div class="concept-check">
+    <p class="cc-title">CONCEPT CHECK 8.3</p>
+    <p>載體蛋白與通道蛋白有何相似之處？結構與機制上又有何不同？</p>
+  </div>
+</section>
+
+<!-- ================= 8.4 ================= -->
+<section id="s4">
+  <h2>8.4 主動運輸：蛋白質驅動的逆梯度運輸（Active Transport）</h2>
+
+  <p>當溶質必須「逆」濃度梯度或電化學電位移動時，就需要<span class="term-zh">主動運輸（active transport）</span>。這類過程永遠是吸能反應（ΔG 為正），必須偶聯一個放能反應（通常是 ATP 水解）。</p>
+
+  <div class="box pathway">
+    <p class="box-title">主動運輸的三大功能</p>
+    <p>① 從環境中攝取必需營養物（即使胞內濃度已較高）。<br>
+    ② 將分泌物或廢物排出細胞（即使胞外濃度較高）。<br>
+    ③ 維持細胞內 K⁺、Na⁺、Ca²⁺、H⁺ 等離子的非平衡穩定濃度。</p>
+  </div>
+
+  <p>主動運輸具有<span class="term-zh">內在方向性（intrinsic directionality）</span>，通常只朝單一方向運輸，這點與簡單/促進性擴散（可雙向、依梯度而定）明顯不同。</p>
+
+  <h3>直接 vs 間接主動運輸</h3>
+  <table class="compare-table">
+    <caption>容易混淆的概念②　直接主動運輸 vs 間接主動運輸</caption>
+    <thead><tr><th>比較項目</th><th>直接主動運輸（Primary）</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr><td>能量來源</td><td>直接偶聯放能化學反應（通常是 ATP 水解）</td><td>間接主動運輸（Secondary）：偶聯另一溶質<b>順</b>電化學梯度移動所釋放的能量</td></tr>
+      <tr><td>執行蛋白</td><td>運輸ATP酶（transport ATPase / ATPase pump）</td><td>間接：symporter 或 antiporter（常與 Na⁺ 或 H⁺ 偶聯）</td></tr>
+      <tr><td>代表實例</td><td>Na⁺/K⁺ 幫浦</td><td>間接：Na⁺/葡萄糖共運蛋白（利用 Na⁺ 梯度）</td></tr>
+      <tr><td>與 ATP 的關係</td><td>直接使用 ATP</td><td>間接運輸雖不直接用 ATP，但驅動它的離子梯度仍由 ATP 驅動的幫浦所維持</td></tr>
+    </tbody>
+  </table>
+
+  <div class="flow">
+    <div class="flow-step"><b>(a) 直接主動運輸</b><br>ATP → ADP + Pi 水解，驅動 H⁺（或其他溶質）逆梯度運出細胞，建立電化學電位</div>
+    <div class="flow-arrow">＋</div>
+    <div class="flow-step"><b>(b) 間接主動運輸</b><br>H⁺（或 Na⁺）順梯度流入，其釋放的能量驅動另一溶質 S 逆梯度流入（symport）</div>
+  </div>
+  <p class="cycle-note">（圖 8-11 重製：兩者常形成離子的「循環」——直接運輸把離子送出，間接運輸再讓離子流回並帶動其他溶質）</p>
+
+  <h3>四類運輸ATPase（Transport ATPases）</h3>
+  <table>
+    <caption>表 8-2（精簡重製）四類主要運輸ATPase</caption>
+    <thead><tr><th>類型</th><th>運輸對象</th><th>常見位置</th><th>代表功能</th></tr></thead>
+    <tbody>
+      <tr><td><b>P-type</b>（磷酸化，Phosphorylation）</td><td>Na⁺、K⁺、H⁺、Ca²⁺、重金屬離子、磷脂</td><td>細胞膜、內質網、SR</td><td>Na⁺/K⁺ 幫浦維持膜電位；Ca²⁺/H⁺ ATPase 調控肌肉收縮；被釩酸根（vanadate）抑制</td></tr>
+      <tr><td><b>V-type</b>（液泡，Vacuole）</td><td>H⁺</td><td>溶小體、液泡、分泌小泡</td><td>酸化胞器內部，活化水解酶；不受釩酸根抑制</td></tr>
+      <tr><td><b>F-type</b>（factor，即ATP合成酶）</td><td>H⁺</td><td>粒線體內膜、葉綠體類囊體膜、細菌膜</td><td>可逆反應：既能用ATP打出H⁺，也能讓H⁺順梯度回流以合成ATP</td></tr>
+      <tr><td><b>ABC-type</b>（ATP結合卡匣）</td><td>多樣（糖、胺基酸、脂質、藥物等）</td><td>細胞膜</td><td>細菌中常作為輸入者；人類多重抗藥性蛋白（MDR）將化療藥物幫出腫瘤細胞，CFTR屬此家族但機制特殊</td></tr>
+    </tbody>
+  </table>
+
+  <div class="concept-check">
+    <p class="cc-title">CONCEPT CHECK 8.4</p>
+    <p>你會如何判斷某個膜運輸蛋白是以促進性擴散還是主動運輸的方式運作？</p>
+  </div>
+</section>
+
+<!-- ================= 8.5 ================= -->
+<section id="s5">
+  <h2>8.5 主動運輸實例（Examples of Active Transport）</h2>
+
+  <h3>直接主動運輸：Na⁺/K⁺ 幫浦</h3>
+  <p><span class="term-zh">Na⁺/K⁺ ATPase（Na⁺/K⁺ 幫浦）</span>由 Jens Skou 於 1957 年發現，是史上第一個被證實的主動運輸系統。每水解 1 分子 ATP，可將 <b>3 個 Na⁺ 運出、2 個 K⁺ 運入</b>細胞，兩者皆逆電化學梯度移動。此幫浦是動物細胞維持膜電位與離子不對稱分布的核心。</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="num">1</span>3個Na⁺於細胞內側結合到 E₁ 構型</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">2</span>ATP使α次單元磷酸化，構型轉為E₂</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">3</span>Na⁺被送至外側並釋放</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">4</span>2個K⁺從外側結合到E₂</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">5</span>K⁺結合觸發去磷酸化，構型變回E₁</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">6</span>K⁺釋放到細胞內，回到起始狀態</div>
+  </div>
+  <p class="cycle-note">（圖 8-13 / 8-14 重製：Na⁺/K⁺ 幫浦六步循環，α、β、γ 三個次單元組成的三聚體蛋白）</p>
+
+  <h3>間接主動運輸：Na⁺/葡萄糖共運蛋白（SGLT）</h3>
+  <p>小腸上皮細胞利用 <span class="term-zh">Na⁺/葡萄糖共運蛋白（symporter）</span>，即使腸腔內葡萄糖濃度低於細胞內，仍能靠 Na⁺ 順著電化學梯度流入所釋放的能量，將葡萄糖逆濃度梯度送入細胞。</p>
+
+  <div class="flow">
+    <div class="flow-step"><span class="num">1</span>2個Na⁺結合到朝外開放的共運蛋白</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">2</span>葡萄糖結合，蛋白開始構型改變</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">3</span>蛋白轉為朝內開放</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">4</span>Na⁺釋放到細胞內（再由Na⁺/K⁺幫浦送出，虛線）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">5</span>葡萄糖隨後釋放到細胞內</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span class="num">6</span>空載的共運蛋白恢復朝外開放</div>
+  </div>
+  <p class="cycle-note">（圖 8-15 重製：Na⁺梯度由Na⁺/K⁺幫浦持續維持，形成 Na⁺ 的跨膜循環）</p>
+
+  <div class="box clinical">
+    <p class="box-title">臨床連結：口服補液鹽與霍亂（Cholera）</p>
+    <p>霍亂弧菌（<i>Vibrio cholerae</i>）毒素會使腸細胞麻痺並導致嚴重脫水。由於 Na⁺/葡萄糖共運蛋白不受該毒素影響，同時給予 <b>NaCl 與葡萄糖</b> 的口服補液療法，可經由此共運機制促進鈉與水分的再吸收，是治療霍亂的標準方法。</p>
+  </div>
+
+  <h3>光驅動主動運輸：細菌視紫質質子幫浦（Bacteriorhodopsin）</h3>
+  <p><span class="term-zh">細菌視紫質（bacteriorhodopsin）</span>存在於嗜鹽古菌（<i>Halobacterium</i>）的細胞膜上，內含感光色素<span class="term-zh">視黃醛（retinal）</span>。吸收光子後，蛋白被活化並將 H⁺ 主動運出細胞，建立的質子電化學梯度可驅動 ATP 合成酶（F-type ATPase）合成 ATP——與粒線體、葉綠體中質子驅動 ATP 合成的原理相同，只是能量來源是光而非化學反應或電子傳遞。</p>
+
+  <div class="concept-check">
+    <p class="cc-title">CONCEPT CHECK 8.5</p>
+    <p>Na⁺/葡萄糖共運蛋白與 Na⁺/K⁺ 幫浦都會移動鈉離子，兩者移動鈉離子的方式有何不同？</p>
+  </div>
+</section>
+
+<!-- ================= 8.6 ================= -->
+<section id="s6">
+  <h2>8.6 運輸的能量學（The Energetics of Transport）</h2>
+
+  <p>每一次運輸事件都是一次能量交易。是否需要輸入能量，取決於溶質是否帶電：</p>
+
+  <h3>不帶電溶質：ΔG 只取決於濃度梯度</h3>
+  <div class="box mech">
+    <p class="box-title">公式 8-8</p>
+    <p>ΔG<sub>inward</sub> = RT ln ([S]<sub>inside</sub> / [S]<sub>outside</sub>)</p>
+    <p style="font-size:.85rem;">若 [S]<sub>inside</sub> &lt; [S]<sub>outside</sub>，ΔG 為負（放能，順向運輸自發）；若 [S]<sub>inside</sub> &gt; [S]<sub>outside</sub>，ΔG 為正（吸能，需要主動運輸）。</p>
+  </div>
+  <p><b>範例：乳糖攝取。</b>細胞內乳糖 10 mM、外部 0.20 mM，25°C 下：ΔG<sub>inward</sub> = (1.987)(298) ln(10/0.20) ≈ +2.32 kcal/mol，代表逆濃度梯度輸入乳糖需要外部能量驅動。</p>
+
+  <h3>帶電溶質（離子）：ΔG 取決於電化學電位</h3>
+  <div class="box mech">
+    <p class="box-title">公式 8-10</p>
+    <p>ΔG<sub>inward</sub> = RT ln ([S]<sub>inside</sub> / [S]<sub>outside</sub>) + zFV<sub>m</sub></p>
+    <p style="font-size:.85rem;">z 為離子電荷、F 為法拉第常數（23,062 cal/mol-V）、V<sub>m</sub> 為膜電位（伏特）。正離子在細胞膜電位為負時，zFV<sub>m</sub> 項為負值，使內流更有利；負離子則相反。</p>
+  </div>
+
+  <p><b>範例：氯離子的反直覺結果。</b>神經細胞內 Cl⁻ 為 50 mM，外部 100 mM，V<sub>m</sub> = −60 mV。雖然濃度梯度有利於 Cl⁻ 內流（−410 cal/mol），但因細胞內帶負電、排斥陰離子進入，電荷梯度項高達 +1384 cal/mol，兩者加總後 ΔG ≈ +974 cal/mol（+0.97 kcal/mol）為<b>正值</b>——代表 Cl⁻ 內流其實需要能量，而非直覺以為的自發過程。這說明：判斷離子移動方向時，不能只看濃度梯度，必須同時考慮膜電位。</p>
+
+  <table class="compare-table">
+    <caption>容易混淆的概念③　不帶電溶質 vs 帶電溶質的 ΔG 計算</caption>
+    <thead><tr><th>比較項目</th><th>不帶電溶質</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr><td>影響因素</td><td>僅濃度梯度</td><td>帶電溶質（離子）：濃度梯度 + 膜電位（V<sub>m</sub>），合稱電化學電位</td></tr>
+      <tr><td>公式</td><td>ΔG = RT ln([S]內/[S]外)</td><td>離子：ΔG = RT ln([S]內/[S]外) + zFV<sub>m</sub></td></tr>
+      <tr><td>K<sub>eq</sub></td><td>恆等於 1（平衡時內外濃度相等）</td><td>離子平衡時內外濃度可以不相等，因為電位差也提供驅動力</td></tr>
+    </tbody>
+  </table>
+
+  <div class="concept-check">
+    <p class="cc-title">CONCEPT CHECK 8.6</p>
+    <p>天門冬胺酸的側鏈可能呈中性（–COOH）或帶負電（–COO⁻），為什麼計算其跨膜運輸的 ΔG 時，需要知道側鏈的解離狀態？</p>
+  </div>
+</section>
+
+<!-- ================= Key Takeaways ================= -->
+<section id="s7">
+  <h2>Key Takeaways</h2>
+  <div class="takeaways">
+    <ol>
+      <li>細胞膜是<b>選擇性通透屏障（selectively permeable barrier）</b>，跨膜運輸分為<b>簡單擴散、促進性擴散、主動運輸</b>三種機制（見表 8-1）。</li>
+      <li>不帶電溶質受<b>濃度梯度</b>驅動；帶電溶質（離子）受<b>電化學電位</b>（濃度梯度＋膜電位 V<sub>m</sub>）驅動——判斷離子移動方向時務必兩者都考慮。</li>
+      <li>簡單擴散只適用於小型非極性分子（O₂、CO₂）與極小極性分子（H₂O、甘油），速率與濃度梯度成<b>線性</b>關係，不飽和。</li>
+      <li>促進性擴散需要<b>載體蛋白（carrier protein）</b>或<b>通道蛋白（channel protein）</b>；載體蛋白具飽和動力學（K<sub>m</sub>、V<sub>max</sub>），通道蛋白運輸速度快得多。</li>
+      <li>載體蛋白依運輸方式分為<b>單向運輸（uniport）、同向運輸（symport）、逆向運輸（antiport）</b>；GLUT1（單向）與陰離子交換蛋白（逆向）是紅血球的經典例子。</li>
+      <li>主動運輸必為逆梯度、吸能過程，分為<b>直接主動運輸</b>（直接偶聯 ATP 水解，如 Na⁺/K⁺ 幫浦）與<b>間接主動運輸</b>（偶聯離子順梯度移動，如 Na⁺/葡萄糖共運蛋白）。</li>
+      <li>四類運輸ATPase：<b>P-type（磷酸化，被釩酸根抑制）、V-type（液泡酸化）、F-type（可逆合成ATP）、ABC-type（種類最多樣，含多重抗藥性蛋白）</b>。</li>
+      <li>Na⁺/K⁺ 幫浦每水解 1 個 ATP，運出 3 個 Na⁺、運入 2 個 K⁺，是維持動物細胞膜電位與離子梯度的核心。</li>
+      <li>臨床應用：<b>CFTR 缺陷</b>導致囊狀纖維化（黏液濃稠）；<b>Na⁺/葡萄糖共運機制</b>是霍亂口服補液療法的生理基礎。</li>
+      <li>ΔG 計算：不帶電溶質 ΔG = RT ln([S]內/[S]外)；帶電離子需加上 zFV<sub>m</sub> 項——這是考題常出現的計算重點。</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>第8章：跨膜運輸——克服通透屏障｜學習指南</p>
+  <button id="backToTop">⬆ Back to Top</button>
+</footer>
+
+<script>
+(function(){
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#mainNav a'));
+  var sections = navLinks.map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  });
+
+  function setActive(){
+    var scrollPos = window.scrollY + 90;
+    var currentIndex = 0;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i] && sections[i].offsetTop <= scrollPos){
+        currentIndex = i;
+      }
+    }
+    navLinks.forEach(function(a){ a.classList.remove('active'); });
+    if(navLinks[currentIndex]) navLinks[currentIndex].classList.add('active');
+  }
+
+  window.addEventListener('scroll', setActive, {passive:true});
+  window.addEventListener('load', setActive);
+  setActive();
+
+  document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  navLinks.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.querySelector(a.getAttribute('href'));
+      if(target){
+        window.scrollTo({top: target.offsetTop - 60, behavior:'smooth'});
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

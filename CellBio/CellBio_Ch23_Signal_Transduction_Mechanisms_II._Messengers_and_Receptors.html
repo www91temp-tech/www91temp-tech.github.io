@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第23章：訊息傳遞機制：II. 傳訊者與受體｜學習指南</title>
+<style>
+:root{
+  --hue: 282.5;
+  --primary: hsl(var(--hue), 45%, 35%);
+  --primary-light: hsl(var(--hue), 45%, 92%);
+  --primary-dark: hsl(var(--hue), 45%, 25%);
+  --text: #1a1a1a;
+  --border: hsl(var(--hue), 25%, 82%);
+  --bg: #ffffff;
+  --bg-soft: #fafafa;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"Noto Sans TC","思源黑體","PingFang TC","Microsoft JhengHei",sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;}
+
+/* ===== Header ===== */
+header{
+  padding:2.6rem 1.5rem 2rem;
+  text-align:center;
+  background:linear-gradient(180deg, var(--primary-light) 0%, #fff 100%);
+  border-bottom:1px solid var(--border);
+}
+header h1{
+  margin:0 0 .6rem;
+  font-size:1.7rem;
+  color:var(--primary-dark);
+  font-weight:900;
+  letter-spacing:.02em;
+}
+header p.subtitle{
+  margin:0;
+  color:#555;
+  font-size:.95rem;
+}
+header p.caption{
+  max-width:640px;
+  margin:1rem auto 0;
+  font-size:.85rem;
+  color:#666;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:.8rem 1rem;
+}
+
+/* ===== Nav ===== */
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:center;
+}
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.3rem;
+  margin:0;
+  padding:.6rem 1rem;
+  max-width:1100px;
+}
+nav a{
+  display:block;
+  padding:.5rem .9rem;
+  border-radius:999px;
+  color:var(--primary-dark);
+  text-decoration:none;
+  font-size:.85rem;
+  font-weight:500;
+  white-space:nowrap;
+  transition:background .2s, color .2s;
+}
+nav a:hover{background:var(--primary-light);}
+nav a.active{
+  background:var(--primary);
+  color:#fff;
+  font-weight:700;
+}
+
+/* ===== Main layout ===== */
+main{
+  max-width:880px;
+  margin:0 auto;
+  padding:2.2rem 1.4rem 4rem;
+}
+section{
+  padding-top:1.4rem;
+  margin-bottom:2.6rem;
+  border-top:1px dashed var(--border);
+}
+section:first-of-type{border-top:none;}
+
+h2{
+  color:var(--primary-dark);
+  font-size:1.35rem;
+  border-left:6px solid var(--primary);
+  padding-left:.7rem;
+  margin:0 0 1.2rem;
+}
+h3{
+  color:var(--primary);
+  font-size:1.1rem;
+  margin:1.8rem 0 .8rem;
+  padding-bottom:.3rem;
+  border-bottom:2px solid var(--primary-light);
+}
+h4{
+  color:var(--primary-dark);
+  font-size:1rem;
+  margin:1.2rem 0 .6rem;
+}
+p{margin:.7rem 0;}
+strong{color:var(--primary-dark);}
+ul,ol{padding-left:1.4rem;}
+li{margin:.35rem 0;}
+
+/* ===== Callout boxes ===== */
+.box{
+  border-radius:12px;
+  padding:1rem 1.2rem;
+  margin:1.2rem 0;
+  border:1px solid var(--border);
+}
+.box-term{background:var(--primary-light); border-left:5px solid var(--primary);}
+.box-term .box-title{color:var(--primary-dark); font-weight:900; margin-bottom:.3rem; font-size:.95rem;}
+.box-mech{background:#fff; border:1.5px solid var(--primary); }
+.box-mech .box-title{color:var(--primary); font-weight:900; margin-bottom:.4rem;}
+.box-clinical{background:#fff7f2; border-left:5px solid #c0662b;}
+.box-clinical .box-title{color:#a5501c; font-weight:900; margin-bottom:.4rem;}
+.box-think{background:#f4f7ff; border-left:5px solid #35509a;}
+.box-think .box-title{color:#2c4180; font-weight:900; margin-bottom:.4rem;}
+.box p:first-child{margin-top:0;}
+.box p:last-child{margin-bottom:0;}
+
+/* ===== Flow diagram ===== */
+.flow-diagram{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:stretch;
+  gap:.4rem;
+  margin:1.2rem 0;
+  padding:1rem;
+  background:var(--bg-soft);
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+.flow-step{
+  flex:1 1 150px;
+  background:#fff;
+  border:1.5px solid var(--primary);
+  border-radius:10px;
+  padding:.7rem .8rem;
+  min-width:130px;
+  position:relative;
+}
+.flow-step .num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-size:.75rem;
+  font-weight:700;
+  margin-bottom:.35rem;
+}
+.flow-step .title{font-weight:700; font-size:.9rem; display:block; margin-bottom:.15rem; color:var(--primary-dark);}
+.flow-step .desc{font-size:.8rem; color:#333; line-height:1.5;}
+.flow-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--primary);
+  font-size:1.3rem;
+  font-weight:900;
+  flex:0 0 auto;
+  padding:0 .1rem;
+}
+.flow-note{
+  flex-basis:100%;
+  text-align:center;
+  font-size:.78rem;
+  color:#666;
+  margin-top:.3rem;
+}
+@media (max-width:768px){
+  .flow-diagram{flex-direction:column;}
+  .flow-arrow{transform:rotate(90deg); padding:.2rem 0;}
+}
+
+/* grid card diagrams */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:.8rem;
+  margin:1.2rem 0;
+}
+.card{
+  background:#fff;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:.9rem 1rem;
+}
+.card h5{margin:0 0 .4rem; color:var(--primary-dark); font-size:.92rem;}
+.card p{margin:.3rem 0; font-size:.83rem; color:#333;}
+.card .tag{
+  display:inline-block;
+  background:var(--primary-light);
+  color:var(--primary-dark);
+  font-size:.72rem;
+  padding:.15rem .5rem;
+  border-radius:999px;
+  margin-bottom:.4rem;
+  font-weight:700;
+}
+
+/* ===== Tables ===== */
+.table-wrap{overflow-x:auto; margin:1.2rem 0;}
+table{
+  border-collapse:collapse;
+  width:100%;
+  font-size:.86rem;
+  min-width:420px;
+}
+caption{
+  caption-side:top;
+  text-align:left;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:.5rem;
+  font-size:.92rem;
+}
+th,td{
+  border:1px solid var(--border);
+  padding:.55rem .7rem;
+  text-align:left;
+  vertical-align:top;
+}
+th{background:var(--primary);color:#fff;font-weight:700;}
+tr:nth-child(even) td{background:var(--bg-soft);}
+
+.compare-table th{background:var(--primary-dark);}
+.compare-table td:first-child, .compare-table td:nth-child(2){font-weight:600;}
+
+/* ===== Key takeaways ===== */
+.takeaway-list{
+  list-style:none;
+  padding:0;
+  display:grid;
+  gap:.6rem;
+}
+.takeaway-list li{
+  background:var(--primary-light);
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+  padding:.7rem 1rem;
+  margin:0;
+  font-size:.92rem;
+}
+.takeaway-list li b{color:var(--primary-dark);}
+
+/* svg chart */
+.svg-wrap{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:.8rem;
+  margin:1.2rem 0;
+  text-align:center;
+}
+.svg-wrap figcaption{font-size:.8rem;color:#666;margin-top:.4rem;}
+
+/* footer */
+footer{
+  text-align:center;
+  padding:2.2rem 1rem 2.6rem;
+  background:var(--primary-light);
+  border-top:1px solid var(--border);
+}
+footer p{color:var(--primary-dark); font-weight:700; margin:0 0 1rem;}
+#backToTop{
+  border:none;
+  background:var(--primary);
+  color:#fff;
+  padding:.6rem 1.4rem;
+  border-radius:999px;
+  font-size:.9rem;
+  cursor:pointer;
+  font-weight:700;
+  font-family:inherit;
+}
+#backToTop:hover{background:var(--primary-dark);}
+
+@media (max-width:1024px){
+  main{padding:2rem 1rem 3.5rem;}
+}
+@media (max-width:768px){
+  header h1{font-size:1.35rem;}
+  nav a{font-size:.8rem; padding:.45rem .7rem;}
+  h2{font-size:1.15rem;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第23章：訊息傳遞機制：II. 傳訊者與受體</h1>
+  <p class="subtitle">Signal Transduction Mechanisms: II. Messengers and Receptors｜細胞生物學學習指南</p>
+  <p class="caption">課程情境小故事：上課中教授突然宣布小考，你心跳加快、手心冒汗——這是荷爾蒙腎上腺素（epinephrine）透過血液同時作用在心臟、血管等多個器官的結果。本章要解答：一個訊息分子，如何讓不同細胞做出不同、但各自「正確」的反應？</p>
+</header>
+
+<nav id="mainNav">
+  <ul>
+    <li><a href="#s1" data-nav>23.1 化學訊息與受體</a></li>
+    <li><a href="#s2" data-nav>23.2 G蛋白偶聯受體</a></li>
+    <li><a href="#s3" data-nav>23.3 酵素偶聯受體</a></li>
+    <li><a href="#s4" data-nav>23.4 訊息整合</a></li>
+    <li><a href="#s5" data-nav>23.5 荷爾蒙與長程訊息</a></li>
+    <li><a href="#takeaways" data-nav>本章重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ 23.1 ============ -->
+<section id="s1">
+<h2>23.1 化學訊息與細胞受體（Chemical Signals and Cellular Receptors）</h2>
+<p>幾乎所有細胞都具備感知並回應特定化學訊息的能力。細胞除了「接收」訊息，也會「發出」訊息：有些訊息需要細胞直接接觸才能傳遞，有些則可以擴散到鄰近甚至遙遠的細胞。</p>
+
+<h3>訊息傳遞的關鍵組成</h3>
+<div class="box box-term">
+<div class="box-title">依作用距離分類的四種化學訊息</div>
+<p>訊息分子常依「產生地點」與「作用目標」之間的距離來分類：</p>
+</div>
+
+<div class="card-grid">
+<div class="card"><span class="tag">內分泌 Endocrine</span><h5>荷爾蒙（hormone）</h5><p>由內分泌組織分泌，經血液循環運送到遠處的標的組織（target tissue）。</p></div>
+<div class="card"><span class="tag">旁分泌 Paracrine</span><h5>局部調節物（local mediator）</h5><p>如生長因子，擴散作用於鄰近細胞，作用範圍短。</p></div>
+<div class="card"><span class="tag">自分泌 Autocrine</span><h5>作用於自身</h5><p>細胞分泌的訊息分子回過頭作用在分泌它的同一顆細胞上。</p></div>
+<div class="card"><span class="tag">近分泌 Juxtacrine</span><h5>需要細胞接觸</h5><p>訊息分子鑲嵌在細胞膜上，必須與鄰近細胞直接physical contact才能傳遞訊息。</p></div>
+</div>
+<p style="font-size:.85rem;color:#666;">（對應原文 Figure 23-1）</p>
+
+<h4>受體與配體的結合</h4>
+<p>訊息分子（primary messenger）到達標的細胞後，會與細胞表面或細胞內的<strong>受體（receptor）</strong>結合，此時該分子稱為<strong>配體（ligand，源自拉丁文 ligare「結合」）</strong>。配體與受體之間形成多個弱的非共價鍵（noncovalent bond），受體的結合口袋（binding pocket）形狀與胺基酸側鏈排列決定了結合的專一性。</p>
+
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">配體與受體結合</span><span class="desc">Receptor-ligand binding，訊息分子作為「一級傳訊者（primary messenger）」</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">訊息傳遞（signal transduction）</span><span class="desc">細胞質中常經由二級傳訊者（second messenger）放大並傳遞訊息</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">細胞反應</span><span class="desc">改變細胞功能，或訊息進入細胞核改變基因表現</span></div>
+</div>
+<p style="font-size:.85rem;color:#666;text-align:center;margin-top:-.6rem;">（對應原文 Figure 23-2：訊息傳遞的整體流程）</p>
+
+<div class="box box-mech">
+<div class="box-title">重要概念：preprogrammed response（預設程式化反應）</div>
+<p>受體與配體結合後，受體構型改變或發生群聚（clustering），進而啟動細胞內「早已準備好」的一連串反應。細胞會依照自身過去接收過的訊號史（例如先前表現了哪些基因），決定現在能對哪些訊號產生反應。</p>
+</div>
+
+<h3>受體結合的量化分析：解離常數 K<sub>d</sub></h3>
+<p>受體與配體的結合可以用類似酵素與受質的方式來描述。當配體濃度增加，愈來愈多受體被佔據（occupied），直到達到<strong>飽和（saturation）</strong>。</p>
+<p><strong>解離常數（dissociation constant, K<sub>d</sub>）</strong>定義為使一半受體被佔據時所需的游離配體濃度。K<sub>d</sub> 愈小 → 親和力（affinity）愈高；K<sub>d</sub> 愈大 → 親和力愈低。這與酵素動力學中的 K<sub>m</sub> 概念類似。</p>
+
+<figure class="svg-wrap">
+<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="配體濃度與受體佔據百分比關係曲線圖">
+  <line x1="60" y1="20" x2="60" y2="220" stroke="#333" stroke-width="1.5"/>
+  <line x1="60" y1="220" x2="450" y2="220" stroke="#333" stroke-width="1.5"/>
+  <text x="10" y="30" font-size="11" fill="#333">100%</text>
+  <text x="18" y="122" font-size="11" fill="#333">50%</text>
+  <text x="28" y="224" font-size="11" fill="#333">0</text>
+  <text x="245" y="248" font-size="12" fill="#333">配體（荷爾蒙）濃度 (nM)</text>
+  <text x="-100" y="15" font-size="12" fill="#333" transform="rotate(-90)">受體佔據百分比</text>
+  <polyline fill="none" stroke="hsl(282.5,45%,35%)" stroke-width="3"
+    points="60,220 105,120 150,84 240,49 330,37 420,20"/>
+  <circle cx="60" cy="220" r="4" fill="hsl(282.5,45%,35%)"/>
+  <circle cx="105" cy="120" r="4" fill="hsl(282.5,45%,35%)"/>
+  <circle cx="150" cy="84" r="4" fill="hsl(282.5,45%,35%)"/>
+  <circle cx="240" cy="49" r="4" fill="hsl(282.5,45%,35%)"/>
+  <circle cx="330" cy="37" r="4" fill="hsl(282.5,45%,35%)"/>
+  <circle cx="420" cy="20" r="4" fill="hsl(282.5,45%,35%)"/>
+  <line x1="105" y1="120" x2="105" y2="220" stroke="hsl(282.5,45%,35%)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="60" y1="120" x2="105" y2="120" stroke="hsl(282.5,45%,35%)" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="80" y="240" font-size="11" fill="hsl(282.5,45%,25%)" font-weight="700">Kd (5nM)</text>
+</svg>
+<figcaption>對應原文 Figure 23-3：當配體濃度等於 K<sub>d</sub> 時，恰好有 50% 的受體被佔據；濃度持續上升則趨近 100% 飽和。</figcaption>
+</figure>
+
+<div class="box box-term">
+<div class="box-title">臨床/藥理相關名詞</div>
+<p><strong>致效劑（agonist）</strong>：能與受體結合並「活化」受體的藥物或化合物，模擬天然配體的作用。<br>
+<strong>拮抗劑（antagonist）</strong>：能與受體結合，卻不會活化受體，反而阻止天然配體發揮作用，達到抑制效果。</p>
+</div>
+
+<h4>受體去敏感化（receptor desensitization）</h4>
+<p>細胞感受的其實是配體濃度的<strong>「變化」</strong>而非固定濃度。若配體長時間存在，細胞會降低反應，稱為去敏感化，主要透過兩種方式：</p>
+<ol>
+<li>受體數量減少：受體媒介的胞吞作用（receptor-mediated endocytosis）將細胞表面受體內化。</li>
+<li>受體本身的生化修飾：如磷酸化，改變受體對配體的親和力或傳訊能力。</li>
+</ol>
+
+<h3>訊息放大（Signal Amplification）</h3>
+<p>訊息傳遞路徑最重要的特性之一，就是能將極少量的配體訊號逐級「放大」。以肝細胞對腎上腺素（epinephrine）的反應為例：</p>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">1 個腎上腺素分子</span><span class="desc">結合 GPCR</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">10² 個活化 G 蛋白</span><span class="desc">→ 10² 個活化腺苷酸環化酶</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">10⁴ 個 cAMP</span><span class="desc">→ 10⁴ 個活化 PKA</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">10⁵→10⁶ 個活化磷酸化酶</span><span class="desc">磷酸化酶激酶 → 肝醣磷酸化酶</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span><span class="title">10⁸ 個葡萄糖-1-磷酸</span><span class="desc">最終反應（肝醣分解）</span></div>
+  <div class="flow-note">對應原文 Figure 23-4：單一配體可透過層層放大，釋出上億個產物分子。</div>
+</div>
+
+<h3>細胞表面與細胞內的四大類受體</h3>
+<p>親水性配體（蛋白質、胜肽、胺基酸衍生物）通常結合膜上受體；疏水性配體（如類固醇）則可穿越細胞膜，結合細胞質或細胞核內受體。</p>
+<div class="card-grid">
+<div class="card"><span class="tag">(a)</span><h5>配體閘控離子通道</h5><p>Ligand-gated ion channel。配體結合後通道開啟，離子（如 Ca²⁺）直接流入細胞。</p></div>
+<div class="card"><span class="tag">(b)</span><h5>G蛋白偶聯受體 GPCR</h5><p>配體結合活化 G 蛋白（GTP 態），進而活化酵素、產生二級傳訊者（cAMP、IP₃）。</p></div>
+<div class="card"><span class="tag">(c)</span><h5>酵素偶聯受體</h5><p>如受體酪胺酸激酶：受體本身被磷酸化，活化 Ras 及下游激酶。</p></div>
+<div class="card"><span class="tag">(d)</span><h5>核受體</h5><p>疏水性配體（如類固醇）穿膜進入細胞，與細胞質受體結合後進入細胞核，改變基因表現。</p></div>
+</div>
+<p style="font-size:.85rem;color:#666;">（對應原文 Figure 23-5：四種基本訊息傳遞路徑）</p>
+
+</section>
+
+<!-- ============ 23.2 ============ -->
+<section id="s2">
+<h2>23.2 G蛋白偶聯受體（G Protein–Coupled Receptors, GPCR）</h2>
+
+<h3>GPCR 的結構與 G 蛋白活化循環</h3>
+<p>GPCR 的共同特徵是七次穿膜的 α 螺旋（seven transmembrane α helices），N端在細胞外、C端在細胞質。細胞質環路能與特定 <strong>G 蛋白（guanine-nucleotide binding protein）</strong>作用。GPCR 家族成員包括嗅覺受體、β-腎上腺素受體，以及臨床上極重要的<strong>類鴉片受體（opioid receptor）</strong>（嗎啡的作用標的）。</p>
+
+<div class="box box-term">
+<div class="box-title">異三聚體 G 蛋白（heterotrimeric G protein）</div>
+<p>由 G<sub>α</sub>、G<sub>β</sub>、G<sub>γ</sub> 三個次單元組成。G<sub>α</sub> 結合 GDP 時處於「關閉」狀態；結合 GTP 時處於「開啟」狀態並與 G<sub>βγ</sub> 分離。G<sub>s</sub> 為刺激型（stimulatory），G<sub>i</sub> 為抑制型（inhibitory）。</p>
+</div>
+
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">靜止態</span><span class="desc">受體未結合配體；Gα-GDP 與 Gβγ 結合在一起</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">配體結合受體</span><span class="desc">Gα 釋出 GDP，換上 GTP</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">次單元分離</span><span class="desc">Gα-GTP 與 Gβγ 分開，各自可作用於標的蛋白</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">Gα 水解 GTP</span><span class="desc">GTP → GDP + Pi，Gα 失去活性</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span><span class="title">重新組合</span><span class="desc">Gα-GDP 再與 Gβγ 結合，回到步驟 1（循環）</span></div>
+  <div class="flow-note">對應原文 Figure 23-7：G 蛋白活化／去活化循環（regulators of G protein signaling, RGS 可加速 GTP 水解）</div>
+</div>
+
+<div class="box box-clinical">
+<div class="box-title">G<sub>βγ</sub> 訊息傳遞實例：蕈毒鹼型乙醯膽鹼受體</div>
+<p>乙醯膽鹼（Ach）結合心臟的蕈毒鹼受體後，活化的 G<sub>βγ</sub> 直接作用於鉀離子通道使其開啟，降低心跳速率；Ach 消失後，α、βγ 重新結合，通道關閉。</p>
+</div>
+
+<h3>cAMP：由 G 蛋白調控生成的二級傳訊者</h3>
+<p><strong>環腺苷單磷酸（cyclic AMP, cAMP）</strong>由膜上酵素<strong>腺苷酸環化酶（adenylyl cyclase）</strong>將 ATP 轉換而成；再由細胞質中的<strong>磷酸二酯酶（phosphodiesterase）</strong>水解為 AMP 而失活。</p>
+
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">ATP</span><span class="desc">受質</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">腺苷酸環化酶（活化態）</span><span class="desc">被 Gsα-GTP 活化</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">cAMP + PPi</span><span class="desc">產物</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">磷酸二酯酶</span><span class="desc">cAMP + H₂O → AMP，訊號終止</span></div>
+  <div class="flow-note">對應原文 Figure 23-9／23-10：cAMP 的生成與降解</div>
+</div>
+
+<p>cAMP 的主要細胞內標的是<strong>蛋白激酶A（protein kinase A, PKA）</strong>。PKA 由 2 個調節次單元（regulatory subunit）與 2 個催化次單元（catalytic subunit）組成，未結合 cAMP 時調節次單元會抑制催化次單元。</p>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">PKA 未活化</span><span class="desc">調節次單元與催化次單元結合，彼此抑制</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">cAMP 結合調節次單元</span><span class="desc">調節次單元構型改變</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">催化次單元游離、活化</span><span class="desc">可磷酸化多種標的蛋白的 Ser／Thr 位點</span></div>
+  <div class="flow-note">對應原文 Figure 23-11：cAMP 活化 PKA 的機制</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<caption>Table 23-1（節錄）cAMP 調控的細胞功能</caption>
+<thead><tr><th>調控功能</th><th>標的組織</th><th>荷爾蒙</th></tr></thead>
+<tbody>
+<tr><td>肝醣分解</td><td>肌肉、肝臟</td><td>腎上腺素</td></tr>
+<tr><td>脂肪酸生成</td><td>脂肪組織</td><td>腎上腺素</td></tr>
+<tr><td>心率、血壓</td><td>心血管系統</td><td>腎上腺素</td></tr>
+<tr><td>水分再吸收</td><td>腎臟</td><td>抗利尿激素</td></tr>
+<tr><td>骨骼再吸收</td><td>骨骼</td><td>副甲狀腺素</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>G蛋白訊息路徑失常與人類疾病</h3>
+<div class="box box-clinical">
+<div class="box-title">Clinical Correlation：霍亂與百日咳</div>
+<p><strong>霍亂（cholera）</strong>：霍亂弧菌毒素會化學修飾 G<sub>s</sub>，使其<strong>無法</strong>水解 GTP，導致 G<sub>s</sub> 持續活化、cAMP 濃度可高達正常的 100 倍，過度活化<strong>囊性纖維化氯離子通道（CFTR）</strong>，造成腸道大量分泌氯離子、鈉離子與水分，引發嚴重脫水。治療方式為口服補液療法（含葡萄糖，可透過 Na⁺/glucose 共同運輸蛋白幫助鈉回收）。</p>
+<p><strong>百日咳（pertussis）</strong>：百日咳桿菌毒素作用於<strong>抑制型</strong> G<sub>i</sub> 蛋白，使其失去抑制腺苷酸環化酶的能力，導致肺部液體堆積、劇烈咳嗽。</p>
+</div>
+
+<h3>IP<sub>3</sub> 與 DAG：磷脂醯肌醇路徑</h3>
+<p>另一群 G 蛋白（G<sub>q</sub>）活化<strong>磷脂酶C（phospholipase C）</strong>，將膜脂質 PIP<sub>2</sub>（phosphatidylinositol-4,5-bisphosphate）切割成兩個二級傳訊者：</p>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">配體結合受體 → Gq活化</span><span class="desc">GDP 換 GTP，α與βγ分離</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">磷脂酶Cβ 活化</span><span class="desc">切割 PIP₂</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">IP₃（水溶性，進入細胞質）</span><span class="desc">結合 ER 上 IP₃受體，促使 Ca²⁺ 釋放</span></div>
+  <div class="flow-step"><span class="num">4</span><span class="title">DAG（留在膜上）</span><span class="desc">活化蛋白激酶C（PKC）</span></div>
+  <div class="flow-note">對應原文 Figure 23-12／23-13：PIP₂ → IP₃ + DAG</div>
+</div>
+<p>PKC 活化與多種細胞功能有關：細胞生長刺激、離子通道調控、細胞骨架改變、胞內 pH 上升、蛋白分泌等。</p>
+
+<h3>鈣離子：訊息傳遞中的核心二級傳訊者</h3>
+<p>靜息狀態下細胞質鈣濃度極低（約 0.1 μM），遠低於細胞外液（約 1.2 mM）。維持低濃度靠：</p>
+<div class="card-grid">
+<div class="card"><span class="tag">降低胞質Ca²⁺</span><h5>細胞膜鈣ATP酶</h5><p>將 Ca²⁺ 打出細胞外</p></div>
+<div class="card"><span class="tag">降低胞質Ca²⁺</span><h5>ER鈣ATP酶</h5><p>將 Ca²⁺ 打入內質網腔</p></div>
+<div class="card"><span class="tag">降低胞質Ca²⁺</span><h5>鈉鈣交換器</h5><p>利用 Na⁺ 梯度將 Ca²⁺ 排出</p></div>
+<div class="card"><span class="tag">降低胞質Ca²⁺</span><h5>粒線體攝入</h5><p>將 Ca²⁺ 送入粒線體基質</p></div>
+<div class="card"><span class="tag">升高胞質Ca²⁺</span><h5>質膜鈣通道開啟</h5><p>細胞外 Ca²⁺ 大量湧入</p></div>
+<div class="card"><span class="tag">升高胞質Ca²⁺</span><h5>IP₃ 受體通道</h5><p>ER 儲存的 Ca²⁺ 釋出</p></div>
+<div class="card"><span class="tag">升高胞質Ca²⁺</span><h5>Ryanodine 受體通道</h5><p>對 Ca²⁺ 本身敏感，可放大訊號（見下方機制框）</p></div>
+</div>
+<p style="font-size:.85rem;color:#666;">（對應原文 Figure 23-14：鈣調控總覽）</p>
+
+<div class="box box-mech">
+<div class="box-title">機制重點：鈣誘發鈣釋放（calcium-induced calcium release）</div>
+<p>IP₃ 受體與 Ryanodine 受體本身也對 Ca²⁺ 敏感：少量 Ca²⁺ 進入細胞質後，會進一步刺激 ER 釋出更多 Ca²⁺，如同水波一樣向外擴散放大訊號。此機制是受精卵鈣波（見下方）的關鍵。</p>
+</div>
+
+<h4>受精時的鈣釋放：卵子活化</h4>
+<p>精卵結合後數十秒至數分鐘內，鈣離子波從精子進入處開始擴散全卵（詳見章首插圖）。此鈣波導致兩件重要事件：</p>
+<ol>
+<li><strong>皮質顆粒胞吐（cortical granule exocytosis）</strong>：改變卵膜（vitelline envelope），形成「慢性多精子阻擋（slow block to polyspermy）」，防止多重受精（先前尚有快速阻擋：質膜短暫去極化）。</li>
+<li><strong>卵子活化（egg activation）</strong>：恢復代謝活動、重組卵內部結構，啟動胚胎發育。</li>
+</ol>
+
+<h4>鈣結合效應蛋白：鈣調蛋白（calmodulin）</h4>
+<p>鈣調蛋白形似一條有彈性的「手臂」，兩端各有一個「手掌」，可各結合 2 個 Ca²⁺（共4個）。結合後構型改變，形成活化的<strong>鈣-鈣調蛋白複合體</strong>，像蛇形手環一樣纏繞包裹標的蛋白（如激酶、磷酸酶），進而調控其活性。鈣調蛋白在胞質 Ca²⁺ 升到約 1.0 μM 時結合鈣，降回 0.1 μM 時釋放，恰好對應細胞內鈣濃度的生理範圍。</p>
+
+<div class="box box-term">
+<div class="box-title">研究工具：鈣指示劑與鈣離子載體（Key Technique）</div>
+<p><strong>鈣指示劑（calcium indicator）</strong>，如螢光染料 fura-2 或基因編碼的 cameleon 蛋白，可用來「觀察」細胞內鈣濃度何時何地升高。<br>
+<strong>鈣離子載體（calcium ionophore）</strong>，如 ionomycin、A23187，可使膜對鈣離子通透，在沒有生理刺激下人為釋放胞內鈣儲存，用來測試「鈣升高是否足以引發某個細胞反應」（因果驗證，而非只是相關）。</p>
+</div>
+
+<div class="box box-think">
+<div class="box-title">想一想（Concept Check 23.2）</div>
+<p>靜息細胞的 Ca²⁺ 濃度約 10⁻⁷ M，遠低於 Na⁺（約 10⁻³ M）。為什麼 Ca²⁺ 比 Na⁺ 更適合作為二級傳訊者？<br><em>提示：訊號分子需要「本底極低、變化幅度大」，才能提供高訊噪比（signal-to-noise ratio）。</em></p>
+</div>
+
+</section>
+
+<!-- ============ 23.3 ============ -->
+<section id="s3">
+<h2>23.3 酵素偶聯受體（Enzyme-Coupled Receptors）</h2>
+
+<h3>生長因子與受體激酶</h3>
+<p>細胞增殖除了需要營養，還需要額外訊號刺激。血清（serum，血漿凝血後的清液）中富含<strong>生長因子（growth factor）</strong>，可刺激細胞分裂——這是因為凝血過程中血小板釋放了血小板衍生生長因子（PDGF）。許多生長因子（PDGF、胰島素、EGF、FGF、神經生長因子等）都透過<strong>受體酪胺酸激酶（receptor tyrosine kinase, RTK）</strong>作用。</p>
+
+<h3>RTK 的群聚與自體磷酸化</h3>
+<p>RTK 通常只有一段穿膜區，胞外為配體結合區，胞內含酪胺酸激酶活性區。配體結合後 RTK 發生<strong>雙體化（dimerization）／群聚（clustering）</strong>，彼此磷酸化對方的酪胺酸，稱為<strong>自體磷酸化（autophosphorylation）</strong>。</p>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">配體結合</span><span class="desc">如 EGF 單體結合各自的受體</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">受體雙體化</span><span class="desc">兩個受體聚在一起</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">交互磷酸化</span><span class="desc">彼此的酪胺酸激酶磷酸化對方的酪胺酸殘基</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">形成 SH2 結合位點</span><span class="desc">磷酸酪胺酸可招募含 SH2 domain 的胞質蛋白</span></div>
+  <div class="flow-note">對應原文 Figure 23-17：RTK 的結構與活化（以EGF受體為例）</div>
+</div>
+
+<h3>RTK → Ras → MAP 激酶級聯反應</h3>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">GRB2 結合磷酸酪胺酸</span><span class="desc">GRB2 具 SH2 domain</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">Sos 活化（GEF）</span><span class="desc">Sos 為鳥苷酸交換因子</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">Ras-GDP → Ras-GTP</span><span class="desc">Ras 活化（單體小 G 蛋白）</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">Raf → MEK → MAPK</span><span class="desc">依序磷酸化的激酶級聯</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span><span class="title">磷酸化轉錄因子</span><span class="desc">如 Jun、Ets，進入細胞核調控基因表現</span></div>
+  <div class="flow-note">對應原文 Figure 23-18：GAP 可加速 Ras-GTP 水解，終止訊號（100倍加速）</div>
+</div>
+<p>此外，RTK 也能活化磷脂酶C<sub>γ</sub>（PLCγ，與 GPCR 活化的 PLCβ 為不同亞型），以及<strong>PI 3-激酶（phosphatidylinositol 3-kinase）</strong>，後者對細胞增殖與遷移相當重要。</p>
+
+<div class="box box-mech">
+<div class="box-title">用突變解析RTK訊息路徑：果蠅複眼</div>
+<p>果蠅複眼每個小眼（ommatidium）需要 R8 細胞上的配體 <strong>Boss</strong> 活化 R7 前驅細胞上的受體 <strong>Sevenless（Sev）</strong>，R7 才能正常分化。此系統常用來以基因遺傳學驗證訊息路徑順序：</p>
+<ul>
+<li>Sev 缺失 → 無 R7 細胞（受體必要）</li>
+<li>Sev 缺失，但 Ras 帶有持續活化型突變 → R7 仍可形成（證明 Ras 在 Sev 下游，可繞過受體本身）</li>
+</ul>
+</div>
+
+<div class="box box-clinical">
+<div class="box-title">Clinical Correlation：顯性負性突變與人類疾病</div>
+<p>FGFR（纖維母細胞生長因子受體）需以雙體形式運作。若細胞同時表現正常與<strong>顯性負性（dominant negative）</strong>突變受體，正常受體與突變受體配對後整組失去功能。人類 FGFR-3 的<strong>組成型活化突變（constitutively active mutation）</strong>會造成最常見的侏儒症——軟骨發育不全（achondroplasia）；更嚴重的單一胺基酸突變則導致致死性侏儒症（thanatophoric dysplasia）。</p>
+</div>
+
+<h3>受體絲胺酸/蘇胺酸激酶：TGFβ／Smad 路徑</h3>
+<p>TGFβ 家族生長因子透過磷酸化<strong>絲胺酸／蘇胺酸（serine/threonine）</strong>而非酪胺酸來傳訊，調節細胞增殖、細胞凋亡與胚胎發育。</p>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">TGFβ 結合</span><span class="desc">Type I 與 Type II 受體群聚</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">Type II 磷酸化 Type I</span><span class="desc">受體活化</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">R-Smad 磷酸化</span><span class="desc">由錨定蛋白協助結合活化的受體</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">R-Smad + Smad4</span><span class="desc">複合體進入細胞核，調控基因表現</span></div>
+  <div class="flow-note">對應原文 Figure 23-22：Smad 訊號終止於 R-Smad 被降解或移出細胞核</div>
+</div>
+
+<h4>其他酵素偶聯受體</h4>
+<p><strong>酪胺酸磷酸酶受體</strong>：移除酪胺酸上的磷酸基，反向調控 RTK 活性；許多此類受體的配體仍未知。<strong>鳥苷酸環化酶（guanylyl cyclase）</strong>受體：功能類似腺苷酸環化酶，但產物是 <strong>cGMP</strong> 而非 cAMP，在視網膜光受器、腸道液體調節與血管舒張中扮演重要角色。</p>
+
+</section>
+
+<!-- ============ 23.4 ============ -->
+<section id="s4">
+<h2>23.4 訊息整合（Signal Integration）</h2>
+
+<h3>支架蛋白促進訊息傳遞的專一性</h3>
+<p>細胞常需要把訊息傳遞侷限在特定位置與特定路徑上，<strong>支架蛋白（scaffold protein）</strong>能將多個訊息傳遞成分組裝成大複合體，提高反應效率並避免訊號亂竄。例如 <strong>Ksr</strong> 蛋白可將 Raf、MEK、MAPK 固定在一起。</p>
+
+<div class="box box-mech">
+<div class="box-title">實例：酵母交配路徑（yeast mating pathway）</div>
+<p>單倍體酵母 <strong>a</strong> 型細胞分泌 a factor，<strong>α</strong> 型細胞分泌 α factor，各自結合對方細胞上的 GPCR。活化的 G<sub>βγ</sub> 招募支架蛋白 <strong>Ste5</strong>，將 MEKK → MEK → MAPK 級聯固定在一起，最終活化交配相關基因表現，兩細胞融合成二倍體。此例說明訊息路徑的組件可以「混合搭配」：GPCR 接在細胞表面，卻連接到原本屬於 RTK 系統的 MAPK 級聯。</p>
+</div>
+
+<h3>訊息串聯（signaling crosstalk）</h3>
+<p>細胞同時暴露於多種訊號，各路徑並非彼此獨立。串聯可能發生在：</p>
+<div class="card-grid">
+<div class="card"><span class="tag">層級一</span><h5>共用二級傳訊者</h5><p>如 Ca²⁺、cAMP 可被多條路徑共同產生或使用。</p></div>
+<div class="card"><span class="tag">層級二</span><h5>共用蛋白激酶</h5><p>PKA、PKC、MAPK、鈣調蛋白依賴激酶彼此互相磷酸化調控。</p></div>
+<div class="card"><span class="tag">層級三</span><h5>共同標的蛋白磷酸化</h5><p>不同路徑的激酶可磷酸化相同的標的蛋白。</p></div>
+<div class="card"><span class="tag">層級四</span><h5>基因表現整合</h5><p>多路徑訊號最終匯聚影響同一組基因的轉錄。</p></div>
+</div>
+<p style="font-size:.85rem;color:#666;">（對應原文 Figure 23-24：訊息串聯示意）細胞訊息傳遞最好被視為一張複雜的生化網路，而非彼此獨立的直線路徑。</p>
+
+<div class="box box-think">
+<div class="box-title">想一想（Concept Check 23.4）</div>
+<p>已知生長因子透過 RTK 促進細胞快速分裂；腎上腺素則活化腺苷酸環化酶產生 cAMP；而 PKA 會抑制 Raf 蛋白。若同時給予腎上腺素與生長因子，你預期細胞分裂速率會如何變化？<br><em>提示：PKA 抑制 Raf，而 Raf 是 Ras-MAPK 路徑中生長因子訊號傳遞的關鍵一環——這正是跨路徑串聯（crosstalk）造成拮抗效應的例子。</em></p>
+</div>
+
+</section>
+
+<!-- ============ 23.5 ============ -->
+<section id="s5">
+<h2>23.5 荷爾蒙與其他長程訊息（Hormones and Other Long-Range Signals）</h2>
+
+<h3>荷爾蒙的化學分類</h3>
+<div class="table-wrap">
+<table>
+<caption>Table 23-4（節錄）荷爾蒙的化學分類與功能</caption>
+<thead><tr><th>化學分類</th><th>範例</th><th>調節功能</th></tr></thead>
+<tbody>
+<tr><td>胺基酸衍生物</td><td>腎上腺素、正腎上腺素（衍生自酪胺酸）</td><td>壓力反應：心率、血壓；釋放葡萄糖與脂肪酸</td></tr>
+<tr><td>胜肽</td><td>抗利尿激素（vasopressin）</td><td>體液與血壓調節</td></tr>
+<tr><td>蛋白質</td><td>腦下垂體前葉荷爾蒙</td><td>調節其他內分泌系統</td></tr>
+<tr><td>類固醇</td><td>性荷爾蒙、腎上腺皮質素</td><td>生殖發育、第二性徵、壓力反應</td></tr>
+<tr><td>（旁分泌）胺基酸衍生物</td><td>組織胺</td><td>過敏、壓力、傷害局部反應</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>腎上腺素性荷爾蒙：戰或逃反應</h3>
+<p>腎上腺素（epinephrine/adrenaline）與正腎上腺素統稱<strong>腎上腺素性荷爾蒙（adrenergic hormone）</strong>，結合<strong>α型與β型腎上腺素受體</strong>，兩者連接不同 G 蛋白：</p>
+<div class="table-wrap">
+<table class="compare-table">
+<caption>比較表：α₁-腎上腺素受體 vs β-腎上腺素受體</caption>
+<thead><tr><th>項目 A</th><th>項目 B</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td><strong>α₁-腎上腺素受體</strong></td><td><strong>β-腎上腺素受體</strong></td><td>連接不同 G 蛋白，效應相反</td></tr>
+<tr><td>連接 G<sub>q</sub> 蛋白</td><td>連接 G<sub>s</sub> 蛋白</td><td>活化的下游酵素不同</td></tr>
+<tr><td>活化磷脂酶C → IP₃/DAG → 胞內 Ca²⁺ 上升</td><td>活化腺苷酸環化酶 → cAMP 上升</td><td>二級傳訊者不同</td></tr>
+<tr><td>使血管平滑肌<strong>收縮</strong></td><td>使平滑肌<strong>舒張</strong>（心肌則增強收縮）</td><td>生理效應相反</td></tr>
+<tr><td>主要分布：內臟血管平滑肌</td><td>主要分布：心臟、支氣管、骨骼肌血管</td><td>組織分布不同</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>腎上腺素刺激肝醣分解</h4>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">cAMP 活化 PKA</span><span class="desc">腎上腺素→Gs→腺苷酸環化酶→cAMP</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">PKA 磷酸化磷酸化酶激酶</span><span class="desc">活化磷酸化酶激酶</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">肝醣磷酸化酶 b → a</span><span class="desc">由非活化態轉為活化態</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">肝醣分解加速</span><span class="desc">釋出葡萄糖-1-磷酸</span></div>
+  <div class="flow-note">對應原文 Figure 23-26；PKA 同時磷酸化並「抑制」肝醣合成酶，雙向調節血糖</div>
+</div>
+
+<h3>胰島素訊息傳遞與 PI 3-激酶</h3>
+<p>胰臟胰島細胞分泌的<strong>升糖素（glucagon）</strong>作用機制與腎上腺素相似（同樣經 G<sub>s</sub>→cAMP），會<strong>升高</strong>血糖；<strong>胰島素（insulin）</strong>則作用相反，<strong>降低</strong>血糖。胰島素受體本身即為 RTK（含 2 個 α、2 個 β 次單元）。</p>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">胰島素結合受體</span><span class="desc">受體磷酸化 IRS-1</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">IRS-1 分岔兩條路</span><span class="desc">路徑一：GRB2→Ras；路徑二：PI 3-激酶</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">PIP₂ → PIP₃</span><span class="desc">PTEN 可將 PIP₃ 轉回 PIP₂（負向調控）</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">Akt（PKB）活化</span><span class="desc">PIP₃ 結合並活化 Akt</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span><span class="title">兩大效應</span><span class="desc">① GLUT4 轉位到膜上攝取葡萄糖 ② 抑制GSK3，促進肝醣合成酶活性</span></div>
+  <div class="flow-note">對應原文 Figure 23-27：胰島素訊息路徑</div>
+</div>
+
+<div class="box box-clinical">
+<div class="box-title">Clinical Correlation：糖尿病</div>
+<p><strong>第一型糖尿病</strong>：胰島 β 細胞喪失、無法製造胰島素，可用胰島素治療（Banting 與 Macleod 因此獲 1923 年諾貝爾獎）。<br><strong>第二型糖尿病</strong>：細胞對胰島素產生抗性（insulin resistance），而非胰島素製造不足，故胰島素治療效果較差。</p>
+</div>
+
+<h3>類固醇荷爾蒙：核受體路徑</h3>
+<p>類固醇荷爾蒙（如皮質醇、性荷爾蒙）屬疏水性分子，可直接穿越細胞膜，與細胞質或細胞核內的受體結合。</p>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">皮質醇（S）穿膜進入細胞</span><span class="desc">結合糖皮質素受體（GR）</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">釋放熱休克蛋白（Hsp）</span><span class="desc">活化 GR 的DNA結合位點</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">GR 進入細胞核</span><span class="desc">結合糖皮質素反應元件</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">形成 GR 雙體</span><span class="desc">活化鄰近基因轉錄</span></div>
+  <div class="flow-note">對應原文 Figure 23-28</div>
+</div>
+
+<h3>氣體作為訊息分子：一氧化氮 NO</h3>
+<div class="box box-clinical">
+<div class="box-title">Human Connections：預防心臟病的氣體</div>
+<p>內皮細胞（endothelium）表面的乙醯膽鹼受體活化後，經 IP₃ 促使 Ca²⁺ 釋放，Ca²⁺-鈣調蛋白複合體活化<strong>一氧化氮合成酶（NO synthase）</strong>，將精胺酸轉為 NO 與瓜胺酸。NO 擴散進入鄰近平滑肌細胞，活化<strong>鳥苷酸環化酶</strong>，生成 <strong>cGMP</strong>，進而活化<strong>蛋白激酶G</strong>，使血管平滑肌舒張。硝化甘油（治療心絞痛）與威而鋼（sildenafil，抑制降解 cGMP 的磷酸二酯酶）都是利用此路徑的藥物。</p>
+</div>
+<div class="flow-diagram">
+  <div class="flow-step"><span class="num">1</span><span class="title">Ach → GPCR → IP₃</span><span class="desc">內皮細胞</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><span class="title">Ca²⁺ 釋放、活化鈣調蛋白</span><span class="desc">內皮細胞</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><span class="title">NO 合成、擴散</span><span class="desc">跨越到平滑肌細胞</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><span class="title">活化鳥苷酸環化酶 → cGMP</span><span class="desc">平滑肌細胞</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span><span class="title">PKG 活化 → 肌肉舒張</span><span class="desc">血管舒張</span></div>
+  <div class="flow-note">對應原文 Figure 23B-1</div>
+</div>
+<p>植物中，果實成熟則是由氣體<strong>乙烯（ethylene）</strong>介導的長程訊息（例如未熟香蕉放在熟蘋果旁會加速成熟）。</p>
+
+</section>
+
+<!-- ============ 混淆概念比較表 ============ -->
+<section id="compare">
+<h2>本章容易混淆的概念比較</h2>
+
+<div class="table-wrap">
+<table class="compare-table">
+<caption>比較一：G蛋白偶聯受體（GPCR） vs 受體酪胺酸激酶（RTK）</caption>
+<thead><tr><th>A：GPCR</th><th>B：RTK</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td>七次穿膜 α 螺旋結構</td><td>單次穿膜，胞內段本身即為激酶</td><td>受體結構不同</td></tr>
+<tr><td>本身不具酵素活性，需活化「另一個」G蛋白</td><td>受體本身就是酵素（激酶）</td><td>受體是否直接催化反應</td></tr>
+<tr><td>依賴 GTP／GDP 交換與水解終止訊號</td><td>依賴磷酸化／去磷酸化與 GAP 使 Ras 失活</td><td>訊號開關的分子機制不同</td></tr>
+<tr><td>下游常見 cAMP、IP₃/DAG、Ca²⁺</td><td>下游常見 Ras-MAPK 級聯、PI3K-Akt</td><td>典型下游路徑不同</td></tr>
+<tr><td>典型例子：腎上腺素受體、嗅覺受體、類鴉片受體</td><td>典型例子：EGF受體、胰島素受體、PDGF受體</td><td>代表性配體/受體不同</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="table-wrap">
+<table class="compare-table">
+<caption>比較二：Gs / Gq / Gi 三類 G 蛋白的效應</caption>
+<thead><tr><th>A：G蛋白類型</th><th>B：主要效應</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td>G<sub>s</sub>（stimulatory）</td><td>活化腺苷酸環化酶 → cAMP 上升</td><td>「s」代表刺激（stimulatory）</td></tr>
+<tr><td>G<sub>i</sub>（inhibitory）</td><td>抑制腺苷酸環化酶 → cAMP 下降</td><td>「i」代表抑制（inhibitory），百日咳毒素作用標的</td></tr>
+<tr><td>G<sub>q</sub></td><td>活化磷脂酶Cβ → IP₃/DAG 上升 → Ca²⁺ 釋放</td><td>走磷脂醯肌醇路徑，而非cAMP路徑</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="table-wrap">
+<table class="compare-table">
+<caption>比較三：致效劑（agonist） vs 拮抗劑（antagonist）</caption>
+<thead><tr><th>A：致效劑</th><th>B：拮抗劑</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td>與受體結合並「活化」受體</td><td>與受體結合但「不活化」受體</td><td>是否引發下游反應</td></tr>
+<tr><td>模擬天然配體的效果</td><td>阻止天然配體結合、抑制受體功能</td><td>對訊息路徑是促進還是阻斷</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="takeaways">
+<h2># Key Takeaways</h2>
+<ul class="takeaway-list">
+<li><b>四種距離分類：</b>內分泌（endocrine）走血液、旁分泌（paracrine）局部擴散、自分泌（autocrine）作用自身、近分泌（juxtacrine）需細胞接觸。</li>
+<li><b>K<sub>d</sub>（解離常數）</b>是使一半受體被佔據時的配體濃度，數值越小代表受體對配體的親和力越高。</li>
+<li><b>訊息傳遞四大受體類型：</b>配體閘控離子通道、GPCR、酵素偶聯受體（如RTK）、核受體，各自有不同的訊息傳遞邏輯。</li>
+<li><b>GPCR 核心機制：</b>配體結合 → G<sub>α</sub> 由GDP換GTP → G<sub>α</sub>與G<sub>βγ</sub>分離並各自作用 → G<sub>α</sub>水解GTP後訊號終止。</li>
+<li><b>兩大主要二級傳訊者路徑：</b>①G<sub>s</sub>/G<sub>i</sub> → 腺苷酸環化酶 → cAMP → PKA；②G<sub>q</sub> → 磷脂酶C → IP₃（釋放Ca²⁺）與DAG（活化PKC）。</li>
+<li><b>疾病機制必考：</b>霍亂毒素鎖定G<sub>s</sub>「恆常開啟」；百日咳毒素抑制G<sub>i</sub>的抑制功能——兩者都導致cAMP異常升高，但作用的G蛋白種類相反。</li>
+<li><b>RTK 訊號路徑：</b>配體結合 → 受體雙體化、自體磷酸化 → SH2蛋白（GRB2）招募 → Sos（GEF）活化Ras → Raf-MEK-MAPK級聯 → 調控基因表現。</li>
+<li><b>TGFβ／Smad 路徑</b>使用絲胺酸/蘇胺酸激酶受體，經R-Smad與Smad4複合體直接進入細胞核調控轉錄，機制上與RTK-Ras路徑截然不同。</li>
+<li><b>訊息整合：</b>支架蛋白（如Ksr、Ste5）將訊息組件侷限在特定位置；訊息串聯（crosstalk）可發生在二級傳訊者、激酶、標的蛋白、基因表現等多個層次。</li>
+<li><b>荷爾蒙與長程訊息：</b>腎上腺素性荷爾蒙走GPCR（α型→Gq、β型→Gs）；胰島素走RTK-PI3K-Akt路徑；類固醇荷爾蒙走核受體；一氧化氮（NO）以cGMP路徑舒張血管，是氣體訊號分子的代表。</li>
+</ul>
+</section>
+
+</main>
+
+<footer>
+  <p>第23章：訊息傳遞機制：II. 傳訊者與受體｜學習指南</p>
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top</button>
+</footer>
+
+<script>
+(function(){
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a[data-nav]'));
+  var sections = navLinks.map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  }).filter(Boolean);
+
+  function setActive(id){
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      var visible = entries.filter(function(e){ return e.isIntersecting; });
+      if(visible.length > 0){
+        visible.sort(function(a,b){ return b.intersectionRatio - a.intersectionRatio; });
+        setActive(visible[0].target.id);
+      }
+    }, { rootMargin: '-90px 0px -60% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+
+    sections.forEach(function(s){ observer.observe(s); });
+  }
+
+  // fallback / extra precision on scroll
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){
+        var scrollPos = window.scrollY + 110;
+        var current = sections[0];
+        sections.forEach(function(s){
+          if(s.offsetTop <= scrollPos){ current = s; }
+        });
+        if(current){ setActive(current.id); }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  setActive(sections.length ? sections[0].id : '');
+})();
+</script>
+
+</body>
+</html>

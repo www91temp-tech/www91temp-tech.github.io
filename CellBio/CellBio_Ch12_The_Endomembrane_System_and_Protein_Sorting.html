@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第12章：內膜系統與蛋白質分選｜學習指南</title>
+<style>
+  :root{
+    --hue: 210;
+    --primary: hsl(210, 45%, 35%);
+    --primary-light: hsl(210, 45%, 92%);
+    --primary-dark: hsl(210, 45%, 25%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(210, 30%, 85%);
+    --card-bg: #fafbfc;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    font-family: "Noto Sans TC","思源黑體","Microsoft JhengHei",sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.85;
+    font-size: 16px;
+  }
+  header{
+    text-align:center;
+    padding: 2.6rem 1.2rem 1.6rem;
+    background: linear-gradient(180deg, var(--primary-light) 0%, #fff 100%);
+  }
+  header h1{
+    color: var(--primary-dark);
+    font-size: 1.9rem;
+    margin: 0 0 .5rem;
+    letter-spacing: .02em;
+  }
+  header p.subtitle{
+    color:#555;
+    margin:0;
+    font-size: .95rem;
+  }
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid var(--border);
+    display:flex;
+    justify-content:center;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap: .3rem;
+    margin:0;
+    padding: .55rem .8rem;
+    max-width: 1100px;
+  }
+  nav a{
+    display:block;
+    text-decoration:none;
+    color: var(--primary-dark);
+    font-size: .85rem;
+    padding: .45rem .75rem;
+    border-radius: 999px;
+    white-space:nowrap;
+    transition: background .2s, color .2s;
+  }
+  nav a:hover{ background: var(--primary-light); }
+  nav a.active{
+    background: var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1rem 1.4rem 4rem;
+  }
+  section{ padding-top: 1.6rem; margin-top: .6rem; }
+  h1.chapter-title{ display:none; }
+  h2{
+    color: var(--primary-dark);
+    font-size: 1.4rem;
+    border-left: 6px solid var(--primary);
+    padding-left: .6rem;
+    margin: 2.4rem 0 1rem;
+  }
+  h3{
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1.8rem 0 .7rem;
+    padding-bottom:.3rem;
+    border-bottom: 2px solid var(--primary-light);
+  }
+  h4{
+    color: var(--primary-dark);
+    font-size: 1rem;
+    margin: 1.2rem 0 .5rem;
+  }
+  p{ margin: .7rem 0; text-align: justify; }
+  strong{ color: var(--primary-dark); }
+  ul, ol{ padding-left: 1.4rem; }
+  li{ margin: .35rem 0; }
+
+  .term{ color: var(--primary-dark); font-weight:700; }
+
+  .box{
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin: 1.1rem 0;
+    border: 1px solid var(--border);
+  }
+  .box-tip{ background: var(--primary-light); border-color: var(--primary); }
+  .box-tip .box-title{ color: var(--primary-dark); }
+  .box-clinical{ background: #fdeeee; border-color:#d98a8a; }
+  .box-clinical .box-title{ color:#9c3b3b; }
+  .box-mech{ background: #f3f3fb; border-color:#b3aee0; }
+  .box-mech .box-title{ color:#4b3f9e; }
+  .box-title{
+    font-weight:700;
+    font-size:1rem;
+    margin-bottom:.4rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+
+  table{
+    width:100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.4rem;
+    font-size:.92rem;
+  }
+  caption{
+    caption-side: top;
+    text-align:left;
+    font-weight:700;
+    color: var(--primary-dark);
+    margin-bottom:.4rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding: .55rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background: var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  tr:nth-child(even) td{ background: var(--primary-light); }
+
+  .compare-table th.colA{ background: var(--primary); }
+  .compare-table th.colB{ background: var(--primary-dark); }
+
+  /* flow diagram */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+    gap: .5rem;
+    margin: 1.2rem 0;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+  }
+  .flow.vertical{ flex-direction:column; }
+  .flow-step{
+    background: #fff;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: .6rem .8rem;
+    flex:1;
+    min-width: 130px;
+    font-size: .86rem;
+    display:flex;
+    flex-direction:column;
+    gap:.25rem;
+  }
+  .flow-step .num{
+    display:inline-block;
+    background: var(--primary);
+    color:#fff;
+    border-radius:50%;
+    width:1.4rem;
+    height:1.4rem;
+    text-align:center;
+    line-height:1.4rem;
+    font-size:.75rem;
+    font-weight:700;
+  }
+  .flow-arrow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--primary);
+    font-size: 1.4rem;
+    font-weight:700;
+    min-width: 1.4rem;
+  }
+  .flow.vertical .flow-arrow{ transform: rotate(90deg); margin: -.2rem 0; }
+
+  /* golgi diagram */
+  .golgi-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: .3rem;
+    margin: 1.3rem 0;
+    padding: 1.3rem .6rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    flex-wrap:wrap;
+  }
+  .cisterna-group{ display:flex; flex-direction:column; align-items:center; gap:.35rem;}
+  .cisterna{
+    width: 90px; height: 14px;
+    border-radius: 8px;
+    background: var(--primary);
+  }
+  .cisterna.cgn{ background: hsl(210,45%,55%); }
+  .cisterna.medial{ background: hsl(210,45%,40%); }
+  .cisterna.tgn{ background: hsl(210,45%,25%); }
+  .golgi-label{ font-size:.78rem; font-weight:700; color:var(--primary-dark); margin-top:.3rem;}
+
+  .legend-dot{
+    display:inline-block; width:.7rem; height:.7rem; border-radius:50%;
+    margin-right:.3rem; vertical-align:middle;
+  }
+
+  .badge{
+    display:inline-block;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-radius: 6px;
+    padding: .1rem .5rem;
+    font-size:.8rem;
+    font-weight:700;
+    margin-right:.3rem;
+  }
+
+  .key-takeaways{
+    background: var(--primary-light);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    margin-top: 2.5rem;
+  }
+  .key-takeaways h2{ border:none; padding-left:0; margin-top:0; }
+  .key-takeaways ol{ padding-left: 1.3rem; }
+  .key-takeaways li{ margin: .6rem 0; }
+
+  footer{
+    text-align:center;
+    padding: 2rem 1rem 3rem;
+    color:#666;
+    font-size:.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top: 1rem;
+    background: var(--primary);
+    color:#fff;
+    border:none;
+    border-radius: 999px;
+    padding: .6rem 1.4rem;
+    font-size:.9rem;
+    cursor:pointer;
+    font-family: inherit;
+    transition: background .2s;
+  }
+  #backToTop:hover{ background: var(--primary-dark); }
+
+  @media (max-width: 1024px){
+    main{ max-width: 92%; }
+  }
+  @media (max-width: 768px){
+    header h1{ font-size: 1.4rem; }
+    nav ul{ gap:.15rem; padding:.4rem .3rem; }
+    nav a{ font-size:.76rem; padding:.35rem .55rem; }
+    h2{ font-size:1.2rem; }
+    h3{ font-size:1.02rem; }
+    .flow{ flex-direction:column; }
+    .flow-arrow{ transform: rotate(90deg); }
+    table, thead, tbody, th, td, tr{ display:block; }
+    thead{ display:none; }
+    table tr{ margin-bottom:.8rem; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+    table td{ border:none; border-bottom:1px solid var(--border); }
+    table td::before{
+      content: attr(data-label);
+      display:block;
+      font-weight:700;
+      color: var(--primary-dark);
+      font-size:.78rem;
+      margin-bottom:.15rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第12章：內膜系統與蛋白質分選</h1>
+  <p class="subtitle">The Endomembrane System and Protein Sorting｜細胞生物學初學者學習指南</p>
+</header>
+
+<nav id="mainNav">
+  <ul>
+    <li><a href="#s1" data-target="s1">12.1 內質網</a></li>
+    <li><a href="#s2" data-target="s2">12.2 高基氏體</a></li>
+    <li><a href="#s3" data-target="s3">12.3 蛋白質加工</a></li>
+    <li><a href="#s4" data-target="s4">12.4 蛋白質運輸</a></li>
+    <li><a href="#s5" data-target="s5">12.5 胞吐與胞吞</a></li>
+    <li><a href="#s6" data-target="s6">12.6 被覆小泡</a></li>
+    <li><a href="#s7" data-target="s7">12.7 溶酶體</a></li>
+    <li><a href="#s8" data-target="s8">12.8 過氧化體</a></li>
+    <li><a href="#s9" data-target="s9">重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<p>真核細胞內有許多由膜圍成的胞器（<span class="term">organelle</span>），彼此分工，將不同的代謝反應侷限在特定空間中進行。其中，內質網（endoplasmic reticulum, ER）、高基氏體（Golgi apparatus）、內體（endosome）與溶酶體（lysosome）在構造與功能上緊密相連，合稱<span class="term">內膜系統（endomembrane system）</span>。這些胞器之間以<span class="term">運輸小泡（transport vesicle）</span>互相傳遞物質，形成一套動態的「蛋白質與脂質物流網路」。本章將依序介紹內質網、高基氏體如何合成、加工並分選蛋白質，接著討論物質如何進出細胞（胞吐與胞吞），最後介紹溶酶體與過氧化體這兩個負責分解與代謝的胞器。</p>
+
+<!-- ============ 12.1 ER ============ -->
+<section id="s1">
+<h2>12.1 內質網（The Endoplasmic Reticulum）</h2>
+
+<p>內質網是延伸於整個細胞質中、由扁平囊袋、管狀構造與小泡組成的連續網狀膜系統。膜所圍成的內部空間稱為<span class="term">內質網腔（ER lumen）</span>，膜本身則稱為<span class="term">內質網池（ER cisternae）</span>。在哺乳動物細胞中，內質網膜可佔全部膜面積的 50–90%，但因為太薄、太密集，光學顯微鏡下看不到，需仰賴電子顯微鏡才能觀察其精細結構。</p>
+
+<h3>粗糙內質網與平滑內質網的差異</h3>
+<p>內質網依外觀分為兩型：<span class="term">粗糙內質網（rough ER）</span>因細胞質側附著核糖體而得名，是蛋白質合成與加工的場所；<span class="term">平滑內質網（smooth ER）</span>則不具核糖體，負責脂質與非蛋白質物質的代謝。兩者的內腔其實是彼此相通的，物質可直接流動，不需要小泡協助。</p>
+
+<table class="compare-table">
+<caption>比較表①　粗糙內質網 vs. 平滑內質網</caption>
+<thead><tr><th class="colA">A．粗糙內質網（Rough ER）</th><th class="colB">B．平滑內質網（Smooth ER）</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td data-label="A">細胞質面附著核糖體</td><td data-label="B">無核糖體附著</td><td data-label="差異">外觀「粗糙」對「平滑」的來源</td></tr>
+<tr><td data-label="A">形態多為扁平膜囊（sheet）</td><td data-label="B">形態多為管狀（tubule）</td><td data-label="差異">構造形狀不同</td></tr>
+<tr><td data-label="A">合成分泌蛋白、膜蛋白，進行醣化與折疊品管</td><td data-label="B">藥物解毒、肝醣代謝、鈣儲存、類固醇合成</td><td data-label="差異">功能分工：蛋白質加工 vs. 脂質/小分子代謝</td></tr>
+<tr><td data-label="A">肝細胞、消化酶分泌細胞中特別發達</td><td data-label="B">性腺類固醇分泌細胞、肝細胞中特別發達</td><td data-label="差異">依細胞主要功能而比例不同</td></tr>
+</tbody>
+</table>
+
+<h3>粗糙內質網：蛋白質合成與加工的起點</h3>
+<p>約有三分之一的哺乳動物蛋白質會經過內質網。這些蛋白質以<span class="term">共轉譯（cotranslational）</span>方式邊合成邊穿過內質網膜上的孔道進入內腔。除了合成之外，粗糙內質網也負責醣基的初步添加、蛋白質折疊、錯誤折疊蛋白的辨識移除，以及多聚蛋白的組裝，是重要的「品管站」。familial hypercholesterolemia（家族性高膽固醇血症）等疾病即與此加工過程缺陷有關。</p>
+
+<h3>平滑內質網的四大功能</h3>
+<div class="box box-tip">
+<div class="box-title">💡 重點整理：平滑內質網的功能</div>
+<ul>
+<li><strong>藥物解毒</strong>：細胞色素 P-450 家族酵素進行「羥化反應（hydroxylation）」，增加脂溶性藥物的水溶性以利排出。肝細胞中特別豐富，長期用藥可能誘導此酵素增生（例如巴比妥類藥物產生耐受性）。</li>
+<li><strong>醣類代謝</strong>：肝細胞內質網含有「葡萄糖-6-磷酸酶」，將肝醣分解產物轉為游離葡萄糖釋出到血液，維持血糖恆定；肌肉與腦細胞則缺乏此酵素，故葡萄糖-6-磷酸留在細胞內使用。</li>
+<li><strong>鈣離子儲存</strong>：肌肉細胞中特化的平滑內質網稱為「肌漿網（sarcoplasmic reticulum）」，儲存高濃度鈣離子，接受訊號釋放以引發肌肉收縮。</li>
+<li><strong>類固醇合成</strong>：腎上腺皮質、睪丸萊迪希細胞、卵巢濾泡細胞等，利用平滑內質網合成膽固醇與皮質醇、睪固酮、雌激素等類固醇激素。</li>
+</ul>
+</div>
+
+<h3>內質網與細胞膜脂質的合成</h3>
+<p>內質網是細胞內大部分膜脂質（磷脂質、膽固醇）的來源。脂肪酸合成於細胞質，但併入磷脂質後只會嵌入內質網膜面向細胞質的那一側；要形成雙層膜的對稱分布，需要靠<span class="term">磷脂質轉位酶（phospholipid translocator，又稱 flippase）</span>把特定磷脂質翻轉到另一側，這也是形成「膜不對稱性」的原因之一。至於運送到粒線體、葉綠體、過氧化體的脂質，則靠細胞質中的<span class="term">磷脂質交換蛋白（phospholipid exchange protein）</span>攜帶。</p>
+
+<table>
+<caption>表 12-1　大鼠肝細胞內質網膜與細胞膜的組成比較（重點摘錄）</caption>
+<thead><tr><th>膜成分</th><th>內質網膜</th><th>細胞膜</th></tr></thead>
+<tbody>
+<tr><td data-label="成分">總脂質（占膜重量 %）</td><td data-label="ER">27%</td><td data-label="PM">36%</td></tr>
+<tr><td data-label="成分">膽固醇（占脂質 %）</td><td data-label="ER">6%</td><td data-label="PM">17%</td></tr>
+<tr><td data-label="成分">神經鞘磷脂（占脂質 %）</td><td data-label="ER">5%</td><td data-label="PM">19%</td></tr>
+</tbody>
+</table>
+<p>可以觀察到一個重要趨勢：從內質網 → 高基氏體 → 細胞膜，膽固醇含量與膜厚度（約5 nm→8 nm）呈遞增趨勢，這與後續蛋白質依跨膜區長度分選的機制有關（詳見 12.4）。</p>
+
+</section>
+
+<!-- ============ 12.2 Golgi ============ -->
+<section id="s2">
+<h2>12.2 高基氏體（The Golgi Apparatus）</h2>
+
+<p>高基氏體由 Camillo Golgi 於 1898 年首度描述，是一疊扁平膜囊（cisternae）堆疊而成的構造，稱為「高基氏體堆（Golgi stack）」，通常含 3–8 層膜囊。高基氏體與內質網在結構與功能上緊密相連：來自內質網的醣蛋白會在此進一步加工，並依目的地被分選、包裝。</p>
+
+<h3>順面到反面：高基氏體的三個區域</h3>
+<div class="golgi-wrap">
+  <div class="cisterna-group">
+    <div style="font-size:.78rem;color:#888;">來自 ER</div>
+    <div style="font-size:1.3rem;">➜</div>
+  </div>
+  <div class="cisterna-group">
+    <div class="cisterna cgn"></div>
+    <div class="cisterna cgn"></div>
+    <div class="golgi-label">CGN（順面高基氏網）</div>
+  </div>
+  <div style="font-size:1.3rem;color:var(--primary);">→</div>
+  <div class="cisterna-group">
+    <div class="cisterna medial"></div>
+    <div class="cisterna medial"></div>
+    <div class="cisterna medial"></div>
+    <div class="golgi-label">medial cisternae（中間膜囊）</div>
+  </div>
+  <div style="font-size:1.3rem;color:var(--primary);">→</div>
+  <div class="cisterna-group">
+    <div class="cisterna tgn"></div>
+    <div class="cisterna tgn"></div>
+    <div class="golgi-label">TGN（反面高基氏網）</div>
+  </div>
+  <div class="cisterna-group">
+    <div style="font-size:1.3rem;">➜</div>
+    <div style="font-size:.78rem;color:#888;">送往各目的地</div>
+  </div>
+</div>
+<p>順面（<span class="term">cis face</span>）朝向內質網，接收由過渡小泡（transition vesicle）送來的物質，形成 <span class="term">cis-Golgi network, CGN</span>；反面（<span class="term">trans face</span>）則形成 <span class="term">trans-Golgi network, TGN</span>，是運輸小泡出發、送往內體、溶酶體、分泌顆粒或細胞膜的分選中心。中間的 medial cisternae 是大部分蛋白質加工發生的地方。三個區域各自擁有專屬的酵素，可用免疫染色加以區分。</p>
+
+<h3>物質如何通過高基氏體？兩種主要模型</h3>
+<table class="compare-table">
+<caption>比較表②　高基氏體物質流動的兩種模型</caption>
+<thead><tr><th class="colA">A．靜態膜囊模型（Stationary Cisternae Model）</th><th class="colB">B．膜囊成熟模型（Cisternal Maturation Model）</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td data-label="A">膜囊本身固定不動，物質靠「接駁小泡」在膜囊間穿梭前進</td><td data-label="B">膜囊本身會隨時間逐漸「成熟」，由 CGN 型態轉變為 medial、再轉變為 TGN</td><td data-label="差異">是「小泡動」還是「膜囊動」</td></tr>
+<tr><td data-label="A">早期酵素留在原本膜囊中，靠逆向運輸把跑錯的酵素找回來</td><td data-label="B">不再需要的酵素以逆向小泡送回較早期的膜囊，隨新膜囊生成而更新</td><td data-label="差異">酵素回收方式類似，但發生脈絡不同</td></tr>
+<tr><td data-label="A">可解釋大部分蛋白質的分選觀察結果</td><td data-label="B">可解釋比小泡還大的貨物（如某些藻類多醣鱗片）如何通過高基氏體</td><td data-label="差異">實驗證據支持各有優勢，兩者可能並存</td></tr>
+</tbody>
+</table>
+<p>目前證據顯示兩個模型可能<strong>並不互斥</strong>，甚至還有「擴散模型」與「吻合-分離模型（kiss-and-run）」等補充假說，說明高基氏體內的物質運輸機制仍是活躍的研究課題。</p>
+
+<h3>順向運輸與逆向運輸</h3>
+<p>物質從內質網經高基氏體往細胞膜方向移動稱為<span class="term">順向運輸（anterograde transport）</span>；為了回收脂質與蛋白質、平衡膜的消耗，也存在方向相反的<span class="term">逆向運輸（retrograde transport）</span>，把不需要的組件送回較早的膜區。順向與逆向運輸的平衡，確保每個胞器都能維持正確的蛋白質與脂質組成。</p>
+
+</section>
+
+<!-- ============ 12.3 Protein Processing ============ -->
+<section id="s3">
+<h2>12.3 內質網與高基氏體在蛋白質加工上的角色</h2>
+
+<p>蛋白質進入內質網腔後，會經歷折疊（folding）、品管（quality control）與醣化（glycosylation）等加工步驟，才能被正確送往目的地。</p>
+
+<h3>蛋白質折疊與品管</h3>
+<div class="box box-mech">
+<div class="box-title">⚙️ 機制流程：內質網中的折疊輔助系統</div>
+<ul>
+<li><strong>BiP</strong>（Hsp70家族分子伴護蛋白）：暫時結合未折疊多肽鏈的疏水區域，避免蛋白質聚集，並利用 ATP 水解循環給予蛋白質重新折疊的機會。</li>
+<li><strong>蛋白質雙硫鍵異構酶（protein disulfide isomerase, PDI）</strong>：催化半胱胺酸之間雙硫鍵的形成與斷裂，幫助找到最穩定的折疊方式。</li>
+<li><strong>未折疊蛋白反應（unfolded protein response, UPR）</strong>：偵測到大量錯誤折疊蛋白時，啟動訊號通路，暫停一般蛋白質合成，並增加折疊/降解相關蛋白的表現。</li>
+<li><strong>內質網相關降解（ER-associated degradation, ERAD）</strong>：辨識無法正確折疊或組裝的蛋白質，將其「逆向轉位」送回細胞質，交由蛋白酶體（proteasome）降解。</li>
+</ul>
+</div>
+
+<h3>醣化作用：N-linked 與 O-linked</h3>
+<p><span class="term">醣化（glycosylation）</span>指在蛋白質特定胺基酸上接上寡糖鏈，形成醣蛋白（glycoprotein）。依接合位置可分為兩類：</p>
+<ul>
+<li><strong>N-linked 醣化</strong>：寡糖接在天門冬醯胺（asparagine）的氮原子上，起始於內質網。</li>
+<li><strong>O-linked 醣化</strong>：寡糖接在絲胺酸／蘇胺酸（極少數酪胺酸）的氧原子上。</li>
+</ul>
+
+<table>
+<caption>圖 12-5　醣化與修飾步驟依胞器分區進行（重點整理）</caption>
+<thead><tr><th>胞器區域</th><th>主要修飾步驟</th></tr></thead>
+<tbody>
+<tr><td data-label="區域">內質網（ER）</td><td data-label="步驟">核心寡糖合成、轉移至蛋白質、初步修剪、移除錯誤折疊蛋白</td></tr>
+<tr><td data-label="區域">CGN</td><td data-label="步驟">添加 N-乙醯半乳糖胺；溶酶體蛋白磷酸化</td></tr>
+<tr><td data-label="區域">medial cisternae</td><td data-label="步驟">移除甘露糖、添加 N-乙醯葡萄糖胺</td></tr>
+<tr><td data-label="區域">TGN</td><td data-label="步驟">添加半乳糖、唾液酸；酪胺酸硫酸化</td></tr>
+</tbody>
+</table>
+
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>多庫醇磷酸嵌入 ER 膜作為載體</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>細胞質面添加 GlcNAc、甘露糖</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>經 flippase 翻轉入 ER 腔</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>腔內續加甘露糖、葡萄糖</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span>核心寡糖整體轉移至蛋白質的天門冬醯胺</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">6</span>修剪並送往高基氏體繼續加工</div>
+</div>
+<p style="text-align:center;font-size:.85rem;color:#666;">圖 12-6 概念重製：內質網中 N-linked 醣化的六步驟流程</p>
+
+<div class="box box-tip">
+<div class="box-title">💡 折疊品管小幫手：calnexin / calreticulin</div>
+<p style="margin:0;">添加一個葡萄糖單位後，<strong>calnexin</strong>（膜結合型）或 <strong>calreticulin</strong>（可溶型）會與此醣蛋白結合，協助其正確折疊；若折疊尚未完成，感應蛋白 <strong>UGGT</strong> 會再度添加葡萄糖，使其重新進入這個「品管循環」，直到折疊正確才釋出前往高基氏體。</p>
+</div>
+
+</section>
+
+<!-- ============ 12.4 Protein Trafficking ============ -->
+<section id="s4">
+<h2>12.4 內質網與高基氏體在蛋白質運輸上的角色</h2>
+
+<p>細胞中每個多肽鏈都需要一組「郵遞區號」把它送到正確位置。核糖體合成蛋白質後，依目的地不同，走向兩條截然不同的路徑。</p>
+
+<h3>兩大運輸路徑：轉譯後輸入 vs 共轉譯輸入</h3>
+<table class="compare-table">
+<caption>比較表③　轉譯後輸入 vs. 共轉譯輸入</caption>
+<thead><tr><th class="colA">A．轉譯後輸入（Posttranslational Import）</th><th class="colB">B．共轉譯輸入（Cotranslational Import）</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td data-label="A">核糖體游離於細胞質中合成完整多肽鏈</td><td data-label="B">核糖體早期即附著到內質網膜上</td><td data-label="差異">核糖體是否附著內質網</td></tr>
+<tr><td data-label="A">合成完成「之後」才被運入胞器</td><td data-label="B">邊合成、邊「同時」穿越內質網膜</td><td data-label="差異">輸入的時間點不同</td></tr>
+<tr><td data-label="A">目的地：細胞質、細胞核、粒線體、葉綠體、過氧化體</td><td data-label="B">目的地：內膜系統（ER、高基氏體、溶酶體、分泌小泡、細胞膜）或分泌到細胞外</td><td data-label="差異">目的地類別不同</td></tr>
+</tbody>
+</table>
+
+<h3>訊號假說與 SRP 機制</h3>
+<p>1971 年 Günter Blobel 與 David Sabatini 提出<span class="term">訊號假說（signal hypothesis）</span>：走向內質網的多肽鏈 N 端帶有一段 15–30 個胺基酸的<span class="term">內質網訊號序列（ER signal sequence）</span>，能被<span class="term">訊號識別顆粒（signal recognition particle, SRP）</span>辨認。此發現讓 Blobel 於 1999 年獲頒諾貝爾獎。</p>
+
+<div class="flow vertical">
+  <div class="flow-step"><span class="num">1</span>訊號序列合成後暴露，SRP 結合並暫停轉譯</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">2</span>SRP 與 ER 膜上的 SRP 受體結合，核糖體對接到轉位子（translocon）</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">3</span>GTP 結合 SRP 與其受體，轉譯恢復，訊號序列轉入 Sec61 通道孔</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">4</span>GTP 水解，SRP 釋放</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">5</span>多肽鏈延伸進入 ER 腔，訊號肽酶切除訊號序列</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">6</span>完整多肽釋入 ER 腔，轉位子關閉，核糖體脫離</div>
+</div>
+<p style="text-align:center;font-size:.85rem;color:#666;">圖 12-11 概念重製：SRP 引導的共轉譯輸入機制</p>
+
+<h3>內質網的駐留訊號與回收訊號</h3>
+<ul>
+<li><strong>駐留標籤（retention tag）</strong>：部分內質網專屬蛋白帶有 <span class="badge">RXR</span> 三肽序列，使其較不易離開內質網（如組裝未完成的 NMDA 受體次單元）。</li>
+<li><strong>回收標籤（retrieval tag）</strong>：許多可溶性內質網蛋白 C 端帶有短序列 <span class="badge">KDEL</span>（哺乳類）或 <span class="badge">HDEL</span>（酵母），可與高基氏體膜上的受體結合，被逆向小泡送回內質網。</li>
+</ul>
+
+<h3>高基氏體蛋白質依跨膜區長度分選</h3>
+<p>由於膜厚度由內質網（約5 nm）往細胞膜（約8 nm）方向逐漸增加，高基氏體專屬蛋白的疏水跨膜區長度也隨 CGN → TGN 方向逐漸變長，蛋白質會停留在「跨膜區長度」與「膜厚度」相匹配的膜囊區間，這是繼駐留/回收標籤之外的第三種分選機制。</p>
+
+<h3>可溶性溶酶體蛋白的甘露糖-6-磷酸標記</h3>
+<div class="flow vertical">
+  <div class="flow-step"><span class="num">1</span>ER 中溶酶體酵素完成初步 N-醣化</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">2</span>高基氏體內兩種專屬酵素接力，將甘露糖磷酸化，形成甘露糖-6-磷酸（M6P）標記</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">3</span>TGN 中 M6P 與甘露糖-6-磷酸受體（MPR）結合，打包進入運輸小泡</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">4</span>小泡送至晚期內體，低 pH 使酵素與受體解離</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span class="num">5</span>受體回收送回 TGN；酵素則進入溶酶體</div>
+</div>
+<p style="text-align:center;font-size:.85rem;color:#666;">圖 12-12 概念重製：M6P 標記引導溶酶體酵素運輸</p>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：I 細胞病（I-cell disease）</div>
+<p style="margin:0;">若磷酸轉移酶缺陷，無法在溶酶體酵素上添加 M6P 標記，酵素便會被誤送並分泌到細胞外，而非進入溶酶體。結果是溶酶體堆積大量未消化物質，造成細胞與組織的不可逆傷害——直接證明 M6P 標記在溶酶體蛋白分選上不可或缺的角色。</p>
+</div>
+
+<h3>嵌膜蛋白如何插入內質網膜？</h3>
+<p>可溶性蛋白全部穿過轉位子進入 ER 腔；但欲成為<span class="term">嵌膜蛋白（integral membrane protein）</span>的多肽，則會被特定疏水序列「卡」在膜中，不再繼續移動：</p>
+<ul>
+<li><strong>終止轉移序列（stop-transfer sequence）</strong>：N 端有一般訊號序列先起始轉位，遇到疏水跨膜段時停止轉移，形成 N 端在腔內、C 端在細胞質的 <span class="term">第一型嵌膜蛋白</span>。</li>
+<li><strong>內部起始轉移序列（internal start-transfer sequence）</strong>：本身兼具訊號序列與跨膜錨定功能，依插入方向決定 N/C 端位置，形成 <span class="term">第二型嵌膜蛋白</span>。</li>
+<li><strong>多次跨膜蛋白</strong>：交替出現多組起始/終止轉移序列，讓多肽鏈反覆穿梭膜面（例如具七次跨膜的受體蛋白）。</li>
+</ul>
+
+<h3>轉譯後輸入內質網的機制</h3>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>多肽先與 Hsp70 分子伴護蛋白結合，維持未折疊狀態</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>對接 Sec61 轉位子；Hsp70 脫離，多肽穿孔而入</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>Sec62/63/71/72 複合體招募 BiP，以「棘輪機制」拉入 ER 腔</div>
+</div>
+
+</section>
+
+<!-- ============ 12.5 Exocytosis / Endocytosis ============ -->
+<section id="s5">
+<h2>12.5 胞吐作用與胞吞作用：物質跨越細胞膜的運輸</h2>
+
+<h3>分泌路徑的三種模式</h3>
+<div class="box box-tip">
+<div class="box-title">💡 三種分泌方式比較</div>
+<ul>
+<li><strong>組成型分泌（constitutive secretion）</strong>：小泡持續、不受調控地從 TGN 直接送到細胞膜並釋出，如腸道黏液的持續分泌。曾被視為「預設路徑」——沒有特殊標籤的蛋白質會自動走向分泌。</li>
+<li><strong>調節型分泌（regulated secretion）</strong>：小泡先累積在細胞內，等待特定訊號（如激素或神經傳導物）才與細胞膜融合釋放，例如胰島素、消化酶原（zymogen）的分泌。</li>
+<li><strong>極性分泌（polarized secretion）</strong>：分泌僅限於細胞的特定一側，如腸道分泌細胞只朝管腔面釋放消化酶，神經細胞只在突觸處釋放神經傳導物。</li>
+</ul>
+</div>
+
+<h3>胞吐作用（Exocytosis）機制</h3>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>分泌小泡移向細胞膜</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>小泡膜與細胞膜開始融合</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>融合完成</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>內容物釋放到細胞外</div>
+</div>
+<p>調節型胞吐通常需要細胞內鈣離子濃度短暫上升作為觸發訊號，活化蛋白激酶進而促使小泡與細胞膜融合。</p>
+
+<h3>胞吞作用（Endocytosis）的類型</h3>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>細胞膜向內凹陷，包裹外部物質</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>凹陷處開始收縮夾斷</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>膜完全閉合形成小泡</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>小泡與細胞膜分離，攜帶物質進入細胞</div>
+</div>
+
+<ul>
+<li><strong>吞噬作用（phagocytosis）</strong>：攝入大顆粒（>0.5 μm），如白血球吞噬病原體；靠偽足（pseudopod）包圍形成「吞噬泡（phagosome）」，之後與內體、溶酶體融合進行消化。</li>
+<li><strong>受體媒介型胞吞（receptor-mediated endocytosis）</strong>：配體（ligand）先與細胞膜上特定受體結合，複合物聚集到<span class="term">被覆窩（coated pit）</span>，經 clathrin、adaptor protein、dynamin 作用形成被覆小泡並脫離細胞膜；此機制的發現者 Michael Brown 與 Joseph Goldstein 因家族性高膽固醇血症研究獲得 1986 年諾貝爾獎。</li>
+<li><strong>流體相胞吞（fluid-phase endocytosis）</strong>：屬於不需要 clathrin 的胞吞（clathrin-independent），非選擇性地吞入細胞外液，速率相對穩定，可平衡胞吐所增加的膜面積。</li>
+</ul>
+
+<div class="box box-mech">
+<div class="box-title">⚙️ 受體與配體解離後的三種去向</div>
+<ol style="margin:0;">
+<li>送往溶酶體降解（如表皮生長因子 EGF 與其受體）</li>
+<li>送往 TGN，重新進入內膜系統的各種路徑</li>
+<li>經<span class="term">穿胞作用（transcytosis）</span>送到細胞另一側的細胞膜並分泌（如母體免疫球蛋白經上皮細胞送往胎兒血液）</li>
+</ol>
+</div>
+
+</section>
+
+<!-- ============ 12.6 Coated Vesicles ============ -->
+<section id="s6">
+<h2>12.6 被覆小泡與細胞運輸過程</h2>
+
+<p>大部分運輸小泡的細胞質面都覆有一層蛋白衣被（coat），依組成蛋白不同，決定了小泡的來源與目的地。</p>
+
+<table class="compare-table">
+<caption>比較表④　三大被覆蛋白系統</caption>
+<thead><tr><th class="colA">A．Clathrin（網格蛋白）</th><th class="colB">B．COPI／COPII</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td data-label="A">與 adaptor protein（AP）複合體共同組裝</td><td data-label="B">COPI 由 COPI + ARF 組成；COPII 由 Sec13/31、Sec23/24 + Sar1 組成</td><td data-label="差異">組成蛋白不同</td></tr>
+<tr><td data-label="A">TGN → 內體；細胞膜 → 內體（胞吞）</td><td data-label="B">COPI：高基氏體 → ER（逆向）；COPII：ER → 高基氏體（順向）</td><td data-label="差異">運輸方向與路線不同</td></tr>
+<tr><td data-label="A">組裝出六邊形／五邊形晶格（三腳蛋白 triskelion）</td><td data-label="B">以小 GTP 結合蛋白（ARF／Sar1）調控組裝、脫離</td><td data-label="差異">結構單元與調控分子不同</td></tr>
+</tbody>
+</table>
+
+<table>
+<caption>表 12-2　被覆小泡種類、來源與目的地</caption>
+<thead><tr><th>被覆小泡</th><th>主要衣被蛋白</th><th>來源</th><th>目的地</th></tr></thead>
+<tbody>
+<tr><td data-label="種類">Clathrin</td><td data-label="蛋白">Clathrin, AP1, ARF</td><td data-label="來源">TGN</td><td data-label="目的">內體</td></tr>
+<tr><td data-label="種類">Clathrin</td><td data-label="蛋白">Clathrin, AP2</td><td data-label="來源">細胞膜</td><td data-label="目的">內體</td></tr>
+<tr><td data-label="種類">COPI</td><td data-label="蛋白">COPI, ARF</td><td data-label="來源">高基氏體</td><td data-label="目的">ER 或高基氏體</td></tr>
+<tr><td data-label="種類">COPII</td><td data-label="蛋白">COPII, Sar1</td><td data-label="來源">ER</td><td data-label="目的">高基氏體</td></tr>
+<tr><td data-label="種類">Caveolin</td><td data-label="蛋白">Caveolin</td><td data-label="來源">細胞膜</td><td data-label="目的">尚待確認</td></tr>
+</tbody>
+</table>
+
+<h3>Clathrin 三腳蛋白與衣被組裝</h3>
+<p>Clathrin 的結構單位稱為<span class="term">三腳蛋白（triskelion）</span>，由三條重鏈與三條輕鏈構成，可組裝成六邊形（平面晶格）或五邊形＋六邊形混合（彎曲晶格），提供膜彎曲成球形小泡所需的驅動力。組裝與拆解都需要能量，並受磷酸化與 pH 調控。<span class="term">Dynamin</span>（一種 GTP 酶）則負責在被覆窩頸部形成螺旋環，隨 GTP 水解收縮，將小泡完全夾斷。</p>
+
+<h3>SNARE 假說：小泡辨識與融合機制</h3>
+<p>James Rothman 與同事提出<span class="term">SNARE 假說</span>：運輸小泡膜上帶有 <span class="term">v-SNARE</span>，目標膜上帶有互補的 <span class="term">t-SNARE</span>；兩者形成穩定的 α 螺旋束，是驅動膜融合的關鍵力量。Rothman 與研究酵母分泌途徑的 Randy Schekman 共同獲得 2013 年諾貝爾獎。</p>
+
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>拴繫蛋白（tethering protein）先辨認並固定小泡</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>Rab GTPase 促使 v-SNARE 與 t-SNARE 靠近</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>v-/t-SNARE 交互作用，驅動膜融合</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>NSF 與 SNAP 促使 SNARE 複合體解離，回收再利用</div>
+</div>
+<p style="text-align:center;font-size:.85rem;color:#666;">圖 12-24 概念重製：SNARE 假說的小泡辨識與融合流程</p>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：肉毒桿菌毒素（Botox）</div>
+<p style="margin:0;">肉毒桿菌毒素是一種蛋白酶，能切斷神經細胞內負責小泡融合的 SNARE 蛋白，阻斷神經傳導物釋放，造成肌肉麻痺。低劑量下可用於治療肌肉痙攣、斜視，或美容除皺，近年也用於治療偏頭痛。</p>
+</div>
+
+</section>
+
+<!-- ============ 12.7 Lysosomes ============ -->
+<section id="s7">
+<h2>12.7 溶酶體與細胞消化</h2>
+
+<p>溶酶體（lysosome）由 Christian de Duve 於 1950 年代發現，內含多種水解酶（acid hydrolase），最適 pH 約 5.0，可分解脂質、醣類、核酸與蛋白質等所有主要生物大分子。單層膜將這些酵素與細胞其餘部分隔開，避免自我傷害。</p>
+
+<h3>溶酶體如何形成：從內體到溶酶體</h3>
+<p>溶酶體酵素在粗糙內質網合成，經高基氏體加上 M6P 標記後，由被覆小泡送到早期內體（early endosome）。隨著 pH 逐漸下降（約 6.0 → 5.5 → 4.0–5.0），早期內體成熟為晚期內體（late endosome），最終轉變（或與既有溶酶體融合）成為具活性的溶酶體，此時水解酶才被活化。</p>
+
+<h3>溶酶體參與的四大消化途徑</h3>
+<table>
+<caption>圖 12-25　溶酶體相關的四種消化路徑</caption>
+<thead><tr><th>途徑</th><th>物質來源</th><th>基本流程</th></tr></thead>
+<tbody>
+<tr><td data-label="途徑">A．吞噬作用</td><td data-label="來源">細胞外大顆粒（異體）</td><td data-label="流程">吞噬泡 → 早期內體 → 成熟溶酶體 → 殘餘體</td></tr>
+<tr><td data-label="途徑">B．受體媒介型胞吞</td><td data-label="來源">細胞外可溶性配體（異體）</td><td data-label="流程">胞吞小泡 → 早期內體 → 晚期內體 → 溶酶體</td></tr>
+<tr><td data-label="途徑">C．自噬作用</td><td data-label="來源">細胞自身受損胞器（自體）</td><td data-label="流程">自噬泡（雙層膜）→ 與溶酶體融合成自噬溶酶體</td></tr>
+<tr><td data-label="途徑">D．細胞外消化</td><td data-label="來源">細胞外環境</td><td data-label="流程">溶酶體以胞吐方式將水解酶釋放到細胞外</td></tr>
+</tbody>
+</table>
+
+<div class="box box-mech">
+<div class="box-title">⚙️ 自噬作用（Autophagy）小專題</div>
+<p>自噬（希臘文「自我吞食」）分為兩型：<strong>巨自噬（macrophagy）</strong>由 ER 衍生的雙層膜包裹整個胞器形成自噬泡（autophagosome），再與溶酶體融合；<strong>微自噬（microphagy）</strong>則由單層膜直接包入小塊細胞質。自噬在紅血球成熟（清除全部粒線體）及飢餓壓力下特別活躍，其缺陷也與克隆氏症（Crohn's disease）等發炎性腸道疾病、部分癌症有關。</p>
+</div>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：溶酶體儲積症（Lysosomal Storage Diseases）</div>
+<p>當特定水解酶缺陷或運輸標記錯誤時，未消化物質會在溶酶體中大量堆積，導致細胞受損。常見例子：</p>
+<ul style="margin:.3rem 0 0;">
+<li><strong>Tay-Sachs 氏症</strong>：缺乏 β-N-乙醯己糖胺酶，神經節苷脂（ganglioside）堆積於神經組織，導致進行性神經退化。</li>
+<li><strong>Hurler／Hunter 氏症</strong>：醣胺聚醣（glycosaminoglycan）分解酵素缺陷。</li>
+<li><strong>高雪氏症（Gaucher disease）</strong>：缺乏葡萄糖腦苷脂酶，目前已可用「酵素替代療法」有效治療，是少數已有治療方式的溶酶體儲積症。</li>
+</ul>
+</div>
+
+<h3>植物液胞：多功能的消化胞器</h3>
+<p>植物細胞的<span class="term">液胞（vacuole）</span>在生成方式上與溶酶體類似（經 ER →高基氏體 →「原液胞（provacuole）」成熟而成），但功能更多元：除了消化功能外，還負責累積溶質以維持<span class="term">膨壓（turgor pressure）</span>、調節細胞質 pH、儲存蛋白質（種子）、色素（花青素）與防禦性物質等，體積可占細胞的 90%。</p>
+
+</section>
+
+<!-- ============ 12.8 Peroxisomes ============ -->
+<section id="s8">
+<h2>12.8 過氧化體（Peroxisomes）</h2>
+
+<p>過氧化體同樣由 Christian de Duve 團隊發現，以單層膜包裹，其標誌性酵素為<span class="term">觸酶（catalase）</span>，負責分解細胞代謝過程中產生的過氧化氫（H₂O₂）。由於產生 H₂O₂ 的氧化酶與分解它的觸酶都侷限在同一胞器中，可保護細胞其餘部分免受過氧化氫毒害。</p>
+
+<h3>過氧化體的五大功能</h3>
+<div class="box box-tip">
+<div class="box-title">💡 過氧化體功能一覽</div>
+<ol>
+<li><strong>過氧化氫代謝</strong>：氧化酶產生 H₂O₂，觸酶隨即將其分解為水與氧氣（或作為過氧化酶利用它氧化其他物質）。</li>
+<li><strong>有害物質解毒</strong>：觸酶可氧化甲醇、甲醛、亞硝酸鹽、酚類等毒性物質；也負責分解活性氧物種，避免氧化壓力。</li>
+<li><strong>脂肪酸氧化</strong>：進行 β 氧化，特別負責長鏈、極長鏈與分支脂肪酸的分解；動物細胞中約 25–50% 脂肪酸氧化在過氧化體進行，植物與酵母則 100% 在此進行。</li>
+<li><strong>含氮化合物代謝</strong>：尿酸氧化酶分解嘌呤代謝產物尿酸；胺基轉移酶參與胺基酸的合成與分解。</li>
+<li><strong>特殊物質分解</strong>：分解 D-型胺基酸、異生物質（xenobiotics，如石油中的烷類）等其他胞器無法處理的特殊物質。</li>
+</ol>
+</div>
+
+<h3>植物特有的過氧化體</h3>
+<ul>
+<li><strong>葉過氧化體（leaf peroxisome）</strong>：常與葉綠體、粒線體緊鄰，共同參與「乙醇酸路徑（光呼吸作用）」。</li>
+<li><strong>乙醛酸循環體（glyoxysome）</strong>：出現在儲油種子萌發階段，負責將儲存的三酸甘油酯經 β 氧化與乙醛酸循環轉化為蔗糖，供幼苗生長使用，功能完成後會轉變為一般過氧化體。</li>
+</ul>
+
+<h3>過氧化體的生合成</h3>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>細胞質核糖體合成過氧化體蛋白</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>經膜上過氧素（peroxin）轉運蛋白，以轉譯後輸入方式送入既有過氧化體</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3a</span>既有過氧化體分裂形成新過氧化體</div>
+</div>
+<div class="flow">
+  <div class="flow-step"><span class="num">3b</span>ER 衍生的小泡也可能提供膜與蛋白，促成過氧化體從頭生成</div>
+</div>
+<p>目前證據支持過氧化體可能同時透過「既有胞器分裂」與「ER 小泡融合」兩種途徑增殖，兩者並不互斥。</p>
+
+<div class="box box-clinical">
+<div class="box-title">🩺 臨床連結：X 染色體連鎖腎上腺腦白質失養症</div>
+<p style="margin:0;">最常見的過氧化體疾病之一。因負責將極長鏈脂肪酸運入過氧化體進行 β 氧化的嵌膜蛋白缺陷，導致這類脂肪酸在體液中堆積，破壞神經組織中的髓鞘（myelin sheath）。</p>
+</div>
+
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="s9" class="key-takeaways">
+<h2>Key Takeaways（重點回顧）</h2>
+<ol>
+<li>內膜系統（endomembrane system）包含內質網、高基氏體、內體與溶酶體，彼此以運輸小泡連接，是蛋白質與脂質合成、加工、分選的核心網路。</li>
+<li>粗糙內質網（附核糖體）負責蛋白質合成、折疊與品管；平滑內質網（無核糖體）負責藥物解毒、肝醣代謝、鈣儲存與類固醇合成。</li>
+<li>高基氏體由 CGN → medial → TGN 三區組成，是蛋白質終端醣化與最終分選的場所；順向運輸送出物質，逆向運輸回收組件。</li>
+<li>蛋白質品管靠 BiP、蛋白質雙硫鍵異構酶、UPR 與 ERAD 共同把關；醣化分為 N-linked（起始於 ER）與 O-linked 兩型。</li>
+<li>合成中的多肽依目的地分成兩條路：走向細胞質、粒線體、葉綠體、過氧化體、細胞核的採「轉譯後輸入」；走向內膜系統或分泌到細胞外的採「共轉譯輸入」（由 SRP 與轉位子 Sec61 主導）。</li>
+<li>內質網蛋白靠 RXR 駐留標籤或 KDEL/HDEL 回收標籤留在內質網；溶酶體可溶性酵素靠甘露糖-6-磷酸（M6P）標記精準送達。</li>
+<li>被覆小泡（clathrin、COPI、COPII）各有專屬來源與目的地；SNARE（v-SNARE／t-SNARE）與拴繫蛋白共同確保小泡與目標膜正確辨識、融合。</li>
+<li>胞吐作用分為組成型、調節型與極性分泌；胞吞作用包含吞噬作用、受體媒介型胞吞與流體相胞吞，兩者共同維持細胞膜組成的動態平衡。</li>
+<li>溶酶體整合吞噬作用、受體媒介型胞吞、自噬作用與細胞外消化四大路徑，其缺陷會導致溶酶體儲積症（如 Tay-Sachs 氏症、高雪氏症）。</li>
+<li>過氧化體以觸酶分解過氧化氫為核心功能，並參與脂肪酸氧化、解毒與含氮化合物代謝；其蛋白多以轉譯後輸入方式送入，生合成兼具胞器分裂與 ER 小泡融合兩種途徑。</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+  <div>第12章：內膜系統與蛋白質分選｜學習指南</div>
+  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ Back to Top</button>
+</footer>
+
+<script>
+  // Scroll spy for nav active state
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  function onScroll(){
+    let currentId = sections[0] ? sections[0].id : null;
+    const scrollPos = window.scrollY + 120; // offset for sticky nav
+    sections.forEach(sec => {
+      if(sec.offsetTop <= scrollPos){
+        currentId = sec.id;
+      }
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('data-target') === currentId);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('load', onScroll);
+</script>
+
+</body>
+</html>

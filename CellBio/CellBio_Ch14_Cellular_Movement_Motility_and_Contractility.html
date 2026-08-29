@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第14章：細胞運動：運動性與收縮性｜學習指南</title>
+<style>
+  :root{
+    --hue: 125;
+    --primary: hsl(125, 45%, 35%);
+    --primary-light: hsl(125, 45%, 92%);
+    --text: #1a1a1a;
+    --white: #ffffff;
+    --border: hsl(125, 45%, 80%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    background:#fafafa;
+    line-height:1.8;
+  }
+  header{
+    background:var(--primary);
+    color:var(--white);
+    text-align:center;
+    padding:40px 20px 32px;
+  }
+  header h1{
+    margin:0;
+    font-size:1.9rem;
+    letter-spacing:0.05em;
+  }
+  header p.subtitle{
+    margin:10px 0 0;
+    font-size:1rem;
+    opacity:0.9;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--white);
+    border-bottom:2px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:4px;
+    padding:10px 12px;
+  }
+  nav a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:0.88rem;
+    padding:8px 14px;
+    border-radius:20px;
+    transition:background 0.2s, color 0.2s;
+    white-space:nowrap;
+  }
+  nav a:hover{
+    background:var(--primary-light);
+  }
+  nav a.active{
+    background:var(--primary);
+    color:var(--white);
+    font-weight:700;
+  }
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:30px 20px 60px;
+  }
+  section{
+    margin-bottom:56px;
+    scroll-margin-top:70px;
+  }
+  h1.chapter-title{display:none;}
+  h2{
+    color:var(--primary);
+    font-size:1.45rem;
+    border-bottom:3px solid var(--primary-light);
+    padding-bottom:8px;
+    margin-top:0;
+  }
+  h3{
+    color:var(--primary);
+    font-size:1.15rem;
+    margin-top:34px;
+    padding-left:10px;
+    border-left:5px solid var(--primary);
+  }
+  h4{
+    font-size:1rem;
+    color:var(--text);
+    margin-top:20px;
+    font-weight:700;
+  }
+  p{margin:12px 0;}
+  .intro-box{
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:18px 20px;
+    margin:20px 0;
+  }
+  .box{
+    border-radius:10px;
+    padding:16px 20px;
+    margin:18px 0;
+    border-left:6px solid var(--primary);
+    background:var(--primary-light);
+  }
+  .box.mechanism{border-left-color:var(--primary);}
+  .box-title{
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .clinical{
+    background:#fff4f0;
+    border-left:6px solid #c0553a;
+  }
+  .clinical .box-title{color:#c0553a;}
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin:14px 0;
+  }
+  .flow-step{
+    background:var(--white);
+    border:2px solid var(--primary);
+    border-radius:8px;
+    padding:8px 12px;
+    font-size:0.88rem;
+    flex:1 1 130px;
+    min-width:110px;
+  }
+  .flow-step b{color:var(--primary);}
+  .flow-arrow{
+    color:var(--primary);
+    font-weight:700;
+    font-size:1.2rem;
+  }
+  ol.steps{
+    counter-reset:step;
+    list-style:none;
+    padding-left:0;
+  }
+  ol.steps li{
+    position:relative;
+    padding:10px 10px 10px 44px;
+    margin:8px 0;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:8px;
+  }
+  ol.steps li::before{
+    counter-increment:step;
+    content:counter(step);
+    position:absolute;
+    left:8px;
+    top:8px;
+    background:var(--primary);
+    color:var(--white);
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.85rem;
+    font-weight:700;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0;
+    font-size:0.92rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:9px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:var(--white);
+  }
+  tr:nth-child(even) td{background:#f5f9f5;}
+  .compare-table th{background:var(--primary);}
+  .compare-table td.diff{background:var(--primary-light); font-weight:600;}
+  figure{
+    margin:18px 0;
+    text-align:center;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px;
+  }
+  figcaption{
+    font-size:0.85rem;
+    color:#555;
+    margin-top:8px;
+  }
+  svg{max-width:100%;height:auto;}
+  .term{font-weight:700; color:var(--primary);}
+  .concept-check{
+    background:#fff9e8;
+    border-left:6px solid #b8933a;
+    border-radius:10px;
+    padding:14px 18px;
+    margin:20px 0;
+    font-size:0.92rem;
+  }
+  .concept-check .box-title{color:#8a6d1f;}
+  .key-takeaways{
+    background:var(--primary);
+    color:var(--white);
+    border-radius:12px;
+    padding:24px 26px;
+  }
+  .key-takeaways h2{
+    color:var(--white);
+    border-bottom:3px solid rgba(255,255,255,0.4);
+  }
+  .key-takeaways ul{
+    padding-left:22px;
+  }
+  .key-takeaways li{margin:8px 0;}
+  footer{
+    text-align:center;
+    padding:30px 20px 50px;
+    color:#666;
+    font-size:0.9rem;
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top:14px;
+    background:var(--primary);
+    color:var(--white);
+    border:none;
+    padding:10px 22px;
+    border-radius:24px;
+    font-size:0.9rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  #backToTop:hover{opacity:0.85;}
+
+  @media (max-width:1024px){
+    main{padding:24px 16px 50px;}
+  }
+  @media (max-width:768px){
+    header h1{font-size:1.4rem;}
+    nav{gap:2px; padding:8px;}
+    nav a{font-size:0.78rem; padding:6px 10px;}
+    h2{font-size:1.2rem;}
+    h3{font-size:1.02rem;}
+    .flow{flex-direction:column; align-items:stretch;}
+    .flow-arrow{transform:rotate(90deg); text-align:center;}
+    table{font-size:0.8rem;}
+    th, td{padding:6px 6px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第14章：細胞運動：運動性與收縮性</h1>
+  <p class="subtitle">Cellular Movement: Motility and Contractility</p>
+</header>
+
+<nav id="navbar">
+  <a href="#sec1">14.1 微管動力運動</a>
+  <a href="#sec2">14.2 纖毛與鞭毛</a>
+  <a href="#sec3">14.3 肌凝蛋白</a>
+  <a href="#sec4">14.4 肌肉收縮</a>
+  <a href="#sec5">14.5 非肌肉運動</a>
+  <a href="#takeaways">重點回顧</a>
+</nav>
+
+<main>
+
+<section id="intro">
+  <div class="intro-box">
+    <p>細胞骨架（cytoskeleton）不只是細胞的支架，更是驅動<span class="term">運動性（motility）</span>的引擎。運動性可發生在組織層級（如肌肉收縮）、細胞層級（如精子游動、變形蟲爬行），以及胞內層級（如囊泡運輸、染色體分離）。<span class="term">收縮性（contractility）</span>是運動性的一種特化形式，專指細胞（尤其是肌肉細胞）的縮短。</p>
+    <p>本章的核心觀念只有一個：所有這些運動，幾乎都是由<span class="term">馬達蛋白（motor proteins）</span>將 ATP 水解的化學能轉換成沿著細胞骨架纖維移動的機械能。真核細胞有兩大運動系統：<b>微管系統</b>（驅動蛋白 kinesin、動力蛋白 dynein）與<b>微絲系統</b>（肌凝蛋白 myosin）。</p>
+  </div>
+
+  <div class="box mechanism">
+    <div class="box-title">🔧 馬達蛋白的三個共同特徵</div>
+    <div class="flow">
+      <div class="flow-step"><b>① ATP 水解 → 構型改變</b><br>ATP hydrolysis 驅動馬達蛋白形狀與附著狀態改變</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><b>② 循環運作</b><br>結合 ATP → 水解 → 釋放 ADP+Pi → 再結合 ATP，週而復始</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><b>③ 共同結構</b><br>ATPase 動力域＋機械傳導桿（lever arm）＋細胞骨架結合區</div>
+    </div>
+    <p>大多數馬達蛋白具有一個以上的纖維結合次單元，因此能沿著纖維連續移動而不脫落，稱為<span class="term">前進性（processive）</span>——就像小孩玩單槓（monkey bars）：一手放開向前擺，另一手仍抓緊，如此交替前進。</p>
+  </div>
+</section>
+
+<section id="sec1">
+  <h2>14.1 微管動力運動：驅動蛋白與動力蛋白（Kinesins and Dyneins）</h2>
+  <p>微管（microtubules, MT）像鐵軌一樣，為胞內物質運輸提供軌道，但微管本身不產生動力。真正產生動力的，是附著在微管上的<span class="term">驅動蛋白（kinesin）</span>與<span class="term">動力蛋白（dynein）</span>。由於微管具有極性（多數微管的負端位於中心體），這兩類馬達分別負責相反方向的運輸：</p>
+
+  <div class="flow">
+    <div class="flow-step" style="border-color:var(--primary)"><b>驅動蛋白 Kinesin</b><br>朝微管<b>正端（+）</b>移動<br>= 由中心往細胞邊緣（outbound）</div>
+    <div class="flow-arrow">⇄</div>
+    <div class="flow-step" style="border-color:var(--primary)"><b>動力蛋白 Dynein</b><br>朝微管<b>負端（−）</b>移動<br>= 由邊緣往中心（inbound）</div>
+  </div>
+
+  <h3>軸突運輸：微管馬達的經典證據</h3>
+  <p>神經細胞的軸突（axon）沒有核糖體，蛋白質必須在細胞本體合成後，包裝成囊泡沿軸突運送到突觸末梢，這個過程稱為<span class="term">快速軸突運輸（fast axonal transport）</span>。實驗證實：把驅動蛋白、ATP 與人工小珠加到微管上，小珠會往正端移動（此即<span class="term">順行（anterograde）運輸</span>）；換成動力蛋白則小珠往負端移動（<span class="term">逆行（retrograde）運輸</span>）。</p>
+
+  <h3>驅動蛋白如何移動</h3>
+  <p>經典驅動蛋白（kinesin-1）由兩條重鏈與兩條輕鏈組成，具有四個功能區：結合微管並具 ATPase 活性的<b>球狀馬達區</b>、連接馬達區與捲曲螺旋柄的<b>頸部槓桿</b>、<b>柄部（stalk）</b>，以及攜帶輕鏈、負責結合貨物的<b>尾部（tail）</b>。它以「手過手（hand-over-hand）」方式，每步 8 nm，沿微管前進，單一分子可連續走 100 步以上（可達 1 μm），能量轉換效率約 60–70%。</p>
+
+  <figure>
+    <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        .mtline{stroke:#888;stroke-width:6;stroke-linecap:round;}
+        .lbl{font-size:12px;fill:#1a1a1a;font-family:'Noto Sans TC',sans-serif;}
+        .lbl-title{font-size:13px;font-weight:700;fill:hsl(125,45%,35%);font-family:'Noto Sans TC',sans-serif;}
+      </style>
+      <line x1="30" y1="140" x2="600" y2="140" class="mtline"/>
+      <text x="30" y="165" class="lbl">− 端（中心體）</text>
+      <text x="540" y="165" class="lbl">+ 端（細胞周邊）</text>
+      <!-- kinesin head 1 -->
+      <circle cx="220" cy="120" r="12" fill="hsl(125,45%,35%)"/>
+      <circle cx="260" cy="100" r="12" fill="hsl(125,70%,55%)"/>
+      <line x1="220" y1="120" x2="240" y2="70" stroke="hsl(125,45%,35%)" stroke-width="4"/>
+      <line x1="260" y1="100" x2="240" y2="70" stroke="hsl(125,70%,55%)" stroke-width="4"/>
+      <rect x="230" y="55" width="14" height="16" rx="3" fill="#c98b3a"/>
+      <text x="180" y="40" class="lbl-title">驅動蛋白（Kinesin-1）：手過手前進</text>
+      <text x="200" y="185" class="lbl">每步約 8 nm，朝正端移動，攜帶貨物（囊泡）</text>
+      <!-- cargo arrow -->
+      <line x1="237" y1="55" x2="237" y2="30" stroke="#c98b3a" stroke-width="2" marker-end="url(#arrow)"/>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="#c98b3a"/>
+        </marker>
+      </defs>
+      <text x="200" y="22" class="lbl">貨物（囊泡）</text>
+    </svg>
+    <figcaption>圖 14-3／14-4（重製）驅動蛋白以手過手方式沿微管朝正端移動，一側球狀馬達區前移結合新的 β-微管蛋白，另一側隨即脫離。</figcaption>
+  </figure>
+
+  <h3>驅動蛋白家族龐大、功能多樣</h3>
+  <p>驅動蛋白依序列可分成許多家族（見表 14-1），除了運送 RNA、蛋白複合體、囊泡外，Kinesin-13（catastrophins）不具馬達功能，反而促進微管<b>解聚合</b>；部分驅動蛋白則參與紡錘體與著絲點的功能。</p>
+
+  <h3>動力蛋白：胞質型與軸絲型</h3>
+  <p><span class="term">胞質動力蛋白（cytoplasmic dynein）</span>由兩條重鏈、兩條中間鏈、兩條輕中間鏈與多條輕鏈組成，重鏈末端形成六個環狀排列的 <span class="term">AAA+ 域</span>。動力蛋白透過 <span class="term">dynactin 複合體</span>連接貨物（如囊泡）。與驅動蛋白不同，動力蛋白的動力衝程（power stroke）作用機制是「遠距離傳導」：ADP 結合使 AAA+ 環「上膛」，ADP 釋放引發槓桿大幅擺動，帶動整個動力蛋白朝負端移動。</p>
+  <p><span class="term">軸絲動力蛋白（axonemal dynein）</span>則是纖毛與鞭毛擺動的動力來源，將在 14.2 節詳述。</p>
+
+  <div class="box">
+    <div class="box-title">📦 微管馬達與內膜系統</div>
+    <p>驅動蛋白將囊泡由高基氏體送往細胞邊緣（順行運輸）；胞質動力蛋白則把胞吞形成的囊泡由細胞表面送回內部（逆行運輸）。若以藥物（如 nocodazole）破壞微管，高基氏體會隨之瓦解——顯示微管馬達不僅運輸貨物，也維持內膜系統的形態。</p>
+  </div>
+
+  <h3>本節重要比較：驅動蛋白 vs. 動力蛋白</h3>
+  <table class="compare-table">
+    <tr><th>比較項目</th><th>驅動蛋白 Kinesin</th><th>動力蛋白 Dynein</th></tr>
+    <tr><td>移動方向</td><td>多數朝微管<b>正端（+）</b></td><td>朝微管<b>負端（−）</b></td></tr>
+    <tr><td>家族大小</td><td>家族龐大、種類多</td><td>家族相對較少，分兩大類</td></tr>
+    <tr><td>典型功能</td><td>順行軸突運輸；囊泡外送</td><td>逆行軸突運輸；軸絲滑動（鞭毛擺動）</td></tr>
+    <tr><td>貨物連接方式</td><td>主要經由輕鏈</td><td>經由 dynactin 複合體</td></tr>
+    <tr><td>動力衝程機制</td><td>ATPase 域直接偶聯構型改變</td><td>AAA+ 域「遠距離」傳導至槓桿</td></tr>
+  </table>
+
+  <div class="concept-check">
+    <div class="box-title">💡 想一想</div>
+    <p>驅動蛋白與動力蛋白都是微管馬達，兩者有何相似與相異之處？（提示：可從移動方向、家族大小、能量偶聯機制思考。）</p>
+  </div>
+</section>
+
+<section id="sec2">
+  <h2>14.2 微管為基礎的細胞運動：纖毛與鞭毛</h2>
+  <p><span class="term">纖毛（cilia，單數 cilium）</span>與<span class="term">鞭毛（flagella，單數 flagellum）</span>結構相同，差別在長度、數量與擺動方式。</p>
+
+  <h3>纖毛與鞭毛的差異</h3>
+  <table class="compare-table">
+    <tr><th>比較項目</th><th>纖毛 Cilia</th><th>鞭毛 Flagella</th></tr>
+    <tr><td>長度</td><td>約 2–10 µm，較短</td><td>約 10–200 µm（甚至更長），較長</td></tr>
+    <tr><td>每細胞數量</td><td>數量多（可達數百根）</td><td>通常僅 1 至數根</td></tr>
+    <tr><td>擺動方式</td><td>槳狀擺動：動力衝程＋回復衝程，力量垂直於纖毛、平行於細胞表面</td><td>對稱波浪狀擺動，力量平行於鞭毛軸，推動細胞前進</td></tr>
+    <tr><td>主要功能</td><td>推動環境流過細胞（如清除呼吸道黏液）；原生動物也用於移動與攝食</td><td>推動細胞穿越液體環境（如精子游動）</td></tr>
+  </table>
+
+  <h3>軸絲（axoneme）：9+2 的精密結構</h3>
+  <p>纖毛與鞭毛的核心結構稱為<span class="term">軸絲（axoneme）</span>，連接到<span class="term">基體（basal body）</span>（構造上等同於中心粒）。典型推進型軸絲呈「<b>9+2</b>」排列：九組<span class="term">外側雙聯體（outer doublet）</span>環繞、中央有一對<span class="term">中央對（central pair）</span>微管；感覺性初級纖毛則多為「9+0」（無中央對）。</p>
+
+  <figure>
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="150" r="130" fill="none" stroke="hsl(125,45%,80%)" stroke-width="2" stroke-dasharray="4 3"/>
+      <!-- central pair -->
+      <circle cx="140" cy="150" r="10" fill="hsl(125,45%,35%)"/>
+      <circle cx="160" cy="150" r="10" fill="hsl(125,45%,35%)"/>
+      <!-- 9 outer doublets -->
+      <g id="doublets"></g>
+      <script><![CDATA[
+      ]]></script>
+      <!-- manually place 9 doublets -->
+      <g>
+        <!-- generated positions around circle radius 100 -->
+      </g>
+      <!-- doublet 1..9 placed manually using trig approx -->
+      <g fill="hsl(125,60%,45%)">
+        <ellipse cx="150" cy="50" rx="14" ry="10"/>
+        <ellipse cx="220" cy="72" rx="14" ry="10" transform="rotate(40 220 72)"/>
+        <ellipse cx="253" cy="132" rx="14" ry="10" transform="rotate(80 253 132)"/>
+        <ellipse cx="240" cy="200" rx="14" ry="10" transform="rotate(120 240 200)"/>
+        <ellipse cx="188" cy="242" rx="14" ry="10" transform="rotate(160 188 242)"/>
+        <ellipse cx="112" cy="242" rx="14" ry="10" transform="rotate(200 112 242)"/>
+        <ellipse cx="60" cy="200" rx="14" ry="10" transform="rotate(240 60 200)"/>
+        <ellipse cx="47" cy="132" rx="14" ry="10" transform="rotate(280 47 132)"/>
+        <ellipse cx="80" cy="72" rx="14" ry="10" transform="rotate(320 80 72)"/>
+      </g>
+      <text x="150" y="150" text-anchor="middle" dy="4" font-size="10" fill="#fff" font-family="'Noto Sans TC',sans-serif">中央對</text>
+      <text x="150" y="288" text-anchor="middle" font-size="13" fill="hsl(125,45%,35%)" font-family="'Noto Sans TC',sans-serif" font-weight="700">「9 + 2」軸絲橫切面</text>
+    </svg>
+    <figcaption>圖 14-8（重製）9 組外側雙聯體（含 A 管、B 管與動力蛋白側臂）環繞 1 對中央對微管；徑向輻條連接雙聯體與中央對，nexin 連接相鄰雙聯體。</figcaption>
+  </figure>
+
+  <h3>軸絲的組成元件</h3>
+  <ol class="steps">
+    <li><b>A 管與 B 管</b>：每組外側雙聯體由一條完整的 A 管（13 根原纖絲）與一條不完整的 B 管（10–11 根）組成。</li>
+    <li><b>動力蛋白側臂（inner/outer arm dynein）</b>：由 A 管伸出，是驅動雙聯體滑動的馬達。</li>
+    <li><b>nexin 連接蛋白</b>：連接相鄰雙聯體，限制彼此滑動的幅度。</li>
+    <li><b>徑向輻條（radial spokes）</b>：由雙聯體向內延伸至中央對，將滑動轉換為彎曲。</li>
+  </ol>
+
+  <h3>雙聯體滑動如何造成彎曲</h3>
+  <div class="box mechanism">
+    <div class="box-title">⚙️ 機制：滑動 → 彎曲</div>
+    <p>動力蛋白側臂沿相鄰 B 管「行走」，若雙聯體之間沒有任何連接（如以蛋白酶切除 nexin），加入 ATP 後雙聯體會<b>自由滑開</b>而不彎曲；但完整軸絲中，nexin 與徑向輻條限制了自由滑動，於是滑動的力量被轉換為<b>局部彎曲</b>，並沿軸絲傳遞形成波狀運動。</p>
+  </div>
+
+  <h3>纖毛內運輸（Intraflagellar Transport, IFT）</h3>
+  <p>纖毛/鞭毛的組件（如微管蛋白）須不斷被送到生長中的頂端：驅動蛋白負責將材料送往頂端，胞質動力蛋白負責運回基部，此過程稱為<span class="term">纖毛內運輸（IFT）</span>。IFT 缺陷會造成一系列人類疾病，統稱<span class="term">纖毛病（ciliopathies）</span>，例如 Bardet-Biedl 症候群。</p>
+
+  <div class="box clinical">
+    <div class="box-title">🩺 臨床關聯：Kartagener 症候群與原發性纖毛運動障礙</div>
+    <p>軸絲動力蛋白缺陷會造成<span class="term">原發性纖毛運動障礙（primary ciliary dyskinesia, PCD）</span>。患者常見三聯症：<b>不孕（精子鞭毛不動）</b>、<b>反覆性支氣管炎與鼻竇炎（呼吸道纖毛無法清除黏液）</b>，以及約 50% 機率出現<span class="term">內臟逆位（situs inversus totalis）</span>——因為胚胎發育早期，特化纖毛的擺動所產生的液流，是建立左右不對稱的重要訊號。</p>
+  </div>
+
+  <div class="concept-check">
+    <div class="box-title">💡 想一想</div>
+    <p>人類精子鞭毛基部有大量粒線體，這樣的構造安排對鞭毛運動有什麼優勢？</p>
+  </div>
+</section>
+
+<section id="sec3">
+  <h2>14.3 微絲為基礎的運動：肌凝蛋白（Myosins）</h2>
+  <p><span class="term">肌凝蛋白（myosin）</span>是與肌動蛋白（actin）微絲交互作用的馬達蛋白超家族，目前已知有 24 個類別。所有肌凝蛋白至少有一條重鏈，一端為結合肌動蛋白、具 ATPase 活性的球狀域，另一端連接長度不一的尾部。多數肌凝蛋白朝微絲<b>正端（barbed end）</b>移動；<b>肌凝蛋白 VI</b> 是特例，朝負端（pointed end）移動。</p>
+
+  <h3>肌凝蛋白 II：研究最透徹的家族成員</h3>
+  <p>肌凝蛋白 II 由兩條重鏈（各含球狀域、鉸鏈區、桿狀尾部）與四條輕鏈（每條重鏈搭配一條必要輕鏈與一條調節輕鏈）組成。它能自組裝成長絲（如肌肉的粗肌絲），基本功能是把肌動蛋白絲拉近，造成細胞或細胞群的收縮——這是肌肉收縮、細胞遷移、細胞質分裂共同的分子基礎。</p>
+
+  <h3>步幅大小：驅動蛋白 vs. 肌凝蛋白 II</h3>
+  <p>兩者都用兩個球狀域移動、都靠 ATP 水解改變形狀，效率也相近（驅動蛋白約 60–70%，肌凝蛋白 II 約 50%）。但關鍵差異在<b>行進距離</b>：</p>
+  <table class="compare-table">
+    <tr><th>比較項目</th><th>驅動蛋白（kinesin-1）</th><th>肌凝蛋白 II（myosin II）</th></tr>
+    <tr><td>單分子行進距離</td><td>可連續走上百步，總距離可達 1 µm</td><td>單次動力衝程僅約 12–15 nm</td></tr>
+    <tr><td>運作方式</td><td>單獨或少量即可長距離運貨</td><td>需大量分子組成陣列（如肌肉可含數十億個馬達）協同運作</td></tr>
+    <tr><td>差異的意義</td><td>適合長程、單向的胞內運輸</td><td>適合大量微絲同步滑動，產生巨觀收縮力</td></tr>
+  </table>
+  <p>值得注意的是並非所有肌凝蛋白步幅都短：<b>肌凝蛋白 V</b>（負責胞器與囊泡運輸）具高度前進性，步幅可達 72–74 nm，同樣以「手過手」方式移動。</p>
+</section>
+
+<section id="sec4">
+  <h2>14.4 微絲為基礎的運動性：肌肉細胞的作用</h2>
+  <p>肌肉收縮是細胞骨架驅動機械作功最典型的例子。哺乳動物有骨骼肌、心肌、平滑肌三種肌肉類型。</p>
+
+  <h3>肌小節（sarcomere）：骨骼肌的收縮單位</h3>
+  <p>骨骼肌細胞是多核的長形肌纖維（muscle fiber），內含許多<span class="term">肌原纖維（myofibril）</span>，每條肌原纖維又沿長軸分成重複單位——<span class="term">肌小節（sarcomere）</span>，是肌肉收縮的基本功能單位。肌小節內含由肌凝蛋白組成的<span class="term">粗肌絲（thick filament）</span>與主要由 F-肌動蛋白、原肌凝蛋白（tropomyosin）、旋轉蛋白（troponin）組成的<span class="term">細肌絲（thin filament）</span>。</p>
+
+  <figure>
+    <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg">
+      <style>.sl{font-size:11px;fill:#1a1a1a;font-family:'Noto Sans TC',sans-serif;} .slt{font-size:12px;font-weight:700;fill:hsl(125,45%,35%);font-family:'Noto Sans TC',sans-serif;}</style>
+      <!-- Z lines -->
+      <line x1="60" y1="30" x2="60" y2="170" stroke="#444" stroke-width="4"/>
+      <line x1="580" y1="30" x2="580" y2="170" stroke="#444" stroke-width="4"/>
+      <text x="45" y="20" class="sl">Z 線</text>
+      <text x="565" y="20" class="sl">Z 線</text>
+      <!-- thin filaments from each Z line -->
+      <g stroke="hsl(125,70%,45%)" stroke-width="3">
+        <line x1="60" y1="70" x2="260" y2="70"/>
+        <line x1="60" y1="130" x2="260" y2="130"/>
+        <line x1="580" y1="70" x2="380" y2="70"/>
+        <line x1="580" y1="130" x2="380" y2="130"/>
+      </g>
+      <!-- thick filament in middle -->
+      <rect x="180" y="85" width="280" height="30" fill="hsl(125,30%,55%)" rx="4"/>
+      <text x="270" y="105" text-anchor="middle" font-size="11" fill="#fff" font-family="'Noto Sans TC',sans-serif">粗肌絲（A 帶）</text>
+      <!-- I band brackets -->
+      <text x="120" y="185" class="sl">I 帶</text>
+      <text x="500" y="185" class="sl">I 帶</text>
+      <text x="320" y="185" class="sl">H 區／M 線</text>
+      <line x1="320" y1="60" x2="320" y2="140" stroke="#333" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <text x="270" y="45" class="slt">← 一個肌小節（sarcomere）→</text>
+      <line x1="65" y1="35" x2="575" y2="35" stroke="hsl(125,45%,35%)" stroke-width="1"/>
+    </svg>
+    <figcaption>圖 14-13（簡化重製）一個肌小節：兩條 Z 線之間為一個收縮單位，A 帶對應粗肌絲長度不變，I 帶（僅含細肌絲）在收縮時縮短，H 區在收縮時變窄甚至消失。</figcaption>
+  </figure>
+
+  <h3>滑動纖維模型（Sliding-Filament Model）</h3>
+  <div class="box mechanism">
+    <div class="box-title">⚙️ 核心機制</div>
+    <p>收縮時，粗、細肌絲本身長度<b>不變</b>，而是細肌絲被拉入粗肌絲之間，使 <b>I 帶與 H 區逐漸縮小甚至消失</b>，肌小節整體縮短——這就是 1954 年提出、後來獲得證實的<span class="term">滑動纖維模型</span>。肌肉產生的張力，正比於粗、細肌絲重疊區域中可形成橫橋的肌凝蛋白頭數量：重疊過少（過度伸展）或過多（過度收縮，肌絲互相擠壓）張力都會下降，重疊「剛好」時張力最大。</p>
+  </div>
+
+  <h3>橫橋循環（Cross-Bridge Cycle）：ATP 如何驅動滑動</h3>
+  <div class="flow">
+    <div class="flow-step"><b>① 橫橋形成</b><br>肌凝蛋白頭（帶 ADP+Pi）結合肌動蛋白</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><b>② 釋放 Pi</b><br>觸發構型改變</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><b>③ 動力衝程</b><br>肌凝蛋白頭擺動，拉動細肌絲朝肌小節中央移動</div>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><b>④ 釋放 ADP</b><br>肌凝蛋白仍緊附於肌動蛋白</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><b>⑤ 結合新 ATP</b><br>橫橋解離、肌凝蛋白脫離肌動蛋白</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><b>⑥ ATP 水解</b><br>肌凝蛋白頭回到「上膛」高能態，準備下一輪</div>
+  </div>
+  <p>若缺乏 ATP，橫橋無法解離，肌肉會鎖在僵硬狀態——這正是死後<span class="term">屍僵（rigor mortis）</span>的分子機制。由於單一粗肌絲上有約 350 個肌凝蛋白頭，且各自以不同步調循環，任何時刻總有部分橫橋維持附著，肌絲才不會滑回原位。</p>
+
+  <h3>鈣離子調控收縮：旋轉蛋白—原肌凝蛋白開關</h3>
+  <table>
+    <tr><th>鈣濃度狀態</th><th>分子事件</th><th>結果</th></tr>
+    <tr><td>低鈣（&lt; 0.1 µM）</td><td>原肌凝蛋白遮蔽肌動蛋白上的肌凝蛋白結合位</td><td>無法形成橫橋 → 肌肉舒張</td></tr>
+    <tr><td>高鈣（&gt; 1 µM）</td><td>Ca²⁺ 結合旋轉蛋白 TnC → 構型改變傳至原肌凝蛋白，使其移位</td><td>結合位暴露 → 橫橋形成 → 肌肉收縮</td></tr>
+  </table>
+
+  <h3>興奮—收縮偶聯（Excitation-Contraction Coupling）</h3>
+  <div class="flow">
+    <div class="flow-step">神經衝動抵達<b>神經肌肉接合處</b>，釋放乙醯膽鹼</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">肌纖維膜（肌漿膜）去極化</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">去極化沿<b>橫小管（T 管）</b>深入細胞內部</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><b>雷諾丁受體</b>開啟，肌漿網（SR）釋放 Ca²⁺</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Ca²⁺ 觸發橫橋循環，肌肉收縮</div>
+  </div>
+  <p>舒張則靠 <span class="term">SERCA</span>（sarco/endoplasmic reticulum Ca²⁺-ATPase）將 Ca²⁺ 主動幫浦回肌漿網，使胞質鈣濃度下降、原肌凝蛋白重新遮蔽結合位。</p>
+
+  <h3>心肌與平滑肌</h3>
+  <p><span class="term">心肌（cardiac muscle）</span>結構上與骨骼肌相似（同樣呈橫紋），但心肌細胞經由<span class="term">間盤（intercalated discs）</span>中的縫隙連接彼此電性偶聯，使去極化波能在心臟各處協調傳播，形成規律心跳。</p>
+  <p><span class="term">平滑肌（smooth muscle）</span>缺乏 Z 線與規則排列的肌小節，收縮束改以<span class="term">緻密體（dense bodies）</span>錨定，且調控機制與骨骼肌完全不同：</p>
+
+  <div class="flow">
+    <div class="flow-step">Ca²⁺ 內流（來自細胞外）</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Ca²⁺ 結合<b>鈣調蛋白（calmodulin）</b></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">活化<b>肌凝蛋白輕鏈激酶（MLCK）</b></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">MLCK 使調節輕鏈磷酸化</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">肌凝蛋白活化（伸展）並與肌動蛋白作用 → 收縮</div>
+  </div>
+
+  <h3>本節重要比較：骨骼肌 vs. 平滑肌的收縮調控</h3>
+  <table class="compare-table">
+    <tr><th>比較項目</th><th>骨骼肌</th><th>平滑肌</th></tr>
+    <tr><td>鈣離子來源</td><td>肌漿網（SR）釋放</td><td>細胞外 Ca²⁺ 內流</td></tr>
+    <tr><td>鈣感應蛋白</td><td>旋轉蛋白（troponin C）</td><td>鈣調蛋白（calmodulin）</td></tr>
+    <tr><td>調控機制</td><td>原肌凝蛋白移位，暴露結合位（構型改變，無共價修飾）</td><td>MLCK 磷酸化肌凝蛋白輕鏈（共價修飾）</td></tr>
+    <tr><td>反應速度</td><td>快（僅需構型改變）</td><td>慢（需酵素催化的磷酸化反應）</td></tr>
+    <tr><td>結構基礎</td><td>規則排列的肌小節，Z 線</td><td>無肌小節，靠緻密體錨定</td></tr>
+  </table>
+
+  <div class="concept-check">
+    <div class="box-title">💡 想一想</div>
+    <p>根據肌小節的結構安排（肌動蛋白正端皆錨定於 Z 線），為什麼粗肌絲上的肌凝蛋白頭移動方向必然造成肌小節收縮，而不是伸長？</p>
+  </div>
+</section>
+
+<section id="sec5">
+  <h2>14.5 微絲為基礎的運動：非肌肉細胞</h2>
+  <p>肌動蛋白與肌凝蛋白幾乎存在於所有真核細胞中，除了肌肉收縮，還參與細胞爬行、胞質分裂、囊泡運輸等多種非肌肉運動。</p>
+
+  <h3>細胞遷移：突出、附著、位移、脫離的循環</h3>
+  <p>纖維母細胞（fibroblast）等細胞可利用<span class="term">葉狀偽足（lamellipodia）</span>與<span class="term">絲狀偽足（filopodia）</span>在基質上爬行。細胞爬行包含四個循環步驟：</p>
+  <ol class="steps">
+    <li><b>突出（protrusion）</b>：前緣以 Arp2/3 依賴的分支方式聚合肌動蛋白，向外延伸葉狀偽足。小 GTPase Rac 促進葉狀偽足，Cdc42 促進絲狀偽足。</li>
+    <li><b>附著（attachment）</b>：突出的前緣經<span class="term">整合素（integrin）</span>與細胞外基質形成<span class="term">焦點黏著（focal adhesion）</span>，整合素在胞內經連接蛋白與肌動蛋白相連。</li>
+    <li><b>收縮與位移（contraction/translocation）</b>：Rho 調控肌凝蛋白 II 於細胞後端收縮，將細胞本體向前拉。</li>
+    <li><b>脫離（detachment）</b>：細胞後端（尾部）鬆開與基質的黏著；若黏著過強，尾部甚至可能斷裂留在原地。</li>
+  </ol>
+
+  <div class="box mechanism">
+    <div class="box-title">⚙️ 逆向流（Retrograde Flow）</div>
+    <p>突出前緣的肌動蛋白同時進行「前端聚合」與「後方由肌凝蛋白驅動的回拉、去聚合」，兩者達成平衡時突出穩定；前端聚合佔優勢則突出延伸，回拉佔優勢則突出縮回。解聚合釋出的肌動蛋白單體循環利用，加到前端持續聚合。</p>
+  </div>
+
+  <h3>趨化性（Chemotaxis）</h3>
+  <p>細胞可依擴散性化學物質的濃度梯度定向遷移：朝高濃度移動稱受<span class="term">趨化物（chemoattractant）</span>吸引，朝低濃度移動則是受<span class="term">趨避物（chemorepellant）</span>排斥。白血球與 <i>Dictyostelium</i> 變形蟲是研究趨化性的經典模型：受體活化後，細胞骨架機制被極化招募到遷移方向前緣，形成突出。</p>
+
+  <h3>變形運動（Amoeboid Movement）：膠溶循環</h3>
+  <p>變形蟲與白血球的<span class="term">偽足（pseudopodium）</span>運動依賴細胞質在「凝膠態（gel，外層，肌動蛋白緻密）」與「溶膠態（sol，內層，較流動）」之間的相互轉換：前端凝膠化（gelation）固定突出，後端溶膠化（solation）使細胞質能向前流動，鈣離子活化 gelsolin 等蛋白促成這種轉換。</p>
+
+  <h3>胞質流動（Cytoplasmic Streaming）與胞循環（Cyclosis）</h3>
+  <p>黏菌（如 <i>Physarum</i>）以肌凝蛋白驅動細胞質在肌動蛋白網路中往返流動；許多植物細胞則呈現環繞中央液泡的<span class="term">胞循環（cyclosis）</span>，由排列整齊的肌動蛋白軌道與肌凝蛋白共同驅動，兼具混合與運輸細胞內容物的功能。</p>
+
+  <h3>本章容易混淆的概念比較表：胞內運輸系統一覽</h3>
+  <table class="compare-table">
+    <tr><th>比較項目</th><th>微管系統（MT）</th><th>微絲系統（MF）</th></tr>
+    <tr><td>馬達蛋白</td><td>驅動蛋白（kinesin）、動力蛋白（dynein）</td><td>肌凝蛋白（myosin）</td></tr>
+    <tr><td>典型胞內任務</td><td>長距離囊泡／胞器運輸（軸突運輸）、纖毛內運輸、紡錘體功能</td><td>肌肉收縮、細胞爬行、胞質分裂、囊泡短程轉運</td></tr>
+    <tr><td>細胞層級運動</td><td>纖毛與鞭毛的擺動</td><td>肌肉收縮、變形運動、細胞遷移</td></tr>
+    <tr><td>常見混淆點</td><td>常被誤以為微管本身能主動收縮或搏動——實際上力量全來自附著的馬達蛋白，微管僅是軌道</td><td>常與微管系統混淆方向規則：肌凝蛋白多朝微絲正端，驅動蛋白多朝微管正端，但動力蛋白朝微管負端，方向需分別記憶</td></tr>
+  </table>
+
+  <div class="concept-check">
+    <div class="box-title">💡 想一想</div>
+    <p>非肌肉型肌凝蛋白 II 除了出現在遷移細胞後端，也出現在細胞突出結構中，把肌動蛋白「捲收」到葉狀偽足基部。根據肌凝蛋白 II 沿肌動蛋白移動的方向與葉狀偽足中肌動蛋白絲的極性，為什麼肌凝蛋白會有這樣的效果？</p>
+  </div>
+</section>
+
+<section id="takeaways" class="key-takeaways">
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>細胞運動性的核心原理：<b>馬達蛋白</b>將 ATP 水解的化學能轉換成沿細胞骨架纖維移動的機械能，且具有<b>前進性（processive）</b>循環運作特性。</li>
+    <li>微管系統：<b>驅動蛋白（kinesin）</b>朝微管<b>正端</b>移動，<b>動力蛋白（dynein）</b>朝<b>負端</b>移動；兩者共同負責軸突順行／逆行運輸與內膜系統的運輸與形塑。</li>
+    <li>纖毛與鞭毛的核心結構是「<b>9+2</b>」軸絲：9 組外側雙聯體＋1 對中央對，<b>軸絲動力蛋白</b>驅動雙聯體滑動，經 nexin 與徑向輻條限制轉換成<b>彎曲</b>擺動。</li>
+    <li>臨床關聯：軸絲動力蛋白缺陷導致<b>原發性纖毛運動障礙（PCD）</b>，可造成不孕、慢性呼吸道感染與內臟逆位三聯症。</li>
+    <li>微絲系統：<b>肌凝蛋白（myosin）</b>家族龐大，多數朝微絲正端移動；肌凝蛋白 II 步幅短（12–15 nm）但可大量陣列協同產生巨觀收縮力。</li>
+    <li>骨骼肌收縮遵循<b>滑動纖維模型</b>：粗、細肌絲長度不變，靠<b>橫橋循環</b>（ATP 驅動的結合—動力衝程—解離—再上膛）使細肌絲滑入粗肌絲之間，肌小節縮短。</li>
+    <li>骨骼肌收縮調控由 <b>Ca²⁺—旋轉蛋白（troponin）—原肌凝蛋白（tropomyosin）</b>開關控制；興奮—收縮偶聯路徑：神經衝動 → 乙醯膽鹼 → 去極化 → T 管 → 肌漿網釋放 Ca²⁺。</li>
+    <li>平滑肌調控機制與骨骼肌不同：細胞外 Ca²⁺ 內流 → 鈣調蛋白 → <b>MLCK</b> 磷酸化肌凝蛋白輕鏈，反應較慢；此為本章重要易混淆比較點。</li>
+    <li>非肌肉細胞的肌動蛋白／肌凝蛋白系統驅動<b>細胞爬行</b>（突出—附著—收縮—脫離循環）、<b>趨化性</b>、<b>變形運動</b>（凝膠—溶膠循環）與<b>胞質流動／胞循環</b>。</li>
+    <li>必背名詞：kinesin、dynein、axoneme（9+2）、sarcomere、cross-bridge cycle、sliding-filament model、troponin/tropomyosin、SERCA、MLCK、lamellipodia／filopodia、chemotaxis。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>第14章：細胞運動：運動性與收縮性｜學習指南</p>
+  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ Back to Top</button>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('#navbar a');
+
+  function onScroll(){
+    let currentId = '';
+    const scrollPos = window.scrollY + 90;
+    sections.forEach(sec => {
+      if(sec.offsetTop <= scrollPos){
+        currentId = sec.id;
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if(link.getAttribute('href') === '#' + currentId){
+        link.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll);
+</script>
+
+</body>
+</html>

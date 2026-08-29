@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第26章：癌症細胞｜學習指南</title>
+<style>
+  :root{
+    --hue: 335;
+    --primary: hsl(335, 45%, 35%);
+    --primary-light: hsl(335, 45%, 92%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(335, 45%, 80%);
+    --max-width: 880px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    font-family: "Noto Sans TC","思源黑體","Microsoft JhengHei",sans-serif;
+    color: var(--text);
+    background: #fdfbfc;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header.site-header{
+    text-align:center;
+    padding: 40px 20px 28px;
+    background: linear-gradient(180deg, var(--primary-light), #fff);
+    border-bottom: 1px solid var(--border);
+  }
+
+  header.site-header h1{
+    color: var(--primary);
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+
+  header.site-header p.subtitle{
+    margin:0;
+    color:#555;
+    font-size:0.95rem;
+  }
+
+  nav.main-nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  nav.main-nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    margin:0;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  nav.main-nav a{
+    display:block;
+    text-decoration:none;
+    color:#444;
+    font-size:0.88rem;
+    padding: 8px 14px;
+    border-radius: 20px;
+    white-space:nowrap;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  nav.main-nav a:hover{
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  nav.main-nav a.active{
+    background: var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+
+  main{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 10px 20px 60px;
+  }
+
+  section{ padding-top: 34px; margin-top: 10px; }
+  section:first-of-type{ padding-top: 22px; }
+
+  h2{
+    color: var(--primary);
+    font-size: 1.5rem;
+    border-bottom: 3px solid var(--primary-light);
+    padding-bottom: 10px;
+    margin-top: 46px;
+  }
+
+  h3{
+    color: var(--primary);
+    font-size: 1.18rem;
+    margin-top: 34px;
+    padding-left: 12px;
+    border-left: 5px solid var(--primary);
+  }
+
+  h4{
+    color: var(--text);
+    font-size: 1.02rem;
+    margin-top: 22px;
+    font-weight:700;
+  }
+
+  p{ margin: 12px 0; }
+
+  .term-en{ color:#666; font-size:0.92em; }
+
+  /* 提示框 */
+  .box{
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 18px 0;
+    border: 1px solid var(--border);
+  }
+  .box.concept{
+    background: var(--primary-light);
+  }
+  .box.concept .box-title{
+    color: var(--primary);
+    font-weight:700;
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .box.clinical{
+    background: #fff8ef;
+    border-color:#e8cfa0;
+  }
+  .box.clinical .box-title{
+    color:#9a6a15;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .box.pathway{
+    background:#f4f6ff;
+    border-color:#c9d3f7;
+  }
+  .box.pathway .box-title{
+    color:#3b4fa0;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .box.checkpoint{
+    background:#f2f2f2;
+    border-left:5px solid #888;
+  }
+  .box.checkpoint .box-title{
+    font-weight:700;
+    margin-bottom:6px;
+    color:#444;
+  }
+
+  /* 流程箭頭列表 */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+    gap:6px;
+    margin:18px 0;
+  }
+  .flow .step{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:0.9rem;
+    flex:1 1 130px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    min-width:110px;
+  }
+  .flow .arrow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--primary);
+    font-size:1.3rem;
+    flex:0 0 auto;
+    padding:0 2px;
+  }
+
+  ol.numbered, ul.plain{ margin:12px 0; padding-left: 1.4em; }
+  ol.numbered li, ul.plain li{ margin:6px 0; }
+
+  /* 表格 */
+  table{
+    width:100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size:0.9rem;
+    overflow-x:auto;
+    display:block;
+  }
+  table thead{ display:table; width:100%; table-layout:fixed; }
+  table tbody{ display:table; width:100%; table-layout:fixed; }
+  table tr{ display:table-row; }
+  th, td{
+    border:1px solid var(--border);
+    padding:9px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background: var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  tbody tr:nth-child(even){ background: var(--primary-light); }
+
+  .compare-table th:first-child{ width: 22%; }
+
+  figure{
+    margin: 22px 0;
+    text-align:center;
+  }
+  figure svg{ max-width:100%; height:auto; }
+  figcaption{
+    font-size:0.85rem;
+    color:#555;
+    margin-top:8px;
+    text-align:left;
+    padding: 0 6px;
+  }
+
+  .svg-wrap{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 6px;
+  }
+
+  .takeaway-list{
+    background: var(--primary-light);
+    border-radius: 14px;
+    padding: 22px 26px;
+    list-style: none;
+    margin: 20px 0;
+  }
+  .takeaway-list li{
+    margin: 10px 0;
+    padding-left: 28px;
+    position: relative;
+  }
+  .takeaway-list li::before{
+    content: "✓";
+    position:absolute;
+    left:0;
+    color: var(--primary);
+    font-weight:700;
+  }
+
+  footer.site-footer{
+    text-align:center;
+    padding: 34px 20px 50px;
+    border-top: 1px solid var(--border);
+    color:#555;
+    font-size:0.9rem;
+  }
+
+  #backToTop{
+    display:inline-block;
+    margin-top: 14px;
+    background: var(--primary);
+    color:#fff;
+    border:none;
+    padding: 10px 22px;
+    border-radius: 24px;
+    cursor:pointer;
+    font-size:0.9rem;
+    font-family: inherit;
+    text-decoration:none;
+  }
+  #backToTop:hover{ opacity:0.88; }
+
+  /* RWD */
+  @media (max-width: 1024px){
+    main{ padding: 10px 16px 60px; }
+  }
+  @media (max-width: 768px){
+    header.site-header{ padding: 28px 14px 20px; }
+    nav.main-nav ul{ gap:4px; padding: 8px; }
+    nav.main-nav a{ font-size:0.78rem; padding:7px 10px; }
+    h2{ font-size:1.25rem; }
+    h3{ font-size:1.05rem; }
+    table{ font-size:0.8rem; }
+    .flow{ flex-direction:column; }
+    .flow .arrow{ transform: rotate(90deg); padding:2px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>第26章：癌症細胞</h1>
+  <p class="subtitle">細胞生物學學習指南 · Cancer Cells</p>
+</header>
+
+<nav class="main-nav">
+  <ul>
+    <li><a href="#sec1" data-nav>26.1 癌症的形成</a></li>
+    <li><a href="#sec2" data-nav>26.2 癌症的擴散</a></li>
+    <li><a href="#sec3" data-nav>26.3 癌症的成因</a></li>
+    <li><a href="#sec4" data-nav>26.4 致癌基因與抑癌基因</a></li>
+    <li><a href="#sec5" data-nav>26.5 診斷、篩檢與治療</a></li>
+    <li><a href="#takeaways" data-nav>重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- 26.1 -->
+<!-- ============================================================ -->
+<section id="sec1">
+  <h2>26.1 癌症的形成（How Cancers Arise）</h2>
+
+  <p>癌症（cancer）一詞源自拉丁文「螃蟹」，由希波克拉底於西元前五世紀命名，用來描述組織不受控制地生長並擴散全身的疾病。依據起源的細胞類型，癌症可分為幾大類：<strong>癌瘤（carcinoma）</strong>（約佔90%，源自上皮細胞）、<strong>肉瘤（sarcoma）</strong>（源自骨骼、軟骨、脂肪、肌肉等支持組織）、以及<strong>淋巴瘤（lymphoma）</strong>與<strong>白血病（leukemia）</strong>（源自血液與淋巴系統細胞）。無論起源為何，癌症的危險性來自兩項特性：<strong>不受控制的增生</strong>與<strong>擴散至全身的能力</strong>。</p>
+
+  <h3>腫瘤的形成：細胞分裂與分化／死亡失衡</h3>
+  <p><strong>腫瘤（tumor，或稱neoplasm）</strong>是組織中細胞不受控制、相對自主地分裂累積所形成的腫塊。關鍵並非細胞分裂的「速度」，而是<strong>細胞分裂與細胞分化（cell differentiation）或死亡之間的平衡</strong>。</p>
+
+  <p>以皮膚為例：基底層（basal layer）的細胞分裂後，平均會產生一個保留分裂能力的細胞（留在基底層）與一個喪失分裂能力、開始分化的細胞（往外遷移、製造角蛋白keratin、最終死亡脫落）。這種1:1的平衡確保分裂細胞數量不會累積。腫瘤形成時，這個平衡被打破：部分細胞分裂後產生「兩個」都能繼續分裂的細胞，使分裂細胞數持續增加。</p>
+
+  <figure>
+    <div class="svg-wrap">
+    <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="正常生長與腫瘤生長比較圖">
+      <style>
+        .lbl{ font-family:'Noto Sans TC',sans-serif; font-size:13px; fill:#1a1a1a; }
+        .lbl-h{ font-family:'Noto Sans TC',sans-serif; font-size:14px; fill:var(--primary,#7a2d4e); font-weight:700; }
+        .divcell{ fill:hsl(335,55%,80%); stroke:#7a2d4e; stroke-width:1.5; }
+        .diffcell{ fill:#ddd; stroke:#888; stroke-width:1.5; }
+      </style>
+      <text x="175" y="24" text-anchor="middle" class="lbl-h">(a) 正常生長</text>
+      <text x="525" y="24" text-anchor="middle" class="lbl-h">(b) 腫瘤生長</text>
+
+      <!-- normal: 1 dividing -> 1 dividing + 1 differentiated -->
+      <circle cx="175" cy="60" r="16" class="divcell"/>
+      <text x="175" y="90" text-anchor="middle" class="lbl">基底層分裂細胞</text>
+      <line x1="175" y1="100" x2="120" y2="150" stroke="#7a2d4e" stroke-width="2" marker-end="url(#arrow1)"/>
+      <line x1="175" y1="100" x2="230" y2="150" stroke="#7a2d4e" stroke-width="2" marker-end="url(#arrow1)"/>
+      <circle cx="115" cy="170" r="14" class="divcell"/>
+      <text x="115" y="200" text-anchor="middle" class="lbl">保留分裂力</text>
+      <circle cx="235" cy="170" r="14" class="diffcell"/>
+      <text x="235" y="200" text-anchor="middle" class="lbl">分化・死亡</text>
+      <text x="175" y="230" text-anchor="middle" class="lbl">結果：分裂細胞數量不變（1:1）</text>
+
+      <!-- tumor: 1 dividing -> 2 dividing -->
+      <circle cx="525" cy="60" r="16" class="divcell"/>
+      <text x="525" y="90" text-anchor="middle" class="lbl">基底層分裂細胞</text>
+      <line x1="525" y1="100" x2="470" y2="150" stroke="#7a2d4e" stroke-width="2" marker-end="url(#arrow1)"/>
+      <line x1="525" y1="100" x2="580" y2="150" stroke="#7a2d4e" stroke-width="2" marker-end="url(#arrow1)"/>
+      <circle cx="465" cy="170" r="14" class="divcell"/>
+      <text x="465" y="200" text-anchor="middle" class="lbl">保留分裂力</text>
+      <circle cx="585" cy="170" r="14" class="divcell"/>
+      <text x="585" y="200" text-anchor="middle" class="lbl">保留分裂力</text>
+      <text x="525" y="230" text-anchor="middle" class="lbl">結果：分裂細胞數量持續增加</text>
+
+      <defs>
+        <marker id="arrow1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="#7a2d4e"/>
+        </marker>
+      </defs>
+    </svg>
+    </div>
+    <figcaption><strong>圖 26-1（重製）</strong>正常皮膚中，每次基底層細胞分裂平均產生一個保留分裂能力的細胞與一個分化死亡的細胞，兩者平衡；腫瘤生長時此平衡被打破，分裂細胞數持續累積。</figcaption>
+  </figure>
+
+  <p>依生長模式，腫瘤分為：<strong>良性腫瘤（benign tumor）</strong>局限於原位、危險性低；<strong>惡性腫瘤（malignant tumor）</strong>能侵入周邊組織、進入血流並擴散至遠端器官，這才是「癌症」一詞真正所指。</p>
+
+  <div class="box concept">
+    <div class="box-title">📌 容易混淆的概念：良性腫瘤 vs. 惡性腫瘤</div>
+    <table class="compare-table">
+      <thead><tr><th>比較項目</th><th>良性腫瘤（Benign）</th><th>惡性腫瘤（Malignant）</th></tr></thead>
+      <tbody>
+        <tr><td>生長方式</td><td>局限於原發部位，通常有清楚邊界</td><td>邊界不清，可侵入周邊組織</td></tr>
+        <tr><td>擴散能力</td><td>不會進入血流、不轉移</td><td>可進入血流／淋巴，發生轉移（metastasis）</td></tr>
+        <tr><td>危險性</td><td>通常較低，易切除</td><td>危及生命，難以完全切除</td></tr>
+        <tr><td>細胞分化程度</td><td>接近正常、分化良好</td><td>分化程度低，異形性高</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>癌細胞增生：不依賴附著且不受密度抑制</h3>
+  <p>癌細胞在培養實驗中展現與正常細胞不同的生長特性：</p>
+  <ul class="plain">
+    <li><strong>不錨定依賴性生長（anchorage-independent growth）</strong>：正常細胞須附著在固體表面（透過細胞表面的<em>integrin</em>與細胞外基質結合）才能增生，若阻斷附著常引發<em>細胞凋亡（apoptosis）</em>；癌細胞即使懸浮在液體或半固體培養基中也能持續增生，規避了這道安全機制。</li>
+    <li><strong>密度依賴性生長抑制降低（reduced density-dependent inhibition of growth）</strong>：正常細胞長成單層後便停止分裂；癌細胞則持續分裂並堆疊生長。</li>
+  </ul>
+
+  <h3>端粒維持機制使癌細胞永生化</h3>
+  <p>正常人類纖維母細胞在培養中僅能分裂約50–60次便停止（因<em>端粒（telomere）</em>隨每次複製而縮短，過短會觸發細胞凋亡）。多數癌細胞則透過表現<strong>端粒酶（telomerase）</strong>不斷延長端粒，得以無限分裂——如著名的HeLa細胞株已持續分裂超過70年、逾20,000次仍未停止。</p>
+
+  <h3>訊息傳遞路徑、細胞週期控制與細胞凋亡的缺陷</h3>
+  <div class="box pathway">
+    <div class="box-title">🔬 三大調控機制的失能</div>
+    <div class="flow">
+      <div class="step">生長因子訊息傳遞路徑異常<br><span class="term-en">持續發出「分裂」訊號</span></div>
+      <div class="arrow">＋</div>
+      <div class="step">限制點（restriction point）失控<br><span class="term-en">不受生長因子／DNA損傷制約</span></div>
+      <div class="arrow">＋</div>
+      <div class="step">細胞凋亡受阻<br><span class="term-en">缺陷細胞無法被清除</span></div>
+    </div>
+    <p style="margin-top:6px;">三者共同作用，使癌細胞持續增生且逃避死亡。</p>
+  </div>
+
+  <h3>癌症形成的多步驟過程：起始、促進與腫瘤進展</h3>
+  <p>多項證據顯示癌症發展需經歷三個階段：</p>
+
+  <figure>
+    <div class="flow">
+      <div class="step">① 起始 Initiation<br><span class="term-en">DNA突變，細胞轉為易感狀態</span></div>
+      <div class="arrow">→</div>
+      <div class="step">② 促進 Promotion<br><span class="term-en">反覆暴露於促進劑，細胞增生</span></div>
+      <div class="arrow">→</div>
+      <div class="step">③ 腫瘤進展 Progression<br><span class="term-en">突變累積、篩選出更具侵襲性的族群</span></div>
+    </div>
+    <figcaption><strong>圖 26-3（重製）</strong>癌症發展的三大階段：起始事件建立DNA突變基礎；促進階段刺激已起始細胞增生；腫瘤進展中透過反覆的突變／篩選循環，產生生長更快、更具侵襲性的細胞族群，此過程稱為<strong>克隆擴增（clonal expansion）</strong>。</figcaption>
+  </figure>
+
+  <p>經典證據來自小鼠皮膚實驗：單獨塗抹<em>DMBA</em>（起始劑）幾乎不致癌；單獨塗抹<em>巴豆油（croton oil，含phorbol esters）</em>也不致癌；但「先給DMBA、後續反覆塗抹巴豆油」則會誘發腫瘤——顯示DMBA造成永久性的起始突變，而巴豆油作為促進劑，刺激已起始的細胞增生。</p>
+
+  <div class="box concept">
+    <div class="box-title">📌 容易混淆的概念：起始（Initiation）vs. 促進（Promotion）</div>
+    <table class="compare-table">
+      <thead><tr><th>比較項目</th><th>起始 Initiation</th><th>促進 Promotion</th></tr></thead>
+      <tbody>
+        <tr><td>本質</td><td>造成永久性DNA突變</td><td>刺激細胞增生，不造成新突變</td></tr>
+        <tr><td>作用時間</td><td>單次暴露即可產生效果</td><td>需長期、反覆暴露</td></tr>
+        <tr><td>可逆性</td><td>不可逆（突變已發生）</td><td>停止暴露腫瘤可能消退</td></tr>
+        <tr><td>範例</td><td>DMBA（致突變化學物）</td><td>巴豆油／賀爾蒙等促增生因子</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>此外，腫瘤並非均質的細胞團塊。實驗顯示只有極少數（1–2%）的腫瘤細胞具備快速形成新腫瘤的能力，這類似「<em>癌症幹細胞（cancer stem cell）</em>」的概念；而同一腫瘤內不同區域可能帶有不同的基因變異，稱為<strong>腫瘤內異質性（intratumor heterogeneity）</strong>。</p>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- 26.2 -->
+<!-- ============================================================ -->
+<section id="sec2">
+  <h2>26.2 癌症的擴散（How Cancers Spread）</h2>
+  <p>約90%的癌症死亡是由癌症「擴散」造成，而非原發腫瘤本身。癌症擴散仰賴血管新生、侵襲與轉移等一系列機制。</p>
+
+  <h3>血管新生：腫瘤生長超過幾毫米的必要條件</h3>
+  <p><strong>血管新生（angiogenesis）</strong>指新血管的生成。Judah Folkman於1971年提出：腫瘤會釋放訊息分子誘發周邊組織的血管新生，若無法獲得血液供應，腫瘤只能長到1–2 mm即停止生長（實驗：將癌細胞植入無血管供應的兔眼前房，腫瘤停止生長；植入有血管的虹膜組織，腫瘤則可長到原本體積的數千倍）。</p>
+
+  <h3>血管新生受活化因子與抑制因子的平衡控制</h3>
+  <div class="box pathway">
+    <div class="box-title">🔬 血管新生的分子機制</div>
+    <div class="flow">
+      <div class="step">癌細胞分泌<br><strong>VEGF／FGF</strong>（活化因子）</div>
+      <div class="arrow">→</div>
+      <div class="step">結合內皮細胞受體<br>活化訊息傳遞</div>
+      <div class="arrow">→</div>
+      <div class="step">內皮細胞分裂・分泌<br><strong>MMP</strong>分解基質</div>
+      <div class="arrow">→</div>
+      <div class="step">內皮細胞遷移組織成<br>中空管狀新血管</div>
+    </div>
+    <p>此過程須克服<em>angiostatin、endostatin、thrombospondin</em>等血管新生抑制因子，活化因子與抑制因子的動態平衡決定腫瘤是否誘發新血管生成。</p>
+  </div>
+
+  <h3>癌細胞藉由侵襲與轉移擴散</h3>
+  <p><strong>侵襲（invasion）</strong>指癌細胞直接遷移滲透進入鄰近組織；<strong>轉移（metastasis）</strong>指癌細胞進入血流（或其他體液）並在遠端部位建立新腫瘤（稱為<em>轉移瘤metastases</em>），與原發腫瘤沒有實體連結。</p>
+
+  <div class="box concept">
+    <div class="box-title">📌 容易混淆的概念：侵襲（Invasion）vs. 轉移（Metastasis）</div>
+    <table class="compare-table">
+      <thead><tr><th>比較項目</th><th>侵襲 Invasion</th><th>轉移 Metastasis</th></tr></thead>
+      <tbody>
+        <tr><td>移動方式</td><td>直接遷移進入鄰近組織</td><td>經血液／淋巴循環運送到遠端</td></tr>
+        <tr><td>與原腫瘤的關係</td><td>仍與原腫瘤相連或緊鄰</td><td>在遠端形成獨立、不相連的新腫瘤</td></tr>
+        <tr><td>發生順序</td><td>轉移的第一步</td><td>侵襲之後的後續步驟</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <div class="flow">
+      <div class="step">① 侵襲<br>穿透基底膜與血管壁，進入循環系統</div>
+      <div class="arrow">→</div>
+      <div class="step">② 運輸<br>隨血液循環運送至全身</div>
+      <div class="arrow">→</div>
+      <div class="step">③ 再入侵與生長<br>離開血流，在新器官建立轉移瘤</div>
+    </div>
+    <figcaption><strong>圖 26-5（重製）</strong>轉移過程三大步驟：僅有極少數進入循環的癌細胞能完成全部步驟並成功建立轉移瘤。</figcaption>
+  </figure>
+
+  <h3>細胞黏附、運動性與蛋白酶改變促進轉移</h3>
+  <ol class="numbered">
+    <li><strong>細胞間黏附力下降</strong>：<em>E-cadherin</em>缺失或減少，使癌細胞容易脫離原腫瘤。</li>
+    <li><strong>運動性增加</strong>：受化學趨向因子刺激，<em>Rho家族GTP酶</em>活化促進細胞移動。</li>
+    <li><strong>蛋白酶（protease）分泌增加</strong>：分解細胞外基質與基底膜等屏障結構，利於細胞穿越。</li>
+  </ol>
+
+  <h3>轉移目標器官的選擇</h3>
+  <p>約三分之二的人類癌症轉移部位可由血流模式解釋；但部分癌症（如攝護腺癌偏好轉移至骨骼）則取決於癌細胞與目標器官微環境間的交互作用——骨細胞會分泌特定生長因子刺激攝護腺癌細胞增生。</p>
+
+  <h3>免疫系統影響癌細胞的生長與擴散</h3>
+  <p><strong>免疫監視理論（immune surveillance theory）</strong>認為免疫系統經常清除異常細胞，癌症只是偶發的免疫防禦失敗。支持證據包括：器官移植病人服用免疫抑制劑後癌症發生率上升；缺乏淋巴球的<em>Rag2</em>基因剔除小鼠癌症發生率增加。然而癌細胞也演化出多種逃避免疫辨識的策略：</p>
+  <ul class="plain">
+    <li>篩選出較弱抗原性的細胞亞群，降低被免疫系統辨識的機會</li>
+    <li>分泌抑制或殺死T淋巴球的分子</li>
+    <li>以緻密支持組織包覆腫瘤，阻隔免疫攻擊</li>
+    <li>分裂速度過快，免疫系統來不及清除</li>
+  </ul>
+
+  <h3>腫瘤微環境影響腫瘤生長、侵襲與轉移</h3>
+  <p><strong>腫瘤微環境（tumor microenvironment）</strong>包含正常細胞、細胞外分子與基質成分，會雙向調控腫瘤：既可能促進血管新生、蛋白酶分泌與運動性，也可能透過<em>TGFβ</em>等訊號抑制增生——但癌細胞可能演化出對TGFβ不敏感、甚至反過來分泌TGFβ抑制周邊正常細胞，減少競爭並利於自身侵襲。</p>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- 26.3 -->
+<!-- ============================================================ -->
+<section id="sec3">
+  <h2>26.3 是什麼導致癌症？（What Causes Cancer?）</h2>
+  <p>癌症本質上是一種<strong>基因疾病</strong>：細胞累積突變後走向不受控增生與轉移。致病原因包括DNA複製／修復的隨機錯誤、環境因子、生活型態與遺傳。</p>
+
+  <h3>流行病學數據揭示癌症成因</h3>
+  <p><strong>流行病學（epidemiology）</strong>研究疾病在人群中的發生頻率與分布。關鍵發現：不同地區癌症種類盛行率不同（如日本胃癌多、美國乳癌多）；移民後代的癌症型態會逐漸趨近移居地——顯示<strong>環境與生活型態</strong>對癌症有重大影響。</p>
+  <p>吸菸與肺癌的關聯是最經典的案例：吸菸量愈大、吸菸期間愈長，肺癌風險愈高；戒菸後風險則逐漸下降。吸菸也與口腔、咽喉、食道、胃、胰臟、子宮頸、腎臟、膀胱、大腸等多種癌症有關。</p>
+
+  <h3>DNA複製或修復錯誤可解釋許多癌症</h3>
+  <p>即使沒有明顯的環境或生活型態因素，DNA複製與修復本身就存在低但可測得的失誤率。細胞分裂次數愈多，發生錯誤致癌突變的機率也愈高——研究發現，多種組織中<strong>幹細胞分裂次數</strong>與該組織終身癌症發生率呈正相關。</p>
+
+  <h3>先天遺傳錯誤可解釋部分癌症</h3>
+  <p>人類出生時即從父母遺傳約50–100個突變，其中少數可能落在促癌基因上，造成特定癌症的遺傳易感性升高。</p>
+
+  <h3>化學致癌物經肝臟代謝活化後導致DNA突變</h3>
+  <p>許多化學物質須經肝臟<em>細胞色素P-450（cytochrome P-450）</em>酵素代謝活化後才具致癌性，稱為<strong>致癌物活化（carcinogen activation）</strong>，這類物質原稱<strong>前致癌物（precarcinogen）</strong>。</p>
+
+  <div class="box clinical">
+    <div class="box-title">🧪 Ames測試：檢測化學物致突變性</div>
+    <div class="flow">
+      <div class="step">缺乏組胺酸合成能力的細菌</div>
+      <div class="arrow">＋</div>
+      <div class="step">待測物質（先與肝臟勻漿共同培養以模擬代謝活化）</div>
+      <div class="arrow">→</div>
+      <div class="step">接種於缺乏組胺酸的培養基</div>
+      <div class="arrow">→</div>
+      <div class="step">菌落數愈多，代表致突變性愈強</div>
+    </div>
+    <p>研究顯示，化學物質的<strong>致突變潛力</strong>與<strong>致癌潛力</strong>高度相關，支持「多數致癌物即為致突變物」的假說。</p>
+  </div>
+
+  <h3>游離輻射與紫外線輻射也會導致DNA突變致癌</h3>
+  <p><strong>游離輻射（ionizing radiation）</strong>（如X光及放射性元素釋出的輻射）會移除分子中的電子形成高活性離子，造成DNA單股或雙股斷裂。<strong>紫外線（ultraviolet radiation, UV）</strong>則主要被皮膚吸收，誘發相鄰嘧啶鹼基間形成共價鍵（嘧啶二聚體），若未修復會在複製時產生特徵性的 <strong>CC→TT</strong> 突變——這種「UV突變指紋」常見於皮膚癌的<em>p53</em>基因中，但不見於內臟器官癌症，成為判斷致癌因子的重要證據。</p>
+
+  <h3>病毒與其他感染因子可誘發部分癌症</h3>
+  <p>Peyton Rous於1911年首度證明病毒可致癌（<em>Rous肉瘤病毒</em>）。目前已知可致人類癌症的感染因子包括：</p>
+  <table>
+    <thead><tr><th>感染因子</th><th>相關癌症</th></tr></thead>
+    <tbody>
+      <tr><td>艾伯斯坦-巴爾病毒（Epstein-Barr virus, EBV）</td><td>柏基特淋巴瘤（Burkitt lymphoma）</td></tr>
+      <tr><td>B型／C型肝炎病毒</td><td>肝癌</td></tr>
+      <tr><td>人類嗜T細胞病毒-I（HTLV-I）</td><td>成人T細胞白血病與淋巴瘤</td></tr>
+      <tr><td>人類乳突病毒（HPV）</td><td>子宮頸癌、口咽癌</td></tr>
+      <tr><td>幽門螺旋桿菌（<em>H. pylori</em>）</td><td>胃癌</td></tr>
+    </tbody>
+  </table>
+  <p>感染致癌的機制可歸為兩類：一是造成組織破壞與慢性發炎，免疫細胞攻擊病原時釋出的自由基等物質意外造成DNA突變；二是病毒本身直接刺激受感染細胞增生。針對HPV 16、18型開發的疫苗可預防約70%的子宮頸癌。</p>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- 26.4 -->
+<!-- ============================================================ -->
+<section id="sec4">
+  <h2>26.4 致癌基因與抑癌基因（Oncogenes and Tumor Suppressor Genes）</h2>
+  <p>無論突變來源為何，癌症的發生總是牽涉調控細胞增生與存活的基因。這些基因可分為兩大類：<strong>致癌基因（oncogene）</strong>與<strong>抑癌基因（tumor suppressor gene）</strong>。</p>
+
+  <div class="box concept">
+    <div class="box-title">📌 容易混淆的概念：致癌基因 vs. 抑癌基因</div>
+    <table class="compare-table">
+      <thead><tr><th>比較項目</th><th>致癌基因 Oncogene</th><th>抑癌基因 Tumor Suppressor Gene</th></tr></thead>
+      <tbody>
+        <tr><td>功能比喻</td><td>細胞增生的「油門」</td><td>細胞增生的「煞車」</td></tr>
+        <tr><td>致癌條件</td><td>基因「出現」或過度活化 → 致癌</td><td>基因「缺失」或失活 → 致癌</td></tr>
+        <tr><td>正常來源</td><td>由原致癌基因（proto-oncogene）突變而來</td><td>正常細胞原本即具有的煞車基因</td></tr>
+        <tr><td>顯／隱性</td><td>通常單一等位基因突變即可致病（顯性）</td><td>通常須兩個等位基因皆失能（隱性，需「兩次打擊」）</td></tr>
+        <tr><td>範例</td><td><em>RAS、MYC、BCR-ABL</em></td><td><em>RB、p53、APC</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>致癌基因：其產物可誘發癌症的基因</h3>
+  <p><strong>原致癌基因（proto-oncogene）</strong>是正常細胞中負責調控生長與存活的重要基因；一旦其結構或活性遭特定突變破壞，即成為<strong>致癌基因（oncogene）</strong>。史上第一個被發現的致癌基因是<em>Rous肉瘤病毒</em>中的 <em>src</em> 基因；第一個從人類癌症（膀胱癌）中發現的致癌基因則是突變型 <em>RAS</em>。至今已發現超過200個人類致癌基因，但通常需要多個突變共同作用才會導致癌症。</p>
+
+  <h3>原致癌基因轉變為致癌基因的機制</h3>
+  <p>原致癌基因可透過五種不同機制轉變為致癌基因：</p>
+
+  <figure>
+    <div class="svg-wrap">
+    <svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="五種致癌基因活化機制">
+      <style>
+        .n{ font-family:'Noto Sans TC',sans-serif; font-size:12.5px; fill:#1a1a1a; }
+        .nb{ font-family:'Noto Sans TC',sans-serif; font-size:12.5px; fill:#fff; font-weight:700; }
+        .box1{ fill: hsl(335,45%,35%); rx:8; }
+        .box2{ fill: hsl(335,45%,92%); stroke: hsl(335,45%,55%); rx:8; }
+      </style>
+      <rect x="290" y="10" width="140" height="34" class="box1"/>
+      <text x="360" y="32" text-anchor="middle" class="nb">原致癌基因 DNA</text>
+
+      <!-- 5 branches -->
+      <!-- a -->
+      <line x1="360" y1="44" x2="70" y2="90" stroke="#888" stroke-width="1.5"/>
+      <rect x="10" y="90" width="120" height="40" class="box2"/>
+      <text x="70" y="108" text-anchor="middle" class="n">(a) 點突變</text>
+      <text x="70" y="123" text-anchor="middle" class="n">point mutation</text>
+      <line x1="70" y1="130" x2="70" y2="160" stroke="#888" stroke-width="1.5"/>
+      <text x="70" y="178" text-anchor="middle" class="n">異常過度</text>
+      <text x="70" y="193" text-anchor="middle" class="n">活化蛋白</text>
+
+      <!-- b -->
+      <line x1="360" y1="44" x2="215" y2="90" stroke="#888" stroke-width="1.5"/>
+      <rect x="155" y="90" width="120" height="40" class="box2"/>
+      <text x="215" y="108" text-anchor="middle" class="n">(b) 基因擴增</text>
+      <text x="215" y="123" text-anchor="middle" class="n">gene amplification</text>
+      <line x1="215" y1="130" x2="215" y2="160" stroke="#888" stroke-width="1.5"/>
+      <text x="215" y="178" text-anchor="middle" class="n">正常蛋白</text>
+      <text x="215" y="193" text-anchor="middle" class="n">產量過多</text>
+
+      <!-- c -->
+      <line x1="360" y1="44" x2="360" y2="90" stroke="#888" stroke-width="1.5"/>
+      <rect x="300" y="90" width="120" height="40" class="box2"/>
+      <text x="360" y="108" text-anchor="middle" class="n">(c) 染色體易位</text>
+      <text x="360" y="123" text-anchor="middle" class="n">translocation</text>
+      <line x1="360" y1="130" x2="360" y2="160" stroke="#888" stroke-width="1.5"/>
+      <text x="360" y="178" text-anchor="middle" class="n">融合蛋白 或</text>
+      <text x="360" y="193" text-anchor="middle" class="n">正常蛋白過量</text>
+
+      <!-- d -->
+      <line x1="360" y1="44" x2="505" y2="90" stroke="#888" stroke-width="1.5"/>
+      <rect x="445" y="90" width="120" height="40" class="box2"/>
+      <text x="505" y="108" text-anchor="middle" class="n">(d) 局部重排</text>
+      <text x="505" y="123" text-anchor="middle" class="n">插入／刪除／倒位</text>
+      <line x1="505" y1="130" x2="505" y2="160" stroke="#888" stroke-width="1.5"/>
+      <text x="505" y="178" text-anchor="middle" class="n">異常過度</text>
+      <text x="505" y="193" text-anchor="middle" class="n">活化蛋白</text>
+
+      <!-- e -->
+      <line x1="360" y1="44" x2="650" y2="90" stroke="#888" stroke-width="1.5"/>
+      <rect x="590" y="90" width="120" height="40" class="box2"/>
+      <text x="650" y="108" text-anchor="middle" class="n">(e) 插入突變</text>
+      <text x="650" y="123" text-anchor="middle" class="n">insertional mutagenesis</text>
+      <line x1="650" y1="130" x2="650" y2="160" stroke="#888" stroke-width="1.5"/>
+      <text x="650" y="178" text-anchor="middle" class="n">病毒DNA插入</text>
+      <text x="650" y="193" text-anchor="middle" class="n">正常蛋白過量</text>
+
+      <text x="360" y="240" text-anchor="middle" class="n" font-weight="700">結果：蛋白質結構異常（過度活化）或產量過剩</text>
+      <text x="360" y="262" text-anchor="middle" class="n">→ 持續發送細胞增生訊號</text>
+    </svg>
+    </div>
+    <figcaption><strong>圖 26-11（重製）</strong>五種將原致癌基因轉變為致癌基因的機制：(a) 點突變產生異常蛋白（如<em>RAS</em>）；(b) 基因擴增增加正常蛋白產量（如<em>ERBB2</em>）；(c) 染色體易位可能製造融合蛋白（如<em>BCR-ABL</em>）或使基因過度表現（如<em>MYC</em>易位至活性區域旁）；(d) 局部DNA重排（如<em>TRK</em>致癌基因）；(e) 反轉錄病毒DNA插入宿主基因體附近，使原致癌基因過度表現。</figcaption>
+  </figure>
+
+  <p>經典範例：<strong>柏基特淋巴瘤（Burkitt lymphoma）</strong>中，第8號染色體上的<em>MYC</em>基因易位至第14號染色體、緊鄰高度活躍的抗體基因區，導致<em>MYC</em>過度表現；<strong>慢性骨髓性白血病（CML）</strong>則因第9與22號染色體互換，產生「<strong>費城染色體（Philadelphia chromosome）</strong>」與融合基因 <em>BCR-ABL</em>，製造出結構異常、持續活化的酪胺酸激酶。</p>
+
+  <h3>大多數致癌基因編碼生長訊息傳遞路徑的成分</h3>
+  <p>超過200個已知的人類致癌基因，其產物大致可分為六大類，皆對應生長訊息傳遞路徑中的某個環節：</p>
+
+  <table>
+    <thead><tr><th>蛋白類別</th><th>作用</th><th>代表致癌基因</th></tr></thead>
+    <tbody>
+      <tr><td>① 生長因子</td><td>細胞自我刺激增生</td><td><em>v-sis</em>（PDGF）</td></tr>
+      <tr><td>② 受體</td><td>不依賴生長因子即持續活化，或受體過量</td><td><em>v-erb-b、ERBB2、TRK</em></td></tr>
+      <tr><td>③ 膜上GTP結合蛋白</td><td>持續處於活化態，持續傳送增生訊號</td><td><em>KRAS、HRAS、NRAS</em></td></tr>
+      <tr><td>④ 非受體型蛋白激酶</td><td>細胞內磷酸化級聯持續活化</td><td><em>BRAF、SRC、BCR-ABL</em></td></tr>
+      <tr><td>⑤ 轉錄因子</td><td>過度活化增生相關基因表現</td><td><em>MYC</em></td></tr>
+      <tr><td>⑥ 細胞週期／凋亡調節者</td><td>促進細胞週期進行或抑制凋亡</td><td><em>CYCD1、CDK4、BCL2、MDM2</em></td></tr>
+    </tbody>
+  </table>
+  <p class="term-en">（節錄自原文表26-1，完整表格列出各基因的病毒／突變來源與相關癌症類型）</p>
+
+  <div class="box pathway">
+    <div class="box-title">🔬 受體酪胺酸激酶三種活化方式（圖26-14概念）</div>
+    <div class="flow">
+      <div class="step">正常受體<br>須生長因子結合才二聚化、活化</div>
+      <div class="arrow">vs</div>
+      <div class="step">突變受體<br>缺少結合區，恆定活化（constitutively active）</div>
+      <div class="arrow">vs</div>
+      <div class="step">擴增受體<br>數量過多，即使結合率低仍整體訊號過強</div>
+    </div>
+  </div>
+
+  <h3>抑癌基因：其缺失或失活可導致癌症</h3>
+  <p>與致癌基因相反，<strong>抑癌基因（tumor suppressor gene）</strong>的功能是抑制細胞增生；其「喪失」才會致癌。細胞融合實驗顯示：將癌細胞與正常細胞融合，產生的雜交細胞通常表現正常，不形成腫瘤——證明正常細胞攜帶能抑制腫瘤形成的基因。</p>
+
+  <div class="box concept">
+    <div class="box-title">📌 二次打擊假說（two-hit hypothesis）</div>
+    <p>由Alfred Knudson於1971年提出：抑癌基因通常需要「兩次獨立突變」（分別作用於同源染色體上的兩個等位基因）才會失去功能。若從父母遺傳到一個已突變的等位基因，只需體細胞中再發生「第二次」突變即可致癌，因此帶因者罹癌風險大幅提高。若正常等位基因所在的染色體區域整段缺失，稱為<strong>雜合性喪失（loss of heterozygosity, LOH）</strong>，同樣會加速致癌。</p>
+  </div>
+
+  <h3>RB基因：透過遺傳性視網膜母細胞瘤研究發現</h3>
+  <p><em>RB</em>基因編碼的Rb蛋白負責煞住細胞週期在G1限制點，阻止細胞在缺乏生長因子訊號時進入S期。遺傳性<strong>視網膜母細胞瘤（retinoblastoma）</strong>患者出生時即帶有一個突變的<em>RB</em>等位基因（存在於所有體細胞），只要視網膜中任一細胞的第二個<em>RB</em>拷貝也發生突變，即形成腫瘤；非遺傳型則須兩次突變皆發生於同一體細胞，機率遠低得多。</p>
+
+  <figure>
+    <div class="flow">
+      <div class="step">(a) 遺傳型<br>受精卵已帶1個突變<em>RB</em>基因<br>→ 全身細胞皆帶1個突變<br>→ 視網膜細胞再發生1次突變<br>→ 癌症</div>
+      <div class="arrow">vs</div>
+      <div class="step">(b) 非遺傳型<br>受精卵無突變<br>→ 需同一細胞連續發生2次突變<br>→ 機率極低，罕見發生<br>→ 癌症</div>
+    </div>
+    <figcaption><strong>圖 26-15（重製）</strong>遺傳性與非遺傳性視網膜母細胞瘤的差異：遺傳型只需一次體細胞突變即可致癌，非遺傳型須兩次獨立突變發生於同一細胞。</figcaption>
+  </figure>
+
+  <p>Rb蛋白也是致癌病毒的作用標靶：<strong>HPV的E7蛋白</strong>會結合Rb，使其無法扣留E2F轉錄因子，讓E2F自由促進細胞增生基因的表現，等同於「功能性剔除」了Rb的煞車作用。</p>
+
+  <h3>p53基因：人類癌症中最常見的突變基因</h3>
+  <p><em>p53</em>基因（人類稱<em>TP53</em>）編碼的p53蛋白負責偵測DNA損傷，觸發細胞週期停滯與細胞凋亡，防止受損細胞繼續增生。全球每年約半數癌症病人的腫瘤帶有<em>p53</em>突變，使其成為人類癌症中最常見的突變基因。遺傳性<em>p53</em>缺陷會導致<strong>李佛美尼症候群（Li-Fraumeni syndrome）</strong>，患者早年即可能罹患多種癌症。</p>
+  <p>HPV的<strong>E6蛋白</strong>則透過促使p53與泛素連接酶結合，標記p53經蛋白酶體降解——因此HPV能同時破壞RB與p53兩大抑癌基因路徑。</p>
+
+  <h3>APC基因編碼抑制Wnt訊息傳遞路徑的蛋白質</h3>
+  <p><em>APC</em>基因突變與<strong>家族性腺瘤性息肉症（familial adenomatous polyposis）</strong>相關，患者結腸中可能長出數千個息肉，60歲前近乎100%發展為大腸癌。APC蛋白與axin、GSK3組成「<strong>破壞複合體（destruction complex）</strong>」，負責標記β-catenin使其被降解，讓<strong>Wnt路徑</strong>維持關閉。</p>
+
+  <figure>
+    <div class="flow">
+      <div class="step">無Wnt蛋白<br>APC-axin-GSK3複合體降解β-catenin<br>→ Wnt路徑 OFF<br>→ 不增生</div>
+      <div class="arrow">vs</div>
+      <div class="step">有Wnt蛋白<br>受體結合axin，破壞複合體無法組裝<br>β-catenin進核活化<em>MYC、CYCD1</em><br>→ Wnt路徑 ON → 增生</div>
+      <div class="arrow">vs</div>
+      <div class="step"><em>APC</em>突變的癌細胞<br>破壞複合體無法形成<br>β-catenin持續累積進核<br>→ Wnt路徑「鎖定」ON → 持續增生</div>
+    </div>
+    <figcaption><strong>圖 26-18（重製）</strong>Wnt訊息傳遞路徑：APC功能喪失會使β-catenin無法被降解，讓Wnt路徑不論有無Wnt蛋白皆維持開啟狀態，持續促進細胞增生。</figcaption>
+  </figure>
+
+  <h3>部分抑癌基因的失活會導致基因體不穩定性</h3>
+  <p>正常基因突變率約為每次細胞分裂百萬分之一，但癌細胞常同時帶有十幾個以上的突變，顯示其突變率高出正常數百至數千倍——這種狀態稱為<strong>基因體不穩定性（genetic instability）</strong>，可能源自DNA修復缺陷（如<em>錯配修復（mismatch repair）</em>缺陷導致的遺傳性非息肉症大腸癌HNPCC；<em>切除修復（excision repair）</em>缺陷導致的著色性乾皮症）或染色體分離缺陷（如中心體數目異常造成的非整倍體aneuploidy）。</p>
+
+  <div class="box concept">
+    <div class="box-title">📌 容易混淆的概念：守門者基因 vs. 看守者基因</div>
+    <table class="compare-table">
+      <thead><tr><th>比較項目</th><th>守門者基因 Gatekeeper Gene</th><th>看守者基因 Caretaker Gene</th></tr></thead>
+      <tbody>
+        <tr><td>直接功能</td><td>直接抑制細胞增生</td><td>維持基因體穩定性（DNA修復／染色體分離）</td></tr>
+        <tr><td>失能後果</td><td>直接開啟增生的「大門」</td><td>間接導致突變快速累積，波及其他基因</td></tr>
+        <tr><td>範例</td><td><em>RB、p53、APC</em></td><td><em>BRCA1／2、MSH2、MLH1、XP系列</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>癌症透過致癌基因與抑癌基因的逐步突變累積而發展</h3>
+  <p>基因體定序顯示，同一類型癌症通常涉及50–75個基因突變，其中僅少數基因是「常見」熱點。以大腸癌為例，最常見的進展模式為：</p>
+
+  <figure>
+    <div class="flow">
+      <div class="step">正常細胞<br><em>APC</em>突變</div>
+      <div class="arrow">→</div>
+      <div class="step">早期息肉<br><em>KRAS</em>突變</div>
+      <div class="arrow">→</div>
+      <div class="step">中期息肉<br><em>SMAD4</em>突變</div>
+      <div class="arrow">→</div>
+      <div class="step">晚期息肉<br><em>p53</em>突變</div>
+      <div class="arrow">→</div>
+      <div class="step">局部癌症<br>其他突變／表觀改變</div>
+      <div class="arrow">→</div>
+      <div class="step">侵襲與轉移</div>
+    </div>
+    <figcaption><strong>圖 26-21（重製）</strong>大腸癌的逐步進展模型：<em>APC</em>功能喪失通常是最早偵測到的突變，之後依序出現<em>KRAS、SMAD4、p53</em>等突變，快速生長的癌症通常同時帶有四種變異，良性腫瘤僅有一到兩種。全程並伴隨基因體不穩定性作為底層驅動力。</figcaption>
+  </figure>
+
+  <h3>表觀遺傳改變影響癌細胞的特性</h3>
+  <p>除了DNA序列突變，<strong>表觀遺傳改變（epigenetic change）</strong>（不改變DNA序列的基因表現變化）也是重要致癌機制：</p>
+  <ul class="plain">
+    <li><strong>DNA甲基化</strong>：抑癌基因啟動子區過度甲基化會造成「表觀沉默」，效果等同於突變失活（如<em>MLH1</em>基因）。</li>
+    <li><strong>microRNA異常</strong>：<em>miR-17-92</em>過度表現會抑制抑癌基因<em>PTEN</em>的轉譯，促進PI3激酶-Akt路徑活化；<em>miR-15a/16-1</em>缺失則會使抗凋亡蛋白<em>Bcl-2</em>過量表現，抑制細胞凋亡。</li>
+  </ul>
+
+  <h3>總結：致癌機制與癌症六大特徵（Hallmarks of Cancer）</h3>
+  <p>Hanahan與Weinberg歸納出癌細胞共通的「<strong>六大特徵（hallmarks of cancer）</strong>」，以及兩項「<strong>賦能特徵（enabling characteristics）</strong>」：</p>
+
+  <figure>
+    <div class="svg-wrap">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="癌症六大特徵總覽圖">
+      <style>
+        .n2{ font-family:'Noto Sans TC',sans-serif; font-size:12px; fill:#1a1a1a; }
+        .nb2{ font-family:'Noto Sans TC',sans-serif; font-size:12px; fill:#fff; font-weight:700; }
+      </style>
+      <rect x="20" y="10" width="150" height="46" rx="8" fill="#eee" stroke="#999"/>
+      <text x="95" y="30" text-anchor="middle" class="n2">致病因子：複製錯誤</text>
+      <text x="95" y="46" text-anchor="middle" class="n2">輻射／化學／感染／遺傳</text>
+
+      <line x1="170" y1="33" x2="230" y2="33" stroke="#888" stroke-width="1.5" marker-end="url(#a2)"/>
+      <rect x="235" y="10" width="130" height="46" rx="8" fill="hsl(335,45%,92%)" stroke="hsl(335,45%,55%)"/>
+      <text x="300" y="30" text-anchor="middle" class="n2">DNA突變</text>
+      <text x="300" y="46" text-anchor="middle" class="n2">致癌基因／抑癌基因</text>
+
+      <line x1="365" y1="33" x2="420" y2="33" stroke="#888" stroke-width="1.5" marker-end="url(#a2)"/>
+      <rect x="425" y="10" width="130" height="46" rx="8" fill="hsl(335,45%,92%)" stroke="hsl(335,45%,55%)"/>
+      <text x="490" y="30" text-anchor="middle" class="n2">基因體不穩定性</text>
+      <text x="490" y="46" text-anchor="middle" class="n2">＋腫瘤促進性發炎</text>
+
+      <line x1="490" y1="56" x2="490" y2="76" stroke="#888" stroke-width="1.5" marker-end="url(#a2)"/>
+
+      <rect x="30" y="80" width="640" height="200" rx="10" fill="hsl(335,45%,35%)"/>
+      <text x="350" y="102" text-anchor="middle" class="nb2" font-size="14">癌症六大特徵 HALLMARKS OF CANCER</text>
+
+      <g font-size="11.5">
+        <rect x="45" y="115" width="190" height="34" rx="6" fill="#fff"/>
+        <text x="140" y="136" text-anchor="middle" class="n2">① 生長訊號自給自足</text>
+        <rect x="245" y="115" width="200" height="34" rx="6" fill="#fff"/>
+        <text x="345" y="136" text-anchor="middle" class="n2">② 對抗增生訊號不敏感</text>
+        <rect x="455" y="115" width="200" height="34" rx="6" fill="#fff"/>
+        <text x="555" y="136" text-anchor="middle" class="n2">③ 逃避細胞凋亡</text>
+
+        <rect x="45" y="160" width="190" height="34" rx="6" fill="#fff"/>
+        <text x="140" y="181" text-anchor="middle" class="n2">④ 無限複製潛力</text>
+        <rect x="245" y="160" width="200" height="34" rx="6" fill="#fff"/>
+        <text x="345" y="181" text-anchor="middle" class="n2">⑤ 持續血管新生</text>
+        <rect x="455" y="160" width="200" height="34" rx="6" fill="#fff"/>
+        <text x="555" y="181" text-anchor="middle" class="n2">⑥ 組織侵襲與轉移</text>
+
+        <rect x="45" y="205" width="610" height="34" rx="6" fill="#f6e6ee"/>
+        <text x="350" y="226" text-anchor="middle" class="n2">其他特徵：代謝改變（有氧糖解）／逃避免疫監視</text>
+      </g>
+      <text x="350" y="265" text-anchor="middle" class="nb2" font-size="11">賦能特徵：基因體不穩定性 + 腫瘤促進性發炎（貫穿並促成以上六項）</text>
+      <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#888"/></marker></defs>
+    </svg>
+    </div>
+    <figcaption><strong>圖 26-22（重製）</strong>致癌過程總覽：各種致病因子造成DNA突變，形成致癌基因並使抑癌基因失活；由此產生的基因體不穩定性與腫瘤促進性發炎作為「賦能特徵」，進一步驅動癌細胞獲得六大特徵性狀。</figcaption>
+  </figure>
+
+  <ol class="numbered">
+    <li><strong>生長訊號自給自足</strong>：不需外部生長因子刺激即持續增生（如Ras路徑突變，約25–30%人類癌症）。</li>
+    <li><strong>對抗增生訊號不敏感</strong>：主要透過破壞Rb蛋白路徑，逃避TGFβ等抑制訊號。</li>
+    <li><strong>逃避細胞凋亡</strong>：常見於<em>p53</em>失能、<em>MDM2</em>過量或<em>BCL2</em>過度表現。</li>
+    <li><strong>無限複製潛力</strong>：透過端粒酶或替代機制維持端粒長度。</li>
+    <li><strong>持續血管新生</strong>：p53缺失使thrombospondin下降；<em>RAS</em>致癌基因提升VEGF表現。</li>
+    <li><strong>組織侵襲與轉移</strong>：細胞黏附下降、運動性增加、蛋白酶分泌增加。</li>
+  </ol>
+  <p>其他被納入的特徵還包括<strong>代謝改變</strong>（癌細胞即使有氧仍偏好糖解作用，稱為<em>有氧糖解（aerobic glycolysis）</em>，又稱Warburg效應）與<strong>逃避免疫系統</strong>。</p>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- 26.5 -->
+<!-- ============================================================ -->
+<section id="sec5">
+  <h2>26.5 診斷、篩檢與治療（Diagnosis, Screening, and Treatment）</h2>
+
+  <h3>癌症透過顯微與分子檢查診斷</h3>
+  <p>確定診斷通常需要<strong>切片（biopsy）</strong>，病理師在顯微鏡下觀察細胞特徵以判斷是否為癌症。</p>
+
+  <div class="box concept">
+    <div class="box-title">📌 容易混淆的概念：良性 vs. 惡性腫瘤的顯微特徵（表26-3）</div>
+    <table class="compare-table">
+      <thead><tr><th>特徵</th><th>良性 Benign</th><th>惡性 Malignant</th></tr></thead>
+      <tbody>
+        <tr><td>細胞核大小</td><td>小</td><td>大</td></tr>
+        <tr><td>核質比（N/C ratio）</td><td>低</td><td>高</td></tr>
+        <tr><td>細胞核形狀</td><td>規則</td><td>多形性（不規則）</td></tr>
+        <tr><td>有絲分裂指數</td><td>低</td><td>高</td></tr>
+        <tr><td>組織排列</td><td>正常</td><td>紊亂</td></tr>
+        <tr><td>分化程度</td><td>分化良好</td><td>分化不良</td></tr>
+        <tr><td>腫瘤邊界</td><td>界線清楚</td><td>界線不清</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>依異常程度嚴重性，腫瘤可分級（<strong>tumor grading</strong>）：低級別（如grade 1）分化良好、分裂慢；高級別（如grade 4）分化差、分裂快，通常生長與擴散更具侵襲性、治療反應較差。</p>
+
+  <h3>早期篩檢技術可預防癌症死亡</h3>
+  <ul class="plain">
+    <li><strong>子宮頸抹片檢查（Pap smear）</strong>：檢查子宮頸細胞是否有異常核形態，是最成功的癌症篩檢技術之一。</li>
+    <li><strong>乳房攝影（mammography）</strong>：X光檢查早期乳癌徵象。</li>
+    <li><strong>大腸鏡（colonoscopy）</strong>：偵測早期大腸癌與息肉。</li>
+    <li><strong>PSA檢測</strong>：測量血中攝護腺特異性抗原（prostate-specific antigen），輔助攝護腺癌篩檢。</li>
+  </ul>
+
+  <h3>手術、放射線與化學治療是標準療法</h3>
+  <p>標準治療流程通常是：<strong>手術</strong>移除原發腫瘤 → 視情況輔以<strong>放射線治療（radiation therapy）</strong>與／或<strong>化學治療（chemotherapy）</strong>清除殘留癌細胞。放射線一方面透過活化p53路徑觸發凋亡，另一方面直接造成染色體損傷使有絲分裂無法完成。</p>
+
+  <table>
+    <thead><tr><th>化療藥物類別</th><th>作用機轉</th><th>範例</th></tr></thead>
+    <tbody>
+      <tr><td>抗代謝物 Antimetabolite</td><td>競爭性抑制DNA合成所需酵素</td><td>fluorouracil、methotrexate</td></tr>
+      <tr><td>烷化劑 Alkylating agent</td><td>使DNA雙股產生交聯</td><td>cyclophosphamide、cisplatin</td></tr>
+      <tr><td>抗生素類 Antibiotics</td><td>結合DNA或抑制拓樸異構酶</td><td>doxorubicin</td></tr>
+      <tr><td>植物來源藥物</td><td>抑制拓樸異構酶或破壞紡錘體微管</td><td>etoposide、paclitaxel（Taxol）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box clinical">
+    <div class="box-title">⚠️ 臨床相關：化療的限制</div>
+    <p>化療藥物對所有快速分裂的細胞皆有毒性（包括毛囊、血球前驅細胞、生殖細胞），專一性不足；腫瘤也常演化出<strong>多重抗藥性（multiple drug resistance）</strong>，透過ABC轉運蛋白將藥物主動排出細胞外。少量殘存的癌症幹細胞也可能在治療後使腫瘤復發。</p>
+  </div>
+
+  <h3>分子標靶治療比化療更具專一性</h3>
+  <p><strong>分子標靶治療（molecular targeting）</strong>針對癌細胞特有或過度表現的蛋白進行專一性攻擊，主要有兩種策略：</p>
+  <ol class="numbered">
+    <li><strong>單株抗體（monoclonal antibody）</strong>：如<em>曲妥珠單抗（Herceptin）</em>結合並抑制HER2受體（用於HER2陽性乳癌）；<em>Avastin</em>結合VEGF抑制血管新生。</li>
+    <li><strong>理性藥物設計（rational drug design）</strong>：針對特定突變蛋白設計小分子抑制劑，如<em>Gleevec</em>專一抑制BCR-ABL異常酪胺酸激酶，用於治療慢性骨髓性白血病，效果顯著優於傳統療法。</li>
+  </ol>
+
+  <h3>利用免疫系統對抗癌症細胞</h3>
+  <p><strong>免疫治療（immunotherapy）</strong>利用免疫系統辨識並攻擊癌細胞。近年最重要的進展是<strong>免疫檢查點治療（immune checkpoint therapy）</strong>：</p>
+  <div class="box pathway">
+    <div class="box-title">🔬 免疫檢查點的機制</div>
+    <p>T淋巴球表面的<em>CTLA-4</em>與<em>PD-1</em>蛋白，會分別與腫瘤細胞表面的<em>B7</em>與<em>PD-L1</em>結合，抑制T細胞攻擊腫瘤的能力，形成腫瘤逃避免疫辨識的機制。以單株抗體阻斷這些檢查點蛋白（如ipilimumab阻斷CTLA-4；pembrolizumab、nivolumab阻斷PD-1），可解除T細胞的抑制，恢復其攻擊腫瘤的能力。此發現使James Allison與Tasuku Honjo獲得2018年諾貝爾生理學或醫學獎。</p>
+  </div>
+
+  <figure>
+    <div class="flow">
+      <div class="step">從病人抽取T細胞</div>
+      <div class="arrow">→</div>
+      <div class="step">基因工程改造<br>表現嵌合抗原受體（CAR）</div>
+      <div class="arrow">→</div>
+      <div class="step">CAR辨識腫瘤細胞抗原</div>
+      <div class="arrow">→</div>
+      <div class="step">活化T細胞攻擊腫瘤</div>
+    </div>
+    <figcaption><strong>圖 26-24（重製）</strong><strong>嵌合抗原受體T細胞治療（CAR T cell therapy）</strong>：CAR的胞外部分辨識腫瘤抗原，胞內部分含T細胞活化訊號區，使工程化T細胞能專一辨識並攻擊帶有目標抗原的腫瘤細胞。對B細胞急性淋巴性白血病（B-ALL）的緩解率可達約90%。</figcaption>
+  </figure>
+
+  <h3>癌症治療可依個人化調整</h3>
+  <p><strong>個人化醫療（personalized medicine）</strong>依病人腫瘤的基因表現型態選擇治療方式。例如<em>Iressa</em>僅對帶有特定突變EGF受體的肺癌病人有效（約10%病人），透過基因檢測可預先辨識最可能受益的病人族群，避免不必要的治療。</p>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- Key Takeaways -->
+<!-- ============================================================ -->
+<section id="takeaways">
+  <h2>Key Takeaways 重點回顧</h2>
+  <ul class="takeaway-list">
+    <li>癌症的核心特徵是<strong>細胞分裂與分化／死亡失衡</strong>，並非單純分裂速度過快；惡性腫瘤能侵襲並轉移，良性腫瘤則否。</li>
+    <li>癌細胞展現不錨定依賴性生長、密度抑制降低、以及透過端粒酶維持端粒長度而「永生化」等特性。</li>
+    <li>癌症發展是多步驟過程：<strong>起始（DNA突變）→ 促進（刺激增生）→ 腫瘤進展（篩選出更具侵襲力的細胞）</strong>。</li>
+    <li><strong>血管新生（angiogenesis）</strong>是腫瘤突破數毫米大小限制的必要條件，受活化因子（VEGF、FGF）與抑制因子的動態平衡調控。</li>
+    <li>轉移三步驟：① 侵襲進入血管／淋巴管 ② 隨循環系統運送 ③ 在遠端器官再入侵並生長。</li>
+    <li>癌症成因包括：DNA複製／修復隨機錯誤、化學致癌物（常需肝臟代謝活化）、游離輻射與UV輻射、病毒與感染因子、以及遺傳易感性。</li>
+    <li><strong>致癌基因（oncogene）</strong>是增生的「油門」，其出現或過度活化致癌；<strong>抑癌基因（tumor suppressor gene）</strong>是增生的「煞車」，其缺失或失活（通常需兩次打擊）致癌。</li>
+    <li>必背抑癌基因：<em>RB</em>（控制G1限制點）、<em>p53</em>（DNA損傷反應，人類癌症中最常突變的基因）、<em>APC</em>（抑制Wnt路徑）。守門者基因直接抑制增生，看守者基因維持基因體穩定性。</li>
+    <li>癌症的<strong>六大特徵（hallmarks of cancer）</strong>：生長訊號自給自足、對抗增生訊號不敏感、逃避細胞凋亡、無限複製潛力、持續血管新生、組織侵襲與轉移；基因體不穩定性與腫瘤促進性發炎為賦能特徵。</li>
+    <li>現代治療趨勢：從傳統手術／放射線／化療，走向<strong>分子標靶治療</strong>（單株抗體、理性藥物設計）與<strong>免疫治療</strong>（免疫檢查點阻斷、CAR T細胞療法）的個人化醫療。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>第26章：癌症細胞｜學習指南</p>
+  <a href="#top" id="backToTop">回到頂端 Back to Top</a>
+</footer>
+
+<script>
+(function(){
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav.main-nav a[data-nav]'));
+  var sections = navLinks.map(function(a){
+    var id = a.getAttribute('href').substring(1);
+    return document.getElementById(id);
+  });
+
+  function setActive(){
+    var scrollPos = window.scrollY || document.documentElement.scrollTop;
+    var navHeight = document.querySelector('nav.main-nav').offsetHeight;
+    var current = sections[0];
+    for (var i = 0; i < sections.length; i++){
+      var sec = sections[i];
+      if (!sec) continue;
+      var top = sec.offsetTop - navHeight - 20;
+      if (scrollPos >= top){
+        current = sec;
+      }
+    }
+    navLinks.forEach(function(a){
+      var id = a.getAttribute('href').substring(1);
+      if (current && id === current.id){
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  window.addEventListener('resize', setActive);
+  document.addEventListener('DOMContentLoaded', setActive);
+  setActive();
+
+  var backBtn = document.getElementById('backToTop');
+  backBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>

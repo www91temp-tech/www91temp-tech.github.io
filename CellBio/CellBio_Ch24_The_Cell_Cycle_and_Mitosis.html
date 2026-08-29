@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第24章：細胞週期與有絲分裂｜學習指南</title>
+<style>
+  :root{
+    --hue: 60;
+    --main: hsl(60, 45%, 35%);
+    --main-light: hsl(60, 45%, 92%);
+    --main-dark: hsl(60, 45%, 22%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(60, 25%, 80%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Noto Sans CJK TC",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.85;
+    font-size:16px;
+  }
+  header{
+    padding:2.2rem 1rem 1.6rem;
+    text-align:center;
+    border-bottom:1px solid var(--border);
+  }
+  header h1{
+    margin:0;
+    color:var(--main);
+    font-size:1.8rem;
+    letter-spacing:.02em;
+  }
+  header p.subtitle{
+    margin:.6rem 0 0;
+    color:#555;
+    font-size:.95rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(4px);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:.3rem;
+    margin:0;
+    padding:.5rem .6rem;
+    max-width:1000px;
+  }
+  nav a{
+    display:block;
+    padding:.5rem .85rem;
+    color:var(--text);
+    text-decoration:none;
+    font-size:.88rem;
+    border-radius:6px;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{ background:var(--main-light); }
+  nav a.active{
+    background:var(--main);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:840px;
+    margin:0 auto;
+    padding:1.5rem 1.2rem 4rem;
+  }
+  section{ padding-top:1.2rem; margin-top:.6rem; }
+  h2{
+    color:var(--main);
+    font-size:1.4rem;
+    border-bottom:3px solid var(--main-light);
+    padding-bottom:.4rem;
+    margin-top:2.6rem;
+  }
+  h3{
+    color:var(--main-dark);
+    font-size:1.15rem;
+    margin-top:2rem;
+    padding-left:.6rem;
+    border-left:5px solid var(--main);
+  }
+  h4{
+    color:var(--main-dark);
+    font-size:1rem;
+    margin-top:1.3rem;
+  }
+  p{ margin:.8rem 0; text-align:justify; }
+  .term{ font-weight:700; color:var(--main-dark); }
+  .lead-fig{
+    text-align:center;
+    margin:1rem 0 1.6rem;
+  }
+  .lead-fig svg{ max-width:100%; height:auto; }
+  .lead-fig figcaption{
+    font-size:.85rem;
+    color:#555;
+    margin-top:.4rem;
+  }
+  .box{
+    background:var(--main-light);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1rem 1.2rem;
+    margin:1.2rem 0;
+  }
+  .box-title{
+    font-weight:700;
+    color:var(--main-dark);
+    margin-bottom:.5rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .box-title::before{ content:"💡"; }
+  .clinical{ border-left:5px solid var(--main); background:hsl(60,45%,95%); }
+  .clinical .box-title::before{ content:"🩺"; }
+  .concept-check{
+    background:#fff;
+    border:2px dashed var(--main);
+    border-radius:10px;
+    padding:.9rem 1.1rem;
+    margin:1.4rem 0;
+    font-size:.95rem;
+  }
+  .concept-check .box-title::before{ content:"❓"; }
+  .concept-check .box-title{ color:var(--main); }
+
+  /* flow diagrams */
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    margin:1.4rem 0;
+    padding:1rem .6rem;
+    background:#fafafa;
+    border-radius:10px;
+    border:1px solid var(--border);
+  }
+  .flow.vertical{ flex-direction:column; }
+  .flow-step{
+    background:#fff;
+    border:2px solid var(--main);
+    border-radius:8px;
+    padding:.55rem .8rem;
+    font-size:.88rem;
+    text-align:center;
+    min-width:110px;
+    font-weight:600;
+  }
+  .flow-step.alt{ border-color:var(--main-dark); background:var(--main-light); }
+  .flow-step.end{ background:var(--main); color:#fff; }
+  .flow-arrow{
+    font-size:1.3rem;
+    color:var(--main);
+    font-weight:700;
+  }
+  .flow-arrow.down{ transform:rotate(90deg); }
+  .flow-note{
+    font-size:.75rem;
+    color:#666;
+    text-align:center;
+    max-width:120px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.2rem 0;
+    font-size:.92rem;
+  }
+  caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--main-dark);
+    margin-bottom:.4rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--main);
+    color:#fff;
+  }
+  tr:nth-child(even) td{ background:#faf9f2; }
+  .compare-table th:first-child, .compare-table th:nth-child(2){ width:30%; }
+
+  .takeaways{
+    background:var(--main-light);
+    border-radius:12px;
+    padding:1.3rem 1.5rem;
+    margin-top:2rem;
+  }
+  .takeaways h2{ border:none; margin-top:0; }
+  .takeaways ol{ padding-left:1.3rem; }
+  .takeaways li{ margin:.5rem 0; }
+
+  footer{
+    text-align:center;
+    padding:2.2rem 1rem 3rem;
+    border-top:1px solid var(--border);
+    margin-top:2rem;
+    color:#555;
+    font-size:.9rem;
+  }
+  #backTop{
+    display:inline-block;
+    margin-top:1rem;
+    padding:.6rem 1.3rem;
+    background:var(--main);
+    color:#fff;
+    border:none;
+    border-radius:24px;
+    font-size:.9rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  #backTop:hover{ background:var(--main-dark); }
+
+  @media (max-width:1024px){
+    main{ padding:1.2rem 1rem 3rem; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.4rem; }
+    nav ul{ gap:.15rem; padding:.4rem; }
+    nav a{ padding:.42rem .6rem; font-size:.8rem; }
+    h2{ font-size:1.2rem; }
+    h3{ font-size:1.05rem; }
+    .flow{ flex-direction:column; }
+    .flow-arrow{ transform:rotate(90deg); }
+    body{ font-size:15px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第24章：細胞週期與有絲分裂</h1>
+  <p class="subtitle">Cell Biology 學習指南 · 初學者友善版</p>
+</header>
+
+<nav>
+  <ul id="navList">
+    <li><a href="#sec1" data-target="sec1">24.1 細胞週期概觀</a></li>
+    <li><a href="#sec2" data-target="sec2">24.2 核分裂與細胞質分裂</a></li>
+    <li><a href="#sec3" data-target="sec3">24.3 細胞週期的調控</a></li>
+    <li><a href="#sec4" data-target="sec4">24.4 生長因子與增殖</a></li>
+    <li><a href="#sec5" data-target="sec5">24.5 細胞凋亡</a></li>
+    <li><a href="#takeaways" data-target="takeaways">重點整理</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ 24.1 ============ -->
+<section id="sec1">
+  <h2>24.1 細胞週期概觀（Overview of the Cell Cycle）</h2>
+
+  <p>細胞不能無限制長大：隨著體積增加，表面積／體積比會下降，物質交換效率變差。因此細胞生長通常伴隨<span class="term">細胞分裂（cell division）</span>——一個母細胞產生兩個子細胞。子細胞必須獲得與母細胞相同的遺傳物質，這代表 DNA 必須先完整複製，再被精確分配到兩個子細胞中。細胞經歷的這一連串固定步驟，就稱為<span class="term">細胞週期（cell cycle）</span>。</p>
+
+  <h3>細胞週期的四個階段</h3>
+  <p>細胞週期由兩個大階段組成：<span class="term">間期（interphase）</span>與<span class="term">M期（M phase）</span>。M 期包含核分裂（<span class="term">有絲分裂 mitosis</span>）與細胞質分裂（<span class="term">細胞質分裂 cytokinesis</span>）兩個重疊的事件，是週期中肉眼最容易觀察到變化的階段，但只占整個週期很小一部分（哺乳類培養細胞中通常不到 1 小時）。細胞大部分時間都停留在間期，包含三個小階段：</p>
+
+  <div class="lead-fig">
+    <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="180" cy="180" r="140" fill="none" stroke="var(--border)" stroke-width="2"/>
+      <path d="M180 40 A140 140 0 0 1 306 110" fill="none" stroke="var(--main)" stroke-width="26"/>
+      <path d="M306 110 A140 140 0 0 1 306 250" fill="none" stroke="hsl(60,45%,55%)" stroke-width="26"/>
+      <path d="M306 250 A140 140 0 0 1 180 320" fill="none" stroke="var(--main)" stroke-width="26"/>
+      <path d="M180 320 A140 140 0 0 1 180 40" fill="none" stroke="var(--main-dark)" stroke-width="26"/>
+      <text x="220" y="70" font-size="16" fill="#fff" font-weight="700">G1</text>
+      <text x="300" y="185" font-size="16" fill="#fff" font-weight="700">S（DNA複製）</text>
+      <text x="220" y="298" font-size="16" fill="#fff" font-weight="700">G2</text>
+      <text x="120" y="185" font-size="16" fill="#fff" font-weight="700">M</text>
+      <text x="180" y="184" font-size="13" fill="var(--text)" text-anchor="middle">間期 ≈95%</text>
+    </svg>
+    <figcaption>圖24-1（重現）：真核細胞週期。間期（G1 → S → G2）佔週期絕大部分時間，之後進入 M 期完成分裂。</figcaption>
+  </div>
+
+  <ul>
+    <li><span class="term">G1 期</span>：M 期後的第一個間隙，長度變化最大（幾分鐘到數年不等），細胞在此決定是否要再次分裂。</li>
+    <li><span class="term">S 期（synthesis）</span>：核 DNA 完成複製，長度較穩定（人類培養細胞約 6–8 小時）。</li>
+    <li><span class="term">G2 期</span>：S 期到 M 期之間的第二個間隙，通常較 G1 短且穩定（4–6 小時）。</li>
+  </ul>
+
+  <div class="box">
+    <div class="box-title">G0 期：暫停或永久退出</div>
+    <p style="margin:0">停在 G1、等待訊號重新進入週期的細胞稱為處於 <span class="term">G0（G zero）</span>。有些細胞則永久退出週期，進行<span class="term">終端分化（terminal differentiation）</span>，此後不再分裂——多數神經細胞屬於此類。</p>
+  </div>
+
+  <h3>如何測量細胞週期各期的長度</h3>
+  <p>整體週期長度（世代時間）可藉由培養細胞計數其倍增所需時間求得。要估算個別分期長度，傳統方法是用放射性 <sup>3</sup>H-胸苷（thymidine）短暫標記 DNA 合成中的細胞，再用放射自顯影術觀察；現代則多改用胸苷類似物 <span class="term">BrdU</span> 或 <span class="term">EdU</span>，搭配螢光顯微鏡偵測。</p>
+  <p>另一項重要工具是<span class="term">流式細胞術（flow cytometry）</span>：以螢光染劑標記大量細胞的 DNA 含量與特定蛋白，讓機器每秒分析上千個細胞，藉此判斷細胞所處的週期分期；搭配<span class="term">螢光活化細胞分選（FACS）</span>還能將特定族群的細胞實際分離出來，廣泛應用於基礎研究與臨床檢驗（如白血病、淋巴瘤分析）。</p>
+
+  <div class="concept-check">
+    <div class="box-title">概念check 24.1</div>
+    <p style="margin:0">哪一對 DNA 序列較相似：一對姊妹染色分體，還是一對同源染色體？（提示：見下方比較表）</p>
+  </div>
+
+  <table class="compare-table">
+    <caption>易混淆概念比較① 姊妹染色分體 vs. 同源染色體</caption>
+    <thead><tr><th>A：姊妹染色分體<br>(Sister Chromatids)</th><th>B：同源染色體<br>(Homologous Chromosomes)</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>同一條染色體 DNA 複製後產生的兩條完全相同的拷貝，於分裂前以中節相連</td>
+        <td>一對分別來自父方與母方、攜帶相同基因座但序列不完全相同（等位基因可能不同）的染色體</td>
+        <td>來源：姊妹染色分體來自同一次複製；同源染色體分別來自雙親</td>
+      </tr>
+      <tr>
+        <td>DNA 序列幾乎完全一致（複製誤差極低）</td>
+        <td>序列相似但不相同，帶有個體差異</td>
+        <td>相似度：姊妹染色分體 ≫ 同源染色體</td>
+      </tr>
+      <tr>
+        <td>有絲分裂後期會被分開，各自進入不同子細胞</td>
+        <td>減數分裂第一次分裂時才會被分開</td>
+        <td>分離時機不同（見第25章減數分裂）</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 24.2 ============ -->
+<section id="sec2">
+  <h2>24.2 核分裂與細胞質分裂（Nuclear and Cell Division）</h2>
+  <p>M 期包含核分裂（有絲分裂）與細胞質分裂（cytokinesis）兩個重疊過程，目的是把已複製的染色體正確分配到兩個子細胞中。</p>
+
+  <h3>有絲分裂的五個時期</h3>
+  <p>有絲分裂依染色體外觀與行為分為五期：<span class="term">前期（prophase）</span>、<span class="term">前中期（prometaphase，又稱late prophase）</span>、<span class="term">中期（metaphase）</span>、<span class="term">後期（anaphase）</span>、<span class="term">末期（telophase）</span>。</p>
+
+  <div class="flow">
+    <div class="flow-step">前期<br><span style="font-weight:400;font-size:.78rem">染色質凝集</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">前中期<br><span style="font-weight:400;font-size:.78rem">核膜崩解</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">中期<br><span style="font-weight:400;font-size:.78rem">排列於中期板</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">後期<br><span style="font-weight:400;font-size:.78rem">姊妹染色分體分離</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step end">末期<br><span style="font-weight:400;font-size:.78rem">核膜重組</span></div>
+  </div>
+
+  <table>
+    <caption>圖24-2/24-3重現：有絲分裂五期關鍵事件</caption>
+    <thead><tr><th>時期</th><th>關鍵事件</th></tr></thead>
+    <tbody>
+      <tr><td>前期</td><td>染色質凝集成可辨識的染色體（每條含兩條姊妹染色分體）；核仁消散；中心體向兩極移動並開始組裝紡錘體</td></tr>
+      <tr><td>前中期</td><td>核膜碎裂；紡錘體微管開始接觸染色體中節區的動粒（kinetochore）</td></tr>
+      <tr><td>中期</td><td>所有染色體排列在兩極等距的<span class="term">中期板（metaphase plate）</span>，兩側拉力達成平衡</td></tr>
+      <tr><td>後期</td><td>姊妹染色分體分離，各自以約 1 µm/分鐘速度移向相反的兩極</td></tr>
+      <tr><td>末期</td><td>染色體到達兩極、解旋成鬆散染色質；核仁重新出現；紡錘體解聚；核膜在兩組染色體周圍重新形成；細胞質分裂通常已開始</td></tr>
+    </tbody>
+  </table>
+
+  <h3>紡錘體與染色體的附著</h3>
+  <p><span class="term">中心體（centrosome）</span>是微管組織中心（MTOC），於 S 期複製，前期時分離並移向細胞兩側，成為紡錘體微管生成的據點。動物細胞的中心體內含一對<span class="term">中心粒（centrioles）</span>，但植物細胞多半沒有中心粒，顯示中心粒對有絲分裂並非必要。</p>
+  <p>紡錘體中有三種微管：</p>
+  <ul>
+    <li><span class="term">動粒微管（kinetochore microtubules，K-fiber）</span>：連接到染色體中節上的<span class="term">動粒（kinetochore）</span>，負責拉動染色體。</li>
+    <li><span class="term">極性微管（polar microtubules）</span>：與對側極來的微管互相重疊、交聯。</li>
+    <li><span class="term">星狀微管（astral microtubules）</span>：由中心體向外呈放射狀，部分與細胞皮層蛋白作用。</li>
+  </ul>
+  <p>動粒的組裝以 <span class="term">CENP-A</span>（取代組蛋白 H3 的中節特化核小體）為核心，招募內層的 <span class="term">CCAN</span> 複合體（結合中節 DNA）與外層的 <span class="term">KMN 網路</span>（結合微管正端），兩者像三明治般把染色體與微管橋接在一起。哺乳類每個動粒可結合 15–30 條微管，遠多於酵母菌（每個動粒僅結合 1 條）。</p>
+
+  <div class="box">
+    <div class="box-title">染色體排列（congression）的三種力量</div>
+    <p style="margin:0 0 .4rem">染色體移向中期板靠三種力量拉鋸平衡：</p>
+    <ol style="margin:0;padding-left:1.2rem">
+      <li>動粒微管的拉力（由動力蛋白 cytoplasmic dynein 介導，朝極方向拉）</li>
+      <li>動粒依賴的推力（由驅動蛋白 CENP-E 介導，避免染色體太靠近極）</li>
+      <li>不依賴動粒的「極性排斥力（polar ejection force）」（來自極性微管）</li>
+    </ol>
+  </div>
+
+  <h3>後期的染色體運動：三組馬達蛋白</h3>
+  <p>後期可分為<span class="term">後期A（anaphase A）</span>與<span class="term">後期B（anaphase B）</span>兩種同時或先後發生的運動：</p>
+
+  <table class="compare-table">
+    <caption>易混淆概念比較② 後期A vs. 後期B</caption>
+    <thead><tr><th>A：後期A</th><th>B：後期B</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>染色體被拉向兩極，動粒微管持續縮短</td>
+        <td>兩個紡錘體極本身互相遠離，極性微管持續延長</td>
+        <td>運動對象不同：染色體 vs. 紡錘體極本身</td>
+      </tr>
+      <tr>
+        <td>驅動力來自驅動蛋白（kinesin-13家族）使微管去聚合</td>
+        <td>驅動力主要來自雙極驅動蛋白 Eg-5 使重疊的極性微管互相滑動，加上星狀微管動力蛋白拉動極朝向細胞皮層</td>
+        <td>分子機制不同</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flow">
+    <div class="flow-step alt">動粒微管馬達<br><span style="font-weight:400;font-size:.78rem">①染色體→兩極</span></div>
+    <div class="flow-step alt">極性微管馬達<br><span style="font-weight:400;font-size:.78rem">②兩極互推分離</span></div>
+    <div class="flow-step alt">星狀微管馬達<br><span style="font-weight:400;font-size:.78rem">③極拉向細胞皮層</span></div>
+  </div>
+  <p style="font-size:.85rem;color:#555;text-align:center;margin-top:-.6rem">（重現圖24-7概念：三組馬達蛋白各司其職，共同完成後期染色體分離）</p>
+
+  <div class="clinical box">
+    <div class="box-title">臨床連結：紫杉醇（Taxol/paclitaxel）</div>
+    <p style="margin:0">紫杉醇萃取自太平洋紫杉樹皮，能結合 β-微管蛋白並穩定微管，抑制其去聚合。由於後期需要動粒微管去聚合才能拉動染色體，紫杉醇會讓癌細胞卡在中期無法進入後期，最終走向細胞凋亡，因而成為重要的化療藥物。</p>
+  </div>
+
+  <h3>細胞質分裂（Cytokinesis）</h3>
+  <p>細胞質分裂通常在後期晚期或末期早期就已開始，分裂平面通過<span class="term">紡錘體赤道（spindle equator）</span>，由紡錘體位置決定。若某些細胞只進行核分裂而不分裂細胞質，會形成多核的<span class="term">共胞（syncytium）</span>。</p>
+
+  <table>
+    <caption>動物細胞 vs. 植物細胞的細胞質分裂機制</caption>
+    <thead><tr><th>項目</th><th>動物細胞</th><th>植物細胞</th></tr></thead>
+    <tbody>
+      <tr><td>結構名稱</td><td><span class="term">收縮環（contractile ring）</span>由肌動蛋白絲構成</td><td><span class="term">細胞板（cell plate）</span>由高基氏體衍生囊泡構成</td></tr>
+      <tr><td>動力來源</td><td>非肌肉肌凝蛋白II（myosin II）驅動肌動蛋白滑動；受 Rho家族GTP結合蛋白（RhoA）調控</td><td>囊泡沿<span class="term">分裂體（phragmoplast）</span>微管移動並融合</td></tr>
+      <tr><td>結果</td><td>形成<span class="term">分裂溝（cleavage furrow）</span>，逐漸縮緊將細胞一分為二，最後經<span class="term">脫離（abscission）</span>完全分開，中間殘留<span class="term">中體（midbody）</span></td><td>囊泡融合成扁平囊，形成新細胞壁與胞間連絲，將兩子細胞徹底分開</td></tr>
+      <tr><td>原因</td><td>細胞外無堅硬細胞壁，可用收縮方式分裂</td><td>細胞外有堅硬細胞壁，須從內部組裝新壁</td></tr>
+    </tbody>
+  </table>
+
+  <p>某些細胞分裂並非對半均分：<span class="term">不對稱分裂（asymmetric cell division）</span>可能產生大小不同或發育命運不同的子細胞，例如出芽酵母的母細胞與芽細胞、海膽胚胎的大分裂球（macromere）與小分裂球（micromere）。</p>
+
+  <h3>原核生物與胞器的分裂</h3>
+  <p>細菌不具肌動蛋白收縮環，而是利用結構上類似微管蛋白的<span class="term">FtsZ</span> 蛋白，在分裂位點組裝成環，並招募其他蛋白形成<span class="term">分裂體（divisome）</span>，一同合成分裂處的細胞壁。粒線體與葉綠體因源自內共生的細菌（見內共生學說），分裂時也使用 FtsZ。</p>
+
+  <div class="concept-check">
+    <div class="box-title">概念check 24.2</div>
+    <p style="margin:0">若以肌凝蛋白II抑制劑 blebbistatin 處理快速分裂的培養細胞，你預期對有絲分裂與細胞質分裂各有什麼影響？為什麼？</p>
+  </div>
+</section>
+
+<!-- ============ 24.3 ============ -->
+<section id="sec3">
+  <h2>24.3 細胞週期的調控（Regulation of the Cell Cycle）</h2>
+
+  <h3>細胞週期長度因細胞類型而異</h3>
+  <p>持續分裂補充死亡細胞的幹細胞（如造血幹細胞）世代時間可短至 8 小時；成熟神經或肌肉細胞則完全不再分裂；肝細胞、淋巴球等平時不分裂，但接受適當刺激（如肝臟部分切除、感染）可重新進入週期。這些差異主要來自 <span class="term">G1 期</span>長度的變化。胚胎細胞（如非洲爪蟾早期胚胎）甚至可省略 G1、以極快速度完成 S 期（&lt;3分鐘），細胞週期壓縮到 30 分鐘以內。</p>
+  <p>細胞生長與週期進程須協調一致，關鍵調控者是蛋白激酶 <span class="term">TOR（target of rapamycin）</span>：養分與生長因子充足時活化 TOR，促進蛋白質合成與細胞質量增加，同時也促進進入 S 期。</p>
+
+  <h3>細胞週期的三個關鍵轉換點</h3>
+  <p>細胞週期控制系統須確保：①各期事件按時發生、②前一期完成後才進入下一期、③能回應外在訊號（養分、生長因子）。這是透過三個主要<span class="term">轉換點（transition point）</span>達成：</p>
+
+  <table>
+    <caption>圖24-13重現：細胞週期三大轉換點</caption>
+    <thead><tr><th>轉換點</th><th>俗名</th><th>受什麼因素影響</th></tr></thead>
+    <tbody>
+      <tr><td>G1-S 轉換點</td><td><span class="term">限制點（restriction point）</span>；酵母稱 Start</td><td>生長因子、養分、細胞大小、DNA 損傷</td></tr>
+      <tr><td>G2-M 轉換點</td><td>——</td><td>細胞大小、DNA 損傷、DNA 複製是否完成</td></tr>
+      <tr><td>中期-後期轉換點</td><td>——</td><td>染色體是否都已正確附著到紡錘體</td></tr>
+    </tbody>
+  </table>
+  <p>通過限制點的細胞會承諾進入 S 期；未通過者則進入 G0 等待。多數細胞的分裂調控主要發生在 G1 限制點，少數則在 G2 阻滯。</p>
+
+  <h3>Cdk 與週期蛋白：細胞週期的分子引擎</h3>
+  <p>細胞融合實驗（將不同分期的細胞融合成雙核的<span class="term">異核體 heterokaryon</span>）顯示：S 期細胞含有能促使 G1 核提早進入 S 期的物質；M 期細胞則能讓任何間期核立即進入有絲分裂樣的染色質凝集狀態——顯示細胞質中存在可擴散的調控分子。酵母遺傳學（Hartwell 的溫度敏感突變株）進一步鑑定出關鍵基因 <span class="term">cdc2</span>（Paul Nurse），其產物是一種<span class="term">蛋白激酶（protein kinase）</span>。</p>
+  <p>這類蛋白激酶只有結合活化蛋白<span class="term">週期蛋白（cyclin）</span>後才具有活性，因此稱為<span class="term">週期蛋白依賴性激酶（cyclin-dependent kinase, Cdk）</span>。促使 G2 進入 M 期的複合體稱為 <span class="term">MPF（mitosis-promoting factor）</span>，由絲裂週期蛋白（cyclin B）與絲裂 Cdk 組成。Hartwell、Nurse 與發現週期蛋白振盪特性的 Tim Hunt 共同獲得 2001 年諾貝爾獎。</p>
+
+  <div class="flow vertical">
+    <div class="flow-step">絲裂Cdk + 絲裂cyclin 結合<br><span style="font-weight:400;font-size:.78rem">形成無活性複合體</span></div>
+    <div class="flow-arrow down">↓</div>
+    <div class="flow-step alt">抑制性激酶加上兩個抑制性磷酸</div>
+    <div class="flow-arrow down">↓</div>
+    <div class="flow-step alt">活化性激酶加上活化性磷酸<br><span style="font-weight:400;font-size:.78rem">此時仍無活性（抑制磷酸仍在）</span></div>
+    <div class="flow-arrow down">↓</div>
+    <div class="flow-step end">磷酸酶移除抑制性磷酸<br><span style="font-weight:400;font-size:.78rem">Cdk-cyclin 活化！（正回饋加速）</span></div>
+  </div>
+  <p style="font-size:.85rem;color:#555;text-align:center;margin-top:-.6rem">（重現圖24-16：絲裂Cdk-cyclin的磷酸化／去磷酸化調控）</p>
+
+  <div class="box">
+    <div class="box-title">活化的絲裂Cdk-cyclin做了什麼？</div>
+    <p style="margin:0">磷酸化核纖層蛋白（lamin）→核膜崩解；磷酸化凝縮蛋白（condensin）→染色體凝集；磷酸化微管結合蛋白→促進紡錘體組裝；同時抑制DNA修復複合體組裝，避免端粒被誤判為斷裂端而互相黏合。</p>
+  </div>
+
+  <h3>APC/C：離開有絲分裂的關鍵開關</h3>
+  <p><span class="term">後期促進複合體（anaphase-promoting complex, APC/C）</span>是一種<span class="term">泛素連接酶（ubiquitin ligase）</span>，被絲裂Cdk-cyclin磷酸化活化後，標記特定蛋白進行降解：</p>
+  <div class="flow">
+    <div class="flow-step">APC/C 活化</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step alt">降解securin<br><span style="font-weight:400;font-size:.78rem">釋放separase</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step alt">separase切割cohesin</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step end">姊妹染色分體分離<br><span style="font-weight:400;font-size:.78rem">後期開始</span></div>
+  </div>
+  <p>同時，APC/C 也降解絲裂cyclin本身，使絲裂Cdk活性下降——這是細胞質分裂、染色質解旋、核膜重組等「離開有絲分裂」事件得以發生的必要條件。</p>
+
+  <h3>檢查點路徑：確保每一步都做對</h3>
+  <p><span class="term">檢查點（checkpoint）</span>是監控細胞內狀態、在條件不允許時暫停週期的機制，避免發生<span class="term">非整倍體（aneuploidy）</span>等錯誤。</p>
+
+  <h4>① G1-S 檢查點：Rb 蛋白與 E2F</h4>
+  <div class="flow">
+    <div class="flow-step">Rb（去磷酸化）結合E2F<br><span style="font-weight:400;font-size:.78rem">S期基因不轉錄</span></div>
+    <div class="flow-arrow">→生長因子刺激→</div>
+    <div class="flow-step alt">G1 Cdk-cyclin活化<br><span style="font-weight:400;font-size:.78rem">磷酸化Rb</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step end">Rb釋放E2F<br><span style="font-weight:400;font-size:.78rem">S期基因開始轉錄</span></div>
+  </div>
+  <p><span class="term">Rb 蛋白</span>缺陷與遺傳性或環境誘發的癌症有密切關聯（詳見第26章）。</p>
+
+  <h4>② S 期：複製授權（licensing）</h4>
+  <p>每個複製起點在一個週期中只能複製一次。<span class="term">MCM 蛋白</span>結合到複製起點（需 ORC 與 helicase loader協助）即完成「授權」；複製一旦開始，MCM 即被複製叉取代。S期產生的Cdk與蛋白 <span class="term">geminin</span> 會阻止起點被重複授權，直到細胞完成有絲分裂、geminin降解後才重新開放。</p>
+
+  <h4>③ G2-M：DNA 複製檢查點</h4>
+  <p>若 DNA 複製尚未完成，會抑制活化絲裂Cdk-cyclin所需的磷酸酶，使細胞停在 G2，直到複製完全結束。</p>
+
+  <h4>④ 紡錘體組裝檢查點（Spindle Assembly Checkpoint, SAC）</h4>
+  <div class="flow">
+    <div class="flow-step alt">動粒尚未附著微管</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step alt">Mad/Bub蛋白聚集<br><span style="font-weight:400;font-size:.78rem">形成MCC複合體</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">抑制Cdc20</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step end">APC/C不活化<br><span style="font-weight:400;font-size:.78rem">後期暫停「等待訊號」</span></div>
+  </div>
+  <p>所有染色體都正確附著後，Mad/Bub蛋白被動力蛋白（dynein）自動粒剝離，APC/C才得以活化、啟動後期。</p>
+
+  <h4>⑤ DNA 損傷檢查點：p53「基因組守護者」</h4>
+  <div class="flow">
+    <div class="flow-step">DNA損傷</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step alt">ATM/ATR活化<br><span style="font-weight:400;font-size:.78rem">→檢查點激酶</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step alt">p53磷酸化並穩定<br><span style="font-weight:400;font-size:.78rem">（阻止Mdm2降解它）</span></div>
+  </div>
+  <div class="flow" style="margin-top:.3rem">
+    <div class="flow-step end">路徑①：活化p21<br><span style="font-weight:400;font-size:.78rem">抑制Cdk-cyclin→細胞週期停滯</span></div>
+    <div class="flow-step end">路徑②：活化Puma<br><span style="font-weight:400;font-size:.78rem">抑制Bcl-2→細胞凋亡</span></div>
+  </div>
+  <p>p53 可依損傷是否可修復，在「暫停等待修復」與「啟動細胞凋亡」之間做決定，因此被稱為<span class="term">分子紅綠燈</span>。</p>
+
+  <div class="concept-check">
+    <div class="box-title">概念check 24.3</div>
+    <p style="margin:0">Cyclin D 是 G1 Cdk-cyclin 的一員，常在癌症中過度表現。為什麼 cyclin D 過度表現容易導致癌症？</p>
+  </div>
+</section>
+
+<!-- ============ 24.4 ============ -->
+<section id="sec4">
+  <h2>24.4 生長因子與細胞增殖（Growth Factors and Cell Proliferation）</h2>
+  <p>多細胞生物的細胞通常浸泡在養分充足的體液中，但不能任意分裂，否則會失去控制（即癌症）。因此生物利用<span class="term">生長因子（growth factor）</span>——多數是<span class="term">促有絲分裂原（mitogen）</span>——來控制細胞何時通過限制點、進入分裂。</p>
+
+  <h3>刺激性路徑一：Ras 訊息傳遞</h3>
+  <p>PDGF（血小板衍生生長因子）、EGF（表皮生長因子）等會結合具酪胺酸激酶活性的受體，啟動下列級聯反應：</p>
+  <div class="flow">
+    <div class="flow-step">①生長因子結合受體<br><span style="font-weight:400;font-size:.78rem">活化Ras</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">②Raf→MEK→MAPK<br><span style="font-weight:400;font-size:.78rem">激酶級聯</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">③活化轉錄因子<br><span style="font-weight:400;font-size:.78rem">Ets、Jun等→早期基因→Myc、Fos</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step end">④延遲基因表現<br><span style="font-weight:400;font-size:.78rem">E2F、cyclin、Cdk生成→磷酸化Rb→進入S期</span></div>
+  </div>
+  <div class="clinical box">
+    <div class="box-title">臨床連結：Ras 與癌症</div>
+    <p style="margin:0">突變型 Ras 蛋白可不依賴生長因子持續活化，常見於胰臟癌、大腸癌、肺癌與膀胱癌，約占所有人類癌症的25–30%。</p>
+  </div>
+
+  <h3>刺激性路徑二：PI3K–Akt</h3>
+  <div class="flow">
+    <div class="flow-step">生長因子受體</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">PI3K活化<br><span style="font-weight:400;font-size:.78rem">生成PIP₃</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step alt">Akt磷酸化活化</div>
+  </div>
+  <div class="flow" style="margin-top:.3rem">
+    <div class="flow-step end">抑制Bad<br><span style="font-weight:400;font-size:.78rem">→抑制細胞凋亡</span></div>
+    <div class="flow-step end">活化Rheb→TOR<br><span style="font-weight:400;font-size:.78rem">→促進細胞生長</span></div>
+  </div>
+  <p><span class="term">PTEN</span> 是此路徑的煞車（去磷酸化PIP₃），PTEN 突變會使 Akt 持續活化，見於高比例的攝護腺癌、子宮內膜癌與多種其他癌症。</p>
+
+  <h3>抑制性路徑：TGFβ 與 Cdk 抑制物</h3>
+  <p>並非所有生長因子都促進分裂：<span class="term">TGFβ</span> 結合受體後活化 Smad 蛋白進入細胞核，誘導 <span class="term">p15、p21</span> 等 <span class="term">Cdk 抑制物（Cdk inhibitor）</span>表現，抑制 Cdk-cyclin 活性，阻止細胞週期前進，是保護組織不過度增殖的重要機制。</p>
+
+  <div class="box">
+    <div class="box-title">整合看：細胞週期調控是一台「時鐘＋回饋」機器</div>
+    <p style="margin:0">週期蛋白的合成與降解構成一個自主運行的「時鐘」，驅動細胞通過三大轉換點；而檢查點與生長因子訊息則作為「回饋輸入」，根據 DNA 完整性、複製狀態與外部環境調整時鐘的節奏，決定細胞是否該分裂。</p>
+  </div>
+
+  <div class="concept-check">
+    <div class="box-title">概念check 24.4</div>
+    <p style="margin:0">EGF（促有絲分裂原）與 TGFβ（作為抑制物時）都作用於 Cdk-cyclin 複合體，但作用方式相反。若細胞同時暴露於兩者，你預期結果如何？</p>
+  </div>
+</section>
+
+<!-- ============ 24.5 ============ -->
+<section id="sec5">
+  <h2>24.5 細胞凋亡（Apoptosis）</h2>
+  <p><span class="term">細胞凋亡（apoptosis）</span>是一種受調控的程式性細胞死亡，用於移除胚胎指間蹼、修剪多餘神經連結、清除受感染或老化細胞。與細胞凋亡不同，<span class="term">壞死（necrosis）</span>是因劇烈損傷造成的細胞死亡，兩者過程與結果差異很大：</p>
+
+  <table class="compare-table">
+    <caption>易混淆概念比較③ 細胞凋亡 vs. 壞死</caption>
+    <thead><tr><th>A：細胞凋亡（Apoptosis）</th><th>B：壞死（Necrosis）</th><th>差異重點</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>受調控的程式性死亡，由細胞內在程式或訊號主動啟動</td>
+        <td>因劇烈物理／化學損傷被動發生</td>
+        <td>是否為主動、可調控的過程</td>
+      </tr>
+      <tr>
+        <td>細胞縮小、DNA規律斷裂成200bp倍數的「梯狀」片段、形成凋亡小體並被吞噬細胞清除，不引發發炎</td>
+        <td>細胞腫脹破裂，內容物（含消化酶）外洩，引發周圍組織發炎</td>
+        <td>對周圍組織的影響（是否發炎）</td>
+      </tr>
+      <tr>
+        <td>需要ATP、caspase等蛋白主動執行</td>
+        <td>能量耗竭下的失控崩解</td>
+        <td>是否需要能量與特定蛋白參與</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>細胞凋亡的分子基礎最早在線蟲 <span class="term">C. elegans</span> 中被闡明（Sulston、Horvitz 與 Brenner 因此共獲2002年諾貝爾獎）：<span class="term">ced-3</span> 編碼半胱天冬酶（caspase）家族成員，<span class="term">ced-9</span> 則是 Bcl-2 的同源基因。</p>
+
+  <h3>執行者：半胱天冬酶（Caspases）</h3>
+  <p><span class="term">半胱天冬酶（caspase）</span>以無活性的<span class="term">前驅半胱天冬酶（procaspase）</span>形式存在，經蛋白酶級聯切割後活化。<span class="term">起始半胱天冬酶（initiator caspase）</span>活化<span class="term">執行半胱天冬酶（executioner caspase，主要是caspase-3）</span>，後者切割多種目標蛋白，完成細胞的有序拆解。</p>
+
+  <h3>兩條啟動路徑</h3>
+  <div class="flow">
+    <div class="flow-step">外在路徑（死亡受體）<br><span style="font-weight:400;font-size:.78rem">如CD95/Fas、TNF</span></div>
+    <div class="flow-step">內在路徑（粒線體）<br><span style="font-weight:400;font-size:.78rem">存活因子撤除／DNA損傷</span></div>
+  </div>
+
+  <table>
+    <caption>兩條凋亡路徑的步驟對照</caption>
+    <thead><tr><th>步驟</th><th>外在路徑</th><th>內在路徑（粒線體）</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>死亡配體（如細胞毒殺T細胞的配體）結合死亡受體CD95，造成受體聚集</td><td>存活因子撤除，或p53偵測到DNA損傷（經Puma）</td></tr>
+      <tr><td>2</td><td>接合蛋白招募前驅caspase-8並活化</td><td>促凋亡蛋白累積，抑制粒線體上的Bcl-2等抗凋亡蛋白</td></tr>
+      <tr><td>3</td><td>起始caspase-8活化執行caspase-3</td><td>粒線體外膜通透，釋放<span class="term">細胞色素c（cytochrome c）</span></td></tr>
+      <tr><td>4</td><td>——</td><td>細胞色素c + Apaf-1 + 前驅caspase-9 組成<span class="term">凋亡體（apoptosome）</span>，活化caspase-9</td></tr>
+      <tr><td>5</td><td colspan="1" style="text-align:center">→</td><td>caspase-9活化執行caspase-3</td></tr>
+    </tbody>
+  </table>
+  <p>兩條路徑最終都匯聚到活化<span class="term">執行caspase-3</span>，驅動細胞凋亡的形態變化：染色質凝集、細胞質起泡（blebbing）、DNA梯狀斷裂、形成凋亡小體，最後被巨噬細胞吞噬清除（磷脂絲胺酸暴露於外膜作為「吃我」訊號）。</p>
+
+  <div class="clinical box">
+    <div class="box-title">臨床連結：凋亡與癌症</div>
+    <p style="margin:0">Apaf-1 突變常見於黑色素瘤；許多癌症治療策略正是設法「觸發」癌細胞凋亡（如活化死亡受體、抑制Bcl-2）或在某些退化疾病中「阻止」不必要的神經細胞凋亡。</p>
+  </div>
+
+  <div class="concept-check">
+    <div class="box-title">概念check 24.5</div>
+    <p style="margin:0">若剔除 caspase-9 基因的小鼠胚胎，你預期其腦部可能出現什麼樣的異常？</p>
+  </div>
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="takeaways" class="takeaways">
+  <h2>Key Takeaways（本章重點整理）</h2>
+  <ol>
+    <li>細胞週期 = 間期（G1 → S → G2，佔約95%時間）+ M期（有絲分裂 + 細胞質分裂）；G0是暫時或永久退出分裂的狀態。</li>
+    <li>有絲分裂五期：前期 → 前中期 → 中期 → 後期 → 末期，核心任務是把姊妹染色分體精確分配到兩個子核。</li>
+    <li>紡錘體由動粒微管、極性微管、星狀微管組成；動粒（CCAN+KMN網路）是染色體與微管間的橋梁。</li>
+    <li>動物細胞靠肌動蛋白收縮環完成細胞質分裂；植物細胞則由高基氏體衍生囊泡組成細胞板築起新細胞壁。</li>
+    <li>細胞週期由 Cdk-cyclin 複合體驅動：cyclin濃度週期性升降＋Cdk磷酸化/去磷酸化調控其活性；三大轉換點為限制點（G1-S）、G2-M轉換點、中期-後期轉換點。</li>
+    <li>後期促進複合體（APC/C）透過泛素-蛋白酶體系統降解securin與絲裂cyclin，分別觸發姊妹染色分體分離與退出有絲分裂。</li>
+    <li>四大檢查點：G1-S（Rb-E2F）、複製授權（licensing）、G2-M（DNA複製檢查點）、紡錘體組裝檢查點（SAC，Mad/Bub）；DNA損傷則透過p53啟動停滯或凋亡。</li>
+    <li>生長因子經Ras-MAPK路徑與PI3K-Akt路徑促進增殖與存活；TGFβ等經Cdk抑制物（p15、p21）抑制增殖；兩路徑失控是癌症常見成因。</li>
+    <li>細胞凋亡是受調控的程式性死亡，靠caspase級聯執行，區分外在路徑（死亡受體）與內在路徑（粒線體釋放細胞色素c）；與壞死（被動、引發發炎）本質不同。</li>
+    <li>必背關鍵詞：cyclin、Cdk、MPF、APC/C、securin/separase/cohesin、Rb/E2F、p53/p21/Puma、SAC（Mad/Bub）、caspase、Bcl-2/cytochrome c、Ras/Raf/MEK/MAPK、PI3K/Akt/PTEN。</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <div>第24章：細胞週期與有絲分裂｜學習指南</div>
+  <button id="backTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">回到頂端 ↑</button>
+</footer>
+
+<script>
+  const sections = ['sec1','sec2','sec3','sec4','sec5','takeaways'].map(id => document.getElementById(id));
+  const links = Array.from(document.querySelectorAll('nav a'));
+
+  function setActive(){
+    let currentId = sections[0].id;
+    const offset = 90;
+    for(const sec of sections){
+      const rect = sec.getBoundingClientRect();
+      if(rect.top - offset <= 0){
+        currentId = sec.id;
+      }
+    }
+    links.forEach(link => {
+      if(link.dataset.target === currentId){
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', setActive, {passive:true});
+  window.addEventListener('load', setActive);
+  window.addEventListener('resize', setActive);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第21章：細胞生物學的分子生物學技術｜學習指南</title>
+<style>
+  :root{
+    --primary: hsl(7.5, 45%, 35%);
+    --primary-light: hsl(7.5, 45%, 92%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(7.5, 45%, 80%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.8;
+  }
+  header{
+    padding:2.5rem 1rem 1.5rem;
+    text-align:center;
+  }
+  header h1{
+    color:var(--primary);
+    font-size:1.8rem;
+    margin:0 0 .5rem;
+  }
+  header p.sub{
+    color:#555;
+    font-size:.95rem;
+    margin:0;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.3rem;
+    padding:.6rem 1rem;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--primary);
+    font-size:.85rem;
+    padding:.4rem .8rem;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:860px;
+    margin:0 auto;
+    padding:1rem 1.2rem 3rem;
+  }
+  section{
+    padding-top:1.5rem;
+    margin-bottom:2rem;
+  }
+  h1.chapter-title{display:none;}
+  h2{
+    color:var(--primary);
+    border-bottom:3px solid var(--primary);
+    padding-bottom:.4rem;
+    margin-top:2.5rem;
+    font-size:1.4rem;
+  }
+  h3{
+    color:var(--primary);
+    margin-top:2rem;
+    font-size:1.15rem;
+    padding-left:.6rem;
+    border-left:5px solid var(--primary);
+  }
+  h4{
+    color:var(--primary);
+    font-size:1rem;
+    margin-top:1.3rem;
+  }
+  p{ margin:.7rem 0; }
+  .box{
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:1rem 1.2rem;
+    margin:1rem 0;
+  }
+  .box-title{
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:.4rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .tip{
+    border-left:5px solid var(--primary);
+    background:var(--primary-light);
+    padding:.8rem 1rem;
+    border-radius:6px;
+    margin:1rem 0;
+    font-size:.95rem;
+  }
+  .clinical{
+    border:2px dashed var(--primary);
+    background:#fff;
+    padding:.8rem 1rem;
+    border-radius:8px;
+    margin:1rem 0;
+  }
+  .clinical .box-title{ color:var(--primary); }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1rem 0;
+    font-size:.92rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+  }
+  tr:nth-child(even) td{ background:var(--primary-light); }
+  .compare-table th{ text-align:center; }
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+    gap:.3rem;
+    margin:1rem 0;
+    justify-content:center;
+  }
+  .flow-step{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:10px;
+    padding:.6rem .8rem;
+    min-width:120px;
+    max-width:190px;
+    font-size:.85rem;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .flow-step .num{
+    display:inline-block;
+    background:var(--primary);
+    color:#fff;
+    border-radius:50%;
+    width:1.4rem;
+    height:1.4rem;
+    line-height:1.4rem;
+    font-size:.8rem;
+    margin-bottom:.3rem;
+  }
+  .flow-arrow{
+    align-self:center;
+    color:var(--primary);
+    font-size:1.4rem;
+    font-weight:700;
+  }
+  .key-term{ color:var(--primary); font-weight:700; }
+  .svg-wrap{ text-align:center; margin:1rem 0; }
+  svg text{ font-family:"Noto Sans TC","思源黑體",sans-serif; }
+  .concept-check{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:10px;
+    padding:.9rem 1.1rem;
+    margin:1.2rem 0;
+    font-size:.92rem;
+  }
+  .concept-check .box-title{ color:var(--primary); }
+  ul, ol{ padding-left:1.4rem; }
+  li{ margin:.35rem 0; }
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:12px;
+    padding:1.3rem 1.5rem;
+  }
+  .takeaways li{ margin:.55rem 0; }
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#555;
+    font-size:.9rem;
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top:.8rem;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:.6rem 1.4rem;
+    border-radius:999px;
+    font-size:.9rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  #backToTop:hover{ opacity:.85; }
+
+  @media (max-width: 1024px){
+    main{ max-width:94%; }
+  }
+  @media (max-width: 768px){
+    header h1{ font-size:1.35rem; }
+    nav{ gap:.15rem; padding:.5rem .5rem; }
+    nav a{ font-size:.75rem; padding:.35rem .6rem; }
+    h2{ font-size:1.2rem; }
+    h3{ font-size:1.02rem; }
+    .flow{ flex-direction:column; align-items:center; }
+    .flow-arrow{ transform:rotate(90deg); }
+    table, th, td{ font-size:.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第21章：細胞生物學的分子生物學技術</h1>
+  <p class="sub">Molecular Biology Techniques for Cell Biology｜學習指南</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#sec1">21.1 DNA的分析、操作與選殖</a>
+  <a href="#sec2">21.2 基因體定序與分析</a>
+  <a href="#sec3">21.3 RNA與蛋白質分析</a>
+  <a href="#sec4">21.4 基因功能的分析與操縱</a>
+  <a href="#sec5">重點回顧</a>
+</nav>
+
+<main>
+
+<p style="margin-top:1.5rem;">細胞生物學的進展高度仰賴分子生物學（molecular biology）與生物化學的工具。本章不會詳細講解每個技術的實驗步驟，而是聚焦於「這些技術是什麼、何時使用、為什麼有用」，幫助你建立整體的技術地圖。</p>
+
+<!-- ===================== 21.1 ===================== -->
+<section id="sec1">
+<h2>21.1 DNA的分析、操作與選殖</h2>
+
+<p>自1970年代<span class="key-term">重組DNA技術（recombinant DNA technology）</span>發展以來，科學家可以任意將不同來源的DNA片段接合在一起，不再受限於自然界中只發生在同物種間的基因重組。這項技術的核心能力，就是把特定DNA片段大量複製，稱為<span class="key-term">DNA選殖（DNA cloning）</span>。</p>
+
+<h3>PCR：最快速的基因選殖方式</h3>
+<p><span class="key-term">聚合酶連鎖反應（PCR, polymerase chain reaction）</span>只需要知道目標序列兩端的部分鹼基序列，合成一對互補的<span class="key-term">引子（primer）</span>，即可在活體外快速大量複製DNA。PCR產物可依需求接上限制酶切位，方便後續選殖到載體中。</p>
+
+<div class="box">
+<div class="box-title">🔄 PCR 反應流程（每一循環）</div>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span><b>變性（Denaturation）</b><br>95°C，雙股DNA解開為單股</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><b>黏合（Annealing）</b><br>~50°C，引子與互補序列結合</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><b>延伸（Extension）</b><br>72°C，Taq聚合酶合成新股</div>
+</div>
+<p style="margin:.3rem 0 0;font-size:.9rem;">重複 <i>n</i> 次循環，理論上可將目標序列放大 2<sup>n</sup> 倍。Taq聚合酶取自嗜熱菌 <i>Thermus aquaticus</i>，可耐受接近沸點的高溫，因此不需每次循環都重新添加酶。</p>
+</div>
+
+<h3>限制酶：在特定位點切割DNA</h3>
+<p><span class="key-term">限制內切酶（restriction endonuclease，簡稱限制酶）</span>是細菌用來防禦外來（噬菌體）DNA的蛋白質，會辨認特定的<span class="key-term">限制位點（restriction site）</span>（通常4、6或8個鹼基長）並切割雙股DNA。細菌自身DNA則因甲基化而受到保護，此即「限制／甲基化系統」。</p>
+
+<p>依切割方式不同，產生的<span class="key-term">限制片段（restriction fragment）</span>末端可分為兩種：</p>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+  <text x="150" y="24" text-anchor="middle" font-size="15" fill="hsl(7.5,45%,35%)" font-weight="bold">(a) 齊平末端 Blunt end（如 HaeIII）</text>
+  <text x="150" y="70" text-anchor="middle" font-size="14" font-family="monospace">5' G G C C 3'</text>
+  <text x="150" y="92" text-anchor="middle" font-size="14" font-family="monospace">3' C C G G 5'</text>
+  <line x1="150" y1="102" x2="150" y2="118" stroke="hsl(7.5,45%,35%)" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="150" y="140" text-anchor="middle" font-size="14" font-family="monospace">5' GG   CC 3'</text>
+  <text x="150" y="160" text-anchor="middle" font-size="14" font-family="monospace">3' CC   GG 5'</text>
+
+  <text x="470" y="24" text-anchor="middle" font-size="15" fill="hsl(7.5,45%,35%)" font-weight="bold">(b) 黏性末端 Sticky end（如 EcoRI）</text>
+  <text x="470" y="70" text-anchor="middle" font-size="14" font-family="monospace">5' G A A T T C 3'</text>
+  <text x="470" y="92" text-anchor="middle" font-size="14" font-family="monospace">3' C T T A A G 5'</text>
+  <line x1="470" y1="102" x2="470" y2="118" stroke="hsl(7.5,45%,35%)" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="470" y="140" text-anchor="middle" font-size="14" font-family="monospace">5' G       AATTC 3'</text>
+  <text x="470" y="160" text-anchor="middle" font-size="14" font-family="monospace">3' CTTAA       G 5'</text>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="hsl(7.5,45%,35%)"/>
+    </marker>
+  </defs>
+</svg>
+</div>
+
+<p>大多數限制位點是<span class="key-term">迴文序列（palindrome）</span>：雙股DNA以5'→3'方向讀取時，兩股序列相同。黏性末端因為含有可互補配對的單股突出端，特別適合用於接合不同來源的DNA，是建構重組DNA的關鍵。</p>
+
+<h3>膠體電泳：依大小分離DNA</h3>
+<p><span class="key-term">膠體電泳（gel electrophoresis）</span>利用DNA本身帶負電的特性，在電場中使DNA向陽極移動；片段越小移動越快。常用的膠材料為<span class="key-term">洋菜膠（agarose）</span>（大片段，200–20,000 bp）與<span class="key-term">聚丙烯醯胺膠（polyacrylamide）</span>（小片段，1–1000 bp）。染色後（如溴化乙錠 ethidium bromide）在紫外光下即可觀察DNA條帶。對於超大型DNA（如小型染色體），則需使用<span class="key-term">脈衝場電泳（pulsed-field electrophoresis）</span>。</p>
+
+<div class="svg-wrap">
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;width:100%;height:auto;">
+  <rect x="20" y="20" width="460" height="130" fill="none" stroke="hsl(7.5,45%,35%)" stroke-width="2" rx="6"/>
+  <text x="10" y="35" font-size="12" fill="hsl(7.5,45%,35%)">-陰極</text>
+  <text x="455" y="35" font-size="12" fill="hsl(7.5,45%,35%)">+陽極</text>
+  <g font-family="monospace" font-size="11">
+    <rect x="45" y="35" width="14" height="10" fill="hsl(7.5,45%,35%)"/>
+    <rect x="45" y="55" width="14" height="8" fill="hsl(7.5,45%,60%)"/>
+    <rect x="45" y="72" width="14" height="6" fill="hsl(7.5,45%,60%)"/>
+
+    <rect x="100" y="55" width="14" height="8" fill="hsl(7.5,45%,60%)"/>
+    <rect x="100" y="85" width="14" height="6" fill="hsl(7.5,45%,60%)"/>
+    <rect x="100" y="105" width="14" height="5" fill="hsl(7.5,45%,60%)"/>
+
+    <rect x="160" y="75" width="14" height="6" fill="hsl(7.5,45%,60%)"/>
+    <rect x="160" y="115" width="14" height="5" fill="hsl(7.5,45%,60%)"/>
+
+    <rect x="220" y="95" width="14" height="6" fill="hsl(7.5,45%,60%)"/>
+    <rect x="220" y="130" width="14" height="5" fill="hsl(7.5,45%,60%)"/>
+  </g>
+  <line x1="40" y1="45" x2="450" y2="45" stroke="#999" stroke-dasharray="2,3"/>
+  <text x="250" y="165" text-anchor="middle" font-size="12" fill="#555">小片段移動快（靠近陽極）→</text>
+</svg>
+</div>
+
+<h3>限制酶圖譜與南方墨點法</h3>
+<p><span class="key-term">限制酶圖譜（restriction map）</span>是利用單獨或合併使用不同限制酶消化DNA，比對電泳片段大小，推論出限制位點在DNA上的相對位置與順序。</p>
+
+<p>當需要在混合的DNA片段中「找出含特定序列的那一條」時，可使用<span class="key-term">南方墨點法（Southern blotting）</span>（以發明者 Edwin Southern 命名）：</p>
+
+<div class="box">
+<div class="box-title">🧪 Southern Blotting 流程</div>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>限制酶消化DNA</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>電泳依大小分離片段</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>變性後轉印至尼龍膜</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>加入標記探針雜交</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span>偵測螢光／放射訊號</div>
+</div>
+</div>
+
+<h3>重組DNA的構築與質體選殖</h3>
+<p>用同一種產生黏性末端的限制酶切割兩個不同來源的DNA分子，兩者的黏性末端可透過鹼基互補配對接合，再由<span class="key-term">DNA接合酶（DNA ligase）</span>共價連接，形成<span class="key-term">重組DNA分子（recombinant DNA molecule）</span>。</p>
+
+<p>最常見的選殖載體是<span class="key-term">質體（plasmid）</span>，例如經典的 pUC19：帶有<span class="key-term">抗生素抗性基因（如 amp<sup>R</sup>）</span>作為篩選標記，以及位於 <i>lacZ</i> 基因內的多重選殖位（MCS）。當外源DNA插入 MCS 會破壞 <i>lacZ</i>，可用<span class="key-term">藍白篩選（blue/white screening）</span>分辨：</p>
+
+<div class="tip">💡 <b>藍白篩選原理：</b>含正常 <i>lacZ</i>（無插入片段）的菌落可分解X-gal呈<b>藍色</b>；<i>lacZ</i>被破壞（有插入片段＝成功重組）的菌落呈<b>白色</b>。</div>
+
+<h3>基因體庫 vs. cDNA庫</h3>
+<p>取得選殖用DNA的兩種主要策略：</p>
+<ul>
+  <li><span class="key-term">基因體庫（genomic library）</span>：將整個基因體切成限制片段並選殖，含有內含子（intron）、啟動子等所有非轉錄序列，適合研究基因調控元件。</li>
+  <li><span class="key-term">互補DNA庫（cDNA library）</span>：以<span class="key-term">反轉錄酶（reverse transcriptase）</span>將mRNA反轉錄為cDNA後選殖，只含有轉錄活躍（已剪接、去除內含子）的基因序列，較短、適合表現蛋白質。</li>
+</ul>
+
+<table class="compare-table">
+<tr><th>A：基因體庫（Genomic library）</th><th>B：cDNA庫（cDNA library）</th><th>差異重點</th></tr>
+<tr>
+  <td>取自整個基因體DNA</td>
+  <td>取自mRNA反轉錄產物</td>
+  <td>來源不同：DNA本身 vs. 表現產物</td>
+</tr>
+<tr>
+  <td>含內含子、啟動子、增強子等調控序列</td>
+  <td>只含外顯子（已剪接）序列，無內含子</td>
+  <td>是否含非轉錄調控區</td>
+</tr>
+<tr>
+  <td>適合研究基因結構與調控機制</td>
+  <td>適合在細菌中表現真核蛋白質（細菌無剪接機制）</td>
+  <td>應用目的不同</td>
+</tr>
+</table>
+
+<h3>大型DNA片段的選殖載體</h3>
+<p>依插入片段大小選用不同載體：噬菌體 λ（20–25 kb）→ <span class="key-term">黏質體（cosmid）</span>（40–45 kb）→ <span class="key-term">細菌人工染色體（BAC）</span>（可達350,000 bp）→ <span class="key-term">酵母菌人工染色體（YAC）</span>（含複製起點、著絲點、端粒，可攜帶300,000–1,500,000 bp）。</p>
+
+<div class="concept-check">
+<div class="box-title">✅ 概念檢核 21.1</div>
+若要選殖蜘蛛絲蛋白基因，應該從基因體DNA還是cDNA著手？提示：蜘蛛絲基因高度重複且可能很長，而cDNA只含表現的編碼序列，較適合直接在細菌中表現蛋白質。
+</div>
+
+</section>
+
+<!-- ===================== 21.2 ===================== -->
+<section id="sec2">
+<h2>21.2 基因體定序與分析</h2>
+
+<h3>Sanger（雙脫氧鏈終止）定序法</h3>
+<p><span class="key-term">Sanger法（chain termination method）</span>利用<span class="key-term">雙脫氧核苷酸（dideoxynucleotide, ddNTP）</span>——缺少3'-OH基，一旦被併入新生鏈就會終止合成。將帶有四種螢光顏色標記的ddNTP與一般dNTP混合，DNA聚合酶隨機併入ddNTP，產生長度不一、末端帶有特定顏色的片段，再以毛細管電泳依大小分離、偵測顏色，即可推知鹼基序列。</p>
+
+<div class="box">
+<div class="box-title">🔬 Sanger 定序流程</div>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>混合模板、引子、DNA聚合酶、dNTP與螢光ddNTP</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>合成中隨機併入ddNTP而終止，產生長短不一的螢光片段</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>毛細管電泳依大小分離</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>雷射偵測顏色，依序讀出鹼基序列</div>
+</div>
+</div>
+
+<h3>次世代與第三代定序技術</h3>
+<p><span class="key-term">次世代定序（next-generation sequencing, NGS）</span>可平行進行數百萬個定序反應，速度快、成本低，且不需事先選殖DNA。常見平台包括：</p>
+<ul>
+  <li><b>Illumina（合成定序法）</b>：帶螢光標記＋可逆終止子的dNTP，讀長約50–300 bp，通量極高。</li>
+  <li><b>Pyro-sequencing／SOLiD</b>：分別偵測焦磷酸釋放的螢光或以連接反應偵測，現已較少使用。</li>
+  <li><b>第三代長讀長技術：PacBio（單分子即時定序）</b>與<b>Nanopore（奈米孔定序）</b>：讀長可達數萬至百萬鹼基，Nanopore的MinION為可攜式定序儀，曾用於伊波拉、茲卡病毒疫情現場監測。</li>
+</ul>
+
+<div class="tip">💡 <b>亞硫酸氫鹽定序（bisulfite sequencing）</b>可偵測DNA甲基化：亞硫酸氫鹽會將未甲基化的C轉為U，而5-甲基胞嘧啶（5-methylcytosine）不受影響，比對前後序列即可找出甲基化位置。</div>
+
+<h3>全基因體定序：兩種策略</h3>
+<table class="compare-table">
+<tr><th>A：圖譜式選殖法（Map-based cloning）</th><th>B：全基因體散彈法（Shotgun sequencing）</th><th>差異重點</th></tr>
+<tr>
+  <td>先建立限制酶圖譜，再逐一選殖、定序、比對重疊片段（contig）</td>
+  <td>直接將基因體打碎成大量重疊片段，定序後以電腦演算法組裝</td>
+  <td>是否需要先選殖與建圖</td>
+</tr>
+<tr>
+  <td>精確但耗時（如早期人類基因體計畫）</td>
+  <td>快速、成本低，現為主流方法</td>
+  <td>速度與成本</td>
+</tr>
+<tr>
+  <td>適合處理高度重複序列區域的收尾工作</td>
+  <td>適合從頭定序（de novo）新基因體</td>
+  <td>應用時機</td>
+</tr>
+</table>
+
+<h3>比較基因體學與生物資訊學</h3>
+<p>基因體大小（以<span class="key-term">kb、Mb、Gb</span>表示千、百萬、十億鹼基對）並不與生物複雜度成正比——某些兩生類與植物的基因體遠大於人類。<span class="key-term">生物資訊學（bioinformatics）</span>結合電腦科學、統計與生物學，用來解讀龐大的序列資料。最常用的工具是<span class="key-term">BLAST（Basic Local Alignment Search Tool）</span>，可比對輸入序列與資料庫中已知序列的同源性，用於尋找同源基因、推測蛋白質功能。</p>
+
+<h3>個體間基因體差異的偵測</h3>
+<p>約99.7%的人類基因體序列彼此相同，其餘0.3%的差異即造就個體獨特性，主要偵測方式如下：</p>
+<ul>
+  <li><span class="key-term">單一核苷酸多型性（SNP）</span>：單一鹼基的差異，可能改變限制位點而形成RFLP。</li>
+  <li><span class="key-term">限制片段長度多型性（RFLP）</span>：因序列差異造成限制酶切位增減，使限制片段長度不同，可用南方墨點法偵測（如鐮刀型血球疾病診斷）。</li>
+  <li><span class="key-term">可變數目串聯重複（VNTR）</span>：包含小衛星DNA與微衛星DNA／<span class="key-term">短片段重複（STR）</span>，重複次數因人而異，是DNA指紋鑑定（如CODIS資料庫）的基礎，常以PCR搭配螢光引子、毛細管電泳分析。</li>
+</ul>
+
+<div class="clinical">
+<div class="box-title">🩺 臨床連結：DNA指紋與法醫鑑定</div>
+STR分析常用13個四核苷酸重複位點進行個體鑑定，兩人擁有相同DNA指紋的機率約為百億分之一，廣泛用於刑事鑑定與親子鑑定，也已協助超過350人洗刷冤案。
+</div>
+
+<div class="concept-check">
+<div class="box-title">✅ 概念檢核 21.2</div>
+SNP與RFLP在分子層次與應用上有何異同？兩者的偵測分別需要什麼技術？（提示：SNP是單一鹼基差異的統稱，RFLP是SNP等變異造成的限制片段長度差異，前者常用定序或晶片偵測，後者常用限制酶消化＋電泳／南方墨點法。）
+</div>
+
+</section>
+
+<!-- ===================== 21.3 ===================== -->
+<section id="sec3">
+<h2>21.3 RNA與蛋白質分析</h2>
+
+<h3>偵測mRNA表現的時空分佈</h3>
+<table>
+<tr><th>技術</th><th>原理重點</th><th>特色</th></tr>
+<tr><td><span class="key-term">北方墨點法（Northern blotting）</span></td><td>RNA電泳→轉印膜→標記探針雜交</td><td>可定量、需破壞樣本</td></tr>
+<tr><td><span class="key-term">RT-PCR</span></td><td>mRNA→反轉錄成cDNA→PCR放大</td><td>間接偵測，半定量</td></tr>
+<tr><td><span class="key-term">定量PCR（q-PCR，即時PCR）</span></td><td>額外加入螢光探針，即時偵測每輪擴增量</td><td>可精確定量起始mRNA量</td></tr>
+<tr><td><span class="key-term">原位雜交（in situ hybridization）</span></td><td>螢光或呈色探針直接在組織切片中偵測mRNA位置</td><td>保留空間資訊，不需萃取RNA</td></tr>
+</table>
+
+<h3>大規模轉錄體分析</h3>
+<p><span class="key-term">DNA微陣列（DNA microarray）</span>是佈滿數千至上萬個基因探針的晶片，將不同來源細胞的螢光標記cDNA同時雜交上去，依螢光顏色（如綠色＝腦細胞、紅色＝肝細胞、黃色＝兩者皆表現、黑色＝皆不表現）比較基因表現差異。</p>
+
+<p><span class="key-term">RNAseq</span>則直接對cDNA進行高通量定序，不受限於晶片上預先設計的基因探針，還能偵測SNP、選擇性剪接與RNA編輯等變異，是目前分析<span class="key-term">轉錄體（transcriptome）</span>的主流方法，並已可延伸至單細胞層級（single-cell RNAseq）。</p>
+
+<h3>蛋白質電泳技術</h3>
+<div class="box">
+<div class="box-title">⚡ SDS-PAGE 流程</div>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>SDS與加熱使蛋白質變性、帶負電</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>樣品與分子量標準品加入膠孔</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>通電後向陽極遷移</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>依大小分離（小分子移動快）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span>考馬斯亮藍染色顯示條帶</div>
+</div>
+</div>
+
+<p><span class="key-term">二維電泳（2D gel electrophoresis）</span>先以<span class="key-term">等電聚焦（isoelectric focusing）</span>依電荷（等電點）分離，再以SDS-PAGE依大小分離，可解析細微的蛋白質異構物或修飾狀態。</p>
+
+<h3>抗體技術：辨識特定蛋白質</h3>
+<p><span class="key-term">抗體（antibody）</span>由B淋巴球產生，可高度專一地辨識<span class="key-term">抗原（antigen）</span>。</p>
+
+<table class="compare-table">
+<tr><th>A：多株抗體（Polyclonal antibody）</th><th>B：單株抗體（Monoclonal antibody）</th><th>差異重點</th></tr>
+<tr>
+  <td>直接免疫動物後純化血清，含多種不同B細胞株產生的抗體混合物</td>
+  <td>由單一融合瘤（hybridoma）細胞株持續培養產生</td>
+  <td>來源與均質性</td>
+</tr>
+<tr>
+  <td>可辨識蛋白質上多個抗原位點，訊號較強</td>
+  <td>只辨識單一抗原位點，專一性極高</td>
+  <td>辨識位點數目</td>
+</tr>
+<tr>
+  <td>不可再生，需重新免疫動物</td>
+  <td>細胞株可長期培養，供應穩定可再生</td>
+  <td>可再生性</td>
+</tr>
+</table>
+
+<p>利用抗體偵測蛋白質最常見的技術是<span class="key-term">西方墨點法（Western blotting，免疫墨點法）</span>：</p>
+
+<div class="box">
+<div class="box-title">🧫 Western Blotting 流程</div>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>SDS-PAGE依大小分離蛋白質</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>電轉印至硝化纖維／尼龍膜</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>一級抗體結合目標蛋白，再加二級抗體（接酵素）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>呈色或化學發光偵測</div>
+</div>
+</div>
+
+<h3>蛋白質純化：層析法</h3>
+<table>
+<tr><th>層析法</th><th>分離依據</th><th>原理重點</th></tr>
+<tr><td><span class="key-term">離子交換層析（ion-exchange）</span></td><td>電荷</td><td>帶電珠子吸附相反電荷蛋白，以鹽濃度梯度洗脫</td></tr>
+<tr><td><span class="key-term">凝膠過濾層析（gel filtration）</span></td><td>大小</td><td>小分子進入珠孔而延遲、大分子直接通過先流出</td></tr>
+<tr><td><span class="key-term">親和層析（affinity chromatography）</span></td><td>專一結合力</td><td>珠子接上抗體或標籤辨識分子，如免疫沉澱（immunoprecipitation）、His-tag結合Ni<sup>2+</sup></td></tr>
+</table>
+
+<h3>質譜分析鑑定蛋白質</h3>
+<p><span class="key-term">質譜分析（mass spectrometry）</span>依質荷比（m/z）分離離子化的蛋白質／胜肽片段。常見游離方式為<span class="key-term">MALDI</span>（雷射解吸附）與<span class="key-term">ESI</span>（電噴灑）。<span class="key-term">串聯質譜（MS/MS）</span>可將胜肽二次裂解，比對資料庫以鑑定蛋白質序列，是大規模蛋白質體分析（proteomics）的核心工具。</p>
+
+<h3>研究蛋白質功能與交互作用</h3>
+<p>可利用<span class="key-term">定點突變（site-directed mutagenesis）</span>改變特定胺基酸、以<span class="key-term">表現載體（expression vector）</span>大量生產蛋白質，或以<span class="key-term">GFP標籤</span>融合蛋白質以利在活細胞中觀察其位置與動態。</p>
+
+<table>
+<tr><th>技術</th><th>原理重點</th></tr>
+<tr><td><span class="key-term">下拉試驗／共免疫沉澱（Pull-down／Co-IP）</span></td><td>以親和標籤或抗體捕捉蛋白A，檢查蛋白B是否隨之被捕獲，判斷是否直接或間接結合</td></tr>
+<tr><td><span class="key-term">酵母菌雙雜交（yeast two-hybrid）</span></td><td>將轉錄活化蛋白Gal4拆成DNA結合域（bait）與活化域（prey），兩者所接的蛋白質若互相結合，可重建轉錄活性、活化報導基因</td></tr>
+<tr><td><span class="key-term">FRET／BiFC</span></td><td>顯微鏡下即時觀察活細胞中兩蛋白質是否物理接觸</td></tr>
+</table>
+
+<div class="concept-check">
+<div class="box-title">✅ 概念檢核 21.3</div>
+比較北方墨點法與西方墨點法所用的探針與可得資訊；並比較酵母菌雙雜交與共免疫沉澱之異同。（提示：北方墨點法用核酸探針偵測RNA；西方墨點法用抗體偵測蛋白質。雙雜交是活體內、基因報導式的間接偵測；Co-IP是活體外、直接由複合體中共沉澱蛋白質。）
+</div>
+
+</section>
+
+<!-- ===================== 21.4 ===================== -->
+<section id="sec4">
+<h2>21.4 基因功能的分析與操縱</h2>
+
+<h3>轉殖生物：使外源基因可遺傳</h3>
+<p>將外源DNA導入生殖系（germ line），使其可傳遞至後代的生物稱為<span class="key-term">轉殖生物（transgenic organism）</span>，過程稱<span class="key-term">轉殖（transgenesis）</span>。哺乳類常以顯微注射將DNA打入受精卵的原核；植物則常利用農桿菌（<i>Agrobacterium tumefaciens</i>）的<span class="key-term">Ti質體（Ti plasmid）</span>攜帶目的基因進入植物細胞。</p>
+
+<h3>轉錄報導基因：研究調控元件</h3>
+<p>若要研究某個「必要基因」（缺失即致死）的調控機制，直接破壞該基因會導致個體死亡。此時可製作<span class="key-term">轉錄報導基因（transcriptional reporter）</span>：保留原基因的調控序列，但將編碼區換成無害且易觀察的報導基因（如<i>lacZ</i>、GUS或GFP），藉此在不影響個體存活的前提下研究調控元件的功能（如果蠅 <i>even-skipped</i> 基因條紋增強子的經典實驗）。</p>
+
+<h3>基因剔除（Knockout）：同源重組</h3>
+<div class="box">
+<div class="box-title">🧬 剔除鼠（Knockout mouse）製作流程</div>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>構築帶NEO<sup>R</sup>（插入目標基因中）與TK基因（在末端）的靶向DNA</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>導入胚幹細胞（ES cells）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>雙重篩選：新黴素抗性＋更昔洛韋敏感（篩出同源重組細胞）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>植入受贈胚胎，發育為嵌合鼠</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span>雜交育種得到純種剔除鼠</div>
+</div>
+</div>
+
+<p>若剔除基因會導致胚胎致死，可改用<span class="key-term">條件式剔除鼠（conditional knockout）</span>，搭配位點專一重組酶只在特定組織／時期剔除基因。</p>
+
+<h3>基因體編輯：TALEN與CRISPR/Cas9</h3>
+<p><span class="key-term">基因體編輯（genome editing）</span>直接在基因體特定位置誘發<span class="key-term">雙股斷裂（double-stranded break, DSB）</span>，再經非同源末端接合或同源修復完成基因刪除／置換。</p>
+
+<div class="tip">💡 <b>CRISPR/Cas9</b>：源自細菌對抗噬菌體的免疫系統。導入一段<span class="key-term">嚮導RNA（guide RNA）</span>與Cas9核酸酶，嚮導RNA配對至目標序列後，Cas9即在該處切出雙股斷裂，達成精準基因編輯。相較傳統同源重組剔除法，CRISPR/Cas9更快速、便宜、可用於多種物種。</div>
+
+<h3>基因減量：RNA或蛋白質層級的抑制</h3>
+<p>與「剔除」（在DNA層級移除基因）不同，<span class="key-term">基因減量（gene knockdown）</span>是在RNA或蛋白質層級降低其量，常見方法為：</p>
+<ul>
+  <li><span class="key-term">RNA干擾（RNAi）</span>：導入雙股RNA誘發序列專一性的mRNA降解。</li>
+  <li><span class="key-term">嗎啉基寡核苷酸（morpholino）</span>：在RNAi效果不佳的物種（如蛙、斑馬魚）中，以化學修飾寡核苷酸阻斷剪接位點或轉譯起始位置。</li>
+</ul>
+
+<table class="compare-table">
+<tr><th>A：基因剔除（Knockout）</th><th>B：基因減量（Knockdown）</th><th>差異重點</th></tr>
+<tr>
+  <td>作用於DNA／基因體層級，永久移除或置換基因</td>
+  <td>作用於RNA或蛋白質層級，暫時降低表現量</td>
+  <td>作用層級與可逆性</td>
+</tr>
+<tr>
+  <td>以同源重組或CRISPR/Cas9等基因體編輯技術達成</td>
+  <td>以RNAi、morpholino等技術達成</td>
+  <td>使用技術</td>
+</tr>
+<tr>
+  <td>效果穩定、可遺傳給後代</td>
+  <td>效果通常暫時、不遺傳，適合快速篩選表型</td>
+  <td>持久性與應用場景</td>
+</tr>
+</table>
+
+<h3>基因工程的實務應用</h3>
+<p>重組DNA技術已用於量產醫療用蛋白質（如人類胰島素、生長激素、血液凝固因子），以及改造農作物：例如導入<i>Bacillus thuringiensis</i>（<span class="key-term">Bt</span>）毒素基因增加抗蟲性，或培育富含β-胡蘿蔔素的「黃金米（Golden Rice）」以改善維生素A缺乏問題。</p>
+
+<h3>基因治療與倫理議題</h3>
+<p><span class="key-term">基因治療（gene therapy）</span>嘗試將正常基因導入患者細胞以治療遺傳疾病。早期以反轉錄病毒（retrovirus）為載體的SCID治療曾因病毒插入位點鄰近致癌基因而引發白血病，此現象稱<span class="key-term">插入型突變（insertional mutagenesis）</span>。目前傾向使用較安全的<span class="key-term">腺相關病毒（AAV）</span>載體，或發展RNA療法（如siRNA）與CRISPR搭配誘導性多能幹細胞（iPS cells）的策略。</p>
+
+<div class="clinical">
+<div class="box-title">🩺 臨床與倫理焦點</div>
+2018年一名科學家使用CRISPR編輯人類胚胎生殖系基因，引發全球科學界與倫理界高度爭議，最終導致其被判刑，並促成國際上對人類基因體編輯技術的監管討論。這提醒我們：技術能力的進步，需要同步建立倫理規範。
+</div>
+
+<div class="concept-check">
+<div class="box-title">✅ 概念檢核 21.4</div>
+若要在<i>E. coli</i>中生產人類蛋白質，需要哪些步驟？可能遇到什麼限制？（提示：需使用cDNA而非基因體DNA以避免內含子問題；還須考慮細菌缺乏真核生物的轉譯後修飾系統，可能影響蛋白質功能。）
+</div>
+
+</section>
+
+<!-- ===================== Key Takeaways ===================== -->
+<section id="sec5">
+<h2># Key Takeaways</h2>
+<div class="takeaways">
+<ol>
+  <li><b>PCR</b>透過變性→黏合→延伸三步驟循環，以Taq聚合酶指數放大目標DNA序列。</li>
+  <li><b>限制酶</b>在特定序列切割DNA，產生齊平末端或黏性末端；黏性末端是建構重組DNA的關鍵。</li>
+  <li><b>電泳</b>依電荷與大小分離核酸／蛋白質；<b>南方／北方／西方墨點法</b>分別偵測DNA／RNA／蛋白質，皆需搭配專一探針（核酸探針或抗體）。</li>
+  <li><b>質體選殖</b>依賴抗生素抗性篩選＋藍白篩選；大片段DNA需用cosmid、BAC、YAC等載體。</li>
+  <li><b>基因體庫</b>含全部DNA（含內含子）；<b>cDNA庫</b>只含表現的編碼序列（無內含子），適合異源表現蛋白質。</li>
+  <li><b>Sanger定序</b>靠雙脫氧核苷酸終止鏈延伸；<b>次世代／第三代定序</b>大幅提升速度並降低成本，使全基因體定序普及化。</li>
+  <li><b>SNP、RFLP、VNTR/STR</b>是偵測個體基因體差異與DNA指紋鑑定的基礎。</li>
+  <li><b>單株抗體</b>專一性高、可再生；<b>多株抗體</b>辨識多位點但不可再生——是研究蛋白質最重要的工具。</li>
+  <li><b>基因剔除（同源重組／CRISPR）</b>在DNA層級永久移除基因；<b>基因減量（RNAi／morpholino）</b>在RNA或蛋白質層級暫時降低表現，兩者機制與可逆性不同。</li>
+  <li>重組DNA技術已廣泛應用於<b>醫療用蛋白質生產、基改作物與基因治療</b>，同時也帶來重要的倫理與監管議題。</li>
+</ol>
+</div>
+</section>
+
+</main>
+
+<footer>
+  第21章：細胞生物學的分子生物學技術｜學習指南
+  <br>
+  <button id="backToTop">⬆ Back to Top</button>
+</footer>
+
+<script>
+  document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  const navLinks = Array.from(document.querySelectorAll('#mainNav a'));
+  const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+
+  function setActive(){
+    let idx = 0;
+    const scrollPos = window.scrollY + 120;
+    sections.forEach((sec, i) => {
+      if(sec && sec.offsetTop <= scrollPos){
+        idx = i;
+      }
+    });
+    navLinks.forEach(a => a.classList.remove('active'));
+    navLinks[idx].classList.add('active');
+  }
+
+  window.addEventListener('scroll', setActive);
+  window.addEventListener('load', setActive);
+</script>
+
+</body>
+</html>

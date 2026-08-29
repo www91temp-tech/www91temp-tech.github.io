@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第13章：細胞骨架系統｜學習指南</title>
+<style>
+  :root{
+    --hue: 347.5;
+    --primary: hsl(347.5, 45%, 35%);
+    --primary-light: hsl(347.5, 45%, 92%);
+    --primary-mid: hsl(347.5, 45%, 75%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(347.5, 20%, 85%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    padding:2.5rem 1rem 2rem;
+    text-align:center;
+    background:linear-gradient(180deg, var(--primary-light), #fff);
+    border-bottom:1px solid var(--border);
+  }
+  header h1{
+    color:var(--primary);
+    font-size:2rem;
+    margin:0 0 .5rem;
+    letter-spacing:.05em;
+  }
+  header p.subtitle{
+    color:#555;
+    margin:0;
+    font-size:.95rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:2px solid var(--primary-light);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.25rem;
+    padding:.6rem 1rem;
+    box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  }
+  nav a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:.88rem;
+    padding:.45rem .85rem;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:860px;
+    margin:0 auto;
+    padding:2rem 1.25rem 4rem;
+  }
+  section{ padding-top:1.4rem; }
+  h2{
+    color:var(--primary);
+    font-size:1.5rem;
+    border-bottom:3px solid var(--primary-light);
+    padding-bottom:.5rem;
+    margin-top:3rem;
+  }
+  h3{
+    color:var(--primary);
+    font-size:1.18rem;
+    margin-top:2.2rem;
+    padding-left:.6rem;
+    border-left:5px solid var(--primary);
+  }
+  h4{
+    color:var(--primary);
+    font-size:1rem;
+    margin-top:1.4rem;
+  }
+  p{ margin:.8rem 0; }
+  .lead{
+    font-size:.98rem;
+    color:#333;
+  }
+  .box{
+    background:var(--primary-light);
+    border-left:6px solid var(--primary);
+    border-radius:8px;
+    padding:1rem 1.2rem;
+    margin:1.4rem 0;
+  }
+  .box h4{ margin-top:0; color:var(--primary); }
+  .box.flow{ background:#fff; border:2px solid var(--primary-light); }
+  .box.clinical{
+    background:#fff7f7;
+    border-left:6px solid var(--primary);
+  }
+  .box.clinical h4::before{ content:"🩺 "; }
+  .box.mechanism h4::before{ content:"⚙️ "; }
+  .box.pathway h4::before{ content:"➡️ "; }
+  .tag{
+    display:inline-block;
+    background:var(--primary);
+    color:#fff;
+    font-size:.72rem;
+    padding:.15rem .6rem;
+    border-radius:999px;
+    margin-bottom:.5rem;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.2rem 0;
+    font-size:.92rem;
+  }
+  caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:.4rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:.55rem .7rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  tr:nth-child(even) td{ background:#fafafa; }
+  .compare-table th{ background:var(--primary); }
+  .compare-table td:nth-child(3){ background:var(--primary-light); font-weight:600; }
+  .flow-steps{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.4rem;
+    margin:1rem 0;
+  }
+  .flow-step{
+    background:var(--primary-light);
+    border:1.5px solid var(--primary-mid);
+    border-radius:8px;
+    padding:.5rem .8rem;
+    font-size:.85rem;
+    flex:1 1 auto;
+    min-width:120px;
+    text-align:center;
+  }
+  .flow-arrow{
+    color:var(--primary);
+    font-weight:900;
+    font-size:1.2rem;
+  }
+  svg{ max-width:100%; height:auto; display:block; margin:1rem auto; }
+  .fig-caption{
+    text-align:center;
+    font-size:.82rem;
+    color:#555;
+    margin-top:-.6rem;
+    margin-bottom:1.2rem;
+  }
+  .term{ font-weight:700; color:var(--primary); }
+  ul, ol{ padding-left:1.4rem; }
+  li{ margin:.35rem 0; }
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:10px;
+    padding:1.5rem 1.8rem;
+  }
+  .takeaways li{ margin:.6rem 0; }
+  footer{
+    text-align:center;
+    padding:2.5rem 1rem 3rem;
+    background:var(--primary-light);
+    margin-top:3rem;
+  }
+  footer p{ color:var(--primary); font-weight:700; margin-bottom:1rem; }
+  #backToTop{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:.7rem 1.6rem;
+    border-radius:999px;
+    font-size:.95rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  #backToTop:hover{ opacity:.85; }
+
+  @media (max-width:1024px){
+    main{ max-width:94%; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.5rem; }
+    nav{ gap:.15rem; padding:.5rem .5rem; }
+    nav a{ font-size:.78rem; padding:.4rem .6rem; }
+    h2{ font-size:1.25rem; }
+    h3{ font-size:1.05rem; }
+    table{ font-size:.8rem; }
+    th, td{ padding:.4rem .45rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第13章：細胞骨架系統</h1>
+  <p class="subtitle">Cytoskeletal Systems — 細胞生物學學習指南</p>
+</header>
+
+<nav id="navbar">
+  <a href="#sec1" data-target="sec1">13.1 結構元件</a>
+  <a href="#sec2" data-target="sec2">13.2 微管</a>
+  <a href="#sec3" data-target="sec3">13.3 微絲</a>
+  <a href="#sec4" data-target="sec4">13.4 中間絲</a>
+  <a href="#sec5" data-target="sec5">13.5 整合網絡</a>
+  <a href="#takeaways" data-target="takeaways">重點回顧</a>
+</nav>
+
+<main>
+
+<p class="lead">真核細胞的細胞質並非均勻的膠狀物，而是由<span class="term">細胞骨架（cytoskeleton）</span>——一套遍布細胞質、連接細胞核與細胞膜的纖維與管狀網絡——所支撐。細胞骨架不僅賦予細胞形狀，也主導細胞運動、胞器運輸、細胞分裂與訊息傳遞等關鍵功能，並且是高度動態、可隨時組裝與拆解的結構。</p>
+
+<!-- ============ 13.1 ============ -->
+<section id="sec1">
+<h2>13.1 細胞骨架的主要結構元件</h2>
+
+<p>細胞骨架的核心特徵是<span class="term">模組化（modularity）</span>：少數幾種基本元件，在不同位置以不同排列方式組成各種細胞結構，就如同人體骨骼僅用骨頭、軟骨、肌腱、韌帶等有限元件建構出全身架構一樣。</p>
+
+<h3>真核生物的三種細胞骨架元件</h3>
+<p>電子顯微鏡與免疫螢光技術（immunofluorescence）確認了真核細胞中有三種主要的細胞骨架系統：<span class="term">微管（microtubule, MT）</span>、<span class="term">微絲（microfilament, MF）</span>與<span class="term">中間絲（intermediate filament, IF）</span>。三者的直徑、組成蛋白與功能各不相同（見下表）。此外，酵母菌中發現的<span class="term">septin</span>蛋白聚合物有時被稱為「第四種細胞骨架」，與細胞分裂時的收縮環（contractile ring）密切相關。</p>
+
+<table>
+<caption>表13-1　微管、微絲與中間絲的性質比較</caption>
+<tr><th>特性</th><th>微管 (MT)</th><th>微絲 (MF)</th><th>中間絲 (IF)</th></tr>
+<tr><td>組成單體</td><td>α-tubulin、β-tubulin</td><td>G-actin</td><td>六大類蛋白（見表13-4）</td></tr>
+<tr><td>直徑</td><td>約25 nm</td><td>約7 nm</td><td>約8–12 nm</td></tr>
+<tr><td>結構</td><td>13條原絲組成的中空管</td><td>兩股F-actin纏繞</td><td>8條原絲，末端交錯重疊</td></tr>
+<tr><td>極性</td><td>有正端(+)、負端(−)</td><td>有正端(+)、負端(−)</td><td>無已知極性</td></tr>
+<tr><td>結合核苷酸</td><td>GTP</td><td>ATP</td><td>無</td></tr>
+<tr><td>代表功能</td><td>染色體移動、胞內運輸、細胞形狀、纖毛/鞭毛運動</td><td>肌肉收縮、細胞爬行、細胞質流動、胞質分裂</td><td>結構支撐、核纖層形成、神經軸突強化</td></tr>
+</table>
+
+<h3>原核生物也有類似的細胞骨架系統</h3>
+<p>細菌與古菌同樣具有功能上類似微絲、微管、中間絲的聚合系統。例如：桿狀細菌中的<span class="term">MreB</span>（類似肌動蛋白）維持細胞形狀並參與細胞分裂；<span class="term">FtsZ</span>（類似微管蛋白）決定細菌分裂的位置；<span class="term">crescentin</span>（類似中間絲蛋白）則調控某些細菌的細胞形狀。雖然這些蛋白質在胺基酸序列上與真核同源蛋白差異很大，但X光晶體繞射顯示其聚合後的整體結構高度相似，且都能結合相同種類的核苷酸（GTP、ATP）。</p>
+
+<div class="box">
+<h4>知識延伸</h4>
+<p>粒線體與葉綠體也會製造FtsZ蛋白，並定位於胞器分裂位置，這項發現支持了真核細胞胞器起源於內共生原核生物的理論。</p>
+</div>
+
+<h3>細胞骨架是動態組裝與拆解的</h3>
+<p>細胞骨架最為人熟知的功能之一是驅動細胞運動：微絲是肌肉收縮纖維的核心成分，微管則構成纖毛與鞭毛（flagella）的結構骨幹。隨著顯微技術進步，科學家發現大多數細胞會依時間與位置動態地調控特定細胞骨架結構的組裝與拆解，這也是本章後續各節的核心主題。</p>
+
+</section>
+
+<!-- ============ 13.2 ============ -->
+<section id="sec2">
+<h2>13.2 微管 Microtubules</h2>
+<p>微管（MTs）是細胞骨架中最大的結構元件，功能主軸都圍繞著「移動」：無論是移動細胞內部的物質，或是移動細胞外部的液體。</p>
+
+<h3>兩種微管：胞質微管與軸絲微管</h3>
+<ul>
+<li><span class="term">胞質微管（cytosolic microtubules）</span>：組織較鬆散、動態性高，負責維持軸突（axon）結構、決定植物細胞壁纖維排列方向、組成有絲分裂/減數分裂紡錘體，並引導胞器與囊泡的運輸方向。</li>
+<li><span class="term">軸絲微管（axonemal microtubules）</span>：高度有序且穩定，見於纖毛、鞭毛及其基部的基體（basal body）。</li>
+</ul>
+
+<h3>微管蛋白異二聚體：微管的建構單元</h3>
+<p>微管是外徑約25 nm、內徑約15 nm的中空圓柱，管壁通常由13條稱為<span class="term">原絲（protofilament）</span>的線性聚合物並排組成。每個原絲的基本單位是<span class="term">異二聚體（heterodimer）</span>——一分子α-tubulin加一分子β-tubulin以非共價方式緊密結合而成，正常情況下不會解離。</p>
+<p>α-與β-tubulin雖然胺基酸序列僅約40%相同，立體結構卻幾乎一致，各自具有：(1) N端的GTP結合區、(2) 可被微管毒素秋水仙素（colchicine）結合的中段區域、(3) C端可與微管結合蛋白（MAP）交互作用的區域。由於所有原絲中二聚體方向一致，整條微管因此具有<span class="term">極性（polarity）</span>——一端為正端(+)，一端為負端(−)。</p>
+
+<svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg">
+  <rect width="620" height="220" fill="#fff"/>
+  <text x="60" y="30" font-size="14" fill="hsl(347.5,45%,35%)" font-weight="700">微管橫截面（13條原絲圍成中空管）</text>
+  <g transform="translate(60,55)">
+    <ellipse cx="70" cy="70" rx="70" ry="70" fill="none" stroke="hsl(347.5,45%,75%)" stroke-width="3"/>
+    <ellipse cx="70" cy="70" rx="42" ry="42" fill="hsl(347.5,45%,92%)" stroke="hsl(347.5,45%,35%)" stroke-dasharray="3 3"/>
+    <text x="45" y="75" font-size="11" fill="#555">lumen 內腔</text>
+    <g id="dots"></g>
+    <script><![CDATA[]]></script>
+  </g>
+  <!-- protofilament dots around circle -->
+  <g transform="translate(130,125)">
+    <circle cx="0" cy="-70" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="35" cy="-60" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="60" cy="-35" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="70" cy="0" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="60" cy="35" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="35" cy="60" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="0" cy="70" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="-35" cy="60" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="-60" cy="35" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="-70" cy="0" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="-60" cy="-35" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="-35" cy="-60" r="8" fill="hsl(347.5,45%,35%)"/>
+    <circle cx="0" cy="-70" r="8" fill="hsl(347.5,45%,35%)"/>
+  </g>
+  <g transform="translate(340,45)">
+    <rect x="0" y="0" width="26" height="150" rx="13" fill="hsl(347.5,45%,92%)" stroke="hsl(347.5,45%,35%)" stroke-width="2"/>
+    <circle cx="13" cy="20" r="11" fill="hsl(347.5,45%,60%)"/>
+    <circle cx="13" cy="42" r="11" fill="hsl(347.5,45%,80%)"/>
+    <text x="45" y="24" font-size="12" fill="#333">β-tubulin</text>
+    <text x="45" y="46" font-size="12" fill="#333">α-tubulin</text>
+    <text x="-6" y="-8" font-size="13" fill="hsl(347.5,45%,35%)" font-weight="700">+ 端（生長快）</text>
+    <text x="-6" y="168" font-size="13" fill="hsl(347.5,45%,35%)" font-weight="700">− 端（生長慢）</text>
+    <line x1="0" y1="65" x2="26" y2="65" stroke="#999"/>
+    <text x="45" y="90" font-size="11" fill="#555">單一原絲，由多個</text>
+    <text x="45" y="105" font-size="11" fill="#555">αβ異二聚體堆疊而成</text>
+  </g>
+</svg>
+<p class="fig-caption">示意圖：微管橫截面由13條原絲圍成中空圓柱（左）；單一原絲由αβ-tubulin異二聚體重複堆疊、具方向性，因此整條微管有正端與負端之分（右）。（改繪自 Figure 13-3）</p>
+
+<p>大多數生物具有多種α-、β-tubulin<span class="term">同型體（isoform）</span>，這些同型體主要在C端序列上有差異，可能影響其與不同蛋白質的交互作用；tubulin也可經化學修飾（如乙醯化）而形成較穩定的微管。</p>
+<p>胞質微管通常為13原絲的<span class="term">單管（singlet）</span>；部分軸絲微管則更複雜，形成<span class="term">雙聯管（doublet）</span>或<span class="term">三聯管（triplet）</span>——由一條完整的A管與一到兩條不完整的B、C管組成，見於纖毛/鞭毛及基體、中心粒。</p>
+
+<h3>微管的組裝：成核、延伸與動態不穩定性</h3>
+<p>微管由tubulin二聚體的可逆聚合形成。體外實驗顯示，將含足量tubulin二聚體、GTP與Mg²⁺的溶液由0°C升溫至37°C，聚合反應即會啟動，過程分為三個階段：</p>
+
+<div class="flow-steps">
+  <div class="flow-step"><b>遲滯期 Lag</b><br>二聚體聚集成寡聚物「種子」（成核 nucleation）</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><b>延伸期 Elongation</b><br>tubulin二聚體快速加到微管兩端</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><b>平原期 Plateau</b><br>游離tubulin濃度受限，聚合與解聚達平衡</div>
+</div>
+<p class="fig-caption">圖13-4改繪：微管體外組裝的三階段動力學（以光散射法測定）。</p>
+
+<p>微管兩端組裝速率不同：組裝速度較快的一端稱<span class="term">正端（plus end）</span>，較慢的一端稱<span class="term">負端（minus end）</span>。當游離tubulin濃度介於正端與負端的<span class="term">臨界濃度（critical concentration）</span>之間時，正端持續聚合、負端持續解聚，形成<span class="term">跑步機效應（treadmilling）</span>——次單元從正端加入，沿著微管「移動」後最終從負端脫離。</p>
+
+<div class="box mechanism">
+<h4>機制：GTP帽與動態不穩定性（Dynamic Instability）</h4>
+<p>每個tubulin異二聚體結合兩個GTP：α-tubulin上的GTP不會被水解，β-tubulin上的GTP則會在加入微管後逐漸水解為GDP。Mitchison與Kirschner提出的<span class="term">動態不穩定模型</span>指出，微管族群同時存在「生長」與「縮短」兩種狀態：</p>
+<div class="flow-steps">
+  <div class="flow-step">GTP-tubulin快速加入正端 → 形成「GTP帽」</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">GTP帽穩定微管尖端，持續生長</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">游離tubulin濃度下降，GTP水解速度追上添加速度</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">GTP帽消失 →<b>「災難」catastrophe</b>，快速解聚</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">若重新形成GTP帽 →<b>「拯救」rescue</b>，恢復生長</div>
+</div>
+<p>災變（catastrophe）在正端更容易發生，且游離tubulin濃度愈高，災變機率愈低、拯救機率愈高。</p>
+</div>
+
+<h3>藥物如何影響微管組裝</h3>
+<p>多種天然與合成藥物可用於研究微管功能，其中<span class="term">秋水仙素（colchicine）</span>與<span class="term">紫杉醇／太平洋紫杉醇（paclitaxel/Taxol）</span>作用機制恰好相反，是課堂上最容易混淆的一組概念：</p>
+
+<table class="compare-table">
+<caption>本章易混淆概念比較①　秋水仙素 vs. 紫杉醇（Taxol）</caption>
+<tr><th>A：秋水仙素 Colchicine</th><th>B：紫杉醇 Paclitaxel (Taxol)</th><th>差異重點</th></tr>
+<tr><td>來源於秋水仙（autumn crocus）</td><td>來源於太平洋紫杉樹皮</td><td>來源不同</td></tr>
+<tr><td>結合β-tubulin，<b>抑制</b>二聚體加入微管，促使微管<b>解聚</b></td><td><b>穩定</b>已聚合的微管，<b>阻止解聚</b>，鎖住游離tubulin</td><td>作用方向相反</td></tr>
+<tr><td>阻斷有絲分裂紡錘體形成 → 抗有絲分裂</td><td>使細胞停滯於有絲分裂中期 → 同樣抗有絲分裂</td><td>殊途同歸：兩者都能阻斷細胞分裂，但機制相反</td></tr>
+<tr><td>近緣物：長春花鹼(vinblastine)、長春新鹼(vincristine)——用於癌症化療</td><td>用於乳癌等癌症治療</td><td>皆為臨床抗癌藥物</td></tr>
+</table>
+
+<div class="box">
+<h4>其他常用藥物一覽（表13-3節錄）</h4>
+<table>
+<tr><th>藥劑</th><th>來源</th><th>作用</th></tr>
+<tr><td>秋水仙素、colcemid</td><td>秋水仙</td><td>結合β-tubulin，抑制聚合</td></tr>
+<tr><td>Nocodazole（合成）</td><td>合成化合物</td><td>抑制聚合，效果易被沖洗逆轉，實驗常用</td></tr>
+<tr><td>長春花鹼／長春新鹼</td><td>長春花</td><td>使tubulin二聚體聚集，無法組裝</td></tr>
+<tr><td>紫杉醇 (Taxol)</td><td>太平洋紫杉樹皮</td><td>穩定微管，阻止解聚</td></tr>
+</table>
+</div>
+
+<h3>微管組織中心（MTOC）：決定微管從哪裡長出來</h3>
+<p>細胞內微管通常由<span class="term">微管組織中心（microtubule-organizing center, MTOC）</span>發起組裝，並錨定微管的一端。動物細胞間期最重要的MTOC是位於細胞核附近的<span class="term">中心體（centrosome）</span>，內含一對互相垂直的<span class="term">中心粒（centriole）</span>，其管壁由九組三聯管構成。中心體周圍散布的<span class="term">中心粒周物質（pericentriolar material）</span>含有<span class="term">γ-tubulin</span>，會與GRiP蛋白組成環狀的<span class="term">γ-tubulin環複合體（γ-TuRC）</span>，作為微管成核位點。</p>
+
+<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+ <rect width="560" height="220" fill="#fff"/>
+ <text x="20" y="24" font-size="14" fill="hsl(347.5,45%,35%)" font-weight="700">中心體作為微管組織中心（MTOC）</text>
+ <g transform="translate(280,130)">
+   <circle r="26" fill="hsl(347.5,45%,92%)" stroke="hsl(347.5,45%,35%)" stroke-width="2"/>
+   <rect x="-14" y="-30" width="10" height="20" fill="hsl(347.5,45%,55%)" transform="rotate(20)"/>
+   <rect x="4" y="-30" width="10" height="20" fill="hsl(347.5,45%,55%)" transform="rotate(-20)"/>
+   <text x="-40" y="55" font-size="11" fill="#555">中心粒 x2（互相垂直）</text>
+   <text x="-45" y="70" font-size="11" fill="#555">+ 周邊物質（γ-TuRC）</text>
+ </g>
+ <g stroke="hsl(347.5,45%,35%)" stroke-width="2" fill="none">
+  <line x1="280" y1="130" x2="120" y2="40"/>
+  <line x1="280" y1="130" x2="80" y2="130"/>
+  <line x1="280" y1="130" x2="120" y2="210"/>
+  <line x1="280" y1="130" x2="440" y2="40"/>
+  <line x1="280" y1="130" x2="480" y2="130"/>
+  <line x1="280" y1="130" x2="440" y2="210"/>
+ </g>
+ <text x="70" y="34" font-size="10" fill="hsl(347.5,45%,35%)">+ 端（朝細胞邊緣）</text>
+ <text x="30" y="126" font-size="10" fill="hsl(347.5,45%,35%)">+</text>
+ <text x="70" y="205" font-size="10" fill="hsl(347.5,45%,35%)">+</text>
+ <text x="420" y="34" font-size="10" fill="hsl(347.5,45%,35%)">+</text>
+ <text x="486" y="126" font-size="10" fill="hsl(347.5,45%,35%)">+</text>
+ <text x="420" y="205" font-size="10" fill="hsl(347.5,45%,35%)">+</text>
+ <text x="255" y="105" font-size="10" fill="#555">− 端錨定於中心體</text>
+</svg>
+<p class="fig-caption">中心體錨定微管的負端（−），微管由此向細胞周邊延伸，正端（+）朝外，是細胞內微管動態變化最活躍的位置。（改繪自 Figure 13-8/13-9）</p>
+
+<p>並非所有細胞都以中心體作為MTOC——例如高基氏體（Golgi apparatus）也是重要的非中心體MTOC，協助組織囊泡運輸相關的微管；植物與大多數真菌細胞則完全沒有中心粒，顯示中心粒並非MTOC形成的必要條件。有絲分裂期間，MTOC的微管成核活性會顯著提升，以利紡錘體形成。</p>
+
+<div class="box flow">
+<h4>研究技術：如何觀察細胞骨架的動態？</h4>
+<p>科學家利用可逆的<b>化學干擾劑（如秋水仙素、nocodazole）</b>搭配「沖洗實驗（wash-out experiment）」——先讓藥物抑制微管組裝，再將藥物洗去，觀察微管如何重新從中心體長出，藉此證實中心體錨定微管負端。此外，將<b>螢光標記的tubulin或GFP標記的+TIP蛋白（如EB1）</b>導入活細胞並以螢光顯微鏡即時攝影，是證實「動態不穩定性」確實發生在活細胞內的關鍵方法。</p>
+</div>
+
+<h3>微管結合蛋白調控微管的穩定性</h3>
+<p>微管結合蛋白（MT-binding proteins）依功能可分為穩定型與去穩定型兩大類：</p>
+
+<div class="box">
+<h4>穩定型 vs. 去穩定型微管結合蛋白</h4>
+<ol>
+<li><span class="term">微管相關蛋白（MAP，如Tau、MAP2）</span>：沿微管壁結合，防止微管被切斷，並以突出的「手臂」調控微管束的鬆緊。Tau形成緊密的軸突微管束，MAP2的手臂較長、束較鬆散。Tau過度磷酸化會形成神經纖維纏結（neurofibrillary tangles），是阿茲海默症等<span class="term">Tau病變（tauopathy）</span>的病理特徵。</li>
+<li><span class="term">+端追蹤蛋白（+-TIP，如EB1）</span>：專一結合並穩定微管正端，降低其發生災變的機率。</li>
+<li><span class="term">去穩定蛋白</span>：如<span class="term">stathmin/Op18</span>會結合游離tubulin阻止其聚合；<span class="term">catastrophins（如MCAK）</span>屬於驅動蛋白（kinesin）家族，直接促使微管正端解聚；<span class="term">katanin</span>則負責切斷既有的微管。</li>
+</ol>
+</div>
+
+<table class="compare-table">
+<caption>本章易混淆概念比較②　+TIP蛋白 vs. Catastrophins</caption>
+<tr><th>A：+TIP蛋白（如EB1）</th><th>B：Catastrophins（如MCAK）</th><th>差異重點</th></tr>
+<tr><td>結合微管正端並<b>穩定</b>它</td><td>作用於微管末端，促使原絲剝離、<b>去穩定</b></td><td>功能相反：一個保護、一個破壞</td></tr>
+<tr><td>降低災變（catastrophe）發生機率</td><td>增加災變發生機率，加速解聚</td><td>對微管動態不穩定性的效果相反</td></tr>
+<tr><td>非驅動蛋白家族</td><td>屬於驅動蛋白（kinesin）家族成員</td><td>蛋白家族來源不同</td></tr>
+</table>
+
+</section>
+
+<!-- ============ 13.3 ============ -->
+<section id="sec3">
+<h2>13.3 微絲 Microfilaments</h2>
+<p>微絲（MFs）直徑約7 nm，是三種細胞骨架元件中最細的一種，最為人熟知的功能是與肌凝蛋白（myosin）共同作用產生肌肉收縮，但也廣泛參與細胞遷移、變形蟲運動、細胞質流動、胞質分裂（cytokinesis）及細胞形狀維持。</p>
+
+<h3>肌動蛋白：微絲的建構單元</h3>
+<p>肌動蛋白（actin）是真核細胞中含量最豐富的蛋白質之一，單體形式稱<span class="term">G-actin（球狀肌動蛋白）</span>，聚合後稱<span class="term">F-actin（絲狀肌動蛋白）</span>。G-actin單體在適當條件下以兩股螺旋方式纏繞聚合，約每13.5個單體形成半圈螺旋。肌動蛋白依序列可分為肌肉型（α-actin）與非肌肉型（β-、γ-actin），後兩者在細胞內的分布位置與交互作用蛋白也有所不同。</p>
+
+<h3>微絲的組裝、極性與跑步機效應</h3>
+<p>如同tubulin，G-actin的聚合也經歷遲滯期（成核）與延伸期。微絲同樣具有極性：生長較快的一端稱<span class="term">倒鉤端／正端（barbed/plus end）</span>，生長較慢的一端稱<span class="term">尖端／負端（pointed/minus end）</span>——此命名來自肌凝蛋白S1片段結合微絲後所產生的箭頭狀圖案。細胞內G-actin幾乎只加到正端，因為<span class="term">profilin</span>蛋白會阻止其加到負端。ATP會在單體加入後逐漸水解為ADP，因此微絲末端多為ATP-actin，主體則多為ADP-actin。</p>
+
+<h3>藥物如何影響微絲聚合</h3>
+<table>
+<tr><th>藥劑</th><th>來源</th><th>作用</th></tr>
+<tr><td>Cytochalasin D</td><td>真菌代謝物</td><td>封住正端，阻止新單體加入</td></tr>
+<tr><td>Latrunculin A</td><td>紅海海綿</td><td>螯合肌動蛋白單體，使其無法聚合</td></tr>
+<tr><td>Phalloidin（毒鵝膏鹼）</td><td>死亡帽真菌</td><td>穩定已聚合的微絲，阻止解聚</td></tr>
+</table>
+
+<h3>細胞如何動態組裝出不同的肌動蛋白結構</h3>
+<p>在爬行細胞（crawling cell）中，肌動蛋白依位置與功能組裝成截然不同的結構：</p>
+
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+ <rect width="640" height="220" fill="#fff"/>
+ <ellipse cx="320" cy="120" rx="270" ry="80" fill="hsl(347.5,45%,96%)" stroke="hsl(347.5,45%,75%)" stroke-width="2"/>
+ <text x="40" y="120" font-size="12" fill="hsl(347.5,45%,35%)" font-weight="700">尾端（trailing edge）</text>
+ <text x="500" y="120" font-size="12" fill="hsl(347.5,45%,35%)" font-weight="700">前緣（leading edge）</text>
+ <line x1="130" y1="118" x2="500" y2="118" stroke="hsl(347.5,45%,45%)" stroke-width="4"/>
+ <text x="250" y="105" font-size="11" fill="#333">應力纖維 stress fiber（收縮束）</text>
+ <ellipse cx="320" cy="120" rx="200" ry="55" fill="none" stroke="hsl(347.5,45%,55%)" stroke-width="2" stroke-dasharray="4 3"/>
+ <text x="280" y="185" font-size="11" fill="#333">皮質層 cortex（凝膠狀網狀結構）</text>
+ <path d="M500 100 Q560 90 590 60 Q560 100 590 120 Q560 140 590 170 Q560 150 500 140 Z" fill="hsl(347.5,45%,88%)" stroke="hsl(347.5,45%,35%)"/>
+ <text x="500" y="45" font-size="11" fill="#333">葉狀偽足 lamellipodium（分支網狀）</text>
+ <line x1="560" y1="55" x2="620" y2="45" stroke="hsl(347.5,45%,35%)" stroke-width="3"/>
+ <line x1="558" y1="65" x2="622" y2="70" stroke="hsl(347.5,45%,35%)" stroke-width="3"/>
+ <text x="590" y="35" font-size="11" fill="#333">指狀偽足 filopodium（平行束）</text>
+</svg>
+<p class="fig-caption">爬行細胞中肌動蛋白的多種結構：尾端的應力纖維提供收縮力；細胞皮質為鬆散網狀結構；前緣的葉狀偽足含分支網絡、指狀偽足含平行束狀肌動蛋白，兩者的正端皆朝向細胞外側。（改繪自 Figure 13-14）</p>
+
+<h3>肌動蛋白結合蛋白：精細調控微絲的長度與組織</h3>
+<p>細胞利用多種<span class="term">肌動蛋白結合蛋白（actin-binding proteins）</span>來控制微絲的聚合位置、長度與排列方式：</p>
+
+<div class="box">
+<ul>
+<li><b>單體調控蛋白：</b>thymosin β4會螯合G-actin使其無法聚合；profilin則促進G-actin加到正端；ADF/cofilin促進負端單體週轉，並可切斷微絲、產生新的正端。</li>
+<li><b>成核蛋白：</b>Arp2/3複合體在既有微絲側邊形成分支狀新絲（受WASP家族蛋白活化）；formin則以二聚體形式結合正端，持續性地拉長絲狀結構，並可招募profilin-actin複合物。</li>
+<li><b>端帽蛋白：</b>CapZ封住正端阻止加成/流失；tropomodulin封住負端。</li>
+<li><b>交聯蛋白：</b>filamin將交錯的微絲「拼接」成三維網狀結構。</li>
+<li><b>切斷蛋白：</b>gelsolin切斷微絲並為新暴露的正端加帽，使皮質凝膠軟化液化。</li>
+<li><b>束狀化蛋白：</b>α-actinin見於focal adhesion；fascin使指狀偽足內的微絲緊密成束。</li>
+</ul>
+</div>
+
+<div class="flow-steps">
+  <div class="flow-step"><b>Arp2/3路徑</b><br>WASP活化Arp2/3 → 側邊成核出分支 → 正端延伸推動細胞膜 → capping蛋白終止延伸</div>
+  <span class="flow-arrow">vs</span>
+  <div class="flow-step"><b>Formin路徑</b><br>Formin二聚體結合正端 → 招募profilin-actin複合物 → 持續延伸絲狀束</div>
+</div>
+<p class="fig-caption">分支網絡（葉狀偽足）與平行束（指狀偽足）分別由Arp2/3與Formin兩套不同機制驅動。（改繪自 Figure 13-20）</p>
+
+<h3>微絨毛（Microvilli）：高度有序的肌動蛋白束範例</h3>
+<p>腸道黏膜細胞表面密布的<span class="term">微絨毛（microvillus）</span>，核心由緊密的微絲束構成：正端朝向頂端、嵌入電子緻密斑；肌動蛋白束狀化蛋白<span class="term">fimbrin</span>與<span class="term">villin</span>將微絲緊密交聯，並以<span class="term">myosin I</span>與<span class="term">calmodulin</span>將微絲側向連接至細胞膜。微絨毛基部延伸入由myosin II與spectrin構成的<span class="term">終端網（terminal web）</span>，賦予微絨毛穩固的直立結構，可使細胞表面積增加約20倍，有利於營養吸收。</p>
+
+<h3>連接肌動蛋白與細胞膜的蛋白</h3>
+<p>微絲要能對細胞膜施力，需靠連接蛋白錨定於跨膜蛋白，例如band 4.1超家族（含ezrin、radixin、moesin）。紅血球細胞膜下方由<span class="term">spectrin</span>網絡支撐，並經短鏈肌動蛋白交聯，再由<span class="term">ankyrin</span>與band 4.1連接至跨膜蛋白，賦予紅血球膜強度與彈性。</p>
+
+<h3>Rho家族GTPases：調控肌動蛋白結構的分子開關</h3>
+<p><span class="term">Rho GTPases</span>是一群單體G蛋白，作用如同分子開關：結合GTP時為「開」，水解為GDP後轉為「關」。三個關鍵成員——<span class="term">Rho</span>、<span class="term">Rac</span>、<span class="term">Cdc42</span>——分別驅動不同的肌動蛋白結構：</p>
+
+<table>
+<caption>Rho家族GTPases與其對應的肌動蛋白結構</caption>
+<tr><th>GTPase</th><th>活化後產生的結構</th></tr>
+<tr><td>Rho</td><td>應力纖維（stress fibers）</td></tr>
+<tr><td>Rac</td><td>葉狀偽足（lamellipodia）</td></tr>
+<tr><td>Cdc42</td><td>指狀偽足（filopodia）</td></tr>
+</table>
+
+<div class="box pathway">
+<h4>Pathway：Rho GTPase的開關調控</h4>
+<div class="flow-steps">
+  <div class="flow-step">不活化 Rho-GDP</div>
+  <span class="flow-arrow">→ GEF →</span>
+  <div class="flow-step">活化 Rho-GTP</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">刺激肌動蛋白重塑</div>
+</div>
+<div class="flow-steps">
+  <div class="flow-step">活化 Rho-GTP</div>
+  <span class="flow-arrow">→ GAP（促進GTP水解）→</span>
+  <div class="flow-step">不活化 Rho-GDP</div>
+</div>
+<div class="flow-steps">
+  <div class="flow-step">不活化 Rho-GDP</div>
+  <span class="flow-arrow">→ GDI隔離 →</span>
+  <div class="flow-step">胞質中被螯合的 Rho-GDP</div>
+</div>
+<p><b>GEF</b>（guanine-nucleotide exchange factor）促進GDP換成GTP，活化Rho；<b>GAP</b>（GTPase-activating protein）促進GTP水解，使其失活；<b>GDI</b>（guanine-nucleotide dissociation inhibitor）則將不活化的Rho家族蛋白隔離於胞質中，阻止其定位到細胞膜發揮作用。</p>
+</div>
+
+<p>此外，膜上的<span class="term">磷脂醯肌醇雙磷酸（PIP₂）</span>可結合profilin、CapZ、ezrin等蛋白並調節其活性，是另一層調控肌動蛋白組裝的機制。</p>
+
+<div class="box clinical">
+<h4>臨床連結：李斯特菌如何劫持肌動蛋白殺人</h4>
+<p><i>Listeria monocytogenes</i>（李斯特菌）是孕婦飲食中需避免生食冷肉、未殺菌乳酪的原因之一，感染可能導致流產或新生兒嚴重感染。此菌的致病策略正是「劫持」宿主細胞的肌動蛋白聚合機制：</p>
+<div class="flow-steps">
+  <div class="flow-step">1. 表面蛋白internalin A結合宿主E-cadherin → 被吞噬</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">2. Listeriolysin O破壞吞噬體膜 → 逃入細胞質</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">3. 在細胞質中分裂增殖</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">4. 表面蛋白ActA活化Arp2/3，於菌體後方聚合出肌動蛋白「火箭」推進</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">5. 推入鄰近細胞，形成雙層膜</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">6. 感染循環重新開始</div>
+</div>
+<p>此機制與細胞前緣（leading edge）的肌動蛋白聚合原理相同，李斯特菌可藉此以每分鐘22 μm的速度移動，並在感染細胞的保護下躲避宿主免疫系統偵測。</p>
+</div>
+
+<div class="box">
+<h4>觀念釐清：CONCEPT CHECK 13.3</h4>
+<p>若以phalloidin處理培養的纖維母細胞，細胞會停止移動——這是因為phalloidin使既有微絲維持穩定、無法解聚，導致細胞前緣所需的肌動蛋白動態重組（聚合／解聚循環）被阻斷，說明細胞爬行必須依賴微絲的持續組裝與拆解，而非單純「有微絲存在」即可。</p>
+</div>
+
+</section>
+
+<!-- ============ 13.4 ============ -->
+<section id="sec4">
+<h2>13.4 中間絲 Intermediate Filaments</h2>
+<p>中間絲（IFs）直徑約8–12 nm，介於微管與微絲之間。中間絲不存在於植物細胞質中，但廣泛分布於動物細胞，扮演結構支撐與承受張力的角色。與微管、微絲不同，中間絲是細胞骨架中<span class="term">最穩定、最不易溶解</span>的成分——以清潔劑或高/低離子強度處理細胞後，微管與微絲多半消失，但IF網絡仍保留原本形狀，顯示其可能作為整個細胞骨架的支撐骨架。</p>
+
+<h3>中間絲蛋白具有組織特異性</h3>
+<p>不同於微管、微絲蛋白在演化上高度保守，中間絲蛋白依組織種類差異極大，可分為六大類：</p>
+
+<table>
+<caption>表13-4　中間絲的分類（節錄重點）</caption>
+<tr><th>類別</th><th>代表蛋白</th><th>主要分布組織</th><th>功能</th></tr>
+<tr><td>I／II</td><td>酸性／鹼性角蛋白（keratins）</td><td>上皮細胞</td><td>機械強度</td></tr>
+<tr><td>III</td><td>Vimentin、Desmin、GFAP</td><td>結締組織、肌肉細胞、膠質細胞</td><td>維持細胞形狀、支撐收縮機制</td></tr>
+<tr><td>IV</td><td>神經絲蛋白 NF-L/M/H</td><td>神經元</td><td>決定軸突強度與粗細</td></tr>
+<tr><td>V</td><td>核纖層蛋白 Lamin A/B/C</td><td>所有細胞</td><td>構成核纖層，支撐細胞核形狀</td></tr>
+<tr><td>VI</td><td>Nestin</td><td>神經幹細胞</td><td>尚不明確</td></tr>
+</table>
+
+<p>由於腫瘤細胞會保留其原始組織來源的中間絲蛋白特徵，臨床上可利用<span class="term">中間絲分型（IF typing）</span>作為癌症診斷的輔助工具。</p>
+
+<h3>中間絲由纖維狀次單元逐步組裝</h3>
+<p>與球狀的actin、tubulin不同，中間絲的基本單位是<span class="term">纖維狀（fibrous）二聚體</span>，其中央桿狀結構域由四段α螺旋組成。組裝過程如下：</p>
+
+<div class="flow-steps">
+  <div class="flow-step">(a) 兩條IF多肽以中央結構域纏繞成二聚體</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">(b) 兩個二聚體側向錯位排列成四聚體（原絲）</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">(c) 原絲頭尾及側向交錯組裝</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">(d) 完整中間絲：任一橫切面約8條原絲厚</div>
+</div>
+<p class="fig-caption">中間絲的組裝：由纖維狀二聚體逐步堆疊成完整的中間絲，全程不具極性方向。（改繪自 Figure 13-23）</p>
+
+<h3>中間絲賦予組織機械強度</h3>
+<p>中間絲多分布於承受機械應力的區域，具有<span class="term">承受張力（tension-bearing）</span>的功能。基因改造小鼠角質細胞中的角蛋白若被破壞，皮膚細胞會變得脆弱易破——人類自然發生的角蛋白突變也會導致水疱性表皮鬆解症（epidermolysis bullosa simplex）等皮膚疾病。核纖層（由lamin A、B、C構成）會在有絲分裂開始時因磷酸化而解體，分裂後再去磷酸化重組，顯示中間絲並非靜態結構，而是可動態重塑的。IFs對化學藥劑相對不敏感，但<span class="term">丙烯醯胺（acrylamide）</span>——常見於部分加工食品與工業用品——可破壞部分IF網絡，機制尚不完全清楚。</p>
+
+</section>
+
+<!-- ============ 13.5 ============ -->
+<section id="sec5">
+<h2>13.5 細胞骨架是機械整合的網絡</h2>
+<p>雖然本章分別介紹了微管、微絲、中間絲三種元件，但實際上細胞的整體力學特性來自三者協同作用：</p>
+
+<table class="compare-table">
+<caption>本章易混淆概念比較③　三大細胞骨架元件的力學角色</caption>
+<tr><th>元件</th><th>力學特性</th><th>差異重點</th></tr>
+<tr><td>微管 (MT)</td><td>抵抗細胞受壓時的彎曲（壓縮力）</td><td>類似「支柱」</td></tr>
+<tr><td>微絲 (MF)</td><td>作為收縮元件，產生張力</td><td>類似「拉索」，主動出力</td></tr>
+<tr><td>中間絲 (IF)</td><td>具彈性，承受拉伸應力</td><td>類似「彈性繩」，被動緩衝</td></tr>
+</table>
+
+<p>三者的機械整合，是透過連接蛋白家族<span class="term">spectraplakin</span>（如<span class="term">plectin</span>）達成——plectin同時具有結合IF、MF、MT的位點，將三套系統交聯成具有機械韌性的整體網絡。</p>
+
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg">
+ <rect width="500" height="180" fill="#fff"/>
+ <line x1="60" y1="60" x2="440" y2="60" stroke="hsl(347.5,45%,55%)" stroke-width="6"/>
+ <text x="20" y="55" font-size="12" fill="#333">MT</text>
+ <path d="M60 130 Q150 100 250 130 T440 130" fill="none" stroke="hsl(347.5,45%,35%)" stroke-width="5"/>
+ <text x="20" y="135" font-size="12" fill="#333">IF</text>
+ <line x1="60" y1="160" x2="440" y2="160" stroke="hsl(347.5,45%,75%)" stroke-width="5" stroke-dasharray="8 4"/>
+ <text x="10" y="164" font-size="12" fill="#333">MF</text>
+ <circle cx="250" cy="105" r="10" fill="hsl(347.5,45%,35%)"/>
+ <text x="265" y="100" font-size="12" fill="hsl(347.5,45%,35%)" font-weight="700">Plectin</text>
+ <line x1="250" y1="105" x2="250" y2="60" stroke="#999" stroke-dasharray="2 2"/>
+ <line x1="250" y1="105" x2="250" y2="130" stroke="#999" stroke-dasharray="2 2"/>
+ <line x1="250" y1="105" x2="250" y2="160" stroke="#999" stroke-dasharray="2 2"/>
+</svg>
+<p class="fig-caption">Plectin作為交聯樞紐，連結微管、微絲與中間絲三套系統，形成機械整合的細胞骨架網絡。（改繪自 Figure 13-24）</p>
+
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="takeaways">
+<h2># Key Takeaways</h2>
+<div class="takeaways">
+<ul>
+<li><b>三大結構元件：</b>微管（MT，25 nm，tubulin，GTP）、微絲（MF，7 nm，actin，ATP）、中間絲（IF，8–12 nm，組織特異性蛋白，無核苷酸結合）。</li>
+<li>MT與MF皆具<b>極性（正端/負端）</b>，IF則<b>無極性</b>；正端通常生長較快。</li>
+<li><b>動態不穩定性（dynamic instability）</b>是微管的核心概念：GTP帽存在 → 生長；GTP帽消失 → 災變（catastrophe）快速解聚；重新形成GTP帽 → 拯救（rescue）。</li>
+<li><b>中心體／MTOC</b>錨定微管負端，γ-TuRC負責微管成核；MT正端朝細胞周邊延伸。</li>
+<li><b>秋水仙素</b>使微管解聚、<b>紫杉醇</b>使微管過度穩定——兩者機制相反但都能阻斷有絲分裂，是必考比較重點。</li>
+<li>肌動蛋白結合蛋白依功能分為：單體調控（thymosin β4、profilin）、成核（Arp2/3、formin）、加帽（CapZ、tropomodulin）、交聯（filamin）、切斷（gelsolin）、束狀化（α-actinin、fascin）。</li>
+<li><b>Rho家族GTPase</b>：Rho→應力纖維；Rac→葉狀偽足；Cdc42→指狀偽足；GEF活化、GAP去活化、GDI隔離，是訊息傳遞的重要調控範例。</li>
+<li>中間絲最穩定、耐清潔劑，具<b>組織特異性</b>，臨床可用於腫瘤來源鑑定（IF typing）。</li>
+<li>Plectin等spectraplakin蛋白將MT、MF、IF交聯，形成機械整合的細胞骨架，分別提供抗壓（MT）、張力收縮（MF）與彈性抗拉（IF）功能。</li>
+<li>李斯特菌利用ActA活化宿主Arp2/3系統形成肌動蛋白「火箭」，是理解肌動蛋白聚合機制常見的臨床應用實例。</li>
+</ul>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>第13章：細胞骨架系統｜學習指南</p>
+  <button id="backToTop">回到頂端 Back to Top</button>
+</footer>
+
+<script>
+  document.getElementById('backToTop').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  function onScroll(){
+    let currentId = sections[0].id;
+    const scrollPos = window.scrollY + 120;
+    sections.forEach(sec => {
+      if (sec.offsetTop <= scrollPos) {
+        currentId = sec.id;
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('data-target') === currentId);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll);
+</script>
+
+</body>
+</html>

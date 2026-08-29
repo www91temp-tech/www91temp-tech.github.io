@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第22章：神經元的電訊號與突觸傳遞｜學習指南</title>
+<style>
+  :root{
+    --hue: 145;
+    --main: hsl(145, 45%, 35%);
+    --main-dark: hsl(145, 45%, 26%);
+    --light: hsl(145, 45%, 92%);
+    --light2: hsl(145, 45%, 96%);
+    --text: #1a1a1a;
+    --border: hsl(145, 30%, 80%);
+    --warn: hsl(25, 70%, 45%);
+    --warn-light: hsl(25, 70%, 95%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    background:#fff;
+    line-height:1.85;
+    font-size:16px;
+  }
+  header{
+    padding:2.6rem 1.5rem 2rem;
+    text-align:center;
+    background:linear-gradient(180deg, var(--light2), #fff);
+    border-bottom:1px solid var(--border);
+  }
+  header h1{
+    margin:0 auto;
+    max-width:900px;
+    color:var(--main);
+    font-size:1.9rem;
+    font-weight:700;
+    letter-spacing:0.02em;
+  }
+  header p.subtitle{
+    margin:0.7rem auto 0;
+    max-width:700px;
+    color:#555;
+    font-size:0.95rem;
+  }
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:0.3rem;
+    padding:0.7rem 1rem;
+    box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-size:0.9rem;
+    padding:0.5rem 0.9rem;
+    border-radius:999px;
+    transition:background .2s, color .2s;
+    white-space:nowrap;
+  }
+  nav a:hover{background:var(--light);}
+  nav a.active{
+    background:var(--main);
+    color:#fff;
+    font-weight:700;
+  }
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:1rem 1.4rem 3rem;
+  }
+  section{padding-top:1.2rem; margin-top:1rem;}
+  h2{
+    color:var(--main);
+    font-size:1.5rem;
+    border-bottom:3px solid var(--light);
+    padding-bottom:0.5rem;
+    margin-top:3rem;
+  }
+  h3{
+    color:var(--main-dark);
+    font-size:1.18rem;
+    margin-top:2.2rem;
+    padding-left:0.6rem;
+    border-left:5px solid var(--main);
+  }
+  h4{
+    color:var(--main-dark);
+    font-size:1.02rem;
+    margin-top:1.4rem;
+  }
+  p{margin:0.85rem 0;}
+  ul, ol{padding-left:1.4rem;}
+  li{margin:0.4rem 0;}
+  strong{color:var(--main-dark);}
+  .term-en{color:#666; font-weight:400;}
+
+  .box{
+    background:var(--light2);
+    border:1px solid var(--border);
+    border-left:5px solid var(--main);
+    border-radius:8px;
+    padding:1rem 1.2rem;
+    margin:1.3rem 0;
+  }
+  .box-title{
+    font-weight:700;
+    color:var(--main);
+    margin-bottom:0.4rem;
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+  }
+  .clinical{
+    background:var(--warn-light);
+    border:1px solid hsl(25,70%,80%);
+    border-left:5px solid var(--warn);
+    border-radius:8px;
+    padding:1rem 1.2rem;
+    margin:1.3rem 0;
+  }
+  .clinical .box-title{color:var(--warn);}
+
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+    gap:0.4rem;
+    margin:1.2rem 0;
+    overflow-x:auto;
+    padding-bottom:0.4rem;
+  }
+  .flow-step{
+    background:var(--light2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:0.7rem 0.9rem;
+    min-width:150px;
+    flex:1 1 150px;
+    font-size:0.88rem;
+  }
+  .flow-step .num{
+    display:inline-block;
+    background:var(--main);
+    color:#fff;
+    width:1.5rem;
+    height:1.5rem;
+    line-height:1.5rem;
+    text-align:center;
+    border-radius:50%;
+    font-weight:700;
+    font-size:0.8rem;
+    margin-bottom:0.4rem;
+  }
+  .flow-arrow{
+    align-self:center;
+    color:var(--main);
+    font-size:1.4rem;
+    font-weight:700;
+    flex:0 0 auto;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.2rem 0;
+    font-size:0.92rem;
+  }
+  table caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--main-dark);
+    margin-bottom:0.5rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:0.55rem 0.7rem;
+    text-align:left;
+  }
+  th{
+    background:var(--main);
+    color:#fff;
+    font-weight:700;
+  }
+  tr:nth-child(even) td{background:var(--light2);}
+
+  .compare-table th.colA{background:hsl(145,45%,35%);}
+  .compare-table th.colB{background:hsl(25,60%,45%);}
+  .compare-table th.colDiff{background:#555;}
+
+  figure{
+    margin:1.4rem 0;
+    text-align:center;
+    background:var(--light2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1rem;
+  }
+  figcaption{
+    font-size:0.85rem;
+    color:#444;
+    margin-top:0.6rem;
+    text-align:left;
+  }
+  figcaption b{color:var(--main-dark);}
+  svg{max-width:100%; height:auto;}
+
+  .key-takeaways{
+    background:var(--light);
+    border-radius:12px;
+    padding:1.5rem 1.6rem;
+    margin-top:1.5rem;
+  }
+  .key-takeaways h2{border-bottom:none; margin-top:0;}
+  .key-takeaways ol{padding-left:1.3rem;}
+  .key-takeaways li{margin:0.6rem 0;}
+
+  footer{
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    color:#666;
+    font-size:0.9rem;
+    border-top:1px solid var(--border);
+    margin-top:2rem;
+  }
+  #backToTop{
+    display:inline-block;
+    margin-top:1rem;
+    background:var(--main);
+    color:#fff;
+    border:none;
+    padding:0.6rem 1.3rem;
+    border-radius:999px;
+    font-size:0.9rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  #backToTop:hover{background:var(--main-dark);}
+
+  .badge{
+    display:inline-block;
+    background:var(--main);
+    color:#fff;
+    font-size:0.75rem;
+    padding:0.15rem 0.6rem;
+    border-radius:999px;
+    margin-right:0.4rem;
+  }
+
+  @media (max-width:1024px){
+    main{padding:1rem 1.1rem 3rem;}
+    header h1{font-size:1.6rem;}
+  }
+  @media (max-width:768px){
+    header{padding:2rem 1rem 1.5rem;}
+    header h1{font-size:1.32rem;}
+    header p.subtitle{font-size:0.85rem;}
+    nav{gap:0.15rem; padding:0.5rem 0.5rem;}
+    nav a{font-size:0.78rem; padding:0.42rem 0.6rem;}
+    h2{font-size:1.25rem;}
+    h3{font-size:1.05rem;}
+    .flow{flex-direction:column;}
+    .flow-arrow{transform:rotate(90deg); margin:0.1rem auto;}
+    table{font-size:0.8rem;}
+    th, td{padding:0.4rem 0.4rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第22章：神經元的電訊號與突觸傳遞</h1>
+  <p class="subtitle">Signal Transduction Mechanisms I: Electrical and Synaptic Signaling in Neurons</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#s1" data-target="s1">22.1 神經元與膜電位</a>
+  <a href="#s2" data-target="s2">22.2 電興奮性與動作電位</a>
+  <a href="#s3" data-target="s3">22.3 突觸傳遞與訊號整合</a>
+  <a href="#s4" data-target="s4">重點回顧</a>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+<section id="s1">
+<h2>22.1 神經元與膜電位</h2>
+
+<p>細胞膜最重要的能力之一，就是調控離子在細胞內外的流動。由於離子帶有電荷，細胞不僅能調控膜兩側的<strong>電位（electrical potential）</strong>，還能調控電流的流動。這種調控能力在<strong>神經元（neuron）</strong>身上發揮到極致——這正是本章的主題。本章前半部介紹神經元如何利用膜電位傳遞長距離電訊號；後半部則介紹訊號如何在細胞之間透過<strong>突觸（synapse）</strong>傳遞。</p>
+
+<h3>神經系統的基本組成</h3>
+<p>脊椎動物的神經系統分為兩大部分：<strong>中樞神經系統（central nervous system, CNS）</strong>（腦與脊髓）與<strong>周邊神經系統（peripheral nervous system, PNS）</strong>（其餘感覺與運動組成）。神經系統的細胞可分為兩大類：</p>
+<ul>
+  <li><strong>神經元（neuron）</strong>：負責發送或接收電訊號，又依功能分為：
+    <ul>
+      <li><strong>感覺神經元（sensory neuron）</strong>：偵測各類刺激</li>
+      <li><strong>運動神經元（motor neuron）</strong>：將訊號從中樞傳至肌肉或腺體（即其「支配 innervate」的組織）</li>
+      <li><strong>中間神經元（interneuron）</strong>：處理並轉送其他神經元傳來的訊號</li>
+    </ul>
+  </li>
+  <li><strong>膠細胞（glial cell）</strong>：CNS 中數量最多的細胞，包含：
+    <ul>
+      <li><strong>微膠細胞（microglia）</strong>：吞噬病原體、清除廢物</li>
+      <li><strong>寡突膠細胞（oligodendrocyte）</strong>與<strong>許旺細胞（Schwann cell）</strong>：分別在 CNS 與 PNS 形成絕緣的<strong>髓鞘（myelin sheath）</strong></li>
+      <li><strong>星狀膠細胞（astrocyte）</strong>：構成<strong>血腦障壁（blood-brain barrier）</strong>，管制物質進出細胞外液</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>神經元的構造</h3>
+<p>神經元雖形態多樣，但共享一些基本構造：<strong>細胞本體（cell body）</strong>含有細胞核與一般胞器；<strong>樹突（dendrite）</strong>負責接收並整合訊號；<strong>軸突（axon）</strong>負責將訊號傳出，有時可長達一公尺以上。軸突內的細胞質稱為<strong>軸漿（axoplasm）</strong>。許多脊椎動物軸突外包覆不連續的髓鞘，髓鞘之間的裸露處稱為<strong>蘭氏結（node of Ranvier）</strong>。軸突末端分支終止於<strong>突觸小球（synaptic bouton）</strong>，負責把訊號傳給下一個細胞（神經元、肌肉或腺體）。</p>
+
+<figure>
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- dendrites -->
+  <g stroke="var(--main)" stroke-width="2.5" fill="none">
+    <path d="M60,60 L100,95"/>
+    <path d="M50,90 L100,105"/>
+    <path d="M55,130 L100,120"/>
+    <path d="M60,165 L100,135"/>
+    <path d="M40,110 L95,113"/>
+  </g>
+  <text x="35" y="45" font-size="13" fill="#1a1a1a">樹突</text>
+  <text x="20" y="60" font-size="10" fill="#666">dendrites</text>
+
+  <!-- cell body -->
+  <ellipse cx="135" cy="120" rx="42" ry="36" fill="hsl(145,45%,92%)" stroke="var(--main)" stroke-width="2.5"/>
+  <circle cx="135" cy="120" r="14" fill="hsl(145,45%,75%)" stroke="var(--main)" stroke-width="1.5"/>
+  <text x="103" y="180" font-size="13" fill="#1a1a1a">細胞本體</text>
+  <text x="98" y="195" font-size="10" fill="#666">cell body</text>
+
+  <!-- axon hillock -->
+  <path d="M175,120 L205,120" stroke="var(--main)" stroke-width="6" fill="none"/>
+  <text x="165" y="80" font-size="11" fill="#1a1a1a">軸丘 axon hillock</text>
+
+  <!-- axon with myelin segments -->
+  <line x1="205" y1="120" x2="600" y2="120" stroke="var(--main)" stroke-width="3"/>
+  <g fill="hsl(145,45%,80%)" stroke="var(--main)" stroke-width="1.5">
+    <rect x="215" y="108" width="60" height="24" rx="10"/>
+    <rect x="290" y="108" width="60" height="24" rx="10"/>
+    <rect x="365" y="108" width="60" height="24" rx="10"/>
+    <rect x="440" y="108" width="60" height="24" rx="10"/>
+  </g>
+  <text x="278" y="102" font-size="10" fill="var(--main-dark)">蘭氏結</text>
+  <text x="353" y="102" font-size="10" fill="var(--main-dark)">蘭氏結</text>
+  <text x="330" y="160" font-size="13" fill="#1a1a1a">軸突（髓鞘化）</text>
+  <text x="300" y="175" font-size="10" fill="#666">axon with myelin sheath</text>
+
+  <!-- boutons -->
+  <g stroke="var(--main)" stroke-width="2" fill="none">
+    <path d="M600,120 L640,95"/>
+    <path d="M600,120 L645,120"/>
+    <path d="M600,120 L640,145"/>
+  </g>
+  <circle cx="640" cy="95" r="6" fill="hsl(145,45%,60%)"/>
+  <circle cx="645" cy="120" r="6" fill="hsl(145,45%,60%)"/>
+  <circle cx="640" cy="145" r="6" fill="hsl(145,45%,60%)"/>
+  <text x="600" y="75" font-size="11" fill="#1a1a1a">突觸小球</text>
+  <text x="595" y="170" font-size="10" fill="#666">synaptic boutons</text>
+</svg>
+<figcaption><b>圖 22-1（重製）典型運動神經元的構造。</b>樹突接收訊號並傳向細胞本體；訊號自軸丘開始沿軸突傳出；髓鞘之間的裸露段為蘭氏結，是電活動集中的區域；軸突末端的突觸小球負責將訊號傳給下一個細胞。</figcaption>
+</figure>
+
+<h3>膜電位的基本原理</h3>
+<p><strong>膜電位（membrane potential, <em>V<sub>m</sub></em>）</strong>是所有細胞的共同特性，源自膜兩側正負電荷的不均勻分布。理解膜電位需掌握四個基本觀念：</p>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span><strong>擴散</strong><br>溶質由高濃度往低濃度擴散（例如細胞內 K⁺ 濃度高，傾向向外擴散）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><strong>電中性</strong><br>溶液中正負電荷需互相平衡，每個離子都有其「相對離子」（counterion）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><strong>電位（電壓）</strong><br>局部電荷分離即形成電位，此過程需要作功</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><strong>電流</strong><br>離子的淨移動形成電流，單位為安培（A）</div>
+</div>
+<p>靜止細胞內側通常帶負電、外側帶正電，這個穩定狀態下的電位稱為<strong>靜止膜電位（resting membrane potential）</strong>。以<strong>槍烏賊巨大軸突（squid giant axon）</strong>為例，其靜止膜電位約為 −60 mV。</p>
+
+<div class="box">
+<div class="box-title">🔬 關鍵技術：測量膜電位</div>
+<p>科學家利用直徑可達 0.5–1.0 mm 的槍烏賊巨大軸突，方便插入微電極（microelectrode）進行測量：一根置於細胞內，一根置於細胞外，兩者電位差經放大後即為靜止膜電位。若另加入刺激電極（stimulating electrode）短暫去極化膜電位，即可誘發並記錄<strong>動作電位（action potential）</strong>——這項技術由 Hodgkin 與 Huxley 建立，兩人因此於 1963 年獲頒諾貝爾獎。</p>
+</div>
+
+<p>神經元、肌肉細胞及胰島細胞等具有<strong>電興奮性（electrical excitability）</strong>：特定刺激會誘發膜電位在數毫秒內從負轉正、再轉回負值的快速變化，即動作電位（詳見 22.2 節）。</p>
+
+<h3>靜止膜電位取決於離子濃度與膜通透性</h3>
+<p>細胞質與細胞外液的離子組成不同：細胞外液富含 Na⁺ 與 Cl⁻；細胞質中的陰離子主要是無法穿越細胞膜的巨分子（蛋白質、RNA 等，以 M⁻ 表示）。這造成細胞內外離子濃度的巨大差異（見下表）。</p>
+
+<table>
+<caption>表 22-1　槍烏賊軸突與哺乳類神經元的離子濃度（mM）</caption>
+<thead>
+<tr><th rowspan="2">離子</th><th colspan="2">槍烏賊軸突</th><th colspan="2">哺乳類神經元（貓運動神經元）</th></tr>
+<tr><th>外側</th><th>內側</th><th>外側</th><th>內側</th></tr>
+</thead>
+<tbody>
+<tr><td>Na⁺</td><td>440</td><td>50</td><td>145</td><td>10</td></tr>
+<tr><td>K⁺</td><td>20</td><td>400</td><td>5</td><td>140</td></tr>
+<tr><td>Cl⁻</td><td>560</td><td>50</td><td>125</td><td>10</td></tr>
+</tbody>
+</table>
+
+<figure>
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg">
+  <text x="20" y="30" font-size="13" fill="var(--main-dark)" font-weight="700">細胞外 OUTSIDE</text>
+  <rect x="10" y="75" width="680" height="55" fill="hsl(145,45%,85%)" stroke="var(--main)" stroke-width="2"/>
+  <text x="300" y="107" font-size="11" fill="var(--main-dark)">細胞膜（脂雙層）</text>
+  <text x="20" y="185" font-size="13" fill="var(--main-dark)" font-weight="700">細胞內 INSIDE（含無法通透的 M⁻）</text>
+
+  <!-- pump -->
+  <rect x="70" y="85" width="55" height="35" rx="6" fill="hsl(145,45%,55%)"/>
+  <text x="60" y="65" font-size="11" fill="#1a1a1a">Na⁺/K⁺ 幫浦</text>
+  <path d="M85,85 L85,55" stroke="#c0392b" stroke-width="2" marker-end="url(#arrowUp)"/>
+  <text x="88" y="55" font-size="10" fill="#c0392b">3 Na⁺ 出</text>
+  <path d="M110,120 L110,150" stroke="#2471a3" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <text x="88" y="163" font-size="10" fill="#2471a3">2 K⁺ 入</text>
+
+  <!-- K leak -->
+  <rect x="230" y="85" width="45" height="35" rx="6" fill="hsl(145,45%,70%)"/>
+  <text x="215" y="65" font-size="11" fill="#1a1a1a">K⁺ 漏漣通道</text>
+  <path d="M252,120 L252,55" stroke="#2471a3" stroke-width="2" marker-end="url(#arrowUp)"/>
+  <text x="240" y="45" font-size="10" fill="#2471a3">K⁺ 出</text>
+
+  <!-- Na leak -->
+  <rect x="380" y="85" width="45" height="35" rx="6" fill="hsl(145,45%,70%)"/>
+  <text x="365" y="65" font-size="11" fill="#1a1a1a">Na⁺ 漏漣通道</text>
+  <path d="M402,55 L402,120" stroke="#c0392b" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <text x="390" y="163" font-size="10" fill="#c0392b">Na⁺ 入</text>
+
+  <!-- Cl leak -->
+  <rect x="530" y="85" width="45" height="35" rx="6" fill="hsl(145,45%,70%)"/>
+  <text x="515" y="65" font-size="11" fill="#1a1a1a">Cl⁻ 漏漣通道</text>
+  <path d="M552,120 L552,55" stroke="#7d3c98" stroke-width="2" marker-end="url(#arrowUp)"/>
+  <text x="538" y="45" font-size="10" fill="#7d3c98">Cl⁻ 出</text>
+
+  <defs>
+    <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,8 L4,0 L8,8 Z" fill="context-stroke"/></marker>
+    <marker id="arrowDown" markerWidth="8" markerHeight="8" refX="4" refY="8" orient="auto"><path d="M0,0 L8,0 L4,8 Z" fill="context-stroke"/></marker>
+  </defs>
+</svg>
+<figcaption><b>圖 22-4（重製）穩定態離子濃度的維持。</b>不受電壓調控、恆常開啟的<strong>漏漣通道（leak channel）</strong>讓 K⁺、Na⁺、Cl⁻ 依濃度梯度緩慢移動；<strong>Na⁺/K⁺ 幫浦</strong>則利用 ATP 主動將 3 個 Na⁺ 送出、2 個 K⁺ 送入，抵銷漏漣造成的離子滲漏。細胞內帶負電的巨分子（M⁻）無法通透膜，是造成淨負電位的主因。</figcaption>
+</figure>
+
+<p>因為 K⁺ 漏漣通道密度較高，<strong>K⁺ 是造成靜止膜電位的最主要離子</strong>。當 K⁺ 不斷流出，留下的巨分子陰離子（M⁻）缺乏相對離子，使細胞膜內側附近淨負電荷增加，外側淨正電荷增加，形成負的靜止膜電位。Na⁺/K⁺ 幫浦則負責抵銷 Na⁺ 的緩慢滲漏，並維持 K⁺ 的大濃度梯度，是靜止膜電位得以維持的基礎。</p>
+
+<h3>Nernst 方程式：單一離子的平衡電位</h3>
+<p>當某離子的電位吸引力與濃度梯度擴散力達到平衡，此狀態稱為<strong>電化學平衡（electrochemical equilibrium）</strong>，對應的膜電位稱為<strong>平衡電位（equilibrium potential）</strong>，也稱<strong>逆轉電位（reversal potential）</strong>。<strong>Nernst 方程式</strong>可計算「膜只對單一離子通透」時的平衡電位：</p>
+
+<div class="box">
+<div class="box-title">📐 Nernst 方程式</div>
+<p style="text-align:center; font-size:1.05rem;">
+E<sub>X</sub> = (RT / zF) · ln ( [X]<sub>外</sub> / [X]<sub>內</sub> )
+</p>
+<p>在 20°C、單價陽離子的簡化條件下，方程式化簡為：</p>
+<p style="text-align:center; font-size:1.05rem;">
+E<sub>X</sub> = 0.0581 · log<sub>10</sub> ( [X]<sub>外</sub> / [X]<sub>內</sub> ) 　(單位：V)
+</p>
+<p style="font-size:0.9rem; color:#444;">意即：離子濃度梯度每相差 10 倍，平衡電位就改變約 −58 mV。以槍烏賊軸突為例，E<sub>Na</sub> 約為 +55 mV，E<sub>K</sub> 約為 −75 mV。</p>
+</div>
+
+<h3>氯離子對膜電位的影響</h3>
+<p>K⁺ 向外擴散使膜電位更負；Na⁺ 向內流入則造成<strong>去極化（depolarization，膜電位變得較不負）</strong>。Cl⁻ 理論上會向內擴散使膜更負，但由於同時被負電位排斥，Cl⁻ 常與 Na⁺ 同時進入細胞，兩者效應相互抵銷。增加細胞對 Cl⁻ 的通透性會降低神經元的興奮性：一是造成<strong>過極化（hyperpolarization，膜電位變得比平常更負）</strong>；二是當膜對 Na⁺ 通透性增加時，部分 Cl⁻ 也會隨之進入，抑制去極化。這正是抑制性神經傳導物質作用機制的重要特徵（詳見 22.3 節）。</p>
+
+<h3>Goldman 方程式：多離子的綜合效應</h3>
+<p>真實細胞同時對 Na⁺、K⁺、Cl⁻ 都有一定通透性，Nernst 方程式一次只能處理一種離子，因此需要更完整的 <strong>Goldman（Goldman-Hodgkin-Katz）方程式</strong>，納入各離子的相對通透性（P）：</p>
+
+<div class="box">
+<div class="box-title">📐 Goldman 方程式</div>
+<p style="text-align:center; font-size:0.98rem;">
+V<sub>m</sub> = (RT/F) · ln [ (P<sub>K</sub>[K⁺]<sub>外</sub> + P<sub>Na</sub>[Na⁺]<sub>外</sub> + P<sub>Cl</sub>[Cl⁻]<sub>內</sub>) / (P<sub>K</sub>[K⁺]<sub>內</sub> + P<sub>Na</sub>[Na⁺]<sub>內</sub> + P<sub>Cl</sub>[Cl⁻]<sub>外</sub>) ]
+</p>
+<p style="font-size:0.9rem; color:#444;">由於 Cl⁻ 帶負電，其內外濃度項的分子分母位置與陽離子相反。以槍烏賊軸突為例（P<sub>K</sub>=1.0、P<sub>Na</sub>=0.04、P<sub>Cl</sub>=0.45），代入可得 V<sub>m</sub> ≈ −60.3 mV，與實測值 −60 mV 高度吻合。</p>
+</div>
+
+<p>當某離子的相對通透性遠高於其他離子時，Goldman 方程式會化簡為該離子的 Nernst 方程式：靜止時膜對 K⁺ 通透性最高，故 V<sub>m</sub> 接近 E<sub>K</sub>；若膜突然對 Na⁺ 通透性大增（如動作電位發生時），V<sub>m</sub> 便會趨近 E<sub>Na</sub>。</p>
+
+<table class="compare-table">
+<caption>💡 容易混淆的概念比較①：Nernst 方程式 vs. Goldman 方程式</caption>
+<thead><tr><th class="colA">Nernst 方程式</th><th class="colB">Goldman 方程式</th><th class="colDiff">差異重點</th></tr></thead>
+<tbody>
+<tr><td>只考慮單一離子</td><td>同時考慮 Na⁺、K⁺、Cl⁻ 等多種離子</td><td>處理的離子種類數量不同</td></tr>
+<tr><td>假設該離子已達電化學平衡</td><td>描述穩定態下的離子淨移動（未必平衡）</td><td>是否處於平衡狀態</td></tr>
+<tr><td>計算「平衡電位／逆轉電位」E<sub>X</sub></td><td>計算實際「膜電位」V<sub>m</sub></td><td>計算目標不同</td></tr>
+<tr><td>不含通透性（P）項</td><td>納入各離子的相對通透性 P<sub>K</sub>、P<sub>Na</sub>、P<sub>Cl</sub></td><td>是否考慮膜通透性差異</td></tr>
+</tbody>
+</table>
+
+</section>
+
+<!-- ============================================================ -->
+<section id="s2">
+<h2>22.2 電興奮性與動作電位</h2>
+
+<p>非興奮性細胞被輕微去極化後會自行恢復靜止電位；但電興奮性細胞（如神經元）達到相同去極化程度時，會觸發<strong>動作電位（action potential）</strong>。這是因為除了漏漣通道與 Na⁺/K⁺ 幫浦外，興奮性細胞膜上還有<strong>電壓閘控通道（voltage-gated channel）</strong>。</p>
+
+<h3>研究離子通道的技術</h3>
+<ul>
+  <li><strong>膜片鉗（patch clamping）</strong>：由 Erwin Neher 與 Bert Sakmann 發展（1991 年諾貝爾獎），可記錄單一通道的電流，是研究離子通道最重要的工具。</li>
+  <li><strong>蛙卵表現系統（frog oocyte）</strong>：可大量表現通道蛋白，並透過分子突變研究不同區域的功能。</li>
+  <li><strong>光遺傳學（optogenetics）</strong>：利用對光敏感的通道蛋白（如視紫質、channelrhodopsin），可在特定區域以光線局部活化或抑制神經元。</li>
+</ul>
+
+<div class="box">
+<div class="box-title">🔬 關鍵技術：膜片鉗（Patch Clamping）</div>
+<p>將直徑約 1 μm 的玻璃微吸管輕壓於細胞表面並施以吸力，使吸管與細胞膜間形成緊密封接，圈住的膜片通常只含一至數個離子通道。電流只能經由這些通道進出吸管，因此可精確測量單一通道的電流。膜片鉗有四種模式：</p>
+<ul>
+  <li><strong>緊密封接（cell-attached）</strong>：吸管貼附完整細胞</li>
+  <li><strong>全細胞模式（whole-cell）</strong>：強吸力破膜，記錄整個細胞的電流</li>
+  <li><strong>內面朝外（inside-out）</strong>：可對細胞質側施加藥劑</li>
+  <li><strong>外面朝外（outside-out）</strong>：可對細胞外側施加神經傳導物質等分子</li>
+</ul>
+<p style="font-size:0.9rem; color:#444;">實驗顯示，每次電壓閘控 Na⁺ 通道開啟都會傳導固定大小的電流（約 1 pA，相當於每秒約 600 萬個 Na⁺ 通過），證實通道具有「全有全無」的開／關特性。</p>
+</div>
+
+<h3>電壓閘控通道的構造：感測器與去活化</h3>
+<p>電壓閘控通道分為兩種結構型式：K⁺ 通道由 4 個獨立次單元組成（<strong>多聚體 multimeric</strong>）；Na⁺ 通道則是單一多肽含 4 個結構相似的功能域（<strong>單體蛋白 monomeric</strong>）。每個次單元／功能域都含 6 個跨膜螺旋（S1–S6）：</p>
+<ul>
+  <li><strong>S4 螺旋：電壓感測器（voltage sensor）</strong>——帶正電的胺基酸使通道能感應膜電位變化而開啟；若以中性胺基酸取代，通道將無法開啟。</li>
+  <li><strong>選擇性過濾器（selectivity filter）</strong>：通道孔道內精確排列的氧原子，讓失去水合層的 K⁺ 能精準結合，而較小的 Na⁺ 因無法與濾器充分作用而被排除，賦予通道離子選擇性。</li>
+  <li><strong>去活化顆粒（inactivating particle）</strong>：通道開啟一段時間後，此構造像「加上門鎖」般堵住孔道入口，使通道進入<strong>去活化狀態（channel inactivation）</strong>，須待膜電位恢復負值才能重新開啟。</li>
+</ul>
+
+<div class="clinical">
+<div class="box-title">🩺 臨床連結：通道病變（Channelopathy）</div>
+<p>電壓閘控離子通道的基因缺陷會導致多種神經疾病：某些 K⁺ 通道突變會造成<strong>運動失調（ataxia）</strong>；某型癲癇則與電壓閘控 Na⁺ 通道突變有關。</p>
+</div>
+
+<h3>動作電位的五個階段</h3>
+<p>靜止時，電壓閘控 Na⁺、K⁺ 通道多半關閉，此時漏漣通道使膜對 K⁺ 的通透性約為 Na⁺ 的 100 倍。當膜被輕微去極化，部分 Na⁺ 通道開啟，流入的 Na⁺ 又進一步去極化膜——這種去極化與通道開啟互相加強的<strong>正回饋迴路</strong>稱為 <strong>Hodgkin 循環</strong>，是動作電位「一旦啟動就爆發」的關鍵機制。</p>
+
+<figure>
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+  <!-- axes -->
+  <line x1="60" y1="40" x2="60" y2="290" stroke="#666" stroke-width="1.5"/>
+  <line x1="60" y1="290" x2="670" y2="290" stroke="#666" stroke-width="1.5"/>
+  <text x="10" y="45" font-size="11" fill="#444">mV</text>
+  <text x="620" y="308" font-size="11" fill="#444">時間(msec)</text>
+
+  <!-- reference dashed lines -->
+  <line x1="60" y1="243" x2="670" y2="243" stroke="#999" stroke-dasharray="4,3" stroke-width="1"/>
+  <text x="63" y="238" font-size="10" fill="#888">−60 mV（靜止）</text>
+  <line x1="60" y1="58" x2="670" y2="58" stroke="#999" stroke-dasharray="4,3" stroke-width="1"/>
+  <text x="63" y="53" font-size="10" fill="#888">+40 mV（峰值）</text>
+  <line x1="60" y1="271" x2="670" y2="271" stroke="#999" stroke-dasharray="4,3" stroke-width="1"/>
+  <text x="500" y="285" font-size="10" fill="#888">−75 mV（undershoot, ≈E_K）</text>
+
+  <!-- curve -->
+  <polyline points="60,243 127,243 160,206 193,58 260,262 327,271 393,252 460,243 527,243 593,243 660,243"
+    fill="none" stroke="var(--main)" stroke-width="3"/>
+
+  <!-- phase labels -->
+  <text x="70" y="228" font-size="10" fill="var(--main-dark)">① 靜止</text>
+  <text x="150" y="200" font-size="10" fill="var(--main-dark)">② 去極化</text>
+  <text x="215" y="70" font-size="10" fill="var(--main-dark)">閾值/峰值</text>
+  <text x="255" y="255" font-size="10" fill="var(--main-dark)">③ 再極化</text>
+  <text x="330" y="290" font-size="10" fill="var(--main-dark)">④ 過極化(undershoot)</text>
+  <text x="470" y="228" font-size="10" fill="var(--main-dark)">⑤ 回復靜止</text>
+</svg>
+<figcaption><b>圖 22-7（重製）動作電位期間的膜電位變化。</b>整個過程僅需數毫秒：由靜止電位（約 −60 mV）快速上升至峰值（約 +40 mV），再快速下降並短暫低於靜止值（約 −75 mV，接近 E<sub>K</sub>），最終回到靜止電位。</figcaption>
+</figure>
+
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span><strong>靜止狀態</strong><br>電壓閘控 Na⁺、K⁺ 通道皆關閉，V<sub>m</sub>≈−60 mV</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span><strong>去極化期</strong><br>去極化達閾值電位（threshold potential）後，大量 Na⁺ 通道開啟，V<sub>m</sub> 快速升至約 +40 mV（接近但不到 E<sub>Na</sub>≈+55 mV）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span><strong>再極化期</strong><br>Na⁺ 通道去活化，電壓閘控 K⁺ 通道開啟，K⁺ 外流使膜再極化</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span><strong>過極化期（undershoot）</strong><br>K⁺ 通道持續開啟，V<sub>m</sub> 短暫低於靜止值，接近 E<sub>K</sub>≈−75 mV</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span><strong>回復靜止</strong><br>電壓閘控 K⁺ 通道關閉，膜回到靜止電位</div>
+</div>
+
+<p><strong>重要觀念：</strong>單一動作電位期間，細胞質內 Na⁺、K⁺ 的濃度幾乎沒有明顯變化——膜電位只反映極少量離子造成的電荷差。動作電位後恢復靜止電位的過程，主要依賴離子的<strong>被動移動</strong>，並不需要 Na⁺/K⁺ 幫浦即時運作；幫浦的角色是在動作電位「之後」，長期維持離子梯度。</p>
+
+<h3>不反應期</h3>
+<table class="compare-table">
+<caption>💡 容易混淆的概念比較②：絕對不反應期 vs. 相對不反應期</caption>
+<thead><tr><th class="colA">絕對不反應期<br><span class="term-en">absolute refractory period</span></th><th class="colB">相對不反應期<br><span class="term-en">relative refractory period</span></th><th class="colDiff">差異重點</th></tr></thead>
+<tbody>
+<tr><td>發生於動作電位峰值後、再極化階段</td><td>發生於過極化（undershoot）階段</td><td>發生時間點不同</td></tr>
+<tr><td>Na⁺ 通道處於<strong>去活化狀態</strong>，無論刺激多強都無法重新開啟</td><td>Na⁺ 通道已恢復可開啟，但因 K⁺ 通道仍大量開啟使膜電位遠離閾值</td><td>限制原因不同</td></tr>
+<tr><td>完全無法誘發新的動作電位</td><td>需要更強的刺激才能誘發新的動作電位</td><td>能否誘發新動作電位</td></tr>
+</tbody>
+</table>
+<p>不反應期確保動作電位只能<strong>單方向傳播</strong>，因為訊號剛通過的區域暫時無法再被激發，防止訊號逆向回傳。</p>
+
+<h3>動作電位沿軸突的傳播</h3>
+<p>局部去極化可透過<strong>被動擴散（passive spread of depolarization）</strong>傳向鄰近區域，但訊號會隨距離而衰減。要長距離傳遞，動作電位必須逐點<strong>主動再生（propagation）</strong>。訊號從樹突被動擴散至軸丘（此處 Na⁺ 通道密度最高，最容易誘發動作電位），再沿軸突主動傳播。</p>
+
+<h4>無髓鞘軸突：連續傳播</h4>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>膜完全極化，靜止狀態</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>局部去極化，Na⁺ 湧入，鄰近區域被動去極化</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>鄰近區域達閾值，該處產生新動作電位</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>原區域 K⁺ 外流再極化；去極化持續向前推進</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span>此循環沿軸突重複，訊號持續前進而不衰減</div>
+</div>
+<p>由於每一點都「重新產生」全有全無的動作電位，訊號傳遞距離不會使強度衰減。</p>
+
+<h4>髓鞘化軸突：跳躍式傳導（Saltatory Conduction）</h4>
+<p>髓鞘由寡突膠細胞（CNS）或許旺細胞（PNS）以自身細胞膜層層包覆軸突形成，可降低膜的<strong>電容（capacitance）</strong>，使去極化訊號傳得更遠、更快。動作電位只能在蘭氏結（Na⁺ 通道高度集中處）產生，訊號因此「跳躍」於節點之間：</p>
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>動作電位於第一個蘭氏結產生（Na⁺ 湧入）</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>因髓鞘絕緣，去極化被動、快速地擴散至下一個蘭氏結</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>下個蘭氏結達閾值，產生新動作電位</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>循環重複，訊號如「跳躍」般沿節點前進</div>
+</div>
+<p>蘭氏結周圍具高度組織性：結區集中 Na⁺ 通道；<strong>近結旁區（paranodal region）</strong>以黏附蛋白固定髓鞘與軸突膜；<strong>近結旁鄰接區（juxtaparanodal region）</strong>則集中 K⁺ 通道。</p>
+
+<div class="clinical">
+<div class="box-title">🩺 臨床連結：多發性硬化症（Multiple Sclerosis, MS）</div>
+<p>MS 是一種自體免疫疾病，免疫系統攻擊並破壞髓鞘。去髓鞘化會大幅降低軸突膜的電阻（如同漏水的花園水管），使跳躍式傳導失效、傳導速度銳減，若影響支配肌肉的神經，將嚴重損害運動能力。</p>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<section id="s3">
+<h2>22.3 突觸傳遞與訊號整合</h2>
+
+<p>神經元之間，或神經元與肌肉、腺體之間的訊號傳遞發生在<strong>突觸（synapse）</strong>。傳遞訊號的一方稱<strong>突觸前神經元（presynaptic neuron）</strong>，接收的一方稱<strong>突觸後神經元（postsynaptic neuron）</strong>。突觸可分為兩大類：</p>
+
+<table class="compare-table">
+<caption>💡 容易混淆的概念比較③：電突觸 vs. 化學突觸</caption>
+<thead><tr><th class="colA">電突觸<br><span class="term-en">electrical synapse</span></th><th class="colB">化學突觸<br><span class="term-en">chemical synapse</span></th><th class="colDiff">差異重點</th></tr></thead>
+<tbody>
+<tr><td>透過<strong>間隙連接（gap junction）</strong>直接相連</td><td>兩神經元間隔約 20–50 nm 的<strong>突觸間隙（synaptic cleft）</strong>，無直接連接</td><td>細胞間有無直接通道相連</td></tr>
+<tr><td>離子直接流過間隙連接，去極化被動擴散</td><td>需先轉換為化學訊號（神經傳導物質）再轉回電訊號</td><td>訊號傳遞的媒介</td></tr>
+<tr><td>幾乎無延遲，速度極快</td><td>需經歷釋放、擴散、結合等步驟，有短暫延遲</td><td>傳遞速度</td></tr>
+<tr><td>常見於需要高速同步反應之處（如心肌）</td><td>神經系統中最常見的突觸型式，可放大訊號並精細調控（興奮或抑制）</td><td>功能特性</td></tr>
+</tbody>
+</table>
+
+<figure>
+<svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg">
+  <!-- electrical synapse -->
+  <text x="60" y="25" font-size="13" font-weight="700" fill="var(--main-dark)">(a) 電突觸</text>
+  <rect x="30" y="55" width="80" height="90" fill="hsl(145,45%,85%)" stroke="var(--main)" stroke-width="2"/>
+  <rect x="150" y="55" width="80" height="90" fill="hsl(145,45%,85%)" stroke="var(--main)" stroke-width="2"/>
+  <rect x="108" y="70" width="44" height="14" fill="hsl(145,45%,55%)"/>
+  <rect x="108" y="95" width="44" height="14" fill="hsl(145,45%,55%)"/>
+  <rect x="108" y="120" width="44" height="14" fill="hsl(145,45%,55%)"/>
+  <text x="35" y="165" font-size="10" fill="#444">突觸前</text>
+  <text x="160" y="165" font-size="10" fill="#444">突觸後</text>
+  <text x="95" y="45" font-size="9" fill="#444">間隙連接（connexon）</text>
+
+  <!-- chemical synapse -->
+  <text x="400" y="25" font-size="13" font-weight="700" fill="var(--main-dark)">(b) 化學突觸</text>
+  <rect x="370" y="55" width="80" height="70" fill="hsl(145,45%,85%)" stroke="var(--main)" stroke-width="2"/>
+  <circle cx="395" cy="75" r="5" fill="hsl(145,45%,50%)"/>
+  <circle cx="410" cy="85" r="5" fill="hsl(145,45%,50%)"/>
+  <circle cx="400" cy="100" r="5" fill="hsl(145,45%,50%)"/>
+  <rect x="510" y="55" width="80" height="70" fill="hsl(145,45%,92%)" stroke="var(--main)" stroke-width="2"/>
+  <g fill="#c0392b">
+    <circle cx="465" cy="80" r="2.5"/><circle cx="475" cy="90" r="2.5"/><circle cx="470" cy="70" r="2.5"/>
+  </g>
+  <rect x="500" y="60" width="6" height="60" fill="hsl(25,60%,55%)"/>
+  <text x="365" y="145" font-size="10" fill="#444">突觸前（突觸小球）</text>
+  <text x="505" y="145" font-size="10" fill="#444">突觸後（受器）</text>
+  <text x="440" y="45" font-size="9" fill="#444">突觸間隙</text>
+</svg>
+<figcaption><b>圖 22-12／22-13（重製）電突觸與化學突觸的構造比較。</b>(a) 電突觸以間隙連接直接相通；(b) 化學突觸中，突觸小球釋放的神經傳導物質（紅點）擴散穿過突觸間隙，與突觸後膜上的受器結合。</figcaption>
+</figure>
+
+<h3>神經傳導物質的種類</h3>
+<p><strong>神經傳導物質（neurotransmitter）</strong>需符合三項條件：① 加入突觸間隙即能引發相應反應；② 天然存在於突觸前神經元；③ 於神經元受刺激時適時釋放。常見種類如下：</p>
+
+<table>
+<caption>表 22-2　常見神經傳導物質（節錄）</caption>
+<thead><tr><th>類別</th><th>代表分子</th><th>功能傾向</th><th>作用位置</th></tr></thead>
+<tbody>
+<tr><td>乙醯膽鹼</td><td>Acetylcholine</td><td>興奮性（於骨骼肌）；其他部位可興奮或抑制</td><td>CNS、PNS、神經肌肉接合處</td></tr>
+<tr><td rowspan="2">兒茶酚胺<br><span class="term-en">catecholamine</span></td><td>Norepinephrine</td><td>興奮或抑制</td><td>CNS、PNS</td></tr>
+<tr><td>Dopamine</td><td>多為興奮性</td><td>CNS、PNS</td></tr>
+<tr><td rowspan="3">胺基酸及其衍生物</td><td>GABA（γ-胺基丁酸）</td><td>抑制性</td><td>CNS</td></tr>
+<tr><td>Glutamate</td><td>興奮性</td><td>CNS</td></tr>
+<tr><td>Glycine</td><td>抑制性</td><td>CNS</td></tr>
+<tr><td>神經胜肽</td><td>Enkephalin（腦啡肽）</td><td>多為抑制性（鎮痛）</td><td>CNS</td></tr>
+<tr><td>內源性大麻素</td><td>Anandamide</td><td>抑制性</td><td>CNS</td></tr>
+<tr><td>氣體</td><td>Nitric oxide（一氧化氮）</td><td>興奮或抑制</td><td>PNS</td></tr>
+</tbody>
+</table>
+
+<p><strong>乙醯膽鹼（acetylcholine）</strong>是脊椎動物 CNS 外突觸與神經肌肉接合處最常見的興奮性神經傳導物質，使用此傳導物質的突觸稱為<strong>膽鹼激性突觸（cholinergic synapse）</strong>。<strong>兒茶酚胺</strong>（多巴胺、正腎上腺素、腎上腺素）作用的突觸稱<strong>腎上腺素激性突觸（adrenergic synapse）</strong>。GABA 與甘胺酸為主要抑制性傳導物質，麩胺酸（glutamate）則是主要興奮性傳導物質。<strong>神經胜肽（neuropeptide）</strong>由前驅蛋白經蛋白酶切割而成，作用時間較長，且常作用於一群神經元；<strong>內源性大麻素（endocannabinoid）</strong>則抑制突觸前神經元的活性，THC（大麻主要成分）即透過相同受器發揮作用。</p>
+
+<h3>神經傳導物質的釋放：鈣離子的角色</h3>
+<p>動作電位到達突觸小球後，會開啟<strong>電壓閘控鈣通道（voltage-gated calcium channel）</strong>。由於細胞外 Ca<sup>2+</sup> 濃度約為細胞質的一萬倍，Ca<sup>2+</sup> 大量湧入，觸發儲存於<strong>神經分泌小泡（neurosecretory vesicle）</strong>中的神經傳導物質經<strong>胞吐（exocytosis）</strong>釋放：</p>
+
+<div class="flow">
+  <div class="flow-step"><span class="num">1</span>動作電位到達突觸小球，造成短暫去極化</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">2</span>電壓閘控鈣通道開啟，Ca<sup>2+</sup> 流入</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">3</span>Ca<sup>2+</sup> 促使已「停靠（docked）」的小泡與突觸前膜融合、釋放內容物</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">4</span>神經傳導物質擴散穿過突觸間隙</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">5</span>結合突觸後膜上的受器，改變受器構型</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="num">6</span>離子通道開啟，突觸後細胞去極化或過極化</div>
+</div>
+
+<p>小泡停靠、融合發生於<strong>活化區（active zone）</strong>，由 t-SNARE 與 v-SNARE 蛋白介導；鈣離子感應蛋白為<strong>突觸結合蛋白（synaptotagmin）</strong>，結合 Ca<sup>2+</sup> 後促使 SNARE 複合體有效交互作用（Thomas Südhof 因此獲頒 2013 年諾貝爾獎）。當神經元需要快速連續發放訊號時，可採用更迅速的<strong>「吻即離」胞吐（kiss-and-run exocytosis）</strong>：小泡僅短暫、局部地與膜融合並釋出部分內容物，隨即重新封閉。此外，膜融合造成的多餘膜面積會透過 clathrin 依賴的<strong>代償性胞吞（compensatory endocytosis）</strong>回收。</p>
+
+<div class="clinical">
+<div class="box-title">🩺 臨床連結：破傷風與肉毒桿菌毒素</div>
+<p><strong>破傷風毒素（tetanus toxin）</strong>抑制脊髓中<strong>抑制性</strong>神經元釋放神經傳導物質，導致肌肉不受控制地持續收縮（俗稱「牙關緊閉」）。<strong>肉毒桿菌毒素（botulinum toxin）</strong>則抑制運動神經元釋放乙醯膽鹼，導致肌肉無力與麻痺——其輕鏈可切割 SNARE 蛋白（如 synaptobrevin、SNAP-25、syntaxin），破壞小泡融合機制。醫美用的 <strong>Botox</strong> 即利用此原理局部麻痺肌肉、減少皺紋，效果通常維持數週至數月。</p>
+</div>
+
+<h3>突觸後受器：離子型與代謝型</h3>
+<table class="compare-table">
+<caption>💡 容易混淆的概念比較④：離子型受器 vs. 代謝型受器</caption>
+<thead><tr><th class="colA">離子型受器<br><span class="term-en">ionotropic receptor</span></th><th class="colB">代謝型受器<br><span class="term-en">metabotropic receptor</span></th><th class="colDiff">差異重點</th></tr></thead>
+<tbody>
+<tr><td>受器本身就是配體閘控離子通道（ligand-gated ion channel）</td><td>受器透過細胞內訊息傳遞系統間接開啟其他離子通道</td><td>是否直接為離子通道</td></tr>
+<tr><td>結合神經傳導物質後立即改變構型、開啟通道</td><td>需經一連串細胞內訊號級聯才使通道開啟</td><td>作用機制的步驟數</td></tr>
+<tr><td>反應速度快（毫秒等級）</td><td>反應速度慢，但效果可能較持久</td><td>反應速度</td></tr>
+<tr><td>例：菸鹼型乙醯膽鹼受器、GABA 受器、NMDA 受器</td><td>例：多數激素受器（詳見第23章）</td><td>代表實例</td></tr>
+</tbody>
+</table>
+
+<p>本節聚焦離子型（ionotropic）受器：</p>
+<ul>
+  <li><strong>菸鹼型乙醯膽鹼受器（nicotinic acetylcholine receptor, nAChR）</strong>：配體閘控 Na⁺ 通道，由 α₂βγδ 五個次單元組成，兩分子乙醯膽鹼結合兩個 α 次單元後通道開啟，Na⁺ 流入使突觸後膜去極化。因作用可被尼古丁模擬而得名。</li>
+  <li><strong>GABA 受器</strong>：配體閘控 Cl⁻ 通道，開啟後 Cl⁻ 流入使突觸後膜<strong>過極化</strong>，降低動作電位發生機率，屬抑制性受器。苯二氮平類藥物（如 Valium）可增強 GABA 的效果，產生鎮靜作用。</li>
+  <li><strong>NMDA 受器</strong>：麩胺酸的一種離子型受器，結合後對 Na⁺、Ca<sup>2+</sup> 皆通透，與記憶及神經可塑性密切相關；其拮抗劑常用作麻醉劑。</li>
+</ul>
+
+<figure>
+<svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+  <text x="60" y="25" font-size="12" font-weight="700" fill="var(--main-dark)">(a) 未結合：通道關閉</text>
+  <rect x="30" y="45" width="170" height="20" fill="hsl(145,45%,85%)" stroke="var(--main)" stroke-width="2"/>
+  <rect x="100" y="45" width="30" height="20" fill="#fff" stroke="var(--main)" stroke-width="2"/>
+  <text x="35" y="100" font-size="10" fill="#444">兩個 α 次單元的結合位點皆空</text>
+
+  <text x="420" y="25" font-size="12" font-weight="700" fill="var(--main-dark)">(b) 結合 2 分子 ACh：通道開啟</text>
+  <rect x="390" y="45" width="170" height="20" fill="hsl(145,45%,85%)" stroke="var(--main)" stroke-width="2"/>
+  <rect x="460" y="45" width="30" height="20" fill="none"/>
+  <circle cx="465" cy="35" r="5" fill="hsl(25,60%,55%)"/>
+  <circle cx="485" cy="35" r="5" fill="hsl(25,60%,55%)"/>
+  <path d="M475,65 L475,110" stroke="#2471a3" stroke-width="3" marker-end="url(#arrowDown2)"/>
+  <text x="440" y="130" font-size="10" fill="#2471a3">Na⁺ 流入 → 去極化</text>
+  <defs><marker id="arrowDown2" markerWidth="8" markerHeight="8" refX="4" refY="8" orient="auto"><path d="M0,0 L8,0 L4,8 Z" fill="#2471a3"/></marker></defs>
+</svg>
+<figcaption><b>圖 22-17（重製）菸鹼型乙醯膽鹼受器的閘控機制。</b>兩分子乙醯膽鹼（橙色圓點）結合 α 次單元後，通道構型改變而開啟，Na⁺ 流入引發突觸後膜去極化。</figcaption>
+</figure>
+
+<div class="clinical">
+<div class="box-title">🩺 臨床連結：作用於乙醯膽鹼系統的物質</div>
+<ul style="margin:0.4rem 0 0;">
+<li><strong>重症肌無力（myasthenia gravis）</strong>：自體免疫系統攻擊自身 nAChR，造成漸進性肌肉無力。</li>
+<li><strong>箭毒（curare）</strong>：與乙醯膽鹼競爭受器結合位點，屬<strong>拮抗劑（antagonist）</strong>，可阻斷突觸後膜去極化。</li>
+<li><strong>蛇毒（α-bungarotoxin、cobratoxin）</strong>：與 nAChR 共價結合，同樣阻斷去極化，也是研究受器的重要工具分子。</li>
+</ul>
+</div>
+
+<h3>訊號的終止：讓突觸「關閉」同樣重要</h3>
+<p>神經傳導物質釋放後必須迅速清除，否則突觸後神經元會被異常延長刺激或抑制。兩種主要機制：</p>
+<div class="flow">
+  <div class="flow-step"><span class="num">A</span><strong>酵素降解</strong><br><strong>乙醯膽鹼酯酶（acetylcholinesterase）</strong>將乙醯膽鹼水解為乙酸與膽鹼，兩者皆不再刺激受器</div>
+  <div class="flow-arrow">或</div>
+  <div class="flow-step"><span class="num">B</span><strong>再回收（reuptake）</strong><br>將神經傳導物質幫浦運回突觸前軸突末梢或鄰近支持細胞，速度可快至 1 毫秒內清除</div>
+</div>
+
+<div class="clinical">
+<div class="box-title">🩺 臨床連結：干擾訊號終止的藥物與毒物</div>
+<p>抑制乙醯膽鹼酯酶會使乙醯膽鹼堆積、突觸後膜無法再極化，導致肌肉持續麻痺——常見於有機磷殺蟲劑（<strong>parathion、malathion</strong>）與神經毒氣（<strong>tabun、sarin</strong>）。相對地，部分抗憂鬱藥物（如 <strong>百憂解 Prozac</strong>）透過抑制血清素（serotonin）再回收，提高突觸間隙中血清素濃度，達到治療效果；治療注意力不足過動症（ADHD）的藥物則常抑制多巴胺／正腎上腺素的再回收。</p>
+</div>
+
+<h3>突觸後電位的整合：EPSP 與 IPSP</h3>
+<p>單一動作電位到達突觸前神經元，通常只會在突觸後神經元造成小幅度的<strong>突觸後電位（postsynaptic potential, PSP）</strong>，不足以單獨引發新的動作電位：</p>
+
+<table class="compare-table">
+<caption>💡 容易混淆的概念比較⑤：興奮性突觸後電位 vs. 抑制性突觸後電位</caption>
+<thead><tr><th class="colA">EPSP<br><span class="term-en">excitatory postsynaptic potential</span></th><th class="colB">IPSP<br><span class="term-en">inhibitory postsynaptic potential</span></th><th class="colDiff">差異重點</th></tr></thead>
+<tbody>
+<tr><td>由興奮性神經傳導物質引起</td><td>由抑制性神經傳導物質引起</td><td>神經傳導物質性質</td></tr>
+<tr><td>使突觸後膜輕微<strong>去極化</strong></td><td>使突觸後膜輕微<strong>過極化</strong></td><td>膜電位變化方向</td></tr>
+<tr><td>使膜電位更接近閾值，提高動作電位發生機率</td><td>使膜電位遠離閾值，降低動作電位發生機率</td><td>對動作電位發生的影響</td></tr>
+</tbody>
+</table>
+
+<p>突觸後神經元須整合來自成千上萬個突觸的訊號，才能決定是否於軸丘產生新的動作電位，主要透過兩種加成方式：</p>
+<div class="flow">
+  <div class="flow-step"><span class="num">①</span><strong>時間加成<br><span class="term-en">temporal summation</span></strong><br>同一突觸前神經元連續快速發放，使 EPSP 在突觸後神經元尚未恢復前重疊加成</div>
+  <div class="flow-arrow">+</div>
+  <div class="flow-step"><span class="num">②</span><strong>空間加成<br><span class="term-en">spatial summation</span></strong><br>多個不同突觸同時釋放神經傳導物質，各處小幅去極化在細胞表面加總</div>
+  <div class="flow-arrow">=</div>
+  <div class="flow-step"><span class="num">③</span><strong>整合結果</strong><br>興奮性（EPSP）與抑制性（IPSP）訊號在軸丘加總，若淨去極化超過閾值，即產生動作電位</div>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<section id="s4" class="key-takeaways">
+<h2>Key Takeaways 重點回顧</h2>
+<ol>
+  <li><strong>靜止膜電位</strong>源於 K⁺ 漏漣通道的高通透性、細胞內不可通透的巨分子陰離子（M⁻），以及 Na⁺/K⁺ 幫浦（3 Na⁺ 出 / 2 K⁺ 入）的主動維持，典型值約 −60 至 −75 mV，接近 E<sub>K</sub>。</li>
+  <li><strong>Nernst 方程式</strong>計算單一離子的平衡電位；<strong>Goldman 方程式</strong>綜合 Na⁺、K⁺、Cl⁻ 的相對通透性，計算實際膜電位 V<sub>m</sub>——這是本章最重要的兩個計算工具，務必分清用途差異。</li>
+  <li><strong>動作電位</strong>由電壓閘控 Na⁺、K⁺ 通道依序開啟、去活化所驅動，依序經歷去極化、再極化、過極化（undershoot）三個關鍵相位，全程僅需數毫秒，且為「全有全無」現象。</li>
+  <li><strong>絕對不反應期</strong>（Na⁺ 通道去活化，無法再興奮）與<strong>相對不反應期</strong>（需更強刺激）共同確保動作電位單方向傳播、不會逆向回傳。</li>
+  <li>無髓鞘軸突以逐點<strong>連續傳播</strong>；髓鞘化軸突則因髓鞘降低電容，使訊號在蘭氏結之間<strong>跳躍傳導（saltatory conduction）</strong>，速度更快。多發性硬化症即因髓鞘受損而導致傳導障礙。</li>
+  <li><strong>電突觸</strong>經間隙連接直接傳遞、幾乎無延遲；<strong>化學突觸</strong>需經神經傳導物質釋放、擴散、與受器結合等步驟，速度較慢但可精細調控與放大訊號。</li>
+  <li>神經傳導物質的釋放由<strong>鈣離子</strong>觸發：動作電位開啟電壓閘控 Ca<sup>2+</sup> 通道 → Ca<sup>2+</sup> 湧入 → 突觸小泡經 SNARE 蛋白介導與突觸前膜融合、胞吐釋放。破傷風毒素與肉毒桿菌毒素皆透過切割此機制中的蛋白而致病。</li>
+  <li>突觸後受器分為<strong>離子型（ionotropic，直接為通道，反應快）</strong>與<strong>代謝型（metabotropic，間接透過訊息傳遞系統，反應慢）</strong>兩大類；nAChR、GABA 受器、NMDA 受器皆屬離子型。</li>
+  <li>神經傳導物質須被迅速終止作用，方式包括<strong>酵素降解</strong>（如乙醯膽鹼酯酶）與<strong>再回收</strong>；許多藥物（抗憂鬱藥、殺蟲劑、神經毒氣）皆作用於此終止機制。</li>
+  <li>突觸後神經元透過<strong>時間加成</strong>與<strong>空間加成</strong>，整合成千上萬個興奮性（EPSP）與抑制性（IPSP）輸入，決定軸丘是否達到閾值而產生新的動作電位。</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+  <p>第22章：神經元的電訊號與突觸傳遞｜學習指南</p>
+  <button id="backToTop">▲ Back to Top</button>
+</footer>
+
+<script>
+(function(){
+  var backBtn = document.getElementById('backToTop');
+  backBtn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#mainNav a'));
+  var sections = navLinks.map(function(a){
+    return document.getElementById(a.getAttribute('data-target'));
+  });
+
+  function onScroll(){
+    var scrollPos = window.scrollY || window.pageYOffset;
+    var navHeight = document.getElementById('mainNav').offsetHeight + 20;
+    var currentIndex = 0;
+    for (var i = 0; i < sections.length; i++){
+      if (sections[i] && sections[i].offsetTop - navHeight <= scrollPos){
+        currentIndex = i;
+      }
+    }
+    navLinks.forEach(function(a, idx){
+      if (idx === currentIndex){
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('load', onScroll);
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

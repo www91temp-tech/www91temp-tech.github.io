@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第15章：細胞外的世界——細胞黏著、細胞連接與細胞外結構｜學習指南</title>
+<style>
+/* ===== 配色（依 Hue = (15 × 137.5) mod 360 = 262.5 計算）===== */
+:root{
+  --hue: 262.5;
+  --primary: hsl(262.5, 45%, 35%);
+  --primary-light: hsl(262.5, 45%, 92%);
+  --primary-dark: hsl(262.5, 45%, 25%);
+  --text: #1a1a1a;
+  --bg: #ffffff;
+  --border: hsl(262.5, 30%, 82%);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Noto Sans TC','思源黑體','PingFang TC','Microsoft JhengHei',sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.9;
+  font-size:16px;
+}
+
+/* ===== Header ===== */
+header{
+  padding:40px 20px 32px;
+  text-align:center;
+  background:linear-gradient(180deg, var(--primary-light) 0%, #ffffff 100%);
+}
+header h1{
+  color:var(--primary);
+  font-size:1.8rem;
+  margin:0 0 10px;
+  font-weight:700;
+}
+header p.subtitle{
+  color:hsl(262.5,20%,40%);
+  font-size:0.95rem;
+  margin:0;
+  letter-spacing:0.5px;
+}
+
+/* ===== Nav ===== */
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#ffffff;
+  border-bottom:2px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  padding:12px 10px;
+}
+nav ul{
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:0;
+  padding:0;
+  max-width:1000px;
+  margin:0 auto;
+}
+nav a{
+  display:inline-block;
+  padding:8px 16px;
+  color:var(--primary-dark);
+  text-decoration:none;
+  font-size:0.92rem;
+  border-radius:20px;
+  font-weight:500;
+  transition:all .2s ease;
+  white-space:nowrap;
+}
+nav a:hover{background:var(--primary-light);}
+nav a.active{
+  background:var(--primary);
+  color:#fff;
+  font-weight:700;
+}
+
+/* ===== Main layout ===== */
+main{
+  max-width:880px;
+  margin:0 auto;
+  padding:10px 24px 60px;
+}
+section{padding-top:28px; margin-top:12px;}
+section:first-of-type{padding-top:36px;}
+
+h2{
+  color:var(--primary);
+  font-size:1.4rem;
+  border-left:6px solid var(--primary);
+  padding-left:14px;
+  margin:44px 0 18px;
+}
+h3{
+  color:var(--primary-dark);
+  font-size:1.15rem;
+  margin:30px 0 12px;
+  padding-bottom:6px;
+  border-bottom:2px dashed var(--border);
+}
+h4{
+  color:var(--primary-dark);
+  font-size:1.02rem;
+  margin:20px 0 10px;
+}
+p{margin:0 0 14px;}
+strong{color:var(--primary-dark);}
+ul,ol{padding-left:1.4em; margin:0 0 14px;}
+li{margin-bottom:6px;}
+
+/* ===== 提示框 / 重點強調 ===== */
+.box{
+  border-radius:12px;
+  padding:16px 18px;
+  margin:20px 0;
+  border-left:6px solid var(--primary);
+  background:var(--primary-light);
+}
+.box-title{
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:0.98rem;
+}
+.box.mechanism{border-left-color:#2f7a52; background:hsl(140,40%,94%);}
+.box.mechanism .box-title{color:#1e5c3b;}
+.box.clinical{border-left-color:#b3401f; background:hsl(15,60%,95%);}
+.box.clinical .box-title{color:#8a2f14;}
+.box.pathway{border-left-color:#1d5f8a; background:hsl(205,55%,95%);}
+.box.pathway .box-title{color:#123f5c;}
+.box.regulatory{border-left-color:#8a6d1d; background:hsl(45,55%,93%);}
+.box.regulatory .box-title{color:#5c4a12;}
+
+/* ===== 流程圖 (flow) ===== */
+.flow{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin:16px 0;
+  padding:14px;
+  background:#fafafa;
+  border-radius:10px;
+}
+.flow-step{
+  background:#fff;
+  border:2px solid var(--primary);
+  border-radius:8px;
+  padding:10px 14px;
+  text-align:center;
+  font-size:0.86rem;
+  min-width:96px;
+  color:var(--text);
+}
+.flow-step b{display:block; color:var(--primary-dark); font-size:0.88rem;}
+.flow-arrow{color:var(--primary); font-size:1.4rem; font-weight:bold;}
+.flow.vertical{flex-direction:column;}
+.flow.vertical .flow-arrow{transform:rotate(90deg);}
+
+/* ===== 圖表容器 ===== */
+.figure{
+  margin:22px 0;
+  padding:16px;
+  background:#fafafa;
+  border:1px solid var(--border);
+  border-radius:12px;
+  text-align:center;
+}
+.figure svg{max-width:100%; height:auto;}
+.figure-caption{
+  font-size:0.85rem;
+  color:#555;
+  margin-top:10px;
+  text-align:left;
+}
+.figure-caption b{color:var(--primary-dark);}
+
+/* ===== 表格 ===== */
+.table-wrap{overflow-x:auto; margin:18px 0;}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.88rem;
+  min-width:480px;
+}
+th,td{
+  border:1px solid var(--border);
+  padding:9px 12px;
+  text-align:left;
+  vertical-align:top;
+}
+th{
+  background:var(--primary);
+  color:#fff;
+  font-weight:700;
+}
+tr:nth-child(even) td{background:hsl(262.5,30%,97%);}
+caption{
+  caption-side:top;
+  font-weight:700;
+  color:var(--primary-dark);
+  text-align:left;
+  padding-bottom:8px;
+  font-size:0.95rem;
+}
+
+/* ===== 比較表(易混淆概念) ===== */
+.confuse-table th:nth-child(1){background:hsl(262.5,45%,40%);}
+.confuse-table th:nth-child(2){background:hsl(262.5,45%,28%);}
+.confuse-table th:nth-child(3){background:var(--primary-dark);}
+
+/* ===== Key Takeaways ===== */
+.takeaways{
+  background:linear-gradient(135deg, var(--primary-light), #fff);
+  border:2px solid var(--primary);
+  border-radius:16px;
+  padding:24px 26px;
+  margin:24px 0 10px;
+}
+.takeaways ol{padding-left:1.3em;}
+.takeaways li{margin-bottom:12px; font-size:0.97rem;}
+.takeaways li b{color:var(--primary-dark);}
+
+/* ===== Footer ===== */
+footer{
+  text-align:center;
+  padding:36px 20px 50px;
+  background:var(--primary-light);
+  color:var(--primary-dark);
+  margin-top:40px;
+}
+footer p{margin:0 0 16px; font-weight:700;}
+#backToTop{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:24px;
+  padding:10px 26px;
+  font-size:0.95rem;
+  cursor:pointer;
+  font-family:inherit;
+  transition:background .2s;
+}
+#backToTop:hover{background:var(--primary-dark);}
+
+/* ===== 名詞 ===== */
+.term{color:var(--primary-dark); font-weight:700;}
+
+/* ===== RWD ===== */
+@media (max-width:1024px){
+  main{max-width:92%;}
+  h1{font-size:1.6rem;}
+}
+@media (max-width:768px){
+  body{font-size:15px;}
+  header{padding:28px 14px 22px;}
+  header h1{font-size:1.35rem;}
+  nav ul{gap:3px;}
+  nav a{padding:7px 11px; font-size:0.82rem;}
+  h2{font-size:1.2rem;}
+  h3{font-size:1.02rem;}
+  .flow-step{min-width:80px; font-size:0.78rem; padding:8px 10px;}
+  table{font-size:0.78rem;}
+  .takeaways{padding:18px 16px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第15章：細胞外的世界——細胞黏著、細胞連接與細胞外結構</h1>
+  <p class="subtitle">Beyond the Cell: Cell Adhesions, Cell Junctions, and Extracellular Structures</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#intro">導論</a></li>
+    <li><a href="#junctions">15.1 細胞間連接</a></li>
+    <li><a href="#ecm">15.2 細胞外基質</a></li>
+    <li><a href="#plant">15.3 植物細胞壁</a></li>
+    <li><a href="#takeaways">重點回顧</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ 導論 ============ -->
+<section id="intro">
+<h2>導論：細胞為什麼需要彼此相連？</h2>
+<p>大多數生物是<span class="term">多細胞生物（multicellular organism）</span>，體內的細胞終其一生都與鄰近細胞相連，並組織成<span class="term">組織（tissue）</span>，進而構成器官與個體的形態。細胞要達成這樣的組織方式，必須具備兩種能力：與其他細胞相互附著，以及與細胞外部的支撐結構相連。</p>
+
+<h3>上皮組織與結締組織：兩種典型的細胞排列方式</h3>
+<p>動物組織大致可分為兩類，兩者在細胞排列與細胞外物質的比例上截然不同：</p>
+<ul>
+<li><span class="term">上皮組織（epithelium）</span>：細胞緊密排列成一片，並具有<span class="term">極性（polarity）</span>——朝外接觸環境的一側稱為<span class="term">頂端面（apical side）</span>，朝內與<span class="term">基底層（basal lamina）</span>相接的一側稱為<span class="term">基底外側面（basolateral side）</span>。基底層是<span class="term">基底膜（basement membrane）</span>的一部分。</li>
+<li><span class="term">結締組織（connective tissue）</span>：細胞排列鬆散，鑲嵌於大量的<span class="term">細胞外基質（extracellular matrix, ECM）</span>纖維之中。</li>
+</ul>
+
+<div class="figure">
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- (a) epithelium -->
+  <text x="130" y="20" text-anchor="middle" font-size="13" fill="hsl(262.5,45%,25%)" font-weight="700">(a) 上皮組織</text>
+  <text x="30" y="42" font-size="10" fill="#555">頂端 apical</text>
+  <rect x="30" y="46" width="200" height="34" fill="#fff" stroke="hsl(262.5,45%,35%)" stroke-width="2"/>
+  <rect x="30" y="80" width="200" height="34" fill="hsl(262.5,45%,92%)" stroke="hsl(262.5,45%,35%)" stroke-width="2"/>
+  <line x1="30" y1="80" x2="230" y2="80" stroke="hsl(262.5,45%,35%)" stroke-width="3"/>
+  <text x="235" y="66" font-size="9" fill="#555">連接 junction</text>
+  <text x="30" y="128" font-size="10" fill="#555">基底外側 basolateral</text>
+  <rect x="30" y="114" width="200" height="6" fill="hsl(262.5,45%,55%)"/>
+  <text x="30" y="146" font-size="10" fill="#555">基底層 basal lamina</text>
+  <rect x="30" y="150" width="200" height="10" fill="hsl(262.5,60%,60%)"/>
+  <text x="30" y="178" font-size="10" fill="#555">基底膜／結締組織</text>
+  <rect x="30" y="182" width="200" height="16" fill="hsl(262.5,20%,90%)"/>
+
+  <!-- (b) connective tissue -->
+  <text x="460" y="20" text-anchor="middle" font-size="13" fill="hsl(262.5,45%,25%)" font-weight="700">(b) 結締組織中的細胞</text>
+  <rect x="340" y="40" width="240" height="160" fill="hsl(262.5,20%,95%)" stroke="hsl(262.5,30%,80%)"/>
+  <circle cx="400" cy="90" r="18" fill="hsl(262.5,45%,92%)" stroke="hsl(262.5,45%,35%)" stroke-width="2"/>
+  <circle cx="500" cy="140" r="20" fill="hsl(262.5,45%,92%)" stroke="hsl(262.5,45%,35%)" stroke-width="2"/>
+  <circle cx="440" cy="175" r="14" fill="hsl(262.5,45%,92%)" stroke="hsl(262.5,45%,35%)" stroke-width="2"/>
+  <path d="M350 60 Q420 50 460 90 Q510 70 570 90" stroke="hsl(262.5,45%,60%)" stroke-width="2" fill="none"/>
+  <path d="M350 130 Q420 160 480 120 Q540 150 575 130" stroke="hsl(262.5,45%,60%)" stroke-width="2" fill="none"/>
+  <path d="M355 190 Q430 200 490 185 Q540 195 575 175" stroke="hsl(262.5,45%,60%)" stroke-width="2" fill="none"/>
+  <text x="460" y="215" text-anchor="middle" font-size="9" fill="#555">灰線＝ECM纖維，圓圈＝鬆散排列的細胞</text>
+</svg>
+<p class="figure-caption"><b>圖15-1重製．動物組織的兩種型態。</b>(a) 上皮細胞具極性、以連接緊密相連，坐落於基底層上；(b) 結締組織中細胞鬆散排列並鑲嵌於ECM纖維網中。</p>
+</div>
+
+<div class="box">
+<div class="box-title">🔑 兩種細胞外支撐結構</div>
+<p>動物細胞產生<b>細胞外基質（ECM）</b>；植物、真菌、藻類與原核生物則產生<b>細胞壁（cell wall）</b>，兩者化學組成不同，但都提供結構支撐、通透屏障與保護作用。本章將先介紹動物細胞的連接與ECM，再介紹植物細胞壁與胞間連絲。</p>
+</div>
+</section>
+
+<!-- ============ 15.1 ============ -->
+<section id="junctions">
+<h2>15.1 細胞間連接（Cell-Cell Junctions）</h2>
+<p>動物細胞利用特化的<span class="term">細胞間連接（cell-cell junction）</span>形成長期的組織與器官連結，主要分三大類：<span class="term">黏著性連接（adhesive junction）</span>（包含黏著小帶與桌狀連接）、<span class="term">緊密連接（tight junction）</span>與<span class="term">間隙連接（gap junction）</span>。在上皮細胞中，這些連接分布在細胞的不同區域。</p>
+
+<div class="figure">
+<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg">
+  <text x="320" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="hsl(262.5,45%,25%)">上皮細胞側壁連接分布（由頂端到基底）</text>
+  <!-- two cells -->
+  <rect x="180" y="30" width="120" height="230" fill="hsl(262.5,20%,97%)" stroke="hsl(262.5,30%,80%)"/>
+  <rect x="320" y="30" width="120" height="230" fill="hsl(262.5,20%,97%)" stroke="hsl(262.5,30%,80%)"/>
+  <text x="150" y="45" font-size="10" fill="#555" text-anchor="end">頂端 apical</text>
+  <!-- tight junction -->
+  <rect x="295" y="38" width="30" height="14" fill="hsl(262.5,45%,35%)"/>
+  <text x="460" y="48" font-size="10" fill="#333">緊密連接 tight junction（封閉細胞間隙）</text>
+  <!-- adherens junction -->
+  <rect x="295" y="60" width="30" height="14" fill="hsl(20,55%,50%)"/>
+  <text x="460" y="70" font-size="10" fill="#333">黏著小帶 adherens junction（連actin）</text>
+  <!-- gap junction -->
+  <rect x="295" y="82" width="30" height="14" fill="hsl(150,40%,45%)"/>
+  <text x="460" y="92" font-size="10" fill="#333">間隙連接 gap junction（分子通道）</text>
+  <!-- desmosomes x2 -->
+  <rect x="295" y="120" width="30" height="10" fill="hsl(45,60%,45%)"/>
+  <rect x="295" y="160" width="30" height="10" fill="hsl(45,60%,45%)"/>
+  <text x="460" y="128" font-size="10" fill="#333">桌狀連接 desmosome（連中間絲，多點分布）</text>
+  <!-- basal side -->
+  <text x="150" y="248" font-size="10" fill="#555" text-anchor="end">基底 basal</text>
+  <rect x="180" y="262" width="260" height="10" fill="hsl(262.5,60%,60%)"/>
+  <text x="460" y="270" font-size="10" fill="#333">基底層 basal lamina</text>
+  <!-- hemidesmosome -->
+  <rect x="220" y="252" width="16" height="12" fill="hsl(280,40%,45%)"/>
+  <rect x="360" y="252" width="16" height="12" fill="hsl(280,40%,45%)"/>
+  <text x="460" y="292" font-size="10" fill="#333">半桌狀連接 hemidesmosome（細胞-基底層）</text>
+</svg>
+<p class="figure-caption"><b>圖15-2重製．上皮細胞主要連接類型的分布。</b>由頂端往基底依序為緊密連接、黏著小帶、間隙連接、桌狀連接，最底部以半桌狀連接固定於基底層。</p>
+</div>
+
+<div class="table-wrap">
+<table>
+<caption>表15-1．動物細胞的細胞間與細胞-ECM附著方式</caption>
+<thead><tr><th>連接類型</th><th>主要功能</th><th>膜間距離</th><th>相關細胞骨架</th></tr></thead>
+<tbody>
+<tr><td>黏著小帶 Adherens junction</td><td>細胞-細胞黏著</td><td>20–25 nm</td><td>Actin微絲</td></tr>
+<tr><td>桌狀連接 Desmosome</td><td>細胞-細胞黏著</td><td>25–35 nm</td><td>中間絲</td></tr>
+<tr><td>緊密連接 Tight junction</td><td>封閉細胞間空隙</td><td>幾乎無空隙</td><td>Actin（經支架蛋白招募）</td></tr>
+<tr><td>間隙連接 Gap junction</td><td>離子與小分子交換</td><td>2–3 nm</td><td>—（connexon通道）</td></tr>
+<tr><td>焦點黏著 Focal adhesion</td><td>細胞-ECM黏著</td><td>20–25 nm</td><td>Actin微絲</td></tr>
+<tr><td>半桌狀連接 Hemidesmosome</td><td>細胞-基底層黏著</td><td>25–35 nm</td><td>中間絲</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>黏著性連接：把細胞連成一個整體</h3>
+<p>黏著性連接（adhesive junction）都會將<span class="term">細胞骨架（cytoskeleton）</span>錨定在細胞表面，形成互相連結的骨架網絡，維持組織完整性並抵抗機械應力。這類連接依賴跨膜的<span class="term">黏著蛋白（adhesion protein）</span>：若一個細胞的黏著蛋白與鄰近細胞「相同」的分子結合，稱為<span class="term">同源性交互作用（homophilic interaction）</span>；若與「不同」分子結合，則稱為<span class="term">異源性交互作用（heterophilic interaction）</span>。</p>
+<p>黏著性連接主要有兩種：<span class="term">黏著小帶（adherens junction）</span>與<span class="term">桌狀連接（desmosome）</span>。兩者都依賴跨膜蛋白<span class="term">鈣黏蛋白（cadherin）</span>做細胞外的相黏，並透過<span class="term">胞內附著蛋白（intracellular attachment protein）</span>連接到細胞骨架。</p>
+
+<h4>黏著小帶（Adherens Junction）</h4>
+<p>黏著小帶在上皮細胞的頂端外側形成連續的環帶，最具代表性的鈣黏蛋白是<span class="term">E-鈣黏蛋白（E-cadherin）</span>。E-鈣黏蛋白在細胞膜上以二聚體形式存在，其細胞外的重複結構域讓兩個細胞的分子以同源性方式「拉鍊式」互扣，此過程需要<span class="term">Ca²⁺</span>穩定其構形（cadherin一詞的「ca」即來自calcium）。</p>
+
+<div class="box pathway">
+<div class="box-title">🔗 黏著小帶的胞內連結路徑</div>
+<div class="flow">
+<div class="flow-step"><b>Cadherin</b>胞內尾端</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><b>p120ctn</b>調控穩定性/內吞</div>
+</div>
+<div class="flow">
+<div class="flow-step"><b>Cadherin</b>胞內尾端</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><b>β-catenin</b>結合尾端</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><b>α-catenin</b>招募actin</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><b>F-actin</b>（張力↑時vinculin加強）</div>
+</div>
+<p style="margin-top:10px; font-size:0.88rem;">補充：β-catenin同時參與<b>Wnt訊息傳遞路徑（Wnt pathway）</b>，與癌症發生相關；E-cadherin表現量下降常伴隨<span class="term">上皮-間質轉化（epithelial-mesenchymal transition, EMT）</span>，是癌細胞轉移（metastasis）的重要機制。</p>
+</div>
+
+<h4>桌狀連接（Desmosome）</h4>
+<p>桌狀連接是細胞間如鈕扣狀的強力「點焊」，特別集中在承受機械應力的組織，例如皮膚、心肌與子宮。桌狀連接使用的鈣黏蛋白稱為<span class="term">桌狀黏蛋白（desmocollin）</span>與<span class="term">桌狀糖蛋白（desmoglein）</span>，其胞內尾端連結方式與黏著小帶類似，但最終連到<span class="term">中間絲（intermediate filament）</span>而非actin。</p>
+
+<div class="box pathway">
+<div class="box-title">🔗 桌狀連接的胞內連結路徑</div>
+<div class="flow">
+<div class="flow-step"><b>Desmocollin /<br>Desmoglein</b></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><b>Plakoglobin</b>（β-catenin家族）</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><b>Desmoplakin</b></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step"><b>中間絲</b>keratin/desmin/vimentin</div>
+</div>
+<p style="margin-top:10px; font-size:0.88rem;"><b>Plakophilin</b>（p120家族）可結合cadherin與desmoplakin，協助穩定整個複合體。桌狀連接核心處稱為<b>desmosome core</b>，兩膜間距25–35 nm，胞內側則有厚實的<b>斑塊（plaque）</b>。</p>
+</div>
+
+<div class="table-wrap">
+<table class="confuse-table">
+<caption>⚖️ 易混淆概念比較①：黏著小帶 vs 桌狀連接</caption>
+<thead><tr><th>比較項目</th><th>黏著小帶 Adherens Junction</th><th>桌狀連接 Desmosome</th></tr></thead>
+<tbody>
+<tr><td>連結的細胞骨架</td><td>Actin微絲</td><td>中間絲（keratin/desmin/vimentin）</td></tr>
+<tr><td>主要鈣黏蛋白</td><td>E-cadherin等「classical cadherin」</td><td>Desmocollin、desmoglein</td></tr>
+<tr><td>關鍵連接蛋白</td><td>β-catenin → α-catenin</td><td>Plakoglobin → desmoplakin</td></tr>
+<tr><td>分布形態</td><td>連續環帶，位於頂端外側</td><td>局部點狀「鈕扣」</td></tr>
+<tr><td>膜間距離</td><td>20–25 nm</td><td>25–35 nm</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>暫時性細胞黏著：協助動態細胞事件</h3>
+<p>除了鈣黏蛋白，還有其他分子參與細胞辨識與較短暫的黏著：</p>
+<ul>
+<li><span class="term">凝集素（lectin）</span>：能與細胞表面特定醣類結合的蛋白質，因具多個結合位，可同時連接兩個細胞的醣類分子。</li>
+<li><span class="term">細胞黏著分子（cell adhesion molecule, CAM）</span>：屬於<span class="term">免疫球蛋白超家族（immunoglobulin superfamily, IgSF）</span>，如神經細胞黏著分子（N-CAM），可進行同源性或異源性交互作用；在神經系統中協助軸突生長與成束。L1-CAM基因突變會造成腦部胼胝體發育缺陷與智能障礙。</li>
+<li><span class="term">選擇素（selectin）</span>：調控白血球（leukocyte）與血管內皮細胞的交互作用。</li>
+</ul>
+
+<div class="box mechanism">
+<div class="box-title">⚙️ 白血球黏著三部曲（Figure 15-7）</div>
+<div class="flow">
+<div class="flow-step">① <b>滾動 Rolling</b><br>選擇素-醣類結合<br>(L-/E-/P-selectin)</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">② <b>整合素活化</b><br>Integrin activation</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">③ <b>穩定黏著</b><br>Integrin-ICAM(IgSF)結合</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">穿越血管壁<br>移行至發炎部位</div>
+</div>
+</div>
+
+<h3>緊密連接：阻止分子跨細胞層移動</h3>
+<p><span class="term">緊密連接（tight junction, TJ）</span>使上皮細胞間幾乎沒有空隙，形成屏障。經典證據來自把電子緻密的示蹤分子加入組織，發現示蹤分子只能滲入細胞間隙到緊密連接處便被阻擋。以<span class="term">冷凍蝕刻（freeze-fracture）</span>技術觀察，緊密連接呈現連續的脊狀網路，實際上是由一連串跨膜蛋白緊密排列成的脊（ridge），如同把兩片瓦愣鐵沿脊對齊熔接。</p>
+
+<div class="figure">
+<svg viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg">
+  <rect x="40" y="40" width="200" height="100" fill="hsl(262.5,20%,96%)" stroke="hsl(262.5,30%,80%)"/>
+  <rect x="240" y="40" width="200" height="100" fill="hsl(262.5,20%,96%)" stroke="hsl(262.5,30%,80%)"/>
+  <rect x="228" y="50" width="24" height="16" fill="hsl(262.5,45%,35%)"/>
+  <text x="240" y="35" text-anchor="middle" font-size="10" fill="#333">緊密連接脊（claudin/occludin）</text>
+  <line x1="60" y1="100" x2="228" y2="100" stroke="hsl(20,60%,50%)" stroke-width="3" stroke-dasharray="4,3"/>
+  <polygon points="228,100 218,95 218,105" fill="hsl(20,60%,50%)"/>
+  <text x="70" y="90" font-size="9" fill="hsl(20,60%,40%)">示蹤分子/離子被阻擋 ✕</text>
+  <text x="460" y="100" font-size="9" fill="#333">細胞1</text>
+  <text x="30" y="100" font-size="9" fill="#333">細胞2</text>
+</svg>
+<p class="figure-caption"><b>圖15-8／15-9重製．緊密連接的雙重功能：</b>「門(gate)」阻擋分子/離子經細胞間隙滲漏（僅容許經<span class="term">paracellular transport（細胞旁路運輸）</span>選擇性通過特定離子）；「籬(fence)」則限制膜蛋白／脂質在外層葉的側向擴散，維持頂端與基底外側膜蛋白組成不同。</p>
+</div>
+
+<p>緊密連接主要成分包括跨膜蛋白<span class="term">occludin</span>、屬IgSF的<span class="term">連接黏著分子（JAM）</span>，以及最關鍵的<span class="term">緊密連接蛋白（claudin）</span>。Claudin具四個跨膜結構域，其細胞外環上的帶電胺基酸可形成離子選擇性孔道。不同組織表現不同種類的claudin，賦予不同的通透特性；某claudin基因隱性突變會造成Mg²⁺與Ca²⁺失衡的遺傳疾病。緊密連接特別集中於腸道上皮、腎臟／膀胱上皮，以及腦血管內皮細胞（構成<span class="term">血腦障壁（blood-brain barrier）</span>）。</p>
+
+<h3>間隙連接：細胞間的直接電化學溝通</h3>
+<p><span class="term">間隙連接（gap junction）</span>由稱為<span class="term">連接子（connexon）</span>的中空圓柱狀通道構成。在脊椎動物，每個connexon由6個<span class="term">連接蛋白（connexin）</span>次單元組成（無脊椎動物則用innexin）；兩個相鄰細胞的connexon對接後形成貫通的親水通道，孔徑約3 nm，容許分子量達約1200 Da以下的離子與小分子（如糖、胺基酸、核苷酸、第二信使）自由通過。</p>
+
+<div class="figure">
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="20" width="150" height="140" fill="hsl(262.5,20%,96%)" stroke="hsl(262.5,30%,80%)"/>
+  <rect x="290" y="20" width="150" height="140" fill="hsl(262.5,20%,96%)" stroke="hsl(262.5,30%,80%)"/>
+  <rect x="210" y="70" width="30" height="40" fill="hsl(150,40%,55%)"/>
+  <rect x="240" y="70" width="30" height="40" fill="hsl(150,40%,45%)"/>
+  <rect x="222" y="80" width="36" height="20" fill="#fff"/>
+  <text x="240" y="30" text-anchor="middle" font-size="9" fill="#333">Connexon（6×connexin）對接形成通道</text>
+  <line x1="222" y1="90" x2="258" y2="90" stroke="hsl(150,40%,35%)" stroke-width="2" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="hsl(150,40%,35%)"/></marker></defs>
+  <text x="135" y="95" text-anchor="middle" font-size="9" fill="#333">細胞1</text>
+  <text x="365" y="95" text-anchor="middle" font-size="9" fill="#333">細胞2</text>
+  <text x="240" y="150" text-anchor="middle" font-size="9" fill="#555">離子、代謝物、第二信使 &lt; ~1200 Da 可通過</text>
+</svg>
+<p class="figure-caption"><b>圖15-10重製．間隙連接結構。</b>兩細胞膜上的connexon對接，形成直接貫通的親水通道，實現電訊號與代謝物的直接交換。</p>
+</div>
+
+<p>間隙連接在肌肉與神經組織特別豐富，是<span class="term">電突觸（electrical synapse）</span>快速溝通的基礎；在心臟組織中，間隙連接使電流迅速傳導以驅動心跳。人類多種疾病與間隙連接缺陷有關，包括去髓鞘神經退化性疾病、皮膚病變、白內障與耳聾。</p>
+
+<div class="table-wrap">
+<table class="confuse-table">
+<caption>⚖️ 易混淆概念比較②：緊密連接 vs 間隙連接</caption>
+<thead><tr><th>比較項目</th><th>緊密連接 Tight Junction</th><th>間隙連接 Gap Junction</th></tr></thead>
+<tbody>
+<tr><td>主要功能</td><td>封閉細胞間隙，形成屏障</td><td>提供細胞間直接通道</td></tr>
+<tr><td>關鍵蛋白</td><td>Claudin、occludin、JAM</td><td>Connexin（構成connexon）</td></tr>
+<tr><td>膜間距離</td><td>幾乎無空隙（膜直接接觸融合）</td><td>2–3 nm</td></tr>
+<tr><td>物質可否通過</td><td>僅特定離子經細胞旁路小幅通過，大分子被阻擋</td><td>離子與&lt;1200 Da小分子可自由通過</td></tr>
+<tr><td>額外功能</td><td>兼具「籬」功能，限制膜蛋白側向擴散</td><td>無此屏障功能</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="box clinical">
+<div class="box-title">🏥 臨床連結：黏著缺陷的代價</div>
+<p>桌狀連接／半桌狀連接的自體免疫攻擊或基因缺陷會造成嚴重的皮膚水泡疾病：</p>
+<ul>
+<li><b>天皰瘡（pemphigus）</b>：自體抗體攻擊desmoglein或desmoplakin，削弱細胞間黏著，機械摩擦即引發水泡。</li>
+<li><b>類天皰瘡（bullous pemphigoid）</b>：自體抗體攻擊半桌狀連接的BPAG1／BPAG2，好發於年長者。</li>
+<li><b>連接型表皮鬆解水皰症（junctional epidermolysis bullosa, JEB）</b>：常因laminin次單元基因突變，基底層無法正常形成，患者出生時即出現大範圍水泡，並可能因黏膜受損導致吸收不良與營養不良，病情嚴重者於兒童期即死亡。</li>
+</ul>
+<p>治療方式包括類固醇、免疫球蛋白／單株抗體治療，以及正在研究中的基因治療。</p>
+</div>
+</section>
+
+<!-- ============ 15.2 ============ -->
+<section id="ecm">
+<h2>15.2 動物細胞的細胞外基質（Extracellular Matrix）</h2>
+<p><span class="term">細胞外基質（ECM）</span>依組織不同而型態各異：骨骼（bone）幾乎全為堅硬礦化的ECM；軟骨（cartilage）則是柔韌但仍富含基質的組織；結締組織中則有膠狀基質包圍疏鬆分布的<span class="term">纖維母細胞（fibroblast）</span>。儘管型態多樣，動物ECM幾乎都由三大類分子組成：</p>
+
+<div class="box">
+<div class="box-title">🧱 ECM三大分子類別</div>
+<ol>
+<li><b>結構蛋白</b>：膠原蛋白（collagen）與彈性蛋白（elastin）——提供強度與彈性</li>
+<li><b>蛋白聚糖（proteoglycan）</b>——構成結構分子鑲嵌其中的水合基質</li>
+<li><b>黏著醣蛋白</b>：纖連蛋白（fibronectin）與層黏連蛋白（laminin）——讓細胞附著於ECM</li>
+</ol>
+</div>
+
+<div class="table-wrap">
+<table>
+<caption>表15-2．動物ECM與植物細胞壁的組成比較（先預覽，15.3節再詳述植物部分）</caption>
+<thead><tr><th>生物類群</th><th>細胞外結構</th><th>結構纖維</th><th>水合基質成分</th><th>黏著分子</th></tr></thead>
+<tbody>
+<tr><td>動物</td><td>細胞外基質（ECM）</td><td>膠原蛋白、彈性蛋白</td><td>蛋白聚糖</td><td>纖連蛋白、層黏連蛋白</td></tr>
+<tr><td>植物</td><td>細胞壁（cell wall）</td><td>纖維素</td><td>半纖維素、延伸蛋白</td><td>果膠</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>膠原蛋白：賦予ECM強度</h3>
+<p><span class="term">膠原蛋白（collagen）</span>是ECM中含量最豐富的蛋白質，占脊椎動物體內總蛋白量的25–30%，主要由結締組織中的纖維母細胞分泌，賦予ECM極高的抗張強度（一條直徑僅1 mm的膠原纖維，需超過9公斤的重量才能拉斷）。</p>
+<p>所有膠原蛋白都具有兩項共同特徵：(1) 由三條多肽鏈（α鏈）纏繞成剛性<span class="term">三股螺旋（triple helix）</span>；(2) 胺基酸組成特殊，富含甘胺酸（glycine）與少見的<span class="term">羥脯胺酸（hydroxyproline）</span>、<span class="term">羥離胺酸（hydroxylysine）</span>——甘胺酸體積小，恰好能容納於螺旋中心，是三股螺旋得以緊密纏繞的關鍵。</p>
+
+<div class="box mechanism">
+<div class="box-title">⚙️ 膠原蛋白組裝流程（Figure 15-13）</div>
+<div class="flow">
+<div class="flow-step">① 內質網腔<br>3條α鏈組裝成<br><b>前膠原 procollagen</b><br>（三股螺旋+未螺旋末端）</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">② 分泌至細胞外<br><b>前膠原胜肽酶</b>切除末端</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">③ 膠原分子<br>自組裝成<br><b>膠原原纖維 fibril</b><br>（67 nm週期性條紋）</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">④ 原纖維側向<br>聚集成<br><b>膠原纖維 fiber</b></div>
+</div>
+<p style="margin-top:8px; font-size:0.88rem;">膠原原纖維的穩定性由羥脯胺酸／羥離胺酸的氫鍵交聯支撐。人體共約25種α鏈基因、組合成至少15種膠原蛋白型別，其中<b>第I型</b>約占人體膠原蛋白的90%；<b>第IV型</b>不形成原纖維，而是形成基底層中的薄片狀網。</p>
+</div>
+
+<div class="box clinical">
+<div class="box-title">🏥 臨床連結</div>
+<p><b>艾勒斯－丹洛斯症候群（Ehlers–Danlos syndrome）</b>：膠原蛋白基因突變導致關節過度鬆弛、皮膚脆弱易瘀傷。<br><b>壞血病（scurvy）</b>：維生素C是<span class="term">脯胺醯羥化酶（prolyl hydroxylase）</span>的必需輔因子，此酶負責羥化脯胺酸以穩定三股螺旋；缺乏維生素C會使膠原合成缺陷，造成瘀傷與組織崩解，為歷史上水手的常見疾病。</p>
+</div>
+
+<h3>彈性蛋白：賦予ECM彈性與可塑性</h3>
+<p>膠原纖維雖強韌卻不易彎曲，某些組織（如肺、動脈、皮膚、腸道）需要能反覆伸縮的能力，這仰賴富含甘胺酸與脯胺酸（但不羥化）的<span class="term">彈性蛋白（elastin）</span>。彈性蛋白分子透過離胺酸殘基彼此交聯成網，在張力作用下伸展，張力釋放後交聯結構帶動網絡回彈至原本的緊密構形。隨年齡增長，膠原蛋白逐漸過度交聯而僵硬，彈性蛋白則逐漸流失，這是皮膚產生皺紋、關節變得不靈活的原因之一。</p>
+
+<div class="figure">
+<svg viewBox="0 0 460 120" xmlns="http://www.w3.org/2000/svg">
+  <text x="115" y="18" text-anchor="middle" font-size="11" fill="#333">鬆弛（無張力）</text>
+  <path d="M40 60 Q70 40 100 60 Q130 80 160 60 Q190 40 220 60" stroke="hsl(262.5,45%,35%)" stroke-width="3" fill="none"/>
+  <text x="345" y="18" text-anchor="middle" font-size="11" fill="#333">受張力伸展</text>
+  <line x1="260" y1="60" x2="440" y2="60" stroke="hsl(262.5,45%,35%)" stroke-width="3"/>
+  <polygon points="440,60 430,54 430,66" fill="hsl(262.5,45%,35%)"/>
+  <polygon points="260,60 270,54 270,66" fill="hsl(262.5,45%,35%)"/>
+  <text x="240" y="100" text-anchor="middle" font-size="10" fill="#555">交聯鍵（離胺酸間共價鍵）維持網絡於張力釋放後回彈</text>
+</svg>
+<p class="figure-caption"><b>圖15-14重製．彈性蛋白的伸展與回彈。</b></p>
+</div>
+
+<h3>蛋白聚糖與醣胺聚糖：構成水合基質</h3>
+<p>包裹膠原與彈性纖維的膠狀水合網絡主要由<span class="term">蛋白聚糖（proteoglycan）</span>構成——蛋白聚糖是核心蛋白（core protein）上接附大量<span class="term">醣胺聚糖（glycosaminoglycan, GAG）</span>鏈的巨型分子（分子量可達25萬至300萬）。GAG是由雙醣重複單元構成的長鏈碳水化合物，其中一個醣通常是帶胺基的醣（GlcNAc或GalNAc），另一個常為半乳糖或葡萄醣醛酸；除玻尿酸（hyaluronate）外，GAG大多帶有硫酸根，使其高度親水且帶負電，能大量吸附水分與陽離子，形成膠狀基質。</p>
+<p>在軟骨中，眾多蛋白聚糖透過連接蛋白（link protein）附著在一條長的玻尿酸主幹上，形成巨大複合體，賦予軟骨特有的韌性與可塑性。較小型的蛋白聚糖（如syndecan）也參與調控生長因子訊息傳遞。</p>
+
+<h3>黏著醣蛋白：纖連蛋白與層黏連蛋白</h3>
+<h4>纖連蛋白（Fibronectin）</h4>
+<p>纖連蛋白以可溶形式存在於血液中，也可形成不溶的ECM纖絲，或鬆散連結於細胞表面。分子由兩條經雙硫鍵相連的長鏈組成，每條鏈摺疊成一系列結構域，各自能結合膠原蛋白、肝素或血液凝固蛋白<span class="term">纖維蛋白（fibrin）</span>。</p>
+
+<div class="figure">
+<svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg">
+  <line x1="40" y1="50" x2="460" y2="50" stroke="hsl(262.5,45%,35%)" stroke-width="6"/>
+  <line x1="40" y1="90" x2="460" y2="90" stroke="hsl(262.5,45%,55%)" stroke-width="6"/>
+  <line x1="440" y1="50" x2="440" y2="90" stroke="#888" stroke-width="2"/>
+  <line x1="420" y1="50" x2="420" y2="90" stroke="#888" stroke-width="2"/>
+  <text x="430" y="45" font-size="8" fill="#555" text-anchor="middle">雙硫鍵</text>
+  <rect x="60" y="40" width="55" height="20" fill="#fff" stroke="#555"/><text x="87" y="53" font-size="8" text-anchor="middle">膠原結合</text>
+  <rect x="150" y="40" width="55" height="20" fill="#fff" stroke="#555"/><text x="177" y="53" font-size="8" text-anchor="middle">肝素結合</text>
+  <rect x="240" y="40" width="55" height="20" fill="hsl(20,60%,88%)" stroke="hsl(20,60%,45%)"/><text x="267" y="53" font-size="8" text-anchor="middle" fill="hsl(20,60%,35%)">RGD序列</text>
+  <rect x="330" y="40" width="70" height="20" fill="#fff" stroke="#555"/><text x="365" y="53" font-size="8" text-anchor="middle">受體結合</text>
+  <text x="240" y="20" text-anchor="middle" font-size="10" fill="#333">纖連蛋白（二聚體，僅示一半各結構域）</text>
+</svg>
+<p class="figure-caption"><b>圖15-16重製．纖連蛋白結構要點。</b>其中<b>RGD序列（精胺酸-甘胺酸-天門冬胺酸）</b>是多種細胞外黏著蛋白共有的整合素辨識motif。</p>
+</div>
+
+<div class="box mechanism">
+<div class="box-title">⚙️ 纖連蛋白的生理與臨床角色</div>
+<ul>
+<li><b>細胞遷移</b>：胚胎中遷移細胞的路徑常富含纖連蛋白；缺乏纖連蛋白的基因剔除鼠有嚴重的肌肉與血管系統缺陷。</li>
+<li><b>癌症相關</b>：許多癌細胞的纖連蛋白表現量異常（過多或過少），多種癌組織中纖連蛋白過度表現與預後不佳相關。</li>
+<li><b>血液凝固</b>：血漿型纖連蛋白可結合fibrin與血小板，促進凝血。</li>
+</ul>
+</div>
+
+<h4>層黏連蛋白與基底層（Laminin & Basal Lamina）</h4>
+<p><span class="term">基底層（basal lamina）</span>是一層約50 nm厚、高度特化的ECM薄片，位於上皮細胞基底面，也環繞肌肉細胞、脂肪細胞與許旺細胞。基底層的主要成分包括第IV型膠原蛋白（形成片狀網而非原纖維）、蛋白聚糖、<span class="term">層黏連蛋白（laminin）</span>（含量最豐富的黏著醣蛋白），以及橋接第IV型膠原與層黏連蛋白的<span class="term">巢蛋白（nidogen/entactin）</span>。基底層與其下方較膠狀的ECM合稱<span class="term">基底膜（basement membrane）</span>。</p>
+
+<div class="figure">
+<svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg">
+  <text x="90" y="20" text-anchor="middle" font-size="10" fill="#333">(a) Laminin（十字形三鏈分子）</text>
+  <line x1="90" y1="30" x2="90" y2="100" stroke="hsl(262.5,45%,35%)" stroke-width="5"/>
+  <line x1="50" y1="65" x2="130" y2="65" stroke="hsl(262.5,45%,55%)" stroke-width="5"/>
+  <text x="90" y="115" text-anchor="middle" font-size="8" fill="#555">α/β/γ鏈交聯成十字形</text>
+
+  <text x="330" y="20" text-anchor="middle" font-size="10" fill="#333">(b) 基底層網狀組裝</text>
+  <rect x="230" y="35" width="200" height="20" fill="hsl(262.5,20%,90%)"/>
+  <path d="M240 45 L260 35 L280 45 L300 35 L320 45 L340 35 L360 45 L380 35 L400 45 L420 35" stroke="hsl(262.5,60%,55%)" stroke-width="2" fill="none"/>
+  <text x="330" y="65" text-anchor="middle" font-size="8" fill="#555">第IV型膠原（片狀網）+ laminin + nidogen + 蛋白聚糖</text>
+  <line x1="250" y1="80" x2="250" y2="55" stroke="#888" stroke-width="2"/>
+  <line x1="410" y1="80" x2="410" y2="55" stroke="#888" stroke-width="2"/>
+  <rect x="230" y="80" width="200" height="30" fill="#fff" stroke="hsl(262.5,30%,80%)"/>
+  <text x="330" y="98" text-anchor="middle" font-size="9" fill="#333">integrin 錨定上覆細胞</text>
+</svg>
+<p class="figure-caption"><b>圖15-18重製．層黏連蛋白結構與基底層組裝。</b></p>
+</div>
+
+<p>基底層具有結構支撐與通透屏障雙重功能（如腎臟中厚實的基底層可過濾血液蛋白）。細胞也能分泌<span class="term">基質金屬蛋白酶（matrix metalloproteinase, MMP）</span>局部降解基底層，使白血球得以穿越前往發炎部位——同樣的機制若被侵襲性癌細胞高度活化，則有助於癌細胞轉移。</p>
+
+<h3>整合素：連結ECM與細胞骨架的受體</h3>
+<p><span class="term">整合素（integrin）</span>是由α與β兩條跨膜多肽非共價組成的異二聚體受體，胞外部位辨識特定ECM蛋白（多數辨識RGD序列，但仍需其他部位輔助以達到特異性），胞內尾端則與連接蛋白結合，將ECM與細胞骨架機械式連結。含β1次單元的整合素分布於多數脊椎動物細胞、主要調控細胞-ECM交互作用；含β2次單元者則侷限於白血球，主要調控細胞-細胞交互作用。</p>
+
+<div class="figure">
+<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="130" y="16" text-anchor="middle" font-size="10" fill="#333">整合素（以α5β1纖連蛋白受體為例）</text>
+  <path d="M90 30 L110 60 L90 80" stroke="hsl(262.5,45%,35%)" stroke-width="6" fill="none"/>
+  <path d="M170 30 L150 60 L170 80" stroke="hsl(262.5,45%,55%)" stroke-width="6" fill="none"/>
+  <rect x="60" y="20" width="140" height="8" fill="#eee"/>
+  <text x="130" y="18" font-size="0" ></text>
+  <rect x="80" y="90" width="100" height="14" fill="hsl(262.5,20%,90%)"/>
+  <text x="130" y="100" text-anchor="middle" font-size="8">細胞膜</text>
+  <line x1="90" y1="104" x2="90" y2="150" stroke="hsl(262.5,45%,35%)" stroke-width="6"/>
+  <line x1="170" y1="104" x2="170" y2="150" stroke="hsl(262.5,45%,55%)" stroke-width="6"/>
+  <text x="60" y="45" font-size="8" text-anchor="end">RGD結合位</text>
+  <text x="90" y="170" text-anchor="middle" font-size="8">α</text>
+  <text x="170" y="170" text-anchor="middle" font-size="8">β</text>
+  <text x="170" y="188" text-anchor="middle" font-size="8" fill="hsl(262.5,45%,25%)">talin結合位</text>
+</svg>
+<p class="figure-caption"><b>圖15-19重製．整合素基本結構：</b>胞外辨識ECM配體，胞內尾端結合連接蛋白（如talin）。</p>
+</div>
+
+<p>整合素依細胞類型形成兩種主要的胞內連結方式：</p>
+
+<div class="table-wrap">
+<table class="confuse-table">
+<caption>⚖️ 易混淆概念比較③：焦點黏著 vs 半桌狀連接</caption>
+<thead><tr><th>比較項目</th><th>焦點黏著 Focal Adhesion</th><th>半桌狀連接 Hemidesmosome</th></tr></thead>
+<tbody>
+<tr><td>細胞類型</td><td>遷移性／非上皮細胞（如纖維母細胞）</td><td>上皮細胞（基底面）</td></tr>
+<tr><td>連結的細胞骨架</td><td>Actin微絲</td><td>中間絲（多為keratin）</td></tr>
+<tr><td>連接蛋白</td><td>Talin、vinculin、α-actinin</td><td>Plectin（plakin家族）、BPAG1</td></tr>
+<tr><td>相關整合素</td><td>如α5β1（結合纖連蛋白）</td><td>α6β4（結合laminin）</td></tr>
+<tr><td>連結對象</td><td>ECM纖維（如纖連蛋白）</td><td>基底層（laminin）</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="box regulatory">
+<div class="box-title">📶 整合素訊息傳遞：inside-out 與 outside-in</div>
+<p><b>Inside-out訊息傳遞</b>：細胞受生長因子刺激後，內部訊號促使整合素在細胞表面聚集活化。<br><b>Outside-in訊息傳遞</b>：整合素本身也能作為受體，活化胞內訊息傳遞路徑；正常細胞若無法附著於ECM，會啟動<span class="term">錨定依賴性生長（anchorage-dependent growth）</span>機制而停止分裂並走向<span class="term">細胞凋亡（apoptosis）</span>；癌細胞則常逃脫此限制，持續生長。焦點黏著中的<b>FAK（focal adhesion kinase）</b>常在癌細胞中呈現持續活化狀態，與此現象密切相關。</p>
+</div>
+
+<h3>Dystrophin/Dystroglycan複合體：穩定肌肉細胞的附著</h3>
+<p>除了焦點黏著與半桌狀連接，橫紋肌細胞表面還有第三種ECM附著構造，稱為<span class="term">肋膜結構（costamere）</span>，與肌節Z盤對齊排列。除了含β1整合素、vinculin、talin、α-actinin等焦點黏著常見蛋白，costamere還包含巨型胞內蛋白<span class="term">肌縮蛋白（dystrophin）</span>。</p>
+
+<div class="box pathway">
+<div class="box-title">🔗 Dystrophin/Dystroglycan連結路徑</div>
+<div class="flow">
+<div class="flow-step">ECM<br><b>Laminin</b></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">細胞膜<br><b>Dystroglycan複合體</b></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">胞質<br><b>Dystrophin</b></div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">輔助蛋白 + <b>F-actin</b></div>
+</div>
+</div>
+
+<div class="box clinical">
+<div class="box-title">🏥 臨床連結：肌肉萎縮症</div>
+<p>Dystrophin基因位於X染色體，突變幾乎只影響男性。<b>Duchenne氏肌肉萎縮症（DMD）</b>因dystrophin近乎完全喪失功能，病程嚴重，患者會逐漸失去行走能力，並因心肌病變或呼吸肌受損而在青少年至成年早期死亡；<b>Becker氏肌肉萎縮症（BMD）</b>症狀相似但較輕微。兩者合計每年約每3500人中有1人受影響。</p>
+</div>
+</section>
+
+<!-- ============ 15.3 ============ -->
+<section id="plant">
+<h2>15.3 植物細胞表面（The Plant Cell Surface）</h2>
+<h3>細胞壁：結構支撐與通透屏障</h3>
+<p><span class="term">細胞壁（cell wall）</span>包覆幾乎所有植物細胞（精子與部分卵細胞除外），其剛性雖使細胞無法移動，卻能承受水分吸收所產生的<span class="term">膨壓（turgor pressure）</span>——這是植物組織硬挺、以及細胞擴張生長的主要驅動力。細胞壁對水、氣體、離子與小分子（如糖、胺基酸）幾乎不構成阻礙，但能有效阻擋大分子穿透。</p>
+
+<h3>細胞壁的網狀結構：纖維素、多醣與醣蛋白</h3>
+<p>植物細胞壁的組成原理與動物ECM類似——長纖維鑲嵌於分支分子網絡中，只是使用的分子不同：</p>
+
+<div class="figure">
+<svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="260" y="18" text-anchor="middle" font-size="11" fill="#333">植物細胞壁組成（示意）</text>
+  <path d="M40 60 H480" stroke="hsl(262.5,45%,35%)" stroke-width="5"/>
+  <path d="M40 90 H480" stroke="hsl(262.5,45%,35%)" stroke-width="5"/>
+  <path d="M40 120 H480" stroke="hsl(262.5,45%,35%)" stroke-width="5"/>
+  <text x="490" y="65" font-size="8" fill="#333">纖維素微纖維</text>
+  <path d="M60 70 Q80 80 60 88" stroke="hsl(45,55%,45%)" stroke-width="2" fill="none"/>
+  <path d="M160 70 Q180 80 160 88" stroke="hsl(45,55%,45%)" stroke-width="2" fill="none"/>
+  <path d="M260 70 Q280 80 260 88" stroke="hsl(45,55%,45%)" stroke-width="2" fill="none"/>
+  <path d="M360 70 Q380 80 360 88" stroke="hsl(45,55%,45%)" stroke-width="2" fill="none"/>
+  <text x="490" y="82" font-size="8" fill="hsl(45,55%,35%)">半纖維素交聯</text>
+  <rect x="40" y="140" width="440" height="45" fill="hsl(150,35%,90%)" opacity="0.7"/>
+  <text x="260" y="165" text-anchor="middle" font-size="9" fill="hsl(150,45%,25%)">果膠基質（親水、帶負電，黏結相鄰細胞壁）</text>
+  <line x1="120" y1="55" x2="120" y2="150" stroke="hsl(0,50%,50%)" stroke-width="2" stroke-dasharray="3,2"/>
+  <text x="120" y="195" text-anchor="middle" font-size="8" fill="hsl(0,50%,40%)">延伸蛋白（棒狀，交聯強化）</text>
+</svg>
+<p class="figure-caption"><b>圖15-22重製．細胞壁組成要點：</b>纖維素微纖維以半纖維素交聯，延伸蛋白貫穿其中，整體嵌於果膠基質。（乾重比例約：纖維素40%、半纖維素20%、果膠30%、醣蛋白10%）</p>
+</div>
+
+<h4>纖維素與半纖維素</h4>
+<p><span class="term">纖維素（cellulose）</span>是地球上含量最多的有機巨分子，由數千個β-D-葡萄糖以β(1→4)鍵串成不分支長鏈，藉分子內氫鍵形成穩定的帶狀結構；約50–60條纖維素分子側向聚合成<span class="term">微纖維（microfibril）</span>，微纖維再扭轉聚集成<span class="term">巨纖維（macrofibril）</span>——其強度可媲美同尺寸的鋼鐵。<span class="term">半纖維素（hemicellulose）</span>雖名稱相似,但結構與纖維素截然不同，是由單一種糖組成主鏈、並帶有多種糖類側鏈的異質多醣群。</p>
+
+<h4>果膠、延伸蛋白與木質素</h4>
+<ul>
+<li><span class="term">果膠（pectin）</span>：分支多醣，主鏈富含帶負電的半乳糖醛酸與鼠李糖，因高度親水而形成凝膠狀基質，也負責黏結相鄰細胞壁（果醬製作即利用此特性）。</li>
+<li><span class="term">延伸蛋白（extensin）</span>：剛性棒狀醣蛋白，沉積初期可溶，之後與纖維素共價交聯強化壁結構，多見於需要機械支撐的組織。</li>
+<li><span class="term">木質素（lignin）</span>：木質組織中不溶的芳香醇聚合物，填充於纖維素間以抵抗壓縮，占木質植物乾重約25%，是僅次於纖維素的第二豐富有機化合物。</li>
+</ul>
+
+<h3>細胞壁的分階段合成</h3>
+<div class="box mechanism">
+<div class="box-title">⚙️ 細胞壁形成三階段</div>
+<div class="flow vertical">
+<div class="flow-step"><b>① 中膠層 Middle Lamella</b><br>最先形成，主要為果膠，將相鄰兩細胞黏合在一起</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-step"><b>② 初生壁 Primary Wall</b><br>細胞仍在生長時形成，厚約100–200 nm，纖維素微纖維排列疏鬆，由膜上的<b>rosette（纖維素合成酶複合體）</b>合成，其移動方向受細胞膜下方微管導引</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-step"><b>③ 次生壁 Secondary Wall</b><br>生長停止後加於初生壁內側，多層緊密平行排列且各層角度不同，富含纖維素與木質素，更為堅硬</div>
+</div>
+</div>
+
+<div class="figure">
+<svg viewBox="0 0 480 150" xmlns="http://www.w3.org/2000/svg">
+  <text x="120" y="18" text-anchor="middle" font-size="10" fill="#333">(a) 初生壁：微纖維排列鬆散、方向不一</text>
+  <g stroke="hsl(262.5,45%,45%)" stroke-width="2">
+    <line x1="40" y1="40" x2="90" y2="60"/><line x1="60" y1="30" x2="120" y2="70"/>
+    <line x1="30" y1="70" x2="100" y2="90"/><line x1="70" y1="100" x2="150" y2="80"/>
+    <line x1="90" y1="50" x2="160" y2="40"/>
+  </g>
+  <text x="360" y="18" text-anchor="middle" font-size="10" fill="#333">(b) 次生壁：微纖維緊密平行、多層交角</text>
+  <g stroke="hsl(262.5,45%,35%)" stroke-width="2">
+    <line x1="290" y1="35" x2="430" y2="35"/><line x1="290" y1="42" x2="430" y2="42"/><line x1="290" y1="49" x2="430" y2="49"/>
+    <line x1="300" y1="65" x2="420" y2="80"/><line x1="300" y1="72" x2="420" y2="87"/><line x1="300" y1="79" x2="420" y2="94"/>
+    <line x1="290" y1="105" x2="430" y2="105"/><line x1="290" y1="112" x2="430" y2="112"/>
+  </g>
+</svg>
+<p class="figure-caption"><b>圖15-24重製．初生壁與次生壁微纖維排列方式的差異。</b></p>
+</div>
+
+<div class="box regulatory">
+<div class="box-title">📶 調控：延伸蛋白家族（expansin）與細胞壁鬆弛</div>
+<p><span class="term">延伸蛋白家族（expansins）</span>能破壞細胞壁醣鏈間的氫鍵，使微纖維得以重新排列。生長素（auxin）可能透過刺激質子幫浦、降低局部pH來活化expansin，進而使細胞壁鬆弛、細胞得以延伸生長。</p>
+</div>
+
+<h3>胞間連絲：穿越細胞壁的直接細胞間溝通</h3>
+<p><span class="term">胞間連絲（plasmodesmata，單數plasmodesma）</span>是貫穿細胞壁的胞質通道，讓相鄰兩細胞的細胞膜彼此連續。通道呈圓柱狀、兩端較窄，直徑約20–200 nm，中央常有一條源自內質網、與兩側細胞內質網相連的<span class="term">結蛋白管（desmotubule）</span>；結蛋白管與通道內壁膜之間的環狀胞質空間稱為<span class="term">環area annulus</span>，是分子通行的主要空間。</p>
+
+<div class="figure">
+<svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg">
+  <rect x="40" y="20" width="150" height="140" fill="hsl(45,30%,92%)" stroke="hsl(45,30%,70%)"/>
+  <rect x="270" y="20" width="150" height="140" fill="hsl(45,30%,92%)" stroke="hsl(45,30%,70%)"/>
+  <rect x="190" y="20" width="80" height="140" fill="hsl(45,40%,80%)"/>
+  <text x="230" y="15" text-anchor="middle" font-size="9" fill="#555">細胞壁</text>
+  <rect x="205" y="60" width="50" height="60" fill="#fff" stroke="hsl(262.5,45%,35%)" stroke-width="2"/>
+  <line x1="230" y1="60" x2="230" y2="120" stroke="hsl(20,55%,50%)" stroke-width="4"/>
+  <text x="115" y="95" text-anchor="middle" font-size="9" fill="#333">細胞1</text>
+  <text x="345" y="95" text-anchor="middle" font-size="9" fill="#333">細胞2</text>
+  <text x="230" y="145" text-anchor="middle" font-size="8" fill="#333">中央：desmotubule（紅，源自ER）</text>
+  <text x="230" y="158" text-anchor="middle" font-size="8" fill="#333">周圍空隙：annulus（分子通行處）</text>
+</svg>
+<p class="figure-caption"><b>圖15-25重製．胞間連絲的基本結構。</b></p>
+</div>
+
+<p>大多數胞間連絲於<span class="term">細胞分裂（cell division）</span>形成新細胞壁時同步產生，之後數量與位置大致固定。胞間連絲可使相鄰細胞間電阻降低約50倍，並容許離子、代謝物，甚至訊息分子、RNA、轉錄因子與病毒等大分子通過——通透性遠大於動物的間隙連接。</p>
+
+<div class="table-wrap">
+<table class="confuse-table">
+<caption>⚖️ 易混淆概念比較④：間隙連接 vs 胞間連絲</caption>
+<thead><tr><th>比較項目</th><th>間隙連接 Gap Junction（動物）</th><th>胞間連絲 Plasmodesmata（植物）</th></tr></thead>
+<tbody>
+<tr><td>所在生物</td><td>動物細胞</td><td>植物細胞</td></tr>
+<tr><td>通道構成</td><td>Connexin組成的connexon對接</td><td>細胞膜連續開口，中央有desmotubule（源自ER）</td></tr>
+<tr><td>可通過分子大小</td><td>&lt; ~1200 Da（離子、小分子）</td><td>可達RNA、轉錄因子甚至病毒等大分子</td></tr>
+<tr><td>形成時機</td><td>可隨細胞需要動態組裝／拆解</td><td>多在細胞分裂、新細胞壁形成時產生，之後數量大致固定</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ============ Key Takeaways ============ -->
+<section id="takeaways">
+<h2>Key Takeaways 重點回顧</h2>
+<div class="takeaways">
+<ol>
+<li>動物細胞以三大類<b>細胞間連接</b>相連：<b>黏著性連接</b>（黏著小帶、桌狀連接）、<b>緊密連接</b>與<b>間隙連接</b>，各自連結不同的細胞骨架系統或直接形成通道。</li>
+<li><b>鈣黏蛋白（cadherin）</b>是黏著連接的核心跨膜蛋白，以Ca²⁺依賴的同源性交互作用相黏；黏著小帶經β-catenin/α-catenin連actin，桌狀連接經plakoglobin/desmoplakin連中間絲。</li>
+<li><b>緊密連接</b>由claudin、occludin構成，兼具「門」（阻擋分子跨層滲漏）與「籬」（限制膜蛋白側向擴散）雙重功能，維持上皮細胞極性。</li>
+<li><b>間隙連接</b>由6個connexin組成的connexon對接而成，允許離子與&lt;1200 Da小分子直接在細胞間傳遞電訊號與代謝物；植物的功能對應物是<b>胞間連絲</b>，但可通透更大分子。</li>
+<li>動物<b>細胞外基質（ECM）</b>由三大分子類別構成：結構蛋白（膠原蛋白、彈性蛋白）、蛋白聚糖（含GAG）、黏著醣蛋白（纖連蛋白、層黏連蛋白）。</li>
+<li><b>膠原蛋白</b>三股螺旋依賴甘胺酸與羥化的脯胺酸／離胺酸；維生素C是羥化反應必需輔因子，缺乏會導致<b>壞血病</b>。</li>
+<li><b>整合素</b>是連結ECM與細胞骨架的跨膜受體：<b>焦點黏著</b>（talin/α-actinin連actin）用於遷移細胞，<b>半桌狀連接</b>（plectin連中間絲）用於上皮基底面；肌肉的<b>costamere</b>則透過dystrophin/dystroglycan複合體附著ECM，其基因缺陷會造成肌肉萎縮症。</li>
+<li>植物、真菌、藻類與原核生物以<b>細胞壁</b>取代ECM：以纖維素微纖維為骨架，鑲嵌於半纖維素、果膠、延伸蛋白網絡中，木質組織另有木質素強化；細胞壁分中膠層、初生壁、次生壁三階段合成。</li>
+<li>黏著結構缺陷常導致臨床疾病：desmosome/hemidesmosome異常造成天皰瘡、類天皰瘡、表皮鬆解水皰症等皮膚病；dystrophin基因缺陷導致Duchenne／Becker氏肌肉萎縮症。</li>
+<li>必背術語：cadherin、catenin、claudin、connexin/connexon、collagen、elastin、proteoglycan/GAG、fibronectin（RGD序列）、laminin、integrin、cellulose、pectin、plasmodesmata。</li>
+</ol>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>第15章：細胞外的世界——細胞黏著、細胞連接與細胞外結構｜學習指南</p>
+  <button id="backToTop">⬆ Back to Top</button>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+  var sections = navLinks.map(function (link) {
+    return document.querySelector(link.getAttribute('href'));
+  }).filter(Boolean);
+
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - document.querySelector('nav').offsetHeight - 8,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  function setActive() {
+    var navHeight = document.querySelector('nav').offsetHeight;
+    var scrollPos = window.scrollY + navHeight + 40;
+    var currentId = sections[0] ? sections[0].id : '';
+    sections.forEach(function (sec) {
+      if (sec.offsetTop <= scrollPos) {
+        currentId = sec.id;
+      }
+    });
+    navLinks.forEach(function (link) {
+      var isActive = link.getAttribute('href') === '#' + currentId;
+      link.classList.toggle('active', isActive);
+    });
+  }
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+
+  var backBtn = document.getElementById('backToTop');
+  if (backBtn) {
+    backBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第25章：有性生殖、減數分裂與遺傳重組｜學習指南</title>
+<style>
+  :root{
+    --hue: 197.5;
+    --primary: hsl(197.5, 45%, 35%);
+    --primary-dark: hsl(197.5, 45%, 26%);
+    --primary-light: hsl(197.5, 45%, 92%);
+    --primary-mid: hsl(197.5, 40%, 80%);
+    --text: #1a1a1a;
+    --bg: #ffffff;
+    --border: hsl(197.5, 25%, 82%);
+    --amber-light: hsl(38, 70%, 93%);
+    --amber: hsl(30, 55%, 40%);
+    --rose-light: hsl(350, 55%, 94%);
+    --rose: hsl(350, 45%, 42%);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    font-family:"Noto Sans TC","思源黑體","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.85;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== Header ===== */
+  header{
+    text-align:center;
+    padding:44px 20px 28px;
+    background:linear-gradient(180deg, var(--primary-light) 0%, #ffffff 100%);
+  }
+  header h1{
+    margin:0 0 10px;
+    font-size:1.9rem;
+    color:var(--primary-dark);
+    letter-spacing:.02em;
+    font-weight:700;
+  }
+  header p.subtitle{
+    margin:0;
+    color:#555;
+    font-size:.98rem;
+    letter-spacing:.05em;
+  }
+
+  /* ===== Nav ===== */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:4px;
+    padding:10px 12px;
+  }
+  nav a{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:999px;
+    color:var(--primary-dark);
+    text-decoration:none;
+    font-size:.88rem;
+    font-weight:500;
+    white-space:nowrap;
+    transition:background .2s, color .2s;
+  }
+  nav a:hover{ background:var(--primary-light); }
+  nav a.active{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+
+  /* ===== Main layout ===== */
+  main{
+    max-width:840px;
+    margin:0 auto;
+    padding:10px 22px 60px;
+  }
+  section{ padding-top:38px; }
+  section:first-of-type{ padding-top:26px; }
+
+  h2{
+    color:var(--primary-dark);
+    font-size:1.38rem;
+    border-left:6px solid var(--primary);
+    padding:4px 0 4px 14px;
+    margin:0 0 18px;
+  }
+  h3{
+    color:var(--primary);
+    font-size:1.12rem;
+    margin:30px 0 12px;
+    padding-bottom:6px;
+    border-bottom:2px solid var(--primary-light);
+  }
+  h4{
+    color:var(--primary-dark);
+    font-size:1rem;
+    margin:20px 0 8px;
+  }
+  p{ margin:0 0 14px; }
+  ul,ol{ margin:0 0 14px; padding-left:1.4em; }
+  li{ margin-bottom:6px; }
+  strong{ color:var(--primary-dark); }
+
+  .term-en{ color:#666; font-size:.92em; font-weight:400; }
+
+  /* ===== Boxes ===== */
+  .box{
+    border-radius:12px;
+    padding:16px 18px;
+    margin:18px 0;
+    border:1px solid var(--border);
+  }
+  .box-title{
+    font-weight:700;
+    font-size:.95rem;
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .box-concept{ background:var(--primary-light); border-color:var(--primary-mid); }
+  .box-concept .box-title{ color:var(--primary-dark); }
+  .box-process{ background:hsl(197.5,30%,97%); border-left:5px solid var(--primary); border-radius:8px; }
+  .box-process .box-title{ color:var(--primary-dark); }
+  .box-clinical{ background:var(--rose-light); border-color:hsl(350,40%,80%); }
+  .box-clinical .box-title{ color:var(--rose); }
+  .box-history{ background:var(--amber-light); border-color:hsl(38,45%,75%); }
+  .box-history .box-title{ color:var(--amber); }
+
+  /* ===== Flow diagram (CSS) ===== */
+  .flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:16px 0;
+    padding:14px 8px;
+    background:hsl(197.5,30%,97%);
+    border-radius:12px;
+  }
+  .flow.vertical{ flex-direction:column; }
+  .flow-node{
+    background:#fff;
+    border:2px solid var(--primary);
+    color:var(--primary-dark);
+    border-radius:10px;
+    padding:9px 13px;
+    font-size:.85rem;
+    text-align:center;
+    font-weight:600;
+    min-width:64px;
+    line-height:1.3;
+  }
+  .flow-node.alt{ border-color:var(--amber); color:var(--amber); }
+  .flow-node.end{ border-color:var(--rose); color:var(--rose); background:#fff; }
+  .flow-arrow{
+    color:var(--primary);
+    font-size:1.3rem;
+    font-weight:700;
+    padding:0 2px;
+  }
+  .flow-label{
+    font-size:.72rem;
+    color:#666;
+    text-align:center;
+    max-width:90px;
+  }
+  .flow-group{ display:flex; flex-direction:column; align-items:center; gap:2px; }
+  .flow-branch{ display:flex; flex-direction:column; gap:8px; align-items:center; }
+  .flow-row{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; justify-content:center; }
+
+  /* stepper */
+  .stepper{
+    display:flex;
+    overflow-x:auto;
+    gap:0;
+    margin:18px 0;
+    padding-bottom:6px;
+  }
+  .stepper::-webkit-scrollbar{ height:6px; }
+  .step{
+    flex:0 0 auto;
+    width:150px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-top:4px solid var(--primary);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-right:10px;
+    font-size:.8rem;
+  }
+  .step .step-num{
+    display:inline-block;
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+    border-radius:50%;
+    width:20px;height:20px;
+    line-height:20px;
+    text-align:center;
+    font-size:.72rem;
+    margin-bottom:6px;
+  }
+  .step h5{ margin:0 0 4px; color:var(--primary-dark); font-size:.86rem; }
+  .step p{ margin:0; font-size:.78rem; color:#444; }
+
+  /* ===== Tables ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0;
+    font-size:.88rem;
+  }
+  caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:8px;
+    font-size:.95rem;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:9px 11px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--primary);
+    color:#fff;
+    font-weight:700;
+  }
+  tr:nth-child(even) td{ background:hsl(197.5,25%,97%); }
+  .compare-table th:first-child, .compare-table th:nth-child(2){ width:26%; }
+
+  /* ===== SVG figure wrapper ===== */
+  .figure{
+    margin:18px 0;
+    text-align:center;
+    background:hsl(197.5,30%,97%);
+    border-radius:12px;
+    padding:14px 8px 10px;
+  }
+  .figure svg{ max-width:100%; height:auto; }
+  .figure figcaption{
+    font-size:.8rem;
+    color:#555;
+    margin-top:8px;
+    padding:0 10px;
+    text-align:left;
+  }
+  .figure figcaption b{ color:var(--primary-dark); }
+
+  /* ===== Key takeaways ===== */
+  .takeaways{
+    background:var(--primary-light);
+    border-radius:14px;
+    padding:22px 24px;
+    margin-top:16px;
+  }
+  .takeaways ol{ padding-left:1.2em; margin:0; }
+  .takeaways li{ margin-bottom:10px; font-size:.96rem; }
+  .takeaways li::marker{ color:var(--primary-dark); font-weight:700; }
+
+  /* ===== Footer ===== */
+  footer{
+    text-align:center;
+    padding:34px 20px 46px;
+    border-top:1px solid var(--border);
+    margin-top:20px;
+  }
+  footer p{ color:#666; font-size:.85rem; margin:0 0 16px; }
+  #backToTop{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:10px 22px;
+    border-radius:999px;
+    font-size:.88rem;
+    font-weight:700;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background .2s;
+  }
+  #backToTop:hover{ background:var(--primary-dark); }
+
+  .cc-box{
+    border:1.5px dashed var(--primary-mid);
+    border-radius:10px;
+    padding:12px 16px;
+    margin:16px 0;
+    background:#fff;
+    font-size:.86rem;
+    color:#444;
+  }
+  .cc-box b{ color:var(--primary-dark); }
+
+  /* ===== RWD ===== */
+  @media (max-width:1024px){
+    main{ max-width:94%; }
+  }
+  @media (max-width:768px){
+    header h1{ font-size:1.4rem; }
+    header p.subtitle{ font-size:.85rem; }
+    nav{ gap:2px; padding:8px 6px; }
+    nav a{ padding:7px 10px; font-size:.78rem; }
+    h2{ font-size:1.15rem; }
+    h3{ font-size:1rem; }
+    main{ padding:10px 14px 50px; }
+    .step{ width:130px; }
+    table{ font-size:.78rem; }
+    th,td{ padding:6px 7px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>第25章：有性生殖、減數分裂與遺傳重組</h1>
+  <p class="subtitle">學習指南｜細胞生物學基礎教材</p>
+</header>
+
+<nav id="mainNav">
+  <a href="#sec1">25.1 有性生殖</a>
+  <a href="#sec2">25.2 減數分裂</a>
+  <a href="#sec3">25.3 分離與自由組合</a>
+  <a href="#sec4">25.4 重組與互換</a>
+  <a href="#sec5">25.5 細菌與病毒重組</a>
+  <a href="#sec6">25.6 同源重組機制</a>
+  <a href="#sec7">重點回顧</a>
+</nav>
+
+<main>
+
+<!-- ============ INTRO ============ -->
+<section id="intro">
+<p>有絲分裂（mitosis）負責大多數真核細胞的增殖：一次 DNA 複製，接著姊妹染色分體平均分配到兩個子細胞，產生的子細胞在遺傳上幾乎完全相同。這種「複製自己」的方式是<strong>無性生殖（asexual reproduction）</strong>的基礎，常見於單細胞分裂、出芽生殖、再生等。無性生殖效率高，但當環境改變時，族群缺乏遺傳多樣性可能難以適應。<strong>有性生殖（sexual reproduction）</strong>則讓兩個親代的遺傳物質重新組合，產生彼此都不相同的後代，提供族群適應環境變動的潛力。</p>
+</section>
+
+<!-- ============ 25.1 ============ -->
+<section id="sec1">
+<h2>25.1 有性生殖</h2>
+
+<h3>有性生殖產生遺傳多樣性</h3>
+<p>有性生殖把兩個親代的遺傳資訊組合在同一個後代身上，因此每個行有性生殖的生物，生活史中都會出現同時帶有兩份同型染色體的細胞——這兩條染色體稱為<strong>同源染色體（homologous chromosomes）</strong>，分別來自父方與母方，攜帶相同順序的基因，但鹼基序列可能略有差異。例外是<strong>性染色體（sex chromosomes）</strong>：兩種性染色體在基因組成與外觀上差異很大（例如哺乳類的 X 與 Y），但在減數分裂時仍以同源染色體的方式配對行動。</p>
+
+<div class="box box-concept">
+<div class="box-title">🔑 核心名詞：雙套與單套</div>
+<p style="margin:0">具有兩套染色體的細胞或個體稱為<strong>雙套（diploid, 2n）</strong>；只有一套染色體者稱為<strong>單套（haploid, n）</strong>。人類 n = 23，故體細胞多為 2n = 46。雙套狀態的好處：(1) 單一基因突變通常不致命，因為另一份同源基因可代償；(2) 染色體受損時可用同源染色體的序列作模板修復。</p>
+</div>
+
+<h3>配子是特化的單套細胞</h3>
+<p>有性生殖的後代是雙套的，因此雙親提供的貢獻必須各為單套——這些單套細胞稱為<strong>配子（gametes）</strong>，產生配子的過程叫配子形成（gametogenesis）。雄性配子稱<strong>精子（sperm）</strong>，體積小、具運動能力；雌性配子稱<strong>卵（egg / ovum）</strong>，體積大、富含養分、不具運動性——但無論大小,精卵帶入後代的染色體 DNA 量是相等的。</p>
+
+<div class="flow">
+  <div class="flow-node">精子 (n)</div>
+  <div class="flow-arrow">+</div>
+  <div class="flow-node">卵 (n)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-group"><div class="flow-node end">受精卵 Zygote (2n)</div><div class="flow-label">受精 fertilization</div></div>
+</div>
+
+<p>受精後的雙套細胞稱為<strong>受精卵（zygote）</strong>，之後經多次有絲分裂與細胞分化，發育為多細胞的胚胎乃至成體。少數物種（如科摩多巨蜥）可行<strong>孤雌生殖（parthenogenesis）</strong>：卵細胞與同時產生的單套「極體」融合，後代基因全部來自母方，但因等位基因組合不同，後代並非母體的複製品。某些真菌與單細胞真核生物的配子外觀相同，僅在分子層次上區分為不同的<strong>接合型（mating type）</strong>。</p>
+
+<div class="cc-box"><b>概念檢核 25.1</b>　體細胞核轉植（SCNT）曾被提議用於保存瀕危物種，但複製出的個體僅承襲單一親代（甚至單一細胞核）的基因組，族群仍缺乏有性生殖帶來的基因重組與多樣性，長期而言不利於適應力與族群健康。</div>
+</section>
+
+<!-- ============ 25.2 ============ -->
+<section id="sec2">
+<h2>25.2 減數分裂</h2>
+<p>配子是單套的，不可能由雙套細胞經有絲分裂產生（否則配子仍是雙套，受精卵將變成四套，且每一代染色體數目會持續加倍）。因此，配子形成必須依賴一種特殊的分裂方式——<strong>減數分裂（meiosis）</strong>，把染色體數目從雙套（2n）減半為單套（1n）。</p>
+
+<h3>減數分裂的基本原理</h3>
+<p>減數分裂只進行<strong>一次 DNA 複製</strong>，之後連續進行<strong>兩次</strong>核分裂（減數分裂 I 與 II），最終由一個雙套細胞產生四個單套的子細胞核。</p>
+
+<div class="figure">
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="減數分裂原理流程圖">
+  <circle cx="55" cy="95" r="34" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="3"/>
+  <text x="55" y="90" font-size="10" text-anchor="middle" fill="hsl(197.5,45%,26%)" font-weight="700">雙套細胞</text>
+  <text x="55" y="103" font-size="9" text-anchor="middle" fill="#555">4條染色體</text>
+  <line x1="92" y1="95" x2="140" y2="95" stroke="hsl(197.5,45%,35%)" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="116" y="82" font-size="8.5" text-anchor="middle" fill="#555">DNA複製</text>
+
+  <circle cx="175" cy="95" r="34" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="3"/>
+  <text x="175" y="90" font-size="9.5" text-anchor="middle" fill="hsl(197.5,45%,26%)" font-weight="700">每染色體</text>
+  <text x="175" y="102" font-size="9.5" text-anchor="middle" fill="hsl(197.5,45%,26%)" font-weight="700">2姊妹分體</text>
+  <line x1="212" y1="95" x2="255" y2="55" stroke="hsl(197.5,45%,35%)" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="212" y1="95" x2="255" y2="135" stroke="hsl(197.5,45%,35%)" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="245" y="40" font-size="8" text-anchor="middle" fill="#555">減數分裂I</text>
+  <text x="245" y="160" font-size="8" text-anchor="middle" fill="#555">減數分裂I</text>
+
+  <circle cx="290" cy="55" r="26" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2.5"/>
+  <text x="290" y="59" font-size="9" text-anchor="middle" fill="hsl(197.5,45%,26%)" font-weight="700">細胞1</text>
+  <circle cx="290" cy="135" r="26" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2.5"/>
+  <text x="290" y="139" font-size="9" text-anchor="middle" fill="hsl(197.5,45%,26%)" font-weight="700">細胞2</text>
+
+  <line x1="316" y1="45" x2="360" y2="20" stroke="hsl(30,55%,40%)" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="316" y1="65" x2="360" y2="90" stroke="hsl(30,55%,40%)" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="316" y1="125" x2="360" y2="100" stroke="hsl(30,55%,40%)" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="316" y1="145" x2="360" y2="170" stroke="hsl(30,55%,40%)" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="345" y="10" font-size="7.5" fill="#555">減數分裂II</text>
+
+  <g font-size="8.5" font-weight="700" fill="hsl(350,45%,42%)">
+    <circle cx="390" cy="18" r="24" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2.5"/>
+    <text x="390" y="22" text-anchor="middle">單套細胞</text>
+    <circle cx="390" cy="92" r="24" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2.5"/>
+    <text x="390" y="96" text-anchor="middle">單套細胞</text>
+    <circle cx="390" cy="100" r="24" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2.5" opacity="0"/>
+    <circle cx="390" cy="170" r="24" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2.5"/>
+    <text x="390" y="174" text-anchor="middle">單套細胞</text>
+  </g>
+  <circle cx="390" cy="55" r="24" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2.5"/>
+  <text x="390" y="59" font-size="8.5" font-weight="700" text-anchor="middle" fill="hsl(350,45%,42%)">單套細胞</text>
+
+  <text x="470" y="55" font-size="9.5" fill="#333" font-weight="700">→ 共4個</text>
+  <text x="470" y="72" font-size="9.5" fill="#333" font-weight="700">單套子細胞</text>
+  <text x="470" y="92" font-size="8.5" fill="#666">每個含有</text>
+  <text x="470" y="108" font-size="8.5" fill="#666">來自母源/父源</text>
+  <text x="470" y="124" font-size="8.5" fill="#666">染色體各一份</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(197.5,45%,35%)"/></marker>
+    <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(30,55%,40%)"/></marker>
+  </defs>
+</svg>
+<figcaption><b>圖 25-1 重繪：減數分裂原理。</b>以 2n = 4 的雙套細胞為例：一次 DNA 複製後，每條染色體含兩條姊妹分體；減數分裂 I 使同源染色體分離（形成 2 個單套細胞，但染色體仍由姊妹分體組成）；減數分裂 II 使姊妹分體分離，最終產生 4 個單套子細胞，每個都含有各同源對中的一條染色體（圖中未呈現互換效果）。</figcaption>
+</div>
+
+<h3>有性生物生活史的雙套期與單套期</h3>
+<p>減數分裂與受精是每個有性生殖生物生活史中缺一不可的環節：受精造成的染色體加倍，恰由減數分裂的減半來平衡。生活史因而分為<strong>雙套期</strong>（始於受精、止於減數分裂）與<strong>單套期</strong>（始於減數分裂、止於受精）。不同生物中兩期的相對長短差異極大。</p>
+
+<div class="figure">
+<svg viewBox="0 0 620 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="四種生活史類型示意圖">
+  <!-- bacteria -->
+  <g>
+    <text x="60" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">(a) 細菌</text>
+    <circle cx="60" cy="55" r="22" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2.5"/>
+    <text x="60" y="59" font-size="10" text-anchor="middle" fill="hsl(197.5,45%,26%)" font-weight="700">1n</text>
+    <path d="M85,45 A34,34 0 1 1 85,65" fill="none" stroke="hsl(197.5,45%,35%)" stroke-width="1.6" marker-end="url(#a3)"/>
+    <text x="60" y="100" font-size="8" text-anchor="middle" fill="#666">恆為單套</text>
+  </g>
+  <!-- fungi -->
+  <g transform="translate(150,0)">
+    <text x="60" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">(b) 真菌</text>
+    <circle cx="35" cy="55" r="20" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2.5"/>
+    <text x="35" y="59" font-size="9.5" text-anchor="middle">1n</text>
+    <circle cx="95" cy="55" r="20" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2.5"/>
+    <text x="95" y="59" font-size="9.5" text-anchor="middle">2n</text>
+    <line x1="55" y1="55" x2="75" y2="55" stroke="#555" stroke-width="1.6" marker-end="url(#a3)"/>
+    <path d="M95,35 A45,45 0 0 0 35,35" fill="none" stroke="#555" stroke-width="1.6" marker-end="url(#a3)"/>
+    <text x="65" y="97" font-size="8" text-anchor="middle" fill="#666">配子融合／孢子減數分裂</text>
+  </g>
+  <!-- moss -->
+  <g transform="translate(330,0)">
+    <text x="65" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">(c) 苔蘚／蕨類</text>
+    <circle cx="35" cy="55" r="22" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2.5"/>
+    <text x="35" y="59" font-size="9.5" text-anchor="middle">1n</text>
+    <circle cx="100" cy="55" r="18" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2.5"/>
+    <text x="100" y="59" font-size="9" text-anchor="middle">2n</text>
+    <line x1="57" y1="55" x2="82" y2="55" stroke="#555" stroke-width="1.6" marker-end="url(#a3)"/>
+    <path d="M100,35 A50,50 0 0 0 35,33" fill="none" stroke="#555" stroke-width="1.6" marker-end="url(#a3)"/>
+    <text x="65" y="97" font-size="8" text-anchor="middle" fill="#666">世代交替：兩期皆顯著</text>
+  </g>
+  <!-- animal -->
+  <g transform="translate(480,0)">
+    <text x="65" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">(d) 高等動物</text>
+    <circle cx="65" cy="55" r="24" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2.5"/>
+    <text x="65" y="59" font-size="10" text-anchor="middle">2n</text>
+    <circle cx="125" cy="55" r="15" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2.5"/>
+    <text x="125" y="59" font-size="8.5" text-anchor="middle">配子 1n</text>
+    <line x1="89" y1="50" x2="110" y2="50" stroke="#555" stroke-width="1.6" marker-end="url(#a3)"/>
+    <line x1="110" y1="60" x2="89" y2="60" stroke="#555" stroke-width="1.6" marker-end="url(#a3)"/>
+    <text x="95" y="97" font-size="8" text-anchor="middle" fill="#666">配子減數分裂為主</text>
+  </g>
+  <defs><marker id="a3" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#555"/></marker></defs>
+</svg>
+<figcaption><b>圖 25-2 重繪：生活史類型比較。</b>(a) 細菌恆為單套。(b) 多數真菌以單套為主，僅在配子融合後短暫呈雙套（孢子減數分裂）。(c) 苔蘚與蕨類具明顯的<strong>世代交替（alternation of generations）</strong>：雙套的<strong>孢子體（sporophyte）</strong>經減數分裂產生單套孢子，發育為<strong>配子體（gametophyte）</strong>。(d) 高等動物幾乎全程雙套，只有配子代表單套期（配子減數分裂）。</figcaption>
+</div>
+
+<h3>減數分裂：一個雙套細胞變成四個單套細胞</h3>
+<p>減數分裂 I（第一次分裂）又稱<strong>減數分裂（reduction division）</strong>，因為它負責把染色體數目由雙套降為單套。前期初始，每對同源染色體會配對交換部分遺傳訊息，此配對過程稱為<strong>聯會（synapsis）</strong>，是減數分裂獨有的現象（有絲分裂中同源染色體各自獨立行動）。緊密配對後的一對同源染色體稱為<strong>二價體（bivalent，或四分體 tetrad）</strong>，因為共含四條染色分體。減數分裂 II 則與有絲分裂相似：姊妹分體彼此分離,分別進入兩個子細胞。</p>
+
+<div class="box box-concept">
+<div class="box-title">🔑 一句話記住兩次分裂</div>
+<p style="margin:0"><strong>減數分裂 I</strong>＝同源染色體分開（聯會＋互換是這裡發生的）；<strong>減數分裂 II</strong>＝姊妹分體分開（很像一次小型有絲分裂）。兩次分裂之間<strong>沒有 DNA 複製</strong>。</p>
+</div>
+
+<h4>前期 I：五個階段——同源染色體配對並互換 DNA</h4>
+<p>前期 I 特別長且複雜，依染色體外觀變化可分為五個階段：</p>
+
+<div class="stepper">
+  <div class="step"><span class="step-num">1</span><h5>細絲期 Leptotene</h5><p>染色質開始凝縮成細長絲狀結構。</p></div>
+  <div class="step"><span class="step-num">2</span><h5>偶線期 Zygotene</h5><p>染色體可分辨；同源染色體開始聯會，形成二價體；聯會複合體的側面元件開始出現。</p></div>
+  <div class="step"><span class="step-num">3</span><h5>粗線期 Pachytene</h5><p>染色體高度壓縮；<strong>互換（crossing over）</strong>在此階段發生；聯會複合體完全形成。</p></div>
+  <div class="step"><span class="step-num">4</span><h5>雙線期 Diplotene</h5><p>同源染色體開始分開，但仍在<strong>交叉點（chiasmata）</strong>相連——此為互換發生過的證據；聯會複合體逐漸解體。</p></div>
+  <div class="step"><span class="step-num">5</span><h5>終變期 Diakinesis</h5><p>染色體再度高度濃縮；核仁消失、紡錘體形成、核膜崩解，前期 I 結束。</p></div>
+</div>
+
+<div class="box box-process">
+<div class="box-title">🧬 聯會複合體 Synaptonemal Complex</div>
+<p style="margin:0">聯會複合體是一種類似拉鍊的蛋白質結構，負責把同源染色體緊密固定在一起：<strong>側面元件（lateral elements）</strong>在細絲期開始附著於各染色體；<strong>中央元件（central element）</strong>則到偶線期才出現，將兩條同源染色體「拉」在一起。染色體末端（端粒）在偶線期初聚集於核膜一側，形成花束狀（bouquet）排列，有助於同源配對。</p>
+</div>
+
+<h4>中期 I：二價體排列於紡錘體赤道板</h4>
+<p>二價體（而非單一染色體）排列在赤道板，是減數分裂 I 與一般有絲分裂的關鍵差異。每個二價體含四個動粒；同源染色體的姊妹分體動粒朝向同一極，使兩條同源染色體能分別接上來自相對兩極的微管。哪一同源染色體（父源或母源）面向哪一極是隨機的——這正是遺傳重新組合的來源之一。</p>
+
+<h4>後期 I：同源染色體移向相對兩極</h4>
+<p>與有絲分裂的關鍵差異：<strong>後期 I 分離的是同源染色體（姊妹分體仍相連）</strong>，而有絲分裂後期分離的是姊妹分體。有絲分裂後期由<strong>分離酶（separase）</strong>切開黏連蛋白（cohesin）使姊妹分體分開；減數分裂 I 中，一種稱為<strong>守護素（shugoshin）</strong>的蛋白會保護著絲點附近的黏連蛋白不被分離酶降解，直到減數分裂 II 才釋放。</p>
+
+<h4>末期 I 與細胞質分裂 → 減數分裂 II（分離分裂）</h4>
+<p>末期 I 後產生兩個單套細胞，其染色體仍由姊妹分體組成。之後（通常不經 DNA 複製的短暫間期）進入減數分裂 II，過程與有絲分裂相似：前期 II 很短，中期 II 染色體排列於赤道板（但數目只有一半），後期 II 姊妹分體分離，末期 II 與細胞質分裂後產生<strong>四個單套子細胞</strong>，各含隨機混合的母源／父源染色體。</p>
+
+<h3 id="mitosis-meiosis">減數分裂與有絲分裂的比較</h3>
+<p>兩者都經 DNA 複製後才進行分裂，前期都出現兩條姊妹分體；但減數分裂多了聯會與互換，且需要兩次分裂才能把染色體數目減半。文中用 <strong>C 值</strong>表示 DNA 含量（1 套染色體的 DNA 量為 1C）：雙套細胞 S 期前為 2n / 2C，複製後為 2n / 4C；減數分裂 I 後降為 1n / 2C；減數分裂 II 後降為 1n / 1C。有絲分裂則是 4C → 2C，但染色體數維持 2n。</p>
+
+<table class="compare-table">
+<caption>【易混淆概念比較表 1】減數分裂 vs. 有絲分裂</caption>
+<thead><tr><th>比較項目</th><th>A：減數分裂 Meiosis</th><th>差異重點</th></tr></thead>
+<tbody>
+<tr><td><strong>B：有絲分裂 Mitosis</strong></td><td>2次核分裂（I＋II），DNA只複製1次</td><td rowspan="6" style="vertical-align:middle;color:#666">左欄為減數分裂特徵；右欄同列即為對應的有絲分裂特徵，兩者逐項對照</td></tr>
+<tr><td>—</td><td>1次核分裂，DNA複製1次</td></tr>
+<tr><td>同源染色體行為</td><td>前期I發生聯會、形成二價體、互換</td></tr>
+<tr><td>—</td><td>同源染色體全程獨立行動，不配對</td></tr>
+<tr><td>後期分離對象</td><td>後期I：同源染色體分離；後期II：姊妹分體分離</td></tr>
+<tr><td>—</td><td>姊妹分體分離</td></tr>
+</tbody>
+</table>
+
+<table class="compare-table">
+<caption>對照速記表</caption>
+<thead><tr><th>項目</th><th>減數分裂</th><th>有絲分裂</th></tr></thead>
+<tbody>
+<tr><td>發生細胞</td><td>生殖細胞（形成配子）</td><td>大多數體細胞</td></tr>
+<tr><td>分裂次數</td><td>2次（I、II）</td><td>1次</td></tr>
+<tr><td>子細胞染色體套數</td><td>單套 (n)，4個子細胞</td><td>雙套 (2n)，2個子細胞</td></tr>
+<tr><td>同源染色體聯會／互換</td><td>有（前期I）</td><td>無</td></tr>
+<tr><td>子細胞遺傳組成</td><td>彼此不同（重組＋隨機分配）</td><td>與親代幾乎相同</td></tr>
+<tr><td>後期分離單位</td><td>I：同源染色體／II：姊妹分體</td><td>姊妹分體</td></tr>
+</tbody>
+</table>
+
+<h3>減數分裂的錯誤：不分離</h3>
+<p>若染色體分配發生錯誤，稱為<strong>不分離（nondisjunction）</strong>，可發生在減數分裂 I 或 II，造成配子染色體數目異常（一個子細胞多一條、另一個少一條）。受精後導致合子<strong>非整倍體（aneuploidy）</strong>：多一條稱<strong>三體性（trisomy, 2n+1）</strong>，少一條稱<strong>單體性（monosomy, 2n-1）</strong>。若整組染色體加倍則稱<strong>多倍體（polyploidy）</strong>（如三倍體 3n、四倍體 4n），在植物界較常見且較少造成嚴重異常，因為整組加倍對<strong>基因劑量（gene dosage）</strong>的影響比單一染色體異常來得溫和。</p>
+
+<div class="figure">
+<svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="減數分裂不分離示意圖">
+  <text x="140" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">(a) 減數分裂I不分離</text>
+  <circle cx="60" cy="45" r="18" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2"/>
+  <text x="60" y="49" font-size="8" text-anchor="middle">2n二價體</text>
+  <line x1="80" y1="45" x2="115" y2="30" stroke="#555" stroke-width="1.5" marker-end="url(#a4)"/>
+  <line x1="80" y1="45" x2="115" y2="60" stroke="#555" stroke-width="1.5" marker-end="url(#a4)"/>
+  <text x="97" y="20" font-size="7.5" fill="hsl(350,45%,42%)">同源染色體未分開</text>
+  <circle cx="140" cy="26" r="16" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2"/><text x="140" y="30" font-size="7.5" text-anchor="middle">兩者皆有</text>
+  <circle cx="140" cy="64" r="16" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2"/><text x="140" y="68" font-size="7.5" text-anchor="middle">皆無</text>
+  <line x1="156" y1="26" x2="185" y2="15" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/><line x1="156" y1="26" x2="185" y2="37" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/>
+  <line x1="156" y1="64" x2="185" y2="53" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/><line x1="156" y1="64" x2="185" y2="75" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/>
+  <g font-size="8" font-weight="700" fill="hsl(30,55%,40%)" text-anchor="middle">
+    <circle cx="205" cy="15" r="15" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2"/><text x="205" y="18">n+1</text>
+    <circle cx="205" cy="37" r="15" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2"/><text x="205" y="40">n+1</text>
+    <circle cx="205" cy="53" r="15" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2"/><text x="205" y="56">n-1</text>
+    <circle cx="205" cy="75" r="15" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2"/><text x="205" y="78">n-1</text>
+  </g>
+
+  <text x="410" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">(b) 減數分裂II不分離</text>
+  <circle cx="320" cy="45" r="18" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2"/>
+  <text x="320" y="49" font-size="8" text-anchor="middle">正常減I</text>
+  <line x1="340" y1="45" x2="375" y2="30" stroke="#555" stroke-width="1.5" marker-end="url(#a4)"/>
+  <line x1="340" y1="45" x2="375" y2="60" stroke="#555" stroke-width="1.5" marker-end="url(#a4)"/>
+  <circle cx="392" cy="26" r="15" fill="#fff" stroke="hsl(350,45%,42%)" stroke-width="2"/><text x="392" y="20" font-size="7" text-anchor="middle" fill="hsl(350,45%,42%)">姊妹分體未分開</text>
+  <circle cx="392" cy="64" r="15" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2"/><text x="392" y="68" font-size="7" text-anchor="middle">正常</text>
+  <line x1="405" y1="20" x2="435" y2="10" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/><line x1="405" y1="32" x2="435" y2="42" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/>
+  <line x1="405" y1="58" x2="435" y2="53" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/><line x1="405" y1="70" x2="435" y2="76" stroke="#555" stroke-width="1.2" marker-end="url(#a4)"/>
+  <g font-size="8" font-weight="700" fill="hsl(30,55%,40%)" text-anchor="middle">
+    <circle cx="455" cy="10" r="15" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2"/><text x="455" y="13">n+1</text>
+    <circle cx="455" cy="42" r="15" fill="#fff" stroke="hsl(30,55%,40%)" stroke-width="2"/><text x="455" y="45">n-1</text>
+    <circle cx="455" cy="53" r="15" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2"/><text x="455" y="56" fill="hsl(197.5,45%,26%)">n</text>
+    <circle cx="455" cy="76" r="15" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2"/><text x="455" y="79" fill="hsl(197.5,45%,26%)">n</text>
+  </g>
+  <defs><marker id="a4" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#555"/></marker></defs>
+</svg>
+<figcaption><b>圖 25-7 重繪：減數分裂不分離。</b>(a) 減數分裂 I 不分離：同源染色體未分開，產生的配子為 n+1、n+1、n-1、n-1。(b) 減數分裂 II 不分離：姊妹分體未分開，產生 n+1、n-1、n（正常）、n（正常）。</figcaption>
+</div>
+
+<div class="box box-clinical">
+<div class="box-title">🏥 臨床關聯：染色體數目異常</div>
+<ul style="margin:0">
+<li><strong>唐氏症（Down syndrome，三染色體21）</strong>：約每700名新生兒中有1人；多由減數分裂I不分離造成（女性生殖細胞誤差居多，且隨母親年齡增加而升高），少數（約5%）由第21與第14號染色體易位造成。因21號染色體小、基因少，多一份的劑量效應較溫和，故可存活至出生。</li>
+<li><strong>透納氏症（Turner syndrome，X0，單一X染色體）</strong>：外觀為女性，但性器官未發育成熟，需荷爾蒙治療促進第二性徵。</li>
+<li><strong>克氏症（Klinefelter syndrome，XXY）</strong>：外觀為男性但睪丸較小、不孕，可能伴隨女性化特徵。</li>
+<li>性染色體非整倍體比體染色體非整倍體更常見存活至出生，主要因為 Y 染色體基因數少、且體細胞中一條 X 染色體本就會被去活化（劑量補償）。</li>
+</ul>
+</div>
+
+<table class="compare-table">
+<caption>【易混淆概念比較表 2】體染色體非整倍體 vs. 性染色體非整倍體</caption>
+<thead><tr><th>A：體染色體非整倍體</th><th>B：性染色體非整倍體</th><th>差異</th></tr></thead>
+<tbody>
+<tr><td>存活至出生者極少見</td><td>存活至出生者相對常見</td><td>性染色體基因少、且有劑量補償機制，異常影響較小</td></tr>
+<tr><td>代表案例：唐氏症（三染色體21）</td><td>代表案例：透納氏症（X0）、克氏症（XXY）</td><td>唐氏症是體染色體異常中極少數可存活的例外</td></tr>
+<tr><td>影響：多重發育異常、認知功能受影響</td><td>影響：多與性徵發育、生育力有關，其餘身體功能通常正常</td><td>症狀嚴重度與影響範圍不同</td></tr>
+</tbody>
+</table>
+
+<h3>配子生成：減數分裂加上細胞分化</h3>
+<p>減數分裂只是配子形成（gametogenesis）的一部分，因為精卵在構造上差異很大。</p>
+
+<table>
+<caption>【易混淆概念比較表 3】精子形成 vs. 卵子形成</caption>
+<thead><tr><th>項目</th><th>A：精子形成 Spermatogenesis</th><th>B：卵子形成 Oogenesis</th></tr></thead>
+<tbody>
+<tr><td>細胞質分裂方式</td><td>對稱分裂</td><td>不對稱分裂（多數細胞質集中於一顆細胞）</td></tr>
+<tr><td>減數分裂產物</td><td>4個大小相近、功能相同的精細胞</td><td>1個大型卵細胞＋最多3個小型<strong>極體（polar body）</strong>（通常退化）</td></tr>
+<tr><td>特化時機</td><td>減數分裂完成後才特化（丟棄大部分細胞質、發育鞭毛）</td><td>特化多發生在減數分裂進行中（前期I時細胞大量生長，累積養分與保護層）</td></tr>
+<tr><td>生成節律</td><td>成年後持續由幹細胞產生</td><td>常在前期I長期停滯（人類可停滯數年至數十年）</td></tr>
+</tbody>
+</table>
+
+<h3>卵母細胞成熟受到嚴密調控</h3>
+<p>兩棲類卵母細胞完成生長後，會停滯在前期 I，直到接收到激素訊號（黃體素 progesterone）才恢復減數分裂。細胞質中的<strong>成熟促進因子（MPF, maturation-promoting factor）</strong>是啟動關鍵，其本質與有絲分裂促進因子相同：由 Cdk（周期素依賴激酶）與周期素（cyclin）組成。</p>
+
+<div class="flow vertical">
+  <div class="flow-row">
+    <div class="flow-node">黃體素刺激</div><div class="flow-arrow">→</div>
+    <div class="flow-node">活化 MPF (Cdk-cyclin)</div><div class="flow-arrow">→</div>
+    <div class="flow-node end">完成減數分裂I</div>
+  </div>
+  <div class="flow-label" style="max-width:none">多數脊椎動物卵接著停滯在減數分裂II中期，直到受精</div>
+  <div class="flow-row">
+    <div class="flow-node alt">Emi2抑制APC</div><div class="flow-arrow">→</div>
+    <div class="flow-node">維持中期II停滯</div>
+  </div>
+  <div class="flow-row">
+    <div class="flow-node">受精 → Ca²⁺上升</div><div class="flow-arrow">→</div>
+    <div class="flow-node">激酶磷酸化並降解 Emi2</div><div class="flow-arrow">→</div>
+    <div class="flow-node">APC活化</div><div class="flow-arrow">→</div>
+    <div class="flow-node end">完成減數分裂II</div>
+  </div>
+</div>
+<p style="font-size:.85rem;color:#555;margin-top:-6px">此路徑中，<strong>細胞穩定因子（CSF, cytostatic factor）</strong>是造成中期 II 停滯的活性統稱，Emi2/Erp1 是其中重要成分：Emi2 抑制<strong>後期促進複合體（APC）</strong>，阻止細胞由中期進入後期；受精後 Emi2 被降解，APC 恢復活性，減數分裂才得以完成。</p>
+
+<div class="cc-box"><b>概念檢核 25.2</b>　設 G1 期雙套細胞 DNA 量為 X。進入減數分裂並複製後（S期後）DNA 量為 2X；減數分裂I中期時仍為 2X（複製已完成、尚未分離）。減數分裂I完成後細胞為單套但仍含姊妹分體，DNA 量降為 X；進入減數分裂II中期時仍為 X（尚未分離姊妹分體）。</div>
+</section>
+
+<!-- ============ 25.3 ============ -->
+<section id="sec3">
+<h2>25.3 遺傳變異性：等位基因的分離與自由組合</h2>
+
+<h3>減數分裂產生遺傳多樣性的兩大來源</h3>
+<p>每個配子雖然都是單套、各攜帶一套同源染色體中的一條，但特定配子中父源與母源染色體的組合是隨機的。這種隨機性來自中期 I 二價體在赤道板的<strong>隨機定向</strong>：每一對同源染色體面向哪一極，與其他對無關。人類配子（23對染色體）因此可產生超過 800 萬種父母源染色體組合！此外，前期 I 的<strong>互換（crossing over）</strong>更進一步增加了配子的多樣性，因為它讓同一條染色體上也能出現新的等位基因組合。</p>
+
+<h3>孟德爾實驗：隱性性狀可以「隱藏」而不消失</h3>
+<p>孟德爾以豌豆進行雜交實驗：先確認純種親代（<strong>P 世代</strong>）自交後代表現型不變，再將兩種純種品系雜交得到<strong>F<sub>1</sub> 世代</strong>。結果 F<sub>1</sub> 全部只表現其中一種親代性狀（顯性性狀），另一性狀（隱性性狀）看似消失。當 F<sub>1</sub> 自交產生 <strong>F<sub>2</sub> 世代</strong>時，隱性性狀重新出現，且顯性:隱性比例穩定為 <strong>3:1</strong>。</p>
+
+<div class="figure">
+<svg viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="孟德爾P F1 F2世代與3:1比例">
+  <text x="60" y="16" font-size="10" font-weight="700" fill="hsl(197.5,45%,26%)">P世代</text>
+  <rect x="20" y="24" width="70" height="34" rx="6" fill="#fff" stroke="hsl(197.5,45%,35%)" stroke-width="2"/>
+  <text x="55" y="45" font-size="10" text-anchor="middle" font-weight="700" fill="hsl(197.5,45%,26%)">紫花 PP</text>
+  <text x="98" y="45" font-size="14" font-weight="700" fill="#555">×</text>
+  <rect x="112" y="24" width="70" height="34" rx="6" fill="#fff" stroke="var(--border,#ccc)" stroke-width="2"/>
+  <text x="147" y="45" font-size="10" text-anchor="middle" font-weight="700" fill="#555">白花 pp</text>
+
+  <line x1="100" y1="66" x2="100" y2="90" stroke="#555" stroke-width="1.6" marker-end="url(#a5)"/>
+  <text x="60" y="105" font-size="10" font-weight="700" fill="hsl(197.5,45%,26%)">F₁世代</text>
+  <rect x="65" y="112" width="90" height="34" rx="6" fill="hsl(197.5,45%,92%)" stroke="hsl(197.5,45%,35%)" stroke-width="2"/>
+  <text x="110" y="133" font-size="10" text-anchor="middle" font-weight="700" fill="hsl(197.5,45%,26%)">全部紫花 Pp</text>
+
+  <line x1="110" y1="154" x2="110" y2="175" stroke="#555" stroke-width="1.6" marker-end="url(#a5)"/>
+  <text x="230" y="16" font-size="10" font-weight="700" fill="hsl(197.5,45%,26%)">F₂世代（F₁自交）</text>
+  <g transform="translate(230,24)">
+    <rect x="0" y="0" width="40" height="34" fill="hsl(197.5,45%,92%)" stroke="hsl(197.5,45%,35%)" stroke-width="1.5"/><text x="20" y="21" font-size="9.5" text-anchor="middle" font-weight="700">PP</text>
+    <rect x="40" y="0" width="40" height="34" fill="hsl(197.5,45%,92%)" stroke="hsl(197.5,45%,35%)" stroke-width="1.5"/><text x="60" y="21" font-size="9.5" text-anchor="middle" font-weight="700">Pp</text>
+    <rect x="0" y="34" width="40" height="34" fill="hsl(197.5,45%,92%)" stroke="hsl(197.5,45%,35%)" stroke-width="1.5"/><text x="20" y="55" font-size="9.5" text-anchor="middle" font-weight="700">Pp</text>
+    <rect x="40" y="34" width="40" height="34" fill="hsl(350,55%,94%)" stroke="hsl(350,45%,42%)" stroke-width="1.5"/><text x="60" y="55" font-size="9.5" text-anchor="middle" font-weight="700" fill="hsl(350,45%,42%)">pp</text>
+    <text x="-14" y="21" font-size="9">P</text><text x="-14" y="55" font-size="9">p</text>
+    <text x="20" y="-6" font-size="9">P</text><text x="60" y="-6" font-size="9">p</text>
+  </g>
+  <text x="330" y="70" font-size="9" fill="#666">（Punnett 方格）</text>
+
+  <text x="350" y="120" font-size="13" font-weight="700" fill="hsl(197.5,45%,26%)">紫花 : 白花 = 3 : 1</text>
+  <rect x="350" y="132" width="30" height="30" fill="hsl(197.5,45%,92%)" stroke="hsl(197.5,45%,35%)"/>
+  <rect x="382" y="132" width="30" height="30" fill="hsl(197.5,45%,92%)" stroke="hsl(197.5,45%,35%)"/>
+  <rect x="414" y="132" width="30" height="30" fill="hsl(197.5,45%,92%)" stroke="hsl(197.5,45%,35%)"/>
+  <rect x="446" y="132" width="30" height="30" fill="hsl(350,55%,94%)" stroke="hsl(350,45%,42%)"/>
+  <defs><marker id="a5" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#555"/></marker></defs>
+</svg>
+<figcaption><b>圖 25-11／25-13 重繪：孟德爾的分離律。</b>純種紫花（PP）與白花（pp）雜交得到 F₁（全為 Pp，紫花）；F₁ 自交後，F₂ 出現 1 PP : 2 Pp : 1 pp 的基因型比例，表現型比例為 3 紫花 : 1 白花。</figcaption>
+</div>
+
+<div class="box box-concept">
+<div class="box-title">🔑 分離律 vs. 自由組合律</div>
+<p style="margin:0"><strong>分離律（law of segregation）</strong>：同一基因的兩個等位基因是各自獨立的個體，在配子形成時彼此分離，各進入不同配子。<strong>自由組合律（law of independent assortment）</strong>：不同基因的等位基因彼此獨立分配——但這條定律<strong>只適用於位在不同染色體上、或同一染色體上距離夠遠的基因</strong>（因為互換頻率會使其表現得如同自由組合）。</p>
+</div>
+
+<h3>染色體行為解釋了孟德爾的定律：染色體遺傳學說</h3>
+<p>1900 年代初，Sutton、Boveri 等人將孟德爾的抽象「遺傳因子」與顯微鏡下可見的染色體行為連結起來，建立<strong>染色體遺傳學說（chromosomal theory of inheritance）</strong>，核心要點：</p>
+<ol>
+<li>生殖細胞以外的體細胞含有兩套同源染色體，一套來自父方、一套來自母方。</li>
+<li>染色體在個體一生中維持個體性與連續性。</li>
+<li>兩套同源染色體在功能上是等同的，攜帶相似的基因組。</li>
+<li>父母源同源染色體在減數分裂中聯會，之後分別移向紡錘體兩極、進入不同細胞。</li>
+<li>不同對同源染色體的父母源成員，彼此獨立分配。</li>
+</ol>
+
+<div class="figure">
+<svg viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="兩對基因自由組合示意圖">
+  <text x="140" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">中期I排列方式一</text>
+  <rect x="90" y="26" width="14" height="34" fill="hsl(197.5,45%,80%)" stroke="hsl(197.5,45%,35%)"/>
+  <rect x="150" y="26" width="14" height="34" fill="hsl(197.5,45%,80%)" stroke="hsl(197.5,45%,35%)"/>
+  <rect x="90" y="66" width="14" height="34" fill="hsl(30,55%,80%)" stroke="hsl(30,55%,40%)"/>
+  <rect x="150" y="66" width="14" height="34" fill="hsl(30,55%,80%)" stroke="hsl(30,55%,40%)"/>
+  <text x="97" y="20" font-size="8">Y</text><text x="157" y="20" font-size="8">R</text>
+  <text x="97" y="112" font-size="8">y</text><text x="157" y="112" font-size="8">r</text>
+  <line x1="130" y1="130" x2="80" y2="150" stroke="#555" stroke-width="1.3" marker-end="url(#a6)"/>
+  <line x1="130" y1="130" x2="180" y2="150" stroke="#555" stroke-width="1.3" marker-end="url(#a6)"/>
+  <text x="60" y="165" font-size="9" font-weight="700" fill="hsl(197.5,45%,26%)">配子: RY</text>
+  <text x="150" y="165" font-size="9" font-weight="700" fill="hsl(30,55%,40%)">配子: ry</text>
+
+  <text x="420" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">中期I排列方式二</text>
+  <rect x="370" y="26" width="14" height="34" fill="hsl(197.5,45%,80%)" stroke="hsl(197.5,45%,35%)"/>
+  <rect x="430" y="26" width="14" height="34" fill="hsl(30,55%,80%)" stroke="hsl(30,55%,40%)"/>
+  <rect x="370" y="66" width="14" height="34" fill="hsl(30,55%,80%)" stroke="hsl(30,55%,40%)"/>
+  <rect x="430" y="66" width="14" height="34" fill="hsl(197.5,45%,80%)" stroke="hsl(197.5,45%,35%)"/>
+  <text x="377" y="20" font-size="8">Y</text><text x="437" y="20" font-size="8">r</text>
+  <text x="377" y="112" font-size="8">y</text><text x="437" y="112" font-size="8">R</text>
+  <line x1="410" y1="130" x2="360" y2="150" stroke="#555" stroke-width="1.3" marker-end="url(#a6)"/>
+  <line x1="410" y1="130" x2="460" y2="150" stroke="#555" stroke-width="1.3" marker-end="url(#a6)"/>
+  <text x="340" y="165" font-size="9" font-weight="700" fill="hsl(197.5,45%,26%)">配子: Yr</text>
+  <text x="430" y="165" font-size="9" font-weight="700" fill="hsl(30,55%,40%)">配子: yR</text>
+  <defs><marker id="a6" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#555"/></marker></defs>
+</svg>
+<figcaption><b>圖 25-14 重繪：孟德爾定律的染色體基礎。</b>YyRr 個體中期 I 有兩種等機率的排列方式，分別產生不同的配子組合（RY/ry 或 Yr/yR），兩者合計即產生全部四種等機率的配子類型，說明自由組合律的物理基礎（圖中未顯示互換效果）。</figcaption>
+</div>
+
+<h3>同源染色體的 DNA 序列高度相似</h3>
+<p>同源染色體通常攜帶相同順序的基因，但鹼基序列的微小差異造成不同的<strong>等位基因（allele）</strong>；這種相似性稱為 <strong>DNA 同源性（DNA homology）</strong>，被認為是聯會與正常互換得以發生的基礎——目前的模型認為，同源染色體透過鹼基互補配對的「同源搜尋」，找到彼此對應的序列後才組成聯會複合體。</p>
+
+<div class="cc-box"><b>概念檢核 25.3</b>　設白虎（隱性）性狀機率為 1/4（Aa × Aa 交配，1/4 aa）。若鬥雞眼與白化為同一隱性等位基因造成，則所有白虎皆為 aa，因此白虎中鬥雞眼比例為 100%。</div>
+</section>
+
+<!-- ============ 25.4 ============ -->
+<section id="sec4">
+<h2>25.4 遺傳變異性：重組與互換</h2>
+
+<h3>連鎖基因：位在同一染色體上,通常一起遺傳</h3>
+<p>摩根（T. H. Morgan）以果蠅為材料，發現並非所有基因都自由組合：果蠅所有基因可歸為<strong>四個連鎖群（linkage groups）</strong>——恰好等於果蠅的單套染色體數（n = 4）。摩根因此推論：<strong>每條染色體就是一個連鎖群的物理基礎</strong>。孟德爾之所以沒觀察到連鎖現象，是因為他研究的七對性狀恰好分別位於不同染色體，或同一染色體上距離夠遠。</p>
+
+<h3>互換：連鎖並非完全連鎖</h3>
+<p>摩根進一步發現，連鎖基因偶爾也會出現「非親本型」的新組合，這種現象稱為<strong>重組（recombination）</strong>。他提出同源染色體可透過斷裂與接合交換片段——即<strong>互換（crossing over）</strong>。</p>
+
+<div class="figure">
+<svg viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="互換與遺傳重組示意圖">
+  <text x="130" y="16" font-size="10" font-weight="700" text-anchor="middle" fill="hsl(197.5,45%,26%)">聯會的同源染色體（前期I）</text>
+  <rect x="70" y="26" width="16" height="60" rx="4" fill="hsl(197.5,45%,80%)" stroke="hsl(197.5,45%,35%)" stroke-width="1.6"/>
+  <rect x="92" y="26" width="16" height="60" rx="4" fill="hsl(197.5,45%,80%)" stroke="hsl(197.5,45%,35%)" stroke-width="1.6"/>
+  <rect x="150" y="26" width="16" height="60" rx="4" fill="hsl(30,55%,80%)" stroke="hsl(30,55%,40%)" stroke-width="1.6"/>
+  <rect x="172" y="26" width="16" height="60" rx="4" fill="hsl(30,55%,80%)" stroke="hsl(30,55%,40%)" stroke-width="1.6"/>
+  <text x="78" y="20" font-size="9" font-weight="700">A</text><text x="100" y="20" font-size="9" font-weight="700">A</text>
+  <text x="158" y="20" font-size="9" font-weight="700">a</text><text x="180" y="20" font-size="9" font-weight="700">a</text>
+  <text x="78" y="98" font-size="9" font-weight="700">B</text><text x="100" y="98" font-size="9" font-weight="700">B</text>
+  <text x="158" y="98" font-size="9" font-weight="700">b</text><text x="180" y="98" font-size="9" font-weight="700">b</text>
+  <line x1="92" y1="56" x2="150" y2="56" stroke="hsl(350,45%,42%)" stroke-width="2" stroke-dasharray="3,2"/>
+  <text x="121" y="50" font-size="8" text-anchor="middle" fill="hsl(350,45%,42%)" font-weight="700">互換點（非姊妹分體）</text>
+
+  <line x1="130" y1="96" x2="130" y2="115" stroke="#555" stroke-width="1.6" marker-end="url(#a7)"/>
+
+  <text x="130" y="132" font-size="9.5" text-anchor="middle" fill="#555">4條分體分別進入4個配子</text>
+  <rect x="30" y="140" width="16" height="40" rx="4" fill="hsl(197.5,45%,80%)" stroke="hsl(197.5,45%,35%)" stroke-width="1.6"/><text x="38" y="185" font-size="8" text-anchor="middle" font-weight="700">AB<br/></text><text x="38" y="185" font-size="8" text-anchor="middle" font-weight="700">親本型</text>
+  <rect x="95" y="140" width="16" height="40" rx="4" fill="hsl(197.5,45%,80%)" stroke="hsl(30,55%,40%)" stroke-width="1.6"/><text x="103" y="185" font-size="8" text-anchor="middle" font-weight="700" fill="hsl(350,45%,42%)">Ab 重組型</text>
+  <rect x="160" y="140" width="16" height="40" rx="4" fill="hsl(30,55%,80%)" stroke="hsl(197.5,45%,35%)" stroke-width="1.6"/><text x="168" y="185" font-size="8" text-anchor="middle" font-weight="700" fill="hsl(350,45%,42%)">aB 重組型</text>
+  <rect x="225" y="140" width="16" height="40" rx="4" fill="hsl(30,55%,80%)" stroke="hsl(30,55%,40%)" stroke-width="1.6"/><text x="233" y="185" font-size="8" text-anchor="middle" font-weight="700">ab 親本型</text>
+  <defs><marker id="a7" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#555"/></marker></defs>
+</svg>
+<figcaption><b>圖 25-16 重繪：互換與遺傳重組。</b>粗線期時，兩條非姊妹分體之間發生互換，交換部分片段。結果四條分體中，兩條保持親本型組合（AB、ab），兩條成為重組型（Ab、aB）。</figcaption>
+</div>
+
+<p>互換發生在粗線期，此時同源染色體仍緊密相連；分開後，發生互換之處以<strong>交叉（chiasma）</strong>形式可見。人類每對二價體通常有 2–3 個交叉。互換必須發生在<strong>非姊妹分體</strong>之間才具遺傳意義（姊妹分體本就相同，互換無意義）。</p>
+
+<h3>基因定位：以重組頻率測量基因間距離</h3>
+<p>Alfred Sturtevant（摩根實驗室的大學生）提出：兩基因間的<strong>重組頻率（recombination frequency）</strong>可反映其在染色體上的相對距離——距離越遠，重組機率越高。以重組頻率表示的距離單位稱<strong>圖距單位（map unit，即厘摩 centimorgan）</strong>。</p>
+
+<div class="box box-process">
+<div class="box-title">🧮 計算範例</div>
+<p style="margin:0">若後代中親本型（AB、ab）佔 85%，重組型（Ab、aB）佔 15%，則判定兩基因連鎖，圖距約為 <strong>15 map units</strong>。基因間距離越遠，重組頻率越高（但當距離過遠、重組頻率趨近 50% 時，會與自由組合難以區分）。</p>
+</div>
+
+<div class="cc-box"><b>概念檢核 25.4</b>　已知 A–B 重組頻率 25%，A–C 重組頻率 10%。因兩兩重組頻率不同，可初步推知 C 較靠近 A（頻率較低、距離較近）；但要確定 B、C 相對於 A 的排列順序，仍需要 B–C 的重組頻率才能確認三者的線性次序（例如 A-C-B 或 C-A-B）。</div>
+</section>
+
+<!-- ============ 25.5 ============ -->
+<section id="sec5">
+<h2>25.5 細菌與病毒的遺傳重組</h2>
+<p>細菌與病毒是單套的，並非以有性方式生殖，理論上不該有機會進行互換；但實驗證實它們仍可進行<strong>同源重組（homologous recombination）</strong>，只是需要特殊機制把兩套（片段）基因組帶入同一細胞中。</p>
+
+<h3>噬菌體共感染</h3>
+<p>當同一細菌被兩種不同基因型的噬菌體同時感染時，兩者的 DNA 在細胞內偶然靠近並發生互換，產生重組型子代噬菌體，重組頻率同樣隨基因間距離增加而升高。</p>
+
+<h3>轉形作用與轉導作用</h3>
+<table>
+<thead><tr><th>機制</th><th>DNA 來源</th><th>簡述</th></tr></thead>
+<tbody>
+<tr><td><strong>轉形 Transformation</strong></td><td>環境中游離的 DNA</td><td>感受態細菌攝入外源 DNA，若序列相似則可整合進基因組（Avery 以肺炎鏈球菌證實）。</td></tr>
+<tr><td><strong>轉導 Transduction</strong></td><td>由噬菌體攜帶的宿主 DNA</td><td>噬菌體偶爾誤將部分宿主 DNA 包裝進病毒顆粒，感染下一個宿主時如同注射器般送入 DNA，可用於<strong>共轉導定位（cotransductional mapping）</strong>。</td></tr>
+</tbody>
+</table>
+
+<h3>接合作用：細菌的「準性行為」</h3>
+<p>接合（conjugation）中，含有 <strong>F 因子（F factor，fertility factor）</strong>的細菌（F⁺）可作為供給者，經<strong>性線毛（sex pilus）</strong>與受體細胞（F⁻）建立<strong>接合橋（mating bridge）</strong>，傳送 DNA。</p>
+
+<div class="flow">
+  <div class="flow-group"><div class="flow-node">F⁺ 供給菌</div><div class="flow-label">攜帶質體型F因子</div></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-group"><div class="flow-node">傳送F質體複本</div><div class="flow-label">經接合橋</div></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-group"><div class="flow-node end">F⁻ 轉為 F⁺</div><div class="flow-label">供給菌仍保有F⁺</div></div>
+</div>
+
+<p>若 F 因子<strong>嵌入染色體</strong>（透過與染色體上相似序列的互換），F⁺ 細胞就轉變為 <strong>Hfr 細胞（high frequency of recombination）</strong>，接合時能傳送部分（甚至全部，需約 90 分鐘）染色體 DNA，傳入的 DNA 可與受體染色體發生同源重組。</p>
+
+<div class="flow">
+  <div class="flow-group"><div class="flow-node alt">Hfr 供給菌</div><div class="flow-label">F因子已嵌入染色體</div></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-group"><div class="flow-node">傳送部分染色體DNA</div><div class="flow-label">常因接觸中斷而傳送不完全</div></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-group"><div class="flow-node end">與受體DNA同源重組</div><div class="flow-label">產生重組型細菌</div></div>
+</div>
+
+<div class="box box-process">
+<div class="box-title">🧮 以傳遞頻率定位基因</div>
+<p style="margin:0">若基因 A 在接合中傳遞機率 95%、B 為 70%、C 為 55%，可推知順序為 <strong>A–B–C</strong>，A 最靠近傳送起點（origin of transfer）。</p>
+</div>
+
+<div class="cc-box"><b>概念檢核 25.5</b>　若致病菌族群部分帶有 R 因子（攜帶抗藥基因）質體，在抗生素選汰壓力下，帶有 R 因子的細菌存活優勢明顯，並可透過接合把抗藥性快速傳給族群中其他菌株，可能導致抗藥性迅速蔓延。</div>
+</section>
+
+<!-- ============ 25.6 ============ -->
+<section id="sec6">
+<h2>25.6 同源重組的分子機制</h2>
+<p>不論是減數分裂前期 I、噬菌體共感染、細菌轉形／轉導／接合，五種情境都共享一個核心特徵：涉及序列高度相似的 DNA 分子之間的<strong>同源重組</strong>。</p>
+
+<h3>斷裂—交換模型的實驗證據</h3>
+<p>Meselson 與 Weigle（1961）以重、輕氮同位素（<sup>15</sup>N／<sup>14</sup>N）標記兩株噬菌體，共感染細菌後分析重組子代 DNA，發現重組 DNA 同時含有兩種同位素——證實重組涉及 DNA 分子的實際<strong>斷裂與重新接合</strong>，而非單純複製新合成。真核細胞（J. H. Taylor 以 <sup>3</sup>H-胸苷標記）的類似實驗也得到一致結果，並顯示重組主要發生在<strong>同源染色體之間</strong>，而非姊妹分體之間。</p>
+
+<h3>聯會複合體促進同源重組</h3>
+<p>聯會複合體出現的時機、位置都與互換一致，且缺乏聯會複合體的生物（如雄果蠅）也不會發生減數分裂重組，支持其在重組中的角色。</p>
+
+<div class="stepper">
+  <div class="step"><span class="step-num">1</span><h5>黏連與斷裂</h5><p>黏連蛋白（cohesin）固定姊妹分體；非姊妹分體對應位置上出現 DNA 雙股斷裂。</p></div>
+  <div class="step"><span class="step-num">2</span><h5>聯會複合體形成</h5><p>複合體開始組裝，將同源染色體拉近固定。</p></div>
+  <div class="step"><span class="step-num">3</span><h5>斷裂修復＝互換</h5><p>DNA 斷裂處常與<strong>非姊妹分體</strong>的對應片段接合，形成互換。</p></div>
+  <div class="step"><span class="step-num">4</span><h5>複合體解體</h5><p>同源染色體分開，僅在互換處以交叉（chiasma）相連。</p></div>
+</div>
+<p style="font-size:.85rem;color:#555">此模型仰賴<strong>同源搜尋（homology searching）</strong>：單股 DNA 斷裂產生的游離股，會嘗試與其他 DNA 分子配對比對互補序列，找到同源分子後才促成聯會複合體形成。另一模型則指出，酵母的 <strong>Spo11</strong> 蛋白主動引入雙股斷裂，再依第17章介紹的雙股斷裂修復模型（含 Holliday junction）完成重組。</p>
+
+<h3>高保真度 DNA 修復是同源重組的基礎</h3>
+<p>減數分裂重組可視為一種大規模、受嚴密調控的 DNA「修復」過程，使用 <strong>Holliday junction</strong> 這種特殊接合構造來解離重組後的 DNA 股。原核生物中負責的關鍵酵素是 <strong>RecA</strong>，真核生物對應蛋白為 <strong>RAD51</strong>：兩者都會先包覆單股 DNA，再與雙股 DNA 互作、沿線搜尋互補序列。染色體上重組頻率並不均勻，某些區域重組特別活躍，稱<strong>重組熱點（recombination hotspots）</strong>；但重組過多也可能造成染色體缺陷（如與凡科尼氏貧血相關的 DNA 解旋酶缺陷）。</p>
+
+<div class="box box-history">
+<div class="box-title">🔗 延伸連結</div>
+<p style="margin:0">CRISPR 基因編輯技術正是利用同源重組修復路徑：提供一段修復模板（repair template），細胞的同源重組機制便會以此模板修復雙股斷裂，藉此將設計好的序列「寫入」基因組。</p>
+</div>
+
+<div class="cc-box"><b>概念檢核 25.6</b>　若減數分裂細胞無法合成聯會複合體蛋白，同源染色體將難以緊密配對、互換效率大幅下降甚至消失，交叉數目不足可能導致中期I排列與後期I分離錯誤，提高不分離（nondisjunction）與非整倍體配子的機率。</div>
+</section>
+
+<!-- ============ KEY TAKEAWAYS ============ -->
+<section id="sec7">
+<h2># Key Takeaways</h2>
+<div class="takeaways">
+<ol>
+<li><strong>無性生殖</strong>靠有絲分裂複製、後代與親代幾乎相同；<strong>有性生殖</strong>結合雙親遺傳物質，產生多樣化後代，有助族群適應環境變化。</li>
+<li><strong>雙套（2n）</strong>與<strong>單套（n）</strong>：減數分裂使染色體數目由 2n 減半為 n；受精使 n 恢復為 2n。人類 n = 23。</li>
+<li>減數分裂＝<strong>一次 DNA 複製、兩次分裂（減數分裂I、II）</strong>：減數分裂I分離「同源染色體」（減半的關鍵），減數分裂II分離「姊妹分體」（類似有絲分裂），共產生 4 個單套細胞。</li>
+<li>前期 I 的五階段：<strong>細絲期→偶線期（聯會開始）→粗線期（互換發生）→雙線期（交叉可見）→終變期</strong；<strong>聯會複合體</strong>負責固定配對的同源染色體。</li>
+<li>減數分裂錯誤稱<strong>不分離</strong>，導致<strong>非整倍體</strong>（三體性/單體性），如唐氏症（三染色體21）、透納氏症（X0）、克氏症（XXY）；<strong>多倍體</strong>（整組染色體加倍）在植物較常見，通常異常較輕。</li>
+<li>精子形成為對稱分裂（4個精細胞）；卵子形成為不對稱分裂（1個卵細胞＋數個退化的極體），卵母細胞成熟受 <strong>MPF／APC／Emi2</strong> 等分子嚴密調控。</li>
+<li>孟德爾<strong>分離律</strong>：同基因兩等位基因於配子形成時分離；<strong>自由組合律</strong>：不同基因獨立分配（僅適用於不同染色體或距離夠遠的基因）——其物理基礎即中期I二價體的隨機排列。</li>
+<li><strong>連鎖群</strong>＝同一染色體上的基因群；<strong>互換</strong>使連鎖不完全，讓非姊妹分體交換片段，產生重組型配子；<strong>重組頻率</strong>可用於基因定位（圖距單位／厘摩）。</li>
+<li>細菌與病毒雖為單套、無性生殖，仍可透過<strong>噬菌體共感染、轉形、轉導、接合</strong>等方式進行同源重組，且遵循相似的距離—頻率關係。</li>
+<li>同源重組的分子核心是 <strong>DNA 斷裂與重新接合</strong>（經同位素標記實驗證實），涉及 <strong>RecA／RAD51</strong> 蛋白與 <strong>Holliday junction</strong>，此機制也是 CRISPR 基因編輯技術的基礎。</li>
+</ol>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>第25章：有性生殖、減數分裂與遺傳重組｜學習指南</p>
+  <button id="backToTop">回到頂端 Back to Top</button>
+</footer>
+
+<script>
+(function(){
+  var backBtn = document.getElementById('backToTop');
+  backBtn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#mainNav a'));
+  var sections = navLinks.map(function(link){
+    return document.querySelector(link.getAttribute('href'));
+  });
+
+  function setActive(){
+    var scrollPos = window.scrollY || document.documentElement.scrollTop;
+    var navHeight = document.getElementById('mainNav').offsetHeight + 20;
+    var currentIndex = 0;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i] && sections[i].offsetTop - navHeight <= scrollPos){
+        currentIndex = i;
+      }
+    }
+    navLinks.forEach(function(l){ l.classList.remove('active'); });
+    if(navLinks[currentIndex]) navLinks[currentIndex].classList.add('active');
+
+    // near bottom of page -> force last active
+    if(window.innerHeight + scrollPos >= document.body.offsetHeight - 4){
+      navLinks.forEach(function(l){ l.classList.remove('active'); });
+      navLinks[navLinks.length-1].classList.add('active');
+    }
+  }
+
+  window.addEventListener('scroll', setActive, {passive:true});
+  window.addEventListener('resize', setActive);
+  setActive();
+})();
+</script>
+
+</body>
+</html>
