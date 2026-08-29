@@ -3182,9 +3182,9 @@ day,day_title,En,zh
 91,自主神經系統：副交感神經,Pelvic Viscera,骨盆內臟
 91,自主神經系統：副交感神經,Perineal Viscera,會陰內臟
 91,自主神經系統：副交感神經,Preganglionic Neurons,節前神經元
-91,自主神經系統：副交感神經,Iii Cranial Nerve,第三腦神經
-91,自主神經系統：副交感神經,Vii Cranial Nerve,第七腦神經
-91,自主神經系統：副交感神經,Ix Cranial Nerve,第九腦神經
+91,自主神經系統：副交感神經,III Cranial Nerve,第三腦神經
+91,自主神經系統：副交感神經,VII Cranial Nerve,第七腦神經
+91,自主神經系統：副交感神經,IX Cranial Nerve,第九腦神經
 91,自主神經系統：副交感神經,X Cranial Nerve,第十腦神經
 91,自主神經系統：副交感神經,Pterygopalatine Fossa,翼腭窩
 91,自主神經系統：副交感神經,Rectum,直腸
@@ -3810,16 +3810,16 @@ day,day_title,En,zh
 108,下肢的動脈,Inguinal Ligament,腹股溝韌帶
 108,下肢的動脈,Internal Iliac Artery,髂內動脈
 108,下肢的動脈,Interosseous Membrane,骨間膜
-108,下肢的動脈,Lateral Circumflex Artery,旋股外側動脈
+108,下肢的動脈,Lateral Circumflex Femoral Artery,旋股外側動脈
 108,下肢的動脈,Lateral Inferior Genicular Artery,膝下外側動脈
 108,下肢的動脈,Lateral Malleolus,外踝
 108,下肢的動脈,Lateral Plantar Artery,足底外側動脈
 108,下肢的動脈,Lateral Superior Genicular Artery,膝上外側動脈
 108,下肢的動脈,Left Common Iliac Artery,左髂總動脈
-108,下肢的動脈,Medial Circumflex Artery,旋股內側動脈
+108,下肢的動脈,Medial Circumflex Femoral Artery,旋股內側動脈
 108,下肢的動脈,Medial Inferior Genicular Artery,膝下內側動脈
 108,下肢的動脈,Medial Malleolus,內踝
-108,下肢的動脈,Medial Plantar Artery,足底側動脈
+108,下肢的動脈,Medial Plantar Artery,足底內側動脈
 108,下肢的動脈,Medial Superior Genicular Artery,膝上內側動脈
 108,下肢的動脈,Obturator Artery,閉孔動脈
 108,下肢的動脈,Obturator Foramen,閉孔
@@ -4053,52 +4053,52 @@ day,day_title,En,zh
 112,主要動脈複習,Medial Plantar,足底內側動脈
 112,主要動脈複習,Lateral Plantar,足底外側動脈
 112,主要動脈複習,Plantar Arch,足底動脈弓
-113,頭頸部的動脈,Angular Vein,角靜脈
-113,頭頸部的動脈,Anterior Jugular Vein,頸前靜脈
-113,頭頸部的動脈,Clavicle,鎖骨
-113,頭頸部的動脈,Calvaria,顱頂
-113,頭頸部的動脈,Cavernous Sinus,海綿竇
-113,頭頸部的動脈,Confluence Of Sinuses,竇匯
-113,頭頸部的動脈,Deep Cervical Vein,頸深靜脈
-113,頭頸部的動脈,Deep Facial Vein,顏面深靜脈
-113,頭頸部的動脈,Diploic Vein,板障靜脈
-113,頭頸部的動脈,Dura Mater,硬腦膜
-113,頭頸部的動脈,Dural Venous Sinus,硬腦膜靜脈竇
-113,頭頸部的動脈,Emissary Vein,導靜脈
-113,頭頸部的動脈,External Jugular Vein,頸外靜脈
-113,頭頸部的動脈,Facial Vein,顏面靜脈
-113,頭頸部的動脈,Falx Cerebri,大腦鐮
-113,頭頸部的動脈,Great Cerebral Vein Of Galen,大腦大靜脈
-113,頭頸部的動脈,Hypophysis,腦下垂體
-113,頭頸部的動脈,Inferior Petrosal Sinus,下岩竇
-113,頭頸部的動脈,Inferior Sagittal Sinus,下矢狀竇
-113,頭頸部的動脈,Intercavernous Sinus,海綿間竇
-113,頭頸部的動脈,Internal Jugular Vein,頸內靜脈
-113,頭頸部的動脈,Jugular Foramen,頸靜脈孔
-113,頭頸部的動脈,Left Hemisphere,左大腦半球
-113,頭頸部的動脈,Lingual Vein,舌靜脈
-113,頭頸部的動脈,Maxillary Vein,上頷靜脈
-113,頭頸部的動脈,Meningeal,腦膜
-113,頭頸部的動脈,Middle Thyroid Vein,甲狀腺中靜脈
-113,頭頸部的動脈,Occipital Sinus,枕竇
-113,頭頸部的動脈,Periosteal Layer,骨膜層
-113,頭頸部的動脈,Posterior Auricular Vein,耳後靜脈
-113,頭頸部的動脈,Pterygoid Plexus,翼靜脈叢
-113,頭頸部的動脈,Retromandibular Vein,下頷後靜脈
-113,頭頸部的動脈,Right Brachiocephalic Vein,右頭臂靜脈
-113,頭頸部的動脈,Right Subclavian Vein,右鎖骨下靜脈
-113,頭頸部的動脈,Sigmoid Sinus,乙狀竇
-113,頭頸部的動脈,Splenium,壓部
-113,頭頸部的動脈,Straight Sinus,直竇
-113,頭頸部的動脈,Superficial Temporal Vein,淺顳靜脈
-113,頭頸部的動脈,Superior Cerebral Vein,大腦上靜脈
-113,頭頸部的動脈,Superior Petrosal Sinus,上岩竇
-113,頭頸部的動脈,Superior Sagittal Sinus,上矢狀竇
-113,頭頸部的動脈,Superior Thyroid Vein,甲狀腺上靜脈
-113,頭頸部的動脈,Tentorium Cerebelli,小腦天幕
-113,頭頸部的動脈,Transverse Sinus,橫竇
-113,頭頸部的動脈,Superior Ophthalmic Vein,眼上靜脈
-113,頭頸部的動脈,Vertebral Vein,椎靜脈
+113,頭頸部的靜脈,Angular Vein,角靜脈
+113,頭頸部的靜脈,Anterior Jugular Vein,頸前靜脈
+113,頭頸部的靜脈,Clavicle,鎖骨
+113,頭頸部的靜脈,Calvaria,顱頂
+113,頭頸部的靜脈,Cavernous Sinus,海綿竇
+113,頭頸部的靜脈,Confluence Of Sinuses,竇匯
+113,頭頸部的靜脈,Deep Cervical Vein,頸深靜脈
+113,頭頸部的靜脈,Deep Facial Vein,顏面深靜脈
+113,頭頸部的靜脈,Diploic Vein,板障靜脈
+113,頭頸部的靜脈,Dura Mater,硬腦膜
+113,頭頸部的靜脈,Dural Venous Sinus,硬腦膜靜脈竇
+113,頭頸部的靜脈,Emissary Vein,導靜脈
+113,頭頸部的靜脈,External Jugular Vein,頸外靜脈
+113,頭頸部的靜脈,Facial Vein,顏面靜脈
+113,頭頸部的靜脈,Falx Cerebri,大腦鐮
+113,頭頸部的靜脈,Great Cerebral Vein Of Galen,大腦大靜脈
+113,頭頸部的靜脈,Hypophysis,腦下垂體
+113,頭頸部的靜脈,Inferior Petrosal Sinus,下岩竇
+113,頭頸部的靜脈,Inferior Sagittal Sinus,下矢狀竇
+113,頭頸部的靜脈,Intercavernous Sinus,海綿間竇
+113,頭頸部的靜脈,Internal Jugular Vein,頸內靜脈
+113,頭頸部的靜脈,Jugular Foramen,頸靜脈孔
+113,頭頸部的靜脈,Left Hemisphere,左大腦半球
+113,頭頸部的靜脈,Lingual Vein,舌靜脈
+113,頭頸部的靜脈,Maxillary Vein,上頷靜脈
+113,頭頸部的靜脈,Meningeal,腦膜
+113,頭頸部的靜脈,Middle Thyroid Vein,甲狀腺中靜脈
+113,頭頸部的靜脈,Occipital Sinus,枕竇
+113,頭頸部的靜脈,Periosteal Layer,骨膜層
+113,頭頸部的靜脈,Posterior Auricular Vein,耳後靜脈
+113,頭頸部的靜脈,Pterygoid Plexus,翼靜脈叢
+113,頭頸部的靜脈,Retromandibular Vein,下頷後靜脈
+113,頭頸部的靜脈,Right Brachiocephalic Vein,右頭臂靜脈
+113,頭頸部的靜脈,Right Subclavian Vein,右鎖骨下靜脈
+113,頭頸部的靜脈,Sigmoid Sinus,乙狀竇
+113,頭頸部的靜脈,Splenium,壓部
+113,頭頸部的靜脈,Straight Sinus,直竇
+113,頭頸部的靜脈,Superficial Temporal Vein,淺顳靜脈
+113,頭頸部的靜脈,Superior Cerebral Vein,大腦上靜脈
+113,頭頸部的靜脈,Superior Petrosal Sinus,上岩竇
+113,頭頸部的靜脈,Superior Sagittal Sinus,上矢狀竇
+113,頭頸部的靜脈,Superior Thyroid Vein,甲狀腺上靜脈
+113,頭頸部的靜脈,Tentorium Cerebelli,小腦天幕
+113,頭頸部的靜脈,Transverse Sinus,橫竇
+113,頭頸部的靜脈,Superior Ophthalmic Vein,眼上靜脈
+113,頭頸部的靜脈,Vertebral Vein,椎靜脈
 114,腔靜脈與奇靜脈,1St Posterior Intercostal Vein,第一肋間後靜脈
 114,腔靜脈與奇靜脈,Abdominal Aorta,腹主動脈
 114,腔靜脈與奇靜脈,Accessory Hemiazygos,副半奇靜脈
