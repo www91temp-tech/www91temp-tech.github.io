@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>生化與細胞生物學 背誦筆記</title>
+<style>
+:root{--bg:#fafaf7;--card:#fff;--tx:#222;--mu:#6b6b66;--bd:#e2e0d8;--ac:#2f6f5e;--hl:#fff3c4;--g:#1d7a46;--r:#b3341f;--b:#1f5fa8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17181a;--card:#222426;--tx:#e8e6e1;--mu:#9a988f;--bd:#3a3c3f;--ac:#6fc2a9;--hl:#4a4220;--g:#5fd08a;--r:#ff8a74;--b:#7ab4f0}}
+:root[data-theme=dark]{--bg:#17181a;--card:#222426;--tx:#e8e6e1;--mu:#9a988f;--bd:#3a3c3f;--ac:#6fc2a9;--hl:#4a4220;--g:#5fd08a;--r:#ff8a74;--b:#7ab4f0}
+html{scroll-padding-top:70px}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 -apple-system,"Noto Sans TC","PingFang TC",sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--bd);padding:8px 14px;z-index:5}
+h1{font-size:18px;margin:0 0 6px}
+.bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+button,input{font:inherit;font-size:13px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:8px;padding:4px 10px}
+button{cursor:pointer}button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+input{flex:1;min-width:120px}
+main{max-width:1100px;margin:0 auto;padding:10px 14px 60px}
+h2{font-size:17px;margin:22px 0 4px;color:var(--ac);border-left:4px solid var(--ac);padding-left:8px}
+.sub{font-size:12px;color:var(--mu);margin:0 0 6px}
+.w{overflow-x:auto;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--bd);vertical-align:top;text-align:left;font-size:14px}
+th{background:var(--bg);font-size:12px;color:var(--mu);position:sticky;top:0}
+td:first-child{font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.a{color:var(--g)}.i{color:var(--r)}.k{background:var(--hl);padding:0 3px;border-radius:3px}
+td:nth-child(4):not(.n),td:nth-child(5):not(.n){}
+.rec .h{filter:blur(6px);cursor:pointer;user-select:none;transition:.15s}
+.rec .h.s{filter:none}
+.hide{display:none}
+.t{font-size:12px;color:var(--mu);margin:4px 0 10px}
+</style></head><body>
+<header><h1>🧬 生化 &amp; 細胞生物學 背誦筆記</h1>
+<div class="bar"><button id="rb">🙈 背誦模式</button><button id="ra" class="hide">全部顯示</button><input id="q" placeholder="搜尋（酵素、藥物、蛋白…）"><button id="th">🌓</button></div></header>
+<main>
+<p class="t">配色：<b class="a">綠＝活化劑</b>、<b class="i">紅＝抑制劑</b>、<span class="k">黃底＝關鍵/限速</span>。背誦模式會模糊右側欄位，點擊儲存格可揭曉。</p>
+<div id="app"></div></main>
+<script>
+const S=[
+["生化 1｜糖解作用 Glycolysis","限速：PFK-1；不可逆：HK、PFK-1、PK",["步驟","酵素","輔因子","活化劑","抑制劑"],[
+["1 葡萄糖磷酸化","Hexokinase I–III／Glucokinase(IV)","Mg²⁺","高濃度葡萄糖(GK)","G6P(HK)；調節蛋白核內扣押GK(F6P促進)"],
+["2 異構化","磷酸己糖異構酶","Mg²⁺","—","—"],
+["3 二次磷酸化 ★限速","PFK-1","Mg²⁺","AMP、F-2,6-BP、ADP","ATP(高)、檸檬酸、H⁺"],
+["4 六碳糖裂解","Aldolase","活性位 Lys 形成席夫鹼","—","—"],
+["5 三碳糖轉化","Triose phosphate isomerase","—","—","—"],
+["6 氧化+磷酸化","GAPDH","NAD⁺、Pi；活性位 Cys 硫醇負離子","—","碘乙酸(烷基化Cys)、砷酸鹽(競爭水解，去偶聯ATP)"],
+["7 受質水平磷酸化①","Phosphoglycerate kinase","Mg²⁺","—","—"],
+["8 磷酸基轉移","Phosphoglycerate mutase","Mg²⁺、2,3-BPG使活性位His磷酸化","—","—"],
+["9 脫水生成PEP","Enolase","Mg²⁺","—","氟化鈉NaF(干擾Mg²⁺)"],
+["10 受質水平磷酸化② ★不可逆","Pyruvate kinase","Mg²⁺、K⁺或Mn²⁺","F1,6BP(前饋活化)","ATP、Acetyl-CoA、Alanine；升糖素→PKA磷酸化失活(L型)"]]],
+["生化 2｜糖質新生 Gluconeogenesis","繞過糖解 3 個不可逆步驟",["繞道","酵素","輔因子","活化劑","抑制劑"],[
+["1A 丙酮酸羧化(粒線體)","Pyruvate carboxylase","Biotin(共價結合Lys)、ATP、HCO₃⁻、Mg²⁺","Acetyl-CoA(必需)","ADP"],
+["1B OAA→PEP","PEPCK","GTP","升糖素(刺激基因表達)","ADP；胰島素(抑制表達)"],
+["2 F1,6BP去磷酸(細胞質)","FBPase-1","—","檸檬酸、ATP","AMP、F-2,6-BP"],
+["3 G6P去磷酸(內質網)","Glucose 6-phosphatase","G6P經轉運體T1入ER","受質濃度控制","—"]]],
+["生化 3｜五碳醣磷酸途徑 PPP","產 NADPH 與五碳糖",["階段","酵素","輔因子","活化劑","抑制劑"],[
+["氧化：G6P脫氫 ★限速","G6PD","NADP⁺、Mg²⁺","NADP⁺(高NADP⁺/NADPH比)","NADPH"],
+["氧化：內酯水解","6-Phosphogluconolactonase","Mg²⁺","—","—"],
+["氧化：氧化脫羧","6-Phosphogluconate DH","NADP⁺、Mg²⁺","—","—"],
+["非氧化：轉2C","Transketolase","TPP、Mg²⁺","—","—"],
+["非氧化：轉3C","Transaldolase","活性位Lys席夫鹼","—","—"]]],
+["生化 4｜肝醣代謝","磷酸化酶 a/b、合成酶 a/b 相反調控",["步驟","酵素","輔因子","活化劑","抑制劑"],[
+["分解：切下G1P","Glycogen phosphorylase","PLP","AMP(肌肉)、Ca²⁺；升糖素/腎上腺素→PKA級聯磷酸化成a型","葡萄糖(肝臟感測，促PP1去磷酸化成b)、ATP、G6P"],
+["分解：去限制糊精","Debranching enzyme","轉移酶＋α-1,6-葡萄糖苷酶雙活性","—","—"],
+["前驅物：UDP-Glc","UDP-glucose pyrophosphorylase","UTP、G1P(PPi水解驅動)","—","—"],
+["合成：引子","Glycogenin","UDP-Glc(Tyr194自體糖基化)","—","—"],
+["合成：延長","Glycogen synthase","UDP-Glc","G6P；胰島素(活化PP1→a型)","GSK3、PKA(升糖素/腎上腺素→b型)"],
+["合成：分支","Branching enzyme","—","—","—"]]],
+["生化 5｜PDH 複合體 &amp; 檸檬酸循環","PDH 與 α-KGDH 同為 5 種輔酶：TPP、硫辛酸、CoA、FAD、NAD⁺",["步驟","酵素","輔因子","活化劑","抑制劑"],[
+["丙酮酸氧化脫羧","PDH複合體 E₁丙酮酸脫氫酶／E₂二氫硫辛醯轉乙醯酶／E₃二氫硫辛醯脫氫酶","TPP(E₁)、Lipoate(E₂擺動臂)、CoA(E₂)、FAD(E₃)、NAD⁺(E₃)","NAD⁺、CoA、AMP、Ca²⁺、Pyruvate(抑制kinase)；PDH phosphatase","ATP、Acetyl-CoA、NADH、脂肪酸；PDH kinase(磷酸化失活)"],
+["1 檸檬酸合成","Citrate synthase","受質OAA、Acetyl-CoA","ADP","NADH、ATP、檸檬酸、Succinyl-CoA"],
+["2 異構化","Aconitase","4Fe-4S","—","氟乙酸(2-Fluorocitrate)"],
+["3 氧化脫羧①","Isocitrate DH","NAD⁺(或NADP⁺)","ADP、Ca²⁺","ATP、NADH"],
+["4 氧化脫羧②","α-KG DH複合體","TPP、Lipoate、CoA、FAD、NAD⁺","Ca²⁺","Succinyl-CoA、NADH、ATP"],
+["5 受質水平磷酸化","Succinyl-CoA synthetase","ADP/GDP、Pi","—","—"],
+["6 琥珀酸氧化","Succinate DH(Complex II)","FAD、Fe-S、Heme b","—","丙二酸Malonate(競爭性)"],
+["7 水合","Fumarase","—","—","—"],
+["8 OAA再生","Malate DH","NAD⁺","—","—"]]],
+["生化 6｜氧化磷酸化 &amp; 電子傳遞鏈","各複合體專一抑制劑是考點",["複合體","名稱","輔因子/載體","抑制劑","去偶聯/調節"],[
+["Complex I","NADH:ubiquinone oxidoreductase","FMN、Fe-S、CoQ","Rotenone、Amytal、Piericidin A","—"],
+["Complex II","Succinate DH","FAD、Fe-S、Heme b、CoQ","Malonate","—"],
+["Complex III","Cytochrome bc₁","Heme bL/bH/c₁、Rieske Fe-S、Cyt c","Antimycin A、Myxothiazol","—"],
+["Complex IV","Cytochrome c oxidase","CuA、Heme a、Heme a₃–CuB","氰化物CN⁻、CO、疊氮N₃⁻","—"],
+["Complex V","ATP synthase(FₒF₁)","Fₒ質子通道(a、b₂、c環)；F₁頭部α₃β₃γδε","Oligomycin、Venturicidin、DCCD、Aurovertin(F₁)","IF₁(缺氧/酸性時防ATP水解)"],
+["去偶聯劑","—","消除PMF，氧化與磷酸化去偶聯","—","DNP、FCCP、Valinomycin；UCP1/Thermogenin(棕色脂肪產熱)"],
+["轉運體","ANT(腺嘌呤核苷酸轉運體)","交換基質ATP⁴⁻與胞質ADP³⁻","Atractyloside","—"]]],
+["細生 1｜蛋白合成、摺疊與內膜加工","",["過程","酵素/因子","輔因子","活化/促進","抑制/質控"],[
+["訊號胜肽切除","Signal peptidase","—","—","—"],
+["N-鏈核心寡糖轉移","OST","Dolichol phosphate","—","—"],
+["二硫鍵形成","PDI","—","—","—"],
+["ER品質管制","UGGT","UDP-Glc","偵測到未摺疊蛋白","Glucosidase II切葡萄糖→正確摺疊者離開"],
+["UPR","PERK(激酶)、ATF6(轉錄因子)","ATP(PERK自磷酸化)","ER stress使BiP解離感測器","BiP結合時不活化"],
+["溶體酵素M6P標記","GlcNAc phosphotransferase","UDP-GlcNAc","酵素上特異訊號區","缺損→I-cell disease"],
+["溶體降解","Acid hydrolases","—","pH≈5(V-type H⁺-ATPase維持)","pH 7.2 活性低"]]],
+["細生 2｜能量轉換 &amp; 過氧化體","",["過程","酵素","輔因子","活化/促進","抑制/毒素"],[
+["Complex I","NADH dehydrogenase","FMN、Fe-S、CoQ","NADH","—"],
+["Complex II","Succinate DH","FAD、Fe-S","Succinate","—"],
+["Complex III","Cyt bc₁","Cyt b、c₁、Fe-S","QH₂","—"],
+["Complex IV","Cyt c oxidase","Heme a/a₃、CuA、CuB","O₂(最終受體)","CO、N₃⁻、CN⁻"],
+["ATP合成","F₀F₁ ATP synthase","ADP+Pi","PMF(ΔpH&amp;Δψ)驅動c環旋轉","—"],
+["H₂O₂分解","Catalase","—","H₂O₂","—"],
+["CO₂運輸","Carbonic anhydrase","—","CO₂/HCO₃⁻濃度差","—"]]],
+["細生 3｜膜運輸與離子幫浦","",["過程","幫浦/通道","能量/輔因子","調控","抑制/藥物"],[
+["初級主動運輸","Na⁺/K⁺-ATPase(P型)","ATP(Asp351自磷酸化)","胞內Na⁺、胞外K⁺","強心苷Ouabain、Digitalis(外側阻斷)"],
+["鈣回收","SERCA(P型)","ATP(Asp351)","胞質高Ca²⁺","—"],
+["區室酸化","V-type H⁺-ATPase","ATP","—","—"],
+["Cl⁻通道","CFTR(ABC家族)","ATP結合NBDs開啟","PKA磷酸化R domain","F508del(摺疊)、G551D(閘門)；Ivacaftor(增強劑)"],
+["脂質不對稱","Flippase(P型)","ATP","—","—"],
+["脂質外推/MDR","Floppase、P-glycoprotein(ABC)","ATP","脂質、疏水藥物","—"],
+["隨機翻轉","Scramblase","不需ATP","胞內Ca²⁺、凋亡訊號","—"]]],
+["細生 4｜小G蛋白與運輸調節","GTP形式＝活化；GEF 加 GTP、GAP 促水解",["過程","G蛋白","GEF/GAP","活化功能","抑制"],[
+["核質運輸","Ran","RCC1(GEF，核內)／RanGAP1(細胞質)","Ran-GTP使Importin貨物核內解離；結合Exportin帶貨出核","Ran-GDP不結合"],
+["COPII出芽","Sar1","Sec12(GEF，ER膜)","Sar1-GTP錨定ER，招募Sec23/24/13/31","Sar1-GDP脫膜"],
+["COPI/Clathrin出芽","Arf1","Arf-GEF","Arf1-GTP招募COPI或GGA/Clathrin","Arf1-GDP"],
+["囊泡繫泊","Rab","Rab-GEF/GAP","Rab-GTP招募tethering蛋白","Rab-GDP"],
+["囊泡夾斷","Dynamin","—","GTP水解切斷Clathrin囊泡頸","GTPγS(鎖死不切)"],
+["SNARE拆解","NSF＋α-SNAP","ATP","水解ATP拆v/t-SNARE回收","—"]]],
+["細生 5A｜細胞骨架馬達","",["系統","馬達","能量/輔助","調控","缺陷/抑制"],[
+["微管正端運輸","Kinesin","ATP","hand-over-hand步進","Kinesin-13(崩解微管，無馬達)"],
+["微管負端運輸","Cytoplasmic dynein","ATP(AAA+)","需Dynactin(含Arp1)","Kinesin-14(反向往負端)"],
+["纖毛擺動","Axonemal dynein","ATP","Nexin＋Radial spokes轉成彎曲","Kartagener症候群"],
+["骨骼肌收縮","Myosin II","ATP","Ca²⁺→TnC→Tropomyosin移位露出Actin","無ATP→屍僵"],
+["平滑肌/非肌肉","Smooth/Nonmuscle Myosin II","ATP","Ca²⁺-Calmodulin→MLCK磷酸化輕鏈","MLCP去磷酸化→不活化"]]],
+["細生 5B｜細胞骨架藥物","",["標靶","藥物","來源","機制"],[
+["微管","Colchicine/Colcemid","秋水仙","結合αβ-tubulin，抑制組裝"],
+["微管","Nocodazole","合成","結合tubulin，抑制聚合"],
+["微管","Vinblastine/Vincristine","長春花","使tubulin異常聚集沉澱"],
+["微管","Paclitaxel(Taxol)","太平洋紫杉","穩定微管，阻斷解聚"],
+["微絲","Cytochalasin B/D","真菌","封閉正端，阻單體加入、促解聚"],
+["微絲","Latrunculin A","紅海海綿","螯合G-actin，阻組裝"],
+["微絲","Phalloidin","毒鵝膏","結合F-actin，過度穩定"],
+["中間絲","Acrylamide","合成","破壞IF網絡"]]],
+["蛋白 1｜細胞核 &amp; 核質運輸","",["蛋白","定位","功能"],[
+["Lamin A/B/C","核膜內側，Class V中間絲","核網膜，維持核形；突變→HGPS早衰、ADLD"],
+["Nesprin","核外膜","連結核膜與微絲/中間絲/微管，傳力學訊號"],
+["Nucleoporins(Nups)","NPC約30種","八分對稱閘門；FG repeat形成疏水篩網"],
+["Importin α/β","細胞質↔核孔","α認NLS；β結合NPC，核內遇Ran-GTP釋放貨物"],
+["Exportin/CRM1","核↔核孔","認NES，與Ran-GTP成三聚體出核"],
+["mRNA出口(TAP/Mex67、p15、Aly、Dbp5)","結合mRNP","Dbp5(解旋酶)於細胞質側水解ATP撕除因子，防逆流"]]],
+["蛋白 2｜分選與內膜機轉","",["蛋白","定位","功能"],[
+["SRP","細胞質RNP","認N端訊號胜肽，暫停轉譯，帶核糖體到ER"],
+["SRP receptor","RER膜","GTP水解使SRP解離，交給translocon"],
+["Sec61 translocon","RER膜","共轉譯轉位；側向門釋放疏水跨膜段"],
+["Calreticulin/Calnexin","ER腔(CRT可溶、CNX膜)","結合單葡萄糖基化未摺疊蛋白，品質管制"],
+["KDEL receptor","CGN、高基氏囊泡","認C端KDEL，經COPI逆向送回ER"],
+["Clathrin","三腳體(3重鏈+3輕鏈)","TGN→溶體及RME囊泡出芽"],
+["AP-2、GGA","Clathrin與受體間","AP-2結合PI(4,5)P₂與胞吞受體；GGA於TGN結合Arf1-GTP與MPR"],
+["MPR","TGN、內體","捕捉M6P酵素送溶體，低pH解離並回收"],
+["Auxilin＋Hsc70","細胞質","水解ATP拆Clathrin外殼回收"],
+["SNARE","v:Synaptobrevin；t:Syntaxin、SNAP-25","4股α螺旋捲曲，拉近雙膜誘發融合"]]],
+["蛋白 3｜粒線體 &amp; 過氧化體","",["蛋白","定位","功能"],[
+["TOM(20/22/40)","外膜","20/22受體認N端presequence；40為通道"],
+["TIM23","內膜","靠Δψ將基質蛋白運過內膜"],
+["TIM22","內膜","將多跨膜載體蛋白(如ANT)插入內膜"],
+["Tim9-Tim10","膜間隙","伴護疏水前體到TIM22或SAM"],
+["SAM","外膜","協助β-barrel(如Porin)折疊插入外膜"],
+["MPP","基質","切除N端presequence"],
+["Porin/VDAC","外膜","β-barrel大通道，&lt;5000 Da可通過"],
+["Drp1","細胞質→外膜","GTPase，與ER管狀構造接觸，環狀收縮→粒線體分裂"],
+["PEX5／PEX19","細胞質","PEX5結合基質蛋白C端PTS1(SKL)；PEX19結合膜蛋白mPTS"],
+["DTM(PEX13/14、PEX2/10/12)","過氧化體膜","可讓已摺疊的天然蛋白直接進入基質"]]],
+["蛋白 4｜膜結構與通道","",["蛋白","定位","功能"],[
+["Band 3(AE1)","RBC膜多次跨膜","Cl⁻/HCO₃⁻ 1:1 反向交換(chloride shift)"],
+["Glycophorin A","RBC膜單次跨膜","大量N/O-糖基化，負電糖萼防聚集"],
+["Ankyrin","RBC膜內側","連結Spectrin與Band 3"],
+["Band 4.1","RBC膜內側","穩定Spectrin-Actin交叉點，連Glycophorin/Band 3"],
+["Spectrin α/β","RBC膜內側","四聚體+短Actin成網，維持雙凹盤形"],
+["Aquaporin AQP1","四聚體","6個α螺旋；Asn68/Asn203破壞氫鍵網，排除H⁺"],
+["GLUT1/2","12次跨膜","alternating access(T₁↔T₂)促進擴散"],
+["SGLT1/2","小腸/腎小管頂膜","Na⁺梯度驅動葡萄糖，二次主動同向運輸"],
+["Kv通道","四聚體","S1–S4感電壓(S4帶正電)；S5–S6孔道，GYGVT選擇濾器過K⁺"]]],
+["蛋白 5｜骨架調控蛋白","",["蛋白","標靶","功能"],[
+["γ-TuRC","微管負端","PCM中，微管核化模板"],
+["Tau／MAP2","微管","Tau：軸突緊密平行束(過度磷酸化→Alzheimer纖維纏結)；MAP2：樹突鬆散束"],
+["+TIPs(EB1)","微管正端","追蹤GTP帽，連結膜或胞器"],
+["Stathmin","微管","螯合2個αβ-tubulin，促災變"],
+["Katanin","微管","水解ATP切斷微管"],
+["XMAP215","微管正端","穩定GTP帽，抑災變、加速生長"],
+["Augmin","微管","附側邊招募γ-TuRC，分支核化"],
+["Arp2/3","微絲","附側邊70°核化分支，推動板狀偽足"],
+["Formin","微絲正端","二聚體，抓Profilin-actin，延伸直鏈(絲狀偽足)"],
+["Profilin","G-actin","促ADP→ATP交換，導向正端(barbed)聚合"],
+["Cofilin/ADF","F-actin","結合富ADP舊絲，扭曲切斷，加速負端解聚"],
+["Thymosin β₄","G-actin","封存單體，阻自發核化"],
+["CapZ／Tropomodulin","兩端","CapZ封正端；Tmod封負端"],
+["Gelsolin","微絲","高Ca²⁺活化，切斷並蓋正端，Gel→Sol"],
+["Filamin","微絲","V型二聚體，交叉連結成3D網"],
+["α-Actinin／Fimbrin·Villin","微絲","α-Actinin寬間距束(應力纖維)；Fimbrin/Villin緊密平行束(微絨毛)"],
+["WASP/WAVE","Actin調節","NPF；接Cdc42/Rac訊號活化Arp2/3"],
+["Dystrophin","微絲↔膜","連至DAGC；缺損→Duchenne肌營養不良"],
+["Plectin","跨骨架","鉚合微管、微絲、中間絲；連半橋粒"],
+["FtsZ／MreB·ParM／Crescentin","原核","FtsZ(Tubulin同源，Z環分裂)；MreB維持桿狀、ParM推質體(Actin同源)；Crescentin(IF同源，新月形)"]]]
+];
+const app=document.getElementById('app');
+const col=(h,v)=>{const ac=/活化|促進/.test(h),ih=/抑制|藥物|毒素|缺陷/.test(h);return ac?`<span class=a>${v}</span>`:ih?`<span class=i>${v}</span>`:v};
+S.forEach(([t,n,H,R],k)=>{
+ const sec=document.createElement('section');sec.id='s'+k;
+ let h=`<h2>${t}</h2>${n?`<p class=sub>${n}</p>`:''}<div class=w><table><tr>${H.map(x=>`<th>${x}</th>`).join('')}</tr>`;
+ R.forEach(r=>{h+='<tr>'+r.map((v,i)=>{const kv=/★/.test(r[0])&&i==0?`<span class=k>${v}</span>`:v;return `<td${i>=2||H.length==3&&i>=1?' class=h':''}>${i>=3&&H.length>3?col(H[i],v):kv}</td>`}).join('')+'</tr>'});
+ sec.innerHTML=h+'</table></div>';app.appendChild(sec)});
+const $=id=>document.getElementById(id);
+$('rb').onclick=()=>{const on=document.body.classList.toggle('rec');$('rb').classList.toggle('on',on);$('ra').classList.toggle('hide',!on);if(!on)document.querySelectorAll('.s').forEach(e=>e.classList.remove('s'))};
+$('ra').onclick=()=>document.querySelectorAll('.h').forEach(e=>e.classList.add('s'));
+app.addEventListener('click',e=>{const c=e.target.closest('.h');if(c)c.classList.toggle('s')});
+$('q').oninput=e=>{const v=e.target.value.trim().toLowerCase();document.querySelectorAll('tr').forEach((r,i)=>{if(r.querySelector('th'))return;r.classList.toggle('hide',!!v&&!r.textContent.toLowerCase().includes(v))});document.querySelectorAll('section').forEach(s=>s.classList.toggle('hide',!!v&&![...s.querySelectorAll('tr')].some(r=>!r.querySelector('th')&&!r.classList.contains('hide'))))};
+$('th').onclick=()=>{const r=document.documentElement,d=matchMedia('(prefers-color-scheme:dark)').matches;const cur=r.dataset.theme||(d?'dark':'light');r.dataset.theme=cur=='dark'?'light':'dark'};
+</script></body></html>
